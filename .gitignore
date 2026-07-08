@@ -23,9 +23,10 @@ tomato_all_india_apmcs*.csv
 onion_all_india_apmcs*.csv
 potato_all_india_apmcs*.csv
 
-# Processed data files are tracked (see data/ folder)
-# Exclude only model output CSVs generated during training
-Model_Output/*.csv
+# Model outputs — track figures and metrics table, exclude large binaries
+# Figures and metrics are committed for reproducibility and paper reference
+Model_Output/lgbm_*.txt          # trained model binaries (large)
+Model_Output/test_predictions_2024.csv  # 6.5 MB prediction file
 *.parquet
 *.feather
 *.h5
@@ -35,11 +36,6 @@ Model_Output/*.csv
 *.tiff
 *.zip
 *.tar.gz
-
-# Model outputs
-Model_Output/
-*.txt.model
-lgbm_*.txt
 
 # Jupyter
 .ipynb_checkpoints/
