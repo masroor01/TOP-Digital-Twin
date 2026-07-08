@@ -1,0 +1,54 @@
+{
+    "folders": [
+        {
+            "name": "Scripts",
+            "path": "scripts"
+        },
+        {
+            "name": "Notebooks",
+            "path": "notebooks"
+        },
+        {
+            "name": "Agmarknet Weekly",
+            "path": "C:\\Users\\masro\\Downloads\\Agmarknet_Weekly"
+        },
+        {
+            "name": "CMIE Macro",
+            "path": "C:\\Users\\masro\\Downloads\\CMIE_Macro"
+        },
+        {
+            "name": "RBI DBIE",
+            "path": "C:\\Users\\masro\\Downloads\\RBI_DBIE"
+        },
+        {
+            "name": "PPAC Macro",
+            "path": "C:\\Users\\masro\\Downloads\\PPAC_Macro"
+        },
+        {
+            "name": "Satellite S2",
+            "path": "C:\\Users\\masro\\Downloads\\TOP_DT_Satellite\\S2"
+        },
+        {
+            "name": "ERA5 Weather",
+            "path": "C:\\Users\\masro\\Downloads\\ERA5"
+        }
+    ],
+    "settings": {
+        "python.defaultInterpreterPath": "python",
+        "jupyter.notebookFileRoot": "${workspaceFolder}",
+        "editor.fontSize": 13,
+        "editor.formatOnSave": true,
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 2000,
+        "terminal.integrated.defaultProfile.windows": "PowerShell",
+        "python.terminal.activateEnvironment": true
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-python.python",
+            "ms-toolsai.jupyter",
+            "ms-python.pylance",
+            "ms-python.black-formatter"
+        ]
+    }
+}

@@ -1,0 +1,47 @@
+# Data files (too large for git — store locally or on Google Drive)
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.nc
+*.tif
+*.tiff
+*.zip
+*.tar.gz
+
+# Model outputs
+Model_Output/
+*.txt.model
+lgbm_*.txt
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# VS Code
+.vscode/settings.json
+.vscode/*.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temp / scratch
+*.tmp
+*.bak
+*.swp
