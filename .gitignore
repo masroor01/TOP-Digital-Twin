@@ -1,7 +1,11 @@
-# Data files (too large for git — store locally or on Google Drive)
-*.csv
-*.xlsx
-*.xls
+# Raw Agmarknet source files (too large for GitHub — store on Google Drive)
+tomato_all_india_apmcs*.csv
+onion_all_india_apmcs*.csv
+potato_all_india_apmcs*.csv
+
+# Processed data files are tracked (see data/ folder)
+# Exclude only model output CSVs generated during training
+Model_Output/*.csv
 *.parquet
 *.feather
 *.h5
