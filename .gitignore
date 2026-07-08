@@ -1,4 +1,24 @@
-# Raw Agmarknet source files (too large for GitHub — store on Google Drive)
+# =============================================================
+# RAW AGMARKNET SOURCE FILES — EXCLUDED FROM VERSION CONTROL
+# =============================================================
+# These files are excluded because they exceed GitHub's 100 MB
+# per-file limit (tomato: 383 MB, onion: 200 MB, potato: 85 MB).
+#
+# Source: Agmarknet (Agricultural Marketing Information Network)
+#         Government of India, Directorate of Marketing & Inspection
+#         https://agmarknet.gov.in → Price & Arrivals → Download
+#
+# To reproduce the processed weekly panels in data/agmarknet_weekly/,
+# download the raw files from Agmarknet and place them in the same
+# folder as scripts/09_Agmarknet_Weekly_Panel.py, then run:
+#
+#   python scripts/09_Agmarknet_Weekly_Panel.py
+#
+# Expected filenames:
+#   tomato_all_india_apmcs_2000_2026.csv
+#   onion_all_india_apmcs_2000_2025.csv
+#   potato_all_india_apmcs_2000_2026.csv
+# =============================================================
 tomato_all_india_apmcs*.csv
 onion_all_india_apmcs*.csv
 potato_all_india_apmcs*.csv
