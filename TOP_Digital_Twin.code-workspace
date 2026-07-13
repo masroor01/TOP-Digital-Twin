@@ -1,35 +1,47 @@
 {
     "folders": [
         {
+            "name": "Project Root",
+            "path": "."
+        },
+        {
             "name": "Scripts",
             "path": "scripts"
+        },
+        {
+            "name": "Data (Processed)",
+            "path": "data"
+        },
+        {
+            "name": "Model Output",
+            "path": "Model_Output"
         },
         {
             "name": "Notebooks",
             "path": "notebooks"
         },
         {
-            "name": "Agmarknet Weekly",
+            "name": "Agmarknet Weekly (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\Agmarknet_Weekly"
         },
         {
-            "name": "CMIE Macro",
+            "name": "CMIE Macro (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\CMIE_Macro"
         },
         {
-            "name": "RBI DBIE",
+            "name": "RBI DBIE (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\RBI_DBIE"
         },
         {
-            "name": "PPAC Macro",
+            "name": "PPAC Macro (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\PPAC_Macro"
         },
         {
-            "name": "Satellite S2",
+            "name": "Satellite S2 (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\TOP_DT_Satellite\\S2"
         },
         {
-            "name": "ERA5 Weather",
+            "name": "ERA5 Weather (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\ERA5"
         }
     ],
@@ -41,14 +53,26 @@
         "files.autoSave": "afterDelay",
         "files.autoSaveDelay": 2000,
         "terminal.integrated.defaultProfile.windows": "PowerShell",
-        "python.terminal.activateEnvironment": true
+        "python.terminal.activateEnvironment": true,
+        "files.exclude": {
+            "**/__pycache__": true,
+            "**/*.pyc": true,
+            "**/.git": true
+        },
+        "search.exclude": {
+            "**/Model_Output/lgbm_*.txt": true,
+            "**/Model_Output/test_predictions_2024.csv": true,
+            "**/Model_Output/filtered_panel_top.csv": true
+        }
     },
     "extensions": {
         "recommendations": [
             "ms-python.python",
             "ms-toolsai.jupyter",
             "ms-python.pylance",
-            "ms-python.black-formatter"
+            "ms-python.black-formatter",
+            "eamodio.gitlens",
+            "mechatroner.rainbow-csv"
         ]
     }
 }
