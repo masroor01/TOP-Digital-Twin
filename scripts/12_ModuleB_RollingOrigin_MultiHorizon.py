@@ -198,6 +198,21 @@ def build_features(df):
         sub['sin_week'] = np.sin(2 * np.pi * sub['week_num'] / 52)
         sub['cos_week'] = np.cos(2 * np.pi * sub['week_num'] / 52)
 
+        # Crop-specific agronomic season flags
+        m = sub['week_start'].dt.month
+        if crop == 'tomato':
+            sub['season_peak_arrival'] = m.isin([11, 12, 1, 2]).astype(int)   # Rabi harvest; max supply, lowest prices
+            sub['season_lean']         = m.isin([5, 6, 7]).astype(int)         # inter-crop gap; price spike window
+            sub['season_kharif']       = m.isin([8, 9, 10]).astype(int)        # rainy-season crop; reduced quality
+        elif crop == 'onion':
+            sub['season_rabi_arrival'] = m.isin([2, 3, 4, 5]).astype(int)     # peak rabi supply; prices lowest
+            sub['season_lean']         = m.isin([9, 10, 11]).astype(int)       # rabi storage depleted; crisis window
+            sub['season_kharif']       = m.isin([8, 9]).astype(int)            # small kharif crop arrives
+        elif crop == 'potato':
+            sub['season_harvest']      = m.isin([2, 3, 4]).astype(int)         # rabi harvest; peak arrivals, low prices
+            sub['season_storage']      = m.isin([5, 6, 7, 8, 9]).astype(int)  # cold-storage release sustains supply
+            sub['season_lean']         = m.isin([10, 11]).astype(int)          # storage tail; highest price risk
+
         # Market / state encodings
         for col in ['state', 'market']:
             if col in sub.columns:
