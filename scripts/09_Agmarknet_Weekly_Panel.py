@@ -10,13 +10,17 @@ Output: C:/Users/masro/Downloads/Agmarknet_Weekly/
         - top_weekly_panel.csv          (all three combined, long format)
 
 Processing steps per crop:
-  1. Filter to 2017-01-01 -- 2024-12-31
+  1. Filter to 2017-01-01 -- 2025-12-31
   2. Clip modal price to valid range (crop-specific)
   3. Drop rows with zero/null arrivals or price
   4. Assign ISO week (Monday = week start)
   5. Compute arrivals-weighted mean modal price per (market, ISO week)
-  6. For Potato: balanced panel -- keep only markets present in all 8 years
-  7. Output weekly panel with market metadata attached
+  6. For Potato: balanced panel -- keep only markets present in >=8 of 9 years
+  7. Expand to complete (market x week) grid and impute price gaps:
+       <=2 weeks   : linear interpolation
+       3-8 weeks   : seasonal-median fill (same market, same calendar month)
+       >8 weeks    : left NaN -- excluded from model training
+  8. Output complete-grid panel with market metadata and imputation flags attached
 """
 
 import io
@@ -40,7 +44,7 @@ OUTDIR = r'C:\Users\masro\Downloads\Agmarknet_Weekly'
 os.makedirs(OUTDIR, exist_ok=True)
 
 START_DATE = '2017-01-01'
-END_DATE   = '2024-12-31'
+END_DATE   = '2025-12-31'
 
 # Price validity window per crop (Rs/quintal)
 # Tomato: collapses to near-zero in glut; spikes observed ~8,000-10,000 in crisis
@@ -51,6 +55,70 @@ PRICE_CLIP = {
     'onion':  (50,   12000),
     'potato': (40,    3500),
 }
+
+
+# ----------------------------------------------------------------
+# Imputation helpers
+# ----------------------------------------------------------------
+
+def _gap_lengths(series: pd.Series) -> pd.Series:
+    """For each NaN position return its consecutive NaN run length; 0 for non-NaN."""
+    is_null = series.isna()
+    block_id = (is_null != is_null.shift()).cumsum()
+    return is_null.groupby(block_id).transform('sum').where(is_null, 0).astype(int)
+
+
+def impute_price_gaps(agg: pd.DataFrame) -> pd.DataFrame:
+    """
+    Expand weekly aggregates to a full (market × week) grid and impute price gaps:
+      <=2 weeks   : linear interpolation (price varies smoothly at short horizons)
+      3-8 weeks   : seasonal-median fill (same market, same calendar month, observed years)
+      >8 weeks    : left NaN -- systematic absence, excluded from modelling
+    Returns grid with added columns: imputed (0/1), imputed_method.
+    """
+    all_weeks = pd.date_range(START_DATE, END_DATE, freq='W-MON')
+    full = (
+        pd.MultiIndex.from_product(
+            [agg['market_id'].unique(), all_weeks],
+            names=['market_id', 'week_start']
+        )
+        .to_frame(index=False)
+    )
+
+    price_col = 'modal_price_weighted'
+    keep_cols = ['market_id', 'week_start', price_col, 'arrivals_tonnes_week', 'trading_days']
+    full = full.merge(agg[keep_cols], on=['market_id', 'week_start'], how='left')
+    full = full.sort_values(['market_id', 'week_start']).reset_index(drop=True)
+
+    full['imputed']        = full[price_col].isna().astype(int)
+    full['imputed_method'] = full['imputed'].map({0: 'observed', 1: None})
+
+    # Gap lengths computed before any filling
+    full['_gap'] = full.groupby('market_id')[price_col].transform(_gap_lengths)
+
+    # Stage 1: <=2 week gaps — linear interpolation
+    full[price_col] = (
+        full.groupby('market_id')[price_col]
+            .transform(lambda x: x.interpolate(method='linear', limit=2, limit_area='inside'))
+    )
+    s1 = full['imputed'].eq(1) & full[price_col].notna()
+    full.loc[s1, 'imputed_method'] = 'linear'
+
+    # Stage 2: 3-8 week gaps — seasonal median (from observed rows only)
+    full['_month'] = full['week_start'].dt.month
+    smed = (
+        full[full['imputed'] == 0]
+        .groupby(['market_id', '_month'])[price_col]
+        .median().rename('_smed').reset_index()
+    )
+    full = full.merge(smed, on=['market_id', '_month'], how='left')
+
+    s2 = full[price_col].isna() & full['_gap'].between(3, 8)
+    full.loc[s2, price_col]      = full.loc[s2, '_smed']
+    full.loc[s2 & full[price_col].notna(), 'imputed_method'] = 'seasonal_median'
+
+    full = full.drop(columns=['_gap', '_month', '_smed'])
+    return full
 
 
 # ----------------------------------------------------------------
@@ -70,7 +138,7 @@ def process_crop(crop: str) -> pd.DataFrame:
     df['arrival_date'] = pd.to_datetime(df['arrival_date'], errors='coerce')
     df = df.dropna(subset=['arrival_date'])
     df = df[(df['arrival_date'] >= START_DATE) & (df['arrival_date'] <= END_DATE)]
-    print(f'  After date filter (2017-2024): {len(df):,} rows')
+    print(f'  After date filter (2017-2025): {len(df):,} rows')
 
     # 3. Numeric coercion
     df['modal_price_rs_per_quintal'] = pd.to_numeric(df['modal_price_rs_per_quintal'], errors='coerce')
@@ -94,14 +162,14 @@ def process_crop(crop: str) -> pd.DataFrame:
     df['week_start'] = df['arrival_date'] - pd.to_timedelta(df['arrival_date'].dt.dayofweek, unit='D')
     df['week_start'] = df['week_start'].dt.normalize()
 
-    # 7. Potato: balanced panel (markets with data in ALL 8 years 2017-2024)
+    # 7. Potato: balanced panel (markets with data in >=8 of 9 years 2017-2025)
     if crop == 'potato':
         years_per_market = df.groupby('market_id')['iso_year'].nunique()
         balanced_markets = years_per_market[years_per_market >= 8].index
         before = df['market_id'].nunique()
         df = df[df['market_id'].isin(balanced_markets)]
         print(f'  Potato balanced panel: {df["market_id"].nunique()} / {before} markets '
-              f'(kept those present in all 8 years)')
+              f'(kept those present in >=8 of 9 years)')
         print(f'  Rows after balancing: {len(df):,}')
 
     # 8. Weekly aggregation: arrivals-weighted mean modal price per market per week
@@ -120,36 +188,52 @@ def process_crop(crop: str) -> pd.DataFrame:
         .reset_index()
     )
 
-    # 9. Attach market metadata (state, district, market name)
+    # 9. Collect market metadata for later re-join
     meta_cols = ['market_id', 'market', 'district', 'state', 'state_code']
     meta = df[meta_cols].drop_duplicates('market_id').set_index('market_id')
+
+    # 10. Attach metadata (needed for imputation grouping; re-attached below after grid expansion)
     agg = agg.join(meta, on='market_id')
+    agg['crop'] = crop
 
-    # 10. Add crop column + calendar columns
-    agg['crop']     = crop
-    agg['iso_year'] = agg['week_start'].dt.isocalendar().year.astype(int)
-    agg['iso_week'] = agg['week_start'].dt.isocalendar().week.astype(int)
+    # 11. Expand to complete (market x week) grid and impute price gaps
+    print(f'  Expanding to complete grid + imputing gaps ...')
+    full = impute_price_gaps(agg)
+    full = full.join(meta, on='market_id')     # re-attach state/district/market to all grid rows
+    full['crop']     = crop
+    full['iso_year'] = full['week_start'].dt.isocalendar().year.astype(int)
+    full['iso_week'] = full['week_start'].dt.isocalendar().week.astype(int)
 
-    # 11. Column order
+    # Imputation summary
+    n_obs  = (full['imputed'] == 0).sum()
+    n_lin  = (full['imputed_method'] == 'linear').sum()
+    n_smed = (full['imputed_method'] == 'seasonal_median').sum()
+    n_long = full['modal_price_weighted'].isna().sum()
+    print(f'  Grid rows: {len(full):,}  '
+          f'observed={n_obs:,}  linear={n_lin:,}  seasonal_median={n_smed:,}  long_gap_NaN={n_long:,}')
+
+    # 12. Column order
     out_cols = [
         'crop', 'state', 'state_code', 'district', 'market', 'market_id',
         'week_start', 'iso_year', 'iso_week',
-        'modal_price_weighted', 'arrivals_tonnes_week', 'trading_days'
+        'modal_price_weighted', 'arrivals_tonnes_week', 'trading_days',
+        'imputed', 'imputed_method',
     ]
-    agg = agg[out_cols].sort_values(['market_id', 'week_start']).reset_index(drop=True)
+    full = full[out_cols].sort_values(['market_id', 'week_start']).reset_index(drop=True)
 
-    # 12. Save
+    # 13. Save
     outpath = os.path.join(OUTDIR, f'{crop}_weekly_panel.csv')
-    agg.to_csv(outpath, index=False)
+    full.to_csv(outpath, index=False)
+    obs = full[full['imputed'] == 0]
     print(f'  Saved: {outpath}')
-    print(f'  Output shape: {agg.shape}')
-    print(f'  Markets: {agg["market_id"].nunique()}  |  States: {agg["state"].nunique()}')
-    print(f'  Week range: {agg["week_start"].min().date()} to {agg["week_start"].max().date()}')
-    print(f'  Price (Rs/q) — mean: {agg["modal_price_weighted"].mean():.1f}  '
-          f'min: {agg["modal_price_weighted"].min():.1f}  '
-          f'max: {agg["modal_price_weighted"].max():.1f}')
+    print(f'  Output shape: {full.shape}  (observed rows: {len(obs):,})')
+    print(f'  Markets: {full["market_id"].nunique()}  |  States: {full["state"].nunique()}')
+    print(f'  Week range: {full["week_start"].min().date()} to {full["week_start"].max().date()}')
+    print(f'  Price (Rs/q, observed) — mean: {obs["modal_price_weighted"].mean():.1f}  '
+          f'min: {obs["modal_price_weighted"].min():.1f}  '
+          f'max: {obs["modal_price_weighted"].max():.1f}')
 
-    return agg
+    return full
 
 
 # ----------------------------------------------------------------
@@ -158,12 +242,16 @@ def process_crop(crop: str) -> pd.DataFrame:
 
 def coverage_report(df: pd.DataFrame, crop: str):
     print(f'\n--- {crop.upper()} coverage by year ---')
-    rpt = df.groupby('iso_year').agg(
+    obs = df[df['imputed'] == 0] if 'imputed' in df.columns else df
+    rpt = obs.groupby('iso_year').agg(
         weeks   = ('week_start', 'nunique'),
         markets = ('market_id', 'nunique'),
         states  = ('state', 'nunique'),
-        rows    = ('week_start', 'count'),
+        obs_rows = ('week_start', 'count'),
     )
+    if 'imputed' in df.columns:
+        imp_rows = df[df['imputed'] == 1].groupby('iso_year').size().rename('imputed_rows')
+        rpt = rpt.join(imp_rows, how='left').fillna(0).astype({'imputed_rows': int})
     print(rpt.to_string())
 
 

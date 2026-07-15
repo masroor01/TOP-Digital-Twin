@@ -13,7 +13,7 @@ Expected files in C:/Users/masro/Downloads/CMIE_Macro/:
   cmie_pfce_food.xlsx           PFCE - Food & Beverages
   cmie_agri_wages.xlsx          Agricultural / Rural Wages
 
-Output: C:/Users/masro/Downloads/CMIE_Macro/cmie_macro_2017_2024.csv
+Output: C:/Users/masro/Downloads/CMIE_Macro/cmie_macro_2017_2025.csv
 
 Run:
   python 10_CMIE_Macro_Parser.py              # parse all found files
@@ -27,10 +27,10 @@ import numpy as np
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 INDIR   = r'C:\Users\masro\Downloads\CMIE_Macro'
-OUTFILE = os.path.join(INDIR, 'cmie_macro_2017_2024.csv')
+OUTFILE = os.path.join(INDIR, 'cmie_macro_2017_2025.csv')
 os.makedirs(INDIR, exist_ok=True)
 
-START, END = '2017-01-01', '2024-12-31'
+START, END = '2017-01-01', '2025-12-31'
 
 # ----------------------------------------------------------------
 # Series registry
@@ -306,7 +306,7 @@ def parse_one_series(col_name, meta):
                     (result['date'] >= START) & (result['date'] <= END)
                 ].reset_index(drop=True)
                 if len(filtered) > 0:
-                    print('    OK: ' + str(len(filtered)) + ' months (2017-2024)')
+                    print('    OK: ' + str(len(filtered)) + ' months (2017-2025)')
                     return filtered
     return None
 
