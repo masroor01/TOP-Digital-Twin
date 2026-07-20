@@ -128,8 +128,13 @@ zoneList.forEach(function(z) {
     var sub = s2.filterDate(w.start, w.end).filterBounds(geom);
     var nScenes = sub.size();
 
-    // Median composite over the window
-    var comp = sub.median();
+    // Guard: if collection is empty (all scenes cloudy), substitute a fully-masked
+    // placeholder image that carries NDVI and EVI bands. reduceRegion then returns
+    // null for both, and the notNull filter below drops the row cleanly.
+    // Without this, sub.median() on an empty collection returns a zero-band image,
+    // which causes "Band pattern 'NDVI' was applied to an image with no bands".
+    var placeholder = ee.Image.constant([0, 0]).rename(['NDVI', 'EVI']).selfMask();
+    var comp = ee.Image(ee.Algorithms.If(nScenes.gt(0), sub.median(), placeholder));
 
     // Spatial mean NDVI and EVI over zone (masked pixels excluded)
     var meanStats = comp.select(['NDVI','EVI']).reduceRegion({
