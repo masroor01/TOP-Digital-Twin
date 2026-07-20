@@ -11,7 +11,7 @@ CV framework as Script 12, adding one data layer at a time:
   M3  + Climate stress (ERA5 temperature + CHIRPS rainfall, incl. 4/8-week rolls)
   M4  + Satellite vegetation (Sentinel-2 NDVI/EVI + MODIS NDVI/LST + rolling)
 
-Each variant × 3 folds × 4 horizons × 3 crops = 180 LightGBM model fits.
+Each variant × 4 folds × 4 horizons × 3 crops = 240 LightGBM model fits.
 
 Compare against B1 Naive Persistence from Script 13.
 
@@ -44,9 +44,9 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 # ─────────────────────────────────────────────────────────────────────────────
 BASE     = r'C:\Users\masro\Documents\TOP_Digital_Twin'
 AGM_FILE = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
-CMIE_FILE= os.path.join(BASE, 'data', 'cmie_macro',      'cmie_macro_2017_2024.csv')
-RBI_FILE = os.path.join(BASE, 'data', 'rbi_dbie',        'rbi_dbie_macro_2017_2024.csv')
-PPAC_FILE= os.path.join(BASE, 'data', 'ppac_macro',      'ppac_diesel_lpg_2017_2024.csv')
+CMIE_FILE= os.path.join(BASE, 'data', 'cmie_macro',      'cmie_macro_2017_2025.csv')
+RBI_FILE = os.path.join(BASE, 'data', 'rbi_dbie',        'rbi_dbie_macro_2017_2025.csv')
+PPAC_FILE= os.path.join(BASE, 'data', 'ppac_macro',      'ppac_diesel_lpg_2017_2025.csv')
 SAT_FILE = os.path.join(BASE, 'data', 'satellite_climate', 'crop_weekly_features.csv')
 BENCH_FILE = os.path.join(BASE, 'Model_Output', 'table_benchmarks.csv')
 OUT_DIR  = os.path.join(BASE, 'Model_Output')
@@ -70,6 +70,9 @@ FOLDS = [
     {'fold': 3, 'train_end': '2023-06-30',
      'val_start': '2023-07-01', 'val_end': '2023-12-31',
      'test_start': '2024-01-01', 'test_end': '2024-12-31'},
+    {'fold': 4, 'train_end': '2024-06-30',
+     'val_start': '2024-07-01', 'val_end': '2024-12-31',
+     'test_start': '2025-01-01', 'test_end': '2025-12-31'},
 ]
 
 LGBM_PARAMS = dict(
@@ -124,7 +127,7 @@ print(f'  Total fits: {5 * len(FOLDS) * len(HORIZONS_RUN) * len(CROPS)}\n')
 
 print('[1] Loading panel ...')
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
-df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2024-12-31')]
+df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2025-12-31')]
 df = df.sort_values(['crop', 'market', 'week_start']).reset_index(drop=True)
 df['year']  = df['week_start'].dt.year
 df['month'] = df['week_start'].dt.month
