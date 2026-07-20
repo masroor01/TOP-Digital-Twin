@@ -6,11 +6,16 @@ Extracts and processes 4 data sources into weekly district-level
 climate and vegetation features for Layer 2 (Satellite) and
 Layer 3 (Climate) of the TOP Digital Twin.
 
-Inputs (zip files):
+Inputs (zip files for 2017-2024 + topup CSVs for 2025):
   ERA5-...zip           daily temperature per zone (2000-2024)
+  ERA5_topup-...zip     daily temperature per zone (2020-2024)
   CHIRPS-...zip         pentad rainfall per zone (1981-2024)
   S2-...zip             scene-level NDVI/EVI per zone (2017-2024)
   MODIS-...zip          16-day NDVI+EVI and LST per zone (2000-2024)
+  GEE_2025/era5/        2025 ERA5 topup CSVs (from gee_01_ERA5_topup_2025.js)
+  GEE_2025/chirps/      2025 CHIRPS CSVs     (from gee_02_CHIRPS_2025.js)
+  GEE_2025/s2/          2025 S2 NDVI CSVs    (from gee_03_S2_NDVI_2025.js)
+  GEE_2025/modis/       2025 MODIS CSVs      (from gee_04 and gee_05)
 
 Outputs:
   data/satellite_climate/raw/era5/            extracted ERA5 CSVs
@@ -18,9 +23,12 @@ Outputs:
   data/satellite_climate/raw/s2/              extracted S2 CSVs
   data/satellite_climate/raw/modis/           extracted MODIS CSVs
   data/satellite_climate/zone_weekly_features.csv
-      zone_id x week_start: all climate + satellite features
+      zone_id x week_start: all climate + satellite features (17 zones)
   data/satellite_climate/crop_weekly_features.csv
-      crop x week_start: crop-averaged features (joins to market panel)
+      crop x week_start: crop-averaged features (fallback join)
+  data/satellite_climate/market_zone_features.csv  [requires Script 16 first]
+      market_id x week_start: zone features assigned per market by nearest zone
+      Preferred join for modelling: merge on (market_id, week_start)
 """
 
 import io
@@ -54,13 +62,21 @@ ZIP_S2         = DOWNLOADS / 'S2-20260708T112817Z-3-001.zip'
 ZIP_MODIS      = DOWNLOADS / 'MODIS-20260708T112651Z-3-001.zip'
 
 START = pd.Timestamp('2017-01-01')
-END   = pd.Timestamp('2024-12-31')
+END   = pd.Timestamp('2025-12-31')
 
-# Full ISO-week index 2017-2024 (Mondays)
-_all_weeks = pd.date_range('2016-12-26', '2024-12-31', freq='W-MON')
+# Full ISO-week index 2017-2025 (Mondays)
+_all_weeks = pd.date_range('2016-12-26', '2025-12-31', freq='W-MON')
 WEEK_INDEX = _all_weeks[(_all_weeks >= START) & (_all_weeks <= END)]
 
 CROPS = ['tomato', 'onion', 'potato']
+
+# 2025 topup CSVs downloaded from GEE Google Drive exports.
+# Place them in these subfolders (matching the GEE export file naming):
+#   GEE_2025/era5/   → *_ERA5topup_2025.csv  (gee_01)
+#   GEE_2025/chirps/ → *_CHIRPS_2025.csv     (gee_02)
+#   GEE_2025/s2/     → *_S2_NDVI_2025.csv    (gee_03)
+#   GEE_2025/modis/  → *_MODIS_*_2025.csv    (gee_04, gee_05)
+TOPUP_2025 = DOWNLOADS / 'GEE_2025'
 
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 RAW_DIR.mkdir(parents=True, exist_ok=True)
@@ -155,7 +171,8 @@ print('STEP 2: ERA5 — daily → weekly')
 print('='*65)
 
 era5_frames = []
-# Load ERA5 main (2000-2020-07-09) and ERA5_topup (2020-07-10 to 2024-12-31)
+# Load ERA5 main (2000-2020-07-09), ERA5_topup (2020-07-10 to 2024-12-31),
+# and 2025 topup (2025-01-01 to 2025-12-31) if GEE_2025/era5/ folder exists
 for era5_subdir in ['era5', 'era5_topup']:
     for fpath in sorted((RAW_DIR / era5_subdir).glob('*.csv')):
         df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
@@ -163,6 +180,16 @@ for era5_subdir in ['era5', 'era5_topup']:
         if df.empty:
             continue
         era5_frames.append(df)
+topup_era5_dir = TOPUP_2025 / 'era5'
+if topup_era5_dir.exists():
+    for fpath in sorted(topup_era5_dir.glob('*.csv')):
+        df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
+        df = df[(df['date'] >= START) & (df['date'] <= END)].copy()
+        if not df.empty:
+            era5_frames.append(df)
+    print(f'  2025 ERA5 topup: {len(list(topup_era5_dir.glob("*.csv")))} files loaded')
+else:
+    print(f'  2025 ERA5 topup: folder not found ({topup_era5_dir}) -- run gee_01 first')
 
 era5_raw = pd.concat(era5_frames, ignore_index=True)
 # Remove any overlap between main and topup (keep one row per zone × date)
@@ -197,23 +224,33 @@ print('STEP 3: CHIRPS — pentad → weekly')
 print('='*65)
 
 chirps_frames = []
-for fpath in sorted((RAW_DIR / 'chirps').glob('*.csv')):
-    df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
-    df = df[(df['date'] >= START) & (df['date'] <= END)].copy()
-    if df.empty:
-        continue
-    df['week_start'] = to_week_start(df['date'])
-    # rain_mean_mm = spatial-mean daily rainfall (mm/day).
-    # Multiply by 5 to get pentad total mm, then sum across pentads in the week.
-    df['pentad_total_mm'] = df['rain_mean_mm'] * 5
+# Load CHIRPS from zip-extracted folder + optional 2025 topup folder
+chirps_dirs = [RAW_DIR / 'chirps']
+_topup_chirps = TOPUP_2025 / 'chirps'
+if _topup_chirps.exists():
+    chirps_dirs.append(_topup_chirps)
+    print(f'  2025 CHIRPS topup: {len(list(_topup_chirps.glob("*.csv")))} files found')
+else:
+    print(f'  2025 CHIRPS topup: folder not found ({_topup_chirps}) -- run gee_02 first')
 
-    agg = df.groupby(['zone_id', 'crop', 'week_start']).agg(
-        chirps_rain_mm  = ('pentad_total_mm',  'sum'),   # total mm in week
-        chirps_rain_max = ('rain_max_mm',       'max'),   # max daily rainfall (mm/day)
-        chirps_excess   = ('frac_excess_rain',  'mean'),  # fraction of pentads with excess rain
-        chirps_n_pentad = ('date',              'count'),
-    ).reset_index()
-    chirps_frames.append(agg)
+for _chirps_dir in chirps_dirs:
+    for fpath in sorted(_chirps_dir.glob('*.csv')):
+        df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
+        df = df[(df['date'] >= START) & (df['date'] <= END)].copy()
+        if df.empty:
+            continue
+        df['week_start'] = to_week_start(df['date'])
+        # rain_mean_mm = spatial-mean daily rainfall (mm/day).
+        # Multiply by 5 to get pentad total mm, then sum across pentads in the week.
+        df['pentad_total_mm'] = df['rain_mean_mm'] * 5
+
+        agg = df.groupby(['zone_id', 'crop', 'week_start']).agg(
+            chirps_rain_mm  = ('pentad_total_mm',  'sum'),   # total mm in week
+            chirps_rain_max = ('rain_max_mm',       'max'),   # max daily rainfall (mm/day)
+            chirps_excess   = ('frac_excess_rain',  'mean'),  # fraction of pentads with excess rain
+            chirps_n_pentad = ('date',              'count'),
+        ).reset_index()
+        chirps_frames.append(agg)
 
 chirps = pd.concat(chirps_frames, ignore_index=True)
 chirps['crop'] = chirps['crop'].str.lower()
@@ -232,20 +269,30 @@ print('STEP 4: Sentinel-2 — scenes → weekly (forward-filled, limit=4w)')
 print('='*65)
 
 s2_frames = []
-for fpath in sorted((RAW_DIR / 's2').glob('*.csv')):
-    df = pd.read_csv(fpath, parse_dates=['date_start'], low_memory=False)
-    df = df[(df['date_start'] >= START) & (df['date_start'] <= END)].copy()
-    if df.empty:
-        continue
-    df['week_start'] = to_week_start(df['date_start'])
-    df = df.rename(columns={'NDVI': 's2_ndvi', 'EVI': 's2_evi',
-                             'valid_px_frac': 's2_valid_frac'})
+# Load S2 from zip-extracted folder + optional 2025 topup folder
+_s2_dirs = [RAW_DIR / 's2']
+_topup_s2 = TOPUP_2025 / 's2'
+if _topup_s2.exists():
+    _s2_dirs.append(_topup_s2)
+    print(f'  2025 S2 topup: {len(list(_topup_s2.glob("*.csv")))} files found')
+else:
+    print(f'  2025 S2 topup: folder not found ({_topup_s2}) -- run gee_03 first')
 
-    # If two composites fall in the same week, keep highest quality
-    df = df.sort_values('s2_valid_frac', ascending=False)
-    df = df.drop_duplicates(subset=['zone_id', 'week_start'], keep='first')
-    df = df[['zone_id', 'crop', 'week_start', 's2_ndvi', 's2_evi', 's2_valid_frac']]
-    s2_frames.append(df)
+for _s2_dir in _s2_dirs:
+    for fpath in sorted(_s2_dir.glob('*.csv')):
+        df = pd.read_csv(fpath, parse_dates=['date_start'], low_memory=False)
+        df = df[(df['date_start'] >= START) & (df['date_start'] <= END)].copy()
+        if df.empty:
+            continue
+        df['week_start'] = to_week_start(df['date_start'])
+        df = df.rename(columns={'NDVI': 's2_ndvi', 'EVI': 's2_evi',
+                                 'valid_px_frac': 's2_valid_frac'})
+
+        # If two composites fall in the same week, keep highest quality
+        df = df.sort_values('s2_valid_frac', ascending=False)
+        df = df.drop_duplicates(subset=['zone_id', 'week_start'], keep='first')
+        df = df[['zone_id', 'crop', 'week_start', 's2_ndvi', 's2_evi', 's2_valid_frac']]
+        s2_frames.append(df)
 
 s2_raw = pd.concat(s2_frames, ignore_index=True)
 s2_raw['crop'] = s2_raw['crop'].str.lower()
@@ -286,39 +333,49 @@ print('='*65)
 
 modis_ndvi_frames, modis_lst_frames = [], []
 
-for fpath in sorted((RAW_DIR / 'modis').glob('*.csv')):
-    df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
-    df = df[(df['date'] >= START) & (df['date'] <= END)].copy()
-    if df.empty:
-        continue
-    df['week_start'] = to_week_start(df['date'])
+# Load MODIS from zip-extracted folder + optional 2025 topup folder
+_modis_dirs = [RAW_DIR / 'modis']
+_topup_modis = TOPUP_2025 / 'modis'
+if _topup_modis.exists():
+    _modis_dirs.append(_topup_modis)
+    print(f'  2025 MODIS topup: {len(list(_topup_modis.glob("*.csv")))} files found')
+else:
+    print(f'  2025 MODIS topup: folder not found ({_topup_modis}) -- run gee_04/05 first')
 
-    if 'NDVI' in df.columns:
-        # MODIS NDVI product
-        df = df[df['n_valid_px'] > 0]
+for _modis_dir in _modis_dirs:
+    for fpath in sorted(_modis_dir.glob('*.csv')):
+        df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
+        df = df[(df['date'] >= START) & (df['date'] <= END)].copy()
         if df.empty:
             continue
-        df = df.rename(columns={'NDVI': 'modis_ndvi', 'EVI': 'modis_evi'})
-        df = df.sort_values('n_valid_px', ascending=False)
-        df = df.drop_duplicates(subset=['zone_id', 'week_start'], keep='first')
-        modis_ndvi_frames.append(
-            df[['zone_id', 'crop', 'week_start', 'modis_ndvi', 'modis_evi']]
-        )
+        df['week_start'] = to_week_start(df['date'])
 
-    elif 'LST_mean_C' in df.columns:
-        # MODIS LST product
-        df = df[df['n_valid_px'] > 0].dropna(subset=['LST_mean_C'])
-        if df.empty:
-            continue
-        df = df.rename(columns={'LST_mean_C': 'modis_lst_mean',
-                                 'LST_max_C':  'modis_lst_max',
-                                 'frac_above35': 'modis_lst_frac35'})
-        df = df.sort_values('n_valid_px', ascending=False)
-        df = df.drop_duplicates(subset=['zone_id', 'week_start'], keep='first')
-        modis_lst_frames.append(
-            df[['zone_id', 'crop', 'week_start',
-                'modis_lst_mean', 'modis_lst_max', 'modis_lst_frac35']]
-        )
+        if 'NDVI' in df.columns:
+            # MODIS NDVI product
+            df = df[df['n_valid_px'] > 0]
+            if df.empty:
+                continue
+            df = df.rename(columns={'NDVI': 'modis_ndvi', 'EVI': 'modis_evi'})
+            df = df.sort_values('n_valid_px', ascending=False)
+            df = df.drop_duplicates(subset=['zone_id', 'week_start'], keep='first')
+            modis_ndvi_frames.append(
+                df[['zone_id', 'crop', 'week_start', 'modis_ndvi', 'modis_evi']]
+            )
+
+        elif 'LST_mean_C' in df.columns:
+            # MODIS LST product
+            df = df[df['n_valid_px'] > 0].dropna(subset=['LST_mean_C'])
+            if df.empty:
+                continue
+            df = df.rename(columns={'LST_mean_C': 'modis_lst_mean',
+                                     'LST_max_C':  'modis_lst_max',
+                                     'frac_above35': 'modis_lst_frac35'})
+            df = df.sort_values('n_valid_px', ascending=False)
+            df = df.drop_duplicates(subset=['zone_id', 'week_start'], keep='first')
+            modis_lst_frames.append(
+                df[['zone_id', 'crop', 'week_start',
+                    'modis_lst_mean', 'modis_lst_max', 'modis_lst_frac35']]
+            )
 
 # Process MODIS NDVI
 modis_ndvi_raw = pd.concat(modis_ndvi_frames, ignore_index=True)
@@ -371,7 +428,7 @@ skeleton = pd.merge(
     pd.DataFrame({'week_start': WEEK_INDEX, 'key': 1}),
     on='key'
 ).drop(columns='key').sort_values(['zone_id', 'week_start']).reset_index(drop=True)
-print(f'  Skeleton shape: {skeleton.shape}  ({skeleton["zone_id"].nunique()} zones × {skeleton["week_start"].nunique()} weeks)')
+print(f'  Skeleton shape: {skeleton.shape}  ({skeleton["zone_id"].nunique()} zones x {skeleton["week_start"].nunique()} weeks)')  # expect 17 x 470 = 7,990
 
 zone_feat = skeleton.copy()
 
@@ -438,10 +495,71 @@ for crop, grp in crop_feat.groupby('crop'):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Step 8: Data-quality summary table
+# Step 8: Market-zone features (expand zone_weekly_features to market level)
+# Requires zone_assignment.csv produced by Script 16.
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n' + '='*65)
-print('STEP 8: Feature completeness (% non-null in crop_weekly_features)')
+print('STEP 8: Market-zone features (zone features expanded to market level)')
+print('='*65)
+
+zone_assign_path = PROJ / 'data' / 'zone_assignment.csv'
+if zone_assign_path.exists():
+    zone_assign = pd.read_csv(zone_assign_path)
+    n_total    = len(zone_assign)
+    n_assigned = zone_assign['zone_id'].notna().sum()
+    print(f'  zone_assignment.csv: {n_assigned}/{n_total} markets have a zone')
+
+    # Expand: each (market_id, zone_id) pair gets all zone × week features
+    mkt_meta  = zone_assign[['market_id', 'market', 'crop', 'state', 'district',
+                              'zone_id', 'dist_km']].dropna(subset=['zone_id'])
+    mkt_zone  = mkt_meta.merge(
+        zone_feat.drop(columns=['crop']),
+        on='zone_id',
+        how='left'
+    )
+    mkt_zone_out = OUT_DIR / 'market_zone_features.csv'
+    mkt_zone.to_csv(mkt_zone_out, index=False)
+
+    n_mkts  = mkt_zone['market_id'].nunique()
+    n_weeks = mkt_zone['week_start'].nunique()
+    print(f'  market_zone_features.csv')
+    print(f'    Rows     : {len(mkt_zone):,}  ({n_mkts} markets × {n_weeks} weeks)')
+    print(f'    Columns  : {list(mkt_zone.columns[:8])} ...')
+    print(f'    Mean dist: {zone_assign["dist_km"].mean():.0f} km  '
+          f'(max {zone_assign["dist_km"].max():.0f} km)')
+
+    # Zone coverage check: confirm all 17 zones have at least one market
+    zones_used = mkt_zone['zone_id'].unique()
+    all_zones  = list(set(z for z, v in {
+        'T1_Kolar':True,'T2_Madanapalle':True,'T3_Nashik_Tomato':True,
+        'T4_Solan':True,'T5_Navsari':True,'O1_Lasalgaon':True,
+        'O2_Pimpalgaon':True,'O3_Mahuva':True,'O6_Hubli':True,
+        'O7_Solapur':True,'O8_Manmad':True,'O9_Kurnool':True,
+        'O10_Gondal':True,'P1_Agra':True,'P2_Farrukhabad':True,
+        'P3_Jalandhar':True,'P4_Bardhaman':True,
+    }.items()))
+    missing = [z for z in all_zones if z not in zones_used]
+    if missing:
+        print(f'  WARNING: zones with no assigned markets: {missing}')
+    else:
+        print(f'  All 17 zones have at least one assigned market.')
+
+    print(f'\n  Modelling join (use instead of crop_weekly_features):')
+    print(f'    mzf = pd.read_csv("data/satellite_climate/market_zone_features.csv",')
+    print(f'                      parse_dates=["week_start"])')
+    print(f'    panel = panel.merge(mzf, on=["market_id","week_start"], how="left")')
+
+else:
+    print(f'  zone_assignment.csv not found at {zone_assign_path}')
+    print(f'  Run Script 16 first, then re-run Script 14.')
+    print(f'  Fallback: use crop_weekly_features.csv (crop-average join).')
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Step 9: Data-quality summary table
+# ─────────────────────────────────────────────────────────────────────────────
+print('\n' + '='*65)
+print('STEP 9: Feature completeness (% non-null in crop_weekly_features)')
 print('='*65)
 
 completeness = (crop_feat[feat_cols].notna().mean() * 100).round(1)
@@ -449,10 +567,10 @@ print(completeness.to_string())
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Step 9: Paper figures
+# Step 10: Paper figures
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n' + '='*65)
-print('STEP 9: Generating paper figures')
+print('STEP 10: Generating paper figures')
 print('='*65)
 
 CROP_COLORS = {'tomato': '#d62728', 'onion': '#9467bd', 'potato': '#8c564b'}
@@ -477,7 +595,7 @@ for ax, (crop, grp) in zip(axes, crop_feat.groupby('crop')):
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_major_locator(mdates.YearLocator())
 axes[-1].set_xlabel('Year', fontsize=10)
-plt.suptitle('ERA5 Weekly Temperature: Production Zone Averages (2017–2024)',
+plt.suptitle('ERA5 Weekly Temperature: Production Zone Averages (2017–2025)',
              fontsize=12, fontweight='bold', y=1.01)
 plt.tight_layout()
 fig_path = FIG_DIR / 'fig_era5_temperature.png'
@@ -501,7 +619,7 @@ for ax, (crop, grp) in zip(axes, crop_feat.groupby('crop')):
     ax.set_yticklabels(mat.index, fontsize=7)
     ax.set_title(f'{CROP_LABELS[crop]} — Weekly Rainfall (mm)', fontsize=10, fontweight='bold')
 axes[-1].set_xlabel('ISO Week Number', fontsize=10)
-plt.suptitle('CHIRPS Rainfall Heatmap: Crop Production Zones (2017–2024)',
+plt.suptitle('CHIRPS Rainfall Heatmap: Crop Production Zones (2017–2025)',
              fontsize=12, fontweight='bold', y=1.01)
 plt.tight_layout()
 fig_path = FIG_DIR / 'fig_chirps_rainfall_heatmap.png'
@@ -529,7 +647,7 @@ for ax, (crop, grp) in zip(axes, crop_feat.groupby('crop')):
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_major_locator(mdates.YearLocator())
 axes[-1].set_xlabel('Year', fontsize=10)
-plt.suptitle('Sentinel-2 NDVI: Production Zone Averages and Anomalies (2017–2024)',
+plt.suptitle('Sentinel-2 NDVI: Production Zone Averages and Anomalies (2017–2025)',
              fontsize=12, fontweight='bold', y=1.01)
 plt.tight_layout()
 fig_path = FIG_DIR / 'fig_s2_ndvi_anomaly.png'
@@ -604,7 +722,7 @@ for ax, (crop, grp) in zip(axes, crop_feat.groupby('crop')):
                         fontsize=5, color='black' if abs(v) < 0.7 else 'white')
     plt.colorbar(im, ax=ax, fraction=0.04, pad=0.04)
 
-plt.suptitle('Feature Correlation: Climate & Satellite Variables (2017–2024)',
+plt.suptitle('Feature Correlation: Climate & Satellite Variables (2017–2025)',
              fontsize=12, fontweight='bold')
 plt.tight_layout()
 fig_path = FIG_DIR / 'fig_climate_satellite_correlation.png'
@@ -614,10 +732,10 @@ print(f'  Saved: {fig_path.name}')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Step 10: Final summary
+# Step 11: Final summary
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n' + '='*65)
-print('STEP 10: Final summary')
+print('STEP 11: Final summary')
 print('='*65)
 
 print(f'\n  zone_weekly_features.csv  :  {len(zone_feat):,} rows  x  {zone_feat.shape[1]} columns')

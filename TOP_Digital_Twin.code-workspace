@@ -1,47 +1,59 @@
 {
     "folders": [
         {
-            "name": "Project Root",
+            "name": "📁 Project Root",
             "path": "."
         },
         {
-            "name": "Scripts",
+            "name": "📜 Scripts",
             "path": "scripts"
         },
         {
-            "name": "Data (Processed)",
+            "name": "🛰️ GEE Scripts",
+            "path": "scripts/gee"
+        },
+        {
+            "name": "💾 Data (Processed)",
             "path": "data"
         },
         {
-            "name": "Model Output",
+            "name": "📊 Model Output",
             "path": "Model_Output"
         },
         {
-            "name": "Notebooks",
+            "name": "📓 Notebooks",
             "path": "notebooks"
         },
         {
-            "name": "Agmarknet Weekly (Raw)",
+            "name": "📄 Paper Drafts",
+            "path": "paper_drafts"
+        },
+        {
+            "name": "🟢 Agmarknet Weekly (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\Agmarknet_Weekly"
         },
         {
-            "name": "CMIE Macro (Raw)",
+            "name": "🟢 GEE 2025 Topup (Raw)",
+            "path": "C:\\Users\\masro\\Downloads\\GEE_2025"
+        },
+        {
+            "name": "🟡 CMIE Macro (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\CMIE_Macro"
         },
         {
-            "name": "RBI DBIE (Raw)",
+            "name": "🟡 RBI DBIE (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\RBI_DBIE"
         },
         {
-            "name": "PPAC Macro (Raw)",
+            "name": "🟡 PPAC Macro (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\PPAC_Macro"
         },
         {
-            "name": "Satellite S2 (Raw)",
+            "name": "🛰️ Satellite S2 (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\TOP_DT_Satellite\\S2"
         },
         {
-            "name": "ERA5 Weather (Raw)",
+            "name": "🌡️ ERA5 Weather (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\ERA5"
         }
     ],
@@ -61,9 +73,16 @@
         },
         "search.exclude": {
             "**/Model_Output/lgbm_*.txt": true,
-            "**/Model_Output/test_predictions_2024.csv": true,
-            "**/Model_Output/filtered_panel_top.csv": true
-        }
+            "**/Model_Output/test_predictions_*.csv": true,
+            "**/Model_Output/filtered_panel_top.csv": true,
+            "**/data/agmarknet_weekly/top_weekly_panel.csv": true,
+            "**/data/geocode_cache.json": true,
+            "**/~$*.pptx": true,
+            "**/~$*.xlsx": true
+        },
+        "python.analysis.extraPaths": [
+            "scripts"
+        ]
     },
     "extensions": {
         "recommendations": [
@@ -72,7 +91,54 @@
             "ms-python.pylance",
             "ms-python.black-formatter",
             "eamodio.gitlens",
-            "mechatroner.rainbow-csv"
+            "mechatroner.rainbow-csv",
+            "ms-vscode.live-server",
+            "ms-python.isort"
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Run Active Script",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${file}",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 09 — Agmarknet Panel",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/09_Agmarknet_Weekly_Panel.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 14 — Satellite & Climate Features",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/14_Satellite_Climate_Features.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 15 — Ablation Study M0–M4",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/15_Ablation_Study_M0_M4.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 16 — Zone Assignment",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/16_Zone_Assignment.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            }
         ]
     }
 }

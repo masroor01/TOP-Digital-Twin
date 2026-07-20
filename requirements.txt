@@ -1,0 +1,36 @@
+# ============================================================
+# TOP Digital Twin — Python Dependencies
+# Tomato, Onion, Potato APMC Price Forecasting System
+# SKUAST-K | HADP-04
+#
+# Python version: 3.14.3
+# Install: pip install -r requirements.txt
+# ============================================================
+
+# ── Core data processing ────────────────────────────────────
+pandas==3.0.3           # Panel data, ISO-week alignment, imputation
+numpy==2.4.6            # Numerical operations, array handling
+
+# ── Machine learning ────────────────────────────────────────
+lightgbm==4.6.0         # Primary forecasting model (Scripts 12, 15)
+scikit-learn==1.9.0     # Metrics: RMSE, MAE, R2; train/test utilities
+
+# ── Visualisation ───────────────────────────────────────────
+matplotlib==3.11.0      # All paper figures (Scripts 11–16)
+seaborn==0.13.2         # Heatmaps, distribution plots
+
+# ── Statistics ──────────────────────────────────────────────
+scipy==1.18.0           # Statistical tests, Diebold-Mariano (planned)
+statsmodels==0.14.6     # ARIMA benchmarks (Script 13)
+
+# ── Excel / file I/O ────────────────────────────────────────
+openpyxl==3.1.5         # Read .xlsx files (CMIE, RBI, PPAC — Script 10)
+xlrd==2.0.2             # Read legacy .xls files (older Agmarknet exports)
+
+# ── HTTP / API ──────────────────────────────────────────────
+requests==2.34.1        # HTTP utility (Nominatim geocoding fallback)
+# Note: Script 16 uses stdlib urllib for geocoding (no external dependency)
+
+# ── Stdlib (no install needed — listed for documentation) ───
+# pathlib, json, math, os, sys, re, io, time, warnings
+# zipfile, urllib.parse, urllib.request
