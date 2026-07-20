@@ -69,6 +69,11 @@ desktop.ini
 # Zips sourced from Google Drive; run Script 14 to regenerate these folders
 data/satellite_climate/raw/
 
+# Market-zone features file (439 MB — all 2,495 markets × 17 zones × 470 weeks)
+# Regenerate with: python scripts/14_Satellite_Climate_Features.py
+# Primary model uses crop_weekly_features.csv (crop-average join); this is supplementary only
+data/satellite_climate/market_zone_features.csv
+
 # Temp / scratch
 *.tmp
 *.bak

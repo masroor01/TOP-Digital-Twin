@@ -76,6 +76,7 @@
             "**/Model_Output/test_predictions_*.csv": true,
             "**/Model_Output/filtered_panel_top.csv": true,
             "**/data/agmarknet_weekly/top_weekly_panel.csv": true,
+            "**/data/satellite_climate/market_zone_features.csv": true,
             "**/data/geocode_cache.json": true,
             "**/~$*.pptx": true,
             "**/~$*.xlsx": true
@@ -136,6 +137,14 @@
                 "type": "debugpy",
                 "request": "launch",
                 "program": "${workspaceFolder:📁 Project Root}/scripts/16_Zone_Assignment.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 17 — TFT Model",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/17_TFT_Model.py",
                 "console": "integratedTerminal",
                 "cwd": "${workspaceFolder:📁 Project Root}"
             }
