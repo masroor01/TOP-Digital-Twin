@@ -74,6 +74,12 @@ data/satellite_climate/raw/
 # Primary model uses crop_weekly_features.csv (crop-average join); this is supplementary only
 data/satellite_climate/market_zone_features.csv
 
+# Office lock files (created when a file is open in Word / Excel / PowerPoint)
+~$*.xlsx
+~$*.xls
+~$*.docx
+~$*.pptx
+
 # Temp / scratch
 *.tmp
 *.bak
