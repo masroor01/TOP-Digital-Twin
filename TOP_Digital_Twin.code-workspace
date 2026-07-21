@@ -45,7 +45,8 @@
         "files.exclude": {
             "**/__pycache__": true,
             "**/*.pyc": true,
-            "**/.git": true
+            "**/.git": true,
+            "**/~$*": true
         },
         "search.exclude": {
             "**/Model_Output/lgbm_*.txt": true,
