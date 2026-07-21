@@ -5,30 +5,6 @@
             "path": "."
         },
         {
-            "name": "📜 Scripts",
-            "path": "scripts"
-        },
-        {
-            "name": "🛰️ GEE Scripts",
-            "path": "scripts/gee"
-        },
-        {
-            "name": "💾 Data (Processed)",
-            "path": "data"
-        },
-        {
-            "name": "📊 Model Output",
-            "path": "Model_Output"
-        },
-        {
-            "name": "📓 Notebooks",
-            "path": "notebooks"
-        },
-        {
-            "name": "📄 Paper Drafts",
-            "path": "paper_drafts"
-        },
-        {
             "name": "🟢 Agmarknet Weekly (Raw)",
             "path": "C:\\Users\\masro\\Downloads\\Agmarknet_Weekly"
         },
@@ -58,7 +34,7 @@
         }
     ],
     "settings": {
-        "python.defaultInterpreterPath": "python",
+        "python.defaultInterpreterPath": "C:\\Python314\\python.exe",
         "jupyter.notebookFileRoot": "${workspaceFolder}",
         "editor.fontSize": 13,
         "editor.formatOnSave": true,
@@ -113,6 +89,14 @@
                 "type": "debugpy",
                 "request": "launch",
                 "program": "${workspaceFolder:📁 Project Root}/scripts/09_Agmarknet_Weekly_Panel.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 11 — Market Selection",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/11_Market_Selection_And_DataStructure.py",
                 "console": "integratedTerminal",
                 "cwd": "${workspaceFolder:📁 Project Root}"
             },

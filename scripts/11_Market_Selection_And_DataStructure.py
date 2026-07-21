@@ -33,9 +33,8 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 BASE     = r'C:\Users\masro\Documents\TOP_Digital_Twin'
 INFILE   = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
 OUT_DIR  = os.path.join(BASE, 'Model_Output')
-APPX_DIR = os.path.join(BASE, 'Market_Output')
-os.makedirs(OUT_DIR,  exist_ok=True)
-os.makedirs(APPX_DIR, exist_ok=True)
+APPX_DIR = OUT_DIR
+os.makedirs(OUT_DIR, exist_ok=True)
 
 COVERAGE_THRESHOLD = 90          # % of weeks required
 CROPS = ['tomato', 'onion', 'potato']
