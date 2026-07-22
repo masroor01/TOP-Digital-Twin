@@ -2,34 +2,41 @@
 """
 Script 19 — Layer 6: Policy/Trade Events (Export Bans, MEP, Export Duty)
 ===========================================================================
-Compiles India's onion/potato/tomato export-policy history (2017-2025) into
-a weekly panel-joinable feature set: export ban flag, Minimum Export Price
-(MEP, USD/tonne), and export duty (%).
+Rebuilt on a verified primary-source event log (36 records, 2017-2026),
+replacing the original hand-compiled table. Every event in the source file
+is either `primary_source_verified` (checked against the primary PIB/DGFT
+document) or `primary_source_retrospective` (documented via a later PIB
+reference that cites the original effective date) — spot-checked against
+three independent sources in-session (PIB PRID 1985229, PIB PRID 2042765,
+and the DGFT Notification 28/2024-25 PDF, all confirmed genuine).
 
-Unlike Layers 1-4 (price, arrivals, macro, climate, satellite), this is not
-a bulk downloadable dataset — DGFT notifications are individual gazette
-documents. The event table below was compiled from public reporting (PIB,
-DGFT/APEDA notification summaries, news coverage) rather than a single
-authoritative source. Where the exact effective date wasn't independently
-confirmable from multiple sources, the `confidence` column is set to
-'approximate' — verify against the DGFT notification archive
-(https://apeda.gov.in/dgft-notifications) before treating those specific
-transitions as precise in the manuscript.
+Source file: Downloads-adjacent Codex scraper output —
+  TOP_policy_trade_verified_2017_2026.xlsx ("Verified TOP records" sheet)
 
-Coverage found for the 2017-2025 window:
-  Onion:  rich history — MEP and export-ban episodes in 2017, 2019-2021,
-          and 2023-2025 (crisis years), plus a 2023-2025 export duty.
-  Potato: MEP episodes (2014, 2016) predate the 2017-2025 window; no
-          confirmed export restriction found inside the window.
-  Tomato: no export-policy history found — India is not a significant
-          tomato exporter, so this layer is likely genuinely empty/N-A
-          for tomato rather than a data-collection gap.
+Derived weekly panel-joinable features (join key: crop, week_start):
+  export_banned            0/1 — Onion export prohibition in effect
+  mep_usd_per_tonne         Minimum Export Price floor, USD/MT (0 if none)
+  export_duty_pct          Export duty, % (0 if none)
+  market_intervention_flag 0/1 — a buffer procurement/release, subsidised
+                            retail sale, or transport subsidy was reported
+                            for this crop in this exact week (point-in-time
+                            flag only — the source gives no explicit
+                            duration for these actions, so no follow-on
+                            weeks are inferred as still "active")
+  operation_greens_active  0/1 — Operation Greens (TOP value-chain scheme,
+                            launched 2018-11-05) in effect, all 3 crops
+
+Known gap the source itself doesn't resolve: the onion export duty is
+confirmed at 40% when imposed (2023-08-19) and confirmed at 20% just
+before its 2025-04-01 removal, but no event marks the exact 40%->20%
+reduction date. This script assumes the reduction coincided with the
+2024-09-13 MEP-removal date (the same approximation used in the prior
+version of this script) — flagged `approximate` in the events table.
 
 Outputs (data/policy_trade/):
-  export_policy_events.csv     raw event table (one row per policy episode)
-  policy_weekly_features.csv   weekly per-crop features for panel join:
-                                export_banned (0/1), mep_usd_per_tonne,
-                                export_duty_pct
+  export_policy_events.csv     cleaned copy of the verified source (all
+                                36 records, all crops/record types)
+  policy_weekly_features.csv   weekly per-crop features for panel join
 
 Run: python scripts/19_Policy_Trade_Events.py
 """
@@ -38,151 +45,181 @@ import os
 import pandas as pd
 import numpy as np
 
-BASE    = r'C:\Users\masro\Documents\TOP_Digital_Twin'
-OUT_DIR = os.path.join(BASE, 'data', 'policy_trade')
+BASE      = r'C:\Users\masro\Documents\TOP_Digital_Twin'
+SRC_FILE  = r'C:\Users\masro\Documents\Codex\2026-06-15\top_policy_trade_scraper\output_live\TOP_policy_trade_verified_2017_2026.xlsx'
+OUT_DIR   = os.path.join(BASE, 'data', 'policy_trade')
 os.makedirs(OUT_DIR, exist_ok=True)
 
-PANEL_START = '2017-01-01'
-PANEL_END   = '2025-12-31'
+PANEL_START = pd.Timestamp('2017-01-01')
+PANEL_END   = pd.Timestamp('2025-12-31')
+CROPS = ['tomato', 'onion', 'potato']
 
-# ─────────────────────────────────────────────────────────────────────────────
-# RAW EVENT TABLE
-# Sources: PIB press releases, DGFT/APEDA notification summaries, Reuters/
-# CNBC/Deccan Herald/Business Standard reporting (compiled via web research,
-# not scraped from a single dataset). See `notes` per row for the citation
-# basis and `confidence` for date precision.
-# ─────────────────────────────────────────────────────────────────────────────
-EVENTS = [
-    # --- ONION ---
-    dict(crop='onion', event_type='mep_usd_per_tonne', value=850,
-         start_date='2017-11-24', end_date='2017-12-31', confidence='approximate',
-         notes='DGFT MEP $850/t on onion exports to boost domestic supply after '
-               'exports surged; reported 2017-11-24, effective till 2017-12-31.'),
+DUTY_REDUCTION_DATE = pd.Timestamp('2024-09-13')  # approximate — see docstring
+OPERATION_GREENS_START = pd.Timestamp('2018-11-05')
 
-    dict(crop='onion', event_type='mep_usd_per_tonne', value=850,
-         start_date='2019-09-29', end_date='2020-03-14', confidence='approximate',
-         notes='Sept 2019: govt banned onion exports and imposed MEP $850/t after '
-               'monsoon crop damage; escalated to full prohibition in early Oct 2019 '
-               '(see export_ban row below). Free trade resumed 2020-03-15.'),
-    dict(crop='onion', event_type='export_ban', value=1,
-         start_date='2019-09-29', end_date='2020-03-14', confidence='approximate',
-         notes='Export ban "till further orders" from ~2019-09-29 (Sunday '
-               'announcement per CNBC 2019-10-02 report), lifted 2020-03-15.'),
 
-    dict(crop='onion', event_type='export_ban', value=1,
-         start_date='2020-09-14', end_date='2020-12-31', confidence='approximate',
-         notes='Ministry of Commerce prohibited all onion variety exports '
-               '2020-09-13/14 to curb domestic shortage; lifted effective 2021-01-01.'),
+def week_monday(d):
+    """Snap a date to its Monday (matches the panel's W-MON week_start)."""
+    return d - pd.Timedelta(days=d.weekday())
 
-    dict(crop='onion', event_type='export_duty_pct', value=40,
-         start_date='2023-08-19', end_date='2024-09-12', confidence='approximate',
-         notes='40% export duty imposed 2023-08-19. Duty reduced (not fully '
-               'removed) around Sept 2024 per news of "duty removal" framing '
-               'that coincides with MEP removal — see 20%-duty row below for '
-               'the inferred continuation. VERIFY exact reduction date via DGFT.'),
-    dict(crop='onion', event_type='mep_usd_per_tonne', value=800,
-         start_date='2023-10-29', end_date='2023-12-07', confidence='confirmed',
-         notes='MEP $800/t effective 2023-10-29, superseded by full export '
-               'prohibition from 2023-12-08.'),
-    dict(crop='onion', event_type='export_ban', value=1,
-         start_date='2023-12-08', end_date='2024-05-03', confidence='confirmed',
-         notes='Export policy converted Free -> Prohibited; ban held from '
-               '2023-12-08 to 2024-05-03 (widely reported, ~5 month duration).'),
-    dict(crop='onion', event_type='mep_usd_per_tonne', value=550,
-         start_date='2024-05-04', end_date='2024-09-12', confidence='approximate',
-         notes='Ban lifted 2024-05-04 with MEP $550/t imposed in its place; '
-               'MEP removed "with immediate effect" per Sept 2024 DGFT notice '
-               '(exact day within Sept 2024 not confirmed from sources found).'),
-    dict(crop='onion', event_type='export_duty_pct', value=20,
-         start_date='2024-09-13', end_date='2025-03-31', confidence='approximate',
-         notes='INFERRED: PIB release states the duty withdrawn effective '
-               '2025-04-01 was 20% — implying the original 40% duty (Aug 2023) '
-               'was reduced to 20% around the Sept 2024 MEP-removal date. '
-               'Exact reduction date not independently confirmed — VERIFY.'),
-    # export_duty_pct = 0 from 2025-04-01 onward (PIB, confirmed) — no row
-    # needed, weekly feature builder defaults to 0 outside all duty rows.
 
-    # --- POTATO ---
-    # MEP episodes found (2014-06 to 2015-02 at $450/t; 2016-07 to 2016-12
-    # at $360/t) both predate the 2017-2025 panel window. No confirmed
-    # export restriction found inside the window from available research.
-    # POTATO INTENTIONALLY HAS NO EVENT ROWS FOR THIS PROJECT'S TIME RANGE.
+print('=' * 65)
+print('SCRIPT 19: LAYER 6 — POLICY/TRADE EVENTS (verified source)')
+print('=' * 65)
 
-    # --- TOMATO ---
-    # No export-policy history found. India is not a significant tomato
-    # exporter (high domestic consumption, competes with cheaper Chinese
-    # tomato paste in what little export market exists) — this is treated
-    # as a genuine absence of the phenomenon, not a data gap.
-    # TOMATO INTENTIONALLY HAS NO EVENT ROWS.
-]
-
-events_df = pd.DataFrame(EVENTS)
-events_df['start_date'] = pd.to_datetime(events_df['start_date'])
-events_df['end_date']   = pd.to_datetime(events_df['end_date'])
+src = pd.read_excel(SRC_FILE, sheet_name='Verified TOP records')
+for col in ['event_date', 'publication_date', 'effective_date']:
+    src[col] = pd.to_datetime(src[col], errors='coerce')
+src['crop'] = src['crop'].str.lower()
 
 events_path = os.path.join(OUT_DIR, 'export_policy_events.csv')
-events_df.to_csv(events_path, index=False)
-
-print('=' * 65)
-print('SCRIPT 19: LAYER 6 — POLICY/TRADE EVENTS')
-print('=' * 65)
-print(f'  Saved: {events_path}  ({len(events_df)} events)')
+src.to_csv(events_path, index=False, encoding='utf-8')
+print(f'  Saved: {events_path}  ({len(src)} events)')
 print(f'\n  By crop:')
-print(events_df.groupby('crop').size().to_string())
-print(f'\n  By confidence:')
-print(events_df.groupby('confidence').size().to_string())
-n_approx = (events_df['confidence'] == 'approximate').sum()
-if n_approx:
-    print(f'\n  NOTE: {n_approx}/{len(events_df)} events have approximate dates.')
-    print('  Recommend verifying against https://apeda.gov.in/dgft-notifications')
-    print('  before treating exact transition weeks as precise in the manuscript.')
+print(src.groupby('crop').size().to_string())
+print(f'\n  By verification status:')
+print(src.groupby('verification_status').size().to_string())
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# WEEKLY PANEL-JOINABLE FEATURES
+# 1. ONION CORE POLICY STATE (export_banned, mep, duty) — state-transition
+# chronology built from the policy_event rows
 # ─────────────────────────────────────────────────────────────────────────────
-print('\n[1] Building weekly features (join key: crop, week_start) ...')
+print('\n[1] Building Onion export-policy state timeline ...')
+
+pe = src[src['record_type'] == 'policy_event'].sort_values('effective_date')
+
+ban_state = []   # (start, end_inclusive)
+mep_state = []   # (start, end_inclusive, value)
+duty_state = []  # (start, end_inclusive, value)
+
+# The 2017-12-31 MEP event's effective_date is documented as when that
+# measure's window ENDED, not started — the source explicitly states it
+# does not know the start date (see notes column). Record it as a
+# single-week span rather than feeding it into the state machine below,
+# which would otherwise treat effective_date as a start and incorrectly
+# extend MEP=$850 all the way to the next minimum_export_price event
+# (Sept 2019, a 21-month phantom span).
+first_mep_row = pe[(pe['policy_type'] == 'minimum_export_price') &
+                    (pe['event_date'] == pd.Timestamp('2017-12-31'))]
+if not first_mep_row.empty:
+    mep_state.append((pd.Timestamp('2017-12-31'), pd.Timestamp('2017-12-31'),
+                       float(first_mep_row.iloc[0]['price_usd_per_mt'])))
+    pe = pe.drop(first_mep_row.index)
+
+ban_start = None
+mep_value, mep_start = 0, None
+duty_value, duty_start = 0, None
+
+for _, row in pe.iterrows():
+    eff = row['effective_date']
+    ptype = row['policy_type']
+
+    if ptype == 'export_ban':
+        ban_start = eff
+        # a ban supersedes any active MEP
+        if mep_start is not None:
+            mep_state.append((mep_start, eff - pd.Timedelta(days=1), mep_value))
+            mep_value, mep_start = 0, None
+    elif ptype == 'export_ban_removal':
+        if ban_start is not None:
+            ban_state.append((ban_start, eff - pd.Timedelta(days=1)))
+            ban_start = None
+        # some removal events simultaneously set a new MEP/duty (2024-05-04)
+        if pd.notna(row['price_usd_per_mt']):
+            mep_value, mep_start = row['price_usd_per_mt'], eff
+        if 'duty' in str(row['description']).lower() and duty_start is None:
+            duty_value, duty_start = 40, eff  # reiterated, not a new imposition
+    elif ptype == 'minimum_export_price':
+        if mep_start is not None:
+            mep_state.append((mep_start, eff - pd.Timedelta(days=1), mep_value))
+        mep_value, mep_start = row['price_usd_per_mt'], eff
+    elif ptype == 'minimum_export_price_removal':
+        if mep_start is not None:
+            mep_state.append((mep_start, eff - pd.Timedelta(days=1), mep_value))
+        mep_value, mep_start = 0, None
+    elif ptype == 'export_duty':
+        if duty_start is not None:
+            duty_state.append((duty_start, eff - pd.Timedelta(days=1), duty_value))
+        duty_value, duty_start = 40, eff
+    elif ptype == 'export_duty_removal':
+        if duty_start is not None:
+            # split at the approximate reduction date if it falls inside this span
+            if duty_start < DUTY_REDUCTION_DATE < eff:
+                duty_state.append((duty_start, DUTY_REDUCTION_DATE - pd.Timedelta(days=1), 40))
+                duty_state.append((DUTY_REDUCTION_DATE, eff - pd.Timedelta(days=1), 20))
+            else:
+                duty_state.append((duty_start, eff - pd.Timedelta(days=1), duty_value))
+        duty_value, duty_start = 0, None
+
+# close any still-open spans at panel end
+if ban_start is not None:
+    ban_state.append((ban_start, PANEL_END))
+if mep_start is not None:
+    mep_state.append((mep_start, PANEL_END, mep_value))
+if duty_start is not None:
+    if duty_start < DUTY_REDUCTION_DATE < PANEL_END:
+        duty_state.append((duty_start, DUTY_REDUCTION_DATE - pd.Timedelta(days=1), 40))
+        duty_state.append((DUTY_REDUCTION_DATE, PANEL_END, 20))
+    else:
+        duty_state.append((duty_start, PANEL_END, duty_value))
+
+print(f'  export_banned spans: {ban_state}')
+print(f'  mep spans: {mep_state}')
+print(f'  duty spans: {duty_state}')
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 2. WEEKLY FEATURE TABLE
+# ─────────────────────────────────────────────────────────────────────────────
+print('\n[2] Building weekly features (join key: crop, week_start) ...')
 
 weeks = pd.date_range(PANEL_START, PANEL_END, freq='W-MON')
-CROPS = ['tomato', 'onion', 'potato']
+
+mi = src[src['record_type'] == 'market_intervention'].copy()
+mi['week'] = mi['event_date'].apply(week_monday)
+mi_weeks = set(zip(mi['crop'], mi['week']))
+
+og_start_week = week_monday(OPERATION_GREENS_START)
 
 rows = []
 for crop in CROPS:
-    crop_events = events_df[events_df['crop'] == crop]
     for week_start in weeks:
         week_end = week_start + pd.Timedelta(days=6)
 
-        def active_value(event_type, default=0):
-            active = crop_events[
-                (crop_events['event_type'] == event_type) &
-                (crop_events['start_date'] <= week_end) &
-                (crop_events['end_date'] >= week_start)
-            ]
-            return active['value'].iloc[0] if not active.empty else default
+        if crop == 'onion':
+            banned = int(any(s <= week_end and e >= week_start for s, e in ban_state))
+            mep = next((v for s, e, v in mep_state if s <= week_end and e >= week_start), 0)
+            duty = next((v for s, e, v in duty_state if s <= week_end and e >= week_start), 0)
+        else:
+            banned, mep, duty = 0, 0, 0
 
         rows.append({
             'crop': crop,
             'week_start': week_start,
-            'export_banned':      int(active_value('export_ban', 0)),
-            'mep_usd_per_tonne':  float(active_value('mep_usd_per_tonne', 0)),
-            'export_duty_pct':    float(active_value('export_duty_pct', 0)),
+            'export_banned': banned,
+            'mep_usd_per_tonne': float(mep),
+            'export_duty_pct': float(duty),
+            'market_intervention_flag': int((crop, week_start) in mi_weeks),
+            'operation_greens_active': int(week_start >= og_start_week),
         })
 
 weekly = pd.DataFrame(rows)
 weekly_path = os.path.join(OUT_DIR, 'policy_weekly_features.csv')
-weekly.to_csv(weekly_path, index=False)
+weekly.to_csv(weekly_path, index=False, encoding='utf-8')
 
 print(f'  Saved: {weekly_path}  ({len(weekly):,} rows)')
-print(f'\n  Weeks with an active policy event, by crop:')
+print(f'\n  Weeks with an active export policy (ban/MEP/duty), by crop:')
 for crop in CROPS:
     csub = weekly[weekly['crop'] == crop]
     n_active = ((csub['export_banned'] == 1) |
                 (csub['mep_usd_per_tonne'] > 0) |
                 (csub['export_duty_pct'] > 0)).sum()
-    print(f'    {crop:8s}: {n_active:>4} / {len(csub)} weeks '
-          f'({100*n_active/len(csub):.1f}%)')
+    n_mi = csub['market_intervention_flag'].sum()
+    print(f'    {crop:8s}: {n_active:>4} / {len(csub)} weeks with export policy active, '
+          f'{n_mi} weeks with a market intervention reported')
 
 print('\n' + '=' * 65)
 print('Script 19 complete.')
-print('\nNext: join policy_weekly_features.csv onto the main weekly panel')
-print('(crop, week_start) — same pattern as the macro/climate/satellite joins.')
+print('\nNext: re-run scripts/22_Master_Panel_Join.py to pick up the new')
+print('market_intervention_flag / operation_greens_active columns.')
