@@ -1,0 +1,10 @@
+crop,event_type,value,start_date,end_date,confidence,notes
+onion,mep_usd_per_tonne,850,2017-11-24,2017-12-31,approximate,"DGFT MEP $850/t on onion exports to boost domestic supply after exports surged; reported 2017-11-24, effective till 2017-12-31."
+onion,mep_usd_per_tonne,850,2019-09-29,2020-03-14,approximate,Sept 2019: govt banned onion exports and imposed MEP $850/t after monsoon crop damage; escalated to full prohibition in early Oct 2019 (see export_ban row below). Free trade resumed 2020-03-15.
+onion,export_ban,1,2019-09-29,2020-03-14,approximate,"Export ban ""till further orders"" from ~2019-09-29 (Sunday announcement per CNBC 2019-10-02 report), lifted 2020-03-15."
+onion,export_ban,1,2020-09-14,2020-12-31,approximate,Ministry of Commerce prohibited all onion variety exports 2020-09-13/14 to curb domestic shortage; lifted effective 2021-01-01.
+onion,export_duty_pct,40,2023-08-19,2024-09-12,approximate,"40% export duty imposed 2023-08-19. Duty reduced (not fully removed) around Sept 2024 per news of ""duty removal"" framing that coincides with MEP removal — see 20%-duty row below for the inferred continuation. VERIFY exact reduction date via DGFT."
+onion,mep_usd_per_tonne,800,2023-10-29,2023-12-07,confirmed,"MEP $800/t effective 2023-10-29, superseded by full export prohibition from 2023-12-08."
+onion,export_ban,1,2023-12-08,2024-05-03,confirmed,"Export policy converted Free -> Prohibited; ban held from 2023-12-08 to 2024-05-03 (widely reported, ~5 month duration)."
+onion,mep_usd_per_tonne,550,2024-05-04,2024-09-12,approximate,"Ban lifted 2024-05-04 with MEP $550/t imposed in its place; MEP removed ""with immediate effect"" per Sept 2024 DGFT notice (exact day within Sept 2024 not confirmed from sources found)."
+onion,export_duty_pct,20,2024-09-13,2025-03-31,approximate,INFERRED: PIB release states the duty withdrawn effective 2025-04-01 was 20% — implying the original 40% duty (Aug 2023) was reduced to 20% around the Sept 2024 MEP-removal date. Exact reduction date not independently confirmed — VERIFY.

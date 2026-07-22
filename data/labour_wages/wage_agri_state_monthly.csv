@@ -1,0 +1,3425 @@
+state,state_code,year,month,wage_agri_men,wage_agri_women,wage_source
+Andaman and Nicobar,AN,2017,1,280.4,196,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2017,2,280.3,196.6,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2017,3,280.9,199.6,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2017,4,282.7,202.4,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2017,5,282.8,203.2,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2017,6,282.7,203.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2017,7,285.4,204.3,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2017,8,285.9,206.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2017,9,287.3,206.6,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2017,10,287.5,206.3,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2017,11,285.8,205.1,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2017,12,287.8,205.9,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2018,1,285.1,206.2,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2018,2,286.6,207.9,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2018,3,287.3,207.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2018,4,288.3,208.6,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2018,5,288.8,210.3,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2018,6,292.3,210.6,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2018,7,292.4,211.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2018,8,296.3,211.6,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2018,9,297.7,212.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2018,10,299.8,215.8,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2018,11,300.4,216.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2018,12,298.9,216.4,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2019,1,300,217.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2019,2,301.2,218.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2019,3,302.2,220.9,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2019,4,302.3,220.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2019,5,303.7,220.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2019,6,304.5,220.6,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2019,7,306.1,223.2,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2019,8,304.4,221.4,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2019,9,306.4,222.1,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2019,10,306.8,223,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2019,11,307.3,223.1,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2019,12,307,225.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2020,1,311.4,229.3,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2020,2,312.7,230.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2020,3,312.8,231.3,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2020,5,312.4,241.9,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2020,6,321.8,242,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2020,7,327.5,237.9,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2020,8,325.3,235.4,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2020,9,322.9,234,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2020,10,322.6,234.3,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2020,11,325.9,237.4,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2020,12,326.8,240.1,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2021,1,330,239.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2021,2,333.2,241.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2021,3,337.3,245.1,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2021,4,339.3,246,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2021,5,339.9,246.2,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2021,6,341.3,247.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2021,7,341.8,250.4,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2021,8,342.8,249.9,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2021,9,344.5,251.1,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2021,10,341.6,252.6,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2021,11,341.6,252.1,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2021,12,343.1,253.6,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2022,1,343.5,254,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2022,2,347.7,256.6,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2022,3,350.6,259.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2022,4,353,261.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2022,5,354.1,263.8,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2022,6,356,264.9,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2022,7,358.3,266.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2022,8,359.5,267.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2022,9,361,269.4,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2022,10,363.7,270.6,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2022,11,367.2,272.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2022,12,369,273.4,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2023,1,370,276,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2023,2,371.2,277.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2023,3,372.5,278.1,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2023,4,373.8,280,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2023,5,376.8,283.9,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2023,6,385.1,285.8,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2023,7,387.3,290.3,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2023,8,388.5,290.8,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2023,9,388.7,291.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2023,10,390,293.2,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2023,11,392.2,296,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2023,12,393.8,298.1,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2024,1,395.1,299.4,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2024,2,396.1,300.4,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2024,3,398.8,302.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2024,4,398.8,302.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2024,5,401.1,304.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2024,6,404,306,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2024,7,405.7,308.3,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2024,8,410,310.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2024,9,412.6,311.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2024,10,414.3,312.5,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2024,11,417.1,313.8,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2024,12,419,315.8,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2025,1,420.9,317.2,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2025,2,423.2,318.8,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2025,3,425.9,320.1,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2025,4,428.9,322.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2025,5,431.5,324.9,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2025,6,434.3,327.4,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2025,7,494.4,370.9,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2025,8,496.4,370.7,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2025,9,499.3,371.2,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2025,10,501,372.3,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2025,11,501.6,373.2,India (no regional proxy - All-India fallback)
+Andaman and Nicobar,AN,2025,12,501.7,374.6,India (no regional proxy - All-India fallback)
+Andhra Pradesh,AP,2017,1,286.1,189.6,direct
+Andhra Pradesh,AP,2017,2,283,193.4,direct
+Andhra Pradesh,AP,2017,3,284.7,199,direct
+Andhra Pradesh,AP,2017,4,278,202,direct
+Andhra Pradesh,AP,2017,5,277.9,201.1,direct
+Andhra Pradesh,AP,2017,6,271.4,197.5,direct
+Andhra Pradesh,AP,2017,7,274.2,199.2,direct
+Andhra Pradesh,AP,2017,8,270.8,200.4,direct
+Andhra Pradesh,AP,2017,9,276.9,204.5,direct
+Andhra Pradesh,AP,2017,10,280.3,201.6,direct
+Andhra Pradesh,AP,2017,11,281.4,197.9,direct
+Andhra Pradesh,AP,2017,12,284.8,202.7,direct
+Andhra Pradesh,AP,2018,1,291.9,204.9,direct
+Andhra Pradesh,AP,2018,2,293.2,209.5,direct
+Andhra Pradesh,AP,2018,3,297.9,207.4,direct
+Andhra Pradesh,AP,2018,4,298.9,207.9,direct
+Andhra Pradesh,AP,2018,5,301.4,210.2,direct
+Andhra Pradesh,AP,2018,6,290.8,208.6,direct
+Andhra Pradesh,AP,2018,7,297.2,214.9,direct
+Andhra Pradesh,AP,2018,8,304.7,216.5,direct
+Andhra Pradesh,AP,2018,9,304.8,217,direct
+Andhra Pradesh,AP,2018,10,302.4,220,direct
+Andhra Pradesh,AP,2018,11,299.3,216.8,direct
+Andhra Pradesh,AP,2018,12,301.9,218,direct
+Andhra Pradesh,AP,2019,1,306.6,222.6,direct
+Andhra Pradesh,AP,2019,2,309.2,229.3,direct
+Andhra Pradesh,AP,2019,3,314.7,226.9,direct
+Andhra Pradesh,AP,2019,4,314.3,225.1,direct
+Andhra Pradesh,AP,2019,5,324.3,229.7,direct
+Andhra Pradesh,AP,2019,6,321.4,229.8,direct
+Andhra Pradesh,AP,2019,7,323.5,231.6,direct
+Andhra Pradesh,AP,2019,8,326.4,227.7,direct
+Andhra Pradesh,AP,2019,9,331.1,229.2,direct
+Andhra Pradesh,AP,2019,10,332,221.2,direct
+Andhra Pradesh,AP,2019,11,327.5,232.9,direct
+Andhra Pradesh,AP,2019,12,341.5,232.5,direct
+Andhra Pradesh,AP,2020,1,336.9,241.2,direct
+Andhra Pradesh,AP,2020,2,337.6,244.4,direct
+Andhra Pradesh,AP,2020,3,336.4,246.9,direct
+Andhra Pradesh,AP,2020,5,,,direct
+Andhra Pradesh,AP,2020,6,335.4,251.4,direct
+Andhra Pradesh,AP,2020,7,342.2,255.4,direct
+Andhra Pradesh,AP,2020,8,341.1,249.8,direct
+Andhra Pradesh,AP,2020,9,343.8,251.8,direct
+Andhra Pradesh,AP,2020,10,343.2,251.3,direct
+Andhra Pradesh,AP,2020,11,347.1,260.6,direct
+Andhra Pradesh,AP,2020,12,351.2,266.9,direct
+Andhra Pradesh,AP,2021,1,355,265.2,direct
+Andhra Pradesh,AP,2021,2,358.3,271.4,direct
+Andhra Pradesh,AP,2021,3,354.6,274.6,direct
+Andhra Pradesh,AP,2021,4,362.7,275.3,direct
+Andhra Pradesh,AP,2021,5,357.8,275.8,direct
+Andhra Pradesh,AP,2021,6,357.4,275.4,direct
+Andhra Pradesh,AP,2021,7,359.5,278.9,direct
+Andhra Pradesh,AP,2021,8,360.6,281.9,direct
+Andhra Pradesh,AP,2021,9,364.5,276.6,direct
+Andhra Pradesh,AP,2021,10,370.2,279.1,direct
+Andhra Pradesh,AP,2021,11,376.7,281,direct
+Andhra Pradesh,AP,2021,12,380.6,286.7,direct
+Andhra Pradesh,AP,2022,1,377,287.8,direct
+Andhra Pradesh,AP,2022,2,387.8,290.3,direct
+Andhra Pradesh,AP,2022,3,401.3,296.9,direct
+Andhra Pradesh,AP,2022,4,406.5,299.9,direct
+Andhra Pradesh,AP,2022,5,404.3,298.2,direct
+Andhra Pradesh,AP,2022,6,409.4,303.7,direct
+Andhra Pradesh,AP,2022,7,415.2,318.3,direct
+Andhra Pradesh,AP,2022,8,417.9,309.8,direct
+Andhra Pradesh,AP,2022,9,421.1,312.9,direct
+Andhra Pradesh,AP,2022,10,426.2,315.3,direct
+Andhra Pradesh,AP,2022,11,430.6,316.1,direct
+Andhra Pradesh,AP,2022,12,431.9,318.7,direct
+Andhra Pradesh,AP,2023,1,431.9,319.3,direct
+Andhra Pradesh,AP,2023,2,438.2,324.1,direct
+Andhra Pradesh,AP,2023,3,441.9,325.9,direct
+Andhra Pradesh,AP,2023,4,446.6,329.8,direct
+Andhra Pradesh,AP,2023,5,453.5,335.5,direct
+Andhra Pradesh,AP,2023,6,457.1,338.1,direct
+Andhra Pradesh,AP,2023,7,463.4,344.1,direct
+Andhra Pradesh,AP,2023,8,467.3,344.9,direct
+Andhra Pradesh,AP,2023,9,479.8,346.4,direct
+Andhra Pradesh,AP,2023,10,481.5,347.9,direct
+Andhra Pradesh,AP,2023,11,484.5,350.8,direct
+Andhra Pradesh,AP,2023,12,476,352.2,direct
+Andhra Pradesh,AP,2024,1,480,355.5,direct
+Andhra Pradesh,AP,2024,2,481.4,357.3,direct
+Andhra Pradesh,AP,2024,3,500.6,362.1,direct
+Andhra Pradesh,AP,2024,4,500.6,362.1,direct
+Andhra Pradesh,AP,2024,5,504.1,363.5,direct
+Andhra Pradesh,AP,2024,6,507.1,364.4,direct
+Andhra Pradesh,AP,2024,7,514.7,366.7,direct
+Andhra Pradesh,AP,2024,8,519,367.9,direct
+Andhra Pradesh,AP,2024,9,520.8,368.6,direct
+Andhra Pradesh,AP,2024,10,522.6,369.1,direct
+Andhra Pradesh,AP,2024,11,524.7,371.1,direct
+Andhra Pradesh,AP,2024,12,525.9,373.6,direct
+Andhra Pradesh,AP,2025,1,527.5,374.6,direct
+Andhra Pradesh,AP,2025,2,528.8,377.1,direct
+Andhra Pradesh,AP,2025,3,531.6,379.2,direct
+Andhra Pradesh,AP,2025,4,533,379.7,direct
+Andhra Pradesh,AP,2025,5,535.4,379.8,direct
+Andhra Pradesh,AP,2025,6,539.3,382.2,direct
+Andhra Pradesh,AP,2025,7,646.5,438.3,direct
+Andhra Pradesh,AP,2025,8,653.8,443.5,direct
+Andhra Pradesh,AP,2025,9,654.1,443.2,direct
+Andhra Pradesh,AP,2025,10,658.8,431.6,direct
+Andhra Pradesh,AP,2025,11,636.4,433,direct
+Andhra Pradesh,AP,2025,12,756.2,777.8,direct
+Arunachal Pradesh,AR,2017,1,280.4,196,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2017,2,280.3,196.6,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2017,3,280.9,199.6,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2017,4,282.7,202.4,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2017,5,282.8,203.2,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2017,6,282.7,203.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2017,7,285.4,204.3,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2017,8,285.9,206.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2017,9,287.3,206.6,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2017,10,287.5,206.3,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2017,11,285.8,205.1,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2017,12,287.8,205.9,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2018,1,285.1,206.2,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2018,2,286.6,207.9,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2018,3,287.3,207.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2018,4,288.3,208.6,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2018,5,288.8,210.3,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2018,6,292.3,210.6,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2018,7,292.4,211.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2018,8,296.3,211.6,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2018,9,297.7,212.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2018,10,299.8,215.8,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2018,11,300.4,216.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2018,12,298.9,216.4,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2019,1,300,217.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2019,2,301.2,218.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2019,3,302.2,220.9,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2019,4,302.3,220.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2019,5,303.7,220.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2019,6,304.5,220.6,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2019,7,306.1,223.2,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2019,8,304.4,221.4,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2019,9,306.4,222.1,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2019,10,306.8,223,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2019,11,307.3,223.1,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2019,12,307,225.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2020,1,311.4,229.3,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2020,2,312.7,230.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2020,3,312.8,231.3,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2020,5,312.4,241.9,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2020,6,321.8,242,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2020,7,327.5,237.9,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2020,8,325.3,235.4,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2020,9,322.9,234,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2020,10,322.6,234.3,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2020,11,325.9,237.4,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2020,12,326.8,240.1,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2021,1,330,239.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2021,2,333.2,241.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2021,3,337.3,245.1,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2021,4,339.3,246,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2021,5,339.9,246.2,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2021,6,341.3,247.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2021,7,341.8,250.4,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2021,8,342.8,249.9,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2021,9,344.5,251.1,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2021,10,341.6,252.6,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2021,11,341.6,252.1,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2021,12,343.1,253.6,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2022,1,343.5,254,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2022,2,347.7,256.6,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2022,3,350.6,259.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2022,4,353,261.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2022,5,354.1,263.8,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2022,6,356,264.9,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2022,7,358.3,266.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2022,8,359.5,267.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2022,9,361,269.4,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2022,10,363.7,270.6,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2022,11,367.2,272.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2022,12,369,273.4,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2023,1,370,276,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2023,2,371.2,277.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2023,3,372.5,278.1,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2023,4,373.8,280,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2023,5,376.8,283.9,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2023,6,385.1,285.8,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2023,7,387.3,290.3,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2023,8,388.5,290.8,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2023,9,388.7,291.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2023,10,390,293.2,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2023,11,392.2,296,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2023,12,393.8,298.1,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2024,1,395.1,299.4,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2024,2,396.1,300.4,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2024,3,398.8,302.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2024,4,398.8,302.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2024,5,401.1,304.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2024,6,404,306,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2024,7,405.7,308.3,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2024,8,410,310.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2024,9,412.6,311.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2024,10,414.3,312.5,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2024,11,417.1,313.8,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2024,12,419,315.8,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2025,1,420.9,317.2,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2025,2,423.2,318.8,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2025,3,425.9,320.1,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2025,4,428.9,322.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2025,5,431.5,324.9,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2025,6,434.3,327.4,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2025,7,494.4,370.9,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2025,8,496.4,370.7,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2025,9,499.3,371.2,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2025,10,501,372.3,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2025,11,501.6,373.2,India (no regional proxy - All-India fallback)
+Arunachal Pradesh,AR,2025,12,501.7,374.6,India (no regional proxy - All-India fallback)
+Assam,AS,2017,1,250.8,226,direct
+Assam,AS,2017,2,252.7,227.5,direct
+Assam,AS,2017,3,249.4,230.2,direct
+Assam,AS,2017,4,249.7,229.7,direct
+Assam,AS,2017,5,249.5,226.2,direct
+Assam,AS,2017,6,249.1,229.7,direct
+Assam,AS,2017,7,247.2,227.5,direct
+Assam,AS,2017,8,243.3,222.3,direct
+Assam,AS,2017,9,250.9,227.5,direct
+Assam,AS,2017,10,256.5,230.6,direct
+Assam,AS,2017,11,258.2,230.8,direct
+Assam,AS,2017,12,255.5,230.8,direct
+Assam,AS,2018,1,256.2,230.8,direct
+Assam,AS,2018,2,266.4,241.8,direct
+Assam,AS,2018,3,266.3,239,direct
+Assam,AS,2018,4,267.7,240.7,direct
+Assam,AS,2018,5,266.9,241.7,direct
+Assam,AS,2018,6,269.2,241.7,direct
+Assam,AS,2018,7,273.4,242.3,direct
+Assam,AS,2018,8,273.3,242.5,direct
+Assam,AS,2018,9,263,230.8,direct
+Assam,AS,2018,10,258.4,233.8,direct
+Assam,AS,2018,11,261.3,232.8,direct
+Assam,AS,2018,12,260.2,231.7,direct
+Assam,AS,2019,1,262.8,232.1,direct
+Assam,AS,2019,2,261.8,232.1,direct
+Assam,AS,2019,3,261.5,232.1,direct
+Assam,AS,2019,4,259.9,232.7,direct
+Assam,AS,2019,5,262,232.7,direct
+Assam,AS,2019,6,279.2,232.7,direct
+Assam,AS,2019,7,281.4,232.6,direct
+Assam,AS,2019,8,281.8,235.2,direct
+Assam,AS,2019,9,284.1,235.2,direct
+Assam,AS,2019,10,283.9,235.4,direct
+Assam,AS,2019,11,287.9,235.2,direct
+Assam,AS,2019,12,290.5,243.2,direct
+Assam,AS,2020,1,292.5,247,direct
+Assam,AS,2020,2,291,251.6,direct
+Assam,AS,2020,3,291.2,250.2,direct
+Assam,AS,2020,5,,,direct
+Assam,AS,2020,6,376.7,,direct
+Assam,AS,2020,7,286.4,260.5,direct
+Assam,AS,2020,8,289.7,262.6,direct
+Assam,AS,2020,9,283.4,252.9,direct
+Assam,AS,2020,10,293.9,250.4,direct
+Assam,AS,2020,11,298.6,249.3,direct
+Assam,AS,2020,12,303.3,251.7,direct
+Assam,AS,2021,1,301.4,248.6,direct
+Assam,AS,2021,2,300,248.6,direct
+Assam,AS,2021,3,299.1,248.6,direct
+Assam,AS,2021,4,298.8,249.4,direct
+Assam,AS,2021,5,301.9,255.1,direct
+Assam,AS,2021,6,301.9,255.1,direct
+Assam,AS,2021,7,302.5,256.6,direct
+Assam,AS,2021,8,305.1,256.9,direct
+Assam,AS,2021,9,315.6,267.5,direct
+Assam,AS,2021,10,315.7,266.6,direct
+Assam,AS,2021,11,317.2,266.6,direct
+Assam,AS,2021,12,318.9,268.8,direct
+Assam,AS,2022,1,319.3,268.8,direct
+Assam,AS,2022,2,320.9,274.3,direct
+Assam,AS,2022,3,316.3,279.4,direct
+Assam,AS,2022,4,316.3,279.4,direct
+Assam,AS,2022,5,318.1,279.4,direct
+Assam,AS,2022,6,319,281.4,direct
+Assam,AS,2022,7,322.1,282.4,direct
+Assam,AS,2022,8,322.1,282.7,direct
+Assam,AS,2022,9,322.1,282.7,direct
+Assam,AS,2022,10,324.6,291.8,direct
+Assam,AS,2022,11,325.9,291.8,direct
+Assam,AS,2022,12,325.9,292.2,direct
+Assam,AS,2023,1,326.3,292.6,direct
+Assam,AS,2023,2,332,299.6,direct
+Assam,AS,2023,3,335.2,304.5,direct
+Assam,AS,2023,4,337.2,305,direct
+Assam,AS,2023,5,341,307.2,direct
+Assam,AS,2023,6,345,307.6,direct
+Assam,AS,2023,7,346.8,307.6,direct
+Assam,AS,2023,8,347.9,307.6,direct
+Assam,AS,2023,9,348.8,307.6,direct
+Assam,AS,2023,10,351,308.3,direct
+Assam,AS,2023,11,360.5,316.6,direct
+Assam,AS,2023,12,365.7,316.6,direct
+Assam,AS,2024,1,369,323.3,direct
+Assam,AS,2024,2,370.2,323.3,direct
+Assam,AS,2024,3,372.1,324,direct
+Assam,AS,2024,4,372.1,324,direct
+Assam,AS,2024,5,373.5,324,direct
+Assam,AS,2024,6,373.5,324,direct
+Assam,AS,2024,7,375,324,direct
+Assam,AS,2024,8,379.3,326.6,direct
+Assam,AS,2024,9,382.4,328.7,direct
+Assam,AS,2024,10,385.2,330.7,direct
+Assam,AS,2024,11,387.6,335,direct
+Assam,AS,2024,12,389.7,339.2,direct
+Assam,AS,2025,1,390.7,342.6,direct
+Assam,AS,2025,2,395.2,346,direct
+Assam,AS,2025,3,396.3,348.5,direct
+Assam,AS,2025,4,401.3,348.5,direct
+Assam,AS,2025,5,404.3,351.1,direct
+Assam,AS,2025,6,405.5,352.5,direct
+Assam,AS,2025,7,445.1,351.6,direct
+Assam,AS,2025,8,443.8,354.8,direct
+Assam,AS,2025,9,438.5,358.1,direct
+Assam,AS,2025,10,439.9,363.8,direct
+Assam,AS,2025,11,449.4,378.7,direct
+Assam,AS,2025,12,636.9,435.7,direct
+Bihar,BI,2017,1,238.5,193.5,direct
+Bihar,BI,2017,2,239.4,194.9,direct
+Bihar,BI,2017,3,239.1,195,direct
+Bihar,BI,2017,4,239.8,194.9,direct
+Bihar,BI,2017,5,240.6,196.2,direct
+Bihar,BI,2017,6,240.6,196.2,direct
+Bihar,BI,2017,7,242.7,196.8,direct
+Bihar,BI,2017,8,244.1,197.5,direct
+Bihar,BI,2017,9,243.7,197.5,direct
+Bihar,BI,2017,10,243.6,197.6,direct
+Bihar,BI,2017,11,244.6,199.3,direct
+Bihar,BI,2017,12,244.7,197.7,direct
+Bihar,BI,2018,1,247.4,205.5,direct
+Bihar,BI,2018,2,249.4,207.7,direct
+Bihar,BI,2018,3,251.5,207.2,direct
+Bihar,BI,2018,4,251.9,206.5,direct
+Bihar,BI,2018,5,251.6,205.9,direct
+Bihar,BI,2018,6,252.6,206.2,direct
+Bihar,BI,2018,7,253.7,207.2,direct
+Bihar,BI,2018,8,256.3,209.6,direct
+Bihar,BI,2018,9,256.2,211.9,direct
+Bihar,BI,2018,10,257.3,212.5,direct
+Bihar,BI,2018,11,256.7,213.9,direct
+Bihar,BI,2018,12,257.1,213.7,direct
+Bihar,BI,2019,1,261.3,216.8,direct
+Bihar,BI,2019,2,262.8,217.4,direct
+Bihar,BI,2019,3,263.7,219,direct
+Bihar,BI,2019,4,263.4,218.5,direct
+Bihar,BI,2019,5,262.9,217.3,direct
+Bihar,BI,2019,6,263.2,216.4,direct
+Bihar,BI,2019,7,273.6,231.1,direct
+Bihar,BI,2019,8,276,234.5,direct
+Bihar,BI,2019,9,276.8,234.7,direct
+Bihar,BI,2019,10,278.2,236,direct
+Bihar,BI,2019,11,279.6,236.8,direct
+Bihar,BI,2019,12,279.8,234.9,direct
+Bihar,BI,2020,1,288.6,241.4,direct
+Bihar,BI,2020,2,286.8,245.7,direct
+Bihar,BI,2020,3,286.9,245.3,direct
+Bihar,BI,2020,5,,,direct
+Bihar,BI,2020,6,283.9,250.1,direct
+Bihar,BI,2020,7,288.5,247,direct
+Bihar,BI,2020,8,288.1,242.4,direct
+Bihar,BI,2020,9,291,241.9,direct
+Bihar,BI,2020,10,289.4,242.1,direct
+Bihar,BI,2020,11,289.4,242,direct
+Bihar,BI,2020,12,286.6,240.1,direct
+Bihar,BI,2021,1,287.2,240.9,direct
+Bihar,BI,2021,2,289.3,243.3,direct
+Bihar,BI,2021,3,289.9,244,direct
+Bihar,BI,2021,4,290.9,244.3,direct
+Bihar,BI,2021,5,291.5,245.5,direct
+Bihar,BI,2021,6,294.1,244.6,direct
+Bihar,BI,2021,7,295.8,246.9,direct
+Bihar,BI,2021,8,296.6,247.4,direct
+Bihar,BI,2021,9,297.4,248.1,direct
+Bihar,BI,2021,10,298,248.4,direct
+Bihar,BI,2021,11,299.6,250.3,direct
+Bihar,BI,2021,12,300.8,251.4,direct
+Bihar,BI,2022,1,299.3,251.7,direct
+Bihar,BI,2022,2,299.7,251.7,direct
+Bihar,BI,2022,3,303.2,253.2,direct
+Bihar,BI,2022,4,303.4,253.4,direct
+Bihar,BI,2022,5,306.1,255.9,direct
+Bihar,BI,2022,6,309.3,256.7,direct
+Bihar,BI,2022,7,312.7,256.7,direct
+Bihar,BI,2022,8,313.1,256.7,direct
+Bihar,BI,2022,9,313.1,256.7,direct
+Bihar,BI,2022,10,314.3,257.1,direct
+Bihar,BI,2022,11,319.4,258.2,direct
+Bihar,BI,2022,12,319.6,258.2,direct
+Bihar,BI,2023,1,321.3,260.2,direct
+Bihar,BI,2023,2,322.6,260.2,direct
+Bihar,BI,2023,3,324.3,261,direct
+Bihar,BI,2023,4,326.6,265.5,direct
+Bihar,BI,2023,5,331.1,273.8,direct
+Bihar,BI,2023,6,333.4,275.2,direct
+Bihar,BI,2023,7,334.8,280.4,direct
+Bihar,BI,2023,8,336.7,284.5,direct
+Bihar,BI,2023,9,339.6,287.1,direct
+Bihar,BI,2023,10,339.8,289.1,direct
+Bihar,BI,2023,11,340.3,291.1,direct
+Bihar,BI,2023,12,343.6,299.4,direct
+Bihar,BI,2024,1,345.7,302.1,direct
+Bihar,BI,2024,2,350.3,304.4,direct
+Bihar,BI,2024,3,354.7,309.6,direct
+Bihar,BI,2024,4,354.7,309.6,direct
+Bihar,BI,2024,5,357.3,310.8,direct
+Bihar,BI,2024,6,358.6,312.5,direct
+Bihar,BI,2024,7,362.9,314.4,direct
+Bihar,BI,2024,8,367.1,315.2,direct
+Bihar,BI,2024,9,368.8,315.2,direct
+Bihar,BI,2024,10,369.6,315.2,direct
+Bihar,BI,2024,11,370.6,315.8,direct
+Bihar,BI,2024,12,370.6,316.2,direct
+Bihar,BI,2025,1,375.4,318,direct
+Bihar,BI,2025,2,383.2,324.3,direct
+Bihar,BI,2025,3,388.3,329.3,direct
+Bihar,BI,2025,4,391.7,332.2,direct
+Bihar,BI,2025,5,392.1,334.2,direct
+Bihar,BI,2025,6,392.1,334.2,direct
+Bihar,BI,2025,7,399.5,293.1,direct
+Bihar,BI,2025,8,400.3,295.5,direct
+Bihar,BI,2025,9,400.9,298.8,direct
+Bihar,BI,2025,10,400.9,298.8,direct
+Bihar,BI,2025,11,400.9,298.8,direct
+Bihar,BI,2025,12,521.3,407.5,direct
+Chandigarh,CH,2017,1,280.4,196,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2017,2,280.3,196.6,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2017,3,280.9,199.6,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2017,4,282.7,202.4,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2017,5,282.8,203.2,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2017,6,282.7,203.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2017,7,285.4,204.3,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2017,8,285.9,206.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2017,9,287.3,206.6,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2017,10,287.5,206.3,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2017,11,285.8,205.1,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2017,12,287.8,205.9,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2018,1,285.1,206.2,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2018,2,286.6,207.9,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2018,3,287.3,207.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2018,4,288.3,208.6,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2018,5,288.8,210.3,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2018,6,292.3,210.6,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2018,7,292.4,211.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2018,8,296.3,211.6,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2018,9,297.7,212.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2018,10,299.8,215.8,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2018,11,300.4,216.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2018,12,298.9,216.4,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2019,1,300,217.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2019,2,301.2,218.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2019,3,302.2,220.9,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2019,4,302.3,220.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2019,5,303.7,220.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2019,6,304.5,220.6,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2019,7,306.1,223.2,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2019,8,304.4,221.4,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2019,9,306.4,222.1,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2019,10,306.8,223,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2019,11,307.3,223.1,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2019,12,307,225.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2020,1,311.4,229.3,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2020,2,312.7,230.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2020,3,312.8,231.3,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2020,5,312.4,241.9,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2020,6,321.8,242,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2020,7,327.5,237.9,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2020,8,325.3,235.4,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2020,9,322.9,234,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2020,10,322.6,234.3,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2020,11,325.9,237.4,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2020,12,326.8,240.1,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2021,1,330,239.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2021,2,333.2,241.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2021,3,337.3,245.1,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2021,4,339.3,246,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2021,5,339.9,246.2,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2021,6,341.3,247.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2021,7,341.8,250.4,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2021,8,342.8,249.9,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2021,9,344.5,251.1,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2021,10,341.6,252.6,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2021,11,341.6,252.1,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2021,12,343.1,253.6,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2022,1,343.5,254,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2022,2,347.7,256.6,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2022,3,350.6,259.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2022,4,353,261.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2022,5,354.1,263.8,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2022,6,356,264.9,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2022,7,358.3,266.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2022,8,359.5,267.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2022,9,361,269.4,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2022,10,363.7,270.6,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2022,11,367.2,272.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2022,12,369,273.4,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2023,1,370,276,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2023,2,371.2,277.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2023,3,372.5,278.1,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2023,4,373.8,280,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2023,5,376.8,283.9,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2023,6,385.1,285.8,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2023,7,387.3,290.3,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2023,8,388.5,290.8,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2023,9,388.7,291.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2023,10,390,293.2,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2023,11,392.2,296,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2023,12,393.8,298.1,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2024,1,395.1,299.4,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2024,2,396.1,300.4,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2024,3,398.8,302.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2024,4,398.8,302.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2024,5,401.1,304.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2024,6,404,306,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2024,7,405.7,308.3,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2024,8,410,310.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2024,9,412.6,311.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2024,10,414.3,312.5,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2024,11,417.1,313.8,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2024,12,419,315.8,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2025,1,420.9,317.2,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2025,2,423.2,318.8,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2025,3,425.9,320.1,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2025,4,428.9,322.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2025,5,431.5,324.9,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2025,6,434.3,327.4,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2025,7,494.4,370.9,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2025,8,496.4,370.7,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2025,9,499.3,371.2,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2025,10,501,372.3,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2025,11,501.6,373.2,India (no regional proxy - All-India fallback)
+Chandigarh,CH,2025,12,501.7,374.6,India (no regional proxy - All-India fallback)
+Chattisgarh,CG,2017,1,184.2,164.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2017,2,184.1,163.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2017,3,188.2,165.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2017,4,192.5,169.1,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2017,5,188.6,170.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2017,6,189.9,170.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2017,7,192,173,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2017,8,192.1,174.3,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2017,9,191.9,174.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2017,10,192.6,173.4,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2017,11,190,172,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2017,12,190.1,173.5,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2018,1,193.5,181.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2018,2,196.7,174.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2018,3,193.4,174.7,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2018,4,192.8,175.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2018,5,193.6,175.7,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2018,6,193.7,173.7,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2018,7,197.4,175.5,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2018,8,196.4,172.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2018,9,200.8,179,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2018,10,199,176.4,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2018,11,198.7,176.4,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2018,12,198.1,176.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2019,1,198.3,178.5,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2019,2,198.5,177.5,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2019,3,199.7,184.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2019,4,199.8,185.1,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2019,5,199.9,185.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2019,6,200.4,181,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2019,7,200.5,182.8,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2019,8,203.6,177.7,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2019,9,203.1,175.8,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2019,10,201.8,176.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2019,11,200.5,176.8,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2019,12,202,178.1,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2020,1,204,184.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2020,2,205.3,184.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2020,3,205.3,185,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2020,5,,,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2020,6,253.7,232.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2020,7,227.3,202.8,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2020,8,225,197.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2020,9,211.4,189.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2020,10,210.8,187.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2020,11,210.8,191.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2020,12,209.5,188.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2021,1,210.5,188.5,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2021,2,211.1,181.3,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2021,3,212.7,187.5,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2021,4,216.6,189.3,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2021,5,218.5,191.5,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2021,6,217.9,190.3,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2021,7,218.9,190.3,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2021,8,220.1,185.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2021,9,220.9,184.3,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2021,10,221.3,189.4,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2021,11,219.8,186.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2021,12,222.1,192.8,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2022,1,224.9,196.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2022,2,225.7,193.8,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2022,3,226.3,194,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2022,4,227.9,199.4,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2022,5,229.8,202.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2022,6,231.9,204.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2022,7,233.9,206.8,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2022,8,235.3,207.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2022,9,238.4,208.8,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2022,10,238.6,208.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2022,11,239.3,211.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2022,12,239.6,211.7,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2023,1,242.2,213.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2023,2,242.6,213.5,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2023,3,243.4,213.3,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2023,4,243.7,215.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2023,5,246.3,219.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2023,6,247.2,220.1,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2023,7,250.1,224.3,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2023,8,250.5,224.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2023,9,250.8,221.8,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2023,10,250.7,222.1,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2023,11,253.1,223.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2023,12,253.7,223.7,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2024,1,254.1,224.7,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2024,2,254.3,225.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2024,3,255,225.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2024,4,255,225.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2024,5,255.4,225.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2024,6,255.6,226.1,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2024,7,259.6,229.7,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2024,8,263.2,230.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2024,9,264.3,232.5,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2024,10,264.8,232.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2024,11,267.8,235.5,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2024,12,268.3,235.6,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2025,1,269.2,236,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2025,2,274.1,238.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2025,3,275.1,238.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2025,4,277.1,238.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2025,5,279.2,240,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2025,6,279.8,240.3,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2025,7,348.3,291.7,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2025,8,349.3,293.2,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2025,9,352.2,294.8,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2025,10,351.6,294.8,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2025,11,352.3,294.9,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Chattisgarh,CG,2025,12,352.8,328.7,Madhya Pradesh (parent-state proxy (split Nov-2000))
+Goa,GO,2017,1,280.4,196,India (no regional proxy - All-India fallback)
+Goa,GO,2017,2,280.3,196.6,India (no regional proxy - All-India fallback)
+Goa,GO,2017,3,280.9,199.6,India (no regional proxy - All-India fallback)
+Goa,GO,2017,4,282.7,202.4,India (no regional proxy - All-India fallback)
+Goa,GO,2017,5,282.8,203.2,India (no regional proxy - All-India fallback)
+Goa,GO,2017,6,282.7,203.5,India (no regional proxy - All-India fallback)
+Goa,GO,2017,7,285.4,204.3,India (no regional proxy - All-India fallback)
+Goa,GO,2017,8,285.9,206.7,India (no regional proxy - All-India fallback)
+Goa,GO,2017,9,287.3,206.6,India (no regional proxy - All-India fallback)
+Goa,GO,2017,10,287.5,206.3,India (no regional proxy - All-India fallback)
+Goa,GO,2017,11,285.8,205.1,India (no regional proxy - All-India fallback)
+Goa,GO,2017,12,287.8,205.9,India (no regional proxy - All-India fallback)
+Goa,GO,2018,1,285.1,206.2,India (no regional proxy - All-India fallback)
+Goa,GO,2018,2,286.6,207.9,India (no regional proxy - All-India fallback)
+Goa,GO,2018,3,287.3,207.5,India (no regional proxy - All-India fallback)
+Goa,GO,2018,4,288.3,208.6,India (no regional proxy - All-India fallback)
+Goa,GO,2018,5,288.8,210.3,India (no regional proxy - All-India fallback)
+Goa,GO,2018,6,292.3,210.6,India (no regional proxy - All-India fallback)
+Goa,GO,2018,7,292.4,211.7,India (no regional proxy - All-India fallback)
+Goa,GO,2018,8,296.3,211.6,India (no regional proxy - All-India fallback)
+Goa,GO,2018,9,297.7,212.7,India (no regional proxy - All-India fallback)
+Goa,GO,2018,10,299.8,215.8,India (no regional proxy - All-India fallback)
+Goa,GO,2018,11,300.4,216.7,India (no regional proxy - All-India fallback)
+Goa,GO,2018,12,298.9,216.4,India (no regional proxy - All-India fallback)
+Goa,GO,2019,1,300,217.5,India (no regional proxy - All-India fallback)
+Goa,GO,2019,2,301.2,218.7,India (no regional proxy - All-India fallback)
+Goa,GO,2019,3,302.2,220.9,India (no regional proxy - All-India fallback)
+Goa,GO,2019,4,302.3,220.5,India (no regional proxy - All-India fallback)
+Goa,GO,2019,5,303.7,220.7,India (no regional proxy - All-India fallback)
+Goa,GO,2019,6,304.5,220.6,India (no regional proxy - All-India fallback)
+Goa,GO,2019,7,306.1,223.2,India (no regional proxy - All-India fallback)
+Goa,GO,2019,8,304.4,221.4,India (no regional proxy - All-India fallback)
+Goa,GO,2019,9,306.4,222.1,India (no regional proxy - All-India fallback)
+Goa,GO,2019,10,306.8,223,India (no regional proxy - All-India fallback)
+Goa,GO,2019,11,307.3,223.1,India (no regional proxy - All-India fallback)
+Goa,GO,2019,12,307,225.5,India (no regional proxy - All-India fallback)
+Goa,GO,2020,1,311.4,229.3,India (no regional proxy - All-India fallback)
+Goa,GO,2020,2,312.7,230.5,India (no regional proxy - All-India fallback)
+Goa,GO,2020,3,312.8,231.3,India (no regional proxy - All-India fallback)
+Goa,GO,2020,5,312.4,241.9,India (no regional proxy - All-India fallback)
+Goa,GO,2020,6,321.8,242,India (no regional proxy - All-India fallback)
+Goa,GO,2020,7,327.5,237.9,India (no regional proxy - All-India fallback)
+Goa,GO,2020,8,325.3,235.4,India (no regional proxy - All-India fallback)
+Goa,GO,2020,9,322.9,234,India (no regional proxy - All-India fallback)
+Goa,GO,2020,10,322.6,234.3,India (no regional proxy - All-India fallback)
+Goa,GO,2020,11,325.9,237.4,India (no regional proxy - All-India fallback)
+Goa,GO,2020,12,326.8,240.1,India (no regional proxy - All-India fallback)
+Goa,GO,2021,1,330,239.5,India (no regional proxy - All-India fallback)
+Goa,GO,2021,2,333.2,241.5,India (no regional proxy - All-India fallback)
+Goa,GO,2021,3,337.3,245.1,India (no regional proxy - All-India fallback)
+Goa,GO,2021,4,339.3,246,India (no regional proxy - All-India fallback)
+Goa,GO,2021,5,339.9,246.2,India (no regional proxy - All-India fallback)
+Goa,GO,2021,6,341.3,247.7,India (no regional proxy - All-India fallback)
+Goa,GO,2021,7,341.8,250.4,India (no regional proxy - All-India fallback)
+Goa,GO,2021,8,342.8,249.9,India (no regional proxy - All-India fallback)
+Goa,GO,2021,9,344.5,251.1,India (no regional proxy - All-India fallback)
+Goa,GO,2021,10,341.6,252.6,India (no regional proxy - All-India fallback)
+Goa,GO,2021,11,341.6,252.1,India (no regional proxy - All-India fallback)
+Goa,GO,2021,12,343.1,253.6,India (no regional proxy - All-India fallback)
+Goa,GO,2022,1,343.5,254,India (no regional proxy - All-India fallback)
+Goa,GO,2022,2,347.7,256.6,India (no regional proxy - All-India fallback)
+Goa,GO,2022,3,350.6,259.5,India (no regional proxy - All-India fallback)
+Goa,GO,2022,4,353,261.7,India (no regional proxy - All-India fallback)
+Goa,GO,2022,5,354.1,263.8,India (no regional proxy - All-India fallback)
+Goa,GO,2022,6,356,264.9,India (no regional proxy - All-India fallback)
+Goa,GO,2022,7,358.3,266.5,India (no regional proxy - All-India fallback)
+Goa,GO,2022,8,359.5,267.7,India (no regional proxy - All-India fallback)
+Goa,GO,2022,9,361,269.4,India (no regional proxy - All-India fallback)
+Goa,GO,2022,10,363.7,270.6,India (no regional proxy - All-India fallback)
+Goa,GO,2022,11,367.2,272.5,India (no regional proxy - All-India fallback)
+Goa,GO,2022,12,369,273.4,India (no regional proxy - All-India fallback)
+Goa,GO,2023,1,370,276,India (no regional proxy - All-India fallback)
+Goa,GO,2023,2,371.2,277.5,India (no regional proxy - All-India fallback)
+Goa,GO,2023,3,372.5,278.1,India (no regional proxy - All-India fallback)
+Goa,GO,2023,4,373.8,280,India (no regional proxy - All-India fallback)
+Goa,GO,2023,5,376.8,283.9,India (no regional proxy - All-India fallback)
+Goa,GO,2023,6,385.1,285.8,India (no regional proxy - All-India fallback)
+Goa,GO,2023,7,387.3,290.3,India (no regional proxy - All-India fallback)
+Goa,GO,2023,8,388.5,290.8,India (no regional proxy - All-India fallback)
+Goa,GO,2023,9,388.7,291.7,India (no regional proxy - All-India fallback)
+Goa,GO,2023,10,390,293.2,India (no regional proxy - All-India fallback)
+Goa,GO,2023,11,392.2,296,India (no regional proxy - All-India fallback)
+Goa,GO,2023,12,393.8,298.1,India (no regional proxy - All-India fallback)
+Goa,GO,2024,1,395.1,299.4,India (no regional proxy - All-India fallback)
+Goa,GO,2024,2,396.1,300.4,India (no regional proxy - All-India fallback)
+Goa,GO,2024,3,398.8,302.5,India (no regional proxy - All-India fallback)
+Goa,GO,2024,4,398.8,302.5,India (no regional proxy - All-India fallback)
+Goa,GO,2024,5,401.1,304.5,India (no regional proxy - All-India fallback)
+Goa,GO,2024,6,404,306,India (no regional proxy - All-India fallback)
+Goa,GO,2024,7,405.7,308.3,India (no regional proxy - All-India fallback)
+Goa,GO,2024,8,410,310.5,India (no regional proxy - All-India fallback)
+Goa,GO,2024,9,412.6,311.7,India (no regional proxy - All-India fallback)
+Goa,GO,2024,10,414.3,312.5,India (no regional proxy - All-India fallback)
+Goa,GO,2024,11,417.1,313.8,India (no regional proxy - All-India fallback)
+Goa,GO,2024,12,419,315.8,India (no regional proxy - All-India fallback)
+Goa,GO,2025,1,420.9,317.2,India (no regional proxy - All-India fallback)
+Goa,GO,2025,2,423.2,318.8,India (no regional proxy - All-India fallback)
+Goa,GO,2025,3,425.9,320.1,India (no regional proxy - All-India fallback)
+Goa,GO,2025,4,428.9,322.7,India (no regional proxy - All-India fallback)
+Goa,GO,2025,5,431.5,324.9,India (no regional proxy - All-India fallback)
+Goa,GO,2025,6,434.3,327.4,India (no regional proxy - All-India fallback)
+Goa,GO,2025,7,494.4,370.9,India (no regional proxy - All-India fallback)
+Goa,GO,2025,8,496.4,370.7,India (no regional proxy - All-India fallback)
+Goa,GO,2025,9,499.3,371.2,India (no regional proxy - All-India fallback)
+Goa,GO,2025,10,501,372.3,India (no regional proxy - All-India fallback)
+Goa,GO,2025,11,501.6,373.2,India (no regional proxy - All-India fallback)
+Goa,GO,2025,12,501.7,374.6,India (no regional proxy - All-India fallback)
+Gujarat,GJ,2017,1,198.7,198.9,direct
+Gujarat,GJ,2017,2,200.3,198.6,direct
+Gujarat,GJ,2017,3,200.5,198.9,direct
+Gujarat,GJ,2017,4,202.7,201.9,direct
+Gujarat,GJ,2017,5,203,201.9,direct
+Gujarat,GJ,2017,6,204.4,202.5,direct
+Gujarat,GJ,2017,7,205,203.3,direct
+Gujarat,GJ,2017,8,205,203.3,direct
+Gujarat,GJ,2017,9,206.5,205.5,direct
+Gujarat,GJ,2017,10,206.4,205.5,direct
+Gujarat,GJ,2017,11,206.4,205.4,direct
+Gujarat,GJ,2017,12,206,205.4,direct
+Gujarat,GJ,2018,1,209,208.9,direct
+Gujarat,GJ,2018,2,209.1,209.1,direct
+Gujarat,GJ,2018,3,210.9,210.5,direct
+Gujarat,GJ,2018,4,211.4,211,direct
+Gujarat,GJ,2018,5,211.4,211,direct
+Gujarat,GJ,2018,6,211.9,211.7,direct
+Gujarat,GJ,2018,7,213.6,211.7,direct
+Gujarat,GJ,2018,8,213.4,212,direct
+Gujarat,GJ,2018,9,214.1,209.5,direct
+Gujarat,GJ,2018,10,214.4,211.7,direct
+Gujarat,GJ,2018,11,217,212.4,direct
+Gujarat,GJ,2018,12,217.1,212.4,direct
+Gujarat,GJ,2019,1,220.9,212.9,direct
+Gujarat,GJ,2019,2,220.9,213.4,direct
+Gujarat,GJ,2019,3,220.9,213.4,direct
+Gujarat,GJ,2019,4,220.9,213.4,direct
+Gujarat,GJ,2019,5,220.9,213.4,direct
+Gujarat,GJ,2019,6,223.5,213.7,direct
+Gujarat,GJ,2019,7,225.5,214.4,direct
+Gujarat,GJ,2019,8,225.5,214.7,direct
+Gujarat,GJ,2019,9,226.6,215.3,direct
+Gujarat,GJ,2019,10,226.4,215.3,direct
+Gujarat,GJ,2019,11,225.2,214.7,direct
+Gujarat,GJ,2019,12,228.4,215.5,direct
+Gujarat,GJ,2020,1,229,216.1,direct
+Gujarat,GJ,2020,2,229,216.1,direct
+Gujarat,GJ,2020,3,229,216.1,direct
+Gujarat,GJ,2020,5,,,direct
+Gujarat,GJ,2020,6,223.8,214.9,direct
+Gujarat,GJ,2020,7,228.6,215.3,direct
+Gujarat,GJ,2020,8,228.6,215.3,direct
+Gujarat,GJ,2020,9,230.5,218.5,direct
+Gujarat,GJ,2020,10,230.5,218.5,direct
+Gujarat,GJ,2020,11,230.5,218.5,direct
+Gujarat,GJ,2020,12,230.5,218.5,direct
+Gujarat,GJ,2021,1,230.8,219,direct
+Gujarat,GJ,2021,2,230.8,219,direct
+Gujarat,GJ,2021,3,233.5,223,direct
+Gujarat,GJ,2021,4,233.2,223,direct
+Gujarat,GJ,2021,5,232.4,223.1,direct
+Gujarat,GJ,2021,6,234.3,223.4,direct
+Gujarat,GJ,2021,7,236.6,225.2,direct
+Gujarat,GJ,2021,8,236.8,227.9,direct
+Gujarat,GJ,2021,9,236.8,227.9,direct
+Gujarat,GJ,2021,10,236.9,228.7,direct
+Gujarat,GJ,2021,11,236.9,228.7,direct
+Gujarat,GJ,2021,12,238.3,232.6,direct
+Gujarat,GJ,2022,1,240.3,233.3,direct
+Gujarat,GJ,2022,2,241.7,233.6,direct
+Gujarat,GJ,2022,3,241.8,234.3,direct
+Gujarat,GJ,2022,4,244.8,239.1,direct
+Gujarat,GJ,2022,5,245.3,240.9,direct
+Gujarat,GJ,2022,6,247.9,248.3,direct
+Gujarat,GJ,2022,7,252.6,251,direct
+Gujarat,GJ,2022,8,254.4,253.7,direct
+Gujarat,GJ,2022,9,254.6,254.1,direct
+Gujarat,GJ,2022,10,256.2,254.1,direct
+Gujarat,GJ,2022,11,257.9,255,direct
+Gujarat,GJ,2022,12,259.8,256.7,direct
+Gujarat,GJ,2023,1,261.9,257.9,direct
+Gujarat,GJ,2023,2,263.7,258.8,direct
+Gujarat,GJ,2023,3,266.2,259.8,direct
+Gujarat,GJ,2023,4,266.2,259.8,direct
+Gujarat,GJ,2023,5,266.5,260.9,direct
+Gujarat,GJ,2023,6,268.7,262.2,direct
+Gujarat,GJ,2023,7,270.2,262.2,direct
+Gujarat,GJ,2023,8,270.2,262.2,direct
+Gujarat,GJ,2023,9,270.5,262.8,direct
+Gujarat,GJ,2023,10,271.1,268,direct
+Gujarat,GJ,2023,11,272.5,269.3,direct
+Gujarat,GJ,2023,12,273.2,269.2,direct
+Gujarat,GJ,2024,1,273.9,269.2,direct
+Gujarat,GJ,2024,2,273.9,269.2,direct
+Gujarat,GJ,2024,3,274,269.6,direct
+Gujarat,GJ,2024,4,274,269.6,direct
+Gujarat,GJ,2024,5,275.4,271.9,direct
+Gujarat,GJ,2024,6,277.9,274.4,direct
+Gujarat,GJ,2024,7,287.4,279.7,direct
+Gujarat,GJ,2024,8,289.2,281.2,direct
+Gujarat,GJ,2024,9,291.6,282.3,direct
+Gujarat,GJ,2024,10,291.9,282.3,direct
+Gujarat,GJ,2024,11,297.3,287,direct
+Gujarat,GJ,2024,12,300.9,288.1,direct
+Gujarat,GJ,2025,1,302.2,289.3,direct
+Gujarat,GJ,2025,2,302.6,289.8,direct
+Gujarat,GJ,2025,3,302.8,290.1,direct
+Gujarat,GJ,2025,4,303.2,290.1,direct
+Gujarat,GJ,2025,5,304.1,293,direct
+Gujarat,GJ,2025,6,308.4,296.2,direct
+Gujarat,GJ,2025,7,346.4,322.4,direct
+Gujarat,GJ,2025,8,351.3,321.7,direct
+Gujarat,GJ,2025,9,353.4,323.1,direct
+Gujarat,GJ,2025,10,352.8,324,direct
+Gujarat,GJ,2025,11,355.2,325.9,direct
+Gujarat,GJ,2025,12,452,381.7,direct
+Haryana,HR,2017,1,356.3,341.1,direct
+Haryana,HR,2017,2,356.4,341.4,direct
+Haryana,HR,2017,3,356.4,343.5,direct
+Haryana,HR,2017,4,355.7,341.4,direct
+Haryana,HR,2017,5,356.4,343.5,direct
+Haryana,HR,2017,6,356.4,343.5,direct
+Haryana,HR,2017,7,360.9,345.4,direct
+Haryana,HR,2017,8,357.5,352.4,direct
+Haryana,HR,2017,9,358.1,352.4,direct
+Haryana,HR,2017,10,358.7,349.1,direct
+Haryana,HR,2017,11,358.2,343.5,direct
+Haryana,HR,2017,12,358.6,343.5,direct
+Haryana,HR,2018,1,360.7,352.2,direct
+Haryana,HR,2018,2,360.7,352.2,direct
+Haryana,HR,2018,3,360.8,354.5,direct
+Haryana,HR,2018,4,359,345.5,direct
+Haryana,HR,2018,5,360.6,348.1,direct
+Haryana,HR,2018,6,360.6,348.1,direct
+Haryana,HR,2018,7,365,352.8,direct
+Haryana,HR,2018,8,392.1,361.9,direct
+Haryana,HR,2018,9,390.3,361.9,direct
+Haryana,HR,2018,10,387.3,361.3,direct
+Haryana,HR,2018,11,384.7,364.1,direct
+Haryana,HR,2018,12,388.8,361.6,direct
+Haryana,HR,2019,1,398.2,365.5,direct
+Haryana,HR,2019,2,401.7,367.3,direct
+Haryana,HR,2019,3,401.4,366.1,direct
+Haryana,HR,2019,4,401.4,355.9,direct
+Haryana,HR,2019,5,402.7,361.8,direct
+Haryana,HR,2019,6,400.7,355.8,direct
+Haryana,HR,2019,7,401.2,362.2,direct
+Haryana,HR,2019,8,392.5,375.2,direct
+Haryana,HR,2019,9,390.4,373.8,direct
+Haryana,HR,2019,10,384,387.7,direct
+Haryana,HR,2019,11,390.2,387.7,direct
+Haryana,HR,2019,12,384.6,371.3,direct
+Haryana,HR,2020,1,389.8,372.7,direct
+Haryana,HR,2020,2,391.3,374.5,direct
+Haryana,HR,2020,3,391.3,375.4,direct
+Haryana,HR,2020,5,,,direct
+Haryana,HR,2020,6,393.3,372.9,direct
+Haryana,HR,2020,7,398.3,374.6,direct
+Haryana,HR,2020,8,397.5,374.6,direct
+Haryana,HR,2020,9,396.9,374.6,direct
+Haryana,HR,2020,10,391.4,371.1,direct
+Haryana,HR,2020,11,393.1,378.2,direct
+Haryana,HR,2020,12,391.3,378.2,direct
+Haryana,HR,2021,1,393.2,378.2,direct
+Haryana,HR,2021,2,393.2,378.2,direct
+Haryana,HR,2021,3,393.2,378.2,direct
+Haryana,HR,2021,4,393.5,378.2,direct
+Haryana,HR,2021,5,393.3,378.2,direct
+Haryana,HR,2021,6,398.1,393.3,direct
+Haryana,HR,2021,7,400,389.9,direct
+Haryana,HR,2021,8,400.7,389.9,direct
+Haryana,HR,2021,9,401.8,389.9,direct
+Haryana,HR,2021,10,405.5,386.4,direct
+Haryana,HR,2021,11,407.8,389.4,direct
+Haryana,HR,2021,12,411.5,389.4,direct
+Haryana,HR,2022,1,411.6,389.4,direct
+Haryana,HR,2022,2,412.4,386.6,direct
+Haryana,HR,2022,3,413.7,386.6,direct
+Haryana,HR,2022,4,423.4,390.9,direct
+Haryana,HR,2022,5,424.1,389,direct
+Haryana,HR,2022,6,424.1,389,direct
+Haryana,HR,2022,7,429.7,398,direct
+Haryana,HR,2022,8,437.7,405.1,direct
+Haryana,HR,2022,9,439.4,406.3,direct
+Haryana,HR,2022,10,443.3,406.3,direct
+Haryana,HR,2022,11,443.3,406.3,direct
+Haryana,HR,2022,12,450.5,410.9,direct
+Haryana,HR,2023,1,452.7,410.9,direct
+Haryana,HR,2023,2,452.7,410.9,direct
+Haryana,HR,2023,3,452.7,410.9,direct
+Haryana,HR,2023,4,452.7,410.9,direct
+Haryana,HR,2023,5,462.8,421,direct
+Haryana,HR,2023,6,463.5,421,direct
+Haryana,HR,2023,7,463.5,421,direct
+Haryana,HR,2023,8,463.5,421,direct
+Haryana,HR,2023,9,463.5,421,direct
+Haryana,HR,2023,10,463.5,421,direct
+Haryana,HR,2023,11,464.9,423.1,direct
+Haryana,HR,2023,12,472.8,426.9,direct
+Haryana,HR,2024,1,473.9,430.9,direct
+Haryana,HR,2024,2,477.4,437.7,direct
+Haryana,HR,2024,3,483.1,444.2,direct
+Haryana,HR,2024,4,483.1,444.2,direct
+Haryana,HR,2024,5,487.3,447,direct
+Haryana,HR,2024,6,488.5,448.5,direct
+Haryana,HR,2024,7,493.9,452.4,direct
+Haryana,HR,2024,8,499.7,460.9,direct
+Haryana,HR,2024,9,503.9,469.3,direct
+Haryana,HR,2024,10,509.5,475.4,direct
+Haryana,HR,2024,11,510.5,479.6,direct
+Haryana,HR,2024,12,510.5,481.7,direct
+Haryana,HR,2025,1,510.5,483.9,direct
+Haryana,HR,2025,2,514.3,491.7,direct
+Haryana,HR,2025,3,517.4,498.9,direct
+Haryana,HR,2025,4,524.3,504.5,direct
+Haryana,HR,2025,5,531.4,510.9,direct
+Haryana,HR,2025,6,537.2,515.3,direct
+Haryana,HR,2025,7,541.4,483,direct
+Haryana,HR,2025,8,542.5,483,direct
+Haryana,HR,2025,9,545.5,484.7,direct
+Haryana,HR,2025,10,553.6,500,direct
+Haryana,HR,2025,11,554.3,500,direct
+Haryana,HR,2025,12,400.9,301.1,direct
+Himachal Pradesh,HP,2017,1,394.2,338,direct
+Himachal Pradesh,HP,2017,2,377.5,338,direct
+Himachal Pradesh,HP,2017,3,394.2,338,direct
+Himachal Pradesh,HP,2017,4,394.8,348,direct
+Himachal Pradesh,HP,2017,5,393.5,348,direct
+Himachal Pradesh,HP,2017,6,392,348,direct
+Himachal Pradesh,HP,2017,7,402,344.4,direct
+Himachal Pradesh,HP,2017,8,405.6,368,direct
+Himachal Pradesh,HP,2017,9,412.3,,direct
+Himachal Pradesh,HP,2017,10,392.1,,direct
+Himachal Pradesh,HP,2017,11,405.5,,direct
+Himachal Pradesh,HP,2017,12,403,,direct
+Himachal Pradesh,HP,2018,1,418.6,378,direct
+Himachal Pradesh,HP,2018,2,418.6,378,direct
+Himachal Pradesh,HP,2018,3,422.6,378,direct
+Himachal Pradesh,HP,2018,4,422.6,378,direct
+Himachal Pradesh,HP,2018,5,402,378,direct
+Himachal Pradesh,HP,2018,6,418.9,378,direct
+Himachal Pradesh,HP,2018,7,416.6,378,direct
+Himachal Pradesh,HP,2018,8,426.5,378,direct
+Himachal Pradesh,HP,2018,9,428.5,378,direct
+Himachal Pradesh,HP,2018,10,412.4,398,direct
+Himachal Pradesh,HP,2018,11,418.1,398,direct
+Himachal Pradesh,HP,2018,12,415,398,direct
+Himachal Pradesh,HP,2019,1,415,398,direct
+Himachal Pradesh,HP,2019,2,415,398,direct
+Himachal Pradesh,HP,2019,3,433,418,direct
+Himachal Pradesh,HP,2019,4,435.1,,direct
+Himachal Pradesh,HP,2019,5,434,,direct
+Himachal Pradesh,HP,2019,6,426.7,,direct
+Himachal Pradesh,HP,2019,7,439.7,418,direct
+Himachal Pradesh,HP,2019,8,450.1,428,direct
+Himachal Pradesh,HP,2019,9,450.1,428,direct
+Himachal Pradesh,HP,2019,10,433.1,428,direct
+Himachal Pradesh,HP,2019,11,439.8,438,direct
+Himachal Pradesh,HP,2019,12,437.7,438,direct
+Himachal Pradesh,HP,2020,1,458.3,438,direct
+Himachal Pradesh,HP,2020,2,456.6,438,direct
+Himachal Pradesh,HP,2020,3,456.6,438,direct
+Himachal Pradesh,HP,2020,5,,,direct
+Himachal Pradesh,HP,2020,6,538,,direct
+Himachal Pradesh,HP,2020,7,458.7,,direct
+Himachal Pradesh,HP,2020,8,459.9,,direct
+Himachal Pradesh,HP,2020,9,459.9,438,direct
+Himachal Pradesh,HP,2020,10,442.9,438,direct
+Himachal Pradesh,HP,2020,11,442.9,438,direct
+Himachal Pradesh,HP,2020,12,448.1,438,direct
+Himachal Pradesh,HP,2021,1,448.1,438,direct
+Himachal Pradesh,HP,2021,2,446.5,438,direct
+Himachal Pradesh,HP,2021,3,445.4,438,direct
+Himachal Pradesh,HP,2021,4,445.4,438,direct
+Himachal Pradesh,HP,2021,5,452.9,438,direct
+Himachal Pradesh,HP,2021,6,463.2,438,direct
+Himachal Pradesh,HP,2021,7,483.9,460,direct
+Himachal Pradesh,HP,2021,8,494.2,460,direct
+Himachal Pradesh,HP,2021,9,463.1,460,direct
+Himachal Pradesh,HP,2021,10,459.7,460,direct
+Himachal Pradesh,HP,2021,11,459.7,460,direct
+Himachal Pradesh,HP,2021,12,463.1,460,direct
+Himachal Pradesh,HP,2022,1,459.7,460,direct
+Himachal Pradesh,HP,2022,2,458,456,direct
+Himachal Pradesh,HP,2022,3,458,456,direct
+Himachal Pradesh,HP,2022,4,458.1,456,direct
+Himachal Pradesh,HP,2022,5,458.1,456,direct
+Himachal Pradesh,HP,2022,6,458.1,456,direct
+Himachal Pradesh,HP,2022,7,459.5,460,direct
+Himachal Pradesh,HP,2022,8,459.5,460,direct
+Himachal Pradesh,HP,2022,9,458.1,456,direct
+Himachal Pradesh,HP,2022,10,458.1,456,direct
+Himachal Pradesh,HP,2022,11,458,456,direct
+Himachal Pradesh,HP,2022,12,458,456,direct
+Himachal Pradesh,HP,2023,1,460.2,456,direct
+Himachal Pradesh,HP,2023,2,464.8,460,direct
+Himachal Pradesh,HP,2023,3,464.8,460,direct
+Himachal Pradesh,HP,2023,4,465.8,460,direct
+Himachal Pradesh,HP,2023,5,463.6,460,direct
+Himachal Pradesh,HP,2023,6,464.2,,direct
+Himachal Pradesh,HP,2023,7,462.1,,direct
+Himachal Pradesh,HP,2023,8,473.4,,direct
+Himachal Pradesh,HP,2023,9,473.5,,direct
+Himachal Pradesh,HP,2023,10,495.2,,direct
+Himachal Pradesh,HP,2023,11,480.5,,direct
+Himachal Pradesh,HP,2023,12,480.5,,direct
+Himachal Pradesh,HP,2024,1,486,,direct
+Himachal Pradesh,HP,2024,2,488,,direct
+Himachal Pradesh,HP,2024,3,498,,direct
+Himachal Pradesh,HP,2024,4,498,,direct
+Himachal Pradesh,HP,2024,5,500,,direct
+Himachal Pradesh,HP,2024,6,512.4,,direct
+Himachal Pradesh,HP,2024,7,518.5,,direct
+Himachal Pradesh,HP,2024,8,523.5,,direct
+Himachal Pradesh,HP,2024,9,526.6,,direct
+Himachal Pradesh,HP,2024,10,526.6,,direct
+Himachal Pradesh,HP,2024,11,533,,direct
+Himachal Pradesh,HP,2024,12,539.3,,direct
+Himachal Pradesh,HP,2025,1,543.3,,direct
+Himachal Pradesh,HP,2025,2,544.2,,direct
+Himachal Pradesh,HP,2025,3,544.2,,direct
+Himachal Pradesh,HP,2025,4,544.2,,direct
+Himachal Pradesh,HP,2025,5,545.8,,direct
+Himachal Pradesh,HP,2025,6,545.8,,direct
+Himachal Pradesh,HP,2025,7,612.2,541.9,direct
+Himachal Pradesh,HP,2025,8,618.3,537.3,direct
+Himachal Pradesh,HP,2025,9,611.1,526.4,direct
+Himachal Pradesh,HP,2025,10,611.9,529.2,direct
+Himachal Pradesh,HP,2025,11,611.5,529.6,direct
+Himachal Pradesh,HP,2025,12,308.7,240.5,direct
+Jammu and Kashmir,JK,2017,1,432,,direct
+Jammu and Kashmir,JK,2017,2,432.5,,direct
+Jammu and Kashmir,JK,2017,3,441,,direct
+Jammu and Kashmir,JK,2017,4,443.6,,direct
+Jammu and Kashmir,JK,2017,5,442.1,,direct
+Jammu and Kashmir,JK,2017,6,443.2,,direct
+Jammu and Kashmir,JK,2017,7,452.1,,direct
+Jammu and Kashmir,JK,2017,8,452.9,,direct
+Jammu and Kashmir,JK,2017,9,456.6,,direct
+Jammu and Kashmir,JK,2017,10,456.4,,direct
+Jammu and Kashmir,JK,2017,11,455.7,,direct
+Jammu and Kashmir,JK,2017,12,454.4,,direct
+Jammu and Kashmir,JK,2018,1,459.8,,direct
+Jammu and Kashmir,JK,2018,2,452.7,,direct
+Jammu and Kashmir,JK,2018,3,462,,direct
+Jammu and Kashmir,JK,2018,4,464.1,,direct
+Jammu and Kashmir,JK,2018,5,470.7,,direct
+Jammu and Kashmir,JK,2018,6,470.6,,direct
+Jammu and Kashmir,JK,2018,7,471.8,,direct
+Jammu and Kashmir,JK,2018,8,469.7,,direct
+Jammu and Kashmir,JK,2018,9,464,,direct
+Jammu and Kashmir,JK,2018,10,473.2,505,direct
+Jammu and Kashmir,JK,2018,11,468.3,,direct
+Jammu and Kashmir,JK,2018,12,457.3,,direct
+Jammu and Kashmir,JK,2019,1,461.1,,direct
+Jammu and Kashmir,JK,2019,2,460.7,,direct
+Jammu and Kashmir,JK,2019,3,460.7,,direct
+Jammu and Kashmir,JK,2019,4,461.2,,direct
+Jammu and Kashmir,JK,2019,5,474.5,,direct
+Jammu and Kashmir,JK,2019,6,486.2,,direct
+Jammu and Kashmir,JK,2019,7,483.2,,direct
+Jammu and Kashmir,JK,2019,8,483.7,,direct
+Jammu and Kashmir,JK,2019,9,483.7,,direct
+Jammu and Kashmir,JK,2019,10,483.7,,direct
+Jammu and Kashmir,JK,2019,11,483.7,,direct
+Jammu and Kashmir,JK,2019,12,481,,direct
+Jammu and Kashmir,JK,2020,1,483.5,,direct
+Jammu and Kashmir,JK,2020,2,496.5,,direct
+Jammu and Kashmir,JK,2020,3,498.5,,direct
+Jammu and Kashmir,JK,2020,5,,,direct
+Jammu and Kashmir,JK,2020,6,490.8,,direct
+Jammu and Kashmir,JK,2020,7,504.9,,direct
+Jammu and Kashmir,JK,2020,8,512.4,,direct
+Jammu and Kashmir,JK,2020,9,526.1,,direct
+Jammu and Kashmir,JK,2020,10,540.4,,direct
+Jammu and Kashmir,JK,2020,11,532.2,,direct
+Jammu and Kashmir,JK,2020,12,530.2,,direct
+Jammu and Kashmir,JK,2021,1,527.8,,direct
+Jammu and Kashmir,JK,2021,2,529.7,,direct
+Jammu and Kashmir,JK,2021,3,529.2,,direct
+Jammu and Kashmir,JK,2021,4,529.7,,direct
+Jammu and Kashmir,JK,2021,5,529.7,,direct
+Jammu and Kashmir,JK,2021,6,544.3,,direct
+Jammu and Kashmir,JK,2021,7,540.1,,direct
+Jammu and Kashmir,JK,2021,8,540.1,,direct
+Jammu and Kashmir,JK,2021,9,545.2,,direct
+Jammu and Kashmir,JK,2021,10,551.1,,direct
+Jammu and Kashmir,JK,2021,11,549.6,,direct
+Jammu and Kashmir,JK,2021,12,544.9,,direct
+Jammu and Kashmir,JK,2022,1,544.4,,direct
+Jammu and Kashmir,JK,2022,2,545.1,,direct
+Jammu and Kashmir,JK,2022,3,556.4,,direct
+Jammu and Kashmir,JK,2022,4,562.2,,direct
+Jammu and Kashmir,JK,2022,5,565.3,,direct
+Jammu and Kashmir,JK,2022,6,570.7,,direct
+Jammu and Kashmir,JK,2022,7,577.7,,direct
+Jammu and Kashmir,JK,2022,8,580.2,,direct
+Jammu and Kashmir,JK,2022,9,584.6,,direct
+Jammu and Kashmir,JK,2022,10,588.6,,direct
+Jammu and Kashmir,JK,2022,11,592.9,,direct
+Jammu and Kashmir,JK,2022,12,595.4,,direct
+Jammu and Kashmir,JK,2023,1,595.7,,direct
+Jammu and Kashmir,JK,2023,2,596,,direct
+Jammu and Kashmir,JK,2023,3,597.4,,direct
+Jammu and Kashmir,JK,2023,4,598,,direct
+Jammu and Kashmir,JK,2023,5,602.9,,direct
+Jammu and Kashmir,JK,2023,6,604.3,,direct
+Jammu and Kashmir,JK,2023,7,608.3,,direct
+Jammu and Kashmir,JK,2023,8,609.7,,direct
+Jammu and Kashmir,JK,2023,9,610.5,,direct
+Jammu and Kashmir,JK,2023,10,612.3,,direct
+Jammu and Kashmir,JK,2023,11,612.3,,direct
+Jammu and Kashmir,JK,2023,12,611.3,,direct
+Jammu and Kashmir,JK,2024,1,615.1,,direct
+Jammu and Kashmir,JK,2024,2,615.8,,direct
+Jammu and Kashmir,JK,2024,3,619.6,,direct
+Jammu and Kashmir,JK,2024,4,619.6,,direct
+Jammu and Kashmir,JK,2024,5,621,,direct
+Jammu and Kashmir,JK,2024,6,621,,direct
+Jammu and Kashmir,JK,2024,7,624.9,,direct
+Jammu and Kashmir,JK,2024,8,628.7,,direct
+Jammu and Kashmir,JK,2024,9,630.2,,direct
+Jammu and Kashmir,JK,2024,10,633.2,,direct
+Jammu and Kashmir,JK,2024,11,636.8,,direct
+Jammu and Kashmir,JK,2024,12,638.1,,direct
+Jammu and Kashmir,JK,2025,1,638.4,,direct
+Jammu and Kashmir,JK,2025,2,638.4,,direct
+Jammu and Kashmir,JK,2025,3,642.1,,direct
+Jammu and Kashmir,JK,2025,4,644,,direct
+Jammu and Kashmir,JK,2025,5,647,,direct
+Jammu and Kashmir,JK,2025,6,647.1,,direct
+Jammu and Kashmir,JK,2025,7,650.3,620,direct
+Jammu and Kashmir,JK,2025,8,646.8,620,direct
+Jammu and Kashmir,JK,2025,9,648.6,620,direct
+Jammu and Kashmir,JK,2025,10,657.4,620,direct
+Jammu and Kashmir,JK,2025,11,661.2,620,direct
+Jammu and Kashmir,JK,2025,12,470.8,437.8,direct
+Jharkhand,JR,2017,1,238.5,193.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2017,2,239.4,194.9,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2017,3,239.1,195,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2017,4,239.8,194.9,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2017,5,240.6,196.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2017,6,240.6,196.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2017,7,242.7,196.8,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2017,8,244.1,197.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2017,9,243.7,197.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2017,10,243.6,197.6,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2017,11,244.6,199.3,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2017,12,244.7,197.7,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2018,1,247.4,205.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2018,2,249.4,207.7,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2018,3,251.5,207.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2018,4,251.9,206.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2018,5,251.6,205.9,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2018,6,252.6,206.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2018,7,253.7,207.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2018,8,256.3,209.6,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2018,9,256.2,211.9,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2018,10,257.3,212.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2018,11,256.7,213.9,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2018,12,257.1,213.7,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2019,1,261.3,216.8,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2019,2,262.8,217.4,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2019,3,263.7,219,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2019,4,263.4,218.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2019,5,262.9,217.3,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2019,6,263.2,216.4,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2019,7,273.6,231.1,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2019,8,276,234.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2019,9,276.8,234.7,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2019,10,278.2,236,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2019,11,279.6,236.8,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2019,12,279.8,234.9,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2020,1,288.6,241.4,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2020,2,286.8,245.7,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2020,3,286.9,245.3,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2020,5,,,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2020,6,283.9,250.1,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2020,7,288.5,247,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2020,8,288.1,242.4,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2020,9,291,241.9,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2020,10,289.4,242.1,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2020,11,289.4,242,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2020,12,286.6,240.1,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2021,1,287.2,240.9,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2021,2,289.3,243.3,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2021,3,289.9,244,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2021,4,290.9,244.3,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2021,5,291.5,245.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2021,6,294.1,244.6,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2021,7,295.8,246.9,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2021,8,296.6,247.4,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2021,9,297.4,248.1,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2021,10,298,248.4,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2021,11,299.6,250.3,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2021,12,300.8,251.4,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2022,1,299.3,251.7,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2022,2,299.7,251.7,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2022,3,303.2,253.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2022,4,303.4,253.4,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2022,5,306.1,255.9,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2022,6,309.3,256.7,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2022,7,312.7,256.7,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2022,8,313.1,256.7,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2022,9,313.1,256.7,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2022,10,314.3,257.1,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2022,11,319.4,258.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2022,12,319.6,258.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2023,1,321.3,260.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2023,2,322.6,260.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2023,3,324.3,261,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2023,4,326.6,265.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2023,5,331.1,273.8,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2023,6,333.4,275.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2023,7,334.8,280.4,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2023,8,336.7,284.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2023,9,339.6,287.1,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2023,10,339.8,289.1,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2023,11,340.3,291.1,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2023,12,343.6,299.4,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2024,1,345.7,302.1,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2024,2,350.3,304.4,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2024,3,354.7,309.6,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2024,4,354.7,309.6,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2024,5,357.3,310.8,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2024,6,358.6,312.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2024,7,362.9,314.4,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2024,8,367.1,315.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2024,9,368.8,315.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2024,10,369.6,315.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2024,11,370.6,315.8,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2024,12,370.6,316.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2025,1,375.4,318,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2025,2,383.2,324.3,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2025,3,388.3,329.3,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2025,4,391.7,332.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2025,5,392.1,334.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2025,6,392.1,334.2,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2025,7,399.5,293.1,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2025,8,400.3,295.5,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2025,9,400.9,298.8,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2025,10,400.9,298.8,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2025,11,400.9,298.8,Bihar (parent-state proxy (split Nov-2000))
+Jharkhand,JR,2025,12,521.3,407.5,Bihar (parent-state proxy (split Nov-2000))
+Karnataka,KK,2017,1,283.3,196.7,direct
+Karnataka,KK,2017,2,283.6,196.8,direct
+Karnataka,KK,2017,3,282.9,197.9,direct
+Karnataka,KK,2017,4,282.9,197.9,direct
+Karnataka,KK,2017,5,283.2,194.4,direct
+Karnataka,KK,2017,6,283.1,198,direct
+Karnataka,KK,2017,7,283.6,198,direct
+Karnataka,KK,2017,8,284.7,199.7,direct
+Karnataka,KK,2017,9,285,200.4,direct
+Karnataka,KK,2017,10,284.8,200.4,direct
+Karnataka,KK,2017,11,287,200.3,direct
+Karnataka,KK,2017,12,291.2,200.4,direct
+Karnataka,KK,2018,1,296.3,203.9,direct
+Karnataka,KK,2018,2,298.9,207,direct
+Karnataka,KK,2018,3,298.3,207.6,direct
+Karnataka,KK,2018,4,301.8,206.6,direct
+Karnataka,KK,2018,5,302.7,207.5,direct
+Karnataka,KK,2018,6,303.7,210.5,direct
+Karnataka,KK,2018,7,309.6,212.8,direct
+Karnataka,KK,2018,8,311.2,212.7,direct
+Karnataka,KK,2018,9,313.3,212.4,direct
+Karnataka,KK,2018,10,314.6,214.7,direct
+Karnataka,KK,2018,11,316.3,224.2,direct
+Karnataka,KK,2018,12,317.3,222.8,direct
+Karnataka,KK,2019,1,317.2,222.1,direct
+Karnataka,KK,2019,2,318.4,222.1,direct
+Karnataka,KK,2019,3,318,222.5,direct
+Karnataka,KK,2019,4,318.1,222.5,direct
+Karnataka,KK,2019,5,318.2,223.2,direct
+Karnataka,KK,2019,6,317.9,221.6,direct
+Karnataka,KK,2019,7,319.6,223.3,direct
+Karnataka,KK,2019,8,319.5,222.1,direct
+Karnataka,KK,2019,9,319.4,227.7,direct
+Karnataka,KK,2019,10,320,228,direct
+Karnataka,KK,2019,11,320.1,228.1,direct
+Karnataka,KK,2019,12,322.1,227.9,direct
+Karnataka,KK,2020,1,326.9,233.6,direct
+Karnataka,KK,2020,2,328.3,236.1,direct
+Karnataka,KK,2020,3,327.8,236.3,direct
+Karnataka,KK,2020,5,,,direct
+Karnataka,KK,2020,6,349.1,260.5,direct
+Karnataka,KK,2020,7,345.7,254.7,direct
+Karnataka,KK,2020,8,335.7,240.6,direct
+Karnataka,KK,2020,9,335.1,238.7,direct
+Karnataka,KK,2020,10,337.3,243.1,direct
+Karnataka,KK,2020,11,342.1,242.5,direct
+Karnataka,KK,2020,12,350.1,252,direct
+Karnataka,KK,2021,1,351,250.9,direct
+Karnataka,KK,2021,2,353.3,251.5,direct
+Karnataka,KK,2021,3,357.6,251.8,direct
+Karnataka,KK,2021,4,357.1,250.7,direct
+Karnataka,KK,2021,5,357,250.1,direct
+Karnataka,KK,2021,6,357.5,252.2,direct
+Karnataka,KK,2021,7,357.2,246.4,direct
+Karnataka,KK,2021,8,359.3,246.7,direct
+Karnataka,KK,2021,9,364.5,251.1,direct
+Karnataka,KK,2021,10,366.6,251.6,direct
+Karnataka,KK,2021,11,366.1,253.5,direct
+Karnataka,KK,2021,12,367.5,253.7,direct
+Karnataka,KK,2022,1,367.9,253.9,direct
+Karnataka,KK,2022,2,382.1,263.3,direct
+Karnataka,KK,2022,3,384.6,264,direct
+Karnataka,KK,2022,4,387.4,265.3,direct
+Karnataka,KK,2022,5,390.1,267.3,direct
+Karnataka,KK,2022,6,394.3,269.7,direct
+Karnataka,KK,2022,7,394.3,269.7,direct
+Karnataka,KK,2022,8,397.8,275.8,direct
+Karnataka,KK,2022,9,404.5,281.3,direct
+Karnataka,KK,2022,10,406.2,284.2,direct
+Karnataka,KK,2022,11,416.3,289.4,direct
+Karnataka,KK,2022,12,417.5,289.4,direct
+Karnataka,KK,2023,1,419.3,290.2,direct
+Karnataka,KK,2023,2,419.7,290.6,direct
+Karnataka,KK,2023,3,421.2,290.9,direct
+Karnataka,KK,2023,4,422.5,294,direct
+Karnataka,KK,2023,5,423.1,294.3,direct
+Karnataka,KK,2023,6,424.4,294.3,direct
+Karnataka,KK,2023,7,426.9,298,direct
+Karnataka,KK,2023,8,429.9,300.8,direct
+Karnataka,KK,2023,9,431,301.4,direct
+Karnataka,KK,2023,10,431.8,302.8,direct
+Karnataka,KK,2023,11,436,303.3,direct
+Karnataka,KK,2023,12,438.7,304.9,direct
+Karnataka,KK,2024,1,442.1,307.4,direct
+Karnataka,KK,2024,2,444.5,310.7,direct
+Karnataka,KK,2024,3,449,316,direct
+Karnataka,KK,2024,4,449,316,direct
+Karnataka,KK,2024,5,450.8,317.2,direct
+Karnataka,KK,2024,6,453.2,319.2,direct
+Karnataka,KK,2024,7,455,319.9,direct
+Karnataka,KK,2024,8,455.8,320.2,direct
+Karnataka,KK,2024,9,461.6,323.2,direct
+Karnataka,KK,2024,10,464.8,323.5,direct
+Karnataka,KK,2024,11,467,323.5,direct
+Karnataka,KK,2024,12,468.1,323.5,direct
+Karnataka,KK,2025,1,469.4,323.5,direct
+Karnataka,KK,2025,2,473.3,325.6,direct
+Karnataka,KK,2025,3,477.7,330.8,direct
+Karnataka,KK,2025,4,482.5,334,direct
+Karnataka,KK,2025,5,486.4,336.8,direct
+Karnataka,KK,2025,6,489.7,341.2,direct
+Karnataka,KK,2025,7,534.9,379,direct
+Karnataka,KK,2025,8,536.7,380.3,direct
+Karnataka,KK,2025,9,540,387.8,direct
+Karnataka,KK,2025,10,542.8,389.4,direct
+Karnataka,KK,2025,11,544.8,391.7,direct
+Karnataka,KK,2025,12,583.3,500,direct
+Kerala,KL,2017,1,698.3,482.2,direct
+Kerala,KL,2017,2,698.3,486.6,direct
+Kerala,KL,2017,3,698.3,486.6,direct
+Kerala,KL,2017,4,701,489.1,direct
+Kerala,KL,2017,5,703.8,491.1,direct
+Kerala,KL,2017,6,704.8,490.5,direct
+Kerala,KL,2017,7,709.5,490.5,direct
+Kerala,KL,2017,8,712.1,490.5,direct
+Kerala,KL,2017,9,715.3,490.5,direct
+Kerala,KL,2017,10,715.3,490.5,direct
+Kerala,KL,2017,11,721.8,491.7,direct
+Kerala,KL,2017,12,721.8,491.7,direct
+Kerala,KL,2018,1,724.4,496.4,direct
+Kerala,KL,2018,2,724.9,496.4,direct
+Kerala,KL,2018,3,728.2,503.5,direct
+Kerala,KL,2018,4,728.2,503.5,direct
+Kerala,KL,2018,5,728.2,503.5,direct
+Kerala,KL,2018,6,737.3,507.9,direct
+Kerala,KL,2018,7,738.9,515.7,direct
+Kerala,KL,2018,8,746.9,519.3,direct
+Kerala,KL,2018,9,746.9,519.3,direct
+Kerala,KL,2018,10,751.9,522.4,direct
+Kerala,KL,2018,11,755.2,522.9,direct
+Kerala,KL,2018,12,755.2,527.1,direct
+Kerala,KL,2019,1,756.5,528.5,direct
+Kerala,KL,2019,2,756.5,528.5,direct
+Kerala,KL,2019,3,756.5,528.5,direct
+Kerala,KL,2019,4,756.5,528.5,direct
+Kerala,KL,2019,5,756.2,528.5,direct
+Kerala,KL,2019,6,758,528.5,direct
+Kerala,KL,2019,7,758,528.5,direct
+Kerala,KL,2019,8,758.8,528.5,direct
+Kerala,KL,2019,9,758.8,528.5,direct
+Kerala,KL,2019,10,758.8,528.5,direct
+Kerala,KL,2019,11,758.8,528.5,direct
+Kerala,KL,2019,12,758.8,528.5,direct
+Kerala,KL,2020,1,759.3,528.5,direct
+Kerala,KL,2020,2,759.3,528.5,direct
+Kerala,KL,2020,3,758.8,528.5,direct
+Kerala,KL,2020,5,,,direct
+Kerala,KL,2020,6,770.8,522,direct
+Kerala,KL,2020,7,757.5,521.5,direct
+Kerala,KL,2020,8,757.5,521.5,direct
+Kerala,KL,2020,9,757.7,521.5,direct
+Kerala,KL,2020,10,757.5,521.5,direct
+Kerala,KL,2020,11,759.3,521.5,direct
+Kerala,KL,2020,12,759.2,521.5,direct
+Kerala,KL,2021,1,764.2,509.3,direct
+Kerala,KL,2021,2,765.2,512.7,direct
+Kerala,KL,2021,3,765.2,512.7,direct
+Kerala,KL,2021,4,765.2,512.7,direct
+Kerala,KL,2021,5,765.2,512.7,direct
+Kerala,KL,2021,6,765.2,511.5,direct
+Kerala,KL,2021,7,767.6,511.5,direct
+Kerala,KL,2021,8,768.7,513.2,direct
+Kerala,KL,2021,9,775.5,523.8,direct
+Kerala,KL,2021,10,775.5,523.8,direct
+Kerala,KL,2021,11,775.5,523.8,direct
+Kerala,KL,2021,12,775.5,523.8,direct
+Kerala,KL,2022,1,777.5,528.8,direct
+Kerala,KL,2022,2,777.5,553.2,direct
+Kerala,KL,2022,3,778.3,553.2,direct
+Kerala,KL,2022,4,778.8,559.3,direct
+Kerala,KL,2022,5,779.3,561,direct
+Kerala,KL,2022,6,779.3,561,direct
+Kerala,KL,2022,7,782.5,561,direct
+Kerala,KL,2022,8,786.7,564.3,direct
+Kerala,KL,2022,9,786.7,564.3,direct
+Kerala,KL,2022,10,788.2,569.7,direct
+Kerala,KL,2022,11,788.2,569.7,direct
+Kerala,KL,2022,12,788.2,569.7,direct
+Kerala,KL,2023,1,791.4,583,direct
+Kerala,KL,2023,2,794,587.3,direct
+Kerala,KL,2023,3,796.5,587.3,direct
+Kerala,KL,2023,4,797.7,590.5,direct
+Kerala,KL,2023,5,803.9,599.2,direct
+Kerala,KL,2023,6,805.2,599.2,direct
+Kerala,KL,2023,7,810.6,603.1,direct
+Kerala,KL,2023,8,811.7,606.4,direct
+Kerala,KL,2023,9,812.2,606.4,direct
+Kerala,KL,2023,10,814,606.4,direct
+Kerala,KL,2023,11,825.6,619.4,direct
+Kerala,KL,2023,12,826.1,621,direct
+Kerala,KL,2024,1,832.1,625.7,direct
+Kerala,KL,2024,2,836.3,629,direct
+Kerala,KL,2024,3,844.1,636.3,direct
+Kerala,KL,2024,4,844.1,636.3,direct
+Kerala,KL,2024,5,849.2,639.1,direct
+Kerala,KL,2024,6,849.2,641.3,direct
+Kerala,KL,2024,7,854.7,647.4,direct
+Kerala,KL,2024,8,858.4,649.3,direct
+Kerala,KL,2024,9,860.2,649.3,direct
+Kerala,KL,2024,10,861.6,649.3,direct
+Kerala,KL,2024,11,863.9,649.3,direct
+Kerala,KL,2024,12,868.3,650.9,direct
+Kerala,KL,2025,1,872.9,656.3,direct
+Kerala,KL,2025,2,877.1,658,direct
+Kerala,KL,2025,3,879.5,658,direct
+Kerala,KL,2025,4,882.3,658,direct
+Kerala,KL,2025,5,885.9,658,direct
+Kerala,KL,2025,6,887.2,658,direct
+Kerala,KL,2025,7,873.3,679,direct
+Kerala,KL,2025,8,875.5,682.2,direct
+Kerala,KL,2025,9,878.8,682.8,direct
+Kerala,KL,2025,10,878.8,682.8,direct
+Kerala,KL,2025,11,878.8,682.8,direct
+Kerala,KL,2025,12,610,454.2,direct
+Keralam,KL,2017,1,698.3,482.2,Kerala (alternate spelling in panel)
+Keralam,KL,2017,2,698.3,486.6,Kerala (alternate spelling in panel)
+Keralam,KL,2017,3,698.3,486.6,Kerala (alternate spelling in panel)
+Keralam,KL,2017,4,701,489.1,Kerala (alternate spelling in panel)
+Keralam,KL,2017,5,703.8,491.1,Kerala (alternate spelling in panel)
+Keralam,KL,2017,6,704.8,490.5,Kerala (alternate spelling in panel)
+Keralam,KL,2017,7,709.5,490.5,Kerala (alternate spelling in panel)
+Keralam,KL,2017,8,712.1,490.5,Kerala (alternate spelling in panel)
+Keralam,KL,2017,9,715.3,490.5,Kerala (alternate spelling in panel)
+Keralam,KL,2017,10,715.3,490.5,Kerala (alternate spelling in panel)
+Keralam,KL,2017,11,721.8,491.7,Kerala (alternate spelling in panel)
+Keralam,KL,2017,12,721.8,491.7,Kerala (alternate spelling in panel)
+Keralam,KL,2018,1,724.4,496.4,Kerala (alternate spelling in panel)
+Keralam,KL,2018,2,724.9,496.4,Kerala (alternate spelling in panel)
+Keralam,KL,2018,3,728.2,503.5,Kerala (alternate spelling in panel)
+Keralam,KL,2018,4,728.2,503.5,Kerala (alternate spelling in panel)
+Keralam,KL,2018,5,728.2,503.5,Kerala (alternate spelling in panel)
+Keralam,KL,2018,6,737.3,507.9,Kerala (alternate spelling in panel)
+Keralam,KL,2018,7,738.9,515.7,Kerala (alternate spelling in panel)
+Keralam,KL,2018,8,746.9,519.3,Kerala (alternate spelling in panel)
+Keralam,KL,2018,9,746.9,519.3,Kerala (alternate spelling in panel)
+Keralam,KL,2018,10,751.9,522.4,Kerala (alternate spelling in panel)
+Keralam,KL,2018,11,755.2,522.9,Kerala (alternate spelling in panel)
+Keralam,KL,2018,12,755.2,527.1,Kerala (alternate spelling in panel)
+Keralam,KL,2019,1,756.5,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2019,2,756.5,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2019,3,756.5,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2019,4,756.5,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2019,5,756.2,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2019,6,758,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2019,7,758,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2019,8,758.8,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2019,9,758.8,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2019,10,758.8,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2019,11,758.8,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2019,12,758.8,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2020,1,759.3,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2020,2,759.3,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2020,3,758.8,528.5,Kerala (alternate spelling in panel)
+Keralam,KL,2020,5,,,Kerala (alternate spelling in panel)
+Keralam,KL,2020,6,770.8,522,Kerala (alternate spelling in panel)
+Keralam,KL,2020,7,757.5,521.5,Kerala (alternate spelling in panel)
+Keralam,KL,2020,8,757.5,521.5,Kerala (alternate spelling in panel)
+Keralam,KL,2020,9,757.7,521.5,Kerala (alternate spelling in panel)
+Keralam,KL,2020,10,757.5,521.5,Kerala (alternate spelling in panel)
+Keralam,KL,2020,11,759.3,521.5,Kerala (alternate spelling in panel)
+Keralam,KL,2020,12,759.2,521.5,Kerala (alternate spelling in panel)
+Keralam,KL,2021,1,764.2,509.3,Kerala (alternate spelling in panel)
+Keralam,KL,2021,2,765.2,512.7,Kerala (alternate spelling in panel)
+Keralam,KL,2021,3,765.2,512.7,Kerala (alternate spelling in panel)
+Keralam,KL,2021,4,765.2,512.7,Kerala (alternate spelling in panel)
+Keralam,KL,2021,5,765.2,512.7,Kerala (alternate spelling in panel)
+Keralam,KL,2021,6,765.2,511.5,Kerala (alternate spelling in panel)
+Keralam,KL,2021,7,767.6,511.5,Kerala (alternate spelling in panel)
+Keralam,KL,2021,8,768.7,513.2,Kerala (alternate spelling in panel)
+Keralam,KL,2021,9,775.5,523.8,Kerala (alternate spelling in panel)
+Keralam,KL,2021,10,775.5,523.8,Kerala (alternate spelling in panel)
+Keralam,KL,2021,11,775.5,523.8,Kerala (alternate spelling in panel)
+Keralam,KL,2021,12,775.5,523.8,Kerala (alternate spelling in panel)
+Keralam,KL,2022,1,777.5,528.8,Kerala (alternate spelling in panel)
+Keralam,KL,2022,2,777.5,553.2,Kerala (alternate spelling in panel)
+Keralam,KL,2022,3,778.3,553.2,Kerala (alternate spelling in panel)
+Keralam,KL,2022,4,778.8,559.3,Kerala (alternate spelling in panel)
+Keralam,KL,2022,5,779.3,561,Kerala (alternate spelling in panel)
+Keralam,KL,2022,6,779.3,561,Kerala (alternate spelling in panel)
+Keralam,KL,2022,7,782.5,561,Kerala (alternate spelling in panel)
+Keralam,KL,2022,8,786.7,564.3,Kerala (alternate spelling in panel)
+Keralam,KL,2022,9,786.7,564.3,Kerala (alternate spelling in panel)
+Keralam,KL,2022,10,788.2,569.7,Kerala (alternate spelling in panel)
+Keralam,KL,2022,11,788.2,569.7,Kerala (alternate spelling in panel)
+Keralam,KL,2022,12,788.2,569.7,Kerala (alternate spelling in panel)
+Keralam,KL,2023,1,791.4,583,Kerala (alternate spelling in panel)
+Keralam,KL,2023,2,794,587.3,Kerala (alternate spelling in panel)
+Keralam,KL,2023,3,796.5,587.3,Kerala (alternate spelling in panel)
+Keralam,KL,2023,4,797.7,590.5,Kerala (alternate spelling in panel)
+Keralam,KL,2023,5,803.9,599.2,Kerala (alternate spelling in panel)
+Keralam,KL,2023,6,805.2,599.2,Kerala (alternate spelling in panel)
+Keralam,KL,2023,7,810.6,603.1,Kerala (alternate spelling in panel)
+Keralam,KL,2023,8,811.7,606.4,Kerala (alternate spelling in panel)
+Keralam,KL,2023,9,812.2,606.4,Kerala (alternate spelling in panel)
+Keralam,KL,2023,10,814,606.4,Kerala (alternate spelling in panel)
+Keralam,KL,2023,11,825.6,619.4,Kerala (alternate spelling in panel)
+Keralam,KL,2023,12,826.1,621,Kerala (alternate spelling in panel)
+Keralam,KL,2024,1,832.1,625.7,Kerala (alternate spelling in panel)
+Keralam,KL,2024,2,836.3,629,Kerala (alternate spelling in panel)
+Keralam,KL,2024,3,844.1,636.3,Kerala (alternate spelling in panel)
+Keralam,KL,2024,4,844.1,636.3,Kerala (alternate spelling in panel)
+Keralam,KL,2024,5,849.2,639.1,Kerala (alternate spelling in panel)
+Keralam,KL,2024,6,849.2,641.3,Kerala (alternate spelling in panel)
+Keralam,KL,2024,7,854.7,647.4,Kerala (alternate spelling in panel)
+Keralam,KL,2024,8,858.4,649.3,Kerala (alternate spelling in panel)
+Keralam,KL,2024,9,860.2,649.3,Kerala (alternate spelling in panel)
+Keralam,KL,2024,10,861.6,649.3,Kerala (alternate spelling in panel)
+Keralam,KL,2024,11,863.9,649.3,Kerala (alternate spelling in panel)
+Keralam,KL,2024,12,868.3,650.9,Kerala (alternate spelling in panel)
+Keralam,KL,2025,1,872.9,656.3,Kerala (alternate spelling in panel)
+Keralam,KL,2025,2,877.1,658,Kerala (alternate spelling in panel)
+Keralam,KL,2025,3,879.5,658,Kerala (alternate spelling in panel)
+Keralam,KL,2025,4,882.3,658,Kerala (alternate spelling in panel)
+Keralam,KL,2025,5,885.9,658,Kerala (alternate spelling in panel)
+Keralam,KL,2025,6,887.2,658,Kerala (alternate spelling in panel)
+Keralam,KL,2025,7,873.3,679,Kerala (alternate spelling in panel)
+Keralam,KL,2025,8,875.5,682.2,Kerala (alternate spelling in panel)
+Keralam,KL,2025,9,878.8,682.8,Kerala (alternate spelling in panel)
+Keralam,KL,2025,10,878.8,682.8,Kerala (alternate spelling in panel)
+Keralam,KL,2025,11,878.8,682.8,Kerala (alternate spelling in panel)
+Keralam,KL,2025,12,610,454.2,Kerala (alternate spelling in panel)
+Madhya Pradesh,MP,2017,1,184.2,164.9,direct
+Madhya Pradesh,MP,2017,2,184.1,163.9,direct
+Madhya Pradesh,MP,2017,3,188.2,165.6,direct
+Madhya Pradesh,MP,2017,4,192.5,169.1,direct
+Madhya Pradesh,MP,2017,5,188.6,170.9,direct
+Madhya Pradesh,MP,2017,6,189.9,170.2,direct
+Madhya Pradesh,MP,2017,7,192,173,direct
+Madhya Pradesh,MP,2017,8,192.1,174.3,direct
+Madhya Pradesh,MP,2017,9,191.9,174.2,direct
+Madhya Pradesh,MP,2017,10,192.6,173.4,direct
+Madhya Pradesh,MP,2017,11,190,172,direct
+Madhya Pradesh,MP,2017,12,190.1,173.5,direct
+Madhya Pradesh,MP,2018,1,193.5,181.6,direct
+Madhya Pradesh,MP,2018,2,196.7,174.6,direct
+Madhya Pradesh,MP,2018,3,193.4,174.7,direct
+Madhya Pradesh,MP,2018,4,192.8,175.2,direct
+Madhya Pradesh,MP,2018,5,193.6,175.7,direct
+Madhya Pradesh,MP,2018,6,193.7,173.7,direct
+Madhya Pradesh,MP,2018,7,197.4,175.5,direct
+Madhya Pradesh,MP,2018,8,196.4,172.2,direct
+Madhya Pradesh,MP,2018,9,200.8,179,direct
+Madhya Pradesh,MP,2018,10,199,176.4,direct
+Madhya Pradesh,MP,2018,11,198.7,176.4,direct
+Madhya Pradesh,MP,2018,12,198.1,176.6,direct
+Madhya Pradesh,MP,2019,1,198.3,178.5,direct
+Madhya Pradesh,MP,2019,2,198.5,177.5,direct
+Madhya Pradesh,MP,2019,3,199.7,184.6,direct
+Madhya Pradesh,MP,2019,4,199.8,185.1,direct
+Madhya Pradesh,MP,2019,5,199.9,185.2,direct
+Madhya Pradesh,MP,2019,6,200.4,181,direct
+Madhya Pradesh,MP,2019,7,200.5,182.8,direct
+Madhya Pradesh,MP,2019,8,203.6,177.7,direct
+Madhya Pradesh,MP,2019,9,203.1,175.8,direct
+Madhya Pradesh,MP,2019,10,201.8,176.6,direct
+Madhya Pradesh,MP,2019,11,200.5,176.8,direct
+Madhya Pradesh,MP,2019,12,202,178.1,direct
+Madhya Pradesh,MP,2020,1,204,184.2,direct
+Madhya Pradesh,MP,2020,2,205.3,184.9,direct
+Madhya Pradesh,MP,2020,3,205.3,185,direct
+Madhya Pradesh,MP,2020,5,,,direct
+Madhya Pradesh,MP,2020,6,253.7,232.6,direct
+Madhya Pradesh,MP,2020,7,227.3,202.8,direct
+Madhya Pradesh,MP,2020,8,225,197.6,direct
+Madhya Pradesh,MP,2020,9,211.4,189.9,direct
+Madhya Pradesh,MP,2020,10,210.8,187.9,direct
+Madhya Pradesh,MP,2020,11,210.8,191.2,direct
+Madhya Pradesh,MP,2020,12,209.5,188.6,direct
+Madhya Pradesh,MP,2021,1,210.5,188.5,direct
+Madhya Pradesh,MP,2021,2,211.1,181.3,direct
+Madhya Pradesh,MP,2021,3,212.7,187.5,direct
+Madhya Pradesh,MP,2021,4,216.6,189.3,direct
+Madhya Pradesh,MP,2021,5,218.5,191.5,direct
+Madhya Pradesh,MP,2021,6,217.9,190.3,direct
+Madhya Pradesh,MP,2021,7,218.9,190.3,direct
+Madhya Pradesh,MP,2021,8,220.1,185.6,direct
+Madhya Pradesh,MP,2021,9,220.9,184.3,direct
+Madhya Pradesh,MP,2021,10,221.3,189.4,direct
+Madhya Pradesh,MP,2021,11,219.8,186.9,direct
+Madhya Pradesh,MP,2021,12,222.1,192.8,direct
+Madhya Pradesh,MP,2022,1,224.9,196.9,direct
+Madhya Pradesh,MP,2022,2,225.7,193.8,direct
+Madhya Pradesh,MP,2022,3,226.3,194,direct
+Madhya Pradesh,MP,2022,4,227.9,199.4,direct
+Madhya Pradesh,MP,2022,5,229.8,202.6,direct
+Madhya Pradesh,MP,2022,6,231.9,204.9,direct
+Madhya Pradesh,MP,2022,7,233.9,206.8,direct
+Madhya Pradesh,MP,2022,8,235.3,207.9,direct
+Madhya Pradesh,MP,2022,9,238.4,208.8,direct
+Madhya Pradesh,MP,2022,10,238.6,208.9,direct
+Madhya Pradesh,MP,2022,11,239.3,211.2,direct
+Madhya Pradesh,MP,2022,12,239.6,211.7,direct
+Madhya Pradesh,MP,2023,1,242.2,213.2,direct
+Madhya Pradesh,MP,2023,2,242.6,213.5,direct
+Madhya Pradesh,MP,2023,3,243.4,213.3,direct
+Madhya Pradesh,MP,2023,4,243.7,215.6,direct
+Madhya Pradesh,MP,2023,5,246.3,219.6,direct
+Madhya Pradesh,MP,2023,6,247.2,220.1,direct
+Madhya Pradesh,MP,2023,7,250.1,224.3,direct
+Madhya Pradesh,MP,2023,8,250.5,224.6,direct
+Madhya Pradesh,MP,2023,9,250.8,221.8,direct
+Madhya Pradesh,MP,2023,10,250.7,222.1,direct
+Madhya Pradesh,MP,2023,11,253.1,223.6,direct
+Madhya Pradesh,MP,2023,12,253.7,223.7,direct
+Madhya Pradesh,MP,2024,1,254.1,224.7,direct
+Madhya Pradesh,MP,2024,2,254.3,225.2,direct
+Madhya Pradesh,MP,2024,3,255,225.9,direct
+Madhya Pradesh,MP,2024,4,255,225.9,direct
+Madhya Pradesh,MP,2024,5,255.4,225.9,direct
+Madhya Pradesh,MP,2024,6,255.6,226.1,direct
+Madhya Pradesh,MP,2024,7,259.6,229.7,direct
+Madhya Pradesh,MP,2024,8,263.2,230.9,direct
+Madhya Pradesh,MP,2024,9,264.3,232.5,direct
+Madhya Pradesh,MP,2024,10,264.8,232.9,direct
+Madhya Pradesh,MP,2024,11,267.8,235.5,direct
+Madhya Pradesh,MP,2024,12,268.3,235.6,direct
+Madhya Pradesh,MP,2025,1,269.2,236,direct
+Madhya Pradesh,MP,2025,2,274.1,238.2,direct
+Madhya Pradesh,MP,2025,3,275.1,238.2,direct
+Madhya Pradesh,MP,2025,4,277.1,238.9,direct
+Madhya Pradesh,MP,2025,5,279.2,240,direct
+Madhya Pradesh,MP,2025,6,279.8,240.3,direct
+Madhya Pradesh,MP,2025,7,348.3,291.7,direct
+Madhya Pradesh,MP,2025,8,349.3,293.2,direct
+Madhya Pradesh,MP,2025,9,352.2,294.8,direct
+Madhya Pradesh,MP,2025,10,351.6,294.8,direct
+Madhya Pradesh,MP,2025,11,352.3,294.9,direct
+Madhya Pradesh,MP,2025,12,352.8,328.7,direct
+Maharashtra,MH,2017,1,232.2,161.4,direct
+Maharashtra,MH,2017,2,232.6,158.8,direct
+Maharashtra,MH,2017,3,235,161.1,direct
+Maharashtra,MH,2017,4,238.2,168.4,direct
+Maharashtra,MH,2017,5,239.2,161,direct
+Maharashtra,MH,2017,6,236.5,161.8,direct
+Maharashtra,MH,2017,7,237.7,163.8,direct
+Maharashtra,MH,2017,8,236.8,162.2,direct
+Maharashtra,MH,2017,9,244.8,159.8,direct
+Maharashtra,MH,2017,10,237.4,167.3,direct
+Maharashtra,MH,2017,11,245.8,169.9,direct
+Maharashtra,MH,2017,12,245.9,171.3,direct
+Maharashtra,MH,2018,1,247.5,171.3,direct
+Maharashtra,MH,2018,2,246.7,170.9,direct
+Maharashtra,MH,2018,3,247.4,170.7,direct
+Maharashtra,MH,2018,4,247.1,170.6,direct
+Maharashtra,MH,2018,5,254,172.4,direct
+Maharashtra,MH,2018,6,255.3,175.6,direct
+Maharashtra,MH,2018,7,255.6,176.9,direct
+Maharashtra,MH,2018,8,256.2,176,direct
+Maharashtra,MH,2018,9,259.1,174.3,direct
+Maharashtra,MH,2018,10,254.6,181.6,direct
+Maharashtra,MH,2018,11,256.7,184.2,direct
+Maharashtra,MH,2018,12,255.2,180.9,direct
+Maharashtra,MH,2019,1,257.8,181.6,direct
+Maharashtra,MH,2019,2,258.7,182.7,direct
+Maharashtra,MH,2019,3,258,183.5,direct
+Maharashtra,MH,2019,4,256.7,179.9,direct
+Maharashtra,MH,2019,5,259.6,180.6,direct
+Maharashtra,MH,2019,6,267.8,181.3,direct
+Maharashtra,MH,2019,7,272.1,193.7,direct
+Maharashtra,MH,2019,8,275.9,191.2,direct
+Maharashtra,MH,2019,9,275.8,191.3,direct
+Maharashtra,MH,2019,10,276.5,194.8,direct
+Maharashtra,MH,2019,11,281.3,199.5,direct
+Maharashtra,MH,2019,12,271,199,direct
+Maharashtra,MH,2020,1,272,200.8,direct
+Maharashtra,MH,2020,2,271.9,199,direct
+Maharashtra,MH,2020,3,272.2,198.6,direct
+Maharashtra,MH,2020,5,,,direct
+Maharashtra,MH,2020,6,294.5,199.5,direct
+Maharashtra,MH,2020,7,295.2,196.2,direct
+Maharashtra,MH,2020,8,296.7,197.2,direct
+Maharashtra,MH,2020,9,307.8,208.2,direct
+Maharashtra,MH,2020,10,301.5,214.2,direct
+Maharashtra,MH,2020,11,303.7,222.2,direct
+Maharashtra,MH,2020,12,301.9,219.6,direct
+Maharashtra,MH,2021,1,303.2,224.3,direct
+Maharashtra,MH,2021,2,304.3,224.2,direct
+Maharashtra,MH,2021,3,304.2,228.3,direct
+Maharashtra,MH,2021,4,305,229.5,direct
+Maharashtra,MH,2021,5,306.6,229.8,direct
+Maharashtra,MH,2021,6,316.3,240,direct
+Maharashtra,MH,2021,7,314.5,237.2,direct
+Maharashtra,MH,2021,8,324,244.4,direct
+Maharashtra,MH,2021,9,327,250,direct
+Maharashtra,MH,2021,10,324,243.4,direct
+Maharashtra,MH,2021,11,321.5,241.9,direct
+Maharashtra,MH,2021,12,324.5,240.3,direct
+Maharashtra,MH,2022,1,325,241,direct
+Maharashtra,MH,2022,2,325.8,239.8,direct
+Maharashtra,MH,2022,3,326,241.5,direct
+Maharashtra,MH,2022,4,328.2,242.5,direct
+Maharashtra,MH,2022,5,329.5,244.3,direct
+Maharashtra,MH,2022,6,330.9,245.1,direct
+Maharashtra,MH,2022,7,332.8,248.9,direct
+Maharashtra,MH,2022,8,333.7,249.5,direct
+Maharashtra,MH,2022,9,334.4,250.8,direct
+Maharashtra,MH,2022,10,335.1,250.9,direct
+Maharashtra,MH,2022,11,336.3,252.1,direct
+Maharashtra,MH,2022,12,337.7,254,direct
+Maharashtra,MH,2023,1,339.1,255,direct
+Maharashtra,MH,2023,2,340.1,256.2,direct
+Maharashtra,MH,2023,3,340.7,256.7,direct
+Maharashtra,MH,2023,4,340.5,256.7,direct
+Maharashtra,MH,2023,5,341.2,257,direct
+Maharashtra,MH,2023,6,343.8,260.3,direct
+Maharashtra,MH,2023,7,349.7,261.4,direct
+Maharashtra,MH,2023,8,352.7,263.3,direct
+Maharashtra,MH,2023,9,354,263.6,direct
+Maharashtra,MH,2023,10,355.2,263.8,direct
+Maharashtra,MH,2023,11,357.6,264.9,direct
+Maharashtra,MH,2023,12,355.3,265.5,direct
+Maharashtra,MH,2024,1,356,265.8,direct
+Maharashtra,MH,2024,2,356.3,266.1,direct
+Maharashtra,MH,2024,3,360.4,266.9,direct
+Maharashtra,MH,2024,4,360.4,266.9,direct
+Maharashtra,MH,2024,5,362.7,268.2,direct
+Maharashtra,MH,2024,6,366.4,268.8,direct
+Maharashtra,MH,2024,7,369.1,270.8,direct
+Maharashtra,MH,2024,8,377.7,273,direct
+Maharashtra,MH,2024,9,382,274.4,direct
+Maharashtra,MH,2024,10,379.7,277.8,direct
+Maharashtra,MH,2024,11,382.4,279.2,direct
+Maharashtra,MH,2024,12,385,291,direct
+Maharashtra,MH,2025,1,386.2,291.5,direct
+Maharashtra,MH,2025,2,387.6,292.3,direct
+Maharashtra,MH,2025,3,389.3,292.4,direct
+Maharashtra,MH,2025,4,391.9,294.8,direct
+Maharashtra,MH,2025,5,393.3,289.6,direct
+Maharashtra,MH,2025,6,395.3,292.2,direct
+Maharashtra,MH,2025,7,413,302.6,direct
+Maharashtra,MH,2025,8,416.2,305.1,direct
+Maharashtra,MH,2025,9,420.6,310.2,direct
+Maharashtra,MH,2025,10,420.7,310.6,direct
+Maharashtra,MH,2025,11,420.2,310.2,direct
+Maharashtra,MH,2025,12,554.3,500,direct
+Manipur,MN,2017,1,291.9,257.9,direct
+Manipur,MN,2017,2,291.9,257.9,direct
+Manipur,MN,2017,3,291.9,257.9,direct
+Manipur,MN,2017,4,296,257.9,direct
+Manipur,MN,2017,5,296,257.9,direct
+Manipur,MN,2017,6,296.3,259.6,direct
+Manipur,MN,2017,7,296.3,259.6,direct
+Manipur,MN,2017,8,292.2,259.6,direct
+Manipur,MN,2017,9,292.2,259.6,direct
+Manipur,MN,2017,10,292.2,259.6,direct
+Manipur,MN,2017,11,293.4,256.3,direct
+Manipur,MN,2017,12,294.5,258.8,direct
+Manipur,MN,2018,1,294.5,258.8,direct
+Manipur,MN,2018,2,294.5,258.8,direct
+Manipur,MN,2018,3,294.5,258.8,direct
+Manipur,MN,2018,4,294.5,258.8,direct
+Manipur,MN,2018,5,294.5,258.8,direct
+Manipur,MN,2018,6,293.7,258.8,direct
+Manipur,MN,2018,7,294.5,258.8,direct
+Manipur,MN,2018,8,294.5,263.8,direct
+Manipur,MN,2018,9,294.5,263.8,direct
+Manipur,MN,2018,10,294.5,263.8,direct
+Manipur,MN,2018,11,294.5,263.8,direct
+Manipur,MN,2018,12,296.6,263.8,direct
+Manipur,MN,2019,1,298.9,263.8,direct
+Manipur,MN,2019,2,302.6,274.9,direct
+Manipur,MN,2019,3,302.6,274.9,direct
+Manipur,MN,2019,4,302.6,274.9,direct
+Manipur,MN,2019,5,302.6,274.9,direct
+Manipur,MN,2019,6,307.1,284.1,direct
+Manipur,MN,2019,7,309.9,286.3,direct
+Manipur,MN,2019,8,314,286.3,direct
+Manipur,MN,2019,9,314,286.3,direct
+Manipur,MN,2019,10,314,286.3,direct
+Manipur,MN,2019,11,314,286.3,direct
+Manipur,MN,2019,12,314,286.3,direct
+Manipur,MN,2020,1,324.7,293.8,direct
+Manipur,MN,2020,2,324.6,294.3,direct
+Manipur,MN,2020,3,324.6,294.3,direct
+Manipur,MN,2020,5,,,direct
+Manipur,MN,2020,6,,,direct
+Manipur,MN,2020,7,,,direct
+Manipur,MN,2020,8,,,direct
+Manipur,MN,2020,9,,,direct
+Manipur,MN,2020,10,329.8,303.1,direct
+Manipur,MN,2020,11,329.8,303.1,direct
+Manipur,MN,2020,12,329.8,303.1,direct
+Manipur,MN,2021,1,334,305.6,direct
+Manipur,MN,2021,2,334,305.6,direct
+Manipur,MN,2021,3,334,305.6,direct
+Manipur,MN,2021,4,334,305.6,direct
+Manipur,MN,2021,5,334,305.6,direct
+Manipur,MN,2021,6,334,305.6,direct
+Manipur,MN,2021,7,333,305.6,direct
+Manipur,MN,2021,8,333,305.6,direct
+Manipur,MN,2021,9,333,305.6,direct
+Manipur,MN,2021,10,333,305.6,direct
+Manipur,MN,2021,11,333,305.6,direct
+Manipur,MN,2021,12,333,305.6,direct
+Manipur,MN,2022,1,333,305.6,direct
+Manipur,MN,2022,2,333,304.9,direct
+Manipur,MN,2022,3,333,304.9,direct
+Manipur,MN,2022,4,333,304.9,direct
+Manipur,MN,2022,5,333,304.9,direct
+Manipur,MN,2022,6,333,304.9,direct
+Manipur,MN,2022,7,333,304.9,direct
+Manipur,MN,2022,8,333,304.9,direct
+Manipur,MN,2022,9,333,304.9,direct
+Manipur,MN,2022,10,333,304.9,direct
+Manipur,MN,2022,11,334.9,305.9,direct
+Manipur,MN,2022,12,334.9,305.9,direct
+Manipur,MN,2023,1,334.9,305.9,direct
+Manipur,MN,2023,2,334.9,305.9,direct
+Manipur,MN,2023,3,334.9,305.9,direct
+Manipur,MN,2023,4,334.9,305.9,direct
+Manipur,MN,2023,5,334.9,305.9,direct
+Manipur,MN,2023,6,334.9,305.9,direct
+Manipur,MN,2023,7,334.9,305.9,direct
+Manipur,MN,2023,8,334.9,305.9,direct
+Manipur,MN,2023,9,334.9,305.9,direct
+Manipur,MN,2023,10,334.9,305.9,direct
+Manipur,MN,2023,11,334.9,305.9,direct
+Manipur,MN,2023,12,334.9,305.9,direct
+Manipur,MN,2024,1,334.9,305.9,direct
+Manipur,MN,2024,2,334.9,312.5,direct
+Manipur,MN,2024,3,334.9,312.5,direct
+Manipur,MN,2024,4,334.9,312.5,direct
+Manipur,MN,2024,5,334.9,312.5,direct
+Manipur,MN,2024,6,334.9,312.5,direct
+Manipur,MN,2024,7,334.9,312.5,direct
+Manipur,MN,2024,8,334.9,312.5,direct
+Manipur,MN,2024,9,334.9,312.5,direct
+Manipur,MN,2024,10,334.9,312.5,direct
+Manipur,MN,2024,11,334.9,312.5,direct
+Manipur,MN,2024,12,334.9,312.5,direct
+Manipur,MN,2025,1,334.9,312.5,direct
+Manipur,MN,2025,2,334.9,312.5,direct
+Manipur,MN,2025,3,342.8,320,direct
+Manipur,MN,2025,4,350.6,326.7,direct
+Manipur,MN,2025,5,357.2,333.4,direct
+Manipur,MN,2025,6,365.5,341.9,direct
+Manipur,MN,2025,7,516.1,475,direct
+Manipur,MN,2025,8,516.9,475,direct
+Manipur,MN,2025,9,516.9,475,direct
+Manipur,MN,2025,10,516.9,475,direct
+Manipur,MN,2025,11,516.9,475,direct
+Manipur,MN,2025,12,612.2,529.6,direct
+Meghalaya,MG,2017,1,216.3,155.7,direct
+Meghalaya,MG,2017,2,228.3,160.7,direct
+Meghalaya,MG,2017,3,231.9,167.1,direct
+Meghalaya,MG,2017,4,233.3,168.3,direct
+Meghalaya,MG,2017,5,236.7,169.1,direct
+Meghalaya,MG,2017,6,236.7,169.1,direct
+Meghalaya,MG,2017,7,239.6,174.6,direct
+Meghalaya,MG,2017,8,239.6,174.6,direct
+Meghalaya,MG,2017,9,240.3,174.6,direct
+Meghalaya,MG,2017,10,240.5,178.4,direct
+Meghalaya,MG,2017,11,241.4,175.2,direct
+Meghalaya,MG,2017,12,240,167.9,direct
+Meghalaya,MG,2018,1,236.9,179.7,direct
+Meghalaya,MG,2018,2,241.4,179.7,direct
+Meghalaya,MG,2018,3,241.4,179.7,direct
+Meghalaya,MG,2018,4,244.8,169.5,direct
+Meghalaya,MG,2018,5,247.8,176.4,direct
+Meghalaya,MG,2018,6,234.3,177.6,direct
+Meghalaya,MG,2018,7,234.3,177.6,direct
+Meghalaya,MG,2018,8,232.6,176.5,direct
+Meghalaya,MG,2018,9,239.3,180.5,direct
+Meghalaya,MG,2018,10,241,180.5,direct
+Meghalaya,MG,2018,11,231.4,167.4,direct
+Meghalaya,MG,2018,12,230.9,168.5,direct
+Meghalaya,MG,2019,1,230.9,168.5,direct
+Meghalaya,MG,2019,2,244.4,170,direct
+Meghalaya,MG,2019,3,242.5,180,direct
+Meghalaya,MG,2019,4,242.5,180,direct
+Meghalaya,MG,2019,5,244.4,170,direct
+Meghalaya,MG,2019,6,228.6,170,direct
+Meghalaya,MG,2019,7,224.8,170,direct
+Meghalaya,MG,2019,8,224.8,170,direct
+Meghalaya,MG,2019,9,250.2,177.9,direct
+Meghalaya,MG,2019,10,247.2,171.2,direct
+Meghalaya,MG,2019,11,244.2,179.5,direct
+Meghalaya,MG,2019,12,242.4,178,direct
+Meghalaya,MG,2020,1,242.4,178,direct
+Meghalaya,MG,2020,2,244.5,169.3,direct
+Meghalaya,MG,2020,3,244.5,169.3,direct
+Meghalaya,MG,2020,5,,,direct
+Meghalaya,MG,2020,6,244.2,177.6,direct
+Meghalaya,MG,2020,7,237.9,177.6,direct
+Meghalaya,MG,2020,8,235.5,176.5,direct
+Meghalaya,MG,2020,9,238.8,176.5,direct
+Meghalaya,MG,2020,10,238.8,176.5,direct
+Meghalaya,MG,2020,11,251.8,174.6,direct
+Meghalaya,MG,2020,12,246.7,172.6,direct
+Meghalaya,MG,2021,1,248.8,173.5,direct
+Meghalaya,MG,2021,2,284.7,189.2,direct
+Meghalaya,MG,2021,3,304.2,198.4,direct
+Meghalaya,MG,2021,4,304.2,198.4,direct
+Meghalaya,MG,2021,5,304.2,198.4,direct
+Meghalaya,MG,2021,6,304.2,198.4,direct
+Meghalaya,MG,2021,7,311.4,198.4,direct
+Meghalaya,MG,2021,8,310.7,198.4,direct
+Meghalaya,MG,2021,9,309.8,198.4,direct
+Meghalaya,MG,2021,10,304.2,198.4,direct
+Meghalaya,MG,2021,11,304.2,198.4,direct
+Meghalaya,MG,2021,12,309.4,197.7,direct
+Meghalaya,MG,2022,1,311.8,200,direct
+Meghalaya,MG,2022,2,314.2,202.9,direct
+Meghalaya,MG,2022,3,317.3,202.9,direct
+Meghalaya,MG,2022,4,317.3,202.9,direct
+Meghalaya,MG,2022,5,317.3,202.9,direct
+Meghalaya,MG,2022,6,323.6,202.9,direct
+Meghalaya,MG,2022,7,330.3,202.9,direct
+Meghalaya,MG,2022,8,333.5,202.9,direct
+Meghalaya,MG,2022,9,334.7,202.9,direct
+Meghalaya,MG,2022,10,334.7,202.9,direct
+Meghalaya,MG,2022,11,334.7,202.9,direct
+Meghalaya,MG,2022,12,334.1,203.9,direct
+Meghalaya,MG,2023,1,334.1,203.9,direct
+Meghalaya,MG,2023,2,334.1,203.9,direct
+Meghalaya,MG,2023,3,334.1,203.9,direct
+Meghalaya,MG,2023,4,334.1,203.9,direct
+Meghalaya,MG,2023,5,334.1,203.9,direct
+Meghalaya,MG,2023,6,335.3,203.9,direct
+Meghalaya,MG,2023,7,335.3,203.9,direct
+Meghalaya,MG,2023,8,336,203.9,direct
+Meghalaya,MG,2023,9,336.2,203.4,direct
+Meghalaya,MG,2023,10,336.7,202.9,direct
+Meghalaya,MG,2023,11,336.4,203.6,direct
+Meghalaya,MG,2023,12,336.4,203.6,direct
+Meghalaya,MG,2024,1,336.4,203.6,direct
+Meghalaya,MG,2024,2,336.4,203.6,direct
+Meghalaya,MG,2024,3,337.7,203.6,direct
+Meghalaya,MG,2024,4,337.7,203.6,direct
+Meghalaya,MG,2024,5,342,203.8,direct
+Meghalaya,MG,2024,6,342,203.8,direct
+Meghalaya,MG,2024,7,343.2,203.8,direct
+Meghalaya,MG,2024,8,343.2,203.8,direct
+Meghalaya,MG,2024,9,343.2,203.8,direct
+Meghalaya,MG,2024,10,343.2,203.8,direct
+Meghalaya,MG,2024,11,343.2,203.8,direct
+Meghalaya,MG,2024,12,344.1,205.7,direct
+Meghalaya,MG,2025,1,344.1,205.7,direct
+Meghalaya,MG,2025,2,344.1,205.7,direct
+Meghalaya,MG,2025,3,344.1,205.7,direct
+Meghalaya,MG,2025,4,344.1,205.7,direct
+Meghalaya,MG,2025,5,344.1,205.7,direct
+Meghalaya,MG,2025,6,344.1,205.7,direct
+Meghalaya,MG,2025,7,432.8,334.4,direct
+Meghalaya,MG,2025,8,438.6,339.9,direct
+Meghalaya,MG,2025,9,443.5,345.5,direct
+Meghalaya,MG,2025,10,444.9,346.3,direct
+Meghalaya,MG,2025,11,444.9,346.3,direct
+Meghalaya,MG,2025,12,665.4,620,direct
+Mizoram,MZ,2017,1,280.4,196,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2017,2,280.3,196.6,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2017,3,280.9,199.6,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2017,4,282.7,202.4,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2017,5,282.8,203.2,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2017,6,282.7,203.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2017,7,285.4,204.3,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2017,8,285.9,206.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2017,9,287.3,206.6,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2017,10,287.5,206.3,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2017,11,285.8,205.1,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2017,12,287.8,205.9,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2018,1,285.1,206.2,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2018,2,286.6,207.9,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2018,3,287.3,207.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2018,4,288.3,208.6,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2018,5,288.8,210.3,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2018,6,292.3,210.6,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2018,7,292.4,211.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2018,8,296.3,211.6,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2018,9,297.7,212.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2018,10,299.8,215.8,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2018,11,300.4,216.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2018,12,298.9,216.4,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2019,1,300,217.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2019,2,301.2,218.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2019,3,302.2,220.9,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2019,4,302.3,220.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2019,5,303.7,220.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2019,6,304.5,220.6,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2019,7,306.1,223.2,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2019,8,304.4,221.4,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2019,9,306.4,222.1,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2019,10,306.8,223,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2019,11,307.3,223.1,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2019,12,307,225.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2020,1,311.4,229.3,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2020,2,312.7,230.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2020,3,312.8,231.3,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2020,5,312.4,241.9,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2020,6,321.8,242,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2020,7,327.5,237.9,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2020,8,325.3,235.4,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2020,9,322.9,234,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2020,10,322.6,234.3,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2020,11,325.9,237.4,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2020,12,326.8,240.1,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2021,1,330,239.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2021,2,333.2,241.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2021,3,337.3,245.1,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2021,4,339.3,246,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2021,5,339.9,246.2,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2021,6,341.3,247.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2021,7,341.8,250.4,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2021,8,342.8,249.9,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2021,9,344.5,251.1,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2021,10,341.6,252.6,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2021,11,341.6,252.1,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2021,12,343.1,253.6,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2022,1,343.5,254,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2022,2,347.7,256.6,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2022,3,350.6,259.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2022,4,353,261.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2022,5,354.1,263.8,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2022,6,356,264.9,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2022,7,358.3,266.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2022,8,359.5,267.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2022,9,361,269.4,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2022,10,363.7,270.6,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2022,11,367.2,272.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2022,12,369,273.4,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2023,1,370,276,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2023,2,371.2,277.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2023,3,372.5,278.1,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2023,4,373.8,280,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2023,5,376.8,283.9,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2023,6,385.1,285.8,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2023,7,387.3,290.3,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2023,8,388.5,290.8,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2023,9,388.7,291.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2023,10,390,293.2,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2023,11,392.2,296,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2023,12,393.8,298.1,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2024,1,395.1,299.4,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2024,2,396.1,300.4,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2024,3,398.8,302.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2024,4,398.8,302.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2024,5,401.1,304.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2024,6,404,306,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2024,7,405.7,308.3,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2024,8,410,310.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2024,9,412.6,311.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2024,10,414.3,312.5,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2024,11,417.1,313.8,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2024,12,419,315.8,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2025,1,420.9,317.2,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2025,2,423.2,318.8,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2025,3,425.9,320.1,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2025,4,428.9,322.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2025,5,431.5,324.9,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2025,6,434.3,327.4,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2025,7,494.4,370.9,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2025,8,496.4,370.7,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2025,9,499.3,371.2,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2025,10,501,372.3,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2025,11,501.6,373.2,India (no regional proxy - All-India fallback)
+Mizoram,MZ,2025,12,501.7,374.6,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2017,1,280.4,196,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2017,2,280.3,196.6,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2017,3,280.9,199.6,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2017,4,282.7,202.4,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2017,5,282.8,203.2,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2017,6,282.7,203.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2017,7,285.4,204.3,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2017,8,285.9,206.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2017,9,287.3,206.6,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2017,10,287.5,206.3,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2017,11,285.8,205.1,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2017,12,287.8,205.9,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2018,1,285.1,206.2,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2018,2,286.6,207.9,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2018,3,287.3,207.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2018,4,288.3,208.6,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2018,5,288.8,210.3,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2018,6,292.3,210.6,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2018,7,292.4,211.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2018,8,296.3,211.6,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2018,9,297.7,212.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2018,10,299.8,215.8,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2018,11,300.4,216.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2018,12,298.9,216.4,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2019,1,300,217.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2019,2,301.2,218.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2019,3,302.2,220.9,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2019,4,302.3,220.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2019,5,303.7,220.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2019,6,304.5,220.6,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2019,7,306.1,223.2,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2019,8,304.4,221.4,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2019,9,306.4,222.1,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2019,10,306.8,223,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2019,11,307.3,223.1,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2019,12,307,225.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2020,1,311.4,229.3,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2020,2,312.7,230.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2020,3,312.8,231.3,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2020,5,312.4,241.9,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2020,6,321.8,242,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2020,7,327.5,237.9,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2020,8,325.3,235.4,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2020,9,322.9,234,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2020,10,322.6,234.3,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2020,11,325.9,237.4,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2020,12,326.8,240.1,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2021,1,330,239.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2021,2,333.2,241.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2021,3,337.3,245.1,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2021,4,339.3,246,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2021,5,339.9,246.2,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2021,6,341.3,247.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2021,7,341.8,250.4,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2021,8,342.8,249.9,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2021,9,344.5,251.1,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2021,10,341.6,252.6,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2021,11,341.6,252.1,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2021,12,343.1,253.6,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2022,1,343.5,254,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2022,2,347.7,256.6,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2022,3,350.6,259.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2022,4,353,261.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2022,5,354.1,263.8,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2022,6,356,264.9,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2022,7,358.3,266.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2022,8,359.5,267.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2022,9,361,269.4,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2022,10,363.7,270.6,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2022,11,367.2,272.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2022,12,369,273.4,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2023,1,370,276,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2023,2,371.2,277.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2023,3,372.5,278.1,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2023,4,373.8,280,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2023,5,376.8,283.9,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2023,6,385.1,285.8,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2023,7,387.3,290.3,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2023,8,388.5,290.8,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2023,9,388.7,291.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2023,10,390,293.2,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2023,11,392.2,296,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2023,12,393.8,298.1,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2024,1,395.1,299.4,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2024,2,396.1,300.4,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2024,3,398.8,302.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2024,4,398.8,302.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2024,5,401.1,304.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2024,6,404,306,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2024,7,405.7,308.3,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2024,8,410,310.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2024,9,412.6,311.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2024,10,414.3,312.5,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2024,11,417.1,313.8,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2024,12,419,315.8,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2025,1,420.9,317.2,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2025,2,423.2,318.8,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2025,3,425.9,320.1,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2025,4,428.9,322.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2025,5,431.5,324.9,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2025,6,434.3,327.4,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2025,7,494.4,370.9,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2025,8,496.4,370.7,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2025,9,499.3,371.2,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2025,10,501,372.3,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2025,11,501.6,373.2,India (no regional proxy - All-India fallback)
+NCT of Delhi,DL,2025,12,501.7,374.6,India (no regional proxy - All-India fallback)
+Nagaland,NG,2017,1,280.4,196,India (no regional proxy - All-India fallback)
+Nagaland,NG,2017,2,280.3,196.6,India (no regional proxy - All-India fallback)
+Nagaland,NG,2017,3,280.9,199.6,India (no regional proxy - All-India fallback)
+Nagaland,NG,2017,4,282.7,202.4,India (no regional proxy - All-India fallback)
+Nagaland,NG,2017,5,282.8,203.2,India (no regional proxy - All-India fallback)
+Nagaland,NG,2017,6,282.7,203.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2017,7,285.4,204.3,India (no regional proxy - All-India fallback)
+Nagaland,NG,2017,8,285.9,206.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2017,9,287.3,206.6,India (no regional proxy - All-India fallback)
+Nagaland,NG,2017,10,287.5,206.3,India (no regional proxy - All-India fallback)
+Nagaland,NG,2017,11,285.8,205.1,India (no regional proxy - All-India fallback)
+Nagaland,NG,2017,12,287.8,205.9,India (no regional proxy - All-India fallback)
+Nagaland,NG,2018,1,285.1,206.2,India (no regional proxy - All-India fallback)
+Nagaland,NG,2018,2,286.6,207.9,India (no regional proxy - All-India fallback)
+Nagaland,NG,2018,3,287.3,207.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2018,4,288.3,208.6,India (no regional proxy - All-India fallback)
+Nagaland,NG,2018,5,288.8,210.3,India (no regional proxy - All-India fallback)
+Nagaland,NG,2018,6,292.3,210.6,India (no regional proxy - All-India fallback)
+Nagaland,NG,2018,7,292.4,211.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2018,8,296.3,211.6,India (no regional proxy - All-India fallback)
+Nagaland,NG,2018,9,297.7,212.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2018,10,299.8,215.8,India (no regional proxy - All-India fallback)
+Nagaland,NG,2018,11,300.4,216.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2018,12,298.9,216.4,India (no regional proxy - All-India fallback)
+Nagaland,NG,2019,1,300,217.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2019,2,301.2,218.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2019,3,302.2,220.9,India (no regional proxy - All-India fallback)
+Nagaland,NG,2019,4,302.3,220.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2019,5,303.7,220.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2019,6,304.5,220.6,India (no regional proxy - All-India fallback)
+Nagaland,NG,2019,7,306.1,223.2,India (no regional proxy - All-India fallback)
+Nagaland,NG,2019,8,304.4,221.4,India (no regional proxy - All-India fallback)
+Nagaland,NG,2019,9,306.4,222.1,India (no regional proxy - All-India fallback)
+Nagaland,NG,2019,10,306.8,223,India (no regional proxy - All-India fallback)
+Nagaland,NG,2019,11,307.3,223.1,India (no regional proxy - All-India fallback)
+Nagaland,NG,2019,12,307,225.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2020,1,311.4,229.3,India (no regional proxy - All-India fallback)
+Nagaland,NG,2020,2,312.7,230.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2020,3,312.8,231.3,India (no regional proxy - All-India fallback)
+Nagaland,NG,2020,5,312.4,241.9,India (no regional proxy - All-India fallback)
+Nagaland,NG,2020,6,321.8,242,India (no regional proxy - All-India fallback)
+Nagaland,NG,2020,7,327.5,237.9,India (no regional proxy - All-India fallback)
+Nagaland,NG,2020,8,325.3,235.4,India (no regional proxy - All-India fallback)
+Nagaland,NG,2020,9,322.9,234,India (no regional proxy - All-India fallback)
+Nagaland,NG,2020,10,322.6,234.3,India (no regional proxy - All-India fallback)
+Nagaland,NG,2020,11,325.9,237.4,India (no regional proxy - All-India fallback)
+Nagaland,NG,2020,12,326.8,240.1,India (no regional proxy - All-India fallback)
+Nagaland,NG,2021,1,330,239.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2021,2,333.2,241.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2021,3,337.3,245.1,India (no regional proxy - All-India fallback)
+Nagaland,NG,2021,4,339.3,246,India (no regional proxy - All-India fallback)
+Nagaland,NG,2021,5,339.9,246.2,India (no regional proxy - All-India fallback)
+Nagaland,NG,2021,6,341.3,247.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2021,7,341.8,250.4,India (no regional proxy - All-India fallback)
+Nagaland,NG,2021,8,342.8,249.9,India (no regional proxy - All-India fallback)
+Nagaland,NG,2021,9,344.5,251.1,India (no regional proxy - All-India fallback)
+Nagaland,NG,2021,10,341.6,252.6,India (no regional proxy - All-India fallback)
+Nagaland,NG,2021,11,341.6,252.1,India (no regional proxy - All-India fallback)
+Nagaland,NG,2021,12,343.1,253.6,India (no regional proxy - All-India fallback)
+Nagaland,NG,2022,1,343.5,254,India (no regional proxy - All-India fallback)
+Nagaland,NG,2022,2,347.7,256.6,India (no regional proxy - All-India fallback)
+Nagaland,NG,2022,3,350.6,259.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2022,4,353,261.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2022,5,354.1,263.8,India (no regional proxy - All-India fallback)
+Nagaland,NG,2022,6,356,264.9,India (no regional proxy - All-India fallback)
+Nagaland,NG,2022,7,358.3,266.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2022,8,359.5,267.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2022,9,361,269.4,India (no regional proxy - All-India fallback)
+Nagaland,NG,2022,10,363.7,270.6,India (no regional proxy - All-India fallback)
+Nagaland,NG,2022,11,367.2,272.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2022,12,369,273.4,India (no regional proxy - All-India fallback)
+Nagaland,NG,2023,1,370,276,India (no regional proxy - All-India fallback)
+Nagaland,NG,2023,2,371.2,277.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2023,3,372.5,278.1,India (no regional proxy - All-India fallback)
+Nagaland,NG,2023,4,373.8,280,India (no regional proxy - All-India fallback)
+Nagaland,NG,2023,5,376.8,283.9,India (no regional proxy - All-India fallback)
+Nagaland,NG,2023,6,385.1,285.8,India (no regional proxy - All-India fallback)
+Nagaland,NG,2023,7,387.3,290.3,India (no regional proxy - All-India fallback)
+Nagaland,NG,2023,8,388.5,290.8,India (no regional proxy - All-India fallback)
+Nagaland,NG,2023,9,388.7,291.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2023,10,390,293.2,India (no regional proxy - All-India fallback)
+Nagaland,NG,2023,11,392.2,296,India (no regional proxy - All-India fallback)
+Nagaland,NG,2023,12,393.8,298.1,India (no regional proxy - All-India fallback)
+Nagaland,NG,2024,1,395.1,299.4,India (no regional proxy - All-India fallback)
+Nagaland,NG,2024,2,396.1,300.4,India (no regional proxy - All-India fallback)
+Nagaland,NG,2024,3,398.8,302.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2024,4,398.8,302.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2024,5,401.1,304.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2024,6,404,306,India (no regional proxy - All-India fallback)
+Nagaland,NG,2024,7,405.7,308.3,India (no regional proxy - All-India fallback)
+Nagaland,NG,2024,8,410,310.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2024,9,412.6,311.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2024,10,414.3,312.5,India (no regional proxy - All-India fallback)
+Nagaland,NG,2024,11,417.1,313.8,India (no regional proxy - All-India fallback)
+Nagaland,NG,2024,12,419,315.8,India (no regional proxy - All-India fallback)
+Nagaland,NG,2025,1,420.9,317.2,India (no regional proxy - All-India fallback)
+Nagaland,NG,2025,2,423.2,318.8,India (no regional proxy - All-India fallback)
+Nagaland,NG,2025,3,425.9,320.1,India (no regional proxy - All-India fallback)
+Nagaland,NG,2025,4,428.9,322.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2025,5,431.5,324.9,India (no regional proxy - All-India fallback)
+Nagaland,NG,2025,6,434.3,327.4,India (no regional proxy - All-India fallback)
+Nagaland,NG,2025,7,494.4,370.9,India (no regional proxy - All-India fallback)
+Nagaland,NG,2025,8,496.4,370.7,India (no regional proxy - All-India fallback)
+Nagaland,NG,2025,9,499.3,371.2,India (no regional proxy - All-India fallback)
+Nagaland,NG,2025,10,501,372.3,India (no regional proxy - All-India fallback)
+Nagaland,NG,2025,11,501.6,373.2,India (no regional proxy - All-India fallback)
+Nagaland,NG,2025,12,501.7,374.6,India (no regional proxy - All-India fallback)
+Odisha,OR,2017,1,203,174.2,direct
+Odisha,OR,2017,2,198.2,173.5,direct
+Odisha,OR,2017,3,199.2,173.4,direct
+Odisha,OR,2017,4,200.3,172,direct
+Odisha,OR,2017,5,200.6,164.2,direct
+Odisha,OR,2017,6,199.5,159.6,direct
+Odisha,OR,2017,7,207.2,167.2,direct
+Odisha,OR,2017,8,205.8,167.5,direct
+Odisha,OR,2017,9,204.5,166.3,direct
+Odisha,OR,2017,10,204.9,173,direct
+Odisha,OR,2017,11,202.8,169.2,direct
+Odisha,OR,2017,12,204.8,172.2,direct
+Odisha,OR,2018,1,205.1,168.4,direct
+Odisha,OR,2018,2,204.4,168.6,direct
+Odisha,OR,2018,3,204.1,168.3,direct
+Odisha,OR,2018,4,203.4,167.7,direct
+Odisha,OR,2018,5,206.4,167.8,direct
+Odisha,OR,2018,6,204.5,165.7,direct
+Odisha,OR,2018,7,204.6,167.8,direct
+Odisha,OR,2018,8,206.4,171.9,direct
+Odisha,OR,2018,9,211.2,173.7,direct
+Odisha,OR,2018,10,213,174.5,direct
+Odisha,OR,2018,11,213.5,173,direct
+Odisha,OR,2018,12,213.9,174.5,direct
+Odisha,OR,2019,1,213.6,174.3,direct
+Odisha,OR,2019,2,214.6,173,direct
+Odisha,OR,2019,3,213.2,174.8,direct
+Odisha,OR,2019,4,214.4,170.4,direct
+Odisha,OR,2019,5,213.6,168.1,direct
+Odisha,OR,2019,6,215.8,167.8,direct
+Odisha,OR,2019,7,217.5,168,direct
+Odisha,OR,2019,8,219.5,176.1,direct
+Odisha,OR,2019,9,219.1,173.6,direct
+Odisha,OR,2019,10,220.1,177.3,direct
+Odisha,OR,2019,11,218.4,174,direct
+Odisha,OR,2019,12,222.7,178.6,direct
+Odisha,OR,2020,1,224.9,181.1,direct
+Odisha,OR,2020,2,225.9,179.9,direct
+Odisha,OR,2020,3,229.3,182,direct
+Odisha,OR,2020,5,,,direct
+Odisha,OR,2020,6,240.8,176.6,direct
+Odisha,OR,2020,7,230.4,172.6,direct
+Odisha,OR,2020,8,230.5,187,direct
+Odisha,OR,2020,9,234.4,193.9,direct
+Odisha,OR,2020,10,235.1,197.7,direct
+Odisha,OR,2020,11,239,201.1,direct
+Odisha,OR,2020,12,242.3,208.1,direct
+Odisha,OR,2021,1,246.6,203.6,direct
+Odisha,OR,2021,2,246.8,214,direct
+Odisha,OR,2021,3,243.7,209.5,direct
+Odisha,OR,2021,4,242.9,210.9,direct
+Odisha,OR,2021,5,240.3,197.8,direct
+Odisha,OR,2021,6,238.6,204.1,direct
+Odisha,OR,2021,7,249.1,227.8,direct
+Odisha,OR,2021,8,248.5,221.3,direct
+Odisha,OR,2021,9,248.4,215.5,direct
+Odisha,OR,2021,10,247,215.4,direct
+Odisha,OR,2021,11,246.9,215.7,direct
+Odisha,OR,2021,12,254.6,233.7,direct
+Odisha,OR,2022,1,256.3,232.1,direct
+Odisha,OR,2022,2,253.3,223.8,direct
+Odisha,OR,2022,3,253.2,213.8,direct
+Odisha,OR,2022,4,257.7,217.1,direct
+Odisha,OR,2022,5,260.3,221.7,direct
+Odisha,OR,2022,6,261.1,221,direct
+Odisha,OR,2022,7,263.4,232.2,direct
+Odisha,OR,2022,8,264.5,233.7,direct
+Odisha,OR,2022,9,268.4,240.1,direct
+Odisha,OR,2022,10,267.7,238.2,direct
+Odisha,OR,2022,11,269.6,242.5,direct
+Odisha,OR,2022,12,271.1,245.1,direct
+Odisha,OR,2023,1,273.6,246.2,direct
+Odisha,OR,2023,2,274.1,248.4,direct
+Odisha,OR,2023,3,274.9,249.2,direct
+Odisha,OR,2023,4,276.4,251.3,direct
+Odisha,OR,2023,5,276.3,251.4,direct
+Odisha,OR,2023,6,276.3,251.4,direct
+Odisha,OR,2023,7,277.6,255.3,direct
+Odisha,OR,2023,8,280.1,258.6,direct
+Odisha,OR,2023,9,282.2,260.2,direct
+Odisha,OR,2023,10,284.3,262.8,direct
+Odisha,OR,2023,11,287.4,264.8,direct
+Odisha,OR,2023,12,291,268.4,direct
+Odisha,OR,2024,1,294.5,270.1,direct
+Odisha,OR,2024,2,297,273.4,direct
+Odisha,OR,2024,3,301.8,276.8,direct
+Odisha,OR,2024,4,301.8,276.8,direct
+Odisha,OR,2024,5,307.8,280.9,direct
+Odisha,OR,2024,6,309.4,283.8,direct
+Odisha,OR,2024,7,314.7,288.3,direct
+Odisha,OR,2024,8,321.1,291.8,direct
+Odisha,OR,2024,9,323.3,293.6,direct
+Odisha,OR,2024,10,323.3,293.6,direct
+Odisha,OR,2024,11,326.2,297.8,direct
+Odisha,OR,2024,12,327.4,303.1,direct
+Odisha,OR,2025,1,330,306.3,direct
+Odisha,OR,2025,2,332.3,308.5,direct
+Odisha,OR,2025,3,333.9,309.4,direct
+Odisha,OR,2025,4,336.2,310.5,direct
+Odisha,OR,2025,5,338.8,311.7,direct
+Odisha,OR,2025,6,343.8,317.2,direct
+Odisha,OR,2025,7,405.7,309.1,direct
+Odisha,OR,2025,8,414.2,339.7,direct
+Odisha,OR,2025,9,417.5,343.3,direct
+Odisha,OR,2025,10,420.9,347.9,direct
+Odisha,OR,2025,11,421,350.9,direct
+Odisha,OR,2025,12,376.2,303.7,direct
+Punjab,PB,2017,1,322,,direct
+Punjab,PB,2017,2,317.3,,direct
+Punjab,PB,2017,3,317.4,,direct
+Punjab,PB,2017,4,321.7,279,direct
+Punjab,PB,2017,5,327,285.9,direct
+Punjab,PB,2017,6,328.2,,direct
+Punjab,PB,2017,7,324.2,,direct
+Punjab,PB,2017,8,324.4,,direct
+Punjab,PB,2017,9,327.9,280,direct
+Punjab,PB,2017,10,331,300,direct
+Punjab,PB,2017,11,330.9,276,direct
+Punjab,PB,2017,12,334.4,278.1,direct
+Punjab,PB,2018,1,331.2,281.2,direct
+Punjab,PB,2018,2,328.7,270.3,direct
+Punjab,PB,2018,3,325.1,270.3,direct
+Punjab,PB,2018,4,330.8,293.6,direct
+Punjab,PB,2018,5,331.6,271.5,direct
+Punjab,PB,2018,6,337.4,289.5,direct
+Punjab,PB,2018,7,340.1,306.9,direct
+Punjab,PB,2018,8,342.1,303.6,direct
+Punjab,PB,2018,9,341.4,298,direct
+Punjab,PB,2018,10,345.3,318.5,direct
+Punjab,PB,2018,11,346.8,321.3,direct
+Punjab,PB,2018,12,343.1,307.6,direct
+Punjab,PB,2019,1,342.7,302.9,direct
+Punjab,PB,2019,2,345.5,300.8,direct
+Punjab,PB,2019,3,343.9,320.8,direct
+Punjab,PB,2019,4,344.5,321.8,direct
+Punjab,PB,2019,5,342.5,321.8,direct
+Punjab,PB,2019,6,342.9,322.8,direct
+Punjab,PB,2019,7,345.6,332.8,direct
+Punjab,PB,2019,8,349.4,344.4,direct
+Punjab,PB,2019,9,343.8,344.4,direct
+Punjab,PB,2019,10,346.4,354.4,direct
+Punjab,PB,2019,11,344.2,272.7,direct
+Punjab,PB,2019,12,346.6,354.4,direct
+Punjab,PB,2020,1,347.9,344.4,direct
+Punjab,PB,2020,2,345.6,354.4,direct
+Punjab,PB,2020,3,344.6,269,direct
+Punjab,PB,2020,5,,,direct
+Punjab,PB,2020,6,350.7,,direct
+Punjab,PB,2020,7,350.2,,direct
+Punjab,PB,2020,8,349.9,,direct
+Punjab,PB,2020,9,351.8,,direct
+Punjab,PB,2020,10,354.3,191,direct
+Punjab,PB,2020,11,359.8,231,direct
+Punjab,PB,2020,12,360.2,231,direct
+Punjab,PB,2021,1,360.4,251,direct
+Punjab,PB,2021,2,363,,direct
+Punjab,PB,2021,3,364.6,,direct
+Punjab,PB,2021,4,362.6,,direct
+Punjab,PB,2021,5,360.3,,direct
+Punjab,PB,2021,6,363.4,,direct
+Punjab,PB,2021,7,363.4,,direct
+Punjab,PB,2021,8,362.2,,direct
+Punjab,PB,2021,9,362.2,,direct
+Punjab,PB,2021,10,363.4,,direct
+Punjab,PB,2021,11,362.8,,direct
+Punjab,PB,2021,12,363.4,,direct
+Punjab,PB,2022,1,363.8,296.2,direct
+Punjab,PB,2022,2,372,,direct
+Punjab,PB,2022,3,373.2,,direct
+Punjab,PB,2022,4,375.1,,direct
+Punjab,PB,2022,5,379.6,,direct
+Punjab,PB,2022,6,379.7,,direct
+Punjab,PB,2022,7,380.8,,direct
+Punjab,PB,2022,8,381.5,,direct
+Punjab,PB,2022,9,381.6,355.6,direct
+Punjab,PB,2022,10,380.5,355.6,direct
+Punjab,PB,2022,11,381.8,355.6,direct
+Punjab,PB,2022,12,381.8,355.6,direct
+Punjab,PB,2023,1,383.7,355.6,direct
+Punjab,PB,2023,2,385.3,355.6,direct
+Punjab,PB,2023,3,385.3,355.6,direct
+Punjab,PB,2023,4,385.3,355.6,direct
+Punjab,PB,2023,5,389.2,355.6,direct
+Punjab,PB,2023,6,393.3,365.6,direct
+Punjab,PB,2023,7,399.9,365.6,direct
+Punjab,PB,2023,8,399.9,365.6,direct
+Punjab,PB,2023,9,400.4,365.6,direct
+Punjab,PB,2023,10,400.4,365.6,direct
+Punjab,PB,2023,11,406.1,373,direct
+Punjab,PB,2023,12,407.2,373.7,direct
+Punjab,PB,2024,1,407.2,373.7,direct
+Punjab,PB,2024,2,407.6,373.7,direct
+Punjab,PB,2024,3,407.6,373.7,direct
+Punjab,PB,2024,4,407.6,373.7,direct
+Punjab,PB,2024,5,407.6,373.7,direct
+Punjab,PB,2024,6,407.6,373.7,direct
+Punjab,PB,2024,7,407.6,373.7,direct
+Punjab,PB,2024,8,410.7,373.7,direct
+Punjab,PB,2024,9,410.7,373.7,direct
+Punjab,PB,2024,10,411.4,373.7,direct
+Punjab,PB,2024,11,413.6,373.7,direct
+Punjab,PB,2024,12,414.1,373.7,direct
+Punjab,PB,2025,1,414.1,373.7,direct
+Punjab,PB,2025,2,414.1,373.7,direct
+Punjab,PB,2025,3,414.1,373.7,direct
+Punjab,PB,2025,4,418.4,382.7,direct
+Punjab,PB,2025,5,423.8,392.7,direct
+Punjab,PB,2025,6,429.4,399.3,direct
+Punjab,PB,2025,7,452,372.2,direct
+Punjab,PB,2025,8,454.5,379.8,direct
+Punjab,PB,2025,9,457.7,379.8,direct
+Punjab,PB,2025,10,463.1,406.6,direct
+Punjab,PB,2025,11,463.1,420,direct
+Punjab,PB,2025,12,545.5,393.4,direct
+Rajasthan,RJ,2017,1,263.3,248.1,direct
+Rajasthan,RJ,2017,2,267.9,249,direct
+Rajasthan,RJ,2017,3,273.8,274.5,direct
+Rajasthan,RJ,2017,4,269.9,255.5,direct
+Rajasthan,RJ,2017,5,259.9,244.8,direct
+Rajasthan,RJ,2017,6,267.5,259.8,direct
+Rajasthan,RJ,2017,7,271,231.2,direct
+Rajasthan,RJ,2017,8,271.1,234.7,direct
+Rajasthan,RJ,2017,9,270.5,238.6,direct
+Rajasthan,RJ,2017,10,267,232,direct
+Rajasthan,RJ,2017,11,273.1,224.1,direct
+Rajasthan,RJ,2017,12,273.8,224.8,direct
+Rajasthan,RJ,2018,1,262,223.1,direct
+Rajasthan,RJ,2018,2,270,234.9,direct
+Rajasthan,RJ,2018,3,267.9,234.8,direct
+Rajasthan,RJ,2018,4,275.4,242.6,direct
+Rajasthan,RJ,2018,5,289.9,251.5,direct
+Rajasthan,RJ,2018,6,287.8,247.8,direct
+Rajasthan,RJ,2018,7,295.1,249.6,direct
+Rajasthan,RJ,2018,8,295.2,250.3,direct
+Rajasthan,RJ,2018,9,288.5,244,direct
+Rajasthan,RJ,2018,10,290.1,242.9,direct
+Rajasthan,RJ,2018,11,293.4,240.6,direct
+Rajasthan,RJ,2018,12,287.5,239.3,direct
+Rajasthan,RJ,2019,1,281.7,240.8,direct
+Rajasthan,RJ,2019,2,281,239.7,direct
+Rajasthan,RJ,2019,3,284.6,244.9,direct
+Rajasthan,RJ,2019,4,283.6,245,direct
+Rajasthan,RJ,2019,5,290.1,236.9,direct
+Rajasthan,RJ,2019,6,291.6,243.7,direct
+Rajasthan,RJ,2019,7,295.6,253,direct
+Rajasthan,RJ,2019,8,285.7,238.2,direct
+Rajasthan,RJ,2019,9,287,238.7,direct
+Rajasthan,RJ,2019,10,296.7,254,direct
+Rajasthan,RJ,2019,11,299.6,251.1,direct
+Rajasthan,RJ,2019,12,299.6,252.3,direct
+Rajasthan,RJ,2020,1,299.6,254.8,direct
+Rajasthan,RJ,2020,2,299.8,253.7,direct
+Rajasthan,RJ,2020,3,293.6,252.2,direct
+Rajasthan,RJ,2020,5,,,direct
+Rajasthan,RJ,2020,6,322.7,288.7,direct
+Rajasthan,RJ,2020,7,324.4,285.5,direct
+Rajasthan,RJ,2020,8,310.5,280.4,direct
+Rajasthan,RJ,2020,9,310.4,289.6,direct
+Rajasthan,RJ,2020,10,309.9,288.8,direct
+Rajasthan,RJ,2020,11,315.2,285.6,direct
+Rajasthan,RJ,2020,12,311.1,280.8,direct
+Rajasthan,RJ,2021,1,319.5,286.4,direct
+Rajasthan,RJ,2021,2,319.5,285.9,direct
+Rajasthan,RJ,2021,3,326.3,288.9,direct
+Rajasthan,RJ,2021,4,327.1,316.7,direct
+Rajasthan,RJ,2021,5,331,309.7,direct
+Rajasthan,RJ,2021,6,331.5,304,direct
+Rajasthan,RJ,2021,7,328.2,303.5,direct
+Rajasthan,RJ,2021,8,338.7,317,direct
+Rajasthan,RJ,2021,9,336.6,315.3,direct
+Rajasthan,RJ,2021,10,344.6,316,direct
+Rajasthan,RJ,2021,11,347.4,335.6,direct
+Rajasthan,RJ,2021,12,347,332.5,direct
+Rajasthan,RJ,2022,1,339.3,318.3,direct
+Rajasthan,RJ,2022,2,343.2,319.7,direct
+Rajasthan,RJ,2022,3,337.2,321.4,direct
+Rajasthan,RJ,2022,4,337.2,324,direct
+Rajasthan,RJ,2022,5,338,324,direct
+Rajasthan,RJ,2022,6,343.2,322.3,direct
+Rajasthan,RJ,2022,7,345.5,303.8,direct
+Rajasthan,RJ,2022,8,347.6,304.4,direct
+Rajasthan,RJ,2022,9,350,312.6,direct
+Rajasthan,RJ,2022,10,349,311.1,direct
+Rajasthan,RJ,2022,11,353.4,328.2,direct
+Rajasthan,RJ,2022,12,354.8,329.7,direct
+Rajasthan,RJ,2023,1,356.6,331.1,direct
+Rajasthan,RJ,2023,2,358.5,332.2,direct
+Rajasthan,RJ,2023,3,359.9,333.4,direct
+Rajasthan,RJ,2023,4,360.5,335.1,direct
+Rajasthan,RJ,2023,5,365.3,339.5,direct
+Rajasthan,RJ,2023,6,367.1,343.1,direct
+Rajasthan,RJ,2023,7,374.9,352.4,direct
+Rajasthan,RJ,2023,8,377,354.8,direct
+Rajasthan,RJ,2023,9,378.4,355.9,direct
+Rajasthan,RJ,2023,10,381,359.3,direct
+Rajasthan,RJ,2023,11,382,359.3,direct
+Rajasthan,RJ,2023,12,384.8,361.5,direct
+Rajasthan,RJ,2024,1,390,366.6,direct
+Rajasthan,RJ,2024,2,395.3,376,direct
+Rajasthan,RJ,2024,3,398.4,383.5,direct
+Rajasthan,RJ,2024,4,398.4,383.5,direct
+Rajasthan,RJ,2024,5,400.5,389.5,direct
+Rajasthan,RJ,2024,6,400.5,389.5,direct
+Rajasthan,RJ,2024,7,403.4,380.1,direct
+Rajasthan,RJ,2024,8,406.1,382.2,direct
+Rajasthan,RJ,2024,9,410.4,385,direct
+Rajasthan,RJ,2024,10,412.9,389.3,direct
+Rajasthan,RJ,2024,11,416.1,390,direct
+Rajasthan,RJ,2024,12,419.7,393.1,direct
+Rajasthan,RJ,2025,1,421.9,393.1,direct
+Rajasthan,RJ,2025,2,423.6,394.9,direct
+Rajasthan,RJ,2025,3,426.1,396.3,direct
+Rajasthan,RJ,2025,4,431,399.5,direct
+Rajasthan,RJ,2025,5,434.6,402.6,direct
+Rajasthan,RJ,2025,6,437.8,402.6,direct
+Rajasthan,RJ,2025,7,451.1,396.6,direct
+Rajasthan,RJ,2025,8,444.9,395.3,direct
+Rajasthan,RJ,2025,9,455.4,400.3,direct
+Rajasthan,RJ,2025,10,452.9,393.1,direct
+Rajasthan,RJ,2025,11,453.3,392.9,direct
+Rajasthan,RJ,2025,12,878.8,685,direct
+Tamil Nadu,TN,2017,1,409.1,204.7,direct
+Tamil Nadu,TN,2017,2,409.1,204.9,direct
+Tamil Nadu,TN,2017,3,409.1,203.8,direct
+Tamil Nadu,TN,2017,4,409.1,203.8,direct
+Tamil Nadu,TN,2017,5,409.1,203.7,direct
+Tamil Nadu,TN,2017,6,409,203.4,direct
+Tamil Nadu,TN,2017,7,411.4,206.1,direct
+Tamil Nadu,TN,2017,8,410.1,205.3,direct
+Tamil Nadu,TN,2017,9,411.4,204.9,direct
+Tamil Nadu,TN,2017,10,411.4,206.8,direct
+Tamil Nadu,TN,2017,11,411.8,208,direct
+Tamil Nadu,TN,2017,12,411.8,210.3,direct
+Tamil Nadu,TN,2018,1,415.1,208.6,direct
+Tamil Nadu,TN,2018,2,422.5,213.7,direct
+Tamil Nadu,TN,2018,3,423.1,214,direct
+Tamil Nadu,TN,2018,4,423.5,214.5,direct
+Tamil Nadu,TN,2018,5,423.5,214.5,direct
+Tamil Nadu,TN,2018,6,421.7,218.9,direct
+Tamil Nadu,TN,2018,7,421.7,216.6,direct
+Tamil Nadu,TN,2018,8,424.8,217.6,direct
+Tamil Nadu,TN,2018,9,426,216.2,direct
+Tamil Nadu,TN,2018,10,451,220.4,direct
+Tamil Nadu,TN,2018,11,451,220.4,direct
+Tamil Nadu,TN,2018,12,455.9,230.1,direct
+Tamil Nadu,TN,2019,1,455.9,230.1,direct
+Tamil Nadu,TN,2019,2,462.6,236.6,direct
+Tamil Nadu,TN,2019,3,465.2,238.3,direct
+Tamil Nadu,TN,2019,4,465,238.3,direct
+Tamil Nadu,TN,2019,5,468.5,241,direct
+Tamil Nadu,TN,2019,6,467.1,241.3,direct
+Tamil Nadu,TN,2019,7,478.3,245.3,direct
+Tamil Nadu,TN,2019,8,483.1,245.3,direct
+Tamil Nadu,TN,2019,9,483.5,248,direct
+Tamil Nadu,TN,2019,10,481.7,245.4,direct
+Tamil Nadu,TN,2019,11,484.8,246,direct
+Tamil Nadu,TN,2019,12,485.3,246,direct
+Tamil Nadu,TN,2020,1,486.9,250.9,direct
+Tamil Nadu,TN,2020,2,492.2,251.9,direct
+Tamil Nadu,TN,2020,3,494.8,253,direct
+Tamil Nadu,TN,2020,5,,,direct
+Tamil Nadu,TN,2020,6,502.7,262.5,direct
+Tamil Nadu,TN,2020,7,509.7,280.8,direct
+Tamil Nadu,TN,2020,8,510,280.8,direct
+Tamil Nadu,TN,2020,9,512.3,283.9,direct
+Tamil Nadu,TN,2020,10,512.3,283.9,direct
+Tamil Nadu,TN,2020,11,520.3,290.6,direct
+Tamil Nadu,TN,2020,12,522.4,293.5,direct
+Tamil Nadu,TN,2021,1,531.6,295.8,direct
+Tamil Nadu,TN,2021,2,532.5,297.6,direct
+Tamil Nadu,TN,2021,3,537.1,302.3,direct
+Tamil Nadu,TN,2021,4,537.1,302.6,direct
+Tamil Nadu,TN,2021,5,537.1,302.6,direct
+Tamil Nadu,TN,2021,6,536.8,301.4,direct
+Tamil Nadu,TN,2021,7,535.2,302.8,direct
+Tamil Nadu,TN,2021,8,539.3,303.5,direct
+Tamil Nadu,TN,2021,9,539,303.5,direct
+Tamil Nadu,TN,2021,10,541,302.4,direct
+Tamil Nadu,TN,2021,11,540,301.7,direct
+Tamil Nadu,TN,2021,12,540,303.7,direct
+Tamil Nadu,TN,2022,1,541.6,303.2,direct
+Tamil Nadu,TN,2022,2,546.9,308.1,direct
+Tamil Nadu,TN,2022,3,546.9,309.3,direct
+Tamil Nadu,TN,2022,4,547.6,309.3,direct
+Tamil Nadu,TN,2022,5,549,311.3,direct
+Tamil Nadu,TN,2022,6,551.3,313.3,direct
+Tamil Nadu,TN,2022,7,548,315.9,direct
+Tamil Nadu,TN,2022,8,548.3,318.9,direct
+Tamil Nadu,TN,2022,9,558.3,318.9,direct
+Tamil Nadu,TN,2022,10,559.5,318.9,direct
+Tamil Nadu,TN,2022,11,561.7,321.9,direct
+Tamil Nadu,TN,2022,12,562.8,322.8,direct
+Tamil Nadu,TN,2023,1,565,320.8,direct
+Tamil Nadu,TN,2023,2,566.7,322.9,direct
+Tamil Nadu,TN,2023,3,567.8,322.9,direct
+Tamil Nadu,TN,2023,4,579.1,327.8,direct
+Tamil Nadu,TN,2023,5,588.5,335.3,direct
+Tamil Nadu,TN,2023,6,593.2,338.9,direct
+Tamil Nadu,TN,2023,7,600.5,345.8,direct
+Tamil Nadu,TN,2023,8,603.6,347.1,direct
+Tamil Nadu,TN,2023,9,604.9,351.2,direct
+Tamil Nadu,TN,2023,10,610.6,356,direct
+Tamil Nadu,TN,2023,11,610.6,359.4,direct
+Tamil Nadu,TN,2023,12,612.1,361.7,direct
+Tamil Nadu,TN,2024,1,613.5,362.6,direct
+Tamil Nadu,TN,2024,2,614.6,364.6,direct
+Tamil Nadu,TN,2024,3,619.4,354.4,direct
+Tamil Nadu,TN,2024,4,619.4,354.4,direct
+Tamil Nadu,TN,2024,5,619.9,355.3,direct
+Tamil Nadu,TN,2024,6,619.9,355.6,direct
+Tamil Nadu,TN,2024,7,624.4,357.6,direct
+Tamil Nadu,TN,2024,8,628,364.8,direct
+Tamil Nadu,TN,2024,9,633.6,371.1,direct
+Tamil Nadu,TN,2024,10,637.6,373.7,direct
+Tamil Nadu,TN,2024,11,639.6,374.4,direct
+Tamil Nadu,TN,2024,12,641.8,376.4,direct
+Tamil Nadu,TN,2025,1,646.5,377.4,direct
+Tamil Nadu,TN,2025,2,648.1,378.9,direct
+Tamil Nadu,TN,2025,3,648.8,378.9,direct
+Tamil Nadu,TN,2025,4,649.9,380.6,direct
+Tamil Nadu,TN,2025,5,652.1,382.4,direct
+Tamil Nadu,TN,2025,6,654.8,387.6,direct
+Tamil Nadu,TN,2025,7,720.1,430.4,direct
+Tamil Nadu,TN,2025,8,720.1,430.4,direct
+Tamil Nadu,TN,2025,9,725,435.3,direct
+Tamil Nadu,TN,2025,10,727.7,436.3,direct
+Tamil Nadu,TN,2025,11,730.5,436,direct
+Tamil Nadu,TN,2025,12,653.8,,direct
+Telangana,TL,2017,1,286.1,189.6,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2017,2,283,193.4,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2017,3,284.7,199,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2017,4,278,202,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2017,5,277.9,201.1,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2017,6,271.4,197.5,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2017,7,274.2,199.2,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2017,8,270.8,200.4,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2017,9,276.9,204.5,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2017,10,280.3,201.6,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2017,11,281.4,197.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2017,12,284.8,202.7,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2018,1,291.9,204.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2018,2,293.2,209.5,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2018,3,297.9,207.4,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2018,4,298.9,207.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2018,5,301.4,210.2,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2018,6,290.8,208.6,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2018,7,297.2,214.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2018,8,304.7,216.5,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2018,9,304.8,217,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2018,10,302.4,220,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2018,11,299.3,216.8,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2018,12,301.9,218,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2019,1,306.6,222.6,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2019,2,309.2,229.3,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2019,3,314.7,226.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2019,4,314.3,225.1,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2019,5,324.3,229.7,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2019,6,321.4,229.8,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2019,7,323.5,231.6,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2019,8,326.4,227.7,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2019,9,331.1,229.2,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2019,10,332,221.2,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2019,11,327.5,232.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2019,12,341.5,232.5,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2020,1,336.9,241.2,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2020,2,337.6,244.4,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2020,3,336.4,246.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2020,5,,,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2020,6,335.4,251.4,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2020,7,342.2,255.4,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2020,8,341.1,249.8,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2020,9,343.8,251.8,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2020,10,343.2,251.3,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2020,11,347.1,260.6,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2020,12,351.2,266.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2021,1,355,265.2,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2021,2,358.3,271.4,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2021,3,354.6,274.6,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2021,4,362.7,275.3,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2021,5,357.8,275.8,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2021,6,357.4,275.4,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2021,7,359.5,278.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2021,8,360.6,281.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2021,9,364.5,276.6,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2021,10,370.2,279.1,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2021,11,376.7,281,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2021,12,380.6,286.7,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2022,1,377,287.8,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2022,2,387.8,290.3,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2022,3,401.3,296.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2022,4,406.5,299.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2022,5,404.3,298.2,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2022,6,409.4,303.7,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2022,7,415.2,318.3,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2022,8,417.9,309.8,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2022,9,421.1,312.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2022,10,426.2,315.3,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2022,11,430.6,316.1,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2022,12,431.9,318.7,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2023,1,431.9,319.3,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2023,2,438.2,324.1,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2023,3,441.9,325.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2023,4,446.6,329.8,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2023,5,453.5,335.5,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2023,6,457.1,338.1,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2023,7,463.4,344.1,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2023,8,467.3,344.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2023,9,479.8,346.4,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2023,10,481.5,347.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2023,11,484.5,350.8,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2023,12,476,352.2,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2024,1,480,355.5,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2024,2,481.4,357.3,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2024,3,500.6,362.1,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2024,4,500.6,362.1,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2024,5,504.1,363.5,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2024,6,507.1,364.4,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2024,7,514.7,366.7,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2024,8,519,367.9,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2024,9,520.8,368.6,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2024,10,522.6,369.1,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2024,11,524.7,371.1,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2024,12,525.9,373.6,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2025,1,527.5,374.6,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2025,2,528.8,377.1,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2025,3,531.6,379.2,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2025,4,533,379.7,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2025,5,535.4,379.8,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2025,6,539.3,382.2,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2025,7,646.5,438.3,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2025,8,653.8,443.5,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2025,9,654.1,443.2,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2025,10,658.8,431.6,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2025,11,636.4,433,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Telangana,TL,2025,12,756.2,777.8,Andhra Pradesh (parent-state proxy (split Jun-2014))
+Tripura,TR,2017,1,286.7,,direct
+Tripura,TR,2017,2,286.7,,direct
+Tripura,TR,2017,3,286.7,,direct
+Tripura,TR,2017,4,286.7,,direct
+Tripura,TR,2017,5,286.7,,direct
+Tripura,TR,2017,6,286.7,,direct
+Tripura,TR,2017,7,286.7,,direct
+Tripura,TR,2017,8,286.7,,direct
+Tripura,TR,2017,9,286.7,,direct
+Tripura,TR,2017,10,286.7,,direct
+Tripura,TR,2017,11,286.7,,direct
+Tripura,TR,2017,12,286.7,,direct
+Tripura,TR,2018,1,286.7,,direct
+Tripura,TR,2018,2,286.7,,direct
+Tripura,TR,2018,3,286.7,,direct
+Tripura,TR,2018,4,286.7,,direct
+Tripura,TR,2018,5,286.7,,direct
+Tripura,TR,2018,6,286.7,,direct
+Tripura,TR,2018,7,286.7,,direct
+Tripura,TR,2018,8,286.7,,direct
+Tripura,TR,2018,9,286.7,,direct
+Tripura,TR,2018,10,286.7,,direct
+Tripura,TR,2018,11,286.7,,direct
+Tripura,TR,2018,12,286.7,,direct
+Tripura,TR,2019,1,286.7,,direct
+Tripura,TR,2019,2,286.7,,direct
+Tripura,TR,2019,3,286.7,,direct
+Tripura,TR,2019,4,286.7,,direct
+Tripura,TR,2019,5,286.7,,direct
+Tripura,TR,2019,6,286.7,,direct
+Tripura,TR,2019,7,286.7,,direct
+Tripura,TR,2019,8,286.7,,direct
+Tripura,TR,2019,9,286.7,,direct
+Tripura,TR,2019,10,286.7,,direct
+Tripura,TR,2019,11,286.7,,direct
+Tripura,TR,2019,12,286.7,,direct
+Tripura,TR,2020,1,286.7,,direct
+Tripura,TR,2020,2,286.7,,direct
+Tripura,TR,2020,3,286.7,,direct
+Tripura,TR,2020,5,,,direct
+Tripura,TR,2020,6,,,direct
+Tripura,TR,2020,7,286.7,,direct
+Tripura,TR,2020,8,286.7,,direct
+Tripura,TR,2020,9,286.7,,direct
+Tripura,TR,2020,10,286.7,,direct
+Tripura,TR,2020,11,286.7,,direct
+Tripura,TR,2020,12,286.7,,direct
+Tripura,TR,2021,1,286.7,,direct
+Tripura,TR,2021,2,286.7,,direct
+Tripura,TR,2021,3,286.7,,direct
+Tripura,TR,2021,4,286.7,,direct
+Tripura,TR,2021,5,286.7,,direct
+Tripura,TR,2021,6,286.7,,direct
+Tripura,TR,2021,7,286.7,,direct
+Tripura,TR,2021,8,286.7,,direct
+Tripura,TR,2021,9,286.7,,direct
+Tripura,TR,2021,10,286.7,,direct
+Tripura,TR,2021,11,286.7,,direct
+Tripura,TR,2021,12,286.7,,direct
+Tripura,TR,2022,1,286.7,,direct
+Tripura,TR,2022,2,286.7,,direct
+Tripura,TR,2022,3,286.7,,direct
+Tripura,TR,2022,4,286.7,,direct
+Tripura,TR,2022,5,286.7,,direct
+Tripura,TR,2022,6,286.7,,direct
+Tripura,TR,2022,7,286.7,,direct
+Tripura,TR,2022,8,286.7,,direct
+Tripura,TR,2022,9,286.7,,direct
+Tripura,TR,2022,10,336,,direct
+Tripura,TR,2022,11,336,,direct
+Tripura,TR,2022,12,336,,direct
+Tripura,TR,2023,1,336,,direct
+Tripura,TR,2023,2,336,,direct
+Tripura,TR,2023,3,336,,direct
+Tripura,TR,2023,4,336,,direct
+Tripura,TR,2023,5,336,,direct
+Tripura,TR,2023,6,336,,direct
+Tripura,TR,2023,7,336,,direct
+Tripura,TR,2023,8,336,,direct
+Tripura,TR,2023,9,336,,direct
+Tripura,TR,2023,10,336,,direct
+Tripura,TR,2023,11,336,,direct
+Tripura,TR,2023,12,336,,direct
+Tripura,TR,2024,1,336,,direct
+Tripura,TR,2024,2,336,,direct
+Tripura,TR,2024,3,336,,direct
+Tripura,TR,2024,4,336,,direct
+Tripura,TR,2024,5,336,,direct
+Tripura,TR,2024,6,336,,direct
+Tripura,TR,2024,7,336,,direct
+Tripura,TR,2024,8,415.7,,direct
+Tripura,TR,2024,9,415.7,,direct
+Tripura,TR,2024,10,415.7,,direct
+Tripura,TR,2024,11,415.7,,direct
+Tripura,TR,2024,12,415.7,,direct
+Tripura,TR,2025,1,415.7,,direct
+Tripura,TR,2025,2,415.7,,direct
+Tripura,TR,2025,3,415.7,,direct
+Tripura,TR,2025,4,415.7,,direct
+Tripura,TR,2025,5,415.7,,direct
+Tripura,TR,2025,6,415.7,,direct
+Tripura,TR,2025,7,492.1,,direct
+Tripura,TR,2025,8,492.6,,direct
+Tripura,TR,2025,9,492.6,,direct
+Tripura,TR,2025,10,492.6,,direct
+Tripura,TR,2025,11,494,,direct
+Tripura,TR,2025,12,353.4,296,direct
+Uttar Pradesh,UP,2017,1,247.5,185.2,direct
+Uttar Pradesh,UP,2017,2,247.8,189,direct
+Uttar Pradesh,UP,2017,3,242.7,194.5,direct
+Uttar Pradesh,UP,2017,4,243.1,195.2,direct
+Uttar Pradesh,UP,2017,5,244.5,196.3,direct
+Uttar Pradesh,UP,2017,6,244,192.6,direct
+Uttar Pradesh,UP,2017,7,249,198.7,direct
+Uttar Pradesh,UP,2017,8,251,205.6,direct
+Uttar Pradesh,UP,2017,9,254.4,209.3,direct
+Uttar Pradesh,UP,2017,10,252.4,201,direct
+Uttar Pradesh,UP,2017,11,252.5,201.2,direct
+Uttar Pradesh,UP,2017,12,252.6,202.7,direct
+Uttar Pradesh,UP,2018,1,254,203.1,direct
+Uttar Pradesh,UP,2018,2,253.7,203,direct
+Uttar Pradesh,UP,2018,3,252.8,202.4,direct
+Uttar Pradesh,UP,2018,4,252.7,202.5,direct
+Uttar Pradesh,UP,2018,5,253.7,204.3,direct
+Uttar Pradesh,UP,2018,6,258.1,207,direct
+Uttar Pradesh,UP,2018,7,267.4,216.3,direct
+Uttar Pradesh,UP,2018,8,274.2,217.8,direct
+Uttar Pradesh,UP,2018,9,274,218.4,direct
+Uttar Pradesh,UP,2018,10,273.8,220.8,direct
+Uttar Pradesh,UP,2018,11,273.4,219.6,direct
+Uttar Pradesh,UP,2018,12,274.1,221.2,direct
+Uttar Pradesh,UP,2019,1,274.8,220.9,direct
+Uttar Pradesh,UP,2019,2,275.5,223.7,direct
+Uttar Pradesh,UP,2019,3,275.5,222.6,direct
+Uttar Pradesh,UP,2019,4,276,222.6,direct
+Uttar Pradesh,UP,2019,5,278.1,224.9,direct
+Uttar Pradesh,UP,2019,6,278.7,225,direct
+Uttar Pradesh,UP,2019,7,278.3,224,direct
+Uttar Pradesh,UP,2019,8,276.9,224.5,direct
+Uttar Pradesh,UP,2019,9,278.3,226.1,direct
+Uttar Pradesh,UP,2019,10,279,223,direct
+Uttar Pradesh,UP,2019,11,281.2,221.4,direct
+Uttar Pradesh,UP,2019,12,282.1,224.1,direct
+Uttar Pradesh,UP,2020,1,285,231.5,direct
+Uttar Pradesh,UP,2020,2,284.3,230,direct
+Uttar Pradesh,UP,2020,3,284.6,230.4,direct
+Uttar Pradesh,UP,2020,5,,,direct
+Uttar Pradesh,UP,2020,6,284,243.4,direct
+Uttar Pradesh,UP,2020,7,284.5,233.7,direct
+Uttar Pradesh,UP,2020,8,284.5,233.7,direct
+Uttar Pradesh,UP,2020,9,285.6,234.1,direct
+Uttar Pradesh,UP,2020,10,286,233.9,direct
+Uttar Pradesh,UP,2020,11,287.3,236.9,direct
+Uttar Pradesh,UP,2020,12,287.1,236.8,direct
+Uttar Pradesh,UP,2021,1,286.5,236.4,direct
+Uttar Pradesh,UP,2021,2,290.8,237.1,direct
+Uttar Pradesh,UP,2021,3,292.5,239.1,direct
+Uttar Pradesh,UP,2021,4,293.2,239.2,direct
+Uttar Pradesh,UP,2021,5,292.7,240.4,direct
+Uttar Pradesh,UP,2021,6,295.4,242.6,direct
+Uttar Pradesh,UP,2021,7,299.1,246.7,direct
+Uttar Pradesh,UP,2021,8,300.4,248.2,direct
+Uttar Pradesh,UP,2021,9,301.2,248.7,direct
+Uttar Pradesh,UP,2021,10,300.7,247.2,direct
+Uttar Pradesh,UP,2021,11,301.5,250.6,direct
+Uttar Pradesh,UP,2021,12,305.5,251.8,direct
+Uttar Pradesh,UP,2022,1,309,250.8,direct
+Uttar Pradesh,UP,2022,2,314,259.7,direct
+Uttar Pradesh,UP,2022,3,319.8,265.9,direct
+Uttar Pradesh,UP,2022,4,321.9,268.8,direct
+Uttar Pradesh,UP,2022,5,322.9,268.9,direct
+Uttar Pradesh,UP,2022,6,323.3,268.9,direct
+Uttar Pradesh,UP,2022,7,325,267.9,direct
+Uttar Pradesh,UP,2022,8,328.5,272.1,direct
+Uttar Pradesh,UP,2022,9,328.4,271.9,direct
+Uttar Pradesh,UP,2022,10,330.9,275.2,direct
+Uttar Pradesh,UP,2022,11,332,277.6,direct
+Uttar Pradesh,UP,2022,12,334.7,280.4,direct
+Uttar Pradesh,UP,2023,1,336.6,281.4,direct
+Uttar Pradesh,UP,2023,2,337,283.2,direct
+Uttar Pradesh,UP,2023,3,338.7,284.9,direct
+Uttar Pradesh,UP,2023,4,340.5,286.9,direct
+Uttar Pradesh,UP,2023,5,341.2,287.6,direct
+Uttar Pradesh,UP,2023,6,343.6,290.4,direct
+Uttar Pradesh,UP,2023,7,344.4,292.5,direct
+Uttar Pradesh,UP,2023,8,345.5,292.9,direct
+Uttar Pradesh,UP,2023,9,346.7,295.3,direct
+Uttar Pradesh,UP,2023,10,348.3,297.9,direct
+Uttar Pradesh,UP,2023,11,348.5,300.2,direct
+Uttar Pradesh,UP,2023,12,350.3,300.9,direct
+Uttar Pradesh,UP,2024,1,351.8,302.4,direct
+Uttar Pradesh,UP,2024,2,352,302.5,direct
+Uttar Pradesh,UP,2024,3,356.3,307.9,direct
+Uttar Pradesh,UP,2024,4,356.3,307.9,direct
+Uttar Pradesh,UP,2024,5,358.2,310.4,direct
+Uttar Pradesh,UP,2024,6,358.2,310.4,direct
+Uttar Pradesh,UP,2024,7,360.9,312.7,direct
+Uttar Pradesh,UP,2024,8,361.4,313.4,direct
+Uttar Pradesh,UP,2024,9,363,313.4,direct
+Uttar Pradesh,UP,2024,10,364,314.5,direct
+Uttar Pradesh,UP,2024,11,365.3,316.5,direct
+Uttar Pradesh,UP,2024,12,366.5,319.1,direct
+Uttar Pradesh,UP,2025,1,369.2,321.2,direct
+Uttar Pradesh,UP,2025,2,370.4,321.4,direct
+Uttar Pradesh,UP,2025,3,370.9,321.5,direct
+Uttar Pradesh,UP,2025,4,372,324.3,direct
+Uttar Pradesh,UP,2025,5,373.1,325.7,direct
+Uttar Pradesh,UP,2025,6,373.4,325.8,direct
+Uttar Pradesh,UP,2025,7,439.1,362.5,direct
+Uttar Pradesh,UP,2025,8,432.8,354.8,direct
+Uttar Pradesh,UP,2025,9,432.8,354.8,direct
+Uttar Pradesh,UP,2025,10,435.3,354.5,direct
+Uttar Pradesh,UP,2025,11,435.7,354.9,direct
+Uttar Pradesh,UP,2025,12,418.9,308.5,direct
+Uttarakhand,UC,2017,1,247.5,185.2,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2017,2,247.8,189,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2017,3,242.7,194.5,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2017,4,243.1,195.2,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2017,5,244.5,196.3,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2017,6,244,192.6,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2017,7,249,198.7,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2017,8,251,205.6,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2017,9,254.4,209.3,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2017,10,252.4,201,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2017,11,252.5,201.2,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2017,12,252.6,202.7,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2018,1,254,203.1,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2018,2,253.7,203,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2018,3,252.8,202.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2018,4,252.7,202.5,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2018,5,253.7,204.3,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2018,6,258.1,207,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2018,7,267.4,216.3,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2018,8,274.2,217.8,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2018,9,274,218.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2018,10,273.8,220.8,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2018,11,273.4,219.6,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2018,12,274.1,221.2,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2019,1,274.8,220.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2019,2,275.5,223.7,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2019,3,275.5,222.6,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2019,4,276,222.6,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2019,5,278.1,224.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2019,6,278.7,225,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2019,7,278.3,224,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2019,8,276.9,224.5,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2019,9,278.3,226.1,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2019,10,279,223,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2019,11,281.2,221.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2019,12,282.1,224.1,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2020,1,285,231.5,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2020,2,284.3,230,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2020,3,284.6,230.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2020,5,,,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2020,6,284,243.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2020,7,284.5,233.7,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2020,8,284.5,233.7,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2020,9,285.6,234.1,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2020,10,286,233.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2020,11,287.3,236.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2020,12,287.1,236.8,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2021,1,286.5,236.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2021,2,290.8,237.1,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2021,3,292.5,239.1,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2021,4,293.2,239.2,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2021,5,292.7,240.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2021,6,295.4,242.6,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2021,7,299.1,246.7,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2021,8,300.4,248.2,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2021,9,301.2,248.7,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2021,10,300.7,247.2,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2021,11,301.5,250.6,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2021,12,305.5,251.8,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2022,1,309,250.8,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2022,2,314,259.7,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2022,3,319.8,265.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2022,4,321.9,268.8,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2022,5,322.9,268.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2022,6,323.3,268.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2022,7,325,267.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2022,8,328.5,272.1,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2022,9,328.4,271.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2022,10,330.9,275.2,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2022,11,332,277.6,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2022,12,334.7,280.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2023,1,336.6,281.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2023,2,337,283.2,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2023,3,338.7,284.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2023,4,340.5,286.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2023,5,341.2,287.6,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2023,6,343.6,290.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2023,7,344.4,292.5,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2023,8,345.5,292.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2023,9,346.7,295.3,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2023,10,348.3,297.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2023,11,348.5,300.2,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2023,12,350.3,300.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2024,1,351.8,302.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2024,2,352,302.5,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2024,3,356.3,307.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2024,4,356.3,307.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2024,5,358.2,310.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2024,6,358.2,310.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2024,7,360.9,312.7,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2024,8,361.4,313.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2024,9,363,313.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2024,10,364,314.5,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2024,11,365.3,316.5,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2024,12,366.5,319.1,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2025,1,369.2,321.2,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2025,2,370.4,321.4,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2025,3,370.9,321.5,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2025,4,372,324.3,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2025,5,373.1,325.7,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2025,6,373.4,325.8,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2025,7,439.1,362.5,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2025,8,432.8,354.8,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2025,9,432.8,354.8,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2025,10,435.3,354.5,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2025,11,435.7,354.9,Uttar Pradesh (parent-state proxy (split Nov-2000))
+Uttarakhand,UC,2025,12,418.9,308.5,Uttar Pradesh (parent-state proxy (split Nov-2000))
+West Bengal,WB,2017,1,292.8,227.3,direct
+West Bengal,WB,2017,2,293.4,227.3,direct
+West Bengal,WB,2017,3,293.8,227.2,direct
+West Bengal,WB,2017,4,293.8,227.2,direct
+West Bengal,WB,2017,5,294,228.6,direct
+West Bengal,WB,2017,6,294.9,228.6,direct
+West Bengal,WB,2017,7,297.2,232.7,direct
+West Bengal,WB,2017,8,300.1,233.6,direct
+West Bengal,WB,2017,9,301,234.3,direct
+West Bengal,WB,2017,10,302.7,237.9,direct
+West Bengal,WB,2017,11,305.8,242.9,direct
+West Bengal,WB,2017,12,306.4,242.9,direct
+West Bengal,WB,2018,1,306.2,243.8,direct
+West Bengal,WB,2018,2,307.1,245,direct
+West Bengal,WB,2018,3,310.6,246.2,direct
+West Bengal,WB,2018,4,310.1,245.2,direct
+West Bengal,WB,2018,5,309.4,245.2,direct
+West Bengal,WB,2018,6,310.1,246.6,direct
+West Bengal,WB,2018,7,310.8,246.1,direct
+West Bengal,WB,2018,8,310.1,244,direct
+West Bengal,WB,2018,9,310.4,246.8,direct
+West Bengal,WB,2018,10,312.2,247.2,direct
+West Bengal,WB,2018,11,312.7,248.2,direct
+West Bengal,WB,2018,12,313.2,248.9,direct
+West Bengal,WB,2019,1,315.2,249,direct
+West Bengal,WB,2019,2,315.8,249.9,direct
+West Bengal,WB,2019,3,317.8,250.6,direct
+West Bengal,WB,2019,4,317.9,250.6,direct
+West Bengal,WB,2019,5,318.1,249.9,direct
+West Bengal,WB,2019,6,320.1,251,direct
+West Bengal,WB,2019,7,319.4,252.5,direct
+West Bengal,WB,2019,8,320.3,253.8,direct
+West Bengal,WB,2019,9,321.2,254,direct
+West Bengal,WB,2019,10,321.8,253.5,direct
+West Bengal,WB,2019,11,322.4,252.8,direct
+West Bengal,WB,2019,12,323.4,273.4,direct
+West Bengal,WB,2020,1,324.8,273.5,direct
+West Bengal,WB,2020,2,326.3,273.5,direct
+West Bengal,WB,2020,3,326.3,273.5,direct
+West Bengal,WB,2020,5,,,direct
+West Bengal,WB,2020,6,308.2,256.2,direct
+West Bengal,WB,2020,7,365.2,284.4,direct
+West Bengal,WB,2020,8,334.2,277.6,direct
+West Bengal,WB,2020,9,331.8,276.1,direct
+West Bengal,WB,2020,10,334.9,276.6,direct
+West Bengal,WB,2020,11,336.6,277.6,direct
+West Bengal,WB,2020,12,341.3,282.5,direct
+West Bengal,WB,2021,1,342,283.1,direct
+West Bengal,WB,2021,2,348.2,286,direct
+West Bengal,WB,2021,3,350.9,288.5,direct
+West Bengal,WB,2021,4,350.9,288.1,direct
+West Bengal,WB,2021,5,351.7,288.9,direct
+West Bengal,WB,2021,6,351.7,284.7,direct
+West Bengal,WB,2021,7,353.6,285.9,direct
+West Bengal,WB,2021,8,355.3,286.5,direct
+West Bengal,WB,2021,9,354.6,277.6,direct
+West Bengal,WB,2021,10,355.2,277.7,direct
+West Bengal,WB,2021,11,355.2,277.3,direct
+West Bengal,WB,2021,12,357,277.6,direct
+West Bengal,WB,2022,1,357.9,278.2,direct
+West Bengal,WB,2022,2,357.5,278.2,direct
+West Bengal,WB,2022,3,359.4,278.2,direct
+West Bengal,WB,2022,4,360.7,279.9,direct
+West Bengal,WB,2022,5,361.8,279.8,direct
+West Bengal,WB,2022,6,362.9,280.7,direct
+West Bengal,WB,2022,7,368.9,283.2,direct
+West Bengal,WB,2022,8,370.7,283.2,direct
+West Bengal,WB,2022,9,370.7,283.2,direct
+West Bengal,WB,2022,10,370.7,283.2,direct
+West Bengal,WB,2022,11,370.7,283.2,direct
+West Bengal,WB,2022,12,371.6,284.4,direct
+West Bengal,WB,2023,1,372.2,288.3,direct
+West Bengal,WB,2023,2,374.9,289.5,direct
+West Bengal,WB,2023,3,376.4,289.5,direct
+West Bengal,WB,2023,4,378.3,290.3,direct
+West Bengal,WB,2023,5,380.2,291,direct
+West Bengal,WB,2023,6,382.6,291,direct
+West Bengal,WB,2023,7,383.2,292.1,direct
+West Bengal,WB,2023,8,383.2,292.2,direct
+West Bengal,WB,2023,9,383.2,292.2,direct
+West Bengal,WB,2023,10,385.8,306.5,direct
+West Bengal,WB,2023,11,386.3,306.5,direct
+West Bengal,WB,2023,12,389,299.9,direct
+West Bengal,WB,2024,1,390.9,286.1,direct
+West Bengal,WB,2024,2,391,285.9,direct
+West Bengal,WB,2024,3,391.8,285.8,direct
+West Bengal,WB,2024,4,391.8,285.8,direct
+West Bengal,WB,2024,5,392.6,285.8,direct
+West Bengal,WB,2024,6,392.6,285.8,direct
+West Bengal,WB,2024,7,395.3,288.2,direct
+West Bengal,WB,2024,8,399.7,307.8,direct
+West Bengal,WB,2024,9,403,310.2,direct
+West Bengal,WB,2024,10,404.1,310.2,direct
+West Bengal,WB,2024,11,406.8,312.3,direct
+West Bengal,WB,2024,12,408,313.8,direct
+West Bengal,WB,2025,1,410.1,316,direct
+West Bengal,WB,2025,2,410.9,318.4,direct
+West Bengal,WB,2025,3,413,320.1,direct
+West Bengal,WB,2025,4,420,330.5,direct
+West Bengal,WB,2025,5,427.9,336.3,direct
+West Bengal,WB,2025,6,435.7,341.8,direct
+West Bengal,WB,2025,7,425.7,334.1,direct
+West Bengal,WB,2025,8,430.7,335.1,direct
+West Bengal,WB,2025,9,432.8,335.4,direct
+West Bengal,WB,2025,10,436.2,336.9,direct
+West Bengal,WB,2025,11,440.2,339.6,direct
+West Bengal,WB,2025,12,516.9,475,direct

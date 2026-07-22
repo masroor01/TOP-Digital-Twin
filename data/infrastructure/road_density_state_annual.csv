@@ -1,0 +1,289 @@
+state,state_code,year,road_density_per_100_sqkm,is_forward_filled
+Telangana,TL,2017,112.5,False
+Telangana,TL,2018,114.3,False
+Telangana,TL,2019,125.4,False
+Telangana,TL,2020,125.4,True
+Telangana,TL,2021,125.4,True
+Telangana,TL,2022,125.4,True
+Telangana,TL,2023,125.4,True
+Telangana,TL,2024,125.4,True
+Telangana,TL,2025,125.4,True
+Arunachal Pradesh,AR,2017,44.2,False
+Arunachal Pradesh,AR,2018,60.4,False
+Arunachal Pradesh,AR,2019,66.0,False
+Arunachal Pradesh,AR,2020,66.0,True
+Arunachal Pradesh,AR,2021,66.0,True
+Arunachal Pradesh,AR,2022,66.0,True
+Arunachal Pradesh,AR,2023,66.0,True
+Arunachal Pradesh,AR,2024,66.0,True
+Arunachal Pradesh,AR,2025,66.0,True
+Assam,AS,2017,430.6,False
+Assam,AS,2018,438.1,False
+Assam,AS,2019,508.8,False
+Assam,AS,2020,508.8,True
+Assam,AS,2021,508.8,True
+Assam,AS,2022,508.8,True
+Assam,AS,2023,508.8,True
+Assam,AS,2024,508.8,True
+Assam,AS,2025,508.8,True
+Bihar,BI,2017,222.5,False
+Bihar,BI,2018,308.6,False
+Bihar,BI,2019,316.7,False
+Bihar,BI,2020,316.7,True
+Bihar,BI,2021,316.7,True
+Bihar,BI,2022,316.7,True
+Bihar,BI,2023,316.7,True
+Bihar,BI,2024,316.7,True
+Bihar,BI,2025,316.7,True
+Jharkhand,JR,2017,87.6,False
+Jharkhand,JR,2018,99.2,False
+Jharkhand,JR,2019,101.9,False
+Jharkhand,JR,2020,101.9,True
+Jharkhand,JR,2021,101.9,True
+Jharkhand,JR,2022,101.9,True
+Jharkhand,JR,2023,101.9,True
+Jharkhand,JR,2024,101.9,True
+Jharkhand,JR,2025,101.9,True
+Chandigarh,CH,2017,2564.5,False
+Chandigarh,CH,2018,2309.1,False
+Chandigarh,CH,2019,2338.2,False
+Chandigarh,CH,2020,2338.2,True
+Chandigarh,CH,2021,2338.2,True
+Chandigarh,CH,2022,2338.2,True
+Chandigarh,CH,2023,2338.2,True
+Chandigarh,CH,2024,2338.2,True
+Chandigarh,CH,2025,2338.2,True
+Gujarat,GJ,2017,92.3,False
+Gujarat,GJ,2018,102.9,False
+Gujarat,GJ,2019,127.2,False
+Gujarat,GJ,2020,127.2,True
+Gujarat,GJ,2021,127.2,True
+Gujarat,GJ,2022,127.2,True
+Gujarat,GJ,2023,127.2,True
+Gujarat,GJ,2024,127.2,True
+Gujarat,GJ,2025,127.2,True
+Himachal Pradesh,HP,2017,112.8,False
+Himachal Pradesh,HP,2018,111.2,False
+Himachal Pradesh,HP,2019,131.5,False
+Himachal Pradesh,HP,2020,131.5,True
+Himachal Pradesh,HP,2021,131.5,True
+Himachal Pradesh,HP,2022,131.5,True
+Himachal Pradesh,HP,2023,131.5,True
+Himachal Pradesh,HP,2024,131.5,True
+Himachal Pradesh,HP,2025,131.5,True
+Haryana,HR,2017,184.1,False
+Haryana,HR,2018,113.1,False
+Haryana,HR,2019,113.8,False
+Haryana,HR,2020,113.8,True
+Haryana,HR,2021,113.8,True
+Haryana,HR,2022,113.8,True
+Haryana,HR,2023,113.8,True
+Haryana,HR,2024,113.8,True
+Haryana,HR,2025,113.8,True
+Jammu and Kashmir,JK,2017,28.5,False
+Jammu and Kashmir,JK,2018,48.9,False
+Jammu and Kashmir,JK,2019,54.0,False
+Jammu and Kashmir,JK,2020,54.0,True
+Jammu and Kashmir,JK,2021,54.0,True
+Jammu and Kashmir,JK,2022,54.0,True
+Jammu and Kashmir,JK,2023,54.0,True
+Jammu and Kashmir,JK,2024,54.0,True
+Jammu and Kashmir,JK,2025,54.0,True
+Karnataka,KK,2017,188.2,False
+Karnataka,KK,2018,184.8,False
+Karnataka,KK,2019,186.8,False
+Karnataka,KK,2020,186.8,True
+Karnataka,KK,2021,186.8,True
+Karnataka,KK,2022,186.8,True
+Karnataka,KK,2023,186.8,True
+Karnataka,KK,2024,186.8,True
+Karnataka,KK,2025,186.8,True
+Keralam,KL,2017,619.0,False
+Keralam,KL,2018,661.6,False
+Keralam,KL,2019,668.9,False
+Keralam,KL,2020,668.9,True
+Keralam,KL,2021,668.9,True
+Keralam,KL,2022,668.9,True
+Keralam,KL,2023,668.9,True
+Keralam,KL,2024,668.9,True
+Keralam,KL,2025,668.9,True
+Maharashtra,MH,2017,202.8,False
+Maharashtra,MH,2018,203.6,False
+Maharashtra,MH,2019,207.0,False
+Maharashtra,MH,2020,207.0,True
+Maharashtra,MH,2021,207.0,True
+Maharashtra,MH,2022,207.0,True
+Maharashtra,MH,2023,207.0,True
+Maharashtra,MH,2024,207.0,True
+Maharashtra,MH,2025,207.0,True
+Madhya Pradesh,MP,2017,111.2,False
+Madhya Pradesh,MP,2018,118.1,False
+Madhya Pradesh,MP,2019,118.4,False
+Madhya Pradesh,MP,2020,118.4,True
+Madhya Pradesh,MP,2021,118.4,True
+Madhya Pradesh,MP,2022,118.4,True
+Madhya Pradesh,MP,2023,118.4,True
+Madhya Pradesh,MP,2024,118.4,True
+Madhya Pradesh,MP,2025,118.4,True
+Chattisgarh,CG,2017,72.4,False
+Chattisgarh,CG,2018,75.9,False
+Chattisgarh,CG,2019,77.7,False
+Chattisgarh,CG,2020,77.7,True
+Chattisgarh,CG,2021,77.7,True
+Chattisgarh,CG,2022,77.7,True
+Chattisgarh,CG,2023,77.7,True
+Chattisgarh,CG,2024,77.7,True
+Chattisgarh,CG,2025,77.7,True
+Nagaland,NG,2017,218.6,False
+Nagaland,NG,2018,243.3,False
+Nagaland,NG,2019,228.4,False
+Nagaland,NG,2020,228.4,True
+Nagaland,NG,2021,228.4,True
+Nagaland,NG,2022,228.4,True
+Nagaland,NG,2023,228.4,True
+Nagaland,NG,2024,228.4,True
+Nagaland,NG,2025,228.4,True
+Odisha,OR,2017,195.0,False
+Odisha,OR,2018,195.8,False
+Odisha,OR,2019,196.3,False
+Odisha,OR,2020,196.3,True
+Odisha,OR,2021,196.3,True
+Odisha,OR,2022,196.3,True
+Odisha,OR,2023,196.3,True
+Odisha,OR,2024,196.3,True
+Odisha,OR,2025,196.3,True
+Punjab,PB,2017,277.0,False
+Punjab,PB,2018,287.8,False
+Punjab,PB,2019,293.6,False
+Punjab,PB,2020,293.6,True
+Punjab,PB,2021,293.6,True
+Punjab,PB,2022,293.6,True
+Punjab,PB,2023,293.6,True
+Punjab,PB,2024,293.6,True
+Punjab,PB,2025,293.6,True
+Rajasthan,RJ,2017,77.6,False
+Rajasthan,RJ,2018,90.7,False
+Rajasthan,RJ,2019,91.6,False
+Rajasthan,RJ,2020,91.6,True
+Rajasthan,RJ,2021,91.6,True
+Rajasthan,RJ,2022,91.6,True
+Rajasthan,RJ,2023,91.6,True
+Rajasthan,RJ,2024,91.6,True
+Rajasthan,RJ,2025,91.6,True
+Tamil Nadu,TN,2017,201.0,False
+Tamil Nadu,TN,2018,207.1,False
+Tamil Nadu,TN,2019,208.5,False
+Tamil Nadu,TN,2020,208.5,True
+Tamil Nadu,TN,2021,208.5,True
+Tamil Nadu,TN,2022,208.5,True
+Tamil Nadu,TN,2023,208.5,True
+Tamil Nadu,TN,2024,208.5,True
+Tamil Nadu,TN,2025,208.5,True
+Tripura,TR,2017,409.2,False
+Tripura,TR,2018,414.4,False
+Tripura,TR,2019,430.1,False
+Tripura,TR,2020,430.1,True
+Tripura,TR,2021,430.1,True
+Tripura,TR,2022,430.1,True
+Tripura,TR,2023,430.1,True
+Tripura,TR,2024,430.1,True
+Tripura,TR,2025,430.1,True
+Uttar Pradesh,UP,2017,177.7,False
+Uttar Pradesh,UP,2018,183.1,False
+Uttar Pradesh,UP,2019,183.8,False
+Uttar Pradesh,UP,2020,183.8,True
+Uttar Pradesh,UP,2021,183.8,True
+Uttar Pradesh,UP,2022,183.8,True
+Uttar Pradesh,UP,2023,183.8,True
+Uttar Pradesh,UP,2024,183.8,True
+Uttar Pradesh,UP,2025,183.8,True
+Uttarakhand,UC,2017,130.5,False
+Uttarakhand,UC,2018,98.1,False
+Uttarakhand,UC,2019,128.5,False
+Uttarakhand,UC,2020,128.5,True
+Uttarakhand,UC,2021,128.5,True
+Uttarakhand,UC,2022,128.5,True
+Uttarakhand,UC,2023,128.5,True
+Uttarakhand,UC,2024,128.5,True
+Uttarakhand,UC,2025,128.5,True
+West Bengal,WB,2017,362.9,False
+West Bengal,WB,2018,365.4,False
+West Bengal,WB,2019,319.8,False
+West Bengal,WB,2020,319.8,True
+West Bengal,WB,2021,319.8,True
+West Bengal,WB,2022,319.8,True
+West Bengal,WB,2023,319.8,True
+West Bengal,WB,2024,319.8,True
+West Bengal,WB,2025,319.8,True
+Andaman and Nicobar,AN,2017,19.6,False
+Andaman and Nicobar,AN,2018,21.8,False
+Andaman and Nicobar,AN,2019,21.9,False
+Andaman and Nicobar,AN,2020,21.9,True
+Andaman and Nicobar,AN,2021,21.9,True
+Andaman and Nicobar,AN,2022,21.9,True
+Andaman and Nicobar,AN,2023,21.9,True
+Andaman and Nicobar,AN,2024,21.9,True
+Andaman and Nicobar,AN,2025,21.9,True
+Andhra Pradesh,AP,2017,108.3,False
+Andhra Pradesh,AP,2018,133.9,False
+Andhra Pradesh,AP,2019,108.2,False
+Andhra Pradesh,AP,2020,108.2,True
+Andhra Pradesh,AP,2021,108.2,True
+Andhra Pradesh,AP,2022,108.2,True
+Andhra Pradesh,AP,2023,108.2,True
+Andhra Pradesh,AP,2024,108.2,True
+Andhra Pradesh,AP,2025,108.2,True
+NCT of Delhi,DL,2017,1208.2,False
+NCT of Delhi,DL,2018,1188.9,False
+NCT of Delhi,DL,2019,1092.6,False
+NCT of Delhi,DL,2020,1092.6,True
+NCT of Delhi,DL,2021,1092.6,True
+NCT of Delhi,DL,2022,1092.6,True
+NCT of Delhi,DL,2023,1092.6,True
+NCT of Delhi,DL,2024,1092.6,True
+NCT of Delhi,DL,2025,1092.6,True
+Meghalaya,MG,2017,102.3,False
+Meghalaya,MG,2018,195.4,False
+Meghalaya,MG,2019,179.5,False
+Meghalaya,MG,2020,179.5,True
+Meghalaya,MG,2021,179.5,True
+Meghalaya,MG,2022,179.5,True
+Meghalaya,MG,2023,179.5,True
+Meghalaya,MG,2024,179.5,True
+Meghalaya,MG,2025,179.5,True
+Mizoram,MZ,2017,52.2,False
+Mizoram,MZ,2018,62.4,False
+Mizoram,MZ,2019,77.1,False
+Mizoram,MZ,2020,77.1,True
+Mizoram,MZ,2021,77.1,True
+Mizoram,MZ,2022,77.1,True
+Mizoram,MZ,2023,77.1,True
+Mizoram,MZ,2024,77.1,True
+Mizoram,MZ,2025,77.1,True
+Kerala,KL,2017,619.0,False
+Kerala,KL,2018,661.6,False
+Kerala,KL,2019,668.9,False
+Kerala,KL,2020,668.9,True
+Kerala,KL,2021,668.9,True
+Kerala,KL,2022,668.9,True
+Kerala,KL,2023,668.9,True
+Kerala,KL,2024,668.9,True
+Kerala,KL,2025,668.9,True
+Manipur,MN,2017,123.6,False
+Manipur,MN,2018,130.7,False
+Manipur,MN,2019,145.0,False
+Manipur,MN,2020,145.0,True
+Manipur,MN,2021,145.0,True
+Manipur,MN,2022,145.0,True
+Manipur,MN,2023,145.0,True
+Manipur,MN,2024,145.0,True
+Manipur,MN,2025,145.0,True
+Goa,GO,2017,450.2,False
+Goa,GO,2018,502.9,False
+Goa,GO,2019,505.3,False
+Goa,GO,2020,505.3,True
+Goa,GO,2021,505.3,True
+Goa,GO,2022,505.3,True
+Goa,GO,2023,505.3,True
+Goa,GO,2024,505.3,True
+Goa,GO,2025,505.3,True

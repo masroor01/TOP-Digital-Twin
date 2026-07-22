@@ -52,8 +52,10 @@
             "**/Model_Output/lgbm_*.txt": true,
             "**/Model_Output/test_predictions_*.csv": true,
             "**/Model_Output/filtered_panel_top.csv": true,
+            "**/Model_Output/dm_market_level_predictions.csv": true,
             "**/data/agmarknet_weekly/top_weekly_panel.csv": true,
             "**/data/satellite_climate/market_zone_features.csv": true,
+            "**/data/master_weekly_panel_all_layers.csv": true,
             "**/data/geocode_cache.json": true,
             "**/~$*.pptx": true,
             "**/~$*.xlsx": true
@@ -130,6 +132,54 @@
                 "type": "debugpy",
                 "request": "launch",
                 "program": "${workspaceFolder:📁 Project Root}/scripts/17_TFT_Model.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 18 — Diebold-Mariano Tests",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/18_Diebold_Mariano_Tests.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 18b — Market-Level DM Check",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/18b_Market_Level_DM_Check.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 19 — Policy/Trade Events (Layer 6)",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/19_Policy_Trade_Events.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 20 — Labour Wages (Layer 5)",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/20_Labour_Wages_Layer5.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 21 — Infrastructure (Layer 5)",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/21_Infrastructure_Layer5.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 22 — Master Panel Join",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/22_Master_Panel_Join.py",
                 "console": "integratedTerminal",
                 "cwd": "${workspaceFolder:📁 Project Root}"
             }
