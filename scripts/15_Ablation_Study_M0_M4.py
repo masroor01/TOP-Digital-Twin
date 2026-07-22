@@ -18,6 +18,8 @@ Compare against B1 Naive Persistence from Script 13.
 Outputs (Model_Output/)
 -----------------------
   ablation_raw_results.csv          all 180 rows: variant × crop × fold × horizon
+  ablation_predictions.csv          crop-level weekly avg y_true/y_pred per
+                                     variant×crop×fold×horizon (for Script 18 DM tests)
   table_ablation.csv                paper Table — mean across folds
   fig_ablation_r2.png               R² by model variant (h=1, 4 panels)
   fig_ablation_improvement.png      delta R² over M0 by layer addition
@@ -59,6 +61,13 @@ SEED     = 42
 # Set FAST_MODE = True to run h=1 and h=4 only with reduced trees (for testing)
 FAST_MODE = False
 HORIZONS_RUN = [1, 4] if FAST_MODE else HORIZONS
+
+# Diagnostic: retrain only M0 and M4 (headline pair) on the FULL market
+# panel and save per-market (not crop-averaged) predictions, so Script 18b
+# can run a higher-power, market-level Diebold-Mariano test — checking
+# whether crop-level weekly averaging was hiding a real per-market effect.
+# Cheap: only 2 of 5 variants, so ~2/5 the runtime of a full ablation pass.
+MARKET_LEVEL_DIAGNOSTIC = True
 
 FOLDS = [
     {'fold': 1, 'train_end': '2021-06-30',
@@ -316,6 +325,9 @@ MODEL_FEATURE_SETS = {
     'M3': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS,
     'M4': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS,
 }
+if MARKET_LEVEL_DIAGNOSTIC:
+    MODEL_FEATURE_SETS = {'M0': MODEL_FEATURE_SETS['M0'],
+                           'M4': MODEL_FEATURE_SETS['M4']}
 
 for crop in CROPS:
     df_crop = feat[crop]
@@ -354,6 +366,7 @@ print(f'    {len(MODEL_FEATURE_SETS)} variants × {len(FOLDS)} folds × '
       f'{len(MODEL_FEATURE_SETS)*len(FOLDS)*len(HORIZONS_RUN)*len(CROPS)} model fits\n')
 
 all_rows = []
+all_pred_rows = []   # crop-level weekly avg predictions, for Script 18 DM tests
 t0_total = time.time()
 
 for variant, feat_list_all in MODEL_FEATURE_SETS.items():
@@ -411,6 +424,37 @@ for variant, feat_list_all in MODEL_FEATURE_SETS.items():
                 elapsed = round(time.time() - t0, 1)
                 trees   = model.best_iteration_ if model.best_iteration_ else LGBM_PARAMS['n_estimators']
 
+                pred_df = pd.DataFrame({
+                    'market':     test['market'].values,
+                    'week_start': test['week_start'].values,
+                    'y_true': np.expm1(y_te.values),
+                    'y_pred': np.expm1(y_pred),
+                })
+
+                if MARKET_LEVEL_DIAGNOSTIC:
+                    # Full per-market rows — only 2 variants (M0, M4), so
+                    # this stays a manageable file size
+                    mkt = pred_df.copy()
+                    mkt['variant']       = variant
+                    mkt['crop']          = crop
+                    mkt['fold']          = fold
+                    mkt['horizon_weeks'] = h
+                    all_pred_rows.append(mkt)
+                else:
+                    # Crop-level weekly aggregate predictions (avg across
+                    # markets) for Script 18 DM tests — market-level rows
+                    # would produce tens of millions of rows across all fits
+                    weekly = pred_df.groupby('week_start').agg(
+                        y_true=('y_true', 'mean'),
+                        y_pred=('y_pred', 'mean'),
+                        n_markets=('y_true', 'size'),
+                    ).reset_index()
+                    weekly['variant']       = variant
+                    weekly['crop']          = crop
+                    weekly['fold']          = fold
+                    weekly['horizon_weeks'] = h
+                    all_pred_rows.append(weekly)
+
                 row = {
                     'variant': variant, 'crop': crop,
                     'fold': fold, 'horizon_weeks': h,
@@ -437,9 +481,35 @@ total_min = (time.time() - t0_total) / 60
 print(f'\n  Total ablation time: {total_min:.1f} min')
 
 results = pd.DataFrame(all_rows)
+
+if MARKET_LEVEL_DIAGNOSTIC:
+    # Diagnostic-only filenames — never touch the production M0-M4
+    # ablation_raw_results.csv / ablation_predictions.csv that Script 18
+    # and the paper tables depend on
+    diag_raw_path = os.path.join(OUT_DIR, 'dm_market_level_raw_results.csv')
+    results.to_csv(diag_raw_path, index=False)
+    print(f'  Saved: {diag_raw_path}')
+
+    predictions = pd.concat(all_pred_rows, ignore_index=True)
+    predictions = predictions[['variant', 'crop', 'fold', 'horizon_weeks',
+                                'market', 'week_start', 'y_true', 'y_pred']]
+    diag_pred_path = os.path.join(OUT_DIR, 'dm_market_level_predictions.csv')
+    predictions.to_csv(diag_pred_path, index=False)
+    print(f'  Saved: {diag_pred_path}  ({len(predictions):,} rows)')
+    print('\nMARKET_LEVEL_DIAGNOSTIC run complete — skipping summary table/figures')
+    print('(those assume the full M0-M4 + B1_Naive production run).')
+    sys.exit(0)
+
 raw_path = os.path.join(OUT_DIR, 'ablation_raw_results.csv')
 results.to_csv(raw_path, index=False)
 print(f'  Saved: {raw_path}')
+
+predictions = pd.concat(all_pred_rows, ignore_index=True)
+predictions = predictions[['variant', 'crop', 'fold', 'horizon_weeks',
+                            'week_start', 'y_true', 'y_pred', 'n_markets']]
+pred_path = os.path.join(OUT_DIR, 'ablation_predictions.csv')
+predictions.to_csv(pred_path, index=False)
+print(f'  Saved: {pred_path}  ({len(predictions):,} rows)')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
