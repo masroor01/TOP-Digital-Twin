@@ -68,12 +68,14 @@ SEED     = 42
 FAST_MODE = False
 HORIZONS_RUN = [1, 4] if FAST_MODE else HORIZONS
 
-# Diagnostic: retrain only M0 and M4 (headline pair) on the FULL market
-# panel and save per-market (not crop-averaged) predictions, so Script 18b
-# can run a higher-power, market-level Diebold-Mariano test — checking
-# whether crop-level weekly averaging was hiding a real per-market effect.
+# Diagnostic: retrain only M0 and M6 (headline pair — full model vs
+# price-only baseline, now that M5/M6 exist) on the FULL market panel and
+# save per-market (not crop-averaged) predictions, so Script 18b can run a
+# higher-power, market-level Diebold-Mariano test — checking whether
+# crop-level weekly averaging hides a real per-market effect.
 # Cheap: only 2 of 7 variants, so a fraction of a full ablation pass.
-MARKET_LEVEL_DIAGNOSTIC = False
+MARKET_LEVEL_DIAGNOSTIC = True
+DIAGNOSTIC_PAIR = ('M0', 'M6')
 
 FOLDS = [
     {'fold': 1, 'train_end': '2021-06-30',
@@ -397,8 +399,8 @@ MODEL_FEATURE_SETS = {
     'M6': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + INFRA_FEATS + POLICY_FEATS,
 }
 if MARKET_LEVEL_DIAGNOSTIC:
-    MODEL_FEATURE_SETS = {'M0': MODEL_FEATURE_SETS['M0'],
-                           'M4': MODEL_FEATURE_SETS['M4']}
+    a, b = DIAGNOSTIC_PAIR
+    MODEL_FEATURE_SETS = {a: MODEL_FEATURE_SETS[a], b: MODEL_FEATURE_SETS[b]}
 
 for crop in CROPS:
     df_crop = feat[crop]
@@ -503,8 +505,8 @@ for variant, feat_list_all in MODEL_FEATURE_SETS.items():
                 })
 
                 if MARKET_LEVEL_DIAGNOSTIC:
-                    # Full per-market rows — only 2 variants (M0, M4), so
-                    # this stays a manageable file size
+                    # Full per-market rows — only 2 variants (DIAGNOSTIC_PAIR),
+                    # so this stays a manageable file size
                     mkt = pred_df.copy()
                     mkt['variant']       = variant
                     mkt['crop']          = crop
@@ -554,7 +556,7 @@ print(f'\n  Total ablation time: {total_min:.1f} min')
 results = pd.DataFrame(all_rows)
 
 if MARKET_LEVEL_DIAGNOSTIC:
-    # Diagnostic-only filenames — never touch the production M0-M4
+    # Diagnostic-only filenames — never touch the production M0-M6
     # ablation_raw_results.csv / ablation_predictions.csv that Script 18
     # and the paper tables depend on
     diag_raw_path = os.path.join(OUT_DIR, 'dm_market_level_raw_results.csv')

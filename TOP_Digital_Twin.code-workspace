@@ -112,7 +112,7 @@
                 "cwd": "${workspaceFolder:📁 Project Root}"
             },
             {
-                "name": "Script 15 — Ablation Study M0–M4",
+                "name": "Script 15 — Ablation Study M0–M6",
                 "type": "debugpy",
                 "request": "launch",
                 "program": "${workspaceFolder:📁 Project Root}/scripts/15_Ablation_Study_M0_M4.py",
