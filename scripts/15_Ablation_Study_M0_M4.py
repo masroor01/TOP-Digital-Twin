@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Script 15 — Ablation Study: M0 → M4
+Script 15 — Ablation Study: M0 → M6
 =====================================
-Trains 5 progressively richer LightGBM variants on the same rolling-origin
+Trains 7 progressively richer LightGBM variants on the same rolling-origin
 CV framework as Script 12, adding one data layer at a time:
 
   M0  Price features only (lags, rolling stats, seasonality, market encoding)
@@ -10,8 +10,10 @@ CV framework as Script 12, adding one data layer at a time:
   M2  + Macro-logistics (CMIE credit, RBI repo/WPI/USDINR, PPAC diesel/LPG)
   M3  + Climate stress (ERA5 temperature + CHIRPS rainfall, incl. 4/8-week rolls)
   M4  + Satellite vegetation (Sentinel-2 NDVI/EVI + MODIS NDVI/LST + rolling)
+  M5  + Infrastructure (state-wise agri wages, cold storage, road density)
+  M6  + Policy/trade (export ban/MEP/duty, market interventions, Operation Greens)
 
-Each variant × 4 folds × 4 horizons × 3 crops = 240 LightGBM model fits.
+Each variant × 4 folds × 4 horizons × 3 crops = 336 LightGBM model fits.
 
 Compare against B1 Naive Persistence from Script 13.
 
@@ -50,6 +52,10 @@ CMIE_FILE= os.path.join(BASE, 'data', 'cmie_macro',      'cmie_macro_2017_2025.c
 RBI_FILE = os.path.join(BASE, 'data', 'rbi_dbie',        'rbi_dbie_macro_2017_2025.csv')
 PPAC_FILE= os.path.join(BASE, 'data', 'ppac_macro',      'ppac_diesel_lpg_2017_2025.csv')
 SAT_FILE = os.path.join(BASE, 'data', 'satellite_climate', 'crop_weekly_features.csv')
+WAGE_FILE  = os.path.join(BASE, 'data', 'labour_wages',   'wage_agri_state_monthly.csv')
+COLD_FILE  = os.path.join(BASE, 'data', 'infrastructure', 'cold_storage_by_state.csv')
+ROAD_FILE  = os.path.join(BASE, 'data', 'infrastructure', 'road_density_state_annual.csv')
+POLICY_FILE= os.path.join(BASE, 'data', 'policy_trade',   'policy_weekly_features.csv')
 BENCH_FILE = os.path.join(BASE, 'Model_Output', 'table_benchmarks.csv')
 OUT_DIR  = os.path.join(BASE, 'Model_Output')
 os.makedirs(OUT_DIR, exist_ok=True)
@@ -66,8 +72,8 @@ HORIZONS_RUN = [1, 4] if FAST_MODE else HORIZONS
 # panel and save per-market (not crop-averaged) predictions, so Script 18b
 # can run a higher-power, market-level Diebold-Mariano test — checking
 # whether crop-level weekly averaging was hiding a real per-market effect.
-# Cheap: only 2 of 5 variants, so ~2/5 the runtime of a full ablation pass.
-MARKET_LEVEL_DIAGNOSTIC = True
+# Cheap: only 2 of 7 variants, so a fraction of a full ablation pass.
+MARKET_LEVEL_DIAGNOSTIC = False
 
 FOLDS = [
     {'fold': 1, 'train_end': '2021-06-30',
@@ -105,7 +111,7 @@ LGBM_PARAMS = dict(
 CROP_COLORS = {'tomato': '#E63946', 'onion': '#F4A261', 'potato': '#457B9D'}
 VARIANT_COLORS = {
     'M0': '#adb5bd', 'M1': '#74c0fc', 'M2': '#51cf66',
-    'M3': '#ff922b', 'M4': '#cc5de8'
+    'M3': '#ff922b', 'M4': '#cc5de8', 'M5': '#20c997', 'M6': '#e64980',
 }
 VARIANT_LABELS = {
     'M0': 'M0 Price only',
@@ -113,6 +119,8 @@ VARIANT_LABELS = {
     'M2': 'M2 + Macro',
     'M3': 'M3 + Climate',
     'M4': 'M4 + Satellite',
+    'M5': 'M5 + Infrastructure',
+    'M6': 'M6 + Policy/Trade',
 }
 
 LAG_WEEKS = [1, 2, 3, 4, 8, 13, 26, 52]
@@ -128,11 +136,11 @@ plt.rcParams.update({
 # 2. LOAD PANEL + MACRO
 # ─────────────────────────────────────────────────────────────────────────────
 print('='*65)
-print('SCRIPT 15: ABLATION STUDY  M0 → M4')
+print('SCRIPT 15: ABLATION STUDY  M0 → M6')
 print('='*65)
 print(f'  Fast mode : {FAST_MODE}')
 print(f'  Horizons  : {HORIZONS_RUN}')
-print(f'  Total fits: {5 * len(FOLDS) * len(HORIZONS_RUN) * len(CROPS)}\n')
+print(f'  Total fits: {7 * len(FOLDS) * len(HORIZONS_RUN) * len(CROPS)}\n')
 
 print('[1] Loading panel ...')
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
@@ -216,6 +224,67 @@ print(f'   Satellite features: {len(SAT_FEATS)} → {SAT_FEATS}')
 print(f'   Panel after join  : {len(df):,} rows  |  {df.shape[1]} columns')
 print(f'   ERA5 coverage     : {df["era5_tmax"].notna().mean():.1%}')
 print(f'   S2 NDVI coverage  : {df["s2_ndvi"].notna().mean():.1%}')
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 3b. LAYER 5 (INFRASTRUCTURE) + LAYER 6 (POLICY/TRADE)
+# ─────────────────────────────────────────────────────────────────────────────
+print('\n[2b] Loading infrastructure (M5) + policy/trade (M6) layers ...')
+
+
+def assert_unique(frame, keys, label):
+    n_dup = frame[keys].duplicated().sum()
+    if n_dup:
+        raise ValueError(f'{label}: {n_dup} duplicate rows on {keys} — '
+                          f'join would silently fan out the panel.')
+
+
+INFRA_FEATS  = []
+POLICY_FEATS = []
+
+if os.path.exists(WAGE_FILE):
+    wages = pd.read_csv(WAGE_FILE)[['state', 'year', 'month', 'wage_agri_men', 'wage_agri_women']]
+    assert_unique(wages, ['state', 'year', 'month'], 'wages')
+    n_before = len(df)
+    df = df.merge(wages, on=['state', 'year', 'month'], how='left')
+    assert len(df) == n_before, 'wages join changed row count'
+    INFRA_FEATS += ['wage_agri_men', 'wage_agri_women']
+    print(f'   Wages joined      : {df["wage_agri_men"].notna().mean():.1%} coverage')
+
+if os.path.exists(COLD_FILE):
+    cold = pd.read_csv(COLD_FILE)[['state', 'n_facilities', 'capacity_mt']]
+    cold = cold.rename(columns={'n_facilities': 'cold_storage_n_facilities',
+                                 'capacity_mt': 'cold_storage_capacity_mt'})
+    assert_unique(cold, ['state'], 'cold storage')
+    n_before = len(df)
+    df = df.merge(cold, on=['state'], how='left')
+    assert len(df) == n_before, 'cold storage join changed row count'
+    INFRA_FEATS += ['cold_storage_n_facilities', 'cold_storage_capacity_mt']
+    print(f'   Cold storage joined: {df["cold_storage_n_facilities"].notna().mean():.1%} coverage')
+
+if os.path.exists(ROAD_FILE):
+    road = pd.read_csv(ROAD_FILE)[['state', 'year', 'road_density_per_100_sqkm']]
+    assert_unique(road, ['state', 'year'], 'road density')
+    n_before = len(df)
+    df = df.merge(road, on=['state', 'year'], how='left')
+    assert len(df) == n_before, 'road density join changed row count'
+    INFRA_FEATS += ['road_density_per_100_sqkm']
+    print(f'   Road density joined: {df["road_density_per_100_sqkm"].notna().mean():.1%} coverage')
+
+if os.path.exists(POLICY_FILE):
+    policy = pd.read_csv(POLICY_FILE, parse_dates=['week_start'])
+    policy_cols = ['export_banned', 'mep_usd_per_tonne', 'export_duty_pct',
+                   'market_intervention_flag', 'operation_greens_active']
+    policy = policy[['crop', 'week_start'] + policy_cols]
+    assert_unique(policy, ['crop', 'week_start'], 'policy')
+    n_before = len(df)
+    df = df.merge(policy, on=['crop', 'week_start'], how='left')
+    assert len(df) == n_before, 'policy join changed row count'
+    POLICY_FEATS += policy_cols
+    print(f'   Policy joined     : {df["export_banned"].notna().mean():.1%} coverage')
+
+print(f'   Infrastructure features (M5): {len(INFRA_FEATS)} → {INFRA_FEATS}')
+print(f'   Policy features (M6)        : {len(POLICY_FEATS)} → {POLICY_FEATS}')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -324,6 +393,8 @@ MODEL_FEATURE_SETS = {
     'M2': PRICE_FEATS + ARR_FEATS + MACRO_COLS,
     'M3': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS,
     'M4': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS,
+    'M5': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + INFRA_FEATS,
+    'M6': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + INFRA_FEATS + POLICY_FEATS,
 }
 if MARKET_LEVEL_DIAGNOSTIC:
     MODEL_FEATURE_SETS = {'M0': MODEL_FEATURE_SETS['M0'],
@@ -331,10 +402,10 @@ if MARKET_LEVEL_DIAGNOSTIC:
 
 for crop in CROPS:
     df_crop = feat[crop]
-    all_possible = MODEL_FEATURE_SETS['M4']
+    all_possible = MODEL_FEATURE_SETS['M6']
     available = [c for c in all_possible if c in df_crop.columns]
     print(f'   {crop:8s}: {len(df_crop):>8,} rows  | '
-          f'M4 features available: {len(available)}/{len(all_possible)}')
+          f'M6 features available: {len(available)}/{len(all_possible)}')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -360,7 +431,7 @@ def compute_metrics(y_true_log, y_pred_log):
 # ─────────────────────────────────────────────────────────────────────────────
 # 6. ABLATION TRAINING LOOP
 # ─────────────────────────────────────────────────────────────────────────────
-print('\n[4] Running ablation: M0 → M4 ...')
+print('\n[4] Running ablation: M0 → M6 ...')
 print(f'    {len(MODEL_FEATURE_SETS)} variants × {len(FOLDS)} folds × '
       f'{len(HORIZONS_RUN)} horizons × {len(CROPS)} crops = '
       f'{len(MODEL_FEATURE_SETS)*len(FOLDS)*len(HORIZONS_RUN)*len(CROPS)} model fits\n')
@@ -571,7 +642,7 @@ print(f'  Saved: {table_path}')
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[6] Generating figures ...')
 
-VARIANTS_PLOT = list(MODEL_FEATURE_SETS.keys())   # M0-M4 only (no naive in comparison figs)
+VARIANTS_PLOT = list(MODEL_FEATURE_SETS.keys())   # M0-M6 (no naive in comparison figs)
 
 # ── Figure A: R² by variant × crop (h=1 and h=4, side-by-side panels) ────────
 fig, axes = plt.subplots(2, 3, figsize=(15, 9), sharey='row')
@@ -783,4 +854,4 @@ for fname in ['ablation_raw_results.csv', 'table_ablation.csv',
     if os.path.exists(fp):
         print(f'  {fname:<42} {os.path.getsize(fp)/1024:>7.1f} KB')
 print()
-print('Next: Script 16 — Temporal Fusion Transformer (TFT) model')
+print('Next: Script 17 — Temporal Fusion Transformer (TFT) full-panel run')
