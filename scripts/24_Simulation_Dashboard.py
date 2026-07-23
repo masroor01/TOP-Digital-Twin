@@ -56,7 +56,8 @@ def load_metadata():
     with open(os.path.join(MODEL_DIR, 'feature_ranges.json'), encoding='utf-8') as f:
         feature_ranges = json.load(f)
     reference = pd.read_csv(os.path.join(MODEL_DIR, 'reference_rows.csv'), parse_dates=['week_start'])
-    return feature_columns, feature_ranges, reference
+    history = pd.read_csv(os.path.join(MODEL_DIR, 'price_history.csv'), parse_dates=['week_start'])
+    return feature_columns, feature_ranges, reference, history
 
 
 if not os.path.exists(MODEL_DIR):
@@ -65,7 +66,7 @@ if not os.path.exists(MODEL_DIR):
     st.stop()
 
 models = load_models()
-feature_columns, feature_ranges, reference = load_metadata()
+feature_columns, feature_ranges, reference, history = load_metadata()
 
 
 def predict(crop, h, feature_row):
@@ -188,24 +189,47 @@ col3.metric('Last observed price',
 
 st.markdown('---')
 
-# All-horizon comparison chart
-st.subheader('Scenario impact across all forecast horizons')
-rows = []
-for h in HORIZONS:
-    rows.append({'horizon': f'{h}w', 'variant': 'Baseline (current conditions)',
-                 'price': predict(crop, h, base_row)})
-    rows.append({'horizon': f'{h}w', 'variant': 'Scenario',
-                 'price': predict(crop, h, scenario)})
-chart_df = pd.DataFrame(rows)
+# Historical price + calendar-dated forecast chart
+st.subheader('Price history and forecast')
+st.caption(
+    f'Forecasts only reach as far as the model was trained to predict — '
+    f'{max(HORIZONS)} weeks past the last observed week. This is a genuine limit, '
+    f'not a display cutoff: extending it requires training models at longer '
+    f'horizons, not just changing this chart.'
+)
+
+as_of = pd.Timestamp(base_row['week_start'])
+mkt_history = (history[(history['crop'] == crop) & (history['market'] == market)]
+               .sort_values('week_start'))
 
 fig = go.Figure()
-for variant, color in [('Baseline (current conditions)', '#adb5bd'), ('Scenario', '#e64980')]:
-    sub = chart_df[chart_df['variant'] == variant]
-    fig.add_trace(go.Bar(x=sub['horizon'], y=sub['price'], name=variant,
-                          marker_color=color))
-fig.update_layout(barmode='group', xaxis_title='Forecast horizon',
-                   yaxis_title='Predicted price (Rs/quintal)',
-                   legend=dict(orientation='h', y=1.1), height=420)
+
+if not mkt_history.empty:
+    fig.add_trace(go.Scatter(
+        x=mkt_history['week_start'], y=mkt_history['modal_price_weighted'],
+        mode='lines', name='Actual price (history)',
+        line=dict(color='#495057', width=2)))
+
+# Forecast traces: connect from the last actual point through each horizon,
+# at the real calendar date it corresponds to (as_of + h weeks)
+last_actual_date = mkt_history['week_start'].max() if not mkt_history.empty else as_of
+last_actual_price = (mkt_history[mkt_history['week_start'] == last_actual_date]
+                      ['modal_price_weighted'].iloc[0]) if not mkt_history.empty else baseline_pred
+
+for label, feature_row, color, dash in [
+        ('Baseline forecast', base_row, '#adb5bd', 'dot'),
+        ('Scenario forecast', scenario, '#e64980', 'dash')]:
+    fc_dates = [last_actual_date] + [as_of + pd.Timedelta(weeks=h) for h in HORIZONS]
+    fc_prices = [last_actual_price] + [predict(crop, h, feature_row) for h in HORIZONS]
+    fig.add_trace(go.Scatter(
+        x=fc_dates, y=fc_prices, mode='lines+markers', name=label,
+        line=dict(color=color, width=2, dash=dash), marker=dict(size=7)))
+
+fig.add_vline(x=as_of, line_dash='dot', line_color='#888',
+              annotation_text='as-of date', annotation_position='top')
+fig.update_layout(xaxis_title='Date', yaxis_title='Price (Rs/quintal)',
+                   legend=dict(orientation='h', y=1.15), height=460,
+                   hovermode='x unified')
 st.plotly_chart(fig, use_container_width=True)
 
 def _differs(a, b):

@@ -60,6 +60,7 @@ CROPS    = ['tomato', 'onion', 'potato']
 HORIZONS = [1, 4, 13, 26]
 SEED     = 42
 VAL_WEEKS = 26   # held-out tail for early-stopping tree-count selection
+HISTORY_WEEKS = 104   # 2 years of actual price kept per market, for the dashboard's line chart
 
 LGBM_PARAMS = dict(
     objective='regression', metric='rmse', n_estimators=1000,
@@ -221,6 +222,7 @@ print('\n[3] Training production models (M6, full history) ...\n')
 
 feature_columns = {}
 reference_rows = []
+history_rows = []
 
 for crop in CROPS:
     df_crop = feat[crop]
@@ -268,6 +270,13 @@ for crop in CROPS:
     latest['crop'] = crop
     reference_rows.append(latest)
 
+    # Price history (last 2 years per market): for the dashboard's
+    # historical-context line chart, so forecasts plot against real actual
+    # prices instead of a single disconnected baseline point
+    hist = df_crop.sort_values('week_start').groupby('market').tail(HISTORY_WEEKS).copy()
+    hist['crop'] = crop
+    history_rows.append(hist[['crop', 'market', 'week_start', 'modal_price_weighted']])
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 4. SAVE METADATA FOR THE DASHBOARD
@@ -288,6 +297,11 @@ ref_df = ref_df[keep_cols]
 ref_path = os.path.join(OUT_DIR, 'reference_rows.csv')
 ref_df.to_csv(ref_path, index=False, encoding='utf-8')
 print(f'  Saved: {ref_path}  ({len(ref_df):,} market baselines)')
+
+hist_df = pd.concat(history_rows, ignore_index=True)
+hist_path = os.path.join(OUT_DIR, 'price_history.csv')
+hist_df.to_csv(hist_path, index=False, encoding='utf-8')
+print(f'  Saved: {hist_path}  ({len(hist_df):,} rows, up to {HISTORY_WEEKS} weeks/market)')
 
 # Slider bounds: min/median/max for the "what-if" input variables.
 # IMPORTANT: computed from the FULL historical panel (df, all weeks
