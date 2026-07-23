@@ -38,7 +38,7 @@ import os
 import pandas as pd
 import numpy as np
 
-BASE        = r'C:\Users\masro\Documents\TOP_Digital_Twin'
+BASE        = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COLD_FILE   = r'C:\Users\masro\Downloads\RS_Session_266_AU_517_A_i.csv'
 ROAD_FILE   = r'C:\Users\masro\Downloads\Scheme II-00527542-A.xlsx'
 PANEL_FILE  = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')

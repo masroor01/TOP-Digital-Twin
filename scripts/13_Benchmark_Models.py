@@ -38,7 +38,7 @@ warnings.filterwarnings('ignore')
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
-BASE     = r'C:\Users\masro\Documents\TOP_Digital_Twin'
+BASE     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AGM_FILE = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
 LGB_FILE = os.path.join(BASE, 'Model_Output', 'table_rolling_origin_metrics.csv')
 OUT_DIR  = os.path.join(BASE, 'Model_Output')

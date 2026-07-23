@@ -55,7 +55,7 @@ pl.seed_everything(42, workers=True)
 # ─────────────────────────────────────────────────────────────────────────────
 # 1. PATHS & CONFIG
 # ─────────────────────────────────────────────────────────────────────────────
-BASE     = r'C:\Users\masro\Documents\TOP_Digital_Twin'
+BASE     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AGM_FILE = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
 CMIE_FILE= os.path.join(BASE, 'data', 'cmie_macro',      'cmie_macro_2017_2025.csv')
 RBI_FILE = os.path.join(BASE, 'data', 'rbi_dbie',        'rbi_dbie_macro_2017_2025.csv')

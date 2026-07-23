@@ -29,7 +29,7 @@ import os
 import pandas as pd
 import numpy as np
 
-BASE = r'C:\Users\masro\Documents\TOP_Digital_Twin'
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PANEL_FILE   = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
 CMIE_FILE    = os.path.join(BASE, 'data', 'cmie_macro', 'cmie_macro_2017_2025.csv')

@@ -30,7 +30,7 @@ warnings.filterwarnings('ignore')
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
-BASE     = r'C:\Users\masro\Documents\TOP_Digital_Twin'
+BASE     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INFILE   = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
 OUT_DIR  = os.path.join(BASE, 'Model_Output')
 APPX_DIR = OUT_DIR

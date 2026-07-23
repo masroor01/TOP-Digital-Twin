@@ -35,7 +35,7 @@ import pandas as pd
 from scipy import stats
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-BASE      = r'C:\Users\masro\Documents\TOP_Digital_Twin'
+BASE      = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PRED_FILE = os.path.join(BASE, 'Model_Output', 'dm_market_level_predictions.csv')
 OUT_DIR   = os.path.join(BASE, 'Model_Output')
 

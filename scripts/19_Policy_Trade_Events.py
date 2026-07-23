@@ -45,7 +45,7 @@ import os
 import pandas as pd
 import numpy as np
 
-BASE      = r'C:\Users\masro\Documents\TOP_Digital_Twin'
+BASE      = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC_FILE  = r'C:\Users\masro\Documents\Codex\2026-06-15\top_policy_trade_scraper\output_live\TOP_policy_trade_verified_2017_2026.xlsx'
 OUT_DIR   = os.path.join(BASE, 'data', 'policy_trade')
 os.makedirs(OUT_DIR, exist_ok=True)

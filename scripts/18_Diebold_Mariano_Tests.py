@@ -50,7 +50,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 # ─────────────────────────────────────────────────────────────────────────────
 # 1. PATHS & CONFIG
 # ─────────────────────────────────────────────────────────────────────────────
-BASE      = r'C:\Users\masro\Documents\TOP_Digital_Twin'
+BASE      = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PRED_FILE = os.path.join(BASE, 'Model_Output', 'ablation_predictions.csv')
 OUT_DIR   = os.path.join(BASE, 'Model_Output')
 os.makedirs(OUT_DIR, exist_ok=True)
