@@ -28,9 +28,15 @@ Outputs (Model_Output/production_models/):
                              must build the input vector in this order)
   reference_rows.csv        latest available feature vector per (crop,
                              market) — dashboard's baseline "current state"
-                             for the scenario simulator
+                             for the scenario simulator. Also carries
+                             last_observed_price/date (the true last
+                             non-imputed trade, separate from the possibly-
+                             imputed "latest" row) and pct_imputed_last_52w
+                             (data-sufficiency signal for thin-data markets)
   feature_ranges.json       observed min/median/max per raw input feature,
                              for setting sensible dashboard slider bounds
+  model_uncertainty.json    validated M6 RMSE/MAPE per (crop, horizon) from
+                             Script 15's CV results, for uncertainty bands
 
 Run: python scripts/23_Train_Production_Models.py
 """
@@ -268,6 +274,27 @@ for crop in CROPS:
     latest_idx = df_crop.sort_values('week_start').groupby('market').tail(1).index
     latest = df_crop.loc[latest_idx].copy()
     latest['crop'] = crop
+
+    # The panel imputes weeks with no real trading (see 'imputed' column) —
+    # found in review that 58.6% of markets' LATEST row is imputed, which
+    # would silently mislabel an estimated value as "last observed price"
+    # in the dashboard. Attach the true last genuinely-observed (non-
+    # imputed) price + its date per market, so the dashboard can be honest
+    # about staleness instead of implying every row is a real trade.
+    observed = df_crop[df_crop['imputed'] == 0].sort_values('week_start')
+    last_observed = (observed.groupby('market')
+                      .agg(last_observed_price=('modal_price_weighted', 'last'),
+                           last_observed_date=('week_start', 'last')))
+    latest = latest.merge(last_observed, on='market', how='left')
+
+    # Data-sufficiency signal: % of the last 52 weeks that were imputed
+    # (not a real trade) for this market — lets the dashboard flag thin-
+    # data markets instead of presenting every prediction with equal
+    # confidence regardless of how much real data backs it.
+    recent = df_crop.sort_values('week_start').groupby('market').tail(52)
+    pct_imputed = recent.groupby('market')['imputed'].mean().mul(100).rename('pct_imputed_last_52w')
+    latest = latest.merge(pct_imputed, on='market', how='left')
+
     reference_rows.append(latest)
 
     # Price history (last 2 years per market): for the dashboard's
@@ -291,7 +318,9 @@ print(f'  Saved: {fcols_path}')
 ref_df = pd.concat(reference_rows, ignore_index=True)
 # log_price isn't an M6 feature (it's the target's source column) but the
 # dashboard needs it to display "last observed price" — include explicitly
-keep_cols = (['crop', 'market', 'state', 'week_start', 'log_price'] +
+keep_cols = (['crop', 'market', 'state', 'week_start', 'log_price',
+              'imputed', 'last_observed_price', 'last_observed_date',
+              'pct_imputed_last_52w'] +
              sorted(set(M6_FEATS) & set(ref_df.columns)))
 ref_df = ref_df[keep_cols]
 ref_path = os.path.join(OUT_DIR, 'reference_rows.csv')
@@ -325,6 +354,27 @@ ranges_path = os.path.join(OUT_DIR, 'feature_ranges.json')
 with open(ranges_path, 'w', encoding='utf-8') as f:
     json.dump(ranges, f, indent=2)
 print(f'  Saved: {ranges_path}  ({len(ranges)} simulatable features)')
+
+# Validated M6 error rates per (crop, horizon), from Script 15's actual
+# out-of-sample CV results (ablation_raw_results.csv) — lets the dashboard
+# show real, validated uncertainty (e.g. "±RMSE") instead of a bare point
+# estimate with no sense of how reliable it typically is.
+ablation_path = os.path.join(BASE, 'Model_Output', 'ablation_raw_results.csv')
+if os.path.exists(ablation_path):
+    ablation = pd.read_csv(ablation_path)
+    m6_errors = (ablation[ablation['variant'] == 'M6']
+                 .groupby(['crop', 'horizon_weeks'])[['RMSE', 'MAPE']]
+                 .mean().round(1).reset_index())
+    uncertainty = {
+        f"{r['crop']}_{int(r['horizon_weeks'])}w": {'rmse': r['RMSE'], 'mape': r['MAPE']}
+        for _, r in m6_errors.iterrows()
+    }
+    uncertainty_path = os.path.join(OUT_DIR, 'model_uncertainty.json')
+    with open(uncertainty_path, 'w', encoding='utf-8') as f:
+        json.dump(uncertainty, f, indent=2)
+    print(f'  Saved: {uncertainty_path}  ({len(uncertainty)} crop x horizon error rates)')
+else:
+    print(f'  WARNING: {ablation_path} not found — dashboard will have no uncertainty bands')
 
 print('\n' + '=' * 65)
 print('Script 23 complete. 12 production models saved to')

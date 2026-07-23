@@ -147,9 +147,14 @@ def load_metadata():
         feature_columns = json.load(f)
     with open(os.path.join(MODEL_DIR, 'feature_ranges.json'), encoding='utf-8') as f:
         feature_ranges = json.load(f)
-    reference = pd.read_csv(os.path.join(MODEL_DIR, 'reference_rows.csv'), parse_dates=['week_start'])
+    uncertainty_path = os.path.join(MODEL_DIR, 'model_uncertainty.json')
+    uncertainty = {}
+    if os.path.exists(uncertainty_path):
+        with open(uncertainty_path, encoding='utf-8') as f:
+            uncertainty = json.load(f)
+    reference = pd.read_csv(os.path.join(MODEL_DIR, 'reference_rows.csv'), parse_dates=['week_start', 'last_observed_date'])
     history = pd.read_csv(os.path.join(MODEL_DIR, 'price_history.csv'), parse_dates=['week_start'])
-    return feature_columns, feature_ranges, reference, history
+    return feature_columns, feature_ranges, uncertainty, reference, history
 
 
 if not os.path.exists(MODEL_DIR):
@@ -158,7 +163,7 @@ if not os.path.exists(MODEL_DIR):
     st.stop()
 
 models = load_models()
-feature_columns, feature_ranges, reference, history = load_metadata()
+feature_columns, feature_ranges, uncertainty, reference, history = load_metadata()
 
 
 def predict(crop, h, feature_row):
@@ -185,6 +190,7 @@ if base_row_df.empty:
     st.error('No baseline data for this crop/market combination.')
     st.stop()
 base_row = base_row_df.iloc[0].to_dict()
+as_of = pd.Timestamp(base_row['week_start'])
 
 st.sidebar.markdown(f"**As-of week:** {pd.Timestamp(base_row['week_start']).date()}")
 st.sidebar.markdown(f"**State:** {base_row.get('state', 'N/A')}")
@@ -223,21 +229,40 @@ market_intervention = st.sidebar.checkbox(
     _mii['label'], value=bool(base_row.get('market_intervention_flag', 0)), help=_mii['help'])
 scenario['market_intervention_flag'] = int(market_intervention)
 
-def safe_slider(col):
+def safe_slider(col, extend_pct=0.0):
     """Slider with a fallback for degenerate (min==max) or missing ranges —
     a real issue found in testing: some features are near-constant for a
-    given market's history, which crashes st.slider(min==max)."""
+    given market's history, which crashes st.slider(min==max).
+
+    extend_pct: widen the slider beyond the historically-observed min/max
+    by this fraction. Macro variables like diesel price and USD/INR trend
+    in one direction over 2017-2025, so "current value" often sits AT the
+    historical max — leaving zero room to simulate a hike (flagged by a
+    reviewer). Widening lets you explore beyond what's been observed, but
+    LightGBM (tree-based) cannot truly extrapolate past its training
+    range — it just repeats its most extreme leaf's prediction — so any
+    value outside the original observed range is flagged with a warning
+    rather than presented as equally reliable.
+    """
     info = FEATURE_INFO[col]
     label = info['label']
     if col not in feature_ranges or col not in base_row or pd.isna(base_row[col]):
         return None
     r = feature_ranges[col]
-    lo, hi, val = float(r['min']), float(r['max']), float(base_row[col])
+    obs_lo, obs_hi, val = float(r['min']), float(r['max']), float(base_row[col])
+    span = obs_hi - obs_lo
+    lo, hi = obs_lo - span * extend_pct, obs_hi + span * extend_pct
     val = min(max(val, lo), hi)  # clamp in case of float edge cases
-    if hi <= lo:
+    if obs_hi <= obs_lo:
         st.sidebar.caption(f'{label}: {val:g} (fixed — no variation observed)')
         return val
-    return st.sidebar.slider(label, lo, hi, val, help=info['help'])
+    result = st.sidebar.slider(label, lo, hi, val, help=info['help'])
+    if result < obs_lo or result > obs_hi:
+        st.sidebar.caption(
+            f'⚠️ {result:g} is outside the observed 2017-2025 range '
+            f'({obs_lo:g}-{obs_hi:g}) — the model has never seen values here '
+            f'and cannot reliably extrapolate; treat this result as speculative.')
+    return result
 
 
 st.sidebar.markdown('---')
@@ -252,7 +277,10 @@ st.sidebar.markdown('---')
 st.sidebar.subheader('Macro / logistics scenario')
 
 for col in ['diesel_4city_rs_litre', 'repo_rate_pct', 'usdinr_monthly_avg']:
-    val = safe_slider(col)
+    # Widened 20% beyond the observed range — these trend monotonically,
+    # so "current" often sits at the historical max (e.g. USD/INR was
+    # found to be exactly capped at its max with zero headroom).
+    val = safe_slider(col, extend_pct=0.20)
     if val is not None:
         scenario[col] = val
 
@@ -269,25 +297,65 @@ st.caption('Predictions are what the M6 model implies under the selected scenari
            'not a new statistically-validated forecast — see the ablation study '
            '(Script 15) and Diebold-Mariano tests (Scripts 18/18b) for validated results.')
 
+# Data-sufficiency flag: warn when this market's recent history is mostly
+# imputed (no real trades) rather than presenting every market's prediction
+# with equal implied confidence — a reviewer correctly flagged this gap.
+pct_imputed = base_row.get('pct_imputed_last_52w')
+if pd.notna(pct_imputed) and pct_imputed >= 50:
+    st.warning(
+        f'⚠️ Data quality: {pct_imputed:.0f}% of this market\'s last 52 weeks have no '
+        f'recorded trade (imputed/estimated). Predictions for thin-data markets like this '
+        f'are less reliable than the validated error rates below suggest.'
+    )
+elif pd.notna(pct_imputed) and pct_imputed >= 20:
+    st.info(f'ℹ️ Data quality: {pct_imputed:.0f}% of this market\'s last 52 weeks were imputed.')
+
 baseline_pred = predict(crop, horizon, base_row)
 scenario_pred = predict(crop, horizon, scenario)
 delta = scenario_pred - baseline_pred
 delta_pct = 100 * delta / baseline_pred if baseline_pred else 0
 
+# Validated uncertainty for this crop x horizon, from Script 15's actual
+# out-of-sample CV results — not a statistical prediction interval, but a
+# real, defensible sense of typical error magnitude (better than a bare
+# point estimate with no uncertainty shown at all).
+err = uncertainty.get(f'{crop}_{horizon}w', {})
+rmse, mape = err.get('rmse'), err.get('mape')
+uncertainty_note = (f' (typical error: ±Rs {rmse:,.0f}, ~{mape:.0f}% MAPE, from '
+                     f'validated backtesting)') if rmse else ''
+
 col1, col2, col3 = st.columns(3)
 col1.metric(f'Baseline prediction (h={horizon}w)', f'Rs {baseline_pred:,.0f}/quintal',
             help='What the model predicts under the CURRENT real-world feature values '
-                 '(no sidebar changes applied) — this is the model\'s unmodified forecast.')
+                 '(no sidebar changes applied) — this is the model\'s unmodified forecast.'
+                 + uncertainty_note)
 col2.metric(f'Scenario prediction (h={horizon}w)', f'Rs {scenario_pred:,.0f}/quintal',
             delta=f'{delta:+,.0f} ({delta_pct:+.1f}%)',
             help='What the model predicts after applying every change you made in the '
                  'sidebar. The delta (green/red) shows the net effect of ALL your changes '
                  'combined, not any single one — see "Scenario interpretation" below for '
-                 'a feature-by-feature breakdown.')
-col3.metric('Last observed price',
-            f"Rs {np.expm1(base_row.get('log_price', 0)):,.0f}/quintal" if pd.notna(base_row.get('log_price')) else 'N/A',
-            help='The actual, historically observed price for this market in its most '
-                 'recent recorded week — not a prediction.')
+                 'a feature-by-feature breakdown.' + uncertainty_note)
+
+# "Last observed price" previously showed whatever the latest panel row
+# was, even if that row was imputed (58.6% of markets' latest row is —
+# flagged by a reviewer). Show the TRUE last genuinely-observed trade,
+# and note staleness if it differs from the model's as-of week.
+last_obs_price = base_row.get('last_observed_price')
+last_obs_date = base_row.get('last_observed_date')
+if pd.notna(last_obs_price):
+    is_stale = pd.notna(last_obs_date) and pd.Timestamp(last_obs_date) < as_of
+    label3 = 'Last observed (real trade) price'
+    value3 = f'Rs {last_obs_price:,.0f}/quintal'
+    help3 = ('The most recent week with an ACTUAL recorded trade for this market — '
+             'not an imputed/estimated value.')
+    if is_stale:
+        weeks_stale = (as_of - pd.Timestamp(last_obs_date)).days // 7
+        value3 += f'  (as of {pd.Timestamp(last_obs_date).date()}, {weeks_stale}w ago)'
+        help3 += (f' This market has had no real trade recorded in {weeks_stale} weeks — '
+                  f'the value shown as "current" elsewhere on this page is imputed/estimated.')
+else:
+    label3, value3, help3 = 'Last observed price', 'N/A', 'No non-imputed trade found for this market.'
+col3.metric(label3, value3, help=help3)
 
 st.markdown('---')
 
@@ -300,7 +368,6 @@ st.caption(
     f'horizons, not just changing this chart.'
 )
 
-as_of = pd.Timestamp(base_row['week_start'])
 mkt_history = (history[(history['crop'] == crop) & (history['market'] == market)]
                .sort_values('week_start'))
 
@@ -318,6 +385,23 @@ last_actual_date = mkt_history['week_start'].max() if not mkt_history.empty else
 last_actual_price = (mkt_history[mkt_history['week_start'] == last_actual_date]
                       ['modal_price_weighted'].iloc[0]) if not mkt_history.empty else baseline_pred
 
+selected_date = as_of + pd.Timedelta(weeks=horizon)
+selected_points_x, selected_points_y = [], []
+
+# Validated uncertainty band around the baseline forecast (RMSE per
+# horizon from Script 15's actual out-of-sample results) — a reviewer
+# correctly flagged that point predictions were shown with no sense of
+# reliability, especially for thin-data markets.
+band_rmse = [uncertainty.get(f'{crop}_{h}w', {}).get('rmse', 0) for h in HORIZONS]
+if any(band_rmse):
+    band_dates = [last_actual_date] + [as_of + pd.Timedelta(weeks=h) for h in HORIZONS]
+    band_upper = [last_actual_price] + [predict(crop, h, base_row) + r for h, r in zip(HORIZONS, band_rmse)]
+    band_lower = [last_actual_price] + [predict(crop, h, base_row) - r for h, r in zip(HORIZONS, band_rmse)]
+    fig.add_trace(go.Scatter(
+        x=band_dates + band_dates[::-1], y=band_upper + band_lower[::-1],
+        fill='toself', fillcolor='rgba(173,181,189,0.20)', line=dict(width=0),
+        name='±RMSE (validated, baseline)', hoverinfo='skip'))
+
 for label, feature_row, color, dash in [
         ('Baseline forecast', base_row, '#adb5bd', 'dot'),
         ('Scenario forecast', scenario, '#e64980', 'dash')]:
@@ -326,9 +410,22 @@ for label, feature_row, color, dash in [
     fig.add_trace(go.Scatter(
         x=fc_dates, y=fc_prices, mode='lines+markers', name=label,
         line=dict(color=color, width=2, dash=dash), marker=dict(size=7)))
+    # Track the point matching the sidebar's selected horizon, so moving
+    # that slider visibly changes the chart too (previously the chart always
+    # plotted all 4 horizons regardless of the slider — a real UX bug a
+    # reviewer flagged as "the horizon slider doesn't do anything").
+    selected_points_x.append(selected_date)
+    selected_points_y.append(fc_prices[HORIZONS.index(horizon) + 1])
+
+fig.add_trace(go.Scatter(
+    x=selected_points_x, y=selected_points_y, mode='markers', name=f'Selected horizon (h={horizon}w)',
+    marker=dict(size=16, symbol='star', color='#ffd43b', line=dict(width=1.5, color='#495057')),
+    showlegend=True))
 
 fig.add_vline(x=as_of, line_dash='dot', line_color='#888',
               annotation_text='as-of date', annotation_position='top')
+fig.add_vline(x=selected_date, line_dash='dash', line_color='#ffd43b',
+              annotation_text=f'selected: h={horizon}w', annotation_position='top')
 fig.update_layout(xaxis_title='Date', yaxis_title='Price (Rs/quintal)',
                    legend=dict(orientation='h', y=1.15), height=460,
                    hovermode='x unified')
