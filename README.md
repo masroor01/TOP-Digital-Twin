@@ -18,14 +18,15 @@ Claude Code access lapsed: everything below is enough to keep going on your own.
   ```bash
   pip install -r requirements.txt
   ```
-- **Windows path warning**: almost every script hardcodes
-  `BASE = r'C:\Users\masro\Documents\TOP_Digital_Twin'` near the top. If you
-  move this project to a different folder or machine, **you must edit that
-  line in every script** (search for `BASE = r'C:` across `scripts/`) before
-  running anything. Only `scripts/24_Simulation_Dashboard.py` is portable
-  (it resolves its own path automatically) — that was fixed for cloud
-  deployment; the others were never revisited. Fixing all of them properly
-  is a worthwhile future task, just not done yet.
+- **Portability**: every script resolves its own project root automatically
+  from its file location (`BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))`,
+  or the pathlib equivalent in Scripts 14/16) — you can move this project to
+  any folder or machine and every script will find its own `data/` and
+  `Model_Output/` correctly. Scripts 09 and 10 are the one exception: they
+  reference external `Downloads/` folders for raw manual-download inputs
+  (see §5) — those are inherently machine/session-specific and can't be made
+  "portable" in the same sense, since they point to wherever you happened to
+  download a raw source file.
 - **Windows Bash tool note**: if running these commands from a Git Bash /
   MINGW shell rather than PowerShell, paths and `python` invocation work the
   same way — no special handling needed for this project.
