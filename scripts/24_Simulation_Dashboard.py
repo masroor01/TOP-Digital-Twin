@@ -27,7 +27,10 @@ import joblib
 import streamlit as st
 import plotly.graph_objects as go
 
-BASE = r'C:\Users\masro\Documents\TOP_Digital_Twin'
+# Portable path: resolved relative to this script's own location (scripts/..)
+# rather than hardcoded to a specific machine — required for deployment to
+# Streamlit Community Cloud, which clones the repo to its own path.
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_DIR = os.path.join(BASE, 'Model_Output', 'production_models')
 CROPS = ['tomato', 'onion', 'potato']
 HORIZONS = [1, 4, 13, 26]
