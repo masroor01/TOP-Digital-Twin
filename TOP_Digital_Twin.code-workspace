@@ -182,6 +182,23 @@
                 "program": "${workspaceFolder:📁 Project Root}/scripts/22_Master_Panel_Join.py",
                 "console": "integratedTerminal",
                 "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 23 — Train Production Models",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder:📁 Project Root}/scripts/23_Train_Production_Models.py",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
+            },
+            {
+                "name": "Script 24 — Simulation Dashboard (Streamlit)",
+                "type": "debugpy",
+                "request": "launch",
+                "module": "streamlit",
+                "args": ["run", "${workspaceFolder:📁 Project Root}/scripts/24_Simulation_Dashboard.py"],
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder:📁 Project Root}"
             }
         ]
     }

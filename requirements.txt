@@ -31,6 +31,11 @@ xlrd==2.0.2             # Read legacy .xls files (older Agmarknet exports)
 requests==2.34.1        # HTTP utility (Nominatim geocoding fallback)
 # Note: Script 16 uses stdlib urllib for geocoding (no external dependency)
 
+# ── Model persistence / dashboard (Scripts 23-24) ───────────
+joblib==1.5.3            # Save/load trained LightGBM production models
+streamlit==1.60.0        # Interactive simulation dashboard
+plotly==6.9.0            # Dashboard scenario-comparison chart
+
 # ── Stdlib (no install needed — listed for documentation) ───
 # pathlib, json, math, os, sys, re, io, time, warnings
 # zipfile, urllib.parse, urllib.request
