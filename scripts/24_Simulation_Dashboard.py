@@ -32,6 +32,95 @@ MODEL_DIR = os.path.join(BASE, 'Model_Output', 'production_models')
 CROPS = ['tomato', 'onion', 'potato']
 HORIZONS = [1, 4, 13, 26]
 
+# Plain-language explanation for every simulatable input: `help` drives the
+# native Streamlit hover tooltip on each control; `mechanism` is the
+# economic-reasoning sentence used in the scenario interpretation section
+# below the chart. Grounded in the same market-structure reasoning used to
+# interpret the ablation study (see Script 15/18b discussion): export
+# controls matter most for onion, climate/logistics matter more at longer
+# horizons, storage-buffered potato is largely insensitive to any of this.
+FEATURE_INFO = {
+    'export_banned': dict(
+        label='Export ban in effect',
+        help='When ON, the government prohibits exporting this crop abroad '
+             '(e.g. India\'s Dec 2023-May 2024 onion export ban). The strongest '
+             'policy lever — it forces all supply to stay in the domestic market.',
+        mechanism='An export ban keeps supply that would have gone abroad inside '
+                   'domestic markets, which tends to push domestic prices {dir}. '
+                   'Historically this has mainly mattered for onion — tomato and '
+                   'potato have had no significant export-ban history to learn from.'),
+    'mep_usd_per_tonne': dict(
+        label='Minimum Export Price (USD/tonne)',
+        help='The floor price (USD/tonne) below which exporters may not sell '
+             'abroad. A softer alternative to an outright ban — raising it prices '
+             'exports out of the international market without banning them.',
+        mechanism='A higher MEP discourages exports by making them less price-'
+                   'competitive abroad, which — like a ban — tends to keep more '
+                   'supply at home and push domestic prices {dir}.'),
+    'export_duty_pct': dict(
+        label='Export duty (%)',
+        help='A tax (% of value) on exported goods, e.g. the 40% onion export '
+             'duty imposed in Aug 2023. Raises the cost of exporting, discouraging '
+             'outbound shipments similarly to a higher MEP.',
+        mechanism='A higher export duty raises the cost of shipping abroad, '
+                   'discouraging exports and tending to push domestic prices {dir}.'),
+    'market_intervention_flag': dict(
+        label='Government market intervention this week',
+        help='Marks a reported NAFED/NCCF buffer-stock procurement or release, '
+             'or a subsidised retail sale, in this exact week. These directly add '
+             'or remove supply to manage price spikes or crashes.',
+        mechanism='Interventions are usually a REACTION to price stress (they '
+                   'happen because prices are already high or low), so this flag '
+                   'can reflect "crisis conditions" as much as it drives price '
+                   'itself — read its effect with that in mind.'),
+    'era5_tmax': dict(
+        label='Max temperature (°C)',
+        help='Weekly maximum temperature in the growing region (ERA5 climate '
+             'reanalysis). Extreme heat can stress crops and reduce yields, '
+             'tightening supply in the weeks ahead.',
+        mechanism='Higher extreme temperature is associated with crop stress and '
+                   'reduced expected supply, which tends to push prices {dir}.'),
+    'chirps_rain_mm': dict(
+        label='Weekly rainfall (mm)',
+        help='Satellite-estimated rainfall in the growing region (CHIRPS). '
+             'Effect is two-sided: moderate rain supports growth, but excess '
+             'rain can flood fields, damage crops, and disrupt harvest/transport.',
+        mechanism='Rainfall\'s effect is non-monotonic — moderate increases can '
+                   'support supply (pushing prices down), but large increases can '
+                   'damage crops or disrupt logistics (pushing prices up). The '
+                   'direction shown here is what the model learned for this '
+                   'specific change, not a fixed rule.'),
+    's2_ndvi': dict(
+        label='Vegetation index (NDVI)',
+        help='Crop health/density from Sentinel-2 satellite imagery (roughly '
+             '0-1). Higher values generally mean healthier, denser vegetation — '
+             'a proxy for expected yield.',
+        mechanism='Higher NDVI (healthier growing conditions) generally signals '
+                   'more supply ahead, which tends to push prices {dir}.'),
+    'diesel_4city_rs_litre': dict(
+        label='Diesel price (Rs/litre)',
+        help='Average diesel price across 4 major Indian cities (PPAC data). '
+             'Diesel is the dominant fuel for transporting produce from farms to '
+             'markets, so it is a direct proxy for logistics cost.',
+        mechanism='Higher diesel prices raise the cost of transporting produce '
+                   'to market, which tends to push wholesale prices {dir}.'),
+    'repo_rate_pct': dict(
+        label='RBI repo rate (%)',
+        help='The Reserve Bank of India\'s policy interest rate — the cost at '
+             'which banks borrow. Affects the cost of credit for traders who '
+             'borrow to finance stored inventory, particularly cold-stored potato.',
+        mechanism='A higher repo rate raises the cost of holding inventory on '
+                   'credit, which can discourage stockpiling and tends to push '
+                   'prices {dir} — most relevant for storage-buffered crops.'),
+    'usdinr_monthly_avg': dict(
+        label='USD/INR exchange rate',
+        help='The rupee-per-dollar exchange rate. A weaker rupee (higher number) '
+             'makes Indian exports cheaper for foreign buyers in dollar terms.',
+        mechanism='A weaker rupee makes exports more attractive, pulling supply '
+                   'toward export markets and away from domestic ones, which '
+                   'tends to push domestic prices {dir}.'),
+}
+
 st.set_page_config(page_title='TOP Digital Twin — Scenario Simulator', layout='wide')
 
 
@@ -108,29 +197,35 @@ st.sidebar.subheader('Policy scenario')
 
 scenario = dict(base_row)  # start from the real, current feature vector
 
-export_banned = st.sidebar.checkbox('Export ban in effect',
-                                     value=bool(base_row.get('export_banned', 0)))
+_ebi = FEATURE_INFO['export_banned']
+export_banned = st.sidebar.checkbox(_ebi['label'], value=bool(base_row.get('export_banned', 0)),
+                                     help=_ebi['help'])
 scenario['export_banned'] = int(export_banned)
 
 if 'mep_usd_per_tonne' in feature_ranges:
     r = feature_ranges['mep_usd_per_tonne']
+    _mi = FEATURE_INFO['mep_usd_per_tonne']
     scenario['mep_usd_per_tonne'] = st.sidebar.slider(
-        'Minimum Export Price (USD/tonne)', 0.0, max(r['max'], 900.0),
-        float(base_row.get('mep_usd_per_tonne', 0) or 0), step=10.0)
+        _mi['label'], 0.0, max(r['max'], 900.0),
+        float(base_row.get('mep_usd_per_tonne', 0) or 0), step=10.0, help=_mi['help'])
 
 if 'export_duty_pct' in feature_ranges:
+    _di = FEATURE_INFO['export_duty_pct']
     scenario['export_duty_pct'] = st.sidebar.slider(
-        'Export duty (%)', 0.0, 50.0, float(base_row.get('export_duty_pct', 0) or 0), step=1.0)
+        _di['label'], 0.0, 50.0, float(base_row.get('export_duty_pct', 0) or 0),
+        step=1.0, help=_di['help'])
 
+_mii = FEATURE_INFO['market_intervention_flag']
 market_intervention = st.sidebar.checkbox(
-    'Government market intervention this week (buffer procurement/release, subsidised sale)',
-    value=bool(base_row.get('market_intervention_flag', 0)))
+    _mii['label'], value=bool(base_row.get('market_intervention_flag', 0)), help=_mii['help'])
 scenario['market_intervention_flag'] = int(market_intervention)
 
-def safe_slider(col, label):
+def safe_slider(col):
     """Slider with a fallback for degenerate (min==max) or missing ranges —
     a real issue found in testing: some features are near-constant for a
     given market's history, which crashes st.slider(min==max)."""
+    info = FEATURE_INFO[col]
+    label = info['label']
     if col not in feature_ranges or col not in base_row or pd.isna(base_row[col]):
         return None
     r = feature_ranges[col]
@@ -139,26 +234,22 @@ def safe_slider(col, label):
     if hi <= lo:
         st.sidebar.caption(f'{label}: {val:g} (fixed — no variation observed)')
         return val
-    return st.sidebar.slider(label, lo, hi, val)
+    return st.sidebar.slider(label, lo, hi, val, help=info['help'])
 
 
 st.sidebar.markdown('---')
 st.sidebar.subheader('Climate scenario')
 
-for col, label in [('era5_tmax', 'Max temperature (°C)'),
-                    ('chirps_rain_mm', 'Weekly rainfall (mm)'),
-                    ('s2_ndvi', 'Vegetation index (NDVI)')]:
-    val = safe_slider(col, label)
+for col in ['era5_tmax', 'chirps_rain_mm', 's2_ndvi']:
+    val = safe_slider(col)
     if val is not None:
         scenario[col] = val
 
 st.sidebar.markdown('---')
 st.sidebar.subheader('Macro / logistics scenario')
 
-for col, label in [('diesel_4city_rs_litre', 'Diesel price (Rs/litre)'),
-                    ('repo_rate_pct', 'RBI repo rate (%)'),
-                    ('usdinr_monthly_avg', 'USD/INR exchange rate')]:
-    val = safe_slider(col, label)
+for col in ['diesel_4city_rs_litre', 'repo_rate_pct', 'usdinr_monthly_avg']:
+    val = safe_slider(col)
     if val is not None:
         scenario[col] = val
 
@@ -181,11 +272,19 @@ delta = scenario_pred - baseline_pred
 delta_pct = 100 * delta / baseline_pred if baseline_pred else 0
 
 col1, col2, col3 = st.columns(3)
-col1.metric(f'Baseline prediction (h={horizon}w)', f'Rs {baseline_pred:,.0f}/quintal')
+col1.metric(f'Baseline prediction (h={horizon}w)', f'Rs {baseline_pred:,.0f}/quintal',
+            help='What the model predicts under the CURRENT real-world feature values '
+                 '(no sidebar changes applied) — this is the model\'s unmodified forecast.')
 col2.metric(f'Scenario prediction (h={horizon}w)', f'Rs {scenario_pred:,.0f}/quintal',
-            delta=f'{delta:+,.0f} ({delta_pct:+.1f}%)')
+            delta=f'{delta:+,.0f} ({delta_pct:+.1f}%)',
+            help='What the model predicts after applying every change you made in the '
+                 'sidebar. The delta (green/red) shows the net effect of ALL your changes '
+                 'combined, not any single one — see "Scenario interpretation" below for '
+                 'a feature-by-feature breakdown.')
 col3.metric('Last observed price',
-            f"Rs {np.expm1(base_row.get('log_price', 0)):,.0f}/quintal" if pd.notna(base_row.get('log_price')) else 'N/A')
+            f"Rs {np.expm1(base_row.get('log_price', 0)):,.0f}/quintal" if pd.notna(base_row.get('log_price')) else 'N/A',
+            help='The actual, historically observed price for this market in its most '
+                 'recent recorded week — not a prediction.')
 
 st.markdown('---')
 
@@ -232,6 +331,7 @@ fig.update_layout(xaxis_title='Date', yaxis_title='Price (Rs/quintal)',
                    hovermode='x unified')
 st.plotly_chart(fig, use_container_width=True)
 
+
 def _differs(a, b):
     """NaN-safe inequality — plain != treats NaN as never equal to itself,
     which flagged every NaN-valued feature as 'changed' even when untouched."""
@@ -240,8 +340,66 @@ def _differs(a, b):
     return a != b
 
 
+diff_cols = [c for c in scenario if _differs(scenario.get(c), base_row.get(c))]
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SCENARIO INTERPRETATION — feature-by-feature breakdown of the price change
+# ─────────────────────────────────────────────────────────────────────────────
+st.markdown('---')
+st.subheader('Scenario interpretation')
+
+if not diff_cols:
+    st.info('No changes from baseline yet. Adjust a control in the sidebar to see '
+            'how the model\'s prediction responds and why.')
+else:
+    st.caption(
+        'For each input you changed, this isolates ITS OWN effect on the h='
+        f'{horizon}w prediction — changing only that one input from the baseline, '
+        'holding everything else fixed. Because the model is non-linear, these '
+        'isolated effects don\'t always add up exactly to the combined scenario '
+        'delta shown above (features can interact) — treat this as "what each '
+        'change contributes on its own," not a precise accounting.'
+    )
+
+    isolated_effects = []
+    for col in diff_cols:
+        single = dict(base_row)
+        single[col] = scenario[col]
+        single_pred = predict(crop, horizon, single)
+        eff = single_pred - baseline_pred
+        isolated_effects.append((col, eff))
+
+    sum_isolated = sum(e for _, e in isolated_effects)
+    interaction_gap = delta - sum_isolated
+
+    for col, eff in sorted(isolated_effects, key=lambda x: -abs(x[1])):
+        info = FEATURE_INFO.get(col)
+        label = info['label'] if info else col
+        before, after = base_row.get(col), scenario.get(col)
+        direction = 'higher' if eff > 0 else ('lower' if eff < 0 else 'about the same')
+        arrow = '⬆️' if eff > 0 else ('⬇️' if eff < 0 else '➡️')
+
+        with st.container(border=True):
+            c1, c2 = st.columns([3, 1])
+            with c1:
+                st.markdown(f'**{label}**  ·  {before:g} → {after:g}')
+                if info:
+                    st.caption(info['mechanism'].format(dir=direction))
+            with c2:
+                st.markdown(f'### {arrow} {eff:+,.0f}')
+                st.caption(f'Rs/quintal, isolated')
+
+    if abs(interaction_gap) > 1:
+        st.caption(
+            f'Sum of isolated effects: {sum_isolated:+,.0f} Rs — actual combined '
+            f'effect: {delta:+,.0f} Rs (difference of {interaction_gap:+,.0f} Rs is '
+            f'due to interactions between your changes, not measurement error).'
+        )
+
+st.markdown('---')
+
 with st.expander('Full scenario feature vector (debug view)'):
-    diff_cols = [c for c in scenario if _differs(scenario.get(c), base_row.get(c))]
     if diff_cols:
         st.write('Changed from baseline:', {c: (base_row.get(c), scenario.get(c)) for c in diff_cols})
     else:
