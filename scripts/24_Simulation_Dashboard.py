@@ -22,6 +22,7 @@ Run: streamlit run scripts/24_Simulation_Dashboard.py
 import os
 import json
 import hashlib
+import datetime
 import numpy as np
 import pandas as pd
 import joblib
@@ -184,7 +185,11 @@ st.sidebar.caption('Price scenario simulator (M6 production models)')
 
 crop = st.sidebar.selectbox('Crop', CROPS, format_func=str.capitalize)
 
-crop_markets = reference[reference['crop'] == crop].sort_values('market')
+crop_ref = reference[reference['crop'] == crop]
+states = sorted(crop_ref['state'].dropna().unique())
+state_sel = st.sidebar.selectbox('State / UT', states)
+
+crop_markets = crop_ref[crop_ref['state'] == state_sel].sort_values('market')
 market = st.sidebar.selectbox('Market', crop_markets['market'].unique())
 
 base_row_df = crop_markets[crop_markets['market'] == market]
@@ -193,11 +198,15 @@ if base_row_df.empty:
     st.stop()
 base_row = base_row_df.iloc[0].to_dict()
 as_of = pd.Timestamp(base_row['week_start'])
+today = pd.Timestamp(datetime.date.today())
+data_weeks_stale = int((today - as_of).days // 7)
 
-st.sidebar.markdown(f"**As-of week:** {pd.Timestamp(base_row['week_start']).date()}")
-st.sidebar.markdown(f"**State:** {base_row.get('state', 'N/A')}")
+st.sidebar.markdown(f"**Today:** {today.strftime('%d %b %Y')}")
+st.sidebar.markdown(f"**Market data last updated:** {as_of.date()}"
+                     + (f'  ({data_weeks_stale}w ago)' if data_weeks_stale > 0 else ''))
 
 horizon = st.sidebar.select_slider('Forecast horizon (weeks ahead)', options=HORIZONS, value=4)
+st.sidebar.caption(f'≈ {horizon * 7} days ahead of the market\'s last known data point.')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -299,6 +308,20 @@ st.caption('Predictions are what the M6 model implies under the selected scenari
            'not a new statistically-validated forecast — see the ablation study '
            '(Script 15) and Diebold-Mariano tests (Scripts 18/18b) for validated results.')
 
+# "Today" (live, real calendar date) vs. the market's actual last-data date
+# are two different things — forecasts stay anchored to the latter (the
+# model has no live feed), but that gap needs to be visible, not implied
+# away, especially when it's large.
+st.caption(f'📅 Today: **{today.strftime("%d %b %Y")}**  ·  '
+           f'Market data last updated: **{as_of.date()}**')
+if data_weeks_stale >= 8:
+    st.warning(
+        f'⚠️ This market\'s underlying data is {data_weeks_stale} weeks behind today. '
+        f'Forecasts below are calculated {horizon} weeks ahead of that last known data '
+        f'point ({(as_of + pd.Timedelta(weeks=horizon)).date()}), not from today\'s actual '
+        f'conditions — there is no live data feed behind this dashboard.'
+    )
+
 # Data-sufficiency flag: warn when this market's recent history is mostly
 # imputed (no real trades) rather than presenting every market's prediction
 # with equal implied confidence — a reviewer correctly flagged this gap.
@@ -326,7 +349,7 @@ rmse, mape = err.get('rmse'), err.get('mape')
 uncertainty_note = (f' (typical error: ±Rs {rmse:,.0f}, ~{mape:.0f}% MAPE, from '
                      f'validated backtesting)') if rmse else ''
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 col1.metric(f'Baseline prediction (h={horizon}w)', f'Rs {baseline_pred:,.0f}/quintal',
             help='What the model predicts under the CURRENT real-world feature values '
                  '(no sidebar changes applied) — this is the model\'s unmodified forecast.'
@@ -337,6 +360,21 @@ col2.metric(f'Scenario prediction (h={horizon}w)', f'Rs {scenario_pred:,.0f}/qui
                  'sidebar. The delta (green/red) shows the net effect of ALL your changes '
                  'combined, not any single one — see "Scenario interpretation" below for '
                  'a feature-by-feature breakdown.' + uncertainty_note)
+
+# "Accuracy" here is 100% - MAPE from Script 15's validated out-of-sample
+# backtesting for this exact crop x horizon — a widely-used but approximate
+# convention, not a formal confidence level. Shown alongside the raw MAPE/
+# RMSE (in the tooltip) rather than replacing them.
+if mape is not None:
+    accuracy_pct = max(0.0, 100 - mape)
+    col4.metric(f'Model accuracy (h={horizon}w)', f'~{accuracy_pct:.0f}%',
+                help=f'100% − MAPE ({mape:.0f}%) from validated backtesting (Script 15). '
+                     f'An approximate, commonly-used convention — not a formal statistical '
+                     f'confidence level. See the ablation study for the full accuracy picture '
+                     f'across crops/horizons.')
+else:
+    col4.metric(f'Model accuracy (h={horizon}w)', 'N/A',
+                help='No validated backtesting result available for this crop/horizon.')
 
 # "Last observed price" previously showed whatever the latest panel row
 # was, even if that row was imputed (58.6% of markets' latest row is —
@@ -425,13 +463,57 @@ fig.add_trace(go.Scatter(
     showlegend=True))
 
 fig.add_vline(x=as_of, line_dash='dot', line_color='#888',
-              annotation_text='as-of date', annotation_position='top')
+              annotation_text='data as-of', annotation_position='top')
 fig.add_vline(x=selected_date, line_dash='dash', line_color='#ffd43b',
-              annotation_text=f'selected: h={horizon}w', annotation_position='top')
+              annotation_text=f'selected: h={horizon}w (~{horizon * 7}d)', annotation_position='top')
 fig.update_layout(xaxis_title='Date', yaxis_title='Price (Rs/quintal)',
                    legend=dict(orientation='h', y=1.15), height=460,
                    hovermode='x unified')
 st.plotly_chart(fig, use_container_width=True)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MARKET COMPARISON — top markets by price and arrivals, for this crop
+# ─────────────────────────────────────────────────────────────────────────────
+st.markdown('---')
+TOP_N = 15
+st.subheader(f'Market comparison — top {TOP_N} {crop} markets')
+st.caption(
+    'Ranked by each market\'s most recent REAL observed values (not imputed, not a model '
+    'prediction). Price and arrivals may come from different weeks per market since data '
+    'recency varies market to market. The currently selected market is highlighted in pink '
+    'if it appears in the top ranking.'
+)
+
+price_top = (crop_ref.dropna(subset=['last_observed_price'])
+             .nlargest(TOP_N, 'last_observed_price')
+             .sort_values('last_observed_price'))
+arr_top = (crop_ref.dropna(subset=['log_arr'])
+           .assign(arrivals_tonnes=lambda d: np.expm1(d['log_arr']))
+           .nlargest(TOP_N, 'arrivals_tonnes')
+           .sort_values('arrivals_tonnes'))
+
+mkt_col1, mkt_col2 = st.columns(2)
+with mkt_col1:
+    if price_top.empty:
+        st.info('No real (non-imputed) price data available to rank markets.')
+    else:
+        fig_price = go.Figure(go.Bar(
+            x=price_top['last_observed_price'], y=price_top['market'], orientation='h',
+            marker_color=['#e64980' if m == market else '#495057' for m in price_top['market']]))
+        fig_price.update_layout(title='By last observed price (Rs/quintal)', height=440,
+                                 margin=dict(l=10, r=10, t=40, b=10))
+        st.plotly_chart(fig_price, use_container_width=True)
+with mkt_col2:
+    if arr_top.empty:
+        st.info('No arrivals data available to rank markets.')
+    else:
+        fig_arr = go.Figure(go.Bar(
+            x=arr_top['arrivals_tonnes'], y=arr_top['market'], orientation='h',
+            marker_color=['#e64980' if m == market else '#495057' for m in arr_top['market']]))
+        fig_arr.update_layout(title='By arrivals, latest week (tonnes)', height=440,
+                               margin=dict(l=10, r=10, t=40, b=10))
+        st.plotly_chart(fig_arr, use_container_width=True)
 
 
 def _differs(a, b):
