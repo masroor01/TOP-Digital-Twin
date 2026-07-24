@@ -35,6 +35,7 @@ requests==2.34.1        # HTTP utility (Nominatim geocoding fallback)
 joblib==1.5.3            # Save/load trained LightGBM production models
 streamlit==1.60.0        # Interactive simulation dashboard
 plotly==6.9.0            # Dashboard scenario-comparison chart
+anthropic==0.119.0       # AI policy recommendation (Script 24) — needs ANTHROPIC_API_KEY
 
 # ── Stdlib (no install needed — listed for documentation) ───
 # pathlib, json, math, os, sys, re, io, time, warnings

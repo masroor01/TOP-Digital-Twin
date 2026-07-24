@@ -21,11 +21,13 @@ Run: streamlit run scripts/24_Simulation_Dashboard.py
 
 import os
 import json
+import hashlib
 import numpy as np
 import pandas as pd
 import joblib
 import streamlit as st
 import plotly.graph_objects as go
+import anthropic
 
 # Portable path: resolved relative to this script's own location (scripts/..)
 # rather than hardcoded to a specific machine — required for deployment to
@@ -495,6 +497,82 @@ else:
             f'Sum of isolated effects: {sum_isolated:+,.0f} Rs — actual combined '
             f'effect: {delta:+,.0f} Rs (difference of {interaction_gap:+,.0f} Rs is '
             f'due to interactions between your changes, not measurement error).'
+        )
+
+st.markdown('---')
+
+# ─────────────────────────────────────────────────────────────────────────────
+# AI POLICY RECOMMENDATION — button-triggered (not auto-run on every rerun,
+# to keep API calls bounded on a public dashboard), and grounded strictly in
+# the isolated effects / delta / uncertainty already computed above rather
+# than letting the model free-associate about numbers it wasn't given.
+# ─────────────────────────────────────────────────────────────────────────────
+st.subheader('AI policy recommendation')
+
+
+def _api_key():
+    try:
+        return st.secrets.get('ANTHROPIC_API_KEY')
+    except Exception:
+        return None
+
+
+if not diff_cols:
+    st.caption('Adjust a scenario control above, then generate an AI policy read on it.')
+elif not _api_key():
+    st.info(
+        'AI recommendations need an `ANTHROPIC_API_KEY` configured for this deployment '
+        '(Streamlit Cloud: App settings -> Secrets). See README.md for setup.'
+    )
+else:
+    scenario_key = hashlib.md5(
+        f"{crop}|{market}|{horizon}|{sorted((c, scenario.get(c)) for c in diff_cols)}".encode()
+    ).hexdigest()
+    reco_state_key = f'ai_reco_{scenario_key}'
+
+    if st.button('Generate AI policy recommendation'):
+        changes_text = '\n'.join(
+            f"- {FEATURE_INFO.get(c, {}).get('label', c)}: "
+            f"{base_row.get(c):g} -> {scenario.get(c):g} "
+            f"(isolated effect: {eff:+,.0f} Rs/quintal)"
+            for c, eff in sorted(isolated_effects, key=lambda x: -abs(x[1]))
+        )
+        prompt = (
+            'You are a policy-analysis assistant embedded in an agricultural price '
+            'forecasting dashboard for Indian APMC markets (Tomato/Onion/Potato, HADP-04, '
+            'SKUAST-K). A user ran a what-if scenario. Ground your answer STRICTLY in the '
+            'numbers given below — do not invent statistics, events, or data you were not given.\n\n'
+            f'Crop: {crop.capitalize()}\nMarket: {market}\nForecast horizon: {horizon} weeks ahead\n'
+            f'Baseline prediction: Rs {baseline_pred:,.0f}/quintal\n'
+            f'Scenario prediction: Rs {scenario_pred:,.0f}/quintal '
+            f'({delta_pct:+.1f}%, {delta:+,.0f} Rs/quintal)\n'
+            f"Model's typical error at this horizon: "
+            f"{f'±Rs {rmse:,.0f} ({mape:.0f}% MAPE)' if rmse else 'not available'}\n\n"
+            f'Changes made in this scenario, with the isolated effect of each:\n{changes_text}\n\n'
+            'Write ONE paragraph (120-160 words) of plain-language policy commentary for an '
+            'agricultural-market analyst. Cover: (1) what this price move would mean for '
+            'farmers vs consumers, (2) which lever is doing most of the work and whether that '
+            'matches known market structure for this crop, (3) one caveat about relying on this '
+            'scenario (it is a what-if from a single model, not a validated forecast; thin-data '
+            'markets and feature interactions add uncertainty). Plain prose only — no bullet '
+            'points, headers, or markdown.'
+        )
+        try:
+            client = anthropic.Anthropic(api_key=_api_key())
+            resp = client.messages.create(
+                model='claude-haiku-4-5-20251001', max_tokens=400,
+                messages=[{'role': 'user', 'content': prompt}])
+            st.session_state[reco_state_key] = resp.content[0].text
+        except Exception as e:
+            st.session_state[reco_state_key] = None
+            st.error(f'AI recommendation failed: {e}')
+
+    cached = st.session_state.get(reco_state_key)
+    if cached:
+        st.markdown(f'> {cached}')
+        st.caption(
+            'AI-generated commentary grounded in this scenario\'s model outputs above — '
+            'not an independently validated forecast or official policy advice.'
         )
 
 st.markdown('---')

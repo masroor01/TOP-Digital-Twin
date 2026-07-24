@@ -231,6 +231,21 @@ executable often isn't on PATH after `pip install`, `python -m` sidesteps that.)
 `Model_Output/production_models/*.joblib` and the metadata JSON/CSV files
 alongside them).
 
+**AI policy recommendation (optional)**: the dashboard has a button that
+generates a one-paragraph AI policy commentary on whatever scenario you've
+built, using the Claude API. It's optional — without a key, the dashboard
+still works fully, just with that one section showing an info message
+instead of the button.
+- Get a key at [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys)
+  and **set a spending limit there** — the app is public, so any visitor
+  who clicks the button triggers one API call (using the cheap Haiku model).
+- **Local dev**: copy `.streamlit/secrets.toml.example` to
+  `.streamlit/secrets.toml` and paste in your key. That file is gitignored —
+  never commit a real key.
+- **Streamlit Cloud**: App settings → Secrets → paste
+  `ANTHROPIC_API_KEY = "sk-ant-..."` in the same TOML format. No redeploy
+  needed — secrets take effect on the next app restart/rerun.
+
 **Redeploying to the public URL** (Streamlit Community Cloud):
 - The app is already deployed at the live link you've been sharing. Since
   it's connected to GitHub, **any push to `master` triggers an automatic

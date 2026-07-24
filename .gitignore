@@ -1,3 +1,7 @@
+# Streamlit secrets (ANTHROPIC_API_KEY for the dashboard's AI recommendation
+# feature) — never commit real keys. See .streamlit/secrets.toml.example.
+.streamlit/secrets.toml
+
 # =============================================================
 # RAW AGMARKNET SOURCE FILES — EXCLUDED FROM VERSION CONTROL
 # =============================================================
