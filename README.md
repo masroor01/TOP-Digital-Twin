@@ -64,7 +64,9 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 | Script | What it does | Depends on |
 |---|---|---|
 | `09_Agmarknet_Weekly_Panel.py` | Builds the core weekly price/arrivals panel from raw Agmarknet CSVs (tomato/onion/potato, all-India). Handles ISO-week alignment and gap imputation (see §7 imputation caveat). | Raw Agmarknet CSVs (see §5) |
+| `09b_Merge_Onion_2026_Update.py` | One-off/refresh utility: merges the Agmarknet **portal's** separate "Daily Price Report" + "Daily Arrival Report" CSVs into the same row schema as the main onion raw file, matching markets to existing `market_id`s by normalized (state, market) name and assigning new sequential IDs for markets not seen before. Needed because onion's original scraper source doesn't get topped up the way tomato/potato's does — see §5. Run before `09_Agmarknet_Weekly_Panel.py` when refreshing onion. | Onion Daily Price/Arrival Report CSVs (see §5) |
 | `10_CMIE_Macro_Parser.py` | Parses CMIE macro Excel exports into `data/cmie_macro/` | Raw CMIE Excel files |
+| `10b_Extend_Macro_2026.py` | One-off/refresh utility: extends `data/rbi_dbie/`, `data/ppac_macro/`, and `data/cmie_macro/` CSVs in place with new CMIE Economic Outlook exports (repo/reverse-repo rate, USD/INR, WPI, diesel/LPG, agri credit, agri wages, IIP). Column mappings for each series are validated against known overlapping historical values before trusting them — see the script's own docstring for exact source-file → column notes, including two pre-existing mislabeling quirks found in the already-published data (`agri_wages_rs_day`, `iip_food_proc`) that were kept as-is for continuity rather than silently changed. | New CMIE Excel exports (see §5) |
 | `11_Market_Selection_And_DataStructure.py` | Selects/validates the market panel structure | Script 09 output |
 | `14_Satellite_Climate_Features.py` | Builds `crop_weekly_features.csv` from raw GEE exports (ERA5, CHIRPS, Sentinel-2, MODIS) | GEE raw exports (see §5), Script 09 |
 | `16_Zone_Assignment.py` | Assigns markets to agro-climatic zones | Script 09 |
@@ -162,23 +164,40 @@ of these. Here's where everything comes from and how often to refresh it.
 - Download separately for each crop, place in the same folder as
   `09_Agmarknet_Weekly_Panel.py` expects (see the script's own docstring for
   exact filenames — it looks for `tomato_all_india_apmcs*.csv` etc.)
-- Re-run `09_Agmarknet_Weekly_Panel.py` after each download.
+- **Onion specifically**: its scraper source doesn't get a fresh full-history
+  export the way tomato/potato's does (last verified stopping at Dec 2025).
+  Instead, download the portal's own "Daily Price Report" + "Daily Arrival
+  Report" for onion (same Price & Arrivals page, filter by commodity) and run
+  `09b_Merge_Onion_2026_Update.py` first — it merges them into the main raw
+  file's schema and writes an updated `onion_all_india_apmcs_2000_2026.csv`.
+- Re-run `09_Agmarknet_Weekly_Panel.py` after each download (bump `END_DATE`
+  at the top of the script to match your new data's actual cutoff).
 
 ### CMIE Macro — monthly refresh
-- Source: CMIE Economic Outlook (subscription-based data service)
-- Place raw Excel exports where `10_CMIE_Macro_Parser.py` expects, re-run it.
+- Source: CMIE Economic Outlook (subscription-based data service) — exports
+  download as "Scheme II-NNNNNNNN-X.xlsx" (X = M/A/W/D for monthly/annual/
+  weekly/daily frequency), each with a "M"/"C" row tag per date (M = current
+  monthly print, C = cumulative/fiscal-YTD — use M for level/index series).
+- Place raw Excel exports where `10_CMIE_Macro_Parser.py` expects, re-run it,
+  **or** run `10b_Extend_Macro_2026.py` (extends `rbi_dbie`, `ppac_macro`,
+  and `cmie_macro` CSVs together from CMIE exports directly in Downloads —
+  see the script's docstring for exact expected filenames per series, and
+  validate any new series' column mapping against a known historical month
+  before trusting it, same as it did).
 
 ### RBI DBIE (repo rate, USD/INR, WPI) — monthly refresh
-- Source: [DBIE RBI](https://dbie.rbi.org.in)
-- Manually download the specific series (repo rate, USD/INR monthly average,
-  WPI fruits & vegetables / crop-specific indices), combine into
+- Source: [DBIE RBI](https://dbie.rbi.org.in), or CMIE Economic Outlook
+  exports of the same series (repo/reverse-repo rate, USD/INR, WPI) — see
+  `10b_Extend_Macro_2026.py` above, which handles this directly.
+- If assembling by hand instead: combine into
   `data/rbi_dbie/rbi_dbie_macro_2017_2025.csv` matching the existing column
-  structure — there's no dedicated ingestion script for this one; it was
-  hand-assembled from individual RBI downloads.
+  structure — there's no dedicated ingestion script for the RBI-direct path.
 
 ### PPAC (diesel/LPG prices) — monthly refresh
-- Source: [Petroleum Planning & Analysis Cell](https://ppac.gov.in)
-- Same manual-assembly pattern as RBI — combine into
+- Source: [Petroleum Planning & Analysis Cell](https://ppac.gov.in), or a
+  CMIE "Prices of Petroleum Products in Domestic Markets" export — see
+  `10b_Extend_Macro_2026.py` above, which handles this directly.
+- If assembling by hand instead: combine into
   `data/ppac_macro/ppac_diesel_lpg_2017_2025.csv`.
 
 ### Satellite/Climate (ERA5, CHIRPS, Sentinel-2, MODIS) — periodic topup
@@ -191,8 +210,10 @@ of these. Here's where everything comes from and how often to refresh it.
 
 ### Labour Bureau wages — periodic refresh (Layer 5)
 - Source: state-wise "Wage Rates in Rural India" series — the file used was
-  a CEIC-sourced export (`Scheme II-*.xlsx` naming pattern). Check
-  [data.gov.in](https://www.data.gov.in) or a CEIC/statistics terminal for
+  a **CMIE** Economic Outlook export (`Scheme II-*.xlsx` naming pattern —
+  corrected from an earlier "CEIC" mislabel; that naming is CMIE's own
+  export convention, see the CMIE Macro note above). Check
+  [data.gov.in](https://www.data.gov.in) or your CMIE terminal for
   updated exports.
 - Re-run `20_Labour_Wages_Layer5.py` pointing at the new file (update the
   `SRC_FILE` path at the top of the script).
@@ -209,11 +230,16 @@ of these. Here's where everything comes from and how often to refresh it.
 ### Policy/trade events — refresh after major policy changes
 - The verified event log (`TOP_policy_trade_verified_2017_2026.xlsx`) came
   from a separate scraper project. **Important**: before trusting any new
-  policy data source, verify it the way this project did — cross-check a
-  sample of PIB press-release IDs and DGFT notification numbers against the
-  actual government sites. One candidate file during this project turned
-  out to have fabricated citations (a 404 URL, a wrong PIB ID next to a real
-  event) despite looking professional — don't skip this check.
+  policy data source, verify EVERY citation, not just a sample — cross-check
+  each PIB press-release ID and DGFT notification number against the actual
+  government sites. This has now happened **twice**: one candidate file had
+  a 404 URL and a wrong PIB ID next to a real event; a second file
+  (`extensive_top_policy_recordss.csv`, offered as a 2026 update) had all 7
+  of its new rows fail verification outright — 404s, a domain that doesn't
+  even resolve, and 2 real PIB IDs that turned out to be unrelated 2024
+  press releases from different ministries. Both looked professionally
+  structured. Don't skip this check, ever, even from a source that's been
+  reliable before.
 - Re-run `19_Policy_Trade_Events.py` after updating the event log.
 
 ---
