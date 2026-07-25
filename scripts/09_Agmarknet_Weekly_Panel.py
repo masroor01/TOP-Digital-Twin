@@ -10,7 +10,7 @@ Output: C:/Users/masro/Downloads/Agmarknet_Weekly/
         - top_weekly_panel.csv          (all three combined, long format)
 
 Processing steps per crop:
-  1. Filter to 2017-01-01 -- 2025-12-31
+  1. Filter to START_DATE -- END_DATE (see below)
   2. Clip modal price to valid range (crop-specific)
   3. Drop rows with zero/null arrivals or price
   4. Assign ISO week (Monday = week start)
@@ -36,7 +36,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 # ----------------------------------------------------------------
 INFILES = {
     'tomato': r'C:\Users\masro\Downloads\tomato_all_india_apmcs_2000_2026.csv',
-    'onion':  r'C:\Users\masro\Downloads\onion_all_india_apmcs_2000_2025 (1).csv',
+    'onion':  r'C:\Users\masro\Downloads\onion_all_india_apmcs_2000_2026.csv',
     'potato': r'C:\Users\masro\Downloads\potato_all_india_apmcs_2000_2026.csv',
 }
 
@@ -44,7 +44,7 @@ OUTDIR = r'C:\Users\masro\Downloads\Agmarknet_Weekly'
 os.makedirs(OUTDIR, exist_ok=True)
 
 START_DATE = '2017-01-01'
-END_DATE   = '2025-12-31'
+END_DATE   = '2026-07-24'
 
 # Price validity window per crop (Rs/quintal)
 # Tomato: collapses to near-zero in glut; spikes observed ~8,000-10,000 in crisis
@@ -138,7 +138,7 @@ def process_crop(crop: str) -> pd.DataFrame:
     df['arrival_date'] = pd.to_datetime(df['arrival_date'], errors='coerce')
     df = df.dropna(subset=['arrival_date'])
     df = df[(df['arrival_date'] >= START_DATE) & (df['arrival_date'] <= END_DATE)]
-    print(f'  After date filter (2017-2025): {len(df):,} rows')
+    print(f'  After date filter ({START_DATE} to {END_DATE}): {len(df):,} rows')
 
     # 3. Numeric coercion
     df['modal_price_rs_per_quintal'] = pd.to_numeric(df['modal_price_rs_per_quintal'], errors='coerce')
@@ -162,7 +162,7 @@ def process_crop(crop: str) -> pd.DataFrame:
     df['week_start'] = df['arrival_date'] - pd.to_timedelta(df['arrival_date'].dt.dayofweek, unit='D')
     df['week_start'] = df['week_start'].dt.normalize()
 
-    # 7. Potato: balanced panel (markets with data in >=8 of 9 years 2017-2025)
+    # 7. Potato: balanced panel (markets with data in >=8 of the years in [START_DATE, END_DATE])
     if crop == 'potato':
         years_per_market = df.groupby('market_id')['iso_year'].nunique()
         balanced_markets = years_per_market[years_per_market >= 8].index
