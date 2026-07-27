@@ -13,7 +13,9 @@ numpy==2.4.6            # Numerical operations, array handling
 
 # ── Machine learning ────────────────────────────────────────
 lightgbm==4.6.0         # Primary forecasting model (Scripts 12, 15)
-scikit-learn==1.9.0     # Metrics: RMSE, MAE, R2; train/test utilities
+scikit-learn==1.9.0     # Metrics: RMSE, MAE, R2; train/test utilities; RandomForest (Script 15b)
+xgboost==3.3.0          # Tree-model comparison at M6 (Script 15b)
+catboost==1.2.10        # Tree-model comparison at M6 (Script 15b)
 
 # ── Visualisation ───────────────────────────────────────────
 matplotlib==3.11.0      # All paper figures (Scripts 11–16)

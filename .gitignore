@@ -2,6 +2,10 @@
 # feature) — never commit real keys. See .streamlit/secrets.toml.example.
 .streamlit/secrets.toml
 
+# CatBoost's per-run training log directory (Script 15b) — regenerated
+# every run, not a real output (see table_tree_model_comparison*.csv instead)
+catboost_info/
+
 # =============================================================
 # RAW AGMARKNET SOURCE FILES — EXCLUDED FROM VERSION CONTROL
 # =============================================================
