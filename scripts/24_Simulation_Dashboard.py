@@ -545,6 +545,58 @@ with mkt_col2:
         st.plotly_chart(fig_arr, use_container_width=True)
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# PRICE-TREND COMPARISON — user-picks-markets, plotted over time. Separate
+# from the ranked snapshot bar charts above (those show a single latest
+# value; this shows the trend). User-driven multi-select rather than an
+# auto-populated top-N, per explicit user decision.
+# ─────────────────────────────────────────────────────────────────────────────
+st.markdown('---')
+st.subheader('Price-trend comparison')
+st.caption(
+    'Pick up to 15 markets to compare their real observed weekly price history '
+    '(up to the last 2 years) on the same chart — independent of the rankings above.'
+)
+
+crop_history = history[history['crop'] == crop]
+history_markets = sorted(crop_history['market'].unique())
+default_trend_markets = [market] if market in history_markets else []
+selected_trend_markets = st.multiselect(
+    'Markets to compare', options=history_markets, default=default_trend_markets,
+    max_selections=15,
+    help='Select up to 15 markets — defaults to the currently selected market.'
+)
+
+if not selected_trend_markets:
+    st.info('Select at least one market above to see its price trend.')
+else:
+    fig_trend = go.Figure()
+    no_data_markets = []
+    for m in selected_trend_markets:
+        mdata = crop_history[crop_history['market'] == m].sort_values('week_start')
+        if mdata['modal_price_weighted'].notna().sum() == 0:
+            no_data_markets.append(m)
+            continue
+        fig_trend.add_trace(go.Scatter(
+            x=mdata['week_start'], y=mdata['modal_price_weighted'],
+            mode='lines', name=m,
+            line=dict(width=3 if m == market else 1.5)
+        ))
+    if no_data_markets:
+        st.warning(
+            f'⚠️ No real observed trades in this window for: {", ".join(no_data_markets)} '
+            f'— entirely imputed/missing, so left off the chart rather than plotting a '
+            f'flat/empty line.'
+        )
+    if len(fig_trend.data) == 0:
+        st.info('None of the selected markets have real price history to plot in this window.')
+    else:
+        fig_trend.update_layout(xaxis_title='Date', yaxis_title='Price (Rs/quintal)',
+                                 height=460, hovermode='x unified',
+                                 legend=dict(orientation='h', y=1.15))
+        st.plotly_chart(fig_trend, use_container_width=True)
+
+
 def _differs(a, b):
     """NaN-safe inequality — plain != treats NaN as never equal to itself,
     which flagged every NaN-valued feature as 'changed' even when untouched."""
