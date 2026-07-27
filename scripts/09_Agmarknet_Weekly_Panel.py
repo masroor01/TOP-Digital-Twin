@@ -68,15 +68,24 @@ def _gap_lengths(series: pd.Series) -> pd.Series:
     return is_null.groupby(block_id).transform('sum').where(is_null, 0).astype(int)
 
 
-def impute_price_gaps(agg: pd.DataFrame) -> pd.DataFrame:
+def impute_price_gaps(agg: pd.DataFrame, grid_end: pd.Timestamp) -> pd.DataFrame:
     """
     Expand weekly aggregates to a full (market × week) grid and impute price gaps:
       <=2 weeks   : linear interpolation (price varies smoothly at short horizons)
       3-8 weeks   : seasonal-median fill (same market, same calendar month, observed years)
       >8 weeks    : left NaN -- systematic absence, excluded from modelling
     Returns grid with added columns: imputed (0/1), imputed_method.
+
+    grid_end: the END of the grid for THIS crop specifically -- must be
+    min(END_DATE, this crop's own actual max observed date), not the global
+    END_DATE. Different crops' raw sources can have different real cutoffs
+    (e.g. onion's scraper reaches a later date than tomato/potato's); using
+    the global END_DATE for all three would silently manufacture a fully-
+    imputed "phantom" tail for whichever crop's data ends earlier -- caught
+    when the dashboard's "latest week" landed on such a phantom week with
+    100% imputed rows across every market.
     """
-    all_weeks = pd.date_range(START_DATE, END_DATE, freq='W-MON')
+    all_weeks = pd.date_range(START_DATE, grid_end, freq='W-MON')
     full = (
         pd.MultiIndex.from_product(
             [agg['market_id'].unique(), all_weeks],
@@ -196,9 +205,15 @@ def process_crop(crop: str) -> pd.DataFrame:
     agg = agg.join(meta, on='market_id')
     agg['crop'] = crop
 
-    # 11. Expand to complete (market x week) grid and impute price gaps
-    print(f'  Expanding to complete grid + imputing gaps ...')
-    full = impute_price_gaps(agg)
+    # 11. Expand to complete (market x week) grid and impute price gaps.
+    # Cap the grid at THIS crop's own actual max observed date, not the
+    # global END_DATE -- crops' raw sources can have different real
+    # cutoffs (see impute_price_gaps docstring).
+    crop_max_date = df['arrival_date'].max()
+    grid_end = min(pd.Timestamp(END_DATE), crop_max_date)
+    print(f'  Grid end for {crop}: {grid_end.date()} '
+          f'(crop\'s own max observed date: {crop_max_date.date()})')
+    full = impute_price_gaps(agg, grid_end)
     full = full.join(meta, on='market_id')     # re-attach state/district/market to all grid rows
     full['crop']     = crop
     full['iso_year'] = full['week_start'].dt.isocalendar().year.astype(int)

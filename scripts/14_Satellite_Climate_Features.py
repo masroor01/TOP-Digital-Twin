@@ -6,7 +6,7 @@ Extracts and processes 4 data sources into weekly district-level
 climate and vegetation features for Layer 2 (Satellite) and
 Layer 3 (Climate) of the TOP Digital Twin.
 
-Inputs (zip files for 2017-2024 + topup CSVs for 2025):
+Inputs (zip files for 2017-2024 + topup CSVs for 2025 and 2026):
   ERA5-...zip           daily temperature per zone (2000-2024)
   ERA5_topup-...zip     daily temperature per zone (2020-2024)
   CHIRPS-...zip         pentad rainfall per zone (1981-2024)
@@ -16,6 +16,10 @@ Inputs (zip files for 2017-2024 + topup CSVs for 2025):
   GEE_2025/chirps/      2025 CHIRPS CSVs     (from gee_02_CHIRPS_2025.js)
   GEE_2025/s2/          2025 S2 NDVI CSVs    (from gee_03_S2_NDVI_2025.js)
   GEE_2025/modis/       2025 MODIS CSVs      (from gee_04 and gee_05)
+  GEE_2026/era5/        2026 ERA5 topup CSVs (from gee_01_ERA5_topup_2026.js)
+  GEE_2026/chirps/      2026 CHIRPS CSVs     (from gee_02_CHIRPS_2026.js)
+  GEE_2026/s2/          2026 S2 NDVI CSVs    (from gee_03_S2_NDVI_2026.js)
+  GEE_2026/modis/       2026 MODIS CSVs      (from gee_04 and gee_05, 2026 versions)
 
 Outputs:
   data/satellite_climate/raw/era5/            extracted ERA5 CSVs
@@ -62,21 +66,26 @@ ZIP_S2         = DOWNLOADS / 'S2-20260708T112817Z-3-001.zip'
 ZIP_MODIS      = DOWNLOADS / 'MODIS-20260708T112651Z-3-001.zip'
 
 START = pd.Timestamp('2017-01-01')
-END   = pd.Timestamp('2025-12-31')
+END   = pd.Timestamp('2026-07-24')
 
-# Full ISO-week index 2017-2025 (Mondays)
-_all_weeks = pd.date_range('2016-12-26', '2025-12-31', freq='W-MON')
+# Full ISO-week index 2017-2026 (Mondays)
+_all_weeks = pd.date_range('2016-12-26', '2026-07-24', freq='W-MON')
 WEEK_INDEX = _all_weeks[(_all_weeks >= START) & (_all_weeks <= END)]
 
 CROPS = ['tomato', 'onion', 'potato']
 
-# 2025 topup CSVs downloaded from GEE Google Drive exports.
+# 2025/2026 topup CSVs downloaded from GEE Google Drive exports.
 # Place them in these subfolders (matching the GEE export file naming):
-#   GEE_2025/era5/   → *_ERA5topup_2025.csv  (gee_01)
-#   GEE_2025/chirps/ → *_CHIRPS_2025.csv     (gee_02)
-#   GEE_2025/s2/     → *_S2_NDVI_2025.csv    (gee_03)
-#   GEE_2025/modis/  → *_MODIS_*_2025.csv    (gee_04, gee_05)
+#   GEE_2025/era5/   → *_ERA5topup_2025.csv  (gee_01)      GEE_2026/era5/   → *_ERA5topup_2026.csv
+#   GEE_2025/chirps/ → *_CHIRPS_2025.csv     (gee_02)      GEE_2026/chirps/ → *_CHIRPS_2026.csv
+#   GEE_2025/s2/     → *_S2_NDVI_2025.csv    (gee_03)      GEE_2026/s2/     → *_S2_NDVI_2026.csv
+#   GEE_2025/modis/  → *_MODIS_*_2025.csv    (gee_04, 05)  GEE_2026/modis/  → *_MODIS_*_2026.csv
+# Different sources lag real-time by different amounts (CHIRPS/MODIS more
+# than ERA5/S2) -- the final merge in Step 6 is a left-join onto the full
+# week skeleton, so a source's trailing weeks beyond its own cutoff just
+# come through as NaN for those columns, not a crash or a truncated file.
 TOPUP_2025 = DOWNLOADS / 'GEE_2025'
+TOPUP_2026 = DOWNLOADS / 'GEE_2026'
 
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 RAW_DIR.mkdir(parents=True, exist_ok=True)
@@ -180,16 +189,16 @@ for era5_subdir in ['era5', 'era5_topup']:
         if df.empty:
             continue
         era5_frames.append(df)
-topup_era5_dir = TOPUP_2025 / 'era5'
-if topup_era5_dir.exists():
-    for fpath in sorted(topup_era5_dir.glob('*.csv')):
-        df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
-        df = df[(df['date'] >= START) & (df['date'] <= END)].copy()
-        if not df.empty:
-            era5_frames.append(df)
-    print(f'  2025 ERA5 topup: {len(list(topup_era5_dir.glob("*.csv")))} files loaded')
-else:
-    print(f'  2025 ERA5 topup: folder not found ({topup_era5_dir}) -- run gee_01 first')
+for topup_dir_path, topup_label in [(TOPUP_2025 / 'era5', '2025'), (TOPUP_2026 / 'era5', '2026')]:
+    if topup_dir_path.exists():
+        for fpath in sorted(topup_dir_path.glob('*.csv')):
+            df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
+            df = df[(df['date'] >= START) & (df['date'] <= END)].copy()
+            if not df.empty:
+                era5_frames.append(df)
+        print(f'  {topup_label} ERA5 topup: {len(list(topup_dir_path.glob("*.csv")))} files loaded')
+    else:
+        print(f'  {topup_label} ERA5 topup: folder not found ({topup_dir_path}) -- run gee_01 first')
 
 era5_raw = pd.concat(era5_frames, ignore_index=True)
 # Remove any overlap between main and topup (keep one row per zone × date)
@@ -224,14 +233,14 @@ print('STEP 3: CHIRPS — pentad → weekly')
 print('='*65)
 
 chirps_frames = []
-# Load CHIRPS from zip-extracted folder + optional 2025 topup folder
+# Load CHIRPS from zip-extracted folder + optional 2025/2026 topup folders
 chirps_dirs = [RAW_DIR / 'chirps']
-_topup_chirps = TOPUP_2025 / 'chirps'
-if _topup_chirps.exists():
-    chirps_dirs.append(_topup_chirps)
-    print(f'  2025 CHIRPS topup: {len(list(_topup_chirps.glob("*.csv")))} files found')
-else:
-    print(f'  2025 CHIRPS topup: folder not found ({_topup_chirps}) -- run gee_02 first')
+for _topup_chirps, topup_label in [(TOPUP_2025 / 'chirps', '2025'), (TOPUP_2026 / 'chirps', '2026')]:
+    if _topup_chirps.exists():
+        chirps_dirs.append(_topup_chirps)
+        print(f'  {topup_label} CHIRPS topup: {len(list(_topup_chirps.glob("*.csv")))} files found')
+    else:
+        print(f'  {topup_label} CHIRPS topup: folder not found ({_topup_chirps}) -- run gee_02 first')
 
 for _chirps_dir in chirps_dirs:
     for fpath in sorted(_chirps_dir.glob('*.csv')):
@@ -269,14 +278,14 @@ print('STEP 4: Sentinel-2 — scenes → weekly (forward-filled, limit=4w)')
 print('='*65)
 
 s2_frames = []
-# Load S2 from zip-extracted folder + optional 2025 topup folder
+# Load S2 from zip-extracted folder + optional 2025/2026 topup folders
 _s2_dirs = [RAW_DIR / 's2']
-_topup_s2 = TOPUP_2025 / 's2'
-if _topup_s2.exists():
-    _s2_dirs.append(_topup_s2)
-    print(f'  2025 S2 topup: {len(list(_topup_s2.glob("*.csv")))} files found')
-else:
-    print(f'  2025 S2 topup: folder not found ({_topup_s2}) -- run gee_03 first')
+for _topup_s2, topup_label in [(TOPUP_2025 / 's2', '2025'), (TOPUP_2026 / 's2', '2026')]:
+    if _topup_s2.exists():
+        _s2_dirs.append(_topup_s2)
+        print(f'  {topup_label} S2 topup: {len(list(_topup_s2.glob("*.csv")))} files found')
+    else:
+        print(f'  {topup_label} S2 topup: folder not found ({_topup_s2}) -- run gee_03 first')
 
 for _s2_dir in _s2_dirs:
     for fpath in sorted(_s2_dir.glob('*.csv')):
@@ -333,14 +342,14 @@ print('='*65)
 
 modis_ndvi_frames, modis_lst_frames = [], []
 
-# Load MODIS from zip-extracted folder + optional 2025 topup folder
+# Load MODIS from zip-extracted folder + optional 2025/2026 topup folders
 _modis_dirs = [RAW_DIR / 'modis']
-_topup_modis = TOPUP_2025 / 'modis'
-if _topup_modis.exists():
-    _modis_dirs.append(_topup_modis)
-    print(f'  2025 MODIS topup: {len(list(_topup_modis.glob("*.csv")))} files found')
-else:
-    print(f'  2025 MODIS topup: folder not found ({_topup_modis}) -- run gee_04/05 first')
+for _topup_modis, topup_label in [(TOPUP_2025 / 'modis', '2025'), (TOPUP_2026 / 'modis', '2026')]:
+    if _topup_modis.exists():
+        _modis_dirs.append(_topup_modis)
+        print(f'  {topup_label} MODIS topup: {len(list(_topup_modis.glob("*.csv")))} files found')
+    else:
+        print(f'  {topup_label} MODIS topup: folder not found ({_topup_modis}) -- run gee_04/05 first')
 
 for _modis_dir in _modis_dirs:
     for fpath in sorted(_modis_dir.glob('*.csv')):
@@ -421,14 +430,14 @@ print('\n' + '='*65)
 print('STEP 6: Merging all sources into zone_weekly_features')
 print('='*65)
 
-# Build full skeleton: all 17 zones × all 418 ISO weeks
+# Build full skeleton: all 17 zones x all weeks in WEEK_INDEX
 zones_meta = era5[['zone_id', 'crop']].drop_duplicates()
 skeleton = pd.merge(
     zones_meta.assign(key=1),
     pd.DataFrame({'week_start': WEEK_INDEX, 'key': 1}),
     on='key'
 ).drop(columns='key').sort_values(['zone_id', 'week_start']).reset_index(drop=True)
-print(f'  Skeleton shape: {skeleton.shape}  ({skeleton["zone_id"].nunique()} zones x {skeleton["week_start"].nunique()} weeks)')  # expect 17 x 470 = 7,990
+print(f'  Skeleton shape: {skeleton.shape}  ({skeleton["zone_id"].nunique()} zones x {skeleton["week_start"].nunique()} weeks)')
 
 zone_feat = skeleton.copy()
 
@@ -595,7 +604,7 @@ for ax, (crop, grp) in zip(axes, crop_feat.groupby('crop')):
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_major_locator(mdates.YearLocator())
 axes[-1].set_xlabel('Year', fontsize=10)
-plt.suptitle('ERA5 Weekly Temperature: Production Zone Averages (2017–2025)',
+plt.suptitle('ERA5 Weekly Temperature: Production Zone Averages (2017–2026)',
              fontsize=12, fontweight='bold', y=1.01)
 plt.tight_layout()
 fig_path = FIG_DIR / 'fig_era5_temperature.png'
@@ -619,7 +628,7 @@ for ax, (crop, grp) in zip(axes, crop_feat.groupby('crop')):
     ax.set_yticklabels(mat.index, fontsize=7)
     ax.set_title(f'{CROP_LABELS[crop]} — Weekly Rainfall (mm)', fontsize=10, fontweight='bold')
 axes[-1].set_xlabel('ISO Week Number', fontsize=10)
-plt.suptitle('CHIRPS Rainfall Heatmap: Crop Production Zones (2017–2025)',
+plt.suptitle('CHIRPS Rainfall Heatmap: Crop Production Zones (2017–2026)',
              fontsize=12, fontweight='bold', y=1.01)
 plt.tight_layout()
 fig_path = FIG_DIR / 'fig_chirps_rainfall_heatmap.png'
@@ -647,7 +656,7 @@ for ax, (crop, grp) in zip(axes, crop_feat.groupby('crop')):
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     ax.xaxis.set_major_locator(mdates.YearLocator())
 axes[-1].set_xlabel('Year', fontsize=10)
-plt.suptitle('Sentinel-2 NDVI: Production Zone Averages and Anomalies (2017–2025)',
+plt.suptitle('Sentinel-2 NDVI: Production Zone Averages and Anomalies (2017–2026)',
              fontsize=12, fontweight='bold', y=1.01)
 plt.tight_layout()
 fig_path = FIG_DIR / 'fig_s2_ndvi_anomaly.png'
@@ -722,7 +731,7 @@ for ax, (crop, grp) in zip(axes, crop_feat.groupby('crop')):
                         fontsize=5, color='black' if abs(v) < 0.7 else 'white')
     plt.colorbar(im, ax=ax, fraction=0.04, pad=0.04)
 
-plt.suptitle('Feature Correlation: Climate & Satellite Variables (2017–2025)',
+plt.suptitle('Feature Correlation: Climate & Satellite Variables (2017–2026)',
              fontsize=12, fontweight='bold')
 plt.tight_layout()
 fig_path = FIG_DIR / 'fig_climate_satellite_correlation.png'

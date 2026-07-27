@@ -17,7 +17,8 @@ its whole ablation study on import.
 Training procedure per (crop, horizon):
   1. Fit with early stopping on a held-out tail (last 26 weeks) to find
      the right number of trees (best_iteration).
-  2. Refit on the FULL 2017-2025 history using that fixed tree count —
+  2. Refit on the FULL history (2017 through the latest available week)
+     using that fixed tree count —
      standard "validate then refit on everything" practice for a
      production model, so the final model isn't wasting the most recent
      6 months of data on validation alone.
@@ -88,7 +89,7 @@ print('=' * 65)
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[1] Loading panel + all layers ...')
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
-df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2025-12-31')]
+df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2026-07-24')]
 df = df.sort_values(['crop', 'market', 'week_start']).reset_index(drop=True)
 df['year']  = df['week_start'].dt.year
 df['month'] = df['week_start'].dt.month
