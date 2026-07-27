@@ -183,6 +183,19 @@ def predict(crop, h, feature_row):
 st.sidebar.title('TOP Digital Twin')
 st.sidebar.caption('Price scenario simulator (M6 production models)')
 
+with st.sidebar.expander('Data & coverage'):
+    _counts = reference.groupby('crop')['market'].nunique()
+    st.markdown(
+        'Source: Agmarknet (price/arrivals), CMIE/RBI/PPAC (macro), '
+        'GEE Sentinel-2/MODIS/ERA5/CHIRPS (satellite/climate), 2017-2026.\n\n'
+        'Markets are filtered to those with **>=80% real (non-imputed) '
+        'weekly coverage** over their own history (added 2026-07-27 — '
+        'earlier versions of this dashboard had no such filter and '
+        'included many thin-data markets).\n\n'
+        f'Markets in current models: **{_counts.get("tomato", 0)} tomato, '
+        f'{_counts.get("onion", 0)} onion, {_counts.get("potato", 0)} potato**.'
+    )
+
 crop = st.sidebar.selectbox('Crop', CROPS, format_func=str.capitalize)
 
 crop_ref = reference[reference['crop'] == crop]
@@ -247,7 +260,7 @@ def safe_slider(col, extend_pct=0.0):
 
     extend_pct: widen the slider beyond the historically-observed min/max
     by this fraction. Macro variables like diesel price and USD/INR trend
-    in one direction over 2017-2025, so "current value" often sits AT the
+    in one direction over 2017-2026, so "current value" often sits AT the
     historical max — leaving zero room to simulate a hike (flagged by a
     reviewer). Widening lets you explore beyond what's been observed, but
     LightGBM (tree-based) cannot truly extrapolate past its training
@@ -270,7 +283,7 @@ def safe_slider(col, extend_pct=0.0):
     result = st.sidebar.slider(label, lo, hi, val, help=info['help'])
     if result < obs_lo or result > obs_hi:
         st.sidebar.caption(
-            f'⚠️ {result:g} is outside the observed 2017-2025 range '
+            f'⚠️ {result:g} is outside the observed 2017-2026 range '
             f'({obs_lo:g}-{obs_hi:g}) — the model has never seen values here '
             f'and cannot reliably extrapolate; treat this result as speculative.')
     return result
