@@ -79,9 +79,16 @@ ZONES = {
     'O9_Kurnool':        {'crop': 'onion',  'lat': 15.8281, 'lon': 78.0373, 'zone_market': 'Kurnool APMC',      'zone_state': 'Andhra Pradesh'},
     'O10_Gondal':        {'crop': 'onion',  'lat': 21.9608, 'lon': 70.7980, 'zone_market': 'Gondal APMC',       'zone_state': 'Gujarat'},
     # Potato
-    'P1_Agra':           {'crop': 'potato', 'lat': 27.1767, 'lon': 78.0081, 'zone_market': 'Agra APMC',         'zone_state': 'Uttar Pradesh'},
-    'P2_Farrukhabad':    {'crop': 'potato', 'lat': 27.3900, 'lon': 79.5800, 'zone_market': 'Farrukhabad APMC',  'zone_state': 'Uttar Pradesh'},
-    'P3_Jalandhar':      {'crop': 'potato', 'lat': 31.3260, 'lon': 75.5762, 'zone_market': 'Jalandhar APMC',    'zone_state': 'Punjab'},
+    # NOTE (2026-07-27): P1/P2/P3 relocated from Agra/Farrukhabad/Jalandhar
+    # (UP/Punjab) -- those zones had ZERO markets in the modeled potato panel
+    # because raw UP/Punjab potato coverage only starts 2022/2025 respectively,
+    # short of the balanced-panel >=8-year filter in Script 09. Replaced with
+    # real, currently-modeled potato markets chosen for climate diversity.
+    # Requires the full-history GEE exports in scripts/gee/gee_0{1-5}_*_PotatoZoneReplacement_2017_2026.js
+    # before re-running this script (do not re-run until that data lands).
+    'P1_Darjeeling':     {'crop': 'potato', 'lat': 27.037755, 'lon': 88.263176, 'zone_market': 'Darjeeling APMC',                    'zone_state': 'West Bengal'},
+    'P2_DiamondHarbour': {'crop': 'potato', 'lat': 22.192689, 'lon': 88.189488, 'zone_market': 'Diamond Harbour(South 24-pgs) APMC', 'zone_state': 'West Bengal'},
+    'P3_Dehradun':       {'crop': 'potato', 'lat': 30.325565, 'lon': 78.043681, 'zone_market': 'Dehradoon APMC',                     'zone_state': 'Uttarakhand'},
     'P4_Bardhaman':      {'crop': 'potato', 'lat': 23.2330, 'lon': 87.8550, 'zone_market': 'Bardhaman APMC',    'zone_state': 'West Bengal'},
 }
 
@@ -386,10 +393,10 @@ ZONE_COLORS = {
     'O9_Kurnool':       '#0074d9',
     'O10_Gondal':       '#b5c0d0',
     # Potato
-    'P1_Agra':          '#2ca02c',
-    'P2_Farrukhabad':   '#98df8a',
-    'P3_Jalandhar':     '#8c564b',
-    'P4_Bardhaman':     '#c49c94',
+    'P1_Darjeeling':     '#2ca02c',
+    'P2_DiamondHarbour': '#98df8a',
+    'P3_Dehradun':       '#8c564b',
+    'P4_Bardhaman':      '#c49c94',
 }
 
 assigned = assignment.dropna(subset=['lat', 'lon', 'zone_id'])

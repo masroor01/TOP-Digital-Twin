@@ -127,7 +127,7 @@ TEMPLATE_BODY = r"""
 <div class="header">
   <div class="header-top">
     <span class="header-title">TOP Market Coverage</span>
-    <span class="header-subtitle">Tomato &middot; Onion &middot; Potato &nbsp;|&nbsp; 2017&ndash;2024</span>
+    <span class="header-subtitle">Tomato &middot; Onion &middot; Potato &nbsp;|&nbsp; 2017&ndash;2026 &nbsp;|&nbsp; Exploratory only &mdash; modeled panel applies an 80% real-coverage filter separately (see README)</span>
   </div>
   <div class="summary-row">
     <button class="crop-chip active" data-crop="all">All <span class="count" id="cnt-all"></span></button>
@@ -176,7 +176,7 @@ TEMPLATE_BODY = r"""
 """
 
 TEMPLATE_SCRIPT = r"""
-const MAX_WEEKS=419,PAGE_SIZE=60;
+const MAX_WEEKS=500,PAGE_SIZE=60;
 let filteredData=[],currentCrop='all',currentState='',activeCovs=new Set(),searchTerm='',sortCol='n_weeks',sortDir=-1,currentPage=1;
 const covClass={'Full (7yr+)':'full','Good (4.5-7yr)':'good','Moderate (2-4.5yr)':'moderate','Short (1-2yr)':'short','Thin (<1yr)':'thin'};
 function updateCropCounts(){

@@ -20,7 +20,9 @@ Processing steps per crop:
        <=2 weeks   : linear interpolation
        3-8 weeks   : seasonal-median fill (same market, same calendar month)
        >8 weeks    : left NaN -- excluded from model training
-  8. Output complete-grid panel with market metadata and imputation flags attached
+  8. Real-coverage filter: drop markets below MIN_REAL_COVERAGE (80%) real
+     (non-imputed) share of their own grid, all crops (added 2026-07-27)
+  9. Output complete-grid panel with market metadata and imputation flags attached
 """
 
 import io
@@ -45,6 +47,15 @@ os.makedirs(OUTDIR, exist_ok=True)
 
 START_DATE = '2017-01-01'
 END_DATE   = '2026-07-27'
+
+# Minimum share of a market's own full grid that must be real (non-imputed)
+# for the market to be retained. Added 2026-07-27 after discovering the
+# panel had no coverage-based filter at all for tomato/onion (median market
+# was 77-84% imputed) -- decided on 80% as the working threshold, a balance
+# between data quality and preserving enough geographic spread for zone
+# assignment (verified: no production zone loses all nearby markets at 80%,
+# unlike a stricter 90% cut).
+MIN_REAL_COVERAGE = 0.80
 
 # Price validity window per crop (Rs/quintal)
 # Tomato: collapses to near-zero in glut; spikes observed ~8,000-10,000 in crisis
@@ -218,6 +229,20 @@ def process_crop(crop: str) -> pd.DataFrame:
     full['crop']     = crop
     full['iso_year'] = full['week_start'].dt.isocalendar().year.astype(int)
     full['iso_week'] = full['week_start'].dt.isocalendar().week.astype(int)
+
+    # 11b. Real-coverage filter: drop markets whose real (non-imputed) share of
+    # their own full grid falls below MIN_REAL_COVERAGE. Applies to all crops
+    # (potato's existing years>=8 filter already clears this bar for ~80% of
+    # its markets, so this mostly affects tomato/onion, where no market-level
+    # filter previously existed at all -- full retention had left most markets
+    # >70-80% imputed; see 2026-07-27 coverage-gap review).
+    coverage = 1 - full.groupby('market_id')['imputed'].mean()
+    keep_markets = coverage[coverage >= MIN_REAL_COVERAGE].index
+    before_n = full['market_id'].nunique()
+    full = full[full['market_id'].isin(keep_markets)]
+    print(f'  Real-coverage filter (>= {MIN_REAL_COVERAGE:.0%} real, '
+          f'<= {1-MIN_REAL_COVERAGE:.0%} imputed): '
+          f'{full["market_id"].nunique()} / {before_n} markets kept')
 
     # Imputation summary
     n_obs  = (full['imputed'] == 0).sum()

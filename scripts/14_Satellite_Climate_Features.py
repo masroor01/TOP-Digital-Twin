@@ -544,8 +544,8 @@ if zone_assign_path.exists():
         'T4_Solan':True,'T5_Navsari':True,'O1_Lasalgaon':True,
         'O2_Pimpalgaon':True,'O3_Mahuva':True,'O6_Hubli':True,
         'O7_Solapur':True,'O8_Manmad':True,'O9_Kurnool':True,
-        'O10_Gondal':True,'P1_Agra':True,'P2_Farrukhabad':True,
-        'P3_Jalandhar':True,'P4_Bardhaman':True,
+        'O10_Gondal':True,'P1_Darjeeling':True,'P2_DiamondHarbour':True,
+        'P3_Dehradun':True,'P4_Bardhaman':True,
     }.items()))
     missing = [z for z in all_zones if z not in zones_used]
     if missing:
