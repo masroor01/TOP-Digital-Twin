@@ -235,28 +235,50 @@ st.sidebar.subheader('Policy scenario')
 
 scenario = dict(base_row)  # start from the real, current feature vector
 
+def _num(col, default=0.0):
+    """base_row.get(col) safely as a float, never NaN — `NaN or default`
+    doesn't work because NaN is truthy in Python, so a missing/NaN policy
+    value was silently passed straight into st.slider as NaN, rendering a
+    degenerate slider with no visible track (found 2026-07-27)."""
+    v = base_row.get(col)
+    return default if v is None or pd.isna(v) else float(v)
+
+
+def _policy_staleness_caption(col):
+    stale = staleness.get(crop, {}).get(col)
+    if stale:
+        st.sidebar.caption(
+            f'📌 Starting value carried forward from {stale["as_of"]} '
+            f'({stale["weeks_stale"]}w stale) — this source hasn\'t published '
+            f'more recent data yet.')
+
+
 _ebi = FEATURE_INFO['export_banned']
-export_banned = st.sidebar.checkbox(_ebi['label'], value=bool(base_row.get('export_banned', 0)),
+export_banned = st.sidebar.checkbox(_ebi['label'], value=bool(_num('export_banned')),
                                      help=_ebi['help'])
 scenario['export_banned'] = int(export_banned)
+_policy_staleness_caption('export_banned')
 
 if 'mep_usd_per_tonne' in feature_ranges:
     r = feature_ranges['mep_usd_per_tonne']
     _mi = FEATURE_INFO['mep_usd_per_tonne']
     scenario['mep_usd_per_tonne'] = st.sidebar.slider(
         _mi['label'], 0.0, max(r['max'], 900.0),
-        float(base_row.get('mep_usd_per_tonne', 0) or 0), step=10.0, help=_mi['help'])
+        _num('mep_usd_per_tonne'), step=10.0, help=_mi['help'])
+    _policy_staleness_caption('mep_usd_per_tonne')
 
 if 'export_duty_pct' in feature_ranges:
     _di = FEATURE_INFO['export_duty_pct']
     scenario['export_duty_pct'] = st.sidebar.slider(
-        _di['label'], 0.0, 50.0, float(base_row.get('export_duty_pct', 0) or 0),
+        _di['label'], 0.0, 50.0, _num('export_duty_pct'),
         step=1.0, help=_di['help'])
+    _policy_staleness_caption('export_duty_pct')
 
 _mii = FEATURE_INFO['market_intervention_flag']
 market_intervention = st.sidebar.checkbox(
-    _mii['label'], value=bool(base_row.get('market_intervention_flag', 0)), help=_mii['help'])
+    _mii['label'], value=bool(_num('market_intervention_flag')), help=_mii['help'])
 scenario['market_intervention_flag'] = int(market_intervention)
+_policy_staleness_caption('market_intervention_flag')
 
 def safe_slider(col, extend_pct=0.0):
     """Slider with a fallback for degenerate (min==max) or missing ranges —

@@ -111,6 +111,26 @@
     "chirps_rain_mm_roll4": {
       "as_of": "2026-07-13",
       "weeks_stale": 2
+    },
+    "export_banned": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 30
+    },
+    "mep_usd_per_tonne": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 30
+    },
+    "export_duty_pct": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 30
+    },
+    "market_intervention_flag": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 30
+    },
+    "operation_greens_active": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 30
     }
   },
   "onion": {
@@ -225,6 +245,26 @@
     "chirps_rain_mm_roll4": {
       "as_of": "2026-07-13",
       "weeks_stale": 1
+    },
+    "export_banned": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 29
+    },
+    "mep_usd_per_tonne": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 29
+    },
+    "export_duty_pct": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 29
+    },
+    "market_intervention_flag": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 29
+    },
+    "operation_greens_active": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 29
     }
   },
   "potato": {
@@ -339,6 +379,26 @@
     "chirps_rain_mm_roll4": {
       "as_of": "2026-07-13",
       "weeks_stale": 2
+    },
+    "export_banned": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 30
+    },
+    "mep_usd_per_tonne": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 30
+    },
+    "export_duty_pct": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 30
+    },
+    "market_intervention_flag": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 30
+    },
+    "operation_greens_active": {
+      "as_of": "2025-12-29",
+      "weeks_stale": 30
     }
   }
 }

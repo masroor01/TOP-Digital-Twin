@@ -277,18 +277,23 @@ for crop in CROPS:
     latest = df_crop.loc[latest_idx].copy()
     latest['crop'] = crop
 
-    # Forward-fill macro/climate columns for the dashboard's baseline row only
-    # (NOT the training data above, which already saw whatever was really
-    # available at each week). Found 2026-07-27: macro (CMIE/RBI/PPAC) and
-    # some climate (ERA5/CHIRPS) sources lag 1-4 weeks behind the market
-    # panel's own latest week -- since these columns are joined at
+    # Forward-fill macro/climate/policy columns for the dashboard's baseline
+    # row only (NOT the training data above, which already saw whatever was
+    # really available at each week). Found 2026-07-27: macro (CMIE/RBI/PPAC),
+    # some climate (ERA5/CHIRPS), and policy (export ban/MEP/duty) sources all
+    # lag behind the market panel's own latest week -- policy worst of all,
+    # stuck at 2025-12-29, ~30 weeks behind. Since these columns are joined at
     # (crop, year/month) or (crop, week_start), not per-market, EVERY market's
     # baseline row was landing on a calendar gap and getting NaN, silently
-    # disabling the corresponding "what-if" sliders for the whole dashboard.
+    # disabling the corresponding "what-if" sliders for the whole dashboard
+    # (first found with macro/climate; the export-price/duty sliders turned
+    # out to have the exact same bug via the policy layer, missed in the
+    # first pass since export_banned/market_intervention_flag are checkboxes
+    # and don't visibly break the same way NaN does on a slider).
     # These values are identical across markets for a given crop/week (crop-
     # level joins), so forward-filling once per crop is exact, not an
     # approximation across markets.
-    stale_cols = [c for c in (MACRO_COLS + CLIMATE_FEATS) if c in df_crop.columns]
+    stale_cols = [c for c in (MACRO_COLS + CLIMATE_FEATS + POLICY_FEATS) if c in df_crop.columns]
     weekly = (df_crop[['week_start'] + stale_cols]
               .drop_duplicates(subset=['week_start'])
               .sort_values('week_start'))
