@@ -230,6 +230,7 @@ print('\n[3] Training production models (M6, full history) ...\n')
 feature_columns = {}
 reference_rows = []
 history_rows = []
+staleness = {}
 
 for crop in CROPS:
     df_crop = feat[crop]
@@ -275,6 +276,34 @@ for crop in CROPS:
     latest_idx = df_crop.sort_values('week_start').groupby('market').tail(1).index
     latest = df_crop.loc[latest_idx].copy()
     latest['crop'] = crop
+
+    # Forward-fill macro/climate columns for the dashboard's baseline row only
+    # (NOT the training data above, which already saw whatever was really
+    # available at each week). Found 2026-07-27: macro (CMIE/RBI/PPAC) and
+    # some climate (ERA5/CHIRPS) sources lag 1-4 weeks behind the market
+    # panel's own latest week -- since these columns are joined at
+    # (crop, year/month) or (crop, week_start), not per-market, EVERY market's
+    # baseline row was landing on a calendar gap and getting NaN, silently
+    # disabling the corresponding "what-if" sliders for the whole dashboard.
+    # These values are identical across markets for a given crop/week (crop-
+    # level joins), so forward-filling once per crop is exact, not an
+    # approximation across markets.
+    stale_cols = [c for c in (MACRO_COLS + CLIMATE_FEATS) if c in df_crop.columns]
+    weekly = (df_crop[['week_start'] + stale_cols]
+              .drop_duplicates(subset=['week_start'])
+              .sort_values('week_start'))
+    last_real = {c: weekly.loc[weekly[c].notna(), 'week_start'].max() for c in stale_cols}
+    weekly[stale_cols] = weekly[stale_cols].ffill()
+    grid_end_date = latest['week_start'].max()
+
+    staleness[crop] = {}
+    for c in stale_cols:
+        d = last_real[c]
+        if pd.notna(d) and d < grid_end_date:
+            staleness[crop][c] = {'as_of': str(d.date()),
+                                   'weeks_stale': int((grid_end_date - d).days // 7)}
+
+    latest = latest.drop(columns=stale_cols).merge(weekly, on='week_start', how='left')
 
     # The panel imputes weeks with no real trading (see 'imputed' column) —
     # found in review that 58.6% of markets' LATEST row is imputed, which
@@ -342,7 +371,12 @@ print(f'  Saved: {hist_path}  ({len(hist_df):,} rows, up to {HISTORY_WEEKS} week
 # st.slider(). The full time series has real historical variation.
 SIMULATABLE = (['export_banned', 'mep_usd_per_tonne', 'export_duty_pct',
                  'market_intervention_flag', 'operation_greens_active'] +
-                CLIMATE_FEATS[:6] + SAT_FEATS[:4] +
+                # Explicit list, not a CLIMATE_FEATS[:N] slice -- found 2026-07-27
+                # that slicing silently dropped every CHIRPS column (CLIMATE_FEATS
+                # is ERA5_COLS + CHIRPS_COLS, so [:6] only ever grabbed the 6 ERA5
+                # columns), meaning the rainfall slider had no range and could
+                # never render, since Script 15/24.
+                ['era5_tmax', 'chirps_rain_mm'] + SAT_FEATS[:4] +
                 ['diesel_4city_rs_litre', 'repo_rate_pct', 'usdinr_monthly_avg',
                  'wage_agri_men', 'wage_agri_women'])
 ranges = {}
@@ -355,6 +389,16 @@ ranges_path = os.path.join(OUT_DIR, 'feature_ranges.json')
 with open(ranges_path, 'w', encoding='utf-8') as f:
     json.dump(ranges, f, indent=2)
 print(f'  Saved: {ranges_path}  ({len(ranges)} simulatable features)')
+
+# Staleness of forward-filled macro/climate baseline values (see the
+# reference-row construction above) -- lets the dashboard flag which
+# sliders are showing a carried-forward value rather than this exact week's
+# real data, instead of silently presenting it as current.
+stale_path = os.path.join(OUT_DIR, 'macro_climate_staleness.json')
+with open(stale_path, 'w', encoding='utf-8') as f:
+    json.dump(staleness, f, indent=2)
+n_stale = sum(len(v) for v in staleness.values())
+print(f'  Saved: {stale_path}  ({n_stale} crop x feature entries forward-filled)')
 
 # Validated M6 error rates per (crop, horizon), from Script 15's actual
 # out-of-sample CV results (ablation_raw_results.csv) — lets the dashboard

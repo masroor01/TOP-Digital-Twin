@@ -157,7 +157,12 @@ def load_metadata():
             uncertainty = json.load(f)
     reference = pd.read_csv(os.path.join(MODEL_DIR, 'reference_rows.csv'), parse_dates=['week_start', 'last_observed_date'])
     history = pd.read_csv(os.path.join(MODEL_DIR, 'price_history.csv'), parse_dates=['week_start'])
-    return feature_columns, feature_ranges, uncertainty, reference, history
+    staleness_path = os.path.join(MODEL_DIR, 'macro_climate_staleness.json')
+    staleness = {}
+    if os.path.exists(staleness_path):
+        with open(staleness_path, encoding='utf-8') as f:
+            staleness = json.load(f)
+    return feature_columns, feature_ranges, uncertainty, reference, history, staleness
 
 
 if not os.path.exists(MODEL_DIR):
@@ -166,7 +171,7 @@ if not os.path.exists(MODEL_DIR):
     st.stop()
 
 models = load_models()
-feature_columns, feature_ranges, uncertainty, reference, history = load_metadata()
+feature_columns, feature_ranges, uncertainty, reference, history, staleness = load_metadata()
 
 
 def predict(crop, h, feature_row):
@@ -286,6 +291,12 @@ def safe_slider(col, extend_pct=0.0):
             f'⚠️ {result:g} is outside the observed 2017-2026 range '
             f'({obs_lo:g}-{obs_hi:g}) — the model has never seen values here '
             f'and cannot reliably extrapolate; treat this result as speculative.')
+    stale = staleness.get(crop, {}).get(col)
+    if stale:
+        st.sidebar.caption(
+            f'📌 Starting value carried forward from {stale["as_of"]} '
+            f'({stale["weeks_stale"]}w stale) — this source hasn\'t published '
+            f'more recent data yet.')
     return result
 
 
