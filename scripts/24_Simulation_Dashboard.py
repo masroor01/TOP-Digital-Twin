@@ -546,25 +546,39 @@ with mkt_col2:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# PRICE-TREND COMPARISON — user-picks-markets, plotted over time. Separate
-# from the ranked snapshot bar charts above (those show a single latest
-# value; this shows the trend). User-driven multi-select rather than an
-# auto-populated top-N, per explicit user decision.
+# PRICE-TREND COMPARISON — independent Crop / State-UT / Market picker,
+# deliberately separate from the sidebar's main scenario-simulator
+# selectors so you can compare markets in a different crop/state without
+# disturbing the main scenario above. User-driven multi-select rather
+# than an auto-populated top-N, per explicit user decision.
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown('---')
 st.subheader('Price-trend comparison')
 st.caption(
-    'Pick up to 15 markets to compare their real observed weekly price history '
-    '(up to the last 2 years) on the same chart — independent of the rankings above.'
+    'Pick a crop, state, and up to 15 markets to compare their real observed weekly '
+    'price history (up to the last 2 years) on the same chart — independent of the '
+    'main scenario controls in the sidebar and the rankings above.'
 )
 
-crop_history = history[history['crop'] == crop]
-history_markets = sorted(crop_history['market'].unique())
-default_trend_markets = [market] if market in history_markets else []
+trend_col1, trend_col2 = st.columns(2)
+with trend_col1:
+    trend_crop = st.selectbox('Crop', CROPS, format_func=str.capitalize,
+                               index=CROPS.index(crop), key='trend_crop')
+with trend_col2:
+    trend_crop_ref = reference[reference['crop'] == trend_crop]
+    trend_states = sorted(trend_crop_ref['state'].dropna().unique())
+    trend_state_default = trend_states.index(state_sel) if state_sel in trend_states else 0
+    trend_state = st.selectbox('State / UT', trend_states, index=trend_state_default, key='trend_state')
+
+trend_crop_history = history[history['crop'] == trend_crop]
+trend_state_markets = set(trend_crop_ref[trend_crop_ref['state'] == trend_state]['market'])
+history_markets = sorted(m for m in trend_crop_history['market'].unique() if m in trend_state_markets)
+default_trend_markets = [market] if (trend_crop == crop and market in history_markets) else []
 selected_trend_markets = st.multiselect(
     'Markets to compare', options=history_markets, default=default_trend_markets,
     max_selections=15,
-    help='Select up to 15 markets — defaults to the currently selected market.'
+    help='Select up to 15 markets in the chosen crop/state — defaults to the sidebar\'s '
+         'currently selected market when crop and state both match.'
 )
 
 if not selected_trend_markets:
@@ -573,14 +587,14 @@ else:
     fig_trend = go.Figure()
     no_data_markets = []
     for m in selected_trend_markets:
-        mdata = crop_history[crop_history['market'] == m].sort_values('week_start')
+        mdata = trend_crop_history[trend_crop_history['market'] == m].sort_values('week_start')
         if mdata['modal_price_weighted'].notna().sum() == 0:
             no_data_markets.append(m)
             continue
         fig_trend.add_trace(go.Scatter(
             x=mdata['week_start'], y=mdata['modal_price_weighted'],
             mode='lines', name=m,
-            line=dict(width=3 if m == market else 1.5)
+            line=dict(width=3 if (trend_crop == crop and m == market) else 1.5)
         ))
     if no_data_markets:
         st.warning(
