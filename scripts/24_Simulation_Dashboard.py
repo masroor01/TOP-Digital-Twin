@@ -335,6 +335,35 @@ if pd.notna(pct_imputed) and pct_imputed >= 50:
 elif pd.notna(pct_imputed) and pct_imputed >= 20:
     st.info(f'ℹ️ Data quality: {pct_imputed:.0f}% of this market\'s last 52 weeks were imputed.')
 
+# ─────────────────────────────────────────────────────────────────────────────
+# PRICE FORECAST TICKER — the baseline model's real trained horizons, with
+# their actual calendar dates. The model only has 4 trained horizons
+# (1w/4w/13w/26w), not daily granularity, so this shows exactly those —
+# no interpolated/invented daily points presented as real forecasts.
+# Always shows the BASELINE (current real-world inputs), independent of
+# the scenario sliders below, so it reads as "the model's live forecast."
+# ─────────────────────────────────────────────────────────────────────────────
+st.markdown('---')
+st.subheader('Price forecast ticker')
+st.caption(
+    'The baseline model\'s prediction at each of its trained horizons, dated to the '
+    'real calendar week — not affected by the what-if sliders below. Forecasts start '
+    'from the market\'s last known data point, not from today (see above).'
+)
+ticker_cols = st.columns(len(HORIZONS))
+for tcol, h in zip(ticker_cols, HORIZONS):
+    fdate = as_of + pd.Timedelta(weeks=h)
+    fprice = predict(crop, h, base_row)
+    herr = uncertainty.get(f'{crop}_{h}w', {})
+    herr_note = (f' Typical error: ±Rs {herr["rmse"]:,.0f} ({herr["mape"]:.0f}% MAPE), '
+                 f'from validated backtesting.') if herr.get('rmse') else ''
+    tcol.metric(
+        f'h={h}w  ·  {fdate.strftime("%d %b %Y")}',
+        f'Rs {fprice:,.0f}',
+        help=f'Baseline forecast for {fdate.date()} ({h} weeks ahead of the market\'s '
+             f'last known data point, {as_of.date()}).' + herr_note
+    )
+
 baseline_pred = predict(crop, horizon, base_row)
 scenario_pred = predict(crop, horizon, scenario)
 delta = scenario_pred - baseline_pred
