@@ -494,7 +494,11 @@ potato,Uttarakhand,UC,Dehradoon,Dehradoon APMC,303.0,2026-06-01,2026,23,587.5130
 potato,Uttarakhand,UC,Dehradoon,Dehradoon APMC,303.0,2026-06-08,2026,24,554.2253521126761,71.0,3.0,0,observed
 potato,Uttarakhand,UC,Dehradoon,Dehradoon APMC,303.0,2026-06-15,2026,25,551.7783857729139,73.1,4.0,0,observed
 potato,Uttarakhand,UC,Dehradoon,Dehradoon APMC,303.0,2026-06-22,2026,26,599.9307479224376,72.2,3.0,0,observed
-potato,Uttarakhand,UC,Dehradoon,Dehradoon APMC,303.0,2026-06-29,2026,27,504.7169811320755,26.5,2.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Dehradoon APMC,303.0,2026-06-29,2026,27,547.1698113207547,79.5,5.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Dehradoon APMC,303.0,2026-07-06,2026,28,550.0,20.5,1.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Dehradoon APMC,303.0,2026-07-13,2026,29,745.5095862764884,99.1,4.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Dehradoon APMC,303.0,2026-07-20,2026,30,735.0649350649351,7.7,2.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Dehradoon APMC,303.0,2026-07-27,2026,31,,,,1,
 potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2017-01-02,2017,1,606.7567567567568,37.0,7.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2017-01-09,2017,2,496.01593625498003,25.1,7.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2017-01-16,2017,3,543.3673469387755,19.599999999999998,7.0,0,observed
@@ -990,7 +994,11 @@ potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2026-06-01,2026,23,647
 potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2026-06-08,2026,24,550.0,11.0,1.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2026-06-15,2026,25,649.9649122807018,142.5,3.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2026-06-22,2026,26,730.4,112.5,5.0,0,observed
-potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2026-06-29,2026,27,,,,1,
+potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2026-06-29,2026,27,569.6875,64.0,3.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2026-07-06,2026,28,633.0,60.0,4.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2026-07-13,2026,29,608.6842105263158,76.0,4.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2026-07-20,2026,30,611.4230769230769,65.0,5.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Kashipur APMC,319.0,2026-07-27,2026,31,,,,1,
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2017-01-02,2017,1,668.75,8.0,3.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2017-01-09,2017,2,625.0,4.0,2.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2017-01-16,2017,3,650.0,2.0,1.0,0,observed
@@ -1281,7 +1289,7 @@ potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2022-06-27,2022,26,925.
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2022-07-04,2022,27,984.0,12.5,4.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2022-07-11,2022,28,985.8571428571429,,,1,linear
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2022-07-18,2022,29,987.7142857142858,,,1,linear
-potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2022-07-25,2022,30,908.3333333333334,,,1,seasonal_median
+potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2022-07-25,2022,30,887.5,,,1,seasonal_median
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2022-08-01,2022,31,991.4285714285714,17.5,5.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2022-08-08,2022,32,985.8141858141859,,,1,linear
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2022-08-15,2022,33,980.1998001998002,,,1,linear
@@ -1333,8 +1341,8 @@ potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2023-06-26,2023,26,815.
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2023-07-03,2023,27,900.0,1.0,1.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2023-07-10,2023,28,875.0,,,1,linear
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2023-07-17,2023,29,850.0,,,1,linear
-potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2023-07-24,2023,30,908.3333333333334,,,1,seasonal_median
-potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2023-07-31,2023,31,908.3333333333334,,,1,seasonal_median
+potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2023-07-24,2023,30,887.5,,,1,seasonal_median
+potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2023-07-31,2023,31,887.5,,,1,seasonal_median
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2023-08-07,2023,32,1008.6175115207373,,,1,seasonal_median
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2023-08-14,2023,33,1008.6175115207373,,,1,seasonal_median
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2023-08-21,2023,34,1008.6175115207373,,,1,seasonal_median
@@ -1486,7 +1494,11 @@ potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-06-01,2026,23,271.
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-06-08,2026,24,313.3333333333333,24.0,5.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-06-15,2026,25,344.44444444444446,27.0,6.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-06-22,2026,26,348.14814814814815,27.0,6.0,0,observed
-potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-06-29,2026,27,350.0,10.0,2.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-06-29,2026,27,348.3333333333333,30.0,6.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-07-06,2026,28,350.0,22.0,4.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-07-13,2026,29,348.125,32.0,6.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-07-20,2026,30,350.0,33.0,6.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-07-27,2026,31,340.0,5.0,1.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2017-01-02,2017,1,525.0,8.0,5.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2017-01-09,2017,2,471.42857142857144,3.5,2.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2017-01-16,2017,3,450.0,3.0,1.0,0,observed
@@ -1982,7 +1994,11 @@ potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2026-06-01,2026,23,665
 potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2026-06-08,2026,24,678.4883720930233,172.0,5.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2026-06-15,2026,25,653.7453183520599,267.0,6.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2026-06-22,2026,26,704.2990654205607,267.5,6.0,0,observed
-potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2026-06-29,2026,27,633.3333333333334,75.0,2.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2026-06-29,2026,27,616.6666666666666,150.0,5.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2026-07-06,2026,28,600.0,138.0,5.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2026-07-13,2026,29,751.7906336088155,145.2,6.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2026-07-20,2026,30,758.2758620689655,145.0,6.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2017-01-02,2017,1,589.5833333333334,240.0,4.0,0,observed
 potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2017-01-09,2017,2,608.4745762711865,295.0,6.0,0,observed
 potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2017-01-16,2017,3,581.7460317460317,315.0,6.0,0,observed
@@ -2478,7 +2494,11 @@ potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2026-06-01,2026,23,11
 potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2026-06-08,2026,24,1100.0,323.0,7.0,0,observed
 potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2026-06-15,2026,25,1100.0,339.0,7.0,0,observed
 potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2026-06-22,2026,26,1100.0,337.0,7.0,0,observed
-potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2026-06-29,2026,27,1100.0,97.0,2.0,0,observed
+potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2026-06-29,2026,27,1071.2166172106824,337.0,7.0,0,observed
+potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2026-07-06,2026,28,1042.7299703264096,337.0,7.0,0,observed
+potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2026-07-13,2026,29,1000.0,337.0,7.0,0,observed
+potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2026-07-20,2026,30,1000.0,338.0,7.0,0,observed
+potato,West Bengal,WB,North 24 Parganas,Barasat APMC,328.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2017-01-02,2017,1,440.90909090909093,66.0,3.0,0,observed
 potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2017-01-09,2017,2,427.7464788732394,142.0,7.0,0,observed
 potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2017-01-16,2017,3,392.60869565217394,161.0,7.0,0,observed
@@ -2974,7 +2994,11 @@ potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2026-06-01,2026,23,754.73
 potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2026-06-08,2026,24,748.1875,160.0,6.0,0,observed
 potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2026-06-15,2026,25,754.2162162162163,185.0,7.0,0,observed
 potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2026-06-22,2026,26,773.9428571428572,175.0,7.0,0,observed
-potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2026-06-29,2026,27,760.0,52.5,2.0,0,observed
+potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2026-06-29,2026,27,764.2447916666666,192.0,7.0,0,observed
+potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2026-07-06,2026,28,761.3850415512464,198.55,7.0,0,observed
+potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2026-07-13,2026,29,747.6486486486486,185.0,7.0,0,observed
+potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2026-07-20,2026,30,671.5870786516854,178.0,6.0,0,observed
+potato,West Bengal,WB,Bankura,Bankura Sadar APMC,329.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2017-01-02,2017,1,514.2857142857143,322.0,7.0,0,observed
 potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2017-01-09,2017,2,438.34355828220856,326.0,7.0,0,observed
 potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2017-01-16,2017,3,392.85714285714283,329.0,7.0,0,observed
@@ -3470,7 +3494,11 @@ potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2026-06-01,2026,23,1000.0,363.0,
 potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2026-06-08,2026,24,1000.0,315.0,6.0,0,observed
 potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2026-06-15,2026,25,1000.0,263.0,5.0,0,observed
 potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2026-06-22,2026,26,1000.0,259.0,5.0,0,observed
-potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2026-06-29,2026,27,1000.0,152.0,3.0,0,observed
+potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2026-06-29,2026,27,1000.0,253.0,5.0,0,observed
+potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2026-07-06,2026,28,1000.0,359.0,7.0,0,observed
+potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2026-07-13,2026,29,1000.0,368.0,7.0,0,observed
+potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2026-07-20,2026,30,1000.0,384.0,7.0,0,observed
+potato,West Bengal,WB,Birbhum,Bolpur APMC,330.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2017-01-02,2017,1,436.60550458715596,109.0,6.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2017-01-09,2017,2,384.93506493506493,77.0,4.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2017-01-16,2017,3,378.0851063829787,94.0,5.0,0,observed
@@ -3966,7 +3994,11 @@ potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2026-06-01,2026,23,900.0,
 potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2026-06-08,2026,24,876.7179487179487,97.5,6.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2026-06-15,2026,25,856.6153846153846,97.5,6.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2026-06-22,2026,26,870.0507614213197,98.5,6.0,0,observed
-potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2026-06-29,2026,27,880.0,34.0,2.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2026-06-29,2026,27,880.0,103.0,6.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2026-07-06,2026,28,868.3333333333334,105.0,6.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2026-07-13,2026,29,860.0,87.5,5.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2026-07-20,2026,30,840.0,109.0,6.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Kalna APMC,331.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2017-01-02,2017,1,482.4,50.0,7.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2017-01-09,2017,2,428.57142857142856,49.7,6.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2017-01-16,2017,3,364.72222222222223,72.0,7.0,0,observed
@@ -4462,7 +4494,11 @@ potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2026-06-01,2026,23,510.0,
 potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2026-06-08,2026,24,505.86206896551727,116.0,6.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2026-06-15,2026,25,502.9059829059829,117.0,6.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2026-06-22,2026,26,503.9247311827957,93.0,5.0,0,observed
-potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2026-06-29,2026,27,500.0,36.0,2.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2026-06-29,2026,27,486.61538461538464,130.0,7.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2026-07-06,2026,28,460.0,92.0,5.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2026-07-13,2026,29,417.10280373831773,107.0,6.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2026-07-20,2026,30,623.3333333333334,72.0,4.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Katwa APMC,332.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2017-01-02,2017,1,716.5887850467288,21.400000000000002,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2017-01-09,2017,2,687.2685185185185,21.6,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2017-01-16,2017,3,652.5826446280992,24.2,6.0,0,observed
@@ -4958,7 +4994,11 @@ potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2026-06-01,2026,23,600.0,
 potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2026-06-08,2026,24,600.0,90.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2026-06-15,2026,25,600.0,90.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2026-06-22,2026,26,600.0,90.0,6.0,0,observed
-potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2026-06-29,2026,27,600.0,15.0,1.0,0,observed
+potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2026-06-29,2026,27,600.0,105.0,7.0,0,observed
+potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2026-07-06,2026,28,615.9090909090909,44.0,3.0,0,observed
+potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2026-07-13,2026,29,650.0,70.0,5.0,0,observed
+potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2026-07-20,2026,30,,,,1,
+potato,West Bengal,WB,Coochbehar,Coochbehar APMC,333.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2017-01-02,2017,1,372.85714285714283,119.0,6.0,0,observed
 potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2017-01-09,2017,2,356.2857142857143,70.0,6.0,0,observed
 potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2017-01-16,2017,3,338.1720430107527,93.0,7.0,0,observed
@@ -5454,7 +5494,11 @@ potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2026-06-01,2026,23,820.078472403
 potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2026-06-08,2026,24,798.9336801040312,38.45,7.0,0,observed
 potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2026-06-15,2026,25,780.9751567216158,43.07000000000001,7.0,0,observed
 potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2026-06-22,2026,26,790.6260575296108,29.55,7.0,0,observed
-potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2026-06-29,2026,27,813.0188679245284,15.899999999999999,3.0,0,observed
+potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2026-06-29,2026,27,792.4800849707914,37.66,7.0,0,observed
+potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2026-07-06,2026,28,758.2372881355933,29.499999999999996,7.0,0,observed
+potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2026-07-13,2026,29,707.3684210526317,37.05,7.0,0,observed
+potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2026-07-20,2026,30,673.467202141901,37.349999999999994,7.0,0,observed
+potato,West Bengal,WB,Hooghly,Pandua APMC,334.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2017-01-02,2017,1,627.5,220.0,7.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2017-01-09,2017,2,519.9152542372881,295.0,7.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2017-01-16,2017,3,438.1034482758621,290.0,7.0,0,observed
@@ -5950,7 +5994,11 @@ potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2026-06-01,2026,23,553.2142
 potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2026-06-08,2026,24,589.3103448275862,145.0,6.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2026-06-15,2026,25,654.6875,160.0,6.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2026-06-22,2026,26,657.5,120.0,5.0,0,observed
-potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2026-06-29,2026,27,700.0,73.0,3.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2026-06-29,2026,27,700.0,158.0,6.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2026-07-06,2026,28,700.0,140.0,5.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2026-07-13,2026,29,695.7142857142857,140.0,6.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2026-07-20,2026,30,684.6428571428571,140.0,5.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Dhupguri APMC,335.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Malda,Samsi APMC,336.0,2017-01-02,2017,1,703.9215686274509,255.0,5.0,0,observed
 potato,West Bengal,WB,Malda,Samsi APMC,336.0,2017-01-09,2017,2,644.8598130841121,535.0,7.0,0,observed
 potato,West Bengal,WB,Malda,Samsi APMC,336.0,2017-01-16,2017,3,600.0,540.0,7.0,0,observed
@@ -6446,7 +6494,11 @@ potato,West Bengal,WB,Malda,Samsi APMC,336.0,2026-06-01,2026,23,431.147540983606
 potato,West Bengal,WB,Malda,Samsi APMC,336.0,2026-06-08,2026,24,486.66144200626957,638.0,7.0,0,observed
 potato,West Bengal,WB,Malda,Samsi APMC,336.0,2026-06-15,2026,25,701.4285714285714,525.0,7.0,0,observed
 potato,West Bengal,WB,Malda,Samsi APMC,336.0,2026-06-22,2026,26,703.4673366834171,398.0,6.0,0,observed
-potato,West Bengal,WB,Malda,Samsi APMC,336.0,2026-06-29,2026,27,706.578947368421,190.0,3.0,0,observed
+potato,West Bengal,WB,Malda,Samsi APMC,336.0,2026-06-29,2026,27,707.9032258064516,310.0,5.0,0,observed
+potato,West Bengal,WB,Malda,Samsi APMC,336.0,2026-07-06,2026,28,708.5802469135803,405.0,7.0,0,observed
+potato,West Bengal,WB,Malda,Samsi APMC,336.0,2026-07-13,2026,29,708.5616438356165,365.0,7.0,0,observed
+potato,West Bengal,WB,Malda,Samsi APMC,336.0,2026-07-20,2026,30,696.9636135508156,398.5,7.0,0,observed
+potato,West Bengal,WB,Malda,Samsi APMC,336.0,2026-07-27,2026,31,680.0,65.0,1.0,0,observed
 potato,West Bengal,WB,Malda,English Bazar APMC,337.0,2017-01-02,2017,1,650.0,517.5,6.0,0,observed
 potato,West Bengal,WB,Malda,English Bazar APMC,337.0,2017-01-09,2017,2,556.9764979885665,472.30000000000007,7.0,0,observed
 potato,West Bengal,WB,Malda,English Bazar APMC,337.0,2017-01-16,2017,3,560.203542162305,378.3,5.0,0,observed
@@ -6943,6 +6995,10 @@ potato,West Bengal,WB,Malda,English Bazar APMC,337.0,2026-06-08,2026,24,1271.237
 potato,West Bengal,WB,Malda,English Bazar APMC,337.0,2026-06-15,2026,25,1271.2378640776699,,,1,seasonal_median
 potato,West Bengal,WB,Malda,English Bazar APMC,337.0,2026-06-22,2026,26,1271.2378640776699,,,1,seasonal_median
 potato,West Bengal,WB,Malda,English Bazar APMC,337.0,2026-06-29,2026,27,1271.2378640776699,,,1,seasonal_median
+potato,West Bengal,WB,Malda,English Bazar APMC,337.0,2026-07-06,2026,28,1427.2899728997288,,,1,seasonal_median
+potato,West Bengal,WB,Malda,English Bazar APMC,337.0,2026-07-13,2026,29,1427.2899728997288,,,1,seasonal_median
+potato,West Bengal,WB,Malda,English Bazar APMC,337.0,2026-07-20,2026,30,1427.2899728997288,,,1,seasonal_median
+potato,West Bengal,WB,Malda,English Bazar APMC,337.0,2026-07-27,2026,31,1427.2899728997288,,,1,seasonal_median
 potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2017-01-02,2017,1,650.0,125.0,5.0,0,observed
 potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2017-01-09,2017,2,532.0353982300885,113.0,4.0,0,observed
 potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2017-01-16,2017,3,500.0,194.0,6.0,0,observed
@@ -7438,7 +7494,11 @@ potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-06-01,20
 potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-06-08,2026,24,700.0,100.0,5.0,0,observed
 potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-06-15,2026,25,716.0,100.0,5.0,0,observed
 potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-06-22,2026,26,720.0,60.0,3.0,0,observed
-potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-06-29,2026,27,750.0,40.0,2.0,0,observed
+potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-06-29,2026,27,740.0,100.0,5.0,0,observed
+potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-07-06,2026,28,760.0,40.0,2.0,0,observed
+potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-07-13,2026,29,793.3333333333334,60.0,3.0,0,observed
+potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-07-20,2026,30,830.0,80.0,4.0,0,observed
+potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2017-01-02,2017,1,1188.5593220338983,,,1,seasonal_median
 potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2017-01-09,2017,2,1188.5593220338983,,,1,seasonal_median
 potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2017-01-16,2017,3,1188.5593220338983,,,1,seasonal_median
@@ -7934,7 +7994,11 @@ potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-06-01,2026,23,990.039761431
 potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-06-08,2026,24,946.7229729729729,59.2,7.0,0,observed
 potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-06-15,2026,25,971.3879598662207,59.8,7.0,0,observed
 potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-06-22,2026,26,953.2377740303542,59.3,7.0,0,observed
-potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-06-29,2026,27,970.0,25.6,3.0,0,observed
+potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-06-29,2026,27,974.3023255813953,60.2,7.0,0,observed
+potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-07-06,2026,28,982.8547854785479,60.599999999999994,7.0,0,observed
+potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-07-13,2026,29,914.3355481727574,60.2,7.0,0,observed
+potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-07-20,2026,30,852.0744680851063,37.6,5.0,0,observed
+potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2017-01-02,2017,1,594.2,100.0,5.0,0,observed
 potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2017-01-09,2017,2,526.0,125.0,5.0,0,observed
 potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2017-01-16,2017,3,436.7741935483871,155.0,6.0,0,observed
@@ -8430,7 +8494,11 @@ potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2026-06-01,2026,23,984.70329
 potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2026-06-08,2026,24,995.5637707948244,54.099999999999994,7.0,0,observed
 potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2026-06-15,2026,25,964.9443207126949,44.9,6.0,0,observed
 potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2026-06-22,2026,26,954.582560296846,53.9,7.0,0,observed
-potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2026-06-29,2026,27,960.08658008658,23.1,3.0,0,observed
+potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2026-06-29,2026,27,968.0684104627766,49.7,7.0,0,observed
+potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2026-07-06,2026,28,938.5805084745764,47.199999999999996,7.0,0,observed
+potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2026-07-13,2026,29,879.96261682243,53.49999999999999,7.0,0,observed
+potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2026-07-20,2026,30,857.431421446384,40.1,5.0,0,observed
+potato,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2017-01-02,2017,1,691.9811320754717,53.0,5.0,0,observed
 potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2017-01-09,2017,2,512.5,60.0,4.0,0,observed
 potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2017-01-16,2017,3,493.75,60.0,6.0,0,observed
@@ -8926,7 +8994,11 @@ potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2026-06-01,2026,23,496.
 potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2026-06-08,2026,24,523.6842105263158,95.0,5.0,0,observed
 potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2026-06-15,2026,25,654.6303501945525,128.5,6.0,0,observed
 potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2026-06-22,2026,26,726.1467889908257,109.0,6.0,0,observed
-potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2026-06-29,2026,27,750.0,40.5,2.0,0,observed
+potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2026-06-29,2026,27,756.1538461538462,105.3,6.0,0,observed
+potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2026-07-06,2026,28,772.7333333333333,75.0,4.0,0,observed
+potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2026-07-13,2026,29,776.594982078853,111.6,6.0,0,observed
+potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2026-07-20,2026,30,786.1146496815287,78.5,5.0,0,observed
+potato,West Bengal,WB,Uttar Dinajpur,Islampur APMC,343.0,2026-07-27,2026,31,,,,1,
 potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2017-01-02,2017,1,501.23376623376623,77.0,6.0,0,observed
 potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2017-01-09,2017,2,404.72527472527474,45.5,5.0,0,observed
 potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2017-01-16,2017,3,408.25396825396825,63.0,5.0,0,observed
@@ -9422,7 +9494,11 @@ potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2026-06-01,2026,23,604.0469
 potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2026-06-08,2026,24,668.4920634920635,75.6,7.0,0,observed
 potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2026-06-15,2026,25,775.8449612403101,64.5,6.0,0,observed
 potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2026-06-22,2026,26,770.9627329192548,64.39999999999999,6.0,0,observed
-potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2026-06-29,2026,27,842.8899082568807,21.8,2.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2026-06-29,2026,27,870.6379310344828,58.0,6.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2026-07-06,2026,28,877.0042492917847,70.6,7.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2026-07-13,2026,29,892.5557461406519,58.3,6.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2026-07-20,2026,30,898.436944937833,56.300000000000004,6.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Rishikesh APMC,667.0,2026-07-27,2026,31,910.0,9.5,1.0,0,observed
 potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2017-01-02,2017,1,640.5665024630541,40.6,6.0,0,observed
 potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2017-01-09,2017,2,792.1512195121951,20.5,6.0,0,observed
 potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2017-01-16,2017,3,544.9423076923076,26.000000000000004,6.0,0,observed
@@ -9918,7 +9994,11 @@ potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2026-06-01,2026,23,400.0,1
 potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2026-06-08,2026,24,567.6217765042979,34.900000000000006,2.0,0,observed
 potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2026-06-15,2026,25,769.5257315842583,99.1,3.0,0,observed
 potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2026-06-22,2026,26,767.6375404530744,92.7,2.0,0,observed
-potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2026-06-29,2026,27,500.0,105.0,2.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2026-06-29,2026,27,485.79335793357933,135.5,4.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2026-07-06,2026,28,797.4842767295597,127.2,6.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2026-07-13,2026,29,671.9745222929937,31.4,2.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2026-07-20,2026,30,695.7943925233645,85.6,5.0,0,observed
+potato,Uttarakhand,UC,Dehradoon,Vikasnagar APMC,668.0,2026-07-27,2026,31,,,,1,
 potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2017-01-02,2017,1,442.5531914893617,47.0,4.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2017-01-09,2017,2,350.0,20.0,1.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2017-01-16,2017,3,448.71794871794873,39.0,4.0,0,observed
@@ -10414,7 +10494,11 @@ potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2026-06-01,2026,23,592
 potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2026-06-08,2026,24,668.75,24.0,4.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2026-06-15,2026,25,698.8913525498891,45.1,5.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2026-06-22,2026,26,594.8717948717949,58.5,4.0,0,observed
-potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2026-06-29,2026,27,600.0,6.5,2.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2026-06-29,2026,27,615.625,16.0,5.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2026-07-06,2026,28,636.3839285714286,44.8,5.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2026-07-13,2026,29,619.3548387096774,3.1,2.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2026-07-20,2026,30,623.2954545454545,17.6,5.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Khateema APMC,669.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2017-01-02,2017,1,549.9401197604791,167.0,4.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2017-01-09,2017,2,424.5398773006135,163.0,4.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2017-01-16,2017,3,372.59615384615387,208.0,6.0,0,observed
@@ -10910,7 +10994,11 @@ potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2026-06-01,2026,23,923.
 potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2026-06-08,2026,24,896.4516129032259,124.0,5.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2026-06-15,2026,25,888.1481481481482,108.0,5.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2026-06-22,2026,26,886.4705882352941,68.0,3.0,0,observed
-potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2026-06-29,2026,27,880.0,39.0,2.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2026-06-29,2026,27,880.0,132.0,6.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2026-07-06,2026,28,866.5277777777778,144.0,6.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2026-07-13,2026,29,860.0,160.0,7.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2026-07-20,2026,30,846.2162162162163,148.0,6.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Burdwan APMC,670.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2017-01-02,2017,1,457.9746835443038,79.0,5.0,0,observed
 potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2017-01-09,2017,2,466.2295081967213,61.0,4.0,0,observed
 potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2017-01-16,2017,3,351.7289719626168,214.0,6.0,0,observed
@@ -11406,7 +11494,11 @@ potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2026-06-01,2026,23
 potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2026-06-08,2026,24,742.1052631578947,228.0,7.0,0,observed
 potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2026-06-15,2026,25,757.9591836734694,245.0,7.0,0,observed
 potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2026-06-22,2026,26,772.8888888888889,225.0,6.0,0,observed
-potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2026-06-29,2026,27,760.0,83.0,2.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2026-06-29,2026,27,752.9277566539924,263.0,7.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2026-07-06,2026,28,761.1320754716982,265.0,7.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2026-07-13,2026,29,730.2272727272727,264.0,7.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2026-07-20,2026,30,726.2222222222222,180.0,5.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Medinipur(West) APMC,671.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2017-01-02,2017,1,496.5627880184332,868.0,6.0,0,observed
 potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2017-01-09,2017,2,436.6366468422543,882.75,6.0,0,observed
 potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2017-01-16,2017,3,395.81202302851784,746.9000000000001,5.0,0,observed
@@ -11902,7 +11994,11 @@ potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2026-06-01,2026,23,1000.0,363.0
 potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2026-06-08,2026,24,1000.0,311.0,6.0,0,observed
 potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2026-06-15,2026,25,1000.0,258.0,5.0,0,observed
 potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2026-06-22,2026,26,1000.0,257.0,5.0,0,observed
-potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2026-06-29,2026,27,1000.0,154.0,3.0,0,observed
+potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2026-06-29,2026,27,1000.0,311.0,6.0,0,observed
+potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2026-07-06,2026,28,1000.0,372.0,7.0,0,observed
+potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2026-07-13,2026,29,1000.0,362.0,7.0,0,observed
+potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2026-07-20,2026,30,1000.0,368.0,7.0,0,observed
+potato,West Bengal,WB,Birbhum,Birbhum APMC,672.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2017-01-02,2017,1,488.9759036144578,332.0,5.0,0,observed
 potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2017-01-09,2017,2,444.86486486486484,296.0,5.0,0,observed
 potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2017-01-16,2017,3,406.3636363636364,220.0,3.0,0,observed
@@ -12398,7 +12494,11 @@ potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2026-06-01,2026,23,,,,1,
 potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2026-06-08,2026,24,,,,1,
 potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2026-06-15,2026,25,,,,1,
 potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2026-06-22,2026,26,839.2857142857143,140.0,2.0,0,observed
-potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2026-06-29,2026,27,,,,1,
+potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2026-06-29,2026,27,826.355421686747,332.0,5.0,0,observed
+potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2026-07-06,2026,28,795.4098360655738,305.0,5.0,0,observed
+potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2026-07-13,2026,29,874.5338983050848,236.0,5.0,0,observed
+potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2026-07-20,2026,30,822.8852459016393,152.5,5.0,0,observed
+potato,West Bengal,WB,Puruliya,Purulia APMC,673.0,2026-07-27,2026,31,780.0,32.0,1.0,0,observed
 potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2017-01-02,2017,1,528.0,350.0,5.0,0,observed
 potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2017-01-09,2017,2,503.3333333333333,420.0,6.0,0,observed
 potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2017-01-16,2017,3,463.3333333333333,420.0,6.0,0,observed
@@ -12894,7 +12994,11 @@ potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2026-06-01,2026,23,984.941860465116
 potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2026-06-08,2026,24,987.528735632184,34.8,4.0,0,observed
 potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2026-06-15,2026,25,950.8348794063079,53.900000000000006,6.0,0,observed
 potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2026-06-22,2026,26,969.9999999999999,36.2,4.0,0,observed
-potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2026-06-29,2026,27,999.945355191257,18.299999999999997,2.0,0,observed
+potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2026-06-29,2026,27,993.9473684210526,45.6,5.0,0,observed
+potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2026-07-06,2026,28,957.2086720867209,36.9,4.0,0,observed
+potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2026-07-13,2026,29,912.7256944444443,57.60000000000001,6.0,0,observed
+potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2026-07-20,2026,30,845.8717434869741,49.89999999999999,5.0,0,observed
+potato,West Bengal,WB,Nadia,Nadia APMC,674.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2017-01-02,2017,1,574.1935483870968,93.0,6.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2017-01-09,2017,2,537.6666666666666,75.0,4.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2017-01-16,2017,3,450.0,87.0,5.0,0,observed
@@ -13390,7 +13494,11 @@ potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2026-06-01,2026,23,
 potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2026-06-08,2026,24,610.4477611940298,6.7,6.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2026-06-15,2026,25,718.0,7.5,5.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2026-06-22,2026,26,785.0,8.0,6.0,0,observed
-potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2026-06-29,2026,27,790.0,2.5,2.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2026-06-29,2026,27,806.9230769230769,6.5,5.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2026-07-06,2026,28,820.2985074626865,6.7,5.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2026-07-13,2026,29,825.952380952381,4.2,4.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2026-07-20,2026,30,832.0,5.0,4.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Jalpaiguri Sadar APMC,675.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2017-01-02,2017,1,600.0,10.0,1.0,0,observed
 potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2017-01-09,2017,2,531.25,40.0,4.0,0,observed
 potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2017-01-16,2017,3,487.5,20.0,2.0,0,observed
@@ -13886,7 +13994,11 @@ potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2026-06-01,2026,23,736.56
 potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2026-06-08,2026,24,630.0,78.0,5.0,0,observed
 potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2026-06-15,2026,25,630.0,99.0,6.0,0,observed
 potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2026-06-22,2026,26,630.0,78.0,6.0,0,observed
-potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2026-06-29,2026,27,630.0,9.0,1.0,0,observed
+potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2026-06-29,2026,27,630.0,75.0,7.0,0,observed
+potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2026-07-06,2026,28,666.2666666666667,75.0,6.0,0,observed
+potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2026-07-13,2026,29,680.0,69.0,5.0,0,observed
+potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2026-07-20,2026,30,680.0,51.0,5.0,0,observed
+potato,West Bengal,WB,Alipurduar,Alipurduar APMC,676.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2017-01-02,2017,1,1756.8181818181818,4.4,4.0,0,observed
 potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2017-01-09,2017,2,1637.5,4.0,3.0,0,observed
 potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2017-01-16,2017,3,1606.8627450980393,5.1,4.0,0,observed
@@ -14382,7 +14494,11 @@ potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2026-06-01,2026,23,,,,1,
 potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2026-06-08,2026,24,,,,1,
 potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2026-06-15,2026,25,,,,1,
 potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2026-06-22,2026,26,2099.9999999999995,6.300000000000001,5.0,0,observed
-potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2026-06-29,2026,27,1915.3846153846152,2.6,2.0,0,observed
+potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2026-06-29,2026,27,1893.75,3.2,3.0,0,observed
+potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2026-07-06,2026,28,2100.0,3.8000000000000003,4.0,0,observed
+potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2026-07-13,2026,29,2100.0,4.7,4.0,0,observed
+potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2026-07-20,2026,30,2100.0,4.1,5.0,0,observed
+potato,West Bengal,WB,Kalimpong,Kalimpong APMC,677.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2017-01-02,2017,1,605.6951871657755,149.6,7.0,0,observed
 potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2017-01-09,2017,2,569.682416731216,129.10000000000002,6.0,0,observed
 potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2017-01-16,2017,3,572.9609690444146,148.6,7.0,0,observed
@@ -14878,7 +14994,11 @@ potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2026-06-01,2026,23
 potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2026-06-08,2026,24,1011.4117647058823,42.5,7.0,0,observed
 potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2026-06-15,2026,25,980.0,42.5,7.0,0,observed
 potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2026-06-22,2026,26,991.3636363636364,44.0,7.0,0,observed
-potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2026-06-29,2026,27,1020.0,18.5,3.0,0,observed
+potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2026-06-29,2026,27,1020.0,44.0,7.0,0,observed
+potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2026-07-06,2026,28,991.5555555555555,45.0,7.0,0,observed
+potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2026-07-13,2026,29,962.0833333333334,48.0,7.0,0,observed
+potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2026-07-20,2026,30,907.6712328767123,36.5,5.0,0,observed
+potato,West Bengal,WB,Howrah,Ramkrishanpur(Howrah) APMC,799.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2017-01-02,2017,1,463.27944572748265,433.0,7.0,0,observed
 potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2017-01-09,2017,2,400.0,227.5,7.0,0,observed
 potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2017-01-16,2017,3,385.3061224489796,245.0,7.0,0,observed
@@ -15374,7 +15494,11 @@ potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-06-01,2026,23,8
 potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-06-08,2026,24,810.6493506493506,46.2,7.0,0,observed
 potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-06-15,2026,25,750.672097759674,49.10000000000001,7.0,0,observed
 potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-06-22,2026,26,744.4282744282744,48.1,7.0,0,observed
-potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-06-29,2026,27,737.1090047393365,21.1,3.0,0,observed
+potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-06-29,2026,27,738.9462365591397,46.50000000000001,7.0,0,observed
+potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-07-06,2026,28,741.4316702819955,46.10000000000001,7.0,0,observed
+potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-07-13,2026,29,741.9383259911895,45.4,7.0,0,observed
+potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-07-20,2026,30,703.2644628099174,48.4,7.0,0,observed
+potato,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2017-01-02,2017,1,694.7183098591549,71.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2017-01-09,2017,2,690.3225806451613,62.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2017-01-16,2017,3,626.3513513513514,74.0,6.0,0,observed
@@ -15870,7 +15994,11 @@ potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2026-06-01,2026,23,723.30578
 potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2026-06-08,2026,24,680.0,122.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2026-06-15,2026,25,707.8846153846154,104.0,5.0,0,observed
 potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2026-06-22,2026,26,720.0,122.0,6.0,0,observed
-potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2026-06-29,2026,27,720.0,40.0,2.0,0,observed
+potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2026-06-29,2026,27,724.0,105.0,5.0,0,observed
+potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2026-07-06,2026,28,729.609375,128.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2026-07-13,2026,29,720.0,127.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2026-07-20,2026,30,695.0381679389313,131.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Dinhata APMC,817.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2017-01-02,2017,1,613.0363036303631,60.599999999999994,7.0,0,observed
 potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2017-01-09,2017,2,585.8024691358024,81.0,7.0,0,observed
 potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2017-01-16,2017,3,600.0,84.6,7.0,0,observed
@@ -16366,7 +16494,11 @@ potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2026-06-01,2026,23,725.16
 potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2026-06-08,2026,24,680.0,123.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2026-06-15,2026,25,712.0388349514564,103.0,5.0,0,observed
 potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2026-06-22,2026,26,720.0,130.0,6.0,0,observed
-potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2026-06-29,2026,27,720.0,45.0,2.0,0,observed
+potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2026-06-29,2026,27,723.6697247706422,109.0,5.0,0,observed
+potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2026-07-06,2026,28,726.9767441860465,129.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2026-07-13,2026,29,720.0,130.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2026-07-20,2026,30,694.9618320610687,131.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Toofanganj APMC,819.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2017-01-02,2017,1,498.4452296819788,141.5,5.0,0,observed
 potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2017-01-09,2017,2,431.5451895043732,171.5,4.0,0,observed
 potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2017-01-16,2017,3,360.6441717791411,326.0,6.0,0,observed
@@ -16862,7 +16994,11 @@ potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2026-06-01,2026,23,719.8571
 potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2026-06-08,2026,24,812.8571428571429,21.0,6.0,0,observed
 potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2026-06-15,2026,25,841.1428571428571,21.0,6.0,0,observed
 potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2026-06-22,2026,26,922.8979591836735,24.5,7.0,0,observed
-potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2026-06-29,2026,27,930.2857142857143,7.0,2.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2026-06-29,2026,27,934.320987654321,24.3,7.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2026-07-06,2026,28,951.6981132075471,21.200000000000003,6.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2026-07-13,2026,29,938.341232227488,21.1,6.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2026-07-20,2026,30,942.8571428571429,24.5,7.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Ghatal APMC,820.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2017-01-02,2017,1,438.97435897435895,156.0,7.0,0,observed
 potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2017-01-09,2017,2,433.97849462365593,93.0,6.0,0,observed
 potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2017-01-16,2017,3,393.23809523809524,105.0,7.0,0,observed
@@ -17358,7 +17494,11 @@ potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-06-01,2026,23,854.7926
 potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-06-08,2026,24,858.0549199084668,43.7,6.0,0,observed
 potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-06-15,2026,25,834.2045454545455,52.8,7.0,0,observed
 potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-06-22,2026,26,838.4291187739465,52.199999999999996,7.0,0,observed
-potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-06-29,2026,27,830.0,14.8,2.0,0,observed
+potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-06-29,2026,27,821.362763915547,52.1,7.0,0,observed
+potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-07-06,2026,28,815.5172413793103,52.2,7.0,0,observed
+potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-07-13,2026,29,753.8461538461538,55.900000000000006,7.0,0,observed
+potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-07-20,2026,30,719.802371541502,50.6,6.0,0,observed
+potato,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2017-01-02,2017,1,665.6980519480519,1540.0,7.0,0,observed
 potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2017-01-09,2017,2,599.8302069857697,1546.0,7.0,0,observed
 potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2017-01-16,2017,3,540.7466796242306,1543.5,7.0,0,observed
@@ -17854,7 +17994,11 @@ potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2026-06-01,2026,23,892.998
 potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2026-06-08,2026,24,976.5316455696203,493.75,7.0,0,observed
 potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2026-06-15,2026,25,1050.0,314.25,5.0,0,observed
 potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2026-06-22,2026,26,1062.4465811965813,234.0,4.0,0,observed
-potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2026-06-29,2026,27,1082.1069272779534,173.95,3.0,0,observed
+potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2026-06-29,2026,27,1092.462767889575,412.95,7.0,0,observed
+potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2026-07-06,2026,28,1112.764705882353,212.5,4.0,0,observed
+potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2026-07-13,2026,29,1108.7025316455697,300.2,6.0,0,observed
+potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2026-07-20,2026,30,1108.0346563981043,337.6,7.0,0,observed
+potato,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2026-07-27,2026,31,,,,1,
 potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2017-01-02,2017,1,400.0,210.0,2.0,0,observed
 potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2017-01-09,2017,2,389.76063829787233,808.4,4.0,0,observed
 potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2017-01-16,2017,3,376.27338009352036,598.8,3.0,0,observed
@@ -18350,7 +18494,11 @@ potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-06-01,2026,23,742.865647
 potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-06-08,2026,24,934.0524394291403,301.3,6.0,0,observed
 potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-06-15,2026,25,959.1919191919192,247.5,5.0,0,observed
 potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-06-22,2026,26,1068.7194525904204,409.2,6.0,0,observed
-potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-06-29,2026,27,1065.5290102389079,146.5,2.0,0,observed
+potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-06-29,2026,27,1116.5881244109332,424.4,5.0,0,observed
+potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-07-06,2026,28,1279.4148380355277,478.5,6.0,0,observed
+potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-07-13,2026,29,1205.795574288725,379.6,5.0,0,observed
+potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-07-20,2026,30,1267.463706233988,351.3,6.0,0,observed
+potato,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-07-27,2026,31,1200.0,72.4,1.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2017-01-02,2017,1,800.0,92.2,5.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2017-01-09,2017,2,827.7310924369748,59.5,3.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2017-01-16,2017,3,744.8467966573816,107.7,5.0,0,observed
@@ -18846,7 +18994,11 @@ potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2026-06-01,2026,23,574
 potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2026-06-08,2026,24,578.9215686274509,204.0,5.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2026-06-15,2026,25,672.754491017964,167.0,4.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2026-06-22,2026,26,721.1627906976744,215.0,5.0,0,observed
-potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2026-06-29,2026,27,899.4764397905759,95.5,2.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2026-06-29,2026,27,886.7408906882591,247.0,6.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2026-07-06,2026,28,886.5060240963855,207.5,7.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2026-07-13,2026,29,775.7777777777778,225.0,6.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2026-07-20,2026,30,800.0,223.8,7.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2026-07-27,2026,31,800.0,41.5,1.0,0,observed
 potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2017-01-02,2017,1,523.9130434782609,23.0,7.0,0,observed
 potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2017-01-09,2017,2,588.5416666666666,24.0,5.0,0,observed
 potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2017-01-16,2017,3,551.1363636363636,22.0,7.0,0,observed
@@ -19342,7 +19494,11 @@ potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2026-06-01,2026,23,700.0,17.8
 potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2026-06-08,2026,24,700.0,4.0,1.0,0,observed
 potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2026-06-15,2026,25,800.0,,,1,linear
 potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2026-06-22,2026,26,900.0000000000001,40.8,1.0,0,observed
-potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2026-06-29,2026,27,,,,1,
+potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2026-06-29,2026,27,900.0,6.800000000000001,1.0,0,observed
+potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2026-07-06,2026,28,900.0,12.0,1.0,0,observed
+potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2026-07-13,2026,29,899.9999999999999,32.2,3.0,0,observed
+potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2026-07-20,2026,30,,,,1,
+potato,Uttarakhand,UC,Nanital,Ramnagar APMC,1072.0,2026-07-27,2026,31,,,,1,
 potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2017-01-02,2017,1,383.09943522163275,584.3,7.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2017-01-09,2017,2,398.12661498708013,387.0,6.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2017-01-16,2017,3,336.92261547690464,666.8,7.0,0,observed
@@ -19838,7 +19994,11 @@ potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2026-06-01,2026,23,1000.00000
 potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2026-06-08,2026,24,999.9999999999999,19.400000000000002,7.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2026-06-15,2026,25,999.9999999999999,19.6,7.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2026-06-22,2026,26,1000.0,17.8,7.0,0,observed
-potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2026-06-29,2026,27,1000.0,7.1,3.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2026-06-29,2026,27,1000.0,15.9,7.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2026-07-06,2026,28,999.9999999999999,15.000000000000002,7.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2026-07-13,2026,29,1000.0,16.5,7.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2026-07-20,2026,30,1000.0,14.7,7.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Roorkee APMC,1073.0,2026-07-27,2026,31,1000.0,2.0,1.0,0,observed
 potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2017-01-02,2017,1,475.48387096774195,15.5,7.0,0,observed
 potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2017-01-09,2017,2,471.2,12.5,5.0,0,observed
 potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2017-01-16,2017,3,470.3448275862069,14.5,7.0,0,observed
@@ -20334,7 +20494,11 @@ potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-06-01,2026,23,8
 potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-06-08,2026,24,854.6666666666666,7.5,4.0,0,observed
 potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-06-15,2026,25,844.7058823529412,8.5,5.0,0,observed
 potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-06-22,2026,26,970.5882352941177,6.8,3.0,0,observed
-potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-06-29,2026,27,,,,1,
+potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-06-29,2026,27,1462.0689655172414,8.7,2.0,0,observed
+potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-07-06,2026,28,1194.7368421052631,9.5,4.0,0,observed
+potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-07-13,2026,29,1012.8,12.5,5.0,0,observed
+potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-07-20,2026,30,1287.1794871794873,7.8,4.0,0,observed
+potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-07-27,2026,31,1500.0,2.5,1.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2017-01-02,2017,1,,,,1,
 potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2017-01-09,2017,2,,,,1,
 potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2017-01-16,2017,3,,,,1,
@@ -20830,7 +20994,11 @@ potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2026-06-01,2026,23,800.
 potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2026-06-08,2026,24,756.5,,,1,linear
 potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2026-06-15,2026,25,713.0,75.0,1.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2026-06-22,2026,26,800.0,181.4,2.0,0,observed
-potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2026-06-29,2026,27,,,,1,
+potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2026-06-29,2026,27,670.6666666666667,,,1,seasonal_median
+potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2026-07-06,2026,28,615.7185628742516,,,1,seasonal_median
+potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2026-07-13,2026,29,615.7185628742516,,,1,seasonal_median
+potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2026-07-20,2026,30,615.7185628742516,,,1,seasonal_median
+potato,Uttarakhand,UC,Udhamsinghnagar,Bazpur APMC,1075.0,2026-07-27,2026,31,615.7185628742516,,,1,seasonal_median
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-01-02,2017,1,833.0000000000001,,,1,seasonal_median
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-01-09,2017,2,833.0000000000001,,,1,seasonal_median
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-01-16,2017,3,833.0000000000001,,,1,seasonal_median
@@ -20860,8 +21028,8 @@ potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-06-26,2017,26,900.00000
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-07-03,2017,27,420.5882352941177,3.4,3.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-07-10,2017,28,426.47058823529414,,,1,linear
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-07-17,2017,29,432.3529411764706,,,1,linear
-potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-07-24,2017,30,1018.3673469387754,,,1,seasonal_median
-potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-07-31,2017,31,1018.3673469387754,,,1,seasonal_median
+potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-07-24,2017,30,1010.4166666666669,,,1,seasonal_median
+potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-07-31,2017,31,1010.4166666666669,,,1,seasonal_median
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-08-07,2017,32,450.0,0.5,1.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-08-14,2017,33,400.0,,,1,linear
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-08-21,2017,34,350.0,5.300000000000001,2.0,0,observed
@@ -20912,8 +21080,8 @@ potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2018-06-25,2018,26,900.00000
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2018-07-02,2018,27,1000.0,2.5,1.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2018-07-09,2018,28,991.6666666666666,,,1,linear
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2018-07-16,2018,29,983.3333333333334,,,1,linear
-potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2018-07-23,2018,30,1018.3673469387754,,,1,seasonal_median
-potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2018-07-30,2018,31,1018.3673469387754,,,1,seasonal_median
+potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2018-07-23,2018,30,1010.4166666666669,,,1,seasonal_median
+potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2018-07-30,2018,31,1010.4166666666669,,,1,seasonal_median
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2018-08-06,2018,32,1082.6923076923076,,,1,seasonal_median
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2018-08-13,2018,33,950.0,1.0,1.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2018-08-20,2018,34,937.5,3.2,3.0,0,observed
@@ -21326,7 +21494,11 @@ potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2026-06-01,2026,23,639.60396
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2026-06-08,2026,24,614.4736842105262,3.8000000000000003,3.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2026-06-15,2026,25,600.0,3.3,2.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2026-06-22,2026,26,593.2432432432432,7.4,4.0,0,observed
-potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2026-06-29,2026,27,550.0,1.0,1.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2026-06-29,2026,27,589.3617021276596,4.7,3.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2026-07-06,2026,28,776.4705882352941,3.4000000000000004,2.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2026-07-13,2026,29,671.4285714285714,5.6,4.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2026-07-20,2026,30,704.6153846153845,6.500000000000001,5.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2026-07-27,2026,31,700.0,0.9,1.0,0,observed
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2017-01-02,2017,1,,,,1,
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2017-01-09,2017,2,750.0,1.0,2.0,0,observed
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2017-01-16,2017,3,650.0,1.0,1.0,0,observed
@@ -21719,9 +21891,9 @@ potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-06-10,2024,24,2025.0,,
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-06-17,2024,25,2100.0,0.4,1.0,0,observed
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-06-24,2024,26,2158.3333333333335,,,1,linear
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-07-01,2024,27,2216.6666666666665,,,1,linear
-potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-07-08,2024,28,900.0,,,1,seasonal_median
-potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-07-15,2024,29,900.0,,,1,seasonal_median
-potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-07-22,2024,30,900.0,,,1,seasonal_median
+potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-07-08,2024,28,916.6666666666667,,,1,seasonal_median
+potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-07-15,2024,29,916.6666666666667,,,1,seasonal_median
+potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-07-22,2024,30,916.6666666666667,,,1,seasonal_median
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-07-29,2024,31,2450.0,2.0,1.0,0,observed
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-08-05,2024,32,2183.3333333333335,,,1,linear
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2024-08-12,2024,33,1916.6666666666665,,,1,linear
@@ -21774,7 +21946,7 @@ potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2025-06-30,2025,27,966.6666
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2025-07-07,2025,28,1010.0,1.0,1.0,0,observed
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2025-07-14,2025,29,1035.0,,,1,linear
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2025-07-21,2025,30,1060.0,,,1,linear
-potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2025-07-28,2025,31,900.0,,,1,seasonal_median
+potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2025-07-28,2025,31,916.6666666666667,,,1,seasonal_median
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2025-08-04,2025,32,1110.0,1.0,1.0,0,observed
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2025-08-11,2025,33,1110.0,,,1,linear
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2025-08-18,2025,34,1110.0,1.0,1.0,0,observed
@@ -21822,7 +21994,11 @@ potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2026-06-01,2026,23,1000.0,,
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2026-06-08,2026,24,1100.0,1.0,1.0,0,observed
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2026-06-15,2026,25,1100.0,,,1,linear
 potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2026-06-22,2026,26,1100.0,0.5,1.0,0,observed
-potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2026-06-29,2026,27,,,,1,
+potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2026-06-29,2026,27,1150.0,,,1,linear
+potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2026-07-06,2026,28,1200.0,0.9,1.0,0,observed
+potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2026-07-13,2026,29,916.6666666666667,,,1,seasonal_median
+potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2026-07-20,2026,30,916.6666666666667,,,1,seasonal_median
+potato,Uttarakhand,UC,Champawat,Tanakpur APMC,1662.0,2026-07-27,2026,31,916.6666666666667,,,1,seasonal_median
 potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2017-01-02,2017,1,487.5,8.0,3.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2017-01-09,2017,2,475.67771084337346,,,1,linear
 potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2017-01-16,2017,3,463.855421686747,41.5,7.0,0,observed
@@ -22317,8 +22493,12 @@ potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2026-05-25,2026,22,7
 potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2026-06-01,2026,23,1064.7058823529412,85.0,7.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2026-06-08,2026,24,1014.1643059490086,35.3,4.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2026-06-15,2026,25,1009.1954022988506,43.5,6.0,0,observed
-potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2026-06-22,2026,26,1093.75,9.6,3.0,0,observed
-potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2026-06-29,2026,27,1200.0,24.0,1.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2026-06-22,2026,26,1008.6206896551724,11.6,4.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2026-06-29,2026,27,1171.8309859154929,35.5,5.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2026-07-06,2026,28,1377.8247096092925,94.7,6.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2026-07-13,2026,29,1508.675799086758,109.5,6.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2026-07-20,2026,30,1438.3093525179856,55.6,5.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Sitarganj APMC,1663.0,2026-07-27,2026,31,1600.0,4.5,1.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2017-01-02,2017,1,696.875,6.4,7.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2017-01-09,2017,2,761.6666666666665,6.000000000000001,7.0,0,observed
 potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2017-01-16,2017,3,691.6666666666666,8.4,7.0,0,observed
@@ -22813,8 +22993,12 @@ potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2026-05-25,2026,22,
 potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2026-06-01,2026,23,549.5945369184807,,,1,linear
 potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2026-06-08,2026,24,424.7972684592403,,,1,linear
 potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2026-06-15,2026,25,300.0,33.0,1.0,0,observed
-potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2026-06-22,2026,26,,,,1,
-potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2026-06-29,2026,27,,,,1,
+potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2026-06-22,2026,26,300.0,,,1,linear
+potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2026-06-29,2026,27,300.0,,,1,linear
+potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2026-07-06,2026,28,839.4078947368421,,,1,seasonal_median
+potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2026-07-13,2026,29,300.0,35.0,1.0,0,observed
+potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2026-07-20,2026,30,,,,1,
+potato,Uttarakhand,UC,Udhamsinghnagar,Jaspur(UC) APMC,1664.0,2026-07-27,2026,31,,,,1,
 potato,Uttarakhand,UC,Haridwar,Lakshar APMC,1665.0,2017-01-02,2017,1,,,,1,
 potato,Uttarakhand,UC,Haridwar,Lakshar APMC,1665.0,2017-01-09,2017,2,,,,1,
 potato,Uttarakhand,UC,Haridwar,Lakshar APMC,1665.0,2017-01-16,2017,3,500.0,6.7,6.0,0,observed
@@ -23311,6 +23495,10 @@ potato,Uttarakhand,UC,Haridwar,Lakshar APMC,1665.0,2026-06-08,2026,24,,,,1,
 potato,Uttarakhand,UC,Haridwar,Lakshar APMC,1665.0,2026-06-15,2026,25,,,,1,
 potato,Uttarakhand,UC,Haridwar,Lakshar APMC,1665.0,2026-06-22,2026,26,,,,1,
 potato,Uttarakhand,UC,Haridwar,Lakshar APMC,1665.0,2026-06-29,2026,27,,,,1,
+potato,Uttarakhand,UC,Haridwar,Lakshar APMC,1665.0,2026-07-06,2026,28,,,,1,
+potato,Uttarakhand,UC,Haridwar,Lakshar APMC,1665.0,2026-07-13,2026,29,,,,1,
+potato,Uttarakhand,UC,Haridwar,Lakshar APMC,1665.0,2026-07-20,2026,30,,,,1,
+potato,Uttarakhand,UC,Haridwar,Lakshar APMC,1665.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2017-01-02,2017,1,502.43243243243245,111.0,6.0,0,observed
 potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2017-01-09,2017,2,447.6923076923077,65.0,4.0,0,observed
 potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2017-01-16,2017,3,402.1686746987952,83.0,5.0,0,observed
@@ -23806,7 +23994,11 @@ potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2026-06-01,2026,23,800.0,60.
 potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2026-06-08,2026,24,794.2857142857143,70.0,7.0,0,observed
 potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2026-06-15,2026,25,797.1428571428571,70.0,7.0,0,observed
 potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2026-06-22,2026,26,800.0,70.0,7.0,0,observed
-potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2026-06-29,2026,27,800.0,30.0,3.0,0,observed
+potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2026-06-29,2026,27,800.0,70.0,7.0,0,observed
+potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2026-07-06,2026,28,800.0,68.0,6.0,0,observed
+potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2026-07-13,2026,29,781.4285714285714,70.0,7.0,0,observed
+potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2026-07-20,2026,30,750.0,50.0,5.0,0,observed
+potato,West Bengal,WB,Murshidabad,Kandi APMC,2265.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2017-01-02,2017,1,569.3370165745856,18.1,5.0,0,observed
 potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2017-01-09,2017,2,550.0000000000001,19.099999999999998,5.0,0,observed
 potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2017-01-16,2017,3,479.2857142857143,21.0,5.0,0,observed
@@ -24044,8 +24236,8 @@ potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2021-06-21,2021,25,1142.99212598
 potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2021-06-28,2021,26,1096.7171717171716,19.8,3.0,0,observed
 potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2021-07-05,2021,27,1098.2511518695728,,,1,linear
 potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2021-07-12,2021,28,1099.785132021974,,,1,linear
-potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2021-07-19,2021,29,1521.3333333333333,,,1,seasonal_median
-potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2021-07-26,2021,30,1521.3333333333333,,,1,seasonal_median
+potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2021-07-19,2021,29,1498.309217077421,,,1,seasonal_median
+potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2021-07-26,2021,30,1498.309217077421,,,1,seasonal_median
 potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2021-08-02,2021,31,1432.0212283407423,,,1,seasonal_median
 potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2021-08-09,2021,32,1105.921052631579,30.4,5.0,0,observed
 potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2021-08-16,2021,33,1074.6774193548388,24.8,4.0,0,observed
@@ -24302,7 +24494,11 @@ potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2026-06-01,2026,23,980.0,16.0,5.
 potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2026-06-08,2026,24,972.9166666666665,19.200000000000003,6.0,0,observed
 potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2026-06-15,2026,25,940.0,13.8,4.0,0,observed
 potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2026-06-22,2026,26,967.8260869565216,16.1,5.0,0,observed
-potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2026-06-29,2026,27,993.1182795698924,9.3,3.0,0,observed
+potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2026-06-29,2026,27,987.8205128205128,15.6,5.0,0,observed
+potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2026-07-06,2026,28,940.0000000000001,16.4,5.0,0,observed
+potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2026-07-13,2026,29,916.9756097560974,20.500000000000004,6.0,0,observed
+potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2026-07-20,2026,30,855.3846153846155,16.9,5.0,0,observed
+potato,West Bengal,WB,Nadia,Kalyani APMC,2266.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2017-01-02,2017,1,566.5753424657534,29.200000000000003,7.0,0,observed
 potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2017-01-09,2017,2,522.9113924050633,15.799999999999999,6.0,0,observed
 potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2017-01-16,2017,3,458.8311688311688,15.400000000000002,7.0,0,observed
@@ -24798,7 +24994,11 @@ potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2026-06-01,2026,23,1035.733736
 potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2026-06-08,2026,24,1011.6957210776544,31.550000000000004,7.0,0,observed
 potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2026-06-15,2026,25,979.9999999999999,31.400000000000002,7.0,0,observed
 potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2026-06-22,2026,26,992.2641509433962,31.8,7.0,0,observed
-potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2026-06-29,2026,27,1019.9999999999999,14.700000000000001,3.0,0,observed
+potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2026-06-29,2026,27,1020.0,33.25,7.0,0,observed
+potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2026-07-06,2026,28,991.2759643916913,33.7,7.0,0,observed
+potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2026-07-13,2026,29,962.8310502283105,32.85,7.0,0,observed
+potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2026-07-20,2026,30,907.6666666666666,24.000000000000004,5.0,0,observed
+potato,West Bengal,WB,Howrah,Uluberia APMC,2269.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2017-01-02,2017,1,486.0,175.0,7.0,0,observed
 potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2017-01-09,2017,2,485.6060606060606,132.0,7.0,0,observed
 potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2017-01-16,2017,3,595.8241758241758,91.0,7.0,0,observed
@@ -25294,7 +25494,11 @@ potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-06-01,2026,23,849.678
 potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-06-08,2026,24,837.9428571428572,35.0,7.0,0,observed
 potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-06-15,2026,25,825.8087487283826,39.32,7.0,0,observed
 potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-06-22,2026,26,829.1867954911434,43.47,7.0,0,observed
-potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-06-29,2026,27,832.3790322580646,12.399999999999999,2.0,0,observed
+potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-06-29,2026,27,815.4721445472145,46.49,7.0,0,observed
+potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-07-06,2026,28,808.3870967741935,43.4,6.0,0,observed
+potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-07-13,2026,29,760.0110132158591,54.47999999999999,7.0,0,observed
+potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-07-20,2026,30,719.7785977859778,54.2,6.0,0,observed
+potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2017-01-02,2017,1,1011.7647058823529,,,1,seasonal_median
 potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2017-01-09,2017,2,1011.7647058823529,,,1,seasonal_median
 potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2017-01-16,2017,3,1011.7647058823529,,,1,seasonal_median
@@ -25790,7 +25994,11 @@ potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2026-06-01,2026,23,726.
 potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2026-06-08,2026,24,680.0,123.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2026-06-15,2026,25,712.1153846153846,104.0,5.0,0,observed
 potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2026-06-22,2026,26,720.0,126.0,6.0,0,observed
-potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2026-06-29,2026,27,720.0,44.0,2.0,0,observed
+potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2026-06-29,2026,27,723.7037037037037,108.0,5.0,0,observed
+potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2026-07-06,2026,28,733.5433070866142,127.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2026-07-13,2026,29,720.0,127.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2026-07-20,2026,30,695.0,132.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2017-01-02,2017,1,708.3333333333334,18.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2017-01-09,2017,2,689.4736842105264,19.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2017-01-16,2017,3,650.0,22.5,6.0,0,observed
@@ -26286,7 +26494,11 @@ potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2026-06-01,2026,23,721.63
 potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2026-06-08,2026,24,680.0,121.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2026-06-15,2026,25,713.0769230769231,130.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2026-06-22,2026,26,720.0,150.0,7.0,0,observed
-potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2026-06-29,2026,27,720.0,40.0,2.0,0,observed
+potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2026-06-29,2026,27,727.0769230769231,130.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2026-07-06,2026,28,730.0,127.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2026-07-13,2026,29,720.0,126.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2026-07-20,2026,30,695.078125,128.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Haldibari APMC,2535.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2017-01-02,2017,1,650.0,8.0,1.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2017-01-09,2017,2,600.0,8.0,1.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2017-01-16,2017,3,550.0,16.0,2.0,0,observed
@@ -26782,7 +26994,11 @@ potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2026-06-01,2026,23,719.672
 potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2026-06-08,2026,24,667.6470588235294,85.0,7.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2026-06-15,2026,25,694.7712418300654,76.5,7.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2026-06-22,2026,26,685.5434782608696,46.0,4.0,0,observed
-potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2026-06-29,2026,27,714.7058823529412,17.0,2.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2026-06-29,2026,27,713.2894736842105,76.0,6.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2026-07-06,2026,28,711.038961038961,77.0,6.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2026-07-13,2026,29,686.1212121212121,82.5,7.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2026-07-20,2026,30,664.8951048951049,71.5,6.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Belacoba APMC,2536.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2017-01-02,2017,1,706.3752276478843,365.99999699999995,5.0,0,observed
 potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2017-01-09,2017,2,741.6951080488222,293.000001,4.0,0,observed
 potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2017-01-16,2017,3,733.3333333333334,441.0,6.0,0,observed
@@ -27278,7 +27494,11 @@ potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2026-06-01,2026,23,760.0,1
 potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2026-06-08,2026,24,709.7211155378486,1255.0,7.0,0,observed
 potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2026-06-15,2026,25,701.5830115830116,1295.0,7.0,0,observed
 potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2026-06-22,2026,26,720.0,1285.0,7.0,0,observed
-potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2026-06-29,2026,27,750.0,570.0,3.0,0,observed
+potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2026-06-29,2026,27,752.48,1250.0,7.0,0,observed
+potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2026-07-06,2026,28,745.4901960784314,1275.0,7.0,0,observed
+potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2026-07-13,2026,29,730.0,1260.0,7.0,0,observed
+potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2026-07-20,2026,30,721.5261044176707,1245.0,7.0,0,observed
+potato,West Bengal,WB,Darjeeling,Siliguri APMC,2537.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2017-01-02,2017,1,568.8888888888889,45.0,6.0,0,observed
 potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2017-01-09,2017,2,528.0,37.5,6.0,0,observed
 potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2017-01-16,2017,3,504.11764705882354,34.0,5.0,0,observed
@@ -27774,7 +27994,11 @@ potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2026-06-01,20
 potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2026-06-08,2026,24,970.8208955223881,26.799999999999997,5.0,0,observed
 potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2026-06-15,2026,25,978.6370839936607,31.550000000000004,5.0,0,observed
 potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2026-06-22,2026,26,988.1751824817519,27.4,4.0,0,observed
-potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2026-06-29,2026,27,1012.3809523809524,12.6,2.0,0,observed
+potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2026-06-29,2026,27,1033.6615384615384,32.5,5.0,0,observed
+potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2026-07-06,2026,28,1057.784090909091,35.2,5.0,0,observed
+potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2026-07-13,2026,29,1066.8292682926829,36.9,6.0,0,observed
+potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2026-07-20,2026,30,1039.760479041916,33.400000000000006,5.0,0,observed
+potato,West Bengal,WB,Kolkata,Bara Bazar (Posta Bazar) APMC,2894.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2017-01-02,2017,1,759.6153846153846,182.0,5.0,0,observed
 potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2017-01-09,2017,2,759.2391304347826,184.0,5.0,0,observed
 potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2017-01-16,2017,3,733.4070796460177,226.0,6.0,0,observed
@@ -28270,7 +28494,11 @@ potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2026-06-01,2026,23,100
 potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2026-06-08,2026,24,1000.0,255.0,7.0,0,observed
 potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2026-06-15,2026,25,1000.0,248.0,6.0,0,observed
 potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2026-06-22,2026,26,1000.0,270.0,7.0,0,observed
-potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2026-06-29,2026,27,1000.0,115.0,3.0,0,observed
+potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2026-06-29,2026,27,1000.0,276.0,7.0,0,observed
+potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2026-07-06,2026,28,1000.0,279.0,7.0,0,observed
+potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2026-07-13,2026,29,1045.1923076923076,260.0,7.0,0,observed
+potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2026-07-20,2026,30,1066.1538461538462,260.0,7.0,0,observed
+potato,West Bengal,WB,North 24 Parganas,Habra APMC,2897.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2017-01-02,2017,1,395.70093457943926,107.0,7.0,0,observed
 potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2017-01-09,2017,2,380.0,94.0,7.0,0,observed
 potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2017-01-16,2017,3,358.9010989010989,91.0,7.0,0,observed
@@ -28766,7 +28994,11 @@ potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2026-06-01,2026,23,815.32751091
 potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2026-06-08,2026,24,810.8035714285714,44.8,7.0,0,observed
 potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2026-06-15,2026,25,755.1063829787233,47.00000000000001,7.0,0,observed
 potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2026-06-22,2026,26,743.5761589403974,45.3,7.0,0,observed
-potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2026-06-29,2026,27,738.647342995169,20.700000000000003,3.0,0,observed
+potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2026-06-29,2026,27,738.3777777777777,45.0,7.0,0,observed
+potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2026-07-06,2026,28,740.3571428571429,44.8,7.0,0,observed
+potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2026-07-13,2026,29,742.2637362637363,45.5,7.0,0,observed
+potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2026-07-20,2026,30,701.6233766233767,61.6,7.0,0,observed
+potato,West Bengal,WB,Bankura,Khatra APMC,2898.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2017-01-02,2017,1,464.52991452991455,351.0,7.0,0,observed
 potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2017-01-09,2017,2,462.8011204481793,357.0,7.0,0,observed
 potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2017-01-16,2017,3,441.4942528735632,348.0,7.0,0,observed
@@ -29262,7 +29494,11 @@ potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2026-06-01,2026,23,
 potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2026-06-08,2026,24,893.256484149856,347.0,6.0,0,observed
 potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2026-06-15,2026,25,889.9524658348187,336.6,7.0,0,observed
 potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2026-06-22,2026,26,891.4893617021277,376.0,7.0,0,observed
-potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2026-06-29,2026,27,893.8095238095239,168.0,3.0,0,observed
+potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2026-06-29,2026,27,896.1552680221812,270.5,5.0,0,observed
+potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2026-07-06,2026,28,900.0,357.0,7.0,0,observed
+potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2026-07-13,2026,29,900.0,308.5,6.0,0,observed
+potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2026-07-20,2026,30,882.8399781540143,366.2,7.0,0,observed
+potato,West Bengal,WB,Paschim Bardhaman,Durgapur APMC,2899.0,2026-07-27,2026,31,880.0,52.0,1.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2017-01-02,2017,1,464.44444444444446,72.0,4.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2017-01-09,2017,2,421.9886363636364,176.0,6.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2017-01-16,2017,3,395.94805194805195,192.5,6.0,0,observed
@@ -29758,7 +29994,11 @@ potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2026-06-01,2026,23,930.
 potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2026-06-08,2026,24,900.0,110.0,5.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2026-06-15,2026,25,892.0,100.0,5.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2026-06-22,2026,26,892.0,105.0,5.0,0,observed
-potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2026-06-29,2026,27,889.5238095238095,42.0,2.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2026-06-29,2026,27,882.8054298642534,110.5,6.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2026-07-06,2026,28,869.9236641221374,131.0,6.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2026-07-13,2026,29,862.875816993464,153.0,7.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2026-07-20,2026,30,843.7931034482758,116.0,6.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Memari APMC,2900.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2017-01-02,2017,1,716.231343283582,13.400000000000002,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2017-01-09,2017,2,668.7933884297521,12.1,5.0,0,observed
 potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2017-01-16,2017,3,625.1404494382023,17.8,6.0,0,observed
@@ -30254,7 +30494,11 @@ potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2026-06-01,2026,23,600.0,
 potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2026-06-08,2026,24,600.0,37.5,5.0,0,observed
 potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2026-06-15,2026,25,600.0,45.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2026-06-22,2026,26,600.0,52.5,7.0,0,observed
-potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2026-06-29,2026,27,600.0,7.5,1.0,0,observed
+potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2026-06-29,2026,27,600.0,52.5,7.0,0,observed
+potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2026-07-06,2026,28,600.0,22.5,3.0,0,observed
+potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2026-07-13,2026,29,650.0,37.5,5.0,0,observed
+potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2026-07-20,2026,30,,,,1,
+potato,West Bengal,WB,Coochbehar,Pundibari APMC,2901.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2017-01-02,2017,1,787.0967741935484,93.0,3.0,0,observed
 potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2017-01-09,2017,2,664.2857142857143,66.5,6.0,0,observed
 potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2017-01-16,2017,3,650.0,34.5,3.0,0,observed
@@ -30750,7 +30994,11 @@ potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2026-06-01,2026,23,437.88079470198
 potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2026-06-08,2026,24,452.7374301675978,895.0,5.0,0,observed
 potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2026-06-15,2026,25,593.3333333333334,165.0,3.0,0,observed
 potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2026-06-22,2026,26,685.8928571428571,280.0,5.0,0,observed
-potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2026-06-29,2026,27,710.0,115.0,2.0,0,observed
+potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2026-06-29,2026,27,712.4444444444445,225.0,4.0,0,observed
+potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2026-07-06,2026,28,710.0,270.0,5.0,0,observed
+potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2026-07-13,2026,29,710.0,280.0,5.0,0,observed
+potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2026-07-20,2026,30,703.939393939394,264.0,5.0,0,observed
+potato,West Bengal,WB,Malda,Gajol APMC,2902.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2017-01-02,2017,1,504.79338842975204,121.0,6.0,0,observed
 potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2017-01-09,2017,2,473.15315315315314,111.0,6.0,0,observed
 potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2017-01-16,2017,3,444.0983606557377,122.0,6.0,0,observed
@@ -31246,7 +31494,11 @@ potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2026-06-01,2026,23,849.33085
 potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2026-06-08,2026,24,854.2448979591836,24.5,6.0,0,observed
 potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2026-06-15,2026,25,864.6689895470382,28.700000000000003,7.0,0,observed
 potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2026-06-22,2026,26,867.887323943662,21.3,5.0,0,observed
-potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2026-06-29,2026,27,880.0,12.8,3.0,0,observed
+potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2026-06-29,2026,27,877.9342723004693,21.300000000000004,5.0,0,observed
+potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2026-07-06,2026,28,876.379928315412,27.900000000000006,6.0,0,observed
+potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2026-07-13,2026,29,845.4026845637583,29.800000000000004,6.0,0,observed
+potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2026-07-20,2026,30,804.7231270358305,30.700000000000003,6.0,0,observed
+potato,West Bengal,WB,Jhargram,Jhargram APMC,2903.0,2026-07-27,2026,31,780.0,4.4,1.0,0,observed
 potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2017-01-02,2017,1,404.9104859335038,195.5,6.0,0,observed
 potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2017-01-09,2017,2,424.8548812664908,189.5,6.0,0,observed
 potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2017-01-16,2017,3,395.08196721311475,122.0,4.0,0,observed
@@ -31742,7 +31994,11 @@ potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2026-06-01,2026,23,747.64
 potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2026-06-08,2026,24,770.0,12.0,6.0,0,observed
 potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2026-06-15,2026,25,770.0,14.0,7.0,0,observed
 potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2026-06-22,2026,26,775.0,8.0,4.0,0,observed
-potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2026-06-29,2026,27,790.0,4.0,2.0,0,observed
+potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2026-06-29,2026,27,795.7142857142857,14.0,7.0,0,observed
+potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2026-07-06,2026,28,800.0,12.0,6.0,0,observed
+potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2026-07-13,2026,29,806.6666666666666,12.0,6.0,0,observed
+potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2026-07-20,2026,30,820.0,10.0,5.0,0,observed
+potato,West Bengal,WB,Murshidabad,Beldanga APMC,2904.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2017-01-02,2017,1,459.8780487804878,164.0,7.0,0,observed
 potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2017-01-09,2017,2,427.56756756756755,148.0,6.0,0,observed
 potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2017-01-16,2017,3,375.27027027027026,148.0,7.0,0,observed
@@ -32238,7 +32494,11 @@ potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2026-06-01,2026,23,997.518
 potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2026-06-08,2026,24,1100.0,39.2,6.0,0,observed
 potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2026-06-15,2026,25,1057.3275862068965,46.4,7.0,0,observed
 potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2026-06-22,2026,26,966.1971830985915,35.5,5.0,0,observed
-potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2026-06-29,2026,27,900.0,8.5,1.0,0,observed
+potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2026-06-29,2026,27,852.3442136498516,67.4,6.0,0,observed
+potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2026-07-06,2026,28,821.6058394160584,68.5,7.0,0,observed
+potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2026-07-13,2026,29,872.6470588235294,68.0,6.0,0,observed
+potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2026-07-20,2026,30,812.0689655172414,58.0,5.0,0,observed
+potato,West Bengal,WB,Puruliya,Balarampur APMC,2905.0,2026-07-27,2026,31,780.0,15.0,1.0,0,observed
 potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2017-01-02,2017,1,466.887417218543,302.0,6.0,0,observed
 potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2017-01-09,2017,2,475.43859649122805,342.0,7.0,0,observed
 potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2017-01-16,2017,3,437.6470588235294,340.0,7.0,0,observed
@@ -32734,7 +32994,11 @@ potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2026-06-01,2026,23,9
 potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2026-06-08,2026,24,884.6644295302013,298.0,6.0,0,observed
 potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2026-06-15,2026,25,880.0,385.0,7.0,0,observed
 potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2026-06-22,2026,26,888.5869565217391,368.0,7.0,0,observed
-potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2026-06-29,2026,27,881.6254416961131,56.6,2.0,0,observed
+potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2026-06-29,2026,27,887.6588021778584,165.3,5.0,0,observed
+potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2026-07-06,2026,28,900.0,356.2,7.0,0,observed
+potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2026-07-13,2026,29,900.0,312.0,6.0,0,observed
+potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2026-07-20,2026,30,882.9050279329609,358.0,7.0,0,observed
+potato,West Bengal,WB,Paschim Bardhaman,Asansol APMC,3117.0,2026-07-27,2026,31,880.0,52.0,1.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2017-01-02,2017,1,450.0,1.0,2.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2017-01-09,2017,2,408.3333333333333,1.5,3.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2017-01-16,2017,3,331.6666666666667,1.5,3.0,0,observed
@@ -32966,7 +33230,7 @@ potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2021-0
 potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2021-05-17,2021,20,710.0,,,1,linear
 potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2021-05-24,2021,21,770.0,,,1,linear
 potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2021-05-31,2021,22,545.6521739130435,,,1,seasonal_median
-potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2021-06-07,2021,23,566.8354430379746,,,1,seasonal_median
+potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2021-06-07,2021,23,566.7510548523206,,,1,seasonal_median
 potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2021-06-14,2021,24,950.0,2.5,1.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2021-06-21,2021,25,751.6666666666666,9.0,6.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2021-06-28,2021,26,625.8333333333333,,,1,linear
@@ -33230,7 +33494,11 @@ potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2026-0
 potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2026-06-08,2026,24,566.8354430379746,15.8,7.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2026-06-15,2026,25,461.0416666666667,48.0,6.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2026-06-22,2026,26,482.26666666666665,22.5,5.0,0,observed
-potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2026-06-29,2026,27,,,,1,
+potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2026-06-29,2026,27,470.945945945946,7.3999999999999995,5.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2026-07-06,2026,28,467.68637532133675,38.9,6.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2026-07-13,2026,29,516.7987804878048,16.400000000000002,6.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2026-07-20,2026,30,631.6949152542372,23.6,5.0,0,observed
+potato,Uttarakhand,UC,Haridwar,Bhagwanpur(Naveen Mandi Sthal) APMC,3338.0,2026-07-27,2026,31,550.0,13.1,1.0,0,observed
 potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2017-01-02,2017,1,703.4375000000001,51.199999999999996,5.0,0,observed
 potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2017-01-09,2017,2,600.0,21.5,2.0,0,observed
 potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2017-01-16,2017,3,500.00000000000006,10.2,1.0,0,observed
@@ -33725,8 +33993,12 @@ potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2026-05-25,2026,22,800.0,8
 potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2026-06-01,2026,23,688.3333333333334,54.0,3.0,0,observed
 potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2026-06-08,2026,24,630.0,36.0,2.0,0,observed
 potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2026-06-15,2026,25,630.0,52.0,3.0,0,observed
-potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2026-06-22,2026,26,,,,1,
-potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2026-06-29,2026,27,,,,1,
+potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2026-06-22,2026,26,646.6666666666666,,,1,linear
+potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2026-06-29,2026,27,663.3333333333334,,,1,linear
+potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2026-07-06,2026,28,680.0,13.0,1.0,0,observed
+potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2026-07-13,2026,29,680.0,15.0,1.0,0,observed
+potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2026-07-20,2026,30,,,,1,
+potato,West Bengal,WB,Alipurduar,Falakata APMC,3339.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2017-01-02,2017,1,700.0,6.0,1.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2017-01-09,2017,2,600.0,8.0,1.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2017-01-16,2017,3,544.4444444444445,18.0,2.0,0,observed
@@ -34222,7 +34494,11 @@ potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2026-06-01,2026,23,695.20
 potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2026-06-08,2026,24,653.1400966183575,103.5,7.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2026-06-15,2026,25,677.8571428571429,98.0,7.0,0,observed
 potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2026-06-22,2026,26,678.595041322314,60.5,4.0,0,observed
-potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2026-06-29,2026,27,700.0,30.0,2.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2026-06-29,2026,27,700.0,79.5,6.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2026-07-06,2026,28,701.063829787234,94.0,6.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2026-07-13,2026,29,673.3333333333334,102.0,7.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2026-07-20,2026,30,655.177304964539,70.5,6.0,0,observed
+potato,West Bengal,WB,Jalpaiguri,Moynaguri APMC,3340.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2017-01-02,2017,1,1373.5955056179778,17.799999999999997,4.0,0,observed
 potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2017-01-09,2017,2,1475.2808988764045,17.8,4.0,0,observed
 potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2017-01-16,2017,3,1400.0000000000002,22.699999999999996,5.0,0,observed
@@ -34718,7 +34994,11 @@ potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2026-06-01,2026
 potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2026-06-08,2026,24,1456.4516129032259,12.4,7.0,0,observed
 potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2026-06-15,2026,25,1455.4621848739496,11.9,7.0,0,observed
 potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2026-06-22,2026,26,1500.0,12.1,7.0,0,observed
-potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2026-06-29,2026,27,1500.0,4.9,3.0,0,observed
+potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2026-06-29,2026,27,1500.0,12.1,7.0,0,observed
+potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2026-07-06,2026,28,1500.0000000000002,11.799999999999999,7.0,0,observed
+potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2026-07-13,2026,29,1499.9999999999998,12.300000000000002,7.0,0,observed
+potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2026-07-20,2026,30,1500.0,13.0,7.0,0,observed
+potato,West Bengal,WB,Darjeeling,Karsiyang(Matigara) APMC,3341.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2017-01-02,2017,1,1601.1627906976744,8.6,6.0,0,observed
 potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2017-01-09,2017,2,1479.381443298969,9.7,6.0,0,observed
 potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2017-01-16,2017,3,1400.0000000000002,9.799999999999999,6.0,0,observed
@@ -35214,7 +35494,11 @@ potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2026-06-01,2026,23,1500.
 potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2026-06-08,2026,24,1429.4573643410852,12.9,7.0,0,observed
 potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2026-06-15,2026,25,1455.3719008264463,12.1,7.0,0,observed
 potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2026-06-22,2026,26,1500.0,12.9,7.0,0,observed
-potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2026-06-29,2026,27,1500.0,5.4,3.0,0,observed
+potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2026-06-29,2026,27,1500.0,12.4,7.0,0,observed
+potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2026-07-06,2026,28,1500.0,12.5,7.0,0,observed
+potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2026-07-13,2026,29,1500.0,12.4,7.0,0,observed
+potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2026-07-20,2026,30,1499.9999999999998,12.900000000000002,7.0,0,observed
+potato,West Bengal,WB,Darjeeling,Darjeeling APMC,3342.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0,2017-01-02,2017,1,591.9298245614035,114.0,7.0,0,observed
 potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0,2017-01-09,2017,2,491.0828025477707,157.0,7.0,0,observed
 potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0,2017-01-16,2017,3,468.2432432432432,148.0,7.0,0,observed
@@ -35710,7 +35994,11 @@ potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0
 potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0,2026-06-08,2026,24,480.6060606060606,66.0,7.0,0,observed
 potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0,2026-06-15,2026,25,600.0,60.0,6.0,0,observed
 potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0,2026-06-22,2026,26,760.0,50.0,5.0,0,observed
-potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0,2026-06-29,2026,27,780.0,20.0,2.0,0,observed
+potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0,2026-06-29,2026,27,780.0,70.0,7.0,0,observed
+potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0,2026-07-06,2026,28,760.0,53.0,6.0,0,observed
+potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0,2026-07-13,2026,29,760.0,53.0,6.0,0,observed
+potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0,2026-07-20,2026,30,760.0,45.0,5.0,0,observed
+potato,West Bengal,WB,Dakshin Dinajpur,Gangarampur(Dakshin Dinajpur) APMC,3344.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2017-01-02,2017,1,670.0,23.3,4.0,0,observed
 potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2017-01-09,2017,2,595.8255451713395,32.1,5.0,0,observed
 potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2017-01-16,2017,3,460.00000000000006,30.099999999999998,5.0,0,observed
@@ -36155,7 +36443,7 @@ potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2025-06-09,2025,24,1113.88
 potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2025-06-16,2025,25,1147.7777777777778,,,1,linear
 potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2025-06-23,2025,26,1257.5753716012737,,,1,seasonal_median
 potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2025-06-30,2025,27,1257.5753716012737,,,1,seasonal_median
-potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2025-07-07,2025,28,1496.11834270982,,,1,seasonal_median
+potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2025-07-07,2025,28,1434.6484583174724,,,1,seasonal_median
 potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2025-07-14,2025,29,1283.3333333333333,60.0,6.0,0,observed
 potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2025-07-21,2025,30,1200.0,60.5,6.0,0,observed
 potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2025-07-28,2025,31,1200.0,71.4,7.0,0,observed
@@ -36206,7 +36494,11 @@ potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2026-06-01,2026,23,620.0,5
 potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2026-06-08,2026,24,643.6842105263158,38.0,5.0,0,observed
 potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2026-06-15,2026,25,650.0,42.0,5.0,0,observed
 potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2026-06-22,2026,26,650.0,30.0,4.0,0,observed
-potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2026-06-29,2026,27,620.0,20.0,3.0,0,observed
+potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2026-06-29,2026,27,620.0,33.0,5.0,0,observed
+potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2026-07-06,2026,28,614.6153846153846,26.0,4.0,0,observed
+potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2026-07-13,2026,29,606.6666666666666,21.0,3.0,0,observed
+potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2026-07-20,2026,30,587.0967741935484,31.0,5.0,0,observed
+potato,West Bengal,WB,Murshidabad,Jiaganj APMC,3345.0,2026-07-27,2026,31,550.0,7.0,1.0,0,observed
 potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346.0,2017-01-02,2017,1,564.4612476370511,211.6,6.0,0,observed
 potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346.0,2017-01-09,2017,2,550.0,151.0,4.0,0,observed
 potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346.0,2017-01-16,2017,3,500.0,76.0,2.0,0,observed
@@ -36702,7 +36994,11 @@ potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346
 potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346.0,2026-06-08,2026,24,1014.3277310924369,95.2,7.0,0,observed
 potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346.0,2026-06-15,2026,25,1006.4197530864197,81.0,6.0,0,observed
 potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346.0,2026-06-22,2026,26,1011.5151515151515,92.4,7.0,0,observed
-potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346.0,2026-06-29,2026,27,1006.5375302663439,41.3,3.0,0,observed
+potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346.0,2026-06-29,2026,27,1014.141201264489,94.89999999999999,7.0,0,observed
+potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346.0,2026-07-06,2026,28,1008.421052631579,98.8,7.0,0,observed
+potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346.0,2026-07-13,2026,29,996.5599051008304,84.3,6.0,0,observed
+potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346.0,2026-07-20,2026,30,980.0,83.7,6.0,0,observed
+potato,West Bengal,WB,Sounth 24 Parganas,Diamond Harbour(South 24-pgs) APMC,3346.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2017-01-02,2017,1,387.5,96.0,7.0,0,observed
 potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2017-01-09,2017,2,390.94117647058823,85.0,6.0,0,observed
 potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2017-01-16,2017,3,358.52272727272725,88.0,7.0,0,observed
@@ -37198,7 +37494,11 @@ potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-06-01,2026,23,848.7206266
 potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-06-08,2026,24,840.0,39.9,7.0,0,observed
 potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-06-15,2026,25,840.0000000000001,42.199999999999996,7.0,0,observed
 potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-06-22,2026,26,840.0,41.6,7.0,0,observed
-potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-06-29,2026,27,840.0,18.0,3.0,0,observed
+potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-06-29,2026,27,840.0000000000001,43.199999999999996,7.0,0,observed
+potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-07-06,2026,28,831.6129032258065,43.4,7.0,0,observed
+potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-07-13,2026,29,777.0419426048564,45.300000000000004,7.0,0,observed
+potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-07-20,2026,30,729.3333333333334,42.0,6.0,0,observed
+potato,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2017-01-02,2017,1,465.8267716535433,254.0,6.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2017-01-09,2017,2,423.93305439330544,239.0,6.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2017-01-16,2017,3,362.3255813953488,172.0,6.0,0,observed
@@ -37694,7 +37994,11 @@ potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2026-06-01,2026,23,898
 potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2026-06-08,2026,24,877.1428571428571,108.5,7.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2026-06-15,2026,25,860.0913242009133,109.5,7.0,0,observed
 potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2026-06-22,2026,26,871.7277486910995,95.5,6.0,0,observed
-potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2026-06-29,2026,27,880.0,32.0,2.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2026-06-29,2026,27,885.764192139738,114.5,7.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2026-07-06,2026,28,868.4978540772532,116.5,7.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2026-07-13,2026,29,860.0,103.0,6.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2026-07-20,2026,30,836.872037914692,105.5,6.0,0,observed
+potato,West Bengal,WB,Purba Bardhaman,Guskara APMC,3348.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2017-01-02,2017,1,593.3673469387755,98.0,5.0,0,observed
 potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2017-01-09,2017,2,873.515625,128.0,5.0,0,observed
 potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2017-01-16,2017,3,440.0,165.0,6.0,0,observed
@@ -38190,7 +38494,11 @@ potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2026-06-01,2026,23,976.63602941
 potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2026-06-08,2026,24,982.5135135135135,37.0,4.0,0,observed
 potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2026-06-15,2026,25,946.4451827242524,60.2,6.0,0,observed
 potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2026-06-22,2026,26,959.9251870324189,40.1,4.0,0,observed
-potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2026-06-29,2026,27,993.3112582781456,30.200000000000003,3.0,0,observed
+potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2026-06-29,2026,27,985.9405940594058,50.50000000000001,5.0,0,observed
+potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2026-07-06,2026,28,944.015748031496,50.800000000000004,5.0,0,observed
+potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2026-07-13,2026,29,907.9186991869918,61.5,6.0,0,observed
+potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2026-07-20,2026,30,847.4823529411765,42.5,4.0,0,observed
+potato,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2017-01-02,2017,1,623.2278481012659,1580.0,7.0,0,observed
 potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2017-01-09,2017,2,617.5683890577508,1645.0,7.0,0,observed
 potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2017-01-16,2017,3,497.3993808049536,1615.0,6.0,0,observed
@@ -38686,7 +38994,11 @@ potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2026-06-01,2026,23,976.672661870
 potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2026-06-08,2026,24,974.9738219895287,38.2,4.0,0,observed
 potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2026-06-15,2026,25,939.8504983388705,60.199999999999996,6.0,0,observed
 potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2026-06-22,2026,26,957.4441687344914,40.3,4.0,0,observed
-potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2026-06-29,2026,27,993.3112582781456,30.200000000000003,3.0,0,observed
+potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2026-06-29,2026,27,983.9285714285713,50.400000000000006,5.0,0,observed
+potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2026-07-06,2026,28,935.8939096267192,50.89999999999999,5.0,0,observed
+potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2026-07-13,2026,29,898.0,61.5,6.0,0,observed
+potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2026-07-20,2026,30,837.4299065420561,42.8,4.0,0,observed
+potato,West Bengal,WB,Nadia,Chakdah APMC,3350.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2017-01-02,2017,1,450.0,22.0,2.0,0,observed
 potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2017-01-09,2017,2,403.8888888888889,72.0,7.0,0,observed
 potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2017-01-16,2017,3,388.0412371134021,97.0,7.0,0,observed
@@ -39182,7 +39494,11 @@ potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2026-06-01,2026,2
 potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2026-06-08,2026,24,738.2318271119843,50.9,6.0,0,observed
 potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2026-06-15,2026,25,745.6605593056896,51.849999999999994,7.0,0,observed
 potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2026-06-22,2026,26,766.0615711252653,47.1,7.0,0,observed
-potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2026-06-29,2026,27,754.8275862068965,14.5,2.0,0,observed
+potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2026-06-29,2026,27,760.6172839506173,40.5,6.0,0,observed
+potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2026-07-06,2026,28,753.875,40.0,6.0,0,observed
+potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2026-07-13,2026,29,742.0686070686072,48.099999999999994,7.0,0,observed
+potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2026-07-20,2026,30,658.7090558766859,51.900000000000006,7.0,0,observed
+potato,West Bengal,WB,Bankura,Indus(Bankura Sadar) APMC,3351.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2017-01-02,2017,1,449.8333333333333,180.0,6.0,0,observed
 potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2017-01-09,2017,2,422.4418604651163,172.0,6.0,0,observed
 potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2017-01-16,2017,3,382.03821656050957,157.0,6.0,0,observed
@@ -39678,7 +39994,11 @@ potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2026-06-01,202
 potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2026-06-08,2026,24,758.7027027027027,18.5,6.0,0,observed
 potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2026-06-15,2026,25,739.4594594594594,14.8,5.0,0,observed
 potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2026-06-22,2026,26,765.1666666666666,12.0,4.0,0,observed
-potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2026-06-29,2026,27,760.0000000000001,9.2,3.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2026-06-29,2026,27,760.0,15.2,5.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2026-07-06,2026,28,771.304347826087,18.4,6.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2026-07-13,2026,29,730.0,12.0,4.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2026-07-20,2026,30,722.3333333333334,12.0,4.0,0,observed
+potato,West Bengal,WB,Medinipur(W),Garbeta(Medinipur) APMC,3352.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2017-01-02,2017,1,650.0,106.0,5.0,0,observed
 potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2017-01-09,2017,2,547.2826086956521,92.0,4.0,0,observed
 potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2017-01-16,2017,3,506.2111801242236,161.0,6.0,0,observed
@@ -40174,7 +40494,11 @@ potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2026-06-01,2026,23,684.0
 potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2026-06-08,2026,24,700.0,50.0,5.0,0,observed
 potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2026-06-15,2026,25,716.0,50.0,5.0,0,observed
 potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2026-06-22,2026,26,720.0,40.0,4.0,0,observed
-potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2026-06-29,2026,27,740.0,20.0,2.0,0,observed
+potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2026-06-29,2026,27,732.0,50.0,5.0,0,observed
+potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2026-07-06,2026,28,760.0,20.0,2.0,0,observed
+potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2026-07-13,2026,29,793.3333333333334,30.0,3.0,0,observed
+potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2026-07-20,2026,30,830.0,40.0,4.0,0,observed
+potato,West Bengal,WB,Medinipur(E),Kolaghat APMC,3353.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2017-01-02,2017,1,483.1578947368421,57.0,6.0,0,observed
 potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2017-01-09,2017,2,452.41379310344826,58.0,6.0,0,observed
 potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2017-01-16,2017,3,404.82758620689657,58.0,6.0,0,observed
@@ -40670,7 +40994,11 @@ potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2026-06-01,2026,23,820.0,1.7,
 potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2026-06-08,2026,24,798.7096774193548,6.2,3.0,0,observed
 potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2026-06-15,2026,25,793.5384615384615,6.5,3.0,0,observed
 potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2026-06-22,2026,26,784.8351648351647,9.100000000000001,4.0,0,observed
-potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2026-06-29,2026,27,,,,1,
+potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2026-06-29,2026,27,782.4175824175824,,,1,linear
+potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2026-07-06,2026,28,780.0,2.2,1.0,0,observed
+potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2026-07-13,2026,29,767.4285714285714,3.5,2.0,0,observed
+potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2026-07-20,2026,30,750.0,2.2,1.0,0,observed
+potato,West Bengal,WB,Puruliya,Kasipur APMC,3354.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2017-01-02,2017,1,498.96632189707367,792.8,5.0,0,observed
 potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2017-01-09,2017,2,427.9742242242242,799.2,5.0,0,observed
 potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2017-01-16,2017,3,395.88949119132684,811.7,5.0,0,observed
@@ -41166,7 +41494,11 @@ potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2026-06-01,2026,23,1000.0,355
 potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2026-06-08,2026,24,1000.0,307.0,6.0,0,observed
 potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2026-06-15,2026,25,1000.0,251.0,5.0,0,observed
 potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2026-06-22,2026,26,1000.0,212.0,4.0,0,observed
-potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2026-06-29,2026,27,1000.0,154.0,3.0,0,observed
+potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2026-06-29,2026,27,1000.0,310.0,6.0,0,observed
+potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2026-07-06,2026,28,1000.0,369.0,7.0,0,observed
+potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2026-07-13,2026,29,1000.0,347.0,7.0,0,observed
+potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2026-07-20,2026,30,1000.0,351.0,7.0,0,observed
+potato,West Bengal,WB,Birbhum,Sainthia APMC,3355.0,2026-07-27,2026,31,1000.0,48.0,1.0,0,observed
 potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2017-01-02,2017,1,412.9496402877698,278.0,6.0,0,observed
 potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2017-01-09,2017,2,439.9288256227758,281.0,6.0,0,observed
 potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2017-01-16,2017,3,399.8615916955017,289.0,6.0,0,observed
@@ -41662,7 +41994,11 @@ potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2026-06-01,2026,23,625.0,152
 potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2026-06-08,2026,24,672.6086956521739,184.0,6.0,0,observed
 potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2026-06-15,2026,25,708.7837837837837,148.0,5.0,0,observed
 potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2026-06-22,2026,26,735.8083832335329,167.0,5.0,0,observed
-potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2026-06-29,2026,27,760.0,74.0,2.0,0,observed
+potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2026-06-29,2026,27,765.9109311740891,247.0,7.0,0,observed
+potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2026-07-06,2026,28,780.0,138.0,5.0,0,observed
+potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2026-07-13,2026,29,760.0,84.0,3.0,0,observed
+potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2026-07-20,2026,30,686.6428571428571,280.0,7.0,0,observed
+potato,West Bengal,WB,Birbhum,Rampurhat APMC,4666.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2017-01-02,2017,1,814.3382352941177,136.0,7.0,0,observed
 potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2017-01-09,2017,2,850.7575757575758,132.0,7.0,0,observed
 potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2017-01-16,2017,3,726.2589928057554,139.0,7.0,0,observed
@@ -42158,7 +42494,11 @@ potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2026-06-01,2026,23,
 potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2026-06-08,2026,24,476.536312849162,89.5,7.0,0,observed
 potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2026-06-15,2026,25,612.1105527638191,79.6,6.0,0,observed
 potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2026-06-22,2026,26,755.8441558441558,77.0,5.0,0,observed
-potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2026-06-29,2026,27,780.0,32.0,2.0,0,observed
+potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2026-06-29,2026,27,778.2978723404256,94.0,6.0,0,observed
+potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2026-07-06,2026,28,776.5116279069767,86.0,6.0,0,observed
+potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2026-07-13,2026,29,780.0,88.0,6.0,0,observed
+potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2026-07-20,2026,30,780.0,71.0,5.0,0,observed
+potato,West Bengal,WB,Dakshin Dinajpur,Balurghat APMC,4667.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2017-01-02,2017,1,591.5057915057915,518.0,7.0,0,observed
 potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2017-01-09,2017,2,586.6771159874609,638.0,7.0,0,observed
 potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2017-01-16,2017,3,607.1243523316062,772.0,7.0,0,observed
@@ -42654,7 +42994,11 @@ potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2026-06-01,2026,23,724.918
 potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2026-06-08,2026,24,680.0,123.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2026-06-15,2026,25,711.9626168224299,107.0,5.0,0,observed
 potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2026-06-22,2026,26,720.0,128.0,6.0,0,observed
-potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2026-06-29,2026,27,720.0,44.0,2.0,0,observed
+potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2026-06-29,2026,27,724.5454545454545,110.0,5.0,0,observed
+potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2026-07-06,2026,28,730.2290076335878,131.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2026-07-13,2026,29,720.0,130.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2026-07-20,2026,30,695.1492537313433,134.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Baxirhat APMC,4670.0,2026-07-27,2026,31,,,,1,
 potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2017-01-02,2017,1,719.3069306930694,10.1,5.0,0,observed
 potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2017-01-09,2017,2,679.0909090909091,11.0,5.0,0,observed
 potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2017-01-16,2017,3,662.1794871794872,15.6,6.0,0,observed
@@ -43150,4 +43494,8 @@ potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2026-06-01,2026,23,728.1
 potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2026-06-08,2026,24,680.0,125.0,6.0,0,observed
 potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2026-06-15,2026,25,712.1153846153846,104.0,5.0,0,observed
 potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2026-06-22,2026,26,720.0,128.0,6.0,0,observed
-potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2026-06-29,2026,27,720.0,43.0,2.0,0,observed
+potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2026-06-29,2026,27,724.0,105.0,5.0,0,observed
+potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2026-07-06,2026,28,729.8449612403101,129.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2026-07-13,2026,29,720.0,130.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2026-07-20,2026,30,694.9618320610687,131.0,6.0,0,observed
+potato,West Bengal,WB,Coochbehar,Mekhliganj APMC,4671.0,2026-07-27,2026,31,,,,1,

@@ -44,7 +44,7 @@ OUTDIR = r'C:\Users\masro\Downloads\Agmarknet_Weekly'
 os.makedirs(OUTDIR, exist_ok=True)
 
 START_DATE = '2017-01-01'
-END_DATE   = '2026-07-24'
+END_DATE   = '2026-07-27'
 
 # Price validity window per crop (Rs/quintal)
 # Tomato: collapses to near-zero in glut; spikes observed ~8,000-10,000 in crisis

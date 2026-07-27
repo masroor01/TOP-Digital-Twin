@@ -66,10 +66,10 @@ ZIP_S2         = DOWNLOADS / 'S2-20260708T112817Z-3-001.zip'
 ZIP_MODIS      = DOWNLOADS / 'MODIS-20260708T112651Z-3-001.zip'
 
 START = pd.Timestamp('2017-01-01')
-END   = pd.Timestamp('2026-07-24')
+END   = pd.Timestamp('2026-07-27')
 
 # Full ISO-week index 2017-2026 (Mondays)
-_all_weeks = pd.date_range('2016-12-26', '2026-07-24', freq='W-MON')
+_all_weeks = pd.date_range('2016-12-26', '2026-07-27', freq='W-MON')
 WEEK_INDEX = _all_weeks[(_all_weeks >= START) & (_all_weeks <= END)]
 
 CROPS = ['tomato', 'onion', 'potato']

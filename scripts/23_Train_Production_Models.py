@@ -89,7 +89,7 @@ print('=' * 65)
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[1] Loading panel + all layers ...')
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
-df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2026-07-24')]
+df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2026-07-27')]
 df = df.sort_values(['crop', 'market', 'week_start']).reset_index(drop=True)
 df['year']  = df['week_start'].dt.year
 df['month'] = df['week_start'].dt.month
