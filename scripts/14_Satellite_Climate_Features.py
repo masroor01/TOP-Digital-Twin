@@ -86,6 +86,13 @@ CROPS = ['tomato', 'onion', 'potato']
 # come through as NaN for those columns, not a crash or a truncated file.
 TOPUP_2025 = DOWNLOADS / 'GEE_2025'
 TOPUP_2026 = DOWNLOADS / 'GEE_2026'
+# Potato zone relocation (2026-07-28): P1-P3 moved from Agra/Farrukhabad/
+# Jalandhar (unreachable by any modeled market -- see Script 16) to
+# Darjeeling/Diamond Harbour/Dehradun. These are brand-new zone locations
+# with no prior extraction, so this is a FULL 2017-2026 history (not a
+# topup) for just those 3 zones -- same era5/chirps/s2/modis subfolder
+# convention as TOPUP_2025/2026, just scoped to fewer zones and years.
+TOPUP_POTATO_ZONES = DOWNLOADS / 'GEE_PotatoZoneReplacement'
 
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 RAW_DIR.mkdir(parents=True, exist_ok=True)
@@ -189,7 +196,8 @@ for era5_subdir in ['era5', 'era5_topup']:
         if df.empty:
             continue
         era5_frames.append(df)
-for topup_dir_path, topup_label in [(TOPUP_2025 / 'era5', '2025'), (TOPUP_2026 / 'era5', '2026')]:
+for topup_dir_path, topup_label in [(TOPUP_2025 / 'era5', '2025'), (TOPUP_2026 / 'era5', '2026'),
+                                     (TOPUP_POTATO_ZONES / 'era5', 'potato-zone-relocation')]:
     if topup_dir_path.exists():
         for fpath in sorted(topup_dir_path.glob('*.csv')):
             df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
@@ -235,7 +243,8 @@ print('='*65)
 chirps_frames = []
 # Load CHIRPS from zip-extracted folder + optional 2025/2026 topup folders
 chirps_dirs = [RAW_DIR / 'chirps']
-for _topup_chirps, topup_label in [(TOPUP_2025 / 'chirps', '2025'), (TOPUP_2026 / 'chirps', '2026')]:
+for _topup_chirps, topup_label in [(TOPUP_2025 / 'chirps', '2025'), (TOPUP_2026 / 'chirps', '2026'),
+                                    (TOPUP_POTATO_ZONES / 'chirps', 'potato-zone-relocation')]:
     if _topup_chirps.exists():
         chirps_dirs.append(_topup_chirps)
         print(f'  {topup_label} CHIRPS topup: {len(list(_topup_chirps.glob("*.csv")))} files found')
@@ -280,7 +289,8 @@ print('='*65)
 s2_frames = []
 # Load S2 from zip-extracted folder + optional 2025/2026 topup folders
 _s2_dirs = [RAW_DIR / 's2']
-for _topup_s2, topup_label in [(TOPUP_2025 / 's2', '2025'), (TOPUP_2026 / 's2', '2026')]:
+for _topup_s2, topup_label in [(TOPUP_2025 / 's2', '2025'), (TOPUP_2026 / 's2', '2026'),
+                                (TOPUP_POTATO_ZONES / 's2', 'potato-zone-relocation')]:
     if _topup_s2.exists():
         _s2_dirs.append(_topup_s2)
         print(f'  {topup_label} S2 topup: {len(list(_topup_s2.glob("*.csv")))} files found')
@@ -344,7 +354,8 @@ modis_ndvi_frames, modis_lst_frames = [], []
 
 # Load MODIS from zip-extracted folder + optional 2025/2026 topup folders
 _modis_dirs = [RAW_DIR / 'modis']
-for _topup_modis, topup_label in [(TOPUP_2025 / 'modis', '2025'), (TOPUP_2026 / 'modis', '2026')]:
+for _topup_modis, topup_label in [(TOPUP_2025 / 'modis', '2025'), (TOPUP_2026 / 'modis', '2026'),
+                                   (TOPUP_POTATO_ZONES / 'modis', 'potato-zone-relocation')]:
     if _topup_modis.exists():
         _modis_dirs.append(_topup_modis)
         print(f'  {topup_label} MODIS topup: {len(list(_topup_modis.glob("*.csv")))} files found')

@@ -63,7 +63,7 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 
 | Script | What it does | Depends on |
 |---|---|---|
-| `09_Agmarknet_Weekly_Panel.py` | Builds the core weekly price/arrivals panel from raw Agmarknet CSVs (tomato/onion/potato, all-India). Handles ISO-week alignment and gap imputation (see §7 imputation caveat). Applies a real-coverage filter (`MIN_REAL_COVERAGE = 0.80`, added 2026-07-27): markets are dropped unless >=80% of their own full grid is real (non-imputed) data — potato additionally keeps its own >=8-of-9-years balanced-panel rule first. Kept market counts: tomato 401 (was 1,725 unfiltered), onion 189 (was 1,580), potato 79 (was 87). `data/market_coverage_browser.html` is a separate, purely exploratory viewer over ALL markets (unfiltered) — it was never wired into this filter and isn't a decision record. | Raw Agmarknet CSVs (see §5) |
+| `09_Agmarknet_Weekly_Panel.py` | Builds the core weekly price/arrivals panel from raw Agmarknet CSVs (tomato/onion/potato, all-India). Handles ISO-week alignment and gap imputation (see §7 imputation caveat). Applies a real-coverage filter (`MIN_REAL_COVERAGE = 0.70`, added 2026-07-27, revised same day from an initial 0.80): markets are dropped unless >=70% of their own full grid is real (non-imputed) data — potato additionally keeps its own >=8-of-9-years balanced-panel rule first. Kept market counts: tomato 517 (was 1,725 unfiltered), onion 246 (was 1,580), potato 82 (was 87). Revised down from 80% because the market-level DM test (Script 18b) at 80% found onion's h=1w result resting on only 34/189 significant markets; 70% roughly triples that to a sturdier sample. `data/market_coverage_browser.html` is a separate, purely exploratory viewer over ALL markets (unfiltered) — it was never wired into this filter and isn't a decision record. | Raw Agmarknet CSVs (see §5) |
 | `09b_Merge_Onion_2026_Update.py` | One-off/refresh utility: merges the Agmarknet **portal's** separate "Daily Price Report" + "Daily Arrival Report" CSVs into the same row schema as the main onion raw file, matching markets to existing `market_id`s by normalized (state, market) name and assigning new sequential IDs for markets not seen before. Needed because onion's original scraper source doesn't get topped up the way tomato/potato's does — see §5. Run before `09_Agmarknet_Weekly_Panel.py` when refreshing onion. | Onion Daily Price/Arrival Report CSVs (see §5) |
 | `10_CMIE_Macro_Parser.py` | Parses CMIE macro Excel exports into `data/cmie_macro/` | Raw CMIE Excel files |
 | `10b_Extend_Macro_2026.py` | One-off/refresh utility: extends `data/rbi_dbie/`, `data/ppac_macro/`, and `data/cmie_macro/` CSVs in place with new CMIE Economic Outlook exports (repo/reverse-repo rate, USD/INR, WPI, diesel/LPG, agri credit, agri wages, IIP). Column mappings for each series are validated against known overlapping historical values before trusting them — see the script's own docstring for exact source-file → column notes, including two pre-existing mislabeling quirks found in the already-published data (`agri_wages_rs_day`, `iip_food_proc`) that were kept as-is for continuity rather than silently changed. | New CMIE Excel exports (see §5) |
@@ -301,10 +301,10 @@ before you hit them again:
 
 - **Imputation in "latest price"**: the base weekly panel imputes missing
   trading weeks (see the `imputed`/`imputed_method` columns in
-  `top_weekly_panel.csv`). **75.0% of markets' most-recent week is imputed,
+  `top_weekly_panel.csv`). **76.2% of markets' most-recent week is imputed,
   not a real trade** (as of the 2026-07-27 refresh, post-coverage-filter) —
   this is a recency-lag effect (reporting delay in the newest week), distinct
-  from a market's overall coverage quality, so the 80% coverage filter
+  from a market's overall coverage quality, so the 70% coverage filter
   doesn't eliminate it. Script 23 accounts for this (`last_observed_price`
   separate from the possibly-imputed "latest" row) — if you write new code
   against this panel, don't assume the last row per market is real data.

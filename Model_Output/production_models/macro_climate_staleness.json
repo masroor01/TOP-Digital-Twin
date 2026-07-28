@@ -341,28 +341,28 @@
       "weeks_stale": 4
     },
     "era5_tmax": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 2
+      "as_of": "2026-07-20",
+      "weeks_stale": 1
     },
     "era5_tmin": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 2
+      "as_of": "2026-07-20",
+      "weeks_stale": 1
     },
     "era5_tmean": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 2
+      "as_of": "2026-07-20",
+      "weeks_stale": 1
     },
     "era5_dtr": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 2
+      "as_of": "2026-07-20",
+      "weeks_stale": 1
     },
     "era5_heat_35": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 2
+      "as_of": "2026-07-20",
+      "weeks_stale": 1
     },
     "era5_heat_38": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 2
+      "as_of": "2026-07-20",
+      "weeks_stale": 1
     },
     "chirps_rain_mm": {
       "as_of": "2026-06-22",

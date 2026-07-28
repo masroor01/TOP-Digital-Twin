@@ -193,7 +193,7 @@ with st.sidebar.expander('Data & coverage'):
     st.markdown(
         'Source: Agmarknet (price/arrivals), CMIE/RBI/PPAC (macro), '
         'GEE Sentinel-2/MODIS/ERA5/CHIRPS (satellite/climate), 2017-2026.\n\n'
-        'Markets are filtered to those with **>=80% real (non-imputed) '
+        'Markets are filtered to those with **>=70% real (non-imputed) '
         'weekly coverage** over their own history (added 2026-07-27 — '
         'earlier versions of this dashboard had no such filter and '
         'included many thin-data markets).\n\n'

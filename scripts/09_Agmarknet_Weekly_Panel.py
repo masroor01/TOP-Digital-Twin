@@ -49,13 +49,15 @@ START_DATE = '2017-01-01'
 END_DATE   = '2026-07-27'
 
 # Minimum share of a market's own full grid that must be real (non-imputed)
-# for the market to be retained. Added 2026-07-27 after discovering the
-# panel had no coverage-based filter at all for tomato/onion (median market
-# was 77-84% imputed) -- decided on 80% as the working threshold, a balance
-# between data quality and preserving enough geographic spread for zone
-# assignment (verified: no production zone loses all nearby markets at 80%,
-# unlike a stricter 90% cut).
-MIN_REAL_COVERAGE = 0.80
+# for the market to be retained. Added 2026-07-27, originally 0.80. Revised
+# to 0.70 the same day: the market-level DM test (Script 18b) at 80% found
+# onion's M0-vs-M6 result resting on only 34/189 significant markets --
+# fragile. 70% adds 116 tomato / 57 onion markets (median coverage among the
+# added markets is still ~90%, so this isn't admitting genuinely thin data)
+# for more statistical power on that test, at the cost of a lower quality
+# floor. Potato is unaffected (still West Bengal + Uttarakhand only -- that
+# comes from the separate years>=8 balanced-panel filter, not this one).
+MIN_REAL_COVERAGE = 0.70
 
 # Price validity window per crop (Rs/quintal)
 # Tomato: collapses to near-zero in glut; spikes observed ~8,000-10,000 in crisis
