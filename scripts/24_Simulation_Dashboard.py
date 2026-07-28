@@ -601,9 +601,10 @@ with mkt_col2:
 st.markdown('---')
 st.subheader('Price-trend comparison')
 st.caption(
-    'Pick a crop, state, and up to 15 markets to compare their real observed weekly '
-    'price history (up to the last 2 years) on the same chart — independent of the '
-    'main scenario controls in the sidebar and the rankings above.'
+    'Pick a crop, one or more states, and up to 15 markets to compare their real observed '
+    'weekly price history (up to the last 2 years) on the same chart — markets can be mixed '
+    'across states (or all left within one), independent of the main scenario controls in '
+    'the sidebar and the rankings above.'
 )
 
 trend_col1, trend_col2 = st.columns(2)
@@ -613,18 +614,23 @@ with trend_col1:
 with trend_col2:
     trend_crop_ref = reference[reference['crop'] == trend_crop]
     trend_states = sorted(trend_crop_ref['state'].dropna().unique())
-    trend_state_default = trend_states.index(state_sel) if state_sel in trend_states else 0
-    trend_state = st.selectbox('State / UT', trend_states, index=trend_state_default, key='trend_state')
+    trend_state_default = [state_sel] if state_sel in trend_states else trend_states[:1]
+    trend_states_sel = st.multiselect(
+        'State / UT', trend_states, default=trend_state_default, key='trend_states',
+        help='Pick one state to compare markets within it, or several to compare across states.'
+    )
 
 trend_crop_history = history[history['crop'] == trend_crop]
-trend_state_markets = set(trend_crop_ref[trend_crop_ref['state'] == trend_state]['market'])
-history_markets = sorted(m for m in trend_crop_history['market'].unique() if m in trend_state_markets)
+market_state = trend_crop_ref.drop_duplicates('market').set_index('market')['state']
+trend_selectable_markets = set(trend_crop_ref[trend_crop_ref['state'].isin(trend_states_sel)]['market'])
+history_markets = sorted(m for m in trend_crop_history['market'].unique() if m in trend_selectable_markets)
 default_trend_markets = [market] if (trend_crop == crop and market in history_markets) else []
 selected_trend_markets = st.multiselect(
     'Markets to compare', options=history_markets, default=default_trend_markets,
-    max_selections=15,
-    help='Select up to 15 markets in the chosen crop/state — defaults to the sidebar\'s '
-         'currently selected market when crop and state both match.'
+    max_selections=15, format_func=lambda m: f'{m} — {market_state.get(m, "?")}',
+    help='Select up to 15 markets from the state(s) chosen above — defaults to the sidebar\'s '
+         'currently selected market when crop and state both match. Mixing states is fine; '
+         'each market keeps its own line and legend label.'
 )
 
 if not selected_trend_markets:
@@ -637,9 +643,10 @@ else:
         if mdata['modal_price_weighted'].notna().sum() == 0:
             no_data_markets.append(m)
             continue
+        legend_name = m if len(trend_states_sel) <= 1 else f'{m} ({market_state.get(m, "?")})'
         fig_trend.add_trace(go.Scatter(
             x=mdata['week_start'], y=mdata['modal_price_weighted'],
-            mode='lines', name=m,
+            mode='lines', name=legend_name,
             line=dict(width=3 if (trend_crop == crop and m == market) else 1.5)
         ))
     if no_data_markets:
