@@ -293,7 +293,12 @@ for crop in CROPS:
     # These values are identical across markets for a given crop/week (crop-
     # level joins), so forward-filling once per crop is exact, not an
     # approximation across markets.
-    stale_cols = [c for c in (MACRO_COLS + CLIMATE_FEATS + POLICY_FEATS) if c in df_crop.columns]
+    # SAT_FEATS added 2026-07-28: found modis_ndvi NaN at the reference row
+    # for the newly-relocated potato zones -- Script 14 only forward-fills
+    # MODIS 3 weeks, one week short of the grid's actual end date. Same root
+    # cause as the macro/climate case above, just not visible before since
+    # s2_ndvi (4-week ffill) always covered the gap for the original zones.
+    stale_cols = [c for c in (MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + POLICY_FEATS) if c in df_crop.columns]
     weekly = (df_crop[['week_start'] + stale_cols]
               .drop_duplicates(subset=['week_start'])
               .sort_values('week_start'))
