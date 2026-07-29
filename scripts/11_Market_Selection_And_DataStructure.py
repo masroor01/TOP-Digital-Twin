@@ -2,17 +2,18 @@
 """
 Script 11 — Market Selection + Data Structure Visualisation
 ===========================================================
-Filters Agmarknet weekly panel to markets with ≥90% temporal coverage,
-generates paper-ready figures and appendix tables.
+Filters Agmarknet weekly panel to markets with >=70% temporal coverage
+(matches Script 09's canonical MIN_REAL_COVERAGE), generates paper-ready
+figures and appendix tables.
 
 Outputs (all in Model_Output/):
-  filtered_panel_top.csv              — ≥90% coverage panel (3 crops combined)
+  filtered_panel_top.csv              — >=70% coverage panel (3 crops combined)
   appendix_market_selection.xlsx      — per-crop appendix tables
   fig01_data_architecture.png         — Digital Twin 6-layer architecture diagram
   fig02_market_coverage_distribution.png  — coverage histogram + tier breakdown
   fig03_markets_by_state.png          — state-wise market counts (3 crops)
   fig04_coverage_heatmap.png          — year-by-year coverage heatmap (top markets)
-  fig05_panel_timeline.png            — weekly observation counts 2017-2024
+  fig05_panel_timeline.png            — weekly observation counts 2017-2026
 
 Run: python scripts/11_Market_Selection_And_DataStructure.py
 """
@@ -36,7 +37,9 @@ OUT_DIR  = os.path.join(BASE, 'Model_Output')
 APPX_DIR = OUT_DIR
 os.makedirs(OUT_DIR, exist_ok=True)
 
-COVERAGE_THRESHOLD = 90          # % of weeks required
+COVERAGE_THRESHOLD = 70          # % of weeks required -- matches Script 09's
+                                  # MIN_REAL_COVERAGE (updated 2026-07-29 from
+                                  # this script's own previously-independent 90%)
 CROPS = ['tomato', 'onion', 'potato']
 
 CROP_COLORS = {
@@ -56,22 +59,28 @@ plt.rcParams.update({
 
 # ── 1. Load & filter ──────────────────────────────────────────────────────────
 STUDY_START = '2017-01-01'
-STUDY_END   = '2025-12-31'
+STUDY_END   = '2026-07-27'       # matches Script 09's current END_DATE
 
 print('Loading weekly panel ...')
 df = pd.read_csv(INFILE, parse_dates=['week_start'])
 df = df[(df['week_start'] >= STUDY_START) & (df['week_start'] <= STUDY_END)]
-# Total possible weeks in study period (used as denominator for coverage %)
+# Total possible weeks in study period -- kept for reference/reporting only,
+# NOT used as the coverage denominator below (see note).
 TOTAL_WEEKS = len(pd.date_range(STUDY_START, STUDY_END, freq='W-MON'))
-print(f'  Total ISO weeks 2017-2025: {TOTAL_WEEKS}')
+print(f'  Total ISO weeks 2017-2026: {TOTAL_WEEKS}')
 
 def compute_coverage(sub):
-    # Coverage is based on observed (non-imputed) weeks only
-    if 'imputed' in sub.columns:
-        obs = sub[sub['imputed'] == 0].copy()
-    else:
-        obs = sub.copy()
-    obs['year'] = obs['week_start'].dt.year
+    # Coverage denominator: each market's OWN grid (all rows for that market
+    # in this crop's panel, real + imputed), not a fixed 2017-2026 span --
+    # matches Script 09's MIN_REAL_COVERAGE definition exactly (updated
+    # 2026-07-29; previously used a fixed-window denominator that could
+    # understate coverage for markets with a genuinely shorter real history).
+    sub = sub.copy()
+    sub['year'] = sub['week_start'].dt.year
+    sub['pct_coverage_row'] = (1 - sub.groupby('market')['imputed'].transform('mean')) * 100 \
+        if 'imputed' in sub.columns else 100.0
+
+    obs = sub[sub['imputed'] == 0].copy() if 'imputed' in sub.columns else sub.copy()
     return (obs.groupby('market')
                .agg(state         = ('state', 'first'),
                     district      = ('district', 'first'),
@@ -81,7 +90,7 @@ def compute_coverage(sub):
                     mean_arrivals = ('arrivals_tonnes_week',  'mean'),
                     cv_price      = ('modal_price_weighted',
                                      lambda x: x.std()/x.mean()*100 if x.mean()>0 else 0))
-               .assign(pct_coverage = lambda d: (d['weeks_present']/TOTAL_WEEKS*100).round(1))
+               .join(sub.groupby('market')['pct_coverage_row'].first().rename('pct_coverage').round(1))
                .reset_index())
 
 coverage = {}
@@ -95,7 +104,7 @@ all_coverage = pd.concat(coverage.values(), ignore_index=True)
 selected = {c: coverage[c][coverage[c]['pct_coverage'] >= COVERAGE_THRESHOLD]
             for c in CROPS}
 
-print('\nMarket selection summary (≥90% coverage):')
+print('\nMarket selection summary (≥70% coverage):')
 for crop in CROPS:
     n_all = len(coverage[crop])
     n_sel = len(selected[crop])
@@ -251,7 +260,7 @@ for ax, crop in zip(axes, CROPS):
     bars = ax.bar(range(len(labels)), counts, color=bar_colors, edgecolor='white',
                   linewidth=0.8, width=0.7)
 
-    # Highlight ≥90% bar
+    # Highlight ≥70% bar
     bars[-1].set_facecolor(CROP_COLORS[crop])
     bars[-1].set_alpha(0.9)
 
@@ -272,11 +281,11 @@ for ax, crop in zip(axes, CROPS):
                     str(count), ha='center', va='bottom', fontsize=8)
 
     ax.axvline(x=4.65, color=CROP_COLORS[crop], linestyle='--', linewidth=1.2,
-               label='≥90% threshold')
+               label='≥70% threshold')
     ax.legend(fontsize=7)
     ax.set_ylim(0, counts.max() * 1.15)
 
-fig.suptitle('Market Coverage Distribution — Temporal Completeness (2017-2025)',
+fig.suptitle('Market Coverage Distribution — Temporal Completeness (2017-2026)',
              fontsize=12, fontweight='bold', y=1.02)
 plt.tight_layout()
 p = os.path.join(OUT_DIR, 'fig02_market_coverage_distribution.png')
@@ -300,7 +309,7 @@ for ax, crop in zip(axes, CROPS):
                    color=colors, alpha=0.8, edgecolor='white', height=0.7)
     ax.set_yticks(range(len(state_counts)))
     ax.set_yticklabels(state_counts.index, fontsize=8)
-    ax.set_xlabel('Number of markets (≥90% coverage)', fontsize=9)
+    ax.set_xlabel('Number of markets (≥70% coverage)', fontsize=9)
     ax.set_title(f'{crop.capitalize()}\n{len(selected[crop])} markets  |  '
                  f'{selected[crop]["state"].nunique()} states',
                  fontsize=10, fontweight='bold', color=CROP_COLORS[crop])
@@ -309,7 +318,7 @@ for ax, crop in zip(axes, CROPS):
                 str(val), va='center', fontsize=8)
     ax.set_xlim(0, state_counts.max() * 1.15)
 
-fig.suptitle('Selected Markets by State — ≥90% Temporal Coverage Panel (2017-2025)',
+fig.suptitle('Selected Markets by State — ≥70% Temporal Coverage Panel (2017-2026)',
              fontsize=12, fontweight='bold')
 plt.tight_layout()
 p = os.path.join(OUT_DIR, 'fig03_markets_by_state.png')
@@ -354,7 +363,7 @@ for ax, crop in zip(axes, CROPS):
                  fontsize=9, fontweight='bold', color=CROP_COLORS[crop])
     plt.colorbar(im, ax=ax, shrink=0.6, label='Coverage %')
 
-fig.suptitle('Year-by-Year Data Coverage Heatmap — Top 30 Markets per Crop (2017-2025)',
+fig.suptitle('Year-by-Year Data Coverage Heatmap — Top 30 Markets per Crop (2017-2026)',
              fontsize=12, fontweight='bold')
 plt.tight_layout()
 p = os.path.join(OUT_DIR, 'fig04_coverage_heatmap.png')
@@ -364,7 +373,7 @@ print(f'  Saved: {p}')
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# FIGURE 5 — Panel Timeline (weekly observation count 2017-2024)
+# FIGURE 5 — Panel Timeline (weekly observation count 2017-2026)
 # ══════════════════════════════════════════════════════════════════════════════
 print('Generating Figure 5: Panel timeline ...')
 
@@ -385,7 +394,7 @@ for ax, crop in zip(axes, CROPS):
     ax.fill_between(merged['week_start'], merged['all_markets'],
                     alpha=0.25, color=CROP_COLORS[crop], label='All markets')
     ax.fill_between(merged['week_start'], merged['selected'],
-                    alpha=0.7,  color=CROP_COLORS[crop], label='≥90% coverage')
+                    alpha=0.7,  color=CROP_COLORS[crop], label='≥70% coverage')
     ax.set_ylabel('Market-weeks\nper week', fontsize=8)
     ax.set_title(crop.capitalize(), fontsize=10, fontweight='bold',
                  color=CROP_COLORS[crop], loc='left')
@@ -396,7 +405,7 @@ for ax, crop in zip(axes, CROPS):
                alpha=0.12, color='grey', label='COVID lockdown')
 
 axes[-1].set_xlabel('Week', fontsize=9)
-fig.suptitle('Weekly Panel Density — All Markets vs ≥90% Coverage Selection (2017-2025)',
+fig.suptitle('Weekly Panel Density — All Markets vs ≥70% Coverage Selection (2017-2026)',
              fontsize=12, fontweight='bold')
 plt.tight_layout()
 p = os.path.join(OUT_DIR, 'fig05_panel_timeline.png')
@@ -414,7 +423,7 @@ for f in sorted(os.listdir(OUT_DIR)):
         print(f'  {f:<45} {sz:>7.1f} KB')
 print()
 
-print('Panel statistics (≥90% coverage):')
+print('Panel statistics (≥70% coverage):')
 for crop in CROPS:
     sub = df_filtered[df_filtered['crop']==crop]
     print(f'  {crop:8s}: {sub["market"].nunique():>4} markets  '
