@@ -339,9 +339,17 @@ before you hit them again:
 
 ## 8. Where Results Live (`Model_Output/`)
 
-- `ablation_raw_results.csv`, `table_ablation.csv` — Script 15's full M0-M6 results
+**Check `Model_Output/MANIFEST.md` before citing or reusing any table/figure** —
+it tracks which script produced each output and when it was last regenerated,
+so you don't accidentally cite a stale result (this bit us twice on
+2026-07-29: `table_benchmarks.csv` and `table_spike_auc.csv` were both
+several weeks stale and no one had noticed, since nothing on disk indicated
+their age relative to the current pipeline).
+
+- `ablation_raw_results.csv`, `table_ablation.csv`, `table_mase.csv` — Script 15's full M0-M6 results + naive baseline + MASE
 - `table_diebold_mariano.csv`, `table_dm_market_level_summary.csv` — statistical validation
 - `table_shap_by_layer.csv`, `table_shap_top_features.csv` — Script 25's interpretability results
+- `table_spike_auc.csv`, `table_rolling_origin_metrics.csv` — Script 12's spike-detection classifier
 - `fig_*.png` — all paper-ready figures
 - `production_models/` — the 12 saved models + dashboard metadata (see §6)
 

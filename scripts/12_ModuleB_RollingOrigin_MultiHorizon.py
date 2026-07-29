@@ -232,7 +232,7 @@ feat = build_features(df)
 _EXCLUDE = {'crop','market','state','district','state_code','market_id',
             'arrivals_tonnes_week','modal_price_weighted','log_price','log_arr',
             'week_start','year_month','year','month','date',
-            'next_price','target','spike'}
+            'next_price','target','spike','imputed','imputed_method'}
 
 def get_feature_cols(df_crop, macro_cols, include_macro=True):
     candidates = [c for c in df_crop.columns if c not in _EXCLUDE

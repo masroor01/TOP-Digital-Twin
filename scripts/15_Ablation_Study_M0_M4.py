@@ -56,7 +56,6 @@ WAGE_FILE  = os.path.join(BASE, 'data', 'labour_wages',   'wage_agri_state_month
 COLD_FILE  = os.path.join(BASE, 'data', 'infrastructure', 'cold_storage_by_state.csv')
 ROAD_FILE  = os.path.join(BASE, 'data', 'infrastructure', 'road_density_state_annual.csv')
 POLICY_FILE= os.path.join(BASE, 'data', 'policy_trade',   'policy_weekly_features.csv')
-BENCH_FILE = os.path.join(BASE, 'Model_Output', 'table_benchmarks.csv')
 OUT_DIR  = os.path.join(BASE, 'Model_Output')
 os.makedirs(OUT_DIR, exist_ok=True)
 
@@ -74,7 +73,7 @@ HORIZONS_RUN = [1, 4] if FAST_MODE else HORIZONS
 # higher-power, market-level Diebold-Mariano test — checking whether
 # crop-level weekly averaging hides a real per-market effect.
 # Cheap: only 2 of 7 variants, so a fraction of a full ablation pass.
-MARKET_LEVEL_DIAGNOSTIC = True
+MARKET_LEVEL_DIAGNOSTIC = False
 DIAGNOSTIC_PAIR = ('M0', 'M6')
 
 FOLDS = [
@@ -550,6 +549,59 @@ for variant, feat_list_all in MODEL_FEATURE_SETS.items():
     v_elapsed = (time.time() - v_t0) / 60
     print(f'  {variant} done in {v_elapsed:.1f} min')
 
+# Naive persistence (B1_Naive), computed inline on the SAME folds/panel as
+# M0-M6 -- added 2026-07-29 after discovering the previous B1_Naive numbers
+# came from Script 13's table_benchmarks.csv, last run 2026-07-13 (before
+# the mid-2026 refresh, coverage filter, and potato zone fix) on top of a
+# DIFFERENT 3-fold structure (test years 2022-2024, vs this script's 4
+# folds through 2025). Comparing current M0-M6 results against that stale,
+# fold-mismatched baseline was silently wrong. Naive forecast = today's
+# known price carried forward h weeks (log_price itself, no shift needed
+# since target is already log_price shifted -h).
+if not MARKET_LEVEL_DIAGNOSTIC:
+    print(f'\n  ── B1_Naive: persistence (last known price carried forward) ──')
+    naive_t0 = time.time()
+    for crop in CROPS:
+        df_crop = feat[crop].copy()
+        for fold_info in FOLDS:
+            fold = fold_info['fold']
+            te_start = pd.Timestamp(fold_info['test_start'])
+            te_end   = pd.Timestamp(fold_info['test_end'])
+            for h in HORIZONS_RUN:
+                df_h = df_crop.copy()
+                df_h['target'] = df_h.groupby('market')['log_price'].shift(-h)
+                df_h = df_h.dropna(subset=['target', 'log_price'])
+                test = df_h[(df_h['week_start'] >= te_start) & (df_h['week_start'] <= te_end)]
+                if len(test) < 10:
+                    continue
+
+                y_te   = test['target']
+                y_pred = test['log_price'].values  # naive: today's price repeated forward
+                m = compute_metrics(y_te.values, y_pred)
+
+                pred_df = pd.DataFrame({
+                    'market':     test['market'].values,
+                    'week_start': test['week_start'].values,
+                    'y_true': np.expm1(y_te.values),
+                    'y_pred': np.expm1(y_pred),
+                })
+                weekly = pred_df.groupby('week_start').agg(
+                    y_true=('y_true', 'mean'), y_pred=('y_pred', 'mean'),
+                    n_markets=('y_true', 'size'),
+                ).reset_index()
+                weekly['variant'] = 'B1_Naive'
+                weekly['crop'] = crop
+                weekly['fold'] = fold
+                weekly['horizon_weeks'] = h
+                all_pred_rows.append(weekly)
+
+                all_rows.append({
+                    'variant': 'B1_Naive', 'crop': crop, 'fold': fold, 'horizon_weeks': h,
+                    'test_year': te_end.year, 'n_features': 0, 'n_trees': 0,
+                    **m, 'fit_sec': 0.0,
+                })
+    print(f'  B1_Naive done in {(time.time() - naive_t0) / 60:.1f} min')
+
 total_min = (time.time() - t0_total) / 60
 print(f'\n  Total ablation time: {total_min:.1f} min')
 
@@ -596,21 +648,11 @@ summary = (results
            .round({'RMSE': 1, 'MAE': 1, 'MAPE': 2, 'R2': 4})
            .reset_index())
 
-# Load Naive Persistence from Script 13
-VARIANTS_ALL = list(MODEL_FEATURE_SETS.keys())
-if os.path.exists(BENCH_FILE):
-    bench = pd.read_csv(BENCH_FILE)
-    naive = (bench[bench['model'] == 'B1_Naive']
-             .groupby(['crop', 'horizon_weeks'])[['RMSE', 'MAE', 'MAPE', 'R2']]
-             .mean()
-             .round({'RMSE': 1, 'MAE': 1, 'MAPE': 2, 'R2': 4})
-             .reset_index())
-    naive['variant'] = 'B1_Naive'
-    summary = pd.concat([summary, naive], ignore_index=True)
-    VARIANTS_ALL = list(MODEL_FEATURE_SETS.keys()) + ['B1_Naive']
-    print('   B1_Naive benchmark appended from table_benchmarks.csv')
-else:
-    print('   WARNING: table_benchmarks.csv not found — omitting benchmark row')
+# B1_Naive is already in `results` (computed inline above, same folds/panel
+# as M0-M6), so it's already included in the groupby -- no longer loaded
+# from Script 13's table_benchmarks.csv (that file used a different,
+# mismatched 3-fold structure and predates the current data refresh).
+VARIANTS_ALL = list(MODEL_FEATURE_SETS.keys()) + ['B1_Naive']
 
 # Print console table
 print()
