@@ -156,7 +156,61 @@ FEATURE_INFO = {
                    'tends to push domestic prices {dir}.'),
 }
 
-st.set_page_config(page_title='TOP Digital Twin — Scenario Simulator', layout='wide')
+st.set_page_config(page_title='TOP Digital Twin — Scenario Simulator', layout='wide', page_icon='🌾')
+
+# Crop identity: same colors/icons used throughout this project's other
+# visual artifacts (market_coverage_browser.html, result reports) -- kept
+# in sync rather than inventing a separate palette for the dashboard.
+CROP_ICON = {'tomato': '🍅', 'onion': '🧅', 'potato': '🥔'}
+CROP_COLOR = {'tomato': '#C0392B', 'onion': '#7B2C8E', 'potato': '#A07020'}
+
+st.markdown("""
+<style>
+/* ── Metric cards: subtle surface, rounded corners, soft shadow ── */
+div[data-testid="stMetric"] {
+    background: #FFFFFF;
+    border: 1px solid #D9E0D3;
+    border-radius: 10px;
+    padding: 12px 14px 10px;
+    box-shadow: 0 1px 3px rgba(30,92,55,0.06), 0 4px 14px rgba(30,92,55,0.04);
+}
+div[data-testid="stMetricLabel"] { font-weight: 600; }
+
+/* ── Sidebar: faint gradient wash, agricultural rather than flat grey ── */
+section[data-testid="stSidebar"] > div {
+    background: linear-gradient(180deg, #EFF3E9 0%, #E7EEE0 100%);
+}
+section[data-testid="stSidebar"] hr { border-color: #CFD9C7; }
+
+/* ── Buttons: rounded, deeper on hover ── */
+.stButton > button {
+    border-radius: 8px;
+    border: 1px solid #1E5C37;
+    transition: all .15s ease;
+}
+.stButton > button:hover {
+    background-color: #1E5C37;
+    color: #fff;
+    border-color: #1E5C37;
+}
+
+/* ── Expanders and info/warning boxes: rounded, consistent shadow ── */
+div[data-testid="stExpander"], div[data-testid="stAlert"] {
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(30,92,55,0.05);
+}
+
+/* ── Section dividers: thin sage line instead of default grey ── */
+hr { border-color: #D9E0D3 !important; }
+
+/* ── Main title banner: soft harvest gradient strip behind the page title ── */
+h1 {
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, rgba(30,92,55,0.08), rgba(192,57,43,0.05), rgba(160,112,32,0.06));
+}
+</style>
+""", unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -223,7 +277,7 @@ def predict(crop, h, feature_row):
 # ─────────────────────────────────────────────────────────────────────────────
 # SIDEBAR — crop / market / horizon selection
 # ─────────────────────────────────────────────────────────────────────────────
-st.sidebar.title('TOP Digital Twin')
+st.sidebar.title('🌾 TOP Digital Twin')
 st.sidebar.caption('Price scenario simulator (M6 production models)')
 
 with st.sidebar.expander('Data & coverage'):
@@ -240,6 +294,15 @@ with st.sidebar.expander('Data & coverage'):
     )
 
 crop = st.sidebar.selectbox('Crop', CROPS, format_func=str.capitalize)
+
+# Metric cards pick up this crop's accent color as a left border -- a quiet
+# visual cue for which crop's numbers you're looking at, without repeating
+# the crop name on every card.
+st.markdown(f"""
+<style>
+div[data-testid="stMetric"] {{ border-left: 4px solid {CROP_COLOR[crop]}; }}
+</style>
+""", unsafe_allow_html=True)
 
 crop_ref = reference[reference['crop'] == crop]
 states = sorted(crop_ref['state'].dropna().unique())
@@ -269,7 +332,7 @@ st.sidebar.caption(f'≈ {horizon * 7} days ahead of the market\'s last known da
 # WHAT-IF CONTROLS
 # ─────────────────────────────────────────────────────────────────────────────
 st.sidebar.markdown('---')
-st.sidebar.subheader('Policy scenario')
+st.sidebar.subheader('📜 Policy scenario')
 
 scenario = dict(base_row)  # start from the real, current feature vector
 
@@ -361,7 +424,7 @@ def safe_slider(col, extend_pct=0.0):
 
 
 st.sidebar.markdown('---')
-st.sidebar.subheader('Climate scenario')
+st.sidebar.subheader('🌦️ Climate scenario')
 
 for col in ['era5_tmax', 'chirps_rain_mm', 's2_ndvi']:
     val = safe_slider(col)
@@ -369,7 +432,7 @@ for col in ['era5_tmax', 'chirps_rain_mm', 's2_ndvi']:
         scenario[col] = val
 
 st.sidebar.markdown('---')
-st.sidebar.subheader('Macro / logistics scenario')
+st.sidebar.subheader('💹 Macro / logistics scenario')
 
 for col in ['diesel_4city_rs_litre', 'repo_rate_pct', 'usdinr_monthly_avg']:
     # Widened 20% beyond the observed range — these trend monotonically,
@@ -387,7 +450,7 @@ if reset:
 # ─────────────────────────────────────────────────────────────────────────────
 # MAIN PANEL
 # ─────────────────────────────────────────────────────────────────────────────
-st.title(f'{crop.capitalize()} price scenario — {market}')
+st.title(f'{CROP_ICON.get(crop, "")} {crop.capitalize()} price scenario — {market}')
 st.caption('Predictions are what the M6 model implies under the selected scenario, '
            'not a new statistically-validated forecast — see the ablation study '
            '(Script 15) and Diebold-Mariano tests (Scripts 18/18b) for validated results.')
@@ -428,7 +491,7 @@ elif pd.notna(pct_imputed) and pct_imputed >= 20:
 # the scenario sliders below, so it reads as "the model's live forecast."
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown('---')
-st.subheader('Price forecast ticker')
+st.subheader('🎯 Price forecast ticker')
 st.caption(
     'The baseline model\'s prediction at each of its trained horizons, dated to the '
     'real calendar week — not affected by the what-if sliders below. Forecasts start '
@@ -463,10 +526,12 @@ for tcol, h in zip(ticker_cols, HORIZONS):
 # tested and dropped as net-negative.
 # ─────────────────────────────────────────────────────────────────────────────
 if pd.notna(ticker_points[0][1]) and crop in daily_noise:
-    show_daily = st.button('📅 Show daily price forecast', key='show_daily_btn')
-    if show_daily:
-        st.session_state['daily_view_open'] = True
-    if st.session_state.get('daily_view_open'):
+    st.session_state.setdefault('daily_view_open', False)
+    btn_label = '📅 Hide daily price forecast' if st.session_state['daily_view_open'] else '📅 Show daily price forecast'
+    if st.button(btn_label, key='show_daily_btn'):
+        st.session_state['daily_view_open'] = not st.session_state['daily_view_open']
+        st.rerun()
+    if st.session_state['daily_view_open']:
         st.caption(
             'Smoothed daily curve built from the weekly forecast points above, widened by this '
             'crop\'s typical day-to-day price movement — a guide for planning, not an independent '
@@ -631,7 +696,7 @@ col3.metric(label3, value3, help=help3)
 st.markdown('---')
 
 # Historical price + calendar-dated forecast chart
-st.subheader('Price history and forecast')
+st.subheader('📈 Price history and forecast')
 st.caption(
     f'Forecasts only reach as far as the model was trained to predict — '
     f'{max(HORIZONS)} weeks past the last observed week. This is a genuine limit, '
@@ -708,7 +773,7 @@ st.plotly_chart(fig, use_container_width=True)
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown('---')
 TOP_N = 15
-st.subheader(f'Market comparison — top {TOP_N} {crop} markets')
+st.subheader(f'🏆 Market comparison — top {TOP_N} {crop} markets')
 st.caption(
     'Ranked by each market\'s most recent REAL observed values (not imputed, not a model '
     'prediction). Price and arrivals may come from different weeks per market since data '
@@ -755,7 +820,7 @@ with mkt_col2:
 # than an auto-populated top-N, per explicit user decision.
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown('---')
-st.subheader('Price-trend comparison')
+st.subheader('📊 Price-trend comparison')
 st.caption(
     'Pick a crop, one or more states, and up to 15 markets to compare their real observed '
     'weekly price history (up to the last 2 years) on the same chart — markets can be mixed '
@@ -835,7 +900,7 @@ diff_cols = [c for c in scenario if _differs(scenario.get(c), base_row.get(c))]
 # SCENARIO INTERPRETATION — feature-by-feature breakdown of the price change
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown('---')
-st.subheader('Scenario interpretation')
+st.subheader('🔍 Scenario interpretation')
 
 if not diff_cols:
     st.info('No changes from baseline yet. Adjust a control in the sidebar to see '
@@ -893,7 +958,7 @@ st.markdown('---')
 # the isolated effects / delta / uncertainty already computed above rather
 # than letting the model free-associate about numbers it wasn't given.
 # ─────────────────────────────────────────────────────────────────────────────
-st.subheader('AI policy recommendation')
+st.subheader('🤖 AI policy recommendation')
 
 
 def _api_key():
