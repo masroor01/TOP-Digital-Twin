@@ -37,6 +37,33 @@ from scipy.interpolate import PchipInterpolator
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_DIR = os.path.join(BASE, 'Model_Output', 'production_models')
 DOW_PATTERN_FILE = os.path.join(BASE, 'Model_Output', 'table_dow_pattern.csv')
+
+# Season definitions, identical to the month lists Script 23 uses to build
+# the season_* model features (scripts/23_Train_Production_Models.py) --
+# kept in sync so the chart's seasonal shading matches what the model
+# actually learned from, not a separately-invented calendar.
+SEASON_MONTHS = {
+    'tomato': {'peak_arrival': [11, 12, 1, 2], 'lean': [5, 6, 7], 'kharif': [8, 9, 10]},
+    'onion':  {'rabi_arrival': [2, 3, 4, 5],   'lean': [9, 10, 11], 'kharif': [8, 9]},
+    'potato': {'harvest': [2, 3, 4], 'storage': [5, 6, 7, 8, 9], 'lean': [10, 11]},
+}
+SEASON_LABEL = {
+    'peak_arrival': 'Peak arrival', 'lean': 'Lean season', 'kharif': 'Kharif',
+    'rabi_arrival': 'Rabi arrival', 'harvest': 'Harvest', 'storage': 'Storage',
+}
+SEASON_COLOR = {
+    'peak_arrival': 'rgba(30,92,55,0.10)', 'lean': 'rgba(168,50,50,0.10)',
+    'kharif': 'rgba(150,102,11,0.10)', 'rabi_arrival': 'rgba(30,92,55,0.10)',
+    'harvest': 'rgba(30,92,55,0.10)', 'storage': 'rgba(76,134,168,0.10)',
+}
+
+def season_for(crop, dt):
+    """Season key for a given date, or None if it falls in an unlabeled
+    transition month (not every month has a named season for every crop)."""
+    for season, months in SEASON_MONTHS[crop].items():
+        if dt.month in months:
+            return season
+    return None
 CROPS = ['tomato', 'onion', 'potato']
 HORIZONS = [1, 4, 13, 26]
 
@@ -405,7 +432,8 @@ st.subheader('Price forecast ticker')
 st.caption(
     'The baseline model\'s prediction at each of its trained horizons, dated to the '
     'real calendar week — not affected by the what-if sliders below. Forecasts start '
-    'from the market\'s last known data point, not from today (see above).'
+    'from the market\'s last known data point, not from today (see above). Season tags '
+    'use the same calendar the model itself was trained on (Script 23).'
 )
 ticker_cols = st.columns(len(HORIZONS))
 ticker_points = [(as_of, base_row.get('log_price'))]  # (date, log-price) incl. the starting point
@@ -416,36 +444,35 @@ for tcol, h in zip(ticker_cols, HORIZONS):
     herr = uncertainty.get(f'{crop}_{h}w', {})
     herr_note = (f' Typical error: ±Rs {herr["rmse"]:,.0f} ({herr["mape"]:.0f}% MAPE), '
                  f'from validated backtesting.') if herr.get('rmse') else ''
+    season = season_for(crop, fdate)
     tcol.metric(
         f'h={h}w  ·  {fdate.strftime("%d %b %Y")}',
         f'Rs {fprice:,.0f}',
         help=f'Baseline forecast for {fdate.date()} ({h} weeks ahead of the market\'s '
              f'last known data point, {as_of.date()}).' + herr_note
     )
+    if season:
+        tcol.caption(f'🌾 {SEASON_LABEL[season]}')
 
 # ─────────────────────────────────────────────────────────────────────────────
 # DAILY PRICE VIEW (Script 26) — smooth interpolation through the ticker's own
-# 4 validated points, plus an honest uncertainty band from real historical
-# daily volatility. NOT a new daily forecast: no daily model exists (tried
-# and abandoned 2026-07-29 -- daily naive persistence won even more
-# decisively than weekly, and the daily coverage filter collapsed market
-# counts 3-6x). A day-of-week correction was also tried and dropped -- a
-# backtest found it negligible (<1%) and marginally worse than flat
-# interpolation for all 3 crops. What's shown is a smooth (PCHIP) curve
-# through the same 4 points above, with a band sized from real historical
-# day-to-day price noise -- wide on purpose, since which specific day moves
-# is genuinely not predictable this far out.
+# 4 validated points, shaded by the same season calendar as above, plus an
+# uncertainty band from real historical daily volatility. Click-gated (not
+# shown by default) since it's a secondary, derived view -- see Script 26's
+# docstring for the full method and the day-of-week correction that was
+# tested and dropped as net-negative.
 # ─────────────────────────────────────────────────────────────────────────────
 if pd.notna(ticker_points[0][1]) and crop in daily_noise:
-    with st.expander('Daily price view (interpolated, not a validated daily forecast)'):
+    show_daily = st.button('📅 Show daily price forecast', key='show_daily_btn')
+    if show_daily:
+        st.session_state['daily_view_open'] = True
+    if st.session_state.get('daily_view_open'):
         st.caption(
-            'A smooth curve through the 4 validated weekly points above, with a shaded band '
-            'from real historical day-to-day price volatility for this crop. This is a '
-            'visualization aid, not a new forecast — no daily-resolution model exists (daily '
-            'naive persistence beat every model type tested, even more decisively than at '
-            'weekly resolution) and a day-of-week correction was tested and dropped after a '
-            'backtest showed it made things very slightly worse, not better.'
+            'Smoothed daily curve built from the weekly forecast points above, widened by this '
+            'crop\'s typical day-to-day price movement — a guide for planning, not an independent '
+            'daily forecast.'
         )
+
         pts_dates, pts_logp = zip(*ticker_points)
         pts_num = [(d - as_of).days for d in pts_dates]
         pchip = PchipInterpolator(pts_num, pts_logp)
@@ -454,12 +481,58 @@ if pd.notna(ticker_points[0][1]) and crop in daily_noise:
         smooth_trend = np.expm1(pchip(daily_offsets))
         band = smooth_trend * daily_noise[crop]
 
+        # ── Running marquee of the daily values ──
+        marquee_items = ' &nbsp; • &nbsp; '.join(
+            f'{d.strftime("%d %b")}: <b>Rs&nbsp;{p:,.0f}</b>'
+            for d, p in zip(daily_dates, smooth_trend)
+        )
+        st.markdown(f"""
+        <style>
+        .daily-marquee-wrap {{
+            overflow: hidden; white-space: nowrap; box-sizing: border-box;
+            border: 1px solid rgba(128,128,128,0.3); border-radius: 8px;
+            padding: 10px 0; margin-bottom: 12px; background: rgba(30,92,55,0.06);
+        }}
+        .daily-marquee-track {{
+            display: inline-block; padding-left: 100%;
+            animation: daily-marquee 70s linear infinite;
+            font-size: 14px;
+        }}
+        .daily-marquee-wrap:hover .daily-marquee-track {{ animation-play-state: paused; }}
+        @keyframes daily-marquee {{
+            0%   {{ transform: translate(0, 0); }}
+            100% {{ transform: translate(-100%, 0); }}
+        }}
+        </style>
+        <div class="daily-marquee-wrap">
+          <div class="daily-marquee-track">{marquee_items}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
         fig_daily = go.Figure()
+
+        # Season shading -- one vrect per contiguous same-season run of days
+        seasons_by_day = [season_for(crop, d) for d in daily_dates]
+        run_start = 0
+        for i in range(1, len(daily_dates) + 1):
+            if i == len(daily_dates) or seasons_by_day[i] != seasons_by_day[run_start]:
+                s = seasons_by_day[run_start]
+                if s:
+                    fig_daily.add_vrect(
+                        x0=daily_dates[run_start], x1=daily_dates[i - 1] + pd.Timedelta(days=1),
+                        fillcolor=SEASON_COLOR[s], line_width=0, layer='below'
+                    )
+                    mid = daily_dates[run_start + (i - 1 - run_start) // 2]
+                    fig_daily.add_annotation(x=mid, y=1.0, yref='paper', yanchor='bottom',
+                                              text=SEASON_LABEL[s], showarrow=False,
+                                              font=dict(size=9, color='#666'))
+                run_start = i
+
         fig_daily.add_trace(go.Scatter(
             x=daily_dates + daily_dates[::-1],
             y=list(smooth_trend + band) + list((smooth_trend - band)[::-1]),
             fill='toself', fillcolor='rgba(30,92,55,0.13)', line=dict(width=0),
-            name='Historical day-to-day noise (±1 std)', hoverinfo='skip'
+            name='Typical day-to-day movement (±1 std)', hoverinfo='skip'
         ))
         fig_daily.add_trace(go.Scatter(
             x=daily_dates, y=smooth_trend, mode='lines',
@@ -467,11 +540,12 @@ if pd.notna(ticker_points[0][1]) and crop in daily_noise:
         ))
         fig_daily.add_trace(go.Scatter(
             x=[d for d, _ in ticker_points], y=[np.expm1(p) for _, p in ticker_points],
-            mode='markers', marker=dict(size=9, color='#1E5C37'), name='Validated weekly forecast'
+            mode='markers', marker=dict(size=9, color='#1E5C37'), name='Weekly forecast point'
         ))
         fig_daily.update_layout(xaxis_title='Date', yaxis_title='Price (Rs/quintal)',
-                                 height=380, hovermode='x unified',
-                                 legend=dict(orientation='h', y=1.12))
+                                 height=420, hovermode='x unified',
+                                 margin=dict(t=50),
+                                 legend=dict(orientation='h', y=1.16))
         st.plotly_chart(fig_daily, use_container_width=True)
 
 baseline_pred = predict(crop, horizon, base_row)
