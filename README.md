@@ -99,6 +99,7 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 | `27_Horizon_Skill_And_MCS.py` | Reshapes Script 15's MASE into a horizon-conditional skill% table (identifies each crop's crossover horizon where the full pipeline first beats naive persistence), then runs a Model Confidence Set (Hansen, Lunde & Nason 2011 — stationary-bootstrap range statistic) jointly testing all 8 variants per crop × horizon with familywise error control, the multi-model alternative to Script 18's pairwise DM tests. **<1 min** (no model fitting, pure statistical test). | Script 15 output (`ablation_predictions.csv`, `table_mase.csv`) |
 | `28_Crisis_Backtesting_Case_Studies.py` | Backtests 4 real, verified crisis episodes (tomato's Jun-Sep 2023 spike/crash, onion's Aug 2023-Jan 2024 export-restriction escalation/post-ban crash, potato's Apr 2024 spike and Jan 2025 crash) against Script 15's out-of-sample fold predictions, cross-referenced with Script 19's verified policy-event log. Answers whether "naive wins on average" still holds specifically during the crises policy cares about (it does at h=1w; the data layers pull decisively ahead at h=13w/26w for tomato/onion, but not for potato). **<1 min.** | Script 15 output (`ablation_predictions.csv`), Script 19 output (`export_policy_events.csv`) |
 | `29_Granger_Causality_Analysis.py` | Bidirectional Granger causality tests (ADF-checked for stationarity, FDR-corrected within crop) between price and each data layer (arrivals, climate, satellite, macro, policy), plus a light lead-lag network among each crop's top-5-by-volume markets. Complements the ablation study's "does this layer improve accuracy" question with "does this layer have independent predictive content for price at all." **<2 min.** | Script 09 output (weekly panel), Scripts 14/10b/19 outputs |
+| `30_Formal_Stress_Testing.py` | Systematises the dashboard's what-if simulator into a fixed, reproducible battery of named stress scenarios, run across every market using the saved M6 production models (Script 23) -- no retraining. Onion's policy scenarios replay the exact verified 2023-24 event values (Script 19); diesel and climate scenarios are calibrated to real historical extremes. Surfaces a genuine limitation: onion's export-duty scenario predicts the wrong-signed price response versus what Script 28 shows actually happened, traced to the same reactive-not-causal relationship Script 29 found. **<1 min.** | Script 23 output (production models, `reference_rows.csv`), Script 19 output |
 
 ### Phase E — Deep learning (secondary model)
 
@@ -371,6 +372,7 @@ their age relative to the current pipeline).
 - `table_horizon_skill.csv`, `table_horizon_skill_crossover.csv`, `table_mcs.csv`, `table_mcs_membership.csv` — Script 27's horizon-skill and Model Confidence Set results
 - `table_crisis_backtests.csv` — Script 28's crisis-episode backtests (tomato/onion/potato)
 - `table_granger_layers.csv`, `table_granger_market_network.csv` — Script 29's Granger causality results (data layers and top-5-market network)
+- `table_stress_test_results.csv` — Script 30's stress-testing scenario battery results
 - `table_shap_by_layer.csv`, `table_shap_top_features.csv` — Script 25's interpretability results
 - `table_spike_auc.csv`, `table_rolling_origin_metrics.csv` — Script 12's spike-detection classifier
 - `table_dow_pattern.csv`, `table_disagg_backtest.csv` — Script 26's daily-disaggregation backtest (feeds the dashboard's daily view)
@@ -388,5 +390,5 @@ variants), horizon-conditional skill analysis, production models, deployed
 dashboard (with a daily-resolution price view), horizon-stratified SHAP
 analysis.
 
-**Not yet done**: full-capacity TFT run (deliberately deferred), formal
-stress-testing module, manuscript draft.
+**Not yet done**: full-capacity TFT run (deliberately deferred),
+manuscript draft.
