@@ -1,6 +1,7 @@
 ======================================================================
 PAPER METHODS SECTION — Data and Study Area
-(Draft for Computers and Electronics in Agriculture / Agricultural Systems)
+(Draft for Computers and Electronics in Agriculture / Agricultural
+Systems -- revised to match the current data pipeline, 30 Jul 2026)
 ======================================================================
 
 --- 3. Data and Study Area ---
@@ -10,28 +11,37 @@ PAPER METHODS SECTION — Data and Study Area
 This study covers three essential horticultural commodities — tomato
 (Solanum lycopersicum), onion (Allium cepa), and potato (Solanum
 tuberosum) — collectively known as TOP crops, which together account
-for approximately 30% of India's total vegetable production by volume
-and exhibit characteristically high price volatility due to their
-perishable nature, limited cold-chain penetration, and concentration
-of production in a small number of states (Kumar et al., 2021).
+for approximately 30% of India's total vegetable production by
+volume and exhibit characteristically high price volatility due to
+their perishable nature, limited cold-chain penetration, and
+concentration of production in a small number of states (Kumar et
+al., 2021). The analysis period spans ISO calendar weeks from 2
+January 2017 to 27 July 2026 (approximately 500 weeks), capturing
+three complete agricultural price cycles, the COVID-19 disruption
+period (March-June 2020), and two of the largest documented price
+crises in the study window: the June-September 2023 tomato spike
+and crash, and the August 2023-January 2024 onion export-restriction
+episode (see Section X, Crisis Backtesting).
 
 3.2  Primary Data Source: Agmarknet Weekly Price Panel
 
 Weekly wholesale price and arrivals data were obtained from the
-Agricultural Marketing Information Network (Agmarknet), the Government
-of India's real-time electronic market reporting platform that covers
-over 7,000 Agricultural Produce Market Committee (APMC) mandis across
-all states and union territories. Raw transaction-level data spanning
-January 2000 to April 2026 were downloaded for all three crops; the
-analysis period was restricted to ISO calendar weeks 1–52/53 of
-2017–2024 (418 weeks in total), capturing two complete agricultural
-price cycles (2017–2020 and 2021–2024) as well as the COVID-19
-disruption period.
+Agricultural Marketing Information Network (Agmarknet), the
+Government of India's real-time electronic market reporting platform
+that covers over 7,000 Agricultural Produce Market Committee (APMC)
+mandis across all states and union territories. Raw transaction-level
+data were downloaded for all three crops and refreshed periodically
+throughout the study (most recently through late July 2026);
+onion's raw source required a separate merge step reconciling the
+Agmarknet portal's "Daily Price Report" and "Daily Arrival Report"
+exports into the same market-identifier schema as the primary
+scraper-derived file, since onion's original data source is not
+topped up on the same cadence as tomato and potato.
 
 Price records were aggregated to the market-week level using the
 arrivals-weighted mean of daily modal prices:
 
-    P_{m,t} = Σ_d (p_{m,d} × q_{m,d}) / Σ_d q_{m,d}
+    P_{m,t} = Sigma_d (p_{m,d} x q_{m,d}) / Sigma_d q_{m,d}
 
 where p_{m,d} is the modal price (Rs/quintal) and q_{m,d} is the
 arrivals volume (tonnes) on day d of ISO week t for market m.
@@ -39,13 +49,13 @@ Weekly arrivals were summed across all days within each ISO week.
 Markets reporting zero or negative arrivals in a given week were
 excluded from that week's computation but retained in the panel.
 
-After aggregation, the raw panel contained 1,567 tomato markets,
-843 onion markets, and 85 potato markets across 29, 22, and 2 states
-respectively. The notably smaller potato sample reflects the highly
-concentrated production geography of the crop (Uttar Pradesh and
-West Bengal account for >60% of national output) and the limited
-number of regulated APMCs active in those states during the study
-period.
+Before any coverage-based filtering, the raw panel contained 1,725
+tomato markets, 1,580 onion markets, and 87 potato markets. The
+markedly smaller and more geographically concentrated potato sample
+reflects the crop's production geography (Section 3.3 details the
+two states retained after filtering) and the limited number of
+regulated APMCs actively reporting potato trade throughout the
+study period.
 
 3.3  Market Selection Criterion: Temporal Coverage Threshold
 
@@ -58,115 +68,180 @@ introduces structural missingness that degrades feature computation
 (particularly lag and rolling-window features) and produces
 unreliable model estimates.
 
-For each market m and crop c, we computed the temporal coverage index:
+For each market m and crop c, we computed a real (non-imputed)
+temporal coverage index over that market's own reporting span --
+from its first observed week through the end of the study period --
+rather than a fixed calendar-wide denominator, so that markets
+which began reporting after 2017 are not structurally penalised for
+weeks before they existed in the system:
 
-    TC_{m,c} = W_{m,c} / W_total × 100
+    TC_{m,c} = W_real_{m,c} / W_span_{m,c} x 100
 
-where W_{m,c} is the number of ISO weeks in 2017–2024 for which
-market m reported at least one valid price observation, and W_total =
-418 is the total number of ISO weeks in the study period.
+where W_real_{m,c} is the number of ISO weeks for which market m
+reported a real (non-imputed) price observation, and W_span_{m,c} is
+the number of ISO weeks between market m's first reported week and
+the end of the study period.
 
-Markets were retained in the analytical panel only if TC_{m,c} ≥ 90%
-(i.e., present in at least 376 of 418 weeks). This threshold was
-selected to balance two competing objectives: (i) ensuring that
-time-series feature vectors (up to 52-week lags, 13-week rolling
-windows) are computed over complete sequences without structural gaps,
-and (ii) preserving sufficient market diversity across states and
-production regions to allow the model to generalise.
+Markets were retained in the analytical panel only if TC_{m,c} >=
+70% (potato markets additionally had to satisfy a balanced-panel
+pre-filter of real data present in at least 8 of the study's 9-10
+calendar years before the coverage test was applied). The threshold
+was set at 70%, revised down the same day from an initial 80%: a
+market-level Diebold-Mariano robustness check (Section 5.X, Script
+18b) run at the 80% threshold found the onion h=1-week headline
+result resting on only 34 of 189 statistically significant markets;
+the 70% threshold roughly triples that supporting sample while still
+excluding the large majority of sporadically reporting mandis.
 
-Application of the 90% threshold yielded a high-quality balanced panel
-of 286 tomato markets (19 states), 123 onion markets (11 states), and
-64 potato markets (2 states), containing 115,413, 49,178, and 25,888
-market-week observations respectively (Table 1). The resulting panel
-spans 190,479 observations in total. Among the selected markets, median
-temporal coverage exceeded 97% for all three crops, and the minimum
-was 90% by construction. The coverage distribution by state is shown
-in Figure 3; major producing states — Karnataka, Maharashtra, and
-Andhra Pradesh for tomato; Maharashtra, Karnataka, and Rajasthan for
-onion; and Uttar Pradesh for potato — are well-represented.
+Application of the 70% threshold yielded an analytical panel of 517
+tomato markets (20 states), 246 onion markets (15 states), and 82
+potato markets (2 states) -- respectively 30.0%, 15.6%, and 94.3% of
+each crop's raw (unfiltered) market count -- containing 258,500,
+122,754, and 41,000 market-week rows (Table 1). Among selected
+markets, minimum real coverage was 70.0-71.6% by construction and
+median coverage exceeded 90% for all three crops. Potato's two
+retained states, West Bengal and Uttarakhand, reflect a deliberate
+relocation of the crop's three agro-climatic satellite/climate zones
+(P1-P3) to real production districts (Darjeeling, Diamond Harbour,
+and Dehradun respectively) partway through the study, after an
+earlier zone assignment was found to reference districts with no
+corresponding satellite/climate coverage; tomato and onion's
+dominant states shifted accordingly as the coverage-filtered panel
+grew (tomato: Uttar Pradesh, Kerala, Punjab; onion: Maharashtra,
+Kerala, Haryana), reflecting the wider geographic base admitted at a
+70% rather than a stricter threshold.
 
-Table 1.  Analytical panel summary after ≥90% coverage filter
-------------------------------------------------------------------
-Crop     Markets   States   Market-weeks   Median cov.   Min cov.
-Tomato     286       19       115,413         98.1%        90.2%
-Onion      123       11        49,178         97.6%        90.2%
-Potato      64        2        25,888         98.8%        90.2%
-TOTAL      473*      22       190,479
-------------------------------------------------------------------
-* State count reflects unique states across all three crops.
+Table 1.  Analytical panel summary after >=70% real-coverage filter
+------------------------------------------------------------------------
+Crop     Markets  States  Market-weeks  Real obs.  Median cov.  Min cov.
+Tomato     517      20       258,500     227,877      90.2%       70.0%
+Onion      246      15       122,754     108,199      90.0%       70.5%
+Potato      82       2        41,000      38,476      95.6%       71.6%
+TOTAL      845*     22*      422,254     374,552
+------------------------------------------------------------------------
+* State count reflects unique states across all three crops; market
+  count is not summed across crops as some markets trade more than
+  one of the three commodities.
 
 3.4  Macro-Economic and Logistics Covariates (Layer 4)
 
 Monthly macro-economic indicators were obtained from three sources
 and aligned to the weekly panel by matching on (year, month):
 
-(a) CMIE Prowess database: agricultural credit outstanding
-    (Rs crore), vegetable export and import values (USD million),
-    crude oil Indian Basket price (USD/barrel), Index of Industrial
-    Production for food processing (base 2011-12), and agricultural
-    wages (Rs/day).
+(a) CMIE Prowess and CMIE Economic Outlook: agricultural credit
+    outstanding (Rs crore), vegetable export and import values (USD
+    million), crude oil Indian Basket price (USD/barrel), Index of
+    Industrial Production for food processing (base 2011-12), and
+    national agricultural wages (Rs/day).
 
 (b) RBI Database on the Indian Economy (DBIE): repo rate (%),
     reverse repo rate (%), monthly average USD/INR exchange rate,
-    Wholesale Price Index for all commodities, food articles, and
-    fruits and vegetables (base 2011-12).
+    and Wholesale Price Index for all commodities, food articles,
+    and fruits and vegetables (base 2011-12).
 
 (c) Petroleum Planning & Analysis Cell (PPAC): retail diesel price
-    at Delhi (Rs/litre) and LPG price (Rs/14.2 kg cylinder),
-    used as a proxy for transportation and cold-storage cost.
+    at Delhi (Rs/litre) and LPG price (Rs/14.2 kg cylinder), used as
+    a proxy for transportation and cold-storage cost.
 
-All macro series cover January 2017–December 2024 (96 monthly
-observations). Monthly values were broadcast to the weekly level
-by matching each ISO week to the month containing its start date.
-A total of 14 macro variables were retained after removing series
-with >5% missingness or near-zero variance (see Table A1 in
-Supplementary Material).
+All three macro series were extended in place as new CMIE Economic
+Outlook exports became available and now cover January 2017 through
+mid-2026 (113-114 monthly observations per series). Monthly values
+were broadcast to the weekly level by matching each ISO week to the
+month containing its start date. Column-level mappings for each
+extended series were validated against known overlapping historical
+values before being trusted, surfacing two pre-existing mislabelling
+quirks in the originally published CMIE series (agricultural-wage
+and food-processing-IIP column headers) that were retained as-is for
+continuity with the earlier data rather than silently corrected.
 
 3.5  Satellite and Climate Data (Layers 2 & 3)
 
-Sentinel-2 multispectral imagery (10 m, Level-2A) was accessed via
-the Google Earth Engine (GEE) cloud platform for 14 major production
-districts identified within the ≥90% coverage market panel. For each
-district, the Enhanced Vegetation Index (EVI) and Normalised
-Difference Vegetation Index (NDVI) were extracted at the
-pre-harvest phenological window (6–12 weeks before expected peak
-harvest) and aggregated to ISO-week composites. Values with |EVI| > 2
-were masked as cloud contamination artefacts. Weekly NDVI anomaly
-(departure from the 2017–2024 district-level weekly mean) was
-computed as the primary satellite predictor. Climate stress indices
-(Standardised Precipitation Index at 30- and 90-day timescales,
-weekly maximum temperature, heat-degree-days above 35°C, and
-cumulative excess-rainfall days) were derived from ERA5-Land hourly
-reanalysis data (0.1° × 0.1° grid) accessed via the Copernicus
-Climate Data Store and spatially averaged over each production
-district's bounding box.
+Sentinel-2 (10 m, Level-2A), MODIS, ERA5-Land, and CHIRPS data were
+accessed via the Google Earth Engine (GEE) cloud platform for the
+production districts corresponding to each crop's agro-climatic
+zone assignment (Section 3.3). For each zone-week, the following
+features were extracted: maximum, minimum, mean, and diurnal-range
+temperature and a >=35C and >=38C heat-day count from ERA5-Land
+hourly reanalysis (0.1 deg x 0.1 deg grid); total and maximum daily
+rainfall and an excess-rainfall-day count from CHIRPS; Sentinel-2
+NDVI, EVI, the valid-pixel (cloud-free) fraction, and the NDVI
+anomaly relative to each zone's own historical weekly mean; and
+MODIS NDVI, EVI, mean and maximum land-surface temperature, and a
+>=35C land-surface-temperature-day fraction, providing a coarser but
+cloud-resilient vegetation and thermal-stress signal alongside
+Sentinel-2's higher-resolution but cloud-limited optical record.
+Values with an implausible EVI magnitude were masked as cloud-
+contamination artefacts before aggregation to ISO-week composites.
+Cross-validation between the Sentinel-2 and MODIS vegetation indices
+confirmed consistent seasonal patterns across both sensors for all
+three crops' zones.
 
-[NOTE: Satellite and climate features are currently under preparation;
-the baseline model (Section 4) uses only Layers 1 and 4. The ablation
-study (Section 5) adds Layers 2 and 3 incrementally.]
+3.6  Infrastructure and Labour Covariates (Layer 5)
 
-3.6  Data Consistency and Quality Assessment
+State-wise monthly agricultural wage rates were obtained from
+Labour Bureau publications, distinct from and complementary to the
+national-level CMIE wage series in Layer 4 (Section 3.4). Cold-
+storage capacity (registered facilities and rated tonnage) and road
+density were compiled by state from published government sources;
+because these infrastructure measures change slowly, cold-storage
+and road-density figures were treated as approximately static
+within the study period and broadcast to all weeks of the relevant
+years, in contrast to the weekly- or monthly-resolution series used
+elsewhere in the pipeline.
 
-Figure 4 (year-by-year coverage heatmap) illustrates the temporal
-completeness of the top 30 markets per crop. Notably, the COVID-19
-lockdown period (March–June 2020) caused a visible dip in reporting
-across all crops, most pronounced for tomato markets in Karnataka and
-Andhra Pradesh. Markets with recoverable gaps (single isolated weeks)
-were not imputed; instead, the feature engineering pipeline was
-designed to tolerate short gaps by computing rolling statistics only
-over non-null observations within the window. Markets where the
-lockdown gap exceeded four consecutive weeks retained ≥90% annual
-coverage in all other years and thus passed the 90% threshold at the
-full-period level.
+3.7  Policy and Trade-Intervention Covariates (Layer 6)
 
-Figure 5 (weekly panel density timeline) shows the count of
-market-weeks reporting prices in each ISO week from 2017 to 2024.
-The overall trend shows increasing participation over time,
-reflecting the expansion of the Agmarknet digital reporting system.
-The filtered (≥90%) panel shows a stable and dense baseline across
-all years, confirming that the threshold effectively removes
-sporadically reporting mandis while preserving the bulk of
-consistently active markets.
+A primary-source-verified event log was compiled for Government of
+India export-policy and market-intervention actions affecting the
+three crops: export bans, minimum export price (MEP) notifications,
+export duty changes, buffer-stock procurement and release actions,
+Market Intervention Scheme (MIS) revisions, and Operation Greens
+transport/storage subsidy activations. Each event record cites its
+originating notification, source agency, and (where available) a
+direct government source URL, and is tagged with a verification
+status distinguishing primary-source-confirmed events from
+retrospectively reported ones. The event log was converted into five
+weekly policy-state features per crop -- export-ban status, MEP
+level (USD/tonne), export duty rate (%), a market-intervention flag,
+and an Operation Greens activity flag -- by forward-filling each
+event's effective date until superseded by a later event of the
+same type. This layer is the input Section X (Crisis Backtesting)
+identifies as the direct mechanism behind the model's medium- to
+long-horizon forecasting advantage during the 2023-24 onion export-
+restriction episode, since the model observes the same duty/MEP/ban
+sequence as a feature rather than having to infer it indirectly from
+price alone.
+
+3.8  Data Consistency and Imputation
+
+Unlike an earlier draft of this pipeline, missing trading weeks
+within a market's reporting span are not left as structural gaps:
+short and medium gaps are filled using a two-tier imputation
+policy (linear interpolation for brief gaps, seasonal-median
+imputation for longer or seasonally patterned gaps), with the
+imputation method recorded per row (`imputed`, `imputed_method`
+columns) so that any downstream analysis can distinguish real trade
+observations from filled ones. Across the filtered panel, 374,552 of
+422,254 market-week rows (88.7%) are real observations; 17,388 rows
+(4.1%) were linearly interpolated, 6,339 rows (1.5%) were imputed via
+seasonal median, and 23,975 rows (5.7%) remain unfilled where a gap
+exceeded the imputation policy's tolerance. A separate, higher-
+resolution real-coverage index (Section 3.3) governs which markets
+are admitted to the panel at all; imputation governs how within-panel
+gaps for admitted markets are handled. Notably, a market's single
+most recent reporting week is disproportionately likely to be
+imputed rather than real (76.2% of markets, reflecting Agmarknet's
+own reporting lag rather than the market's overall data quality), a
+recency-lag effect the modelling pipeline (Section 4) accounts for
+by separating a market's last real observed price from its possibly-
+imputed most recent panel row.
+
+The COVID-19 lockdown period (March-June 2020) produced a visible
+dip in reporting across all crops, most pronounced for tomato
+markets in Karnataka and Andhra Pradesh; markets whose lockdown gap
+exceeded the imputation policy's tolerance in that window but
+retained sufficient coverage across the full study period passed
+the 70% threshold as normal.
 
 ======================================================================
 END OF METHODS SECTION DRAFT
