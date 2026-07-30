@@ -470,83 +470,101 @@ if pd.notna(ticker_points[0][1]) and crop in daily_noise:
         st.caption(
             'Smoothed daily curve built from the weekly forecast points above, widened by this '
             'crop\'s typical day-to-day price movement — a guide for planning, not an independent '
-            'daily forecast.'
+            'daily forecast. Shown from today onward only.'
         )
 
         pts_dates, pts_logp = zip(*ticker_points)
         pts_num = [(d - as_of).days for d in pts_dates]
         pchip = PchipInterpolator(pts_num, pts_logp)
-        daily_offsets = np.arange(0, HORIZONS[-1] * 7 + 1)
-        daily_dates = [as_of + pd.Timedelta(days=int(o)) for o in daily_offsets]
-        smooth_trend = np.expm1(pchip(daily_offsets))
+        # Fit the curve over the FULL as_of-anchored range (needed for a
+        # correctly-shaped interpolation through all validated points), but
+        # only DISPLAY from today onward -- as_of (the market's last known
+        # data point) can sit weeks behind today's real date (see the
+        # "Market data last updated" staleness note above), and showing
+        # that backfilled gap as part of a "daily forecast" would be
+        # misleading; only genuinely forward-looking days are shown.
+        daily_offsets_full = np.arange(0, HORIZONS[-1] * 7 + 1)
+        daily_dates_full = [as_of + pd.Timedelta(days=int(o)) for o in daily_offsets_full]
+        smooth_trend_full = np.expm1(pchip(daily_offsets_full))
+        display_from = max(today, as_of)
+        keep = [i for i, d in enumerate(daily_dates_full) if d >= display_from]
+        daily_dates = [daily_dates_full[i] for i in keep]
+        smooth_trend = smooth_trend_full[keep]
         band = smooth_trend * daily_noise[crop]
 
-        # ── Running marquee of the daily values ──
-        marquee_items = ' &nbsp; • &nbsp; '.join(
-            f'{d.strftime("%d %b")}: <b>Rs&nbsp;{p:,.0f}</b>'
-            for d, p in zip(daily_dates, smooth_trend)
-        )
-        st.markdown(f"""
-        <style>
-        .daily-marquee-wrap {{
-            overflow: hidden; white-space: nowrap; box-sizing: border-box;
-            border: 1px solid rgba(128,128,128,0.3); border-radius: 8px;
-            padding: 10px 0; margin-bottom: 12px; background: rgba(30,92,55,0.06);
-        }}
-        .daily-marquee-track {{
-            display: inline-block; padding-left: 100%;
-            animation: daily-marquee 70s linear infinite;
-            font-size: 14px;
-        }}
-        .daily-marquee-wrap:hover .daily-marquee-track {{ animation-play-state: paused; }}
-        @keyframes daily-marquee {{
-            0%   {{ transform: translate(0, 0); }}
-            100% {{ transform: translate(-100%, 0); }}
-        }}
-        </style>
-        <div class="daily-marquee-wrap">
-          <div class="daily-marquee-track">{marquee_items}</div>
-        </div>
-        """, unsafe_allow_html=True)
+        if not daily_dates:
+            st.info('Today is beyond this market\'s 26-week forecast horizon — no forward-looking '
+                    'days to show. Try a market with more recent data.')
+        else:
+            # ── Running marquee of the daily values (slowed down for readability) ──
+            marquee_items = ' &nbsp; • &nbsp; '.join(
+                f'{d.strftime("%d %b")}: <b>Rs&nbsp;{p:,.0f}</b>'
+                for d, p in zip(daily_dates, smooth_trend)
+            )
+            marquee_duration = max(90, len(daily_dates) * 1.5)  # scales with content length
+            st.markdown(f"""
+            <style>
+            .daily-marquee-wrap {{
+                overflow: hidden; white-space: nowrap; box-sizing: border-box;
+                border: 1px solid rgba(128,128,128,0.3); border-radius: 8px;
+                padding: 10px 0; margin-bottom: 12px; background: rgba(30,92,55,0.06);
+            }}
+            .daily-marquee-track {{
+                display: inline-block; padding-left: 100%;
+                animation: daily-marquee {marquee_duration}s linear infinite;
+                font-size: 14px;
+            }}
+            .daily-marquee-wrap:hover .daily-marquee-track {{ animation-play-state: paused; }}
+            @keyframes daily-marquee {{
+                0%   {{ transform: translate(0, 0); }}
+                100% {{ transform: translate(-100%, 0); }}
+            }}
+            </style>
+            <div class="daily-marquee-wrap">
+              <div class="daily-marquee-track">{marquee_items}</div>
+            </div>
+            """, unsafe_allow_html=True)
 
-        fig_daily = go.Figure()
+            fig_daily = go.Figure()
 
-        # Season shading -- one vrect per contiguous same-season run of days
-        seasons_by_day = [season_for(crop, d) for d in daily_dates]
-        run_start = 0
-        for i in range(1, len(daily_dates) + 1):
-            if i == len(daily_dates) or seasons_by_day[i] != seasons_by_day[run_start]:
-                s = seasons_by_day[run_start]
-                if s:
-                    fig_daily.add_vrect(
-                        x0=daily_dates[run_start], x1=daily_dates[i - 1] + pd.Timedelta(days=1),
-                        fillcolor=SEASON_COLOR[s], line_width=0, layer='below'
-                    )
-                    mid = daily_dates[run_start + (i - 1 - run_start) // 2]
-                    fig_daily.add_annotation(x=mid, y=1.0, yref='paper', yanchor='bottom',
-                                              text=SEASON_LABEL[s], showarrow=False,
-                                              font=dict(size=9, color='#666'))
-                run_start = i
+            # Season shading -- one vrect per contiguous same-season run of days
+            seasons_by_day = [season_for(crop, d) for d in daily_dates]
+            run_start = 0
+            for i in range(1, len(daily_dates) + 1):
+                if i == len(daily_dates) or seasons_by_day[i] != seasons_by_day[run_start]:
+                    s = seasons_by_day[run_start]
+                    if s:
+                        fig_daily.add_vrect(
+                            x0=daily_dates[run_start], x1=daily_dates[i - 1] + pd.Timedelta(days=1),
+                            fillcolor=SEASON_COLOR[s], line_width=0, layer='below'
+                        )
+                        mid = daily_dates[run_start + (i - 1 - run_start) // 2]
+                        fig_daily.add_annotation(x=mid, y=1.0, yref='paper', yanchor='bottom',
+                                                  text=SEASON_LABEL[s], showarrow=False,
+                                                  font=dict(size=9, color='#666'))
+                    run_start = i
 
-        fig_daily.add_trace(go.Scatter(
-            x=daily_dates + daily_dates[::-1],
-            y=list(smooth_trend + band) + list((smooth_trend - band)[::-1]),
-            fill='toself', fillcolor='rgba(30,92,55,0.13)', line=dict(width=0),
-            name='Typical day-to-day movement (±1 std)', hoverinfo='skip'
-        ))
-        fig_daily.add_trace(go.Scatter(
-            x=daily_dates, y=smooth_trend, mode='lines',
-            line=dict(color='#1E5C37', width=2), name='Smooth daily trend'
-        ))
-        fig_daily.add_trace(go.Scatter(
-            x=[d for d, _ in ticker_points], y=[np.expm1(p) for _, p in ticker_points],
-            mode='markers', marker=dict(size=9, color='#1E5C37'), name='Weekly forecast point'
-        ))
-        fig_daily.update_layout(xaxis_title='Date', yaxis_title='Price (Rs/quintal)',
-                                 height=420, hovermode='x unified',
-                                 margin=dict(t=50),
-                                 legend=dict(orientation='h', y=1.16))
-        st.plotly_chart(fig_daily, use_container_width=True)
+            fig_daily.add_trace(go.Scatter(
+                x=daily_dates + daily_dates[::-1],
+                y=list(smooth_trend + band) + list((smooth_trend - band)[::-1]),
+                fill='toself', fillcolor='rgba(30,92,55,0.13)', line=dict(width=0),
+                name='Typical day-to-day movement (±1 std)', hoverinfo='skip'
+            ))
+            fig_daily.add_trace(go.Scatter(
+                x=daily_dates, y=smooth_trend, mode='lines',
+                line=dict(color='#1E5C37', width=2), name='Smooth daily trend'
+            ))
+            visible_pts = [(d, p) for d, p in ticker_points if d >= display_from]
+            if visible_pts:
+                fig_daily.add_trace(go.Scatter(
+                    x=[d for d, _ in visible_pts], y=[np.expm1(p) for _, p in visible_pts],
+                    mode='markers', marker=dict(size=9, color='#1E5C37'), name='Weekly forecast point'
+                ))
+            fig_daily.update_layout(xaxis_title='Date', yaxis_title='Price (Rs/quintal)',
+                                     height=420, hovermode='x unified',
+                                     margin=dict(t=50),
+                                     legend=dict(orientation='h', y=1.16))
+            st.plotly_chart(fig_daily, use_container_width=True)
 
 baseline_pred = predict(crop, horizon, base_row)
 scenario_pred = predict(crop, horizon, scenario)
