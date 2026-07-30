@@ -1,0 +1,7 @@
+crop,method,RMSE,MAPE,N
+tomato,Flat interpolation,295.2,8.26,1718893
+tomato,Day-of-week disaggregation,295.2,8.29,1718893
+onion,Flat interpolation,495.0,9.33,1047780
+onion,Day-of-week disaggregation,495.0,9.35,1047780
+potato,Flat interpolation,97.2,3.99,662521
+potato,Day-of-week disaggregation,97.2,4.0,662521

@@ -29,12 +29,14 @@ import joblib
 import streamlit as st
 import plotly.graph_objects as go
 import anthropic
+from scipy.interpolate import PchipInterpolator
 
 # Portable path: resolved relative to this script's own location (scripts/..)
 # rather than hardcoded to a specific machine — required for deployment to
 # Streamlit Community Cloud, which clones the repo to its own path.
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_DIR = os.path.join(BASE, 'Model_Output', 'production_models')
+DOW_PATTERN_FILE = os.path.join(BASE, 'Model_Output', 'table_dow_pattern.csv')
 CROPS = ['tomato', 'onion', 'potato']
 HORIZONS = [1, 4, 13, 26]
 
@@ -162,7 +164,16 @@ def load_metadata():
     if os.path.exists(staleness_path):
         with open(staleness_path, encoding='utf-8') as f:
             staleness = json.load(f)
-    return feature_columns, feature_ranges, uncertainty, reference, history, staleness
+    # Daily residual std per crop, for the daily-view uncertainty band (Script
+    # 26). Day-of-week factors themselves are NOT loaded/used here -- a
+    # backtest found them negligible (<1%) and marginally worse than flat
+    # interpolation, so only the overall historical day-to-day noise level
+    # is kept.
+    daily_noise = {}
+    if os.path.exists(DOW_PATTERN_FILE):
+        dow_df = pd.read_csv(DOW_PATTERN_FILE)
+        daily_noise = dow_df.groupby('crop')['factor_std'].mean().to_dict()
+    return feature_columns, feature_ranges, uncertainty, reference, history, staleness, daily_noise
 
 
 if not os.path.exists(MODEL_DIR):
@@ -171,7 +182,7 @@ if not os.path.exists(MODEL_DIR):
     st.stop()
 
 models = load_models()
-feature_columns, feature_ranges, uncertainty, reference, history, staleness = load_metadata()
+feature_columns, feature_ranges, uncertainty, reference, history, staleness, daily_noise = load_metadata()
 
 
 def predict(crop, h, feature_row):
@@ -397,9 +408,11 @@ st.caption(
     'from the market\'s last known data point, not from today (see above).'
 )
 ticker_cols = st.columns(len(HORIZONS))
+ticker_points = [(as_of, base_row.get('log_price'))]  # (date, log-price) incl. the starting point
 for tcol, h in zip(ticker_cols, HORIZONS):
     fdate = as_of + pd.Timedelta(weeks=h)
     fprice = predict(crop, h, base_row)
+    ticker_points.append((fdate, np.log1p(fprice)))
     herr = uncertainty.get(f'{crop}_{h}w', {})
     herr_note = (f' Typical error: ±Rs {herr["rmse"]:,.0f} ({herr["mape"]:.0f}% MAPE), '
                  f'from validated backtesting.') if herr.get('rmse') else ''
@@ -409,6 +422,57 @@ for tcol, h in zip(ticker_cols, HORIZONS):
         help=f'Baseline forecast for {fdate.date()} ({h} weeks ahead of the market\'s '
              f'last known data point, {as_of.date()}).' + herr_note
     )
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DAILY PRICE VIEW (Script 26) — smooth interpolation through the ticker's own
+# 4 validated points, plus an honest uncertainty band from real historical
+# daily volatility. NOT a new daily forecast: no daily model exists (tried
+# and abandoned 2026-07-29 -- daily naive persistence won even more
+# decisively than weekly, and the daily coverage filter collapsed market
+# counts 3-6x). A day-of-week correction was also tried and dropped -- a
+# backtest found it negligible (<1%) and marginally worse than flat
+# interpolation for all 3 crops. What's shown is a smooth (PCHIP) curve
+# through the same 4 points above, with a band sized from real historical
+# day-to-day price noise -- wide on purpose, since which specific day moves
+# is genuinely not predictable this far out.
+# ─────────────────────────────────────────────────────────────────────────────
+if pd.notna(ticker_points[0][1]) and crop in daily_noise:
+    with st.expander('Daily price view (interpolated, not a validated daily forecast)'):
+        st.caption(
+            'A smooth curve through the 4 validated weekly points above, with a shaded band '
+            'from real historical day-to-day price volatility for this crop. This is a '
+            'visualization aid, not a new forecast — no daily-resolution model exists (daily '
+            'naive persistence beat every model type tested, even more decisively than at '
+            'weekly resolution) and a day-of-week correction was tested and dropped after a '
+            'backtest showed it made things very slightly worse, not better.'
+        )
+        pts_dates, pts_logp = zip(*ticker_points)
+        pts_num = [(d - as_of).days for d in pts_dates]
+        pchip = PchipInterpolator(pts_num, pts_logp)
+        daily_offsets = np.arange(0, HORIZONS[-1] * 7 + 1)
+        daily_dates = [as_of + pd.Timedelta(days=int(o)) for o in daily_offsets]
+        smooth_trend = np.expm1(pchip(daily_offsets))
+        band = smooth_trend * daily_noise[crop]
+
+        fig_daily = go.Figure()
+        fig_daily.add_trace(go.Scatter(
+            x=daily_dates + daily_dates[::-1],
+            y=list(smooth_trend + band) + list((smooth_trend - band)[::-1]),
+            fill='toself', fillcolor='rgba(30,92,55,0.13)', line=dict(width=0),
+            name='Historical day-to-day noise (±1 std)', hoverinfo='skip'
+        ))
+        fig_daily.add_trace(go.Scatter(
+            x=daily_dates, y=smooth_trend, mode='lines',
+            line=dict(color='#1E5C37', width=2), name='Smooth daily trend'
+        ))
+        fig_daily.add_trace(go.Scatter(
+            x=[d for d, _ in ticker_points], y=[np.expm1(p) for _, p in ticker_points],
+            mode='markers', marker=dict(size=9, color='#1E5C37'), name='Validated weekly forecast'
+        ))
+        fig_daily.update_layout(xaxis_title='Date', yaxis_title='Price (Rs/quintal)',
+                                 height=380, hovermode='x unified',
+                                 legend=dict(orientation='h', y=1.12))
+        st.plotly_chart(fig_daily, use_container_width=True)
 
 baseline_pred = predict(crop, horizon, base_row)
 scenario_pred = predict(crop, horizon, scenario)
