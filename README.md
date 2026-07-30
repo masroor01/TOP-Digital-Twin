@@ -87,6 +87,8 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 | `12_ModuleB_RollingOrigin_MultiHorizon.py` | Core rolling-origin CV framework | Script 09 |
 | `13_Benchmark_Models.py` | Naive persistence / ARIMA benchmarks (`table_benchmarks.csv`) | Script 09 |
 | `15_Ablation_Study_M0_M4.py` | **The main modeling script.** Trains LightGBM variants M0→M6 (price-only up to the full pipeline), 4-fold rolling-origin CV × 4 horizons × 3 crops = 336 fits. Has a `MARKET_LEVEL_DIAGNOSTIC` flag (see §7) for retraining just 2 variants on the full market panel for higher-power statistical tests. **~10-15 min for the full run.** | Scripts 09, 10, 14, 19, 20, 21 (rebuilds the join itself) |
+| `15b_Tree_Model_Comparison.py` | Compares LightGBM against RandomForest, XGBoost, CatBoost on the same CV framework — validates LightGBM as the production choice. RandomForest is clearly worst; the other three are competitive with no consistent winner. **~2 hours** (RandomForest dominates the runtime). | Same as Script 15 |
+| `15c_LSTM_Transformer_Comparison.py` | Compares LightGBM against an LSTM and a small Transformer on the same CV framework. Both deep-learning models underperform every tree model, mostly negative R². **~20-25 min.** | Same as Script 15 |
 
 ### Phase D — Statistical validation
 
@@ -94,6 +96,7 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 |---|---|---|
 | `18_Diebold_Mariano_Tests.py` | Crop-level DM significance tests on Script 15's ablation results | Script 15 output (`ablation_predictions.csv`) |
 | `18b_Market_Level_DM_Check.py` | Higher-power market-level DM tests | Script 15 run with `MARKET_LEVEL_DIAGNOSTIC = True` (`dm_market_level_predictions.csv`) |
+| `27_Horizon_Skill_And_MCS.py` | Reshapes Script 15's MASE into a horizon-conditional skill% table (identifies each crop's crossover horizon where the full pipeline first beats naive persistence), then runs a Model Confidence Set (Hansen, Lunde & Nason 2011 — stationary-bootstrap range statistic) jointly testing all 8 variants per crop × horizon with familywise error control, the multi-model alternative to Script 18's pairwise DM tests. **<1 min** (no model fitting, pure statistical test). | Script 15 output (`ablation_predictions.csv`, `table_mase.csv`) |
 
 ### Phase E — Deep learning (secondary model)
 
@@ -108,6 +111,7 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 | `23_Train_Production_Models.py` | Trains and **saves** 12 final LightGBM models (3 crops × 4 horizons, M6 feature set) — unlike Script 15, these are persisted (`.joblib`) for reuse. Also saves dashboard metadata: feature ranges, reference rows, price history, validated uncertainty (RMSE/MAPE per crop×horizon). **~10 min.** | Scripts 09, 10, 14, 19, 20, 21 |
 | `24_Simulation_Dashboard.py` | Interactive Streamlit "what-if" scenario simulator. Run with `streamlit run scripts/24_Simulation_Dashboard.py`, not `python`. See §6. | Script 23 output |
 | `25_Horizon_SHAP_Analysis.py` | SHAP feature importance per crop×horizon, grouped by data layer — explains *why* the ablation study shows crop/horizon-dependent results. **~5-10 min.** | Script 23 output (the saved models) |
+| `26_Weekly_To_Daily_Disaggregation.py` | Exploratory: turns the weekly model's 4 forecast points into a smooth daily curve (PCHIP interpolation) with an honest uncertainty band from real historical daily residual std-dev — NOT a new daily-trained model (see §7 for why daily-native models were tried and abandoned). Backs the dashboard's "Show daily price forecast" view. **<1 min.** | Script 23 output |
 
 ---
 
@@ -255,7 +259,20 @@ executable often isn't on PATH after `pip install`, `python -m` sidesteps that.)
 
 **Requires** Script 23 to have been run at least once (needs
 `Model_Output/production_models/*.joblib` and the metadata JSON/CSV files
-alongside them).
+alongside them). The daily price view additionally requires Script 26's
+output (`table_dow_pattern.csv`).
+
+**Theme**: `.streamlit/config.toml` sets the project's palette (green
+accent, crop-specific colors for tomato/onion/potato) — no setup needed,
+Streamlit picks it up automatically.
+
+**Price forecast ticker**: shows the model's prediction at each of its 4
+trained horizons, tagged with which season (per the crop's own calendar —
+kharif/peak-arrival/lean for tomato, rabi-arrival/kharif/lean for onion,
+harvest/storage/lean for potato) that forecast date falls in. The "Show
+daily price forecast" toggle (below the ticker) expands into a smoothed
+daily curve with a seasonal-shading chart and an honest uncertainty band —
+see Script 26 above for what it is and isn't.
 
 **AI policy recommendation (optional)**: the dashboard has a button that
 generates a one-paragraph AI policy commentary on whatever scenario you've
@@ -347,9 +364,12 @@ several weeks stale and no one had noticed, since nothing on disk indicated
 their age relative to the current pipeline).
 
 - `ablation_raw_results.csv`, `table_ablation.csv`, `table_mase.csv` — Script 15's full M0-M6 results + naive baseline + MASE
-- `table_diebold_mariano.csv`, `table_dm_market_level_summary.csv` — statistical validation
+- `table_tree_model_comparison*.csv`, `table_lstm_transformer_comparison*.csv` — Scripts 15b/15c's model-family comparisons
+- `table_diebold_mariano.csv`, `table_dm_market_level_summary.csv` — pairwise statistical validation (Scripts 18/18b)
+- `table_horizon_skill.csv`, `table_horizon_skill_crossover.csv`, `table_mcs.csv`, `table_mcs_membership.csv` — Script 27's horizon-skill and Model Confidence Set results
 - `table_shap_by_layer.csv`, `table_shap_top_features.csv` — Script 25's interpretability results
 - `table_spike_auc.csv`, `table_rolling_origin_metrics.csv` — Script 12's spike-detection classifier
+- `table_dow_pattern.csv`, `table_disagg_backtest.csv` — Script 26's daily-disaggregation backtest (feeds the dashboard's daily view)
 - `fig_*.png` — all paper-ready figures
 - `production_models/` — the 12 saved models + dashboard metadata (see §6)
 
@@ -357,9 +377,12 @@ their age relative to the current pipeline).
 
 ## 9. Project Status (as of this writing)
 
-**Done**: all data layers M0-M6, ablation study, statistical validation
-(crop- and market-level DM tests), production models, deployed dashboard,
-horizon-stratified SHAP analysis.
+**Done**: all data layers M0-M6, ablation study, model-family comparisons
+(tree ensembles, LSTM/Transformer), statistical validation (crop- and
+market-level DM tests, plus a Model Confidence Set jointly testing all
+variants), horizon-conditional skill analysis, production models, deployed
+dashboard (with a daily-resolution price view), horizon-stratified SHAP
+analysis.
 
 **Not yet done**: full-capacity TFT run (deliberately deferred), crisis
 backtesting case studies, Granger causality / market network analysis,
