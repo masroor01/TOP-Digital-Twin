@@ -27,16 +27,19 @@ original rolling-origin design).
 
 Episodes were selected using two independent criteria in
 combination: (i) the four largest four-week percentage price moves
-(both spikes and crashes) identified empirically in the real,
-non-imputed weekly panel within the 2022-2025 out-of-sample window,
-and (ii) cross-referencing against a verified, primary-source-cited
-log of Government of India export-policy and market-intervention
-events (export bans, minimum export price notifications, export
-duty changes, buffer procurement, and Operation Greens/Market
-Intervention Scheme actions). This combination ensures the episodes
-are not cherry-picked from the model's own results, but are instead
-the panel's own largest documented moves, with a traceable policy
-record where one exists. Four episodes met these criteria:
+(both spikes and crashes) identified empirically using real (non-
+imputed) observations from the >=70%-coverage analytical panel
+described in Section 3.3 (517 tomato, 246 onion, and 82 potato
+markets; Section 3.8 defines the real-vs-imputed distinction),
+restricted to the 2022-2025 out-of-sample window, and (ii) cross-
+referencing against the verified, primary-source-cited Layer 6
+policy-event log described in Section 3.7 (export bans, minimum
+export price notifications, export duty changes, buffer procurement,
+and Operation Greens/Market Intervention Scheme actions). This
+combination ensures the episodes are not cherry-picked from the
+model's own results, but are instead the panel's own largest
+documented moves, with a traceable policy record where one exists.
+Four episodes met these criteria:
 
   (a) Tomato, June-September 2023: a nationwide spike of +454% over
       four weeks (peak week of 3 July 2023) followed by a -70% crash
@@ -136,21 +139,22 @@ For a crisis with a genuine onset -- as opposed to a continuation of
 an already-elevated price regime -- this anchor necessarily predates
 the event, so naive persistence is mechanically incapable of
 anticipating it at any lead time exceeding the event's own duration.
-The M6 pipeline, by contrast, has access to climate-stress,
-satellite-vegetation, arrivals, and -- for onion specifically --
-explicit policy-instrument features (export-ban status, minimum
-export price level, export duty rate) that permit the model to
-condition its long-horizon forecast on information correlated with,
-or directly constitutive of, the eventual price response, even when
-that response has not yet begun at the time the forecast is issued.
+The M6 pipeline, by contrast, has access to the climate-stress
+(Section 3.5), satellite-vegetation (Section 3.5), arrivals, and --
+for onion specifically -- Layer 6 policy-instrument features
+(Section 3.7: export-ban status, MEP level, export duty rate) that
+permit the model to condition its long-horizon forecast on
+information correlated with, or directly constitutive of, the
+eventual price response, even when that response has not yet begun
+at the time the forecast is issued.
 
 The onion episode offers the most direct evidence for this
 mechanism. The M6 feature set includes the same export-ban, minimum-
-export-price, and export-duty variables that were used to construct
-the intervention sequence in Table X.1's description, meaning the
-model's long-horizon forecasts during this episode had access, in
-principle, both to the contemporaneous state of trade policy and to
-the learned historical relationship between comparable past
+export-price, and export-duty variables (Section 3.7) that were used
+to construct the intervention sequence in Table X.1's description,
+meaning the model's long-horizon forecasts during this episode had
+access, in principle, both to the contemporaneous state of trade
+policy and to the learned historical relationship between comparable
 interventions and subsequent price movements. The crossover to M6
 superiority occurs by h = 13 weeks during this crisis, one horizon
 step earlier than the h = 26-week crossover identified in the full-
@@ -183,17 +187,20 @@ A plausible explanation for this asymmetry, offered here as a
 hypothesis for future investigation rather than a confirmed finding,
 is that potato's price crashes are predominantly supply-side and
 storage-driven -- governed by cold-storage release timing and
-harvest-season stock levels, which the model's infrastructure and
-seasonal features are reasonably well positioned to capture -- while
-its spikes are more likely driven by acreage or crop-damage shocks
-localised to specific production districts, a signal that
-national- or zone-level aggregated satellite and climate covariates
-may not resolve with sufficient spatial precision. Unlike tomato and
-onion, potato has no active export-control or minimum-export-price
-regime in the study period (Section X.1; no corresponding
-policy-event record exists for either potato episode), removing one
-of the two mechanisms identified above as driving the data layers'
-long-horizon advantage in the other two crops.
+harvest-season stock levels, which the model's Layer 5 infrastructure
+features (Section 3.6: state-wise cold-storage capacity and road
+density) and seasonal features are reasonably well positioned to
+capture -- while its spikes are more likely driven by acreage or
+crop-damage shocks localised to specific production districts, a
+signal that the zone-level aggregated Layer 2/3 satellite and climate
+covariates (Section 3.5), computed over only two states' production
+districts for potato (Section 3.3), may not resolve with sufficient
+spatial precision. Unlike tomato and onion, potato has no active
+export-control or minimum-export-price regime in the study period
+(Section 3.7; no corresponding policy-event record exists for either
+potato episode), removing one of the two mechanisms identified above
+as driving the data layers' long-horizon advantage in the other two
+crops.
 
 X.3  Summary
 
@@ -215,8 +222,10 @@ policymaker would most need it. Potato is the exception that proves
 informative rather than merely negative -- its crash dynamics behave
 like tomato's and onion's, while its spike dynamics do not, pointing
 to a specific, falsifiable hypothesis (localised crop-damage shocks
-under-resolved by national-scale satellite covariates) for future
-work rather than a blanket limitation of the modelling approach.
+under-resolved by the zone-level satellite covariates, Section 3.5,
+computed over potato's two-state, 82-market production geography,
+Section 3.3) for future work rather than a blanket limitation of the
+modelling approach.
 
 [NOTE: Figures fig_crisis_tomato_2023.png, fig_crisis_onion_2023_24.png,
 fig_crisis_potato_2024_25_spike.png, and fig_crisis_potato_2024_25_crash.png
