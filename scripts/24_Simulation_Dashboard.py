@@ -333,6 +333,14 @@ st.sidebar.caption(f'≈ {horizon * 7} days ahead of the market\'s last known da
 # ─────────────────────────────────────────────────────────────────────────────
 st.sidebar.markdown('---')
 st.sidebar.subheader('📜 Policy scenario')
+st.sidebar.caption(
+    "ℹ️ These three controls (ban, MEP, duty) are monotonic-constrained so "
+    "the model can never predict a price *increase* from tighter export "
+    "policy — but for onion specifically, the *magnitude* is intentionally "
+    "suppressed to ~0% because the historical data can't separate the "
+    "three controls' individual effects (they only ever moved together). "
+    "See `scripts/31_Synthetic_DID_Policy_Effect.py` for a dedicated "
+    "causal-effect estimate instead of this model's price prediction.")
 
 scenario = dict(base_row)  # start from the real, current feature vector
 
