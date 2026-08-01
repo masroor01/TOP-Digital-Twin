@@ -1,5 +1,5 @@
-design,subwindow,ATT_log_points,ATT_pct
-real_2023,escalation_preban,0.0348,3.5
-real_2023,postban,0.0361,3.7
-placebo_in_time_2021,escalation_preban,0.0239,2.4
-placebo_in_time_2021,postban,-0.04,-3.9
+design,subwindow,ATT_log_points,ATT_pct,ci_lo_pct,ci_hi_pct,jackknife_n_markets
+real_2023,escalation_preban,0.0348,3.5,1.8,5.3,8
+real_2023,postban,0.0361,3.7,0.9,6.6,8
+placebo_in_time_2021,escalation_preban,0.0239,2.4,-1.0,6.0,8
+placebo_in_time_2021,postban,-0.04,-3.9,-6.3,-1.4,8
