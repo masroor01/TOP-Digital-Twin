@@ -15,6 +15,27 @@ before 2026-08-01 was generated on the smaller pre-grid-fix panel (517/246/82
 markets) and should not be treated as representing the current pipeline
 without re-running its script first.
 
+**2026-08-01 WPI vintage refresh.** Discovered while building an unrelated
+long-history data audit (`scripts/10c_RBI_LongHistory_Parser.py`) that CMIE
+restates the *entire* history of its item-level WPI series (and PPAC
+diesel/LPG) on every pull, not just the newest months — confirmed with the
+project owner, a CMIE subscriber. `data/rbi_dbie/rbi_dbie_macro_2017_2025.csv`
+and `data/ppac_macro/ppac_diesel_lpg_2017_2025.csv` were built at an earlier
+pull and had drifted from CMIE's current vintage across their whole window:
+mean |diff| 13.7% for `wpi_tomato`, 9.4% `wpi_onion`, 6.9% `wpi_potato`, 6.6%
+`wpi_vegetables_total`, 3.8% `wpi_fruits_vegetables`, 1-3% diesel/LPG (repo
+rate/reverse-repo/USD-INR unaffected — discrete/point-in-time, don't get
+restated). Refreshed both files to the current vintage, re-ran Script 22
+(master join) and Script 23 (retrain). Measured impact: `model_uncertainty.json`
+(validated RMSE/MAPE per crop/horizon) came out byte-identical despite tree
+counts shifting per model — a real but small effect, not headline-moving.
+`reference_rows.csv` (dashboard's live baseline) unchanged, since only
+historical training rows were affected, not the latest week. Not treated as
+grounds for a full ablation/crisis-backtest/SHAP/stress-test cascade re-run
+on this basis alone. If Script 15/25/28/30/31 get re-run for some other
+reason, they will pick up the refreshed vintage automatically (no separate
+action needed there).
+
 **2026-08-01 grid-adaptivity fix — read this before citing any market
 count from before this date.** Script 09's weekly grid was built from one
 fixed global `START_DATE` for every market (a plain cartesian product of
@@ -62,7 +83,7 @@ Status legend: 🟢 current · 🟡 stale, known, re-run pending · ⚫ deprecat
 | `17_TFT_Model.py` | `tft_raw_results.csv`, `table_tft_vs_lgbm.csv`, `fig_tft_*.png` | 2026-07-22 | 🟡 | Reduced-scope run only — full-capacity run remains deferred (see README §9), now additionally predates the 2026-08-01 grid fix too. |
 | `18_Diebold_Mariano_Tests.py` | `table_diebold_mariano.csv`, `fig_dm_pvalues.png` | 2026-08-01 | 🟢 | Re-run on the grid-fixed panel. Crop-level, M0 vs M4 headline; conclusions qualitatively unchanged. |
 | `18b_Market_Level_DM_Check.py` | `table_dm_market_level_*.csv` | 2026-07-29 | 🟡 | Predates the 2026-08-01 grid fix. Needs Script 15 re-run with `MARKET_LEVEL_DIAGNOSTIC = True` first (then flipped back) — deferred alongside 15b/15c. |
-| `23_Train_Production_Models.py` | `production_models/` (subfolder) | 2026-08-01 | 🟢 | Retrained on the grid-fixed panel — 1,721 market baselines (up from ~845). Monotonic constraint on the three export-control policy features retained (see Script 15 note); oversampling attempt tried and reverted (see script comments) — magnitude question now handled by Script 31 (SDID) instead of asked of this model. |
+| `23_Train_Production_Models.py` | `production_models/` (subfolder) | 2026-08-01 | 🟢 | Retrained on the grid-fixed panel — 1,721 market baselines (up from ~845). Monotonic constraint on the three export-control policy features retained (see Script 15 note); oversampling attempt tried and reverted (see script comments) — magnitude question now handled by Script 31 (SDID) instead of asked of this model. **Retrained again 2026-08-01 (WPI vintage refresh, see Script 22 note)** — tree counts shifted per crop/horizon (e.g. tomato h=1w 56→134) but validated RMSE/MAPE in `model_uncertainty.json` came out byte-identical; `reference_rows.csv` (dashboard's live baseline) unchanged, since only historical training rows were affected, not the latest week. Small, real, non-headline-moving effect — not treated as grounds for a full ablation/crisis-backtest/SHAP/stress-test cascade re-run. |
 | `25_Horizon_SHAP_Analysis.py` | `table_shap_by_layer.csv`, `table_shap_top_features.csv`, `fig_shap_*.png` (layer_composition, top_features, beeswarm_onion_4w) | 2026-08-01 | 🟢 | Re-run against the retrained production models. |
 | `26_Weekly_To_Daily_Disaggregation.py` | `table_dow_pattern.csv`, `table_disagg_backtest.csv`, `fig_disagg_example.png`, `fig_dow_pattern.png` | 2026-07-30 | 🟡 | Predates the 2026-08-01 grid fix and production-model retrain. Not yet re-run; the day-of-week pattern and noise-band conclusions are unlikely to shift much but the reference series should be refreshed. |
 | `27_Horizon_Skill_And_MCS.py` | `table_horizon_skill.csv`, `table_horizon_skill_crossover.csv`, `fig_horizon_skill.png`, `table_mcs.csv`, `table_mcs_membership.csv`, `fig_mcs_membership.png` | 2026-08-01 | 🟢 | Re-run on the grid-fixed panel with the now-real `table_mase.csv`. **M6 crossover horizon improved**: tomato 13w->**4w**, onion 26w->**13w**, potato unchanged at 26w — the larger, correctly-scored panel gives the data layers a statistically confirmed edge earlier than the pre-fix panel showed. B1_Naive remains the sole 90%-MCS survivor at h=1w for all 3 crops. |
