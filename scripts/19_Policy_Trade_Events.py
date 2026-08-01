@@ -26,12 +26,17 @@ Derived weekly panel-joinable features (join key: crop, week_start):
   operation_greens_active  0/1 — Operation Greens (TOP value-chain scheme,
                             launched 2018-11-05) in effect, all 3 crops
 
-Known gap the source itself doesn't resolve: the onion export duty is
-confirmed at 40% when imposed (2023-08-19) and confirmed at 20% just
-before its 2025-04-01 removal, but no event marks the exact 40%->20%
-reduction date. This script assumes the reduction coincided with the
-2024-09-13 MEP-removal date (the same approximation used in the prior
-version of this script) — flagged `approximate` in the events table.
+The onion export duty was confirmed at 40% when imposed (2023-08-19)
+and 20% just before its 2025-04-01 removal. The exact 40%->20%
+reduction date was originally unresolved and approximated at
+2024-09-13 (the same week as the DGFT MEP-removal notification, a
+different instrument). Resolved 2026-08-01: CBIC Notification
+43/2024-Customs (NT) confirms the reduction, effective 2024-09-14 —
+one day later than the prior approximation, and inside the SAME
+panel week (W-MON 2024-09-09), so this correction changes zero
+downstream weekly feature values. Kept as a real, sourced event
+in the input file regardless (record it right even where it happens
+not to move anything).
 
 Outputs (data/policy_trade/):
   export_policy_events.csv     cleaned copy of the verified source (all
@@ -51,10 +56,19 @@ OUT_DIR   = os.path.join(BASE, 'data', 'policy_trade')
 os.makedirs(OUT_DIR, exist_ok=True)
 
 PANEL_START = pd.Timestamp('2017-01-01')
-PANEL_END   = pd.Timestamp('2025-12-31')
+# Must track (or exceed) scripts/09_Agmarknet_Weekly_Panel.py's END_DATE --
+# this was previously frozen at 2025-12-31 while the production price panel
+# had already grown to 2026-07-20+, leaving ~30 weeks x 3 crops of
+# export_banned/mep_usd_per_tonne/export_duty_pct/market_intervention_flag/
+# operation_greens_active as unmatched NaN after the M6 left-merge in
+# Script 22 (no fillna follows it) -- discovered 2026-08-01 as the root
+# cause of the dashboard's "carried forward from 2025-12-29" staleness
+# notice on every policy control. Update this alongside Script 09's
+# END_DATE each time the panel is extended.
+PANEL_END   = pd.Timestamp('2026-12-31')
 CROPS = ['tomato', 'onion', 'potato']
 
-DUTY_REDUCTION_DATE = pd.Timestamp('2024-09-13')  # approximate — see docstring
+DUTY_REDUCTION_DATE = pd.Timestamp('2024-09-14')  # CBIC Notification 43/2024-Customs (NT) — see docstring
 OPERATION_GREENS_START = pd.Timestamp('2018-11-05')
 
 
