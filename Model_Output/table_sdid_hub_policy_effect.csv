@@ -1,0 +1,5 @@
+design,subwindow,ATT_log_points,ATT_pct
+real_2023,escalation_preban,0.0348,3.5
+real_2023,postban,0.0361,3.7
+placebo_in_time_2021,escalation_preban,0.0239,2.4
+placebo_in_time_2021,postban,-0.04,-3.9

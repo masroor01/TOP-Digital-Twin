@@ -6999,11 +6999,6 @@ potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-07-06,20
 potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-07-13,2026,29,793.3333333333334,60.0,3.0,0,observed
 potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-07-20,2026,30,830.0,80.0,4.0,0,observed
 potato,West Bengal,WB,Medinipur(E),Tamluk (Medinipur E) APMC,338.0,2026-07-27,2026,31,,,,1,
-potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2017-01-02,2017,1,1188.5593220338983,,,1,seasonal_median
-potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2017-01-09,2017,2,1188.5593220338983,,,1,seasonal_median
-potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2017-01-16,2017,3,1188.5593220338983,,,1,seasonal_median
-potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2017-01-23,2017,4,1188.5593220338983,,,1,seasonal_median
-potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2017-01-30,2017,5,1188.5593220338983,,,1,seasonal_median
 potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2017-02-06,2017,6,440.0,11.0,1.0,0,observed
 potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2017-02-13,2017,7,440.0,,,1,linear
 potato,West Bengal,WB,Nadia,Karimpur APMC,341.0,2017-02-20,2017,8,440.0,,,1,linear
@@ -19999,9 +19994,6 @@ potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-07-06,2026,28,1
 potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-07-13,2026,29,1012.8,12.5,5.0,0,observed
 potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-07-20,2026,30,1287.1794871794873,7.8,4.0,0,observed
 potato,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-07-27,2026,31,1500.0,2.5,1.0,0,observed
-potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-01-02,2017,1,833.0000000000001,,,1,seasonal_median
-potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-01-09,2017,2,833.0000000000001,,,1,seasonal_median
-potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-01-16,2017,3,833.0000000000001,,,1,seasonal_median
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-01-23,2017,4,500.0,0.6,1.0,0,observed
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-01-30,2017,5,509.61538461538464,,,1,linear
 potato,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2017-02-06,2017,6,519.2307692307693,,,1,linear
@@ -23499,10 +23491,6 @@ potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-07-06,2026,28,808.387
 potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-07-13,2026,29,760.0110132158591,54.47999999999999,7.0,0,observed
 potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-07-20,2026,30,719.7785977859778,54.2,6.0,0,observed
 potato,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-07-27,2026,31,,,,1,
-potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2017-01-02,2017,1,1011.7647058823529,,,1,seasonal_median
-potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2017-01-09,2017,2,1011.7647058823529,,,1,seasonal_median
-potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2017-01-16,2017,3,1011.7647058823529,,,1,seasonal_median
-potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2017-01-23,2017,4,1011.7647058823529,,,1,seasonal_median
 potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2017-01-30,2017,5,525.0,38.0,4.0,0,observed
 potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2017-02-06,2017,6,373.1543624161074,74.5,7.0,0,observed
 potato,West Bengal,WB,Coochbehar,Mathabhanga APMC,2534.0,2017-02-13,2017,7,295.3020134228188,74.5,7.0,0,observed

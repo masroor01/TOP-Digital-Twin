@@ -1,0 +1,10 @@
+subwindow,unit,role,ATT_log_points,ATT_pct,sigma_hat
+full_window,onion,treated,0.2692,30.9,0.2007
+full_window,tomato,placebo,-0.1073,-10.2,0.142
+full_window,potato,placebo,0.1032,10.9,0.2029
+escalation_preban,onion,treated,0.4457,56.2,0.2007
+escalation_preban,tomato,placebo,-0.3673,-30.7,0.142
+escalation_preban,potato,placebo,0.0424,4.3,0.2029
+postban,onion,treated,0.1355,14.5,0.2007
+postban,tomato,placebo,0.1354,14.5,0.142
+postban,potato,placebo,0.1418,15.2,0.2029

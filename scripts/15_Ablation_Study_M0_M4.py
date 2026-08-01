@@ -109,6 +109,62 @@ LGBM_PARAMS = dict(
     verbose          = -1,
 )
 
+# Monotonic constraints on the three unambiguous export-control levers.
+# Diagnosed 2026-07-31: Script 29 (Granger causality) found price Granger-
+# causes these policy features, not the reverse -- restrictions are imposed
+# REACTIVELY in response to already-elevated prices. Trained without a
+# constraint, M6 picks up that reactive correlation and predicts the WRONG
+# SIGN under a counterfactual stress test (Script 30): flipping export_banned
+# or export_duty_pct in isolation predicted price INCREASING, when the real
+# Aug 2023-Jan 2024 episode saw a -46% crash after the equivalent real
+# restriction sequence (Script 28). Standard trade-policy economics is
+# unambiguous here (export restriction -> more supply retained domestically
+# -> price does not rise), so that domain knowledge is imposed directly via
+# LightGBM's monotone_constraints rather than left for the model to
+# (mis)infer from a confounded training signal. Deliberately NOT applied to
+# market_intervention_flag or operation_greens_active -- their effect on the
+# specific wholesale price series modelled here is genuinely more ambiguous
+# (MIS also activates reactively to LOW farmgate prices, the opposite
+# confound direction) and hard-coding a sign there would be its own error.
+POLICY_MONOTONE = {'export_banned': -1, 'export_duty_pct': -1, 'mep_usd_per_tonne': -1}
+
+
+def build_monotone(fcols):
+    """None if fcols has no constrained policy column (M0-M5); else a
+    per-column constraint list ({-1,0,1}) matching fcols' exact order,
+    as required by LightGBM's monotone_constraints parameter."""
+    if not any(c in POLICY_MONOTONE for c in fcols):
+        return None
+    return [POLICY_MONOTONE.get(c, 0) for c in fcols]
+
+
+# Sample-weight oversampling for the same three policy columns -- TRIED AND
+# REVERTED, 2026-07-31/08-01. The monotonic constraint alone fixed the
+# WRONG-SIGN stress-test prediction (Script 30), but real policy variation
+# exists in only ~20 of ~500 weeks per crop, all from ONE escalating episode
+# in which export duty, MEP, and the ban activated together in sequence --
+# so the three constrained columns are almost collinear in the training
+# data. Oversampling those rows (tried at 10x, then 50x + the less-
+# conservative 'intermediate' monotone_constraints_method) never recovered a
+# meaningful negative magnitude (stayed at ~0.0% everywhere) and cost real
+# accuracy along the way (onion h=26w R² 0.158 -> 0.128). This is an
+# identification problem, not an undertrained-signal problem: no amount of
+# reweighting gives a single time-series model independent variation to
+# separate three variables that only ever moved together once. Reverted to
+# constraint-only (below), which had negligible accuracy cost. The policy
+# counterfactual MAGNITUDE is instead estimated directly from the 2023-24
+# episode via Synthetic Difference-in-Differences (Script 31), using
+# tomato/potato as donor controls -- a method built for exactly this
+# single-natural-experiment setting -- rather than asked of this forecasting
+# model. build_sample_weight is kept (returns None / a no-op) so the fit
+# call below doesn't need an unwind of its sample_weight= argument.
+OVERSAMPLE_FACTOR = 1
+
+
+def build_sample_weight(X, mono):
+    return None
+
+
 CROP_COLORS = {'tomato': '#E63946', 'onion': '#F4A261', 'potato': '#457B9D'}
 VARIANT_COLORS = {
     'M0': '#adb5bd', 'M1': '#74c0fc', 'M2': '#51cf66',
@@ -483,9 +539,16 @@ for variant, feat_list_all in MODEL_FEATURE_SETS.items():
                 X_te = test[fcols].fillna(0)
                 y_te = test['target']
 
-                model = lgb.LGBMRegressor(**LGBM_PARAMS)
+                fit_params = dict(LGBM_PARAMS)
+                mono = build_monotone(fcols)
+                if mono is not None:
+                    fit_params['monotone_constraints'] = mono
+                sample_weight = build_sample_weight(X_tr, mono)
+
+                model = lgb.LGBMRegressor(**fit_params)
                 model.fit(
                     X_tr, y_tr,
+                    sample_weight=sample_weight,
                     eval_set=[(X_va, y_va)],
                     callbacks=[lgb.early_stopping(50, verbose=False),
                                lgb.log_evaluation(-1)]
@@ -679,6 +742,22 @@ for crop in CROPS:
 table_path = os.path.join(OUT_DIR, 'table_ablation.csv')
 summary.to_csv(table_path, index=False)
 print(f'  Saved: {table_path}')
+
+# MASE (Mean Absolute Scaled Error) = variant's mean MAE / naive's mean MAE,
+# per (crop, horizon) -- <1 means the variant beats naive persistence on
+# that cell. Was previously computed as a one-off outside this script (found
+# 2026-08-01: table_mase.csv on disk was 3 days stale relative to a same-day
+# ablation re-run, since nothing here actually regenerated it) -- now a real,
+# reproducible step of the pipeline instead of a manual artifact.
+naive_mae = (summary[summary['variant'] == 'B1_Naive']
+             .set_index(['crop', 'horizon_weeks'])['MAE'])
+mase = summary.copy()   # includes B1_Naive itself, trivially MASE=1.0 -- kept for format parity
+mase['MASE'] = mase.apply(
+    lambda r: r['MAE'] / naive_mae.get((r['crop'], r['horizon_weeks']), float('nan')), axis=1)
+mase_out = mase[['variant', 'crop', 'horizon_weeks', 'MASE']].round({'MASE': 6})
+mase_path = os.path.join(OUT_DIR, 'table_mase.csv')
+mase_out.to_csv(mase_path, index=False)
+print(f'  Saved: {mase_path}')
 
 
 # ─────────────────────────────────────────────────────────────────────────────

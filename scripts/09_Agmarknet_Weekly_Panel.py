@@ -97,7 +97,23 @@ def impute_price_gaps(agg: pd.DataFrame, grid_end: pd.Timestamp) -> pd.DataFrame
     imputed "phantom" tail for whichever crop's data ends earlier -- caught
     when the dashboard's "latest week" landed on such a phantom week with
     100% imputed rows across every market.
+
+    Each market's grid starts at ITS OWN first real observed week, not the
+    global START_DATE. Fixed 2026-08-01: building one fixed START_DATE-to-
+    grid_end grid for every market (a plain cartesian product) meant a
+    market that only began reporting years after START_DATE was scored as
+    "missing" for every week before it existed in the system, silently
+    dragging down its real-coverage ratio for a reason that has nothing to
+    do with its actual data quality. Mild at a 9-year window (STUDY_START
+    2017); became the dominant, market-count-collapsing effect once a
+    2003-start long-history validation experiment (Script 32) extended the
+    window to 23 years and lost 68-70% of otherwise-qualifying markets to
+    exactly this artifact. This also brings the code in line with what the
+    coverage methodology was always documented as doing (see
+    paper_drafts/methods_data_section.txt Sec 3.3: "over that market's own
+    reporting span").
     """
+    market_starts = agg.groupby('market_id')['week_start'].min()
     all_weeks = pd.date_range(START_DATE, grid_end, freq='W-MON')
     full = (
         pd.MultiIndex.from_product(
@@ -106,6 +122,9 @@ def impute_price_gaps(agg: pd.DataFrame, grid_end: pd.Timestamp) -> pd.DataFrame
         )
         .to_frame(index=False)
     )
+    full = full.merge(market_starts.rename('_market_start'), on='market_id', how='left')
+    full = full[full['week_start'] >= full['_market_start']].drop(columns='_market_start')
+    full = full.reset_index(drop=True)
 
     price_col = 'modal_price_weighted'
     keep_cols = ['market_id', 'week_start', price_col, 'arrivals_tonnes_week', 'trading_days']

@@ -29,7 +29,7 @@ Episodes were selected using two independent criteria in
 combination: (i) the four largest four-week percentage price moves
 (both spikes and crashes) identified empirically using real (non-
 imputed) observations from the >=70%-coverage analytical panel
-described in Section 3.3 (517 tomato, 246 onion, and 82 potato
+described in Section 3.3 (834 tomato, 809 onion, and 82 potato
 markets; Section 3.8 defines the real-vs-imputed distinction),
 restricted to the 2022-2025 out-of-sample window, and (ii) cross-
 referencing against the verified, primary-source-cited Layer 6

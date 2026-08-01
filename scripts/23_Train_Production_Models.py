@@ -77,6 +77,36 @@ LGBM_PARAMS = dict(
     random_state=SEED, verbose=-1,
 )
 
+# See scripts/15_Ablation_Study_M0_M4.py for the full rationale: Script 30's
+# stress test found the unconstrained model predicts the WRONG SIGN for
+# onion export-duty/ban scenarios (price up, when the real 2023-24 episode
+# crashed -46%), traced to Script 29's finding that these policy features
+# are set REACTIVELY to already-elevated prices. Domain knowledge (export
+# restriction -> price does not rise) is imposed directly rather than left
+# for the model to infer from that confounded signal.
+POLICY_MONOTONE = {'export_banned': -1, 'export_duty_pct': -1, 'mep_usd_per_tonne': -1}
+
+
+def build_monotone(fcols):
+    if not any(c in POLICY_MONOTONE for c in fcols):
+        return None
+    return [POLICY_MONOTONE.get(c, 0) for c in fcols]
+
+
+# Oversampling -- TRIED AND REVERTED. See scripts/15_Ablation_Study_M0_M4.py
+# for the full account: neither 10x/basic nor 50x/intermediate recovered a
+# meaningful counterfactual magnitude (an identification problem -- duty,
+# MEP, and the ban only ever moved together in one episode -- not a
+# training-signal problem), and both cost real accuracy. Reverted to
+# constraint-only. The policy counterfactual magnitude is now estimated
+# directly from the 2023-24 episode via Synthetic Difference-in-Differences
+# (Script 31), not asked of this forecasting model.
+OVERSAMPLE_FACTOR = 1
+
+
+def build_sample_weight(X, mono):
+    return None
+
 LAG_WEEKS = [1, 2, 3, 4, 8, 13, 26, 52]
 ROLL_WINS = [4, 8, 13]
 
@@ -251,17 +281,24 @@ for crop in CROPS:
         X_tr, y_tr = train[fcols].fillna(0), train['target']
         X_va, y_va = val[fcols].fillna(0), val['target']
 
-        model = lgb.LGBMRegressor(**LGBM_PARAMS)
-        model.fit(X_tr, y_tr, eval_set=[(X_va, y_va)],
+        mono = build_monotone(fcols)
+        fit_params = dict(LGBM_PARAMS)
+        if mono is not None:
+            fit_params['monotone_constraints'] = mono
+        sw_tr = build_sample_weight(X_tr, mono)
+
+        model = lgb.LGBMRegressor(**fit_params)
+        model.fit(X_tr, y_tr, sample_weight=sw_tr, eval_set=[(X_va, y_va)],
                   callbacks=[lgb.early_stopping(50, verbose=False), lgb.log_evaluation(-1)])
         best_iter = model.best_iteration_ or LGBM_PARAMS['n_estimators']
 
         # Refit on ALL data (train + val) using the tree count found above
-        final_params = dict(LGBM_PARAMS)
+        final_params = dict(fit_params)
         final_params['n_estimators'] = best_iter
         final_model = lgb.LGBMRegressor(**final_params)
         X_all, y_all = df_h[fcols].fillna(0), df_h['target']
-        final_model.fit(X_all, y_all)
+        sw_all = build_sample_weight(X_all, mono)
+        final_model.fit(X_all, y_all, sample_weight=sw_all)
 
         model_path = os.path.join(OUT_DIR, f'{crop}_{h}w.joblib')
         joblib.dump(final_model, model_path)

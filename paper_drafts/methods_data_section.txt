@@ -1,7 +1,7 @@
 ======================================================================
 PAPER METHODS SECTION — Data and Study Area
 (Draft for Computers and Electronics in Agriculture / Agricultural
-Systems -- revised to match the current data pipeline, 30 Jul 2026)
+Systems -- revised to match the current data pipeline, 1 Aug 2026)
 ======================================================================
 
 --- 3. Data and Study Area ---
@@ -93,31 +93,51 @@ result resting on only 34 of 189 statistically significant markets;
 the 70% threshold roughly triples that supporting sample while still
 excluding the large majority of sporadically reporting mandis.
 
-Application of the 70% threshold yielded an analytical panel of 517
-tomato markets (20 states), 246 onion markets (15 states), and 82
-potato markets (2 states) -- respectively 30.0%, 15.6%, and 94.3% of
-each crop's raw (unfiltered) market count -- containing 258,500,
-122,754, and 41,000 market-week rows (Table 1). Among selected
-markets, minimum real coverage was 70.0-71.6% by construction and
-median coverage exceeded 90% for all three crops. Potato's two
-retained states, West Bengal and Uttarakhand, reflect a deliberate
-relocation of the crop's three agro-climatic satellite/climate zones
-(P1-P3) to real production districts (Darjeeling, Diamond Harbour,
-and Dehradun respectively) partway through the study, after an
-earlier zone assignment was found to reference districts with no
-corresponding satellite/climate coverage; tomato and onion's
-dominant states shifted accordingly as the coverage-filtered panel
-grew (tomato: Uttar Pradesh, Kerala, Punjab; onion: Maharashtra,
-Kerala, Haryana), reflecting the wider geographic base admitted at a
-70% rather than a stricter threshold.
+A grid-construction error was found and corrected on 1 August 2026:
+the weekly grid each market's real-coverage ratio TC_{m,c} was
+computed over had originally been built from one fixed calendar
+START_DATE common to every market, rather than starting at each
+market's own W_span_{m,c} as the formula above specifies -- so a
+market that only began reporting to Agmarknet partway through the
+study window was silently scored as "missing" for every week before
+it existed in the system, understating its real coverage for reasons
+unrelated to its actual data quality. Correcting the grid to start
+at each market's own first real observation is what the coverage
+index was always intended to measure; at this study's 9-year window
+the correction is modest in relative terms but still substantial in
+absolute market count, since a large cohort of markets across both
+tomato and onion evidently began reporting, or began reporting
+consistently, only from around 2024 onward.
+
+Application of the (corrected) 70% threshold yields an analytical
+panel of 834 tomato markets (22 states), 809 onion markets (25
+states), and 82 potato markets (2 states) -- respectively 48.3%,
+51.2%, and 94.3% of each crop's raw (unfiltered) market count --
+containing 300,344, 172,682, and 40,988 market-week rows (Table 1).
+Among selected markets, minimum real coverage was 70.0-71.6% by
+construction and median coverage exceeded 92% for all three crops --
+the newly-recovered markets are not thin/borderline additions
+(median coverage among them remains 92-96%), simply markets that had
+been unfairly excluded by the grid artefact rather than by genuinely
+low data quality. Potato's two retained states, West Bengal and
+Uttarakhand, reflect a deliberate relocation of the crop's three
+agro-climatic satellite/climate zones (P1-P3) to real production
+districts (Darjeeling, Diamond Harbour, and Dehradun respectively)
+partway through the study, after an earlier zone assignment was
+found to reference districts with no corresponding satellite/climate
+coverage. Tomato and onion's dominant states are unchanged by the
+grid-construction fix (tomato: Uttar Pradesh, Kerala, Punjab; onion:
+Maharashtra, Kerala, Haryana), indicating the newly-recovered markets
+are broadly distributed across the same states already represented
+rather than concentrated in new geography.
 
 Table 1.  Analytical panel summary after >=70% real-coverage filter
 ------------------------------------------------------------------------
 Crop     Markets  States  Market-weeks  Real obs.  Median cov.  Min cov.
-Tomato     517      20       258,500     227,877      90.2%       70.0%
-Onion      246      15       122,754     108,199      90.0%       70.5%
-Potato      82       2        41,000      38,476      95.6%       71.6%
-TOTAL      845*     22*      422,254     374,552
+Tomato     834      22       300,344     267,531      92.4%       70.0%
+Onion      809      25       172,682     154,550      95.6%       70.4%
+Potato      82       2        40,988      38,476      95.6%       71.6%
+TOTAL     1,725*     25*      514,014     460,557
 ------------------------------------------------------------------------
 * State count reflects unique states across all three crops; market
   count is not summed across crops as some markets trade more than
@@ -221,20 +241,22 @@ policy (linear interpolation for brief gaps, seasonal-median
 imputation for longer or seasonally patterned gaps), with the
 imputation method recorded per row (`imputed`, `imputed_method`
 columns) so that any downstream analysis can distinguish real trade
-observations from filled ones. Across the filtered panel, 374,552 of
-422,254 market-week rows (88.7%) are real observations; 17,388 rows
-(4.1%) were linearly interpolated, 6,339 rows (1.5%) were imputed via
-seasonal median, and 23,975 rows (5.7%) remain unfilled where a gap
+observations from filled ones. Across the filtered panel, 460,557 of
+514,014 market-week rows (89.6%) are real observations; 20,675 rows
+(4.0%) were linearly interpolated, 7,587 rows (1.5%) were imputed via
+seasonal median, and 25,195 rows (4.9%) remain unfilled where a gap
 exceeded the imputation policy's tolerance. A separate, higher-
 resolution real-coverage index (Section 3.3) governs which markets
 are admitted to the panel at all; imputation governs how within-panel
 gaps for admitted markets are handled. Notably, a market's single
 most recent reporting week is disproportionately likely to be
-imputed rather than real (76.2% of markets, reflecting Agmarknet's
-own reporting lag rather than the market's overall data quality), a
-recency-lag effect the modelling pipeline (Section 4) accounts for
-by separating a market's last real observed price from its possibly-
-imputed most recent panel row.
+imputed rather than real (40.9% of markets, as of the 1 August 2026
+grid-construction fix and panel expansion -- down from 76.2%
+previously, since the large cohort of markets recovered by that fix
+had mostly onboarded recently and are disproportionately likely to
+still be actively reporting), a recency-lag effect the modelling
+pipeline (Section 4) accounts for by separating a market's last real
+observed price from its possibly-imputed most recent panel row.
 
 The COVID-19 lockdown period (March-June 2020) produced a visible
 dip in reporting across all crops, most pronounced for tomato
