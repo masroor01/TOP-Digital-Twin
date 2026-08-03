@@ -65,11 +65,26 @@ ZIP_CHIRPS     = DOWNLOADS / 'CHIRPS-20260708T112910Z-3-001.zip'
 ZIP_S2         = DOWNLOADS / 'S2-20260708T112817Z-3-001.zip'
 ZIP_MODIS      = DOWNLOADS / 'MODIS-20260708T112651Z-3-001.zip'
 
-START = pd.Timestamp('2017-01-01')
+# Two-Phase Baseline, Stage 1 (2026-08-01): extended from 2017-01-01 -- the
+# raw ERA5/CHIRPS/MODIS zips already on disk cover 2000-2024 (CHIRPS to
+# 1981, unused further back than this since nothing else needed pre-2000)
+# for ALL 5 tomato + 8 onion zones, verified directly against the raw
+# per-zone CSVs before changing this constant. Potato is a real, partial
+# exception: P4_Bardhaman (unchanged) has the same 2000+ coverage, but
+# P1_Darjeeling/P2_DiamondHarbour/P3_Dehradun (relocated 2026-07-27, see
+# scripts/16_Zone_Assignment.py) only have GEE pulls from 2017 -- their
+# old locations' 2000-2024 data (Agra/Farrukhabad/Jalandhar) is orphaned,
+# not usable for the new sites. Potato-market rows assigned to those 3
+# zones will carry real NaN for climate/satellite weeks before 2017; this
+# is accurate (no historical pull exists for those coordinates), not a
+# bug, and not something this change can fix without a fresh GEE pull for
+# the new zone locations.
+START = pd.Timestamp('2000-01-01')
 END   = pd.Timestamp('2026-07-27')
 
-# Full ISO-week index 2017-2026 (Mondays)
-_all_weeks = pd.date_range('2016-12-26', '2026-07-27', freq='W-MON')
+# Full ISO-week index, one buffer week before START through END (same
+# one-week-before-Monday convention the original 2017-01-01 START used)
+_all_weeks = pd.date_range('1999-12-27', '2026-07-27', freq='W-MON')
 WEEK_INDEX = _all_weeks[(_all_weeks >= START) & (_all_weeks <= END)]
 
 CROPS = ['tomato', 'onion', 'potato']

@@ -30,7 +30,15 @@ INDIR   = r'C:\Users\masro\Downloads\CMIE_Macro'
 OUTFILE = os.path.join(INDIR, 'cmie_macro_2017_2025.csv')
 os.makedirs(INDIR, exist_ok=True)
 
-START, END = '2017-01-01', '2025-12-31'
+# Two-Phase Baseline, Stage 1 (2026-08-01): extended from 2017-01-01/
+# 2025-12-31 -- each of these six CMIE files' own "From date"/"To date"
+# metadata was checked directly before changing this (export_veg/
+# import_veg/iip_food/agri_wages: From 2000-01-01; crude_oil (PPAC via
+# CMIE): complete Apr 2000 - Mar 2026, every fiscal year, no gaps; only
+# bank_credit_agri_cr has a later real floor, ~2006, a genuine per-series
+# limit, not a parsing gap). All six also already carry real data through
+# 2026 in the file, ahead of where the previous END constant stopped.
+START, END = '2000-01-01', '2026-12-31'
 
 # ----------------------------------------------------------------
 # Series registry
