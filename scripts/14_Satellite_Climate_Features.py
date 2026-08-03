@@ -402,10 +402,16 @@ for _modis_dir in _modis_dirs:
             if df.empty:
                 continue
             df = df.rename(columns={'NDVI': 'modis_ndvi', 'EVI': 'modis_evi'})
-            df = df.sort_values('n_valid_px', ascending=False)
-            df = df.drop_duplicates(subset=['zone_id', 'week_start'], keep='first')
+            # NOT deduplicated per-file here -- a historical (pre-2017) and a
+            # topup/relocation file can both contain a composite date that maps
+            # to the SAME ISO week at their boundary (e.g. the 2000-2016 potato
+            # gap-fill's last week and the 2017-2026 file's first week both
+            # touch 26-Dec-2016..01-Jan-2017), so per-file dedup alone still
+            # leaves two rows for that one (zone_id, week_start) after
+            # concatenation. Deduplicated once below, across ALL sources
+            # together, keeping n_valid_px through to that point.
             modis_ndvi_frames.append(
-                df[['zone_id', 'crop', 'week_start', 'modis_ndvi', 'modis_evi']]
+                df[['zone_id', 'crop', 'week_start', 'modis_ndvi', 'modis_evi', 'n_valid_px']]
             )
 
         elif 'LST_mean_C' in df.columns:
@@ -416,16 +422,22 @@ for _modis_dir in _modis_dirs:
             df = df.rename(columns={'LST_mean_C': 'modis_lst_mean',
                                      'LST_max_C':  'modis_lst_max',
                                      'frac_above35': 'modis_lst_frac35'})
-            df = df.sort_values('n_valid_px', ascending=False)
-            df = df.drop_duplicates(subset=['zone_id', 'week_start'], keep='first')
+            # Same cross-file boundary-week note as NDVI above -- dedup deferred.
             modis_lst_frames.append(
                 df[['zone_id', 'crop', 'week_start',
-                    'modis_lst_mean', 'modis_lst_max', 'modis_lst_frac35']]
+                    'modis_lst_mean', 'modis_lst_max', 'modis_lst_frac35', 'n_valid_px']]
             )
 
 # Process MODIS NDVI
 modis_ndvi_raw = pd.concat(modis_ndvi_frames, ignore_index=True)
 modis_ndvi_raw['crop'] = modis_ndvi_raw['crop'].str.lower()
+# Dedup ACROSS all sources (not just within one file) -- see the loop comment
+# above for why a per-file dedup alone isn't sufficient at historical/topup
+# file boundaries. Keep the composite with more valid pixels per (zone, week).
+modis_ndvi_raw = (modis_ndvi_raw
+                   .sort_values('n_valid_px', ascending=False)
+                   .drop_duplicates(subset=['zone_id', 'week_start'], keep='first')
+                   .drop(columns='n_valid_px'))
 modis_ndvi = reindex_and_ffill(
     modis_ndvi_raw,
     value_cols=['modis_ndvi', 'modis_evi'],
@@ -436,6 +448,11 @@ modis_ndvi = reindex_and_ffill(
 # Process MODIS LST
 modis_lst_raw = pd.concat(modis_lst_frames, ignore_index=True)
 modis_lst_raw['crop'] = modis_lst_raw['crop'].str.lower()
+# Same cross-file boundary dedup as MODIS NDVI above.
+modis_lst_raw = (modis_lst_raw
+                  .sort_values('n_valid_px', ascending=False)
+                  .drop_duplicates(subset=['zone_id', 'week_start'], keep='first')
+                  .drop(columns='n_valid_px'))
 modis_lst = reindex_and_ffill(
     modis_lst_raw,
     value_cols=['modis_lst_mean', 'modis_lst_max', 'modis_lst_frac35'],
