@@ -108,6 +108,14 @@ TOPUP_2026 = DOWNLOADS / 'GEE_2026'
 # topup) for just those 3 zones -- same era5/chirps/s2/modis subfolder
 # convention as TOPUP_2025/2026, just scoped to fewer zones and years.
 TOPUP_POTATO_ZONES = DOWNLOADS / 'GEE_PotatoZoneReplacement'
+# Two-Phase Baseline, Stage 1 (2026-08-01): the above only covers
+# 2017-2026 for the relocated potato zones -- their new coordinates had
+# no prior extraction. gee_0{1,2,4,5}_*_PotatoZoneReplacement_2000_2016.js
+# fill the pre-2017 gap (not S2 -- Sentinel-2 doesn't predate 2015 and
+# the existing 2017+ pull already covers the residual-phase window it's
+# actually used in). Same optional-folder pattern as TOPUP_2025/2026:
+# skipped gracefully with a printed message if not yet run/downloaded.
+TOPUP_POTATO_ZONES_HIST = DOWNLOADS / 'GEE_PotatoZoneReplacement_Historical'
 
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 RAW_DIR.mkdir(parents=True, exist_ok=True)
@@ -212,7 +220,8 @@ for era5_subdir in ['era5', 'era5_topup']:
             continue
         era5_frames.append(df)
 for topup_dir_path, topup_label in [(TOPUP_2025 / 'era5', '2025'), (TOPUP_2026 / 'era5', '2026'),
-                                     (TOPUP_POTATO_ZONES / 'era5', 'potato-zone-relocation')]:
+                                     (TOPUP_POTATO_ZONES / 'era5', 'potato-zone-relocation'),
+                                     (TOPUP_POTATO_ZONES_HIST / 'era5', 'potato-zone-relocation-historical')]:
     if topup_dir_path.exists():
         for fpath in sorted(topup_dir_path.glob('*.csv')):
             df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
@@ -259,7 +268,8 @@ chirps_frames = []
 # Load CHIRPS from zip-extracted folder + optional 2025/2026 topup folders
 chirps_dirs = [RAW_DIR / 'chirps']
 for _topup_chirps, topup_label in [(TOPUP_2025 / 'chirps', '2025'), (TOPUP_2026 / 'chirps', '2026'),
-                                    (TOPUP_POTATO_ZONES / 'chirps', 'potato-zone-relocation')]:
+                                    (TOPUP_POTATO_ZONES / 'chirps', 'potato-zone-relocation'),
+                                    (TOPUP_POTATO_ZONES_HIST / 'chirps', 'potato-zone-relocation-historical')]:
     if _topup_chirps.exists():
         chirps_dirs.append(_topup_chirps)
         print(f'  {topup_label} CHIRPS topup: {len(list(_topup_chirps.glob("*.csv")))} files found')
@@ -370,7 +380,8 @@ modis_ndvi_frames, modis_lst_frames = [], []
 # Load MODIS from zip-extracted folder + optional 2025/2026 topup folders
 _modis_dirs = [RAW_DIR / 'modis']
 for _topup_modis, topup_label in [(TOPUP_2025 / 'modis', '2025'), (TOPUP_2026 / 'modis', '2026'),
-                                   (TOPUP_POTATO_ZONES / 'modis', 'potato-zone-relocation')]:
+                                   (TOPUP_POTATO_ZONES / 'modis', 'potato-zone-relocation'),
+                                   (TOPUP_POTATO_ZONES_HIST / 'modis', 'potato-zone-relocation-historical')]:
     if _topup_modis.exists():
         _modis_dirs.append(_topup_modis)
         print(f'  {topup_label} MODIS topup: {len(list(_topup_modis.glob("*.csv")))} files found')
