@@ -86,6 +86,10 @@ data/satellite_climate/market_zone_features.csv
 # Regenerate with: python scripts/22_Master_Panel_Join.py
 data/master_weekly_panel_all_layers.csv
 
+# Two-Phase Baseline, Stage 2 panel (370 MB — 2003-2026 longhistory panel x 57 cols)
+# Regenerate with: python scripts/34_Baseline_Phase_Panel_Join.py
+data/baseline_phase_panel.csv
+
 # Market-level Diebold-Mariano diagnostic predictions (159 MB — full market panel, 2 variants)
 # Regenerate with: python scripts/15_Ablation_Study_M0_M4.py (MARKET_LEVEL_DIAGNOSTIC=True)
 Model_Output/dm_market_level_predictions.csv
