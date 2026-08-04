@@ -349,15 +349,28 @@ s2 = reindex_and_ffill(
     limit=4
 )
 
-# NDVI anomaly: deviation from the climatological mean for that ISO-week number
-s2['iso_wk'] = s2['week_start'].dt.isocalendar().week.astype(int)
-clim = (s2.groupby(['zone_id', 'iso_wk'])['s2_ndvi']
-          .mean()
-          .rename('s2_ndvi_clim')
-          .reset_index())
-s2 = s2.merge(clim, on=['zone_id', 'iso_wk'], how='left')
+# NDVI anomaly: deviation from the climatological mean for that ISO-week number.
+# Climatology is an expanding mean over STRICTLY PRIOR ISO-years only (walk-
+# forward correct) -- not a full-sample mean, which would let a 2018 row's
+# anomaly be computed using NDVI observed as late as 2026. First ISO-year of
+# S2 coverage per zone (2017) has no prior year yet, so its anomaly is
+# genuinely NaN rather than leaked.
+iso = s2['week_start'].dt.isocalendar()
+s2['iso_wk'] = iso['week'].astype(int)
+s2['iso_yr'] = iso['year'].astype(int)
+
+yearly = (s2.groupby(['zone_id', 'iso_wk', 'iso_yr'])['s2_ndvi']
+            .mean()
+            .rename('s2_ndvi_yr')
+            .reset_index()
+            .sort_values(['zone_id', 'iso_wk', 'iso_yr']))
+yearly['s2_ndvi_clim'] = (yearly.groupby(['zone_id', 'iso_wk'])['s2_ndvi_yr']
+                                 .transform(lambda x: x.shift(1).expanding().mean()))
+
+s2 = s2.merge(yearly[['zone_id', 'iso_wk', 'iso_yr', 's2_ndvi_clim']],
+              on=['zone_id', 'iso_wk', 'iso_yr'], how='left')
 s2['s2_ndvi_anom'] = s2['s2_ndvi'] - s2['s2_ndvi_clim']
-s2 = s2.drop(columns=['iso_wk', 's2_ndvi_clim'])
+s2 = s2.drop(columns=['iso_wk', 'iso_yr', 's2_ndvi_clim'])
 
 print(f'  Zones processed : {s2["zone_id"].nunique()}')
 print(f'  Date range      : {s2["week_start"].min().date()} → {s2["week_start"].max().date()}')

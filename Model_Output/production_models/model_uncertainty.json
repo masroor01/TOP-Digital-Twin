@@ -1,50 +1,50 @@
 {
   "onion_1w": {
-    "rmse": 507.6,
-    "mape": 17.0
+    "rmse": 519.2,
+    "mape": 17.2
   },
   "onion_4w": {
-    "rmse": 687.8,
-    "mape": 24.8
+    "rmse": 686.0,
+    "mape": 24.0
   },
   "onion_13w": {
-    "rmse": 1002.6,
-    "mape": 40.9
+    "rmse": 942.4,
+    "mape": 35.8
   },
   "onion_26w": {
-    "rmse": 1124.1,
-    "mape": 41.7
+    "rmse": 1081.8,
+    "mape": 38.7
   },
   "potato_1w": {
-    "rmse": 258.7,
-    "mape": 13.0
+    "rmse": 216.0,
+    "mape": 11.3
   },
   "potato_4w": {
-    "rmse": 332.2,
-    "mape": 18.8
+    "rmse": 319.9,
+    "mape": 18.2
   },
   "potato_13w": {
-    "rmse": 670.8,
-    "mape": 39.6
+    "rmse": 695.2,
+    "mape": 38.3
   },
   "potato_26w": {
-    "rmse": 572.4,
-    "mape": 29.8
+    "rmse": 572.6,
+    "mape": 32.2
   },
   "tomato_1w": {
-    "rmse": 1023.6,
-    "mape": 26.7
+    "rmse": 1006.5,
+    "mape": 26.5
   },
   "tomato_4w": {
-    "rmse": 1404.2,
-    "mape": 39.5
+    "rmse": 1398.4,
+    "mape": 38.8
   },
   "tomato_13w": {
-    "rmse": 1440.2,
-    "mape": 39.4
+    "rmse": 1480.4,
+    "mape": 40.2
   },
   "tomato_26w": {
-    "rmse": 1479.8,
+    "rmse": 1483.4,
     "mape": 42.2
   }
 }
