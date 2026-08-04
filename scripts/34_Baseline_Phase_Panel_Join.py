@@ -9,14 +9,29 @@ guarantee -- but swaps in the long-history sources built in Stage 1 and
 deliberately DROPS two layers that Stage 1's audit found don't (or
 shouldn't) span the full window:
 
-  Infrastructure (wages, road density, cold storage): EXCLUDED by design
-  decision (2026-08-02), not just missing data. Wages/road density do
-  have real 2010+ history, but infrastructure's contribution has been
-  modest throughout this project and backfilling 2003-2009 from the
-  2010 value would be a real assumption injected into the "long, robust"
-  baseline for a layer that matters this little. It belongs in Phase 2
-  (the residual model), where its actual 2017+ window is already fully
-  covered -- not stretched further back here.
+  Infrastructure (wages, road density, cold storage): INCLUDED as of
+  2026-08-04, reversing the original 2026-08-02 exclusion -- per a
+  redesigned architecture where Phase 2 narrows to Sentinel-2 only and
+  everything else (including infrastructure) moves into Phase 1. Left
+  as genuine NaN outside each source's real coverage (currently
+  2017-2025 for wages/roads -- Scripts 20/21 were never re-run with an
+  extended PANEL_YEARS the way climate/macro were in Stage 1, a scope
+  decision made here given infrastructure's consistently modest
+  contribution throughout this project, not attempted in this pass).
+  NOT backfilled -- same missing-is-missing discipline as every other
+  partial-coverage column in this panel (WPI, repo rate, policy).
+
+  Policy (export ban/MEP/duty/market intervention): left-joined as-is
+  from the EXISTING policy_weekly_features.csv, which still only spans
+  2017-2026 (Script 19's PANEL_START was never extended). This is
+  deliberate, not an oversight: the verified event log
+  (TOP_policy_trade_verified_2017_2026.xlsx) has real, findable pre-2017
+  events (a Dec-2010 onion export ban, 2014 MEP/ECA events, etc. --
+  surfaced during this session's policy-document audit) that were never
+  added with primary-source verification. Zero-filling policy for
+  2003-2016 would ASSERT "no ban" for years that include a real one --
+  worse than leaving it genuinely missing. Left as NaN pending that
+  verification work; LightGBM handles per-row missing features natively.
 
   Policy (export ban/MEP/duty/market intervention): left-joined as-is
   from the EXISTING policy_weekly_features.csv, which still only spans
@@ -34,6 +49,9 @@ Layers joined:
   Base      top_weekly_panel_longhistory.csv (Script 32)  key: (crop, state, market, week_start), 2003-2026
   M2 macro  CMIE (2000-2026) + RBI/PPAC longhistory (1992/2002-2026)  key: (year, month)
   M3/M4     crop_weekly_features.csv (climate/sat, now 2000-2026)     key: (crop, week_start)
+  M5a wages wage_agri_state_monthly.csv (2017-2025 real, see above)   key: (state, year, month)
+  M5b cold  cold_storage_by_state.csv (static)                       key: (state)
+  M5c road  road_density_state_annual.csv (2017-2025 real, see above) key: (state, year)
   M6 policy policy_weekly_features.csv (still 2017-2026 -- see above) key: (crop, week_start), left as NaN before 2017
 
 Output:
@@ -53,6 +71,9 @@ CMIE_FILE   = os.path.join(BASE, 'data', 'cmie_macro', 'cmie_macro_2017_2025.csv
 RBI_FILE    = os.path.join(BASE, 'data', 'rbi_dbie', 'rbi_dbie_macro_longhistory.csv')        # 1992/2010/2011-2026, Stage 1
 PPAC_FILE   = os.path.join(BASE, 'data', 'ppac_macro', 'ppac_diesel_lpg_longhistory.csv')     # 2002-2026, Stage 1
 SAT_FILE    = os.path.join(BASE, 'data', 'satellite_climate', 'crop_weekly_features.csv')     # extended to 2000-2026 in Stage 1
+WAGE_FILE   = os.path.join(BASE, 'data', 'labour_wages', 'wage_agri_state_monthly.csv')       # 2017-2025 real, see docstring
+COLD_FILE   = os.path.join(BASE, 'data', 'infrastructure', 'cold_storage_by_state.csv')       # static
+ROAD_FILE   = os.path.join(BASE, 'data', 'infrastructure', 'road_density_state_annual.csv')   # 2017-2025 real, see docstring
 POLICY_FILE = os.path.join(BASE, 'data', 'policy_trade', 'policy_weekly_features.csv')        # still 2017-2026, see docstring
 
 OUT_DIR  = os.path.join(BASE, 'data')
@@ -120,6 +141,28 @@ assert sat[['crop', 'week_start']].duplicated().sum() == 0, 'satellite table has
 df = checked_merge(df, sat, on=['crop', 'week_start'], how='left', label='M3/M4 climate/satellite')
 
 # ─────────────────────────────────────────────────────────────────────────────
+# M5a/b/c — Infrastructure (wages, cold storage, road density), added
+# 2026-08-04 (see docstring) -- real coverage 2017-2025 for wages/roads
+# (cold storage is a static single snapshot, no time dimension), left as
+# NaN outside that, not backfilled.
+# ─────────────────────────────────────────────────────────────────────────────
+print('\n[3b] Joining infrastructure (M5a/b/c) -- wages (state,year,month), '
+      'cold storage (state, static), road density (state,year) ...')
+wages = pd.read_csv(WAGE_FILE)[['state', 'year', 'month', 'wage_agri_men', 'wage_agri_women']]
+assert wages[['state', 'year', 'month']].duplicated().sum() == 0, 'wage table has duplicate keys'
+df = checked_merge(df, wages, on=['state', 'year', 'month'], how='left', label='M5a wages')
+
+cold = pd.read_csv(COLD_FILE)[['state', 'n_facilities', 'capacity_mt']]
+cold = cold.rename(columns={'n_facilities': 'cold_storage_n_facilities',
+                             'capacity_mt': 'cold_storage_capacity_mt'})
+assert cold['state'].duplicated().sum() == 0, 'cold storage table has duplicate state rows'
+df = checked_merge(df, cold, on=['state'], how='left', label='M5b cold storage')
+
+road = pd.read_csv(ROAD_FILE)[['state', 'year', 'road_density_per_100_sqkm']]
+assert road[['state', 'year']].duplicated().sum() == 0, 'road density table has duplicate (state,year) rows'
+df = checked_merge(df, road, on=['state', 'year'], how='left', label='M5c road density')
+
+# ─────────────────────────────────────────────────────────────────────────────
 # M6 — Policy/trade events, join key (crop, week_start) -- see docstring:
 # still only 2017-2026, left as NaN before that, deliberately not zero-filled.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -145,6 +188,8 @@ print('\n[5] Missing-value check per COLUMN, split at 2017-01-01 (not "any '
 LAYER_COLS = {
     'M2 macro':          [c for c in macro.columns if c not in ('year', 'month')],
     'M3/M4 climate/sat': [c for c in sat.columns if c not in ('crop', 'week_start')],
+    'M5 infrastructure': ['wage_agri_men', 'wage_agri_women', 'cold_storage_n_facilities',
+                           'cold_storage_capacity_mt', 'road_density_per_100_sqkm'],
     'M6 policy':         [c for c in policy.columns if c not in ('crop', 'week_start')],
 }
 pre_2017 = df['week_start'] < '2017-01-01'

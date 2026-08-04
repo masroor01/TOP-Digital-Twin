@@ -1,0 +1,13 @@
+crop,horizon_weeks,DM_stat,p_value,mean_d,n,better_model,significant_5pct
+tomato,1,0.1688,0.8661,5952.860492,209,Phase1-alone,False
+tomato,4,0.1221,0.9029,12483.728392,207,Phase1-alone,False
+tomato,13,-0.2496,0.8031,-27253.505216,202,M6,False
+tomato,26,0.5401,0.5897,144424.396759,196,Phase1-alone,False
+onion,1,1.9384,0.0539,15198.709457,209,Phase1-alone,False
+onion,4,0.4286,0.6687,20445.611205,207,Phase1-alone,False
+onion,13,0.5155,0.6067,119586.850119,203,Phase1-alone,False
+onion,26,0.4868,0.6269,185894.009009,196,Phase1-alone,False
+potato,1,4.127,0.0001,18502.076855,208,Phase1-alone,True
+potato,4,0.0979,0.9221,1504.874072,205,Phase1-alone,False
+potato,13,0.9135,0.3621,98091.279493,196,Phase1-alone,False
+potato,26,0.841,0.4014,120290.077418,183,Phase1-alone,False

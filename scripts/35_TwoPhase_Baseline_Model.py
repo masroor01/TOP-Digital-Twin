@@ -21,12 +21,24 @@ disjoint test years. Using only the usual 4 folds (predictions for 2022,
 2023, 2024, 2025 alone) would leave Phase 2 with no valid residual
 target for 2017-2021, which is most of its likely training window.
 
-Resolved by extending to 8 annual expanding-window folds, test years
-2018-2025 (train up to 31-Dec of year Y-1, test all of year Y, each
+Resolved by extending to 9 annual expanding-window folds, test years
+2017-2025 (train up to 31-Dec of year Y-1, test all of year Y, each
 fold's training floor is still each market's own earliest real data,
 not shorthistory-capped) -- same annual-boundary convention as the
 usual 4 folds, just finer-grained so Phase 2 gets continuous walk-
 forward coverage across its whole 2017-2026 window instead of 4 gaps.
+
+Fold 0 (test 2017) added 2026-08-03 as a follow-up fix: the original
+8-fold version (test years 2018-2025) let all of 2017 fall straight
+into fold 1's training set with no out-of-fold counterpart, silently
+wasting the one calendar year Stage 4 could have used but couldn't --
+Stage 4's own features (satellite, infrastructure) aren't real before
+2017, so every recoverable year at that floor matters more than
+elsewhere. This alone doesn't fix the deeper data-scarcity issue Stage
+4 has at its earliest usable folds (still bounded by how much calendar
+time has actually elapsed since 2017), but it recovers what was a pure,
+avoidable gap at no cost -- fold 0 is genuine walk-forward like every
+other fold, not a compromise.
 
 Every fold's test-period prediction is out-of-sample by construction
 (the fold's model is fit only on data strictly before that test year)
@@ -42,6 +54,11 @@ Script 15's M1 recipe -- kept identical for continuity):
                              (Sentinel-2 EXCLUDED -- mid-2015 mission
                              floor, belongs to Phase 2 only)
   MACRO_FEATS                all CMIE + RBI + PPAC longhistory columns
+  INFRA_FEATS                 wages, cold storage, road density -- added
+                              2026-08-04, reversing the original
+                              exclusion, now that Phase 2 narrows to
+                              Sentinel-2 only (see Script 36). Real
+                              coverage 2017-2025, NaN outside.
   POLICY_FEATS               all 5 (NaN before 2017 by Stage 2's design
                               -- LightGBM handles missing features
                               natively, no imputation applied)
@@ -49,7 +66,7 @@ Script 15's M1 recipe -- kept identical for continuity):
 Inputs:
   data/baseline_phase_panel.csv (Script 34)
 
-Outputs (Model_Output/):
+Outputs (Model_Output/experiments/two_phase/):
   table_baseline_phase_oof_predictions.csv   per-row out-of-fold predictions,
                                               the input Stage 4 needs
   table_baseline_phase_metrics.csv           RMSE/MAE/MAPE/R2 by crop x
@@ -73,19 +90,28 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 # ─────────────────────────────────────────────────────────────────────────────
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PANEL_FILE = os.path.join(BASE, 'data', 'baseline_phase_panel.csv')
-OUT_DIR = os.path.join(BASE, 'Model_Output')
+OUT_DIR = os.path.join(BASE, 'Model_Output', 'experiments', 'two_phase')
+os.makedirs(OUT_DIR, exist_ok=True)
 os.makedirs(OUT_DIR, exist_ok=True)
 
 CROPS = ['tomato', 'onion', 'potato']
 HORIZONS = [1, 4, 13, 26]
 SEED = 42
 
-# 8 annual expanding-window folds, test years 2018-2025 -- see docstring for
+# 9 annual expanding-window folds, test years 2017-2025 -- see docstring for
 # why this differs from the project's usual 4 (test years 2022-2025).
+# Fold 0 (test 2017) added 2026-08-03: the original range started at 2018,
+# which meant all of 2017 went straight into fold 1's training set and was
+# NEVER surfaced as an out-of-fold residual -- a real, avoidable gap in
+# Stage 4's available residual-training data (Stage 4 can only use 2017+
+# anyway, since that's where its own satellite/infrastructure features
+# start being real, so every recoverable year in that window matters).
+# Folds 1-8 keep their original numbers/test years unchanged -- purely
+# additive, no renumbering.
 FOLDS = [
     {'fold': y - 2017, 'train_end': f'{y-1}-12-31', 'val_start': f'{y-1}-07-01', 'val_end': f'{y-1}-12-31',
      'test_start': f'{y}-01-01', 'test_end': f'{y}-12-31'}
-    for y in range(2018, 2026)
+    for y in range(2017, 2026)
 ]
 
 LGBM_PARAMS = dict(
@@ -123,6 +149,9 @@ MACRO_FEATS = ['bank_credit_agri_cr', 'export_veg_usd_mn', 'import_veg_usd_mn', 
                 'usdinr_monthly_avg', 'wpi_fruits_vegetables', 'wpi_vegetables_total', 'wpi_potato',
                 'wpi_onion', 'wpi_tomato', 'diesel_4city_rs_litre', 'lpg_nonsub_4city_rs_cyl',
                 'diesel_delhi_per_L', 'lpg_nonsub_delhi_per14kg']
+INFRA_FEATS = ['wage_agri_men', 'wage_agri_women', 'cold_storage_n_facilities',
+                'cold_storage_capacity_mt', 'road_density_per_100_sqkm']  # added 2026-08-04,
+# see Script 34's docstring -- real coverage 2017-2025, genuine NaN outside (not backfilled)
 POLICY_FEATS = ['export_banned', 'mep_usd_per_tonne', 'export_duty_pct',
                  'market_intervention_flag', 'operation_greens_active']
 assert not any(c.startswith('s2_') for c in CLIMATE_FEATS), 'Sentinel-2 must not leak into Phase 1'
@@ -196,7 +225,7 @@ PRICE_FEATS = (
 ARR_FEATS = (
     ['log_arr'] + [f'arr_lag_{lag}' for lag in [1, 2, 4]] + [f'arr_roll_mean_{w}' for w in [4, 8]]
 )
-BASELINE_FEATS = PRICE_FEATS + ARR_FEATS + CLIMATE_FEATS + MACRO_FEATS + POLICY_FEATS
+BASELINE_FEATS = PRICE_FEATS + ARR_FEATS + CLIMATE_FEATS + MACRO_FEATS + INFRA_FEATS + POLICY_FEATS
 
 
 def compute_metrics(y_true_log, y_pred_log):
@@ -284,7 +313,7 @@ metrics_path = os.path.join(OUT_DIR, 'table_baseline_phase_metrics.csv')
 metrics.to_csv(metrics_path, index=False)
 print(f'  Saved: {metrics_path}')
 
-print('\n[4] Mean MAPE by crop x horizon, across all 8 folds ...\n')
+print(f'\n[4] Mean MAPE by crop x horizon, across all {len(FOLDS)} folds ...\n')
 piv = metrics.groupby(['crop', 'horizon_weeks'])['MAPE'].mean().round(2).unstack()
 print(piv.to_string())
 
