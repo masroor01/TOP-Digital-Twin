@@ -166,15 +166,31 @@ CROP_COLOR = {'tomato': '#C0392B', 'onion': '#7B2C8E', 'potato': '#A07020'}
 
 st.markdown("""
 <style>
-/* ── Metric cards: subtle surface, rounded corners, soft shadow ── */
+/* ── Metric cards: subtle surface, rounded corners, soft shadow, lifts on hover ── */
 div[data-testid="stMetric"] {
     background: #FFFFFF;
     border: 1px solid #D9E0D3;
     border-radius: 10px;
     padding: 12px 14px 10px;
     box-shadow: 0 1px 3px rgba(30,92,55,0.06), 0 4px 14px rgba(30,92,55,0.04);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+div[data-testid="stMetric"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(30,92,55,0.10), 0 10px 22px rgba(30,92,55,0.08);
 }
 div[data-testid="stMetricLabel"] { font-weight: 600; }
+div[data-testid="stMetricValue"] { font-family: 'Manrope', sans-serif; }
+
+/* ── Fade-in for freshly rendered blocks: a small cue that the app just
+   recomputed, instead of new numbers just silently appearing ── */
+div[data-testid="stVerticalBlockBorderWrapper"], div[data-testid="stMetric"] {
+    animation: top-fade-in .35s ease;
+}
+@keyframes top-fade-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
 /* ── Sidebar: faint gradient wash, agricultural rather than flat grey ── */
 section[data-testid="stSidebar"] > div {
@@ -506,6 +522,14 @@ st.caption(
     'from the market\'s last known data point, not from today (see above). Season tags '
     'use the same calendar the model itself was trained on (Script 23).'
 )
+# Trailing 12 weeks of REAL observed price up to as_of, for the sparkline
+# on each ticker card — genuine recent trend context, not decoration.
+_ticker_hist = (history[(history['crop'] == crop) & (history['market'] == market)
+                         & (history['week_start'] <= as_of)]
+                 .sort_values('week_start')
+                 .tail(12))
+recent_trend = _ticker_hist['modal_price_weighted'].dropna().tolist()
+
 ticker_cols = st.columns(len(HORIZONS))
 ticker_points = [(as_of, base_row.get('log_price'))]  # (date, log-price) incl. the starting point
 for tcol, h in zip(ticker_cols, HORIZONS):
@@ -516,11 +540,20 @@ for tcol, h in zip(ticker_cols, HORIZONS):
     herr_note = (f' Typical error: ±Rs {herr["rmse"]:,.0f} ({herr["mape"]:.0f}% MAPE), '
                  f'from validated backtesting.') if herr.get('rmse') else ''
     season = season_for(crop, fdate)
+    # Sparkline: recent real price trend + this horizon's forecast tacked on
+    # the end, so the card visually connects "where price has been" to
+    # "where the model thinks it's going" — same 12-week window for every
+    # horizon card, only the final point (the forecast) differs.
+    spark = (recent_trend + [fprice]) if recent_trend else None
     tcol.metric(
         f'h={h}w  ·  {fdate.strftime("%d %b %Y")}',
         f'Rs {fprice:,.0f}',
+        border=True,
+        chart_data=spark,
+        chart_type='line',
         help=f'Baseline forecast for {fdate.date()} ({h} weeks ahead of the market\'s '
-             f'last known data point, {as_of.date()}).' + herr_note
+             f'last known data point, {as_of.date()}).' + herr_note +
+             (' Sparkline: last 12 real weekly prices, then this forecast.' if spark else '')
     )
     if season:
         tcol.caption(f'🌾 {SEASON_LABEL[season]}')
@@ -655,11 +688,17 @@ uncertainty_note = (f' (typical error: ±Rs {rmse:,.0f}, ~{mape:.0f}% MAPE, from
 
 col1, col2, col3, col4 = st.columns(4)
 col1.metric(f'Baseline prediction (h={horizon}w)', f'Rs {baseline_pred:,.0f}/quintal',
+            border=True,
+            chart_data=(recent_trend + [baseline_pred]) if recent_trend else None,
+            chart_type='line',
             help='What the model predicts under the CURRENT real-world feature values '
                  '(no sidebar changes applied) — this is the model\'s unmodified forecast.'
                  + uncertainty_note)
 col2.metric(f'Scenario prediction (h={horizon}w)', f'Rs {scenario_pred:,.0f}/quintal',
             delta=f'{delta:+,.0f} ({delta_pct:+.1f}%)',
+            border=True,
+            chart_data=(recent_trend + [scenario_pred]) if recent_trend else None,
+            chart_type='line',
             help='What the model predicts after applying every change you made in the '
                  'sidebar. The delta (green/red) shows the net effect of ALL your changes '
                  'combined, not any single one — see "Scenario interpretation" below for '
@@ -671,13 +710,13 @@ col2.metric(f'Scenario prediction (h={horizon}w)', f'Rs {scenario_pred:,.0f}/qui
 # RMSE (in the tooltip) rather than replacing them.
 if mape is not None:
     accuracy_pct = max(0.0, 100 - mape)
-    col4.metric(f'Model accuracy (h={horizon}w)', f'~{accuracy_pct:.0f}%',
+    col4.metric(f'Model accuracy (h={horizon}w)', f'~{accuracy_pct:.0f}%', border=True,
                 help=f'100% − MAPE ({mape:.0f}%) from validated backtesting (Script 15). '
                      f'An approximate, commonly-used convention — not a formal statistical '
                      f'confidence level. See the ablation study for the full accuracy picture '
                      f'across crops/horizons.')
 else:
-    col4.metric(f'Model accuracy (h={horizon}w)', 'N/A',
+    col4.metric(f'Model accuracy (h={horizon}w)', 'N/A', border=True,
                 help='No validated backtesting result available for this crop/horizon.')
 
 # "Last observed price" previously showed whatever the latest panel row
@@ -699,7 +738,7 @@ if pd.notna(last_obs_price):
                   f'the value shown as "current" elsewhere on this page is imputed/estimated.')
 else:
     label3, value3, help3 = 'Last observed price', 'N/A', 'No non-imputed trade found for this market.'
-col3.metric(label3, value3, help=help3)
+col3.metric(label3, value3, border=True, help=help3)
 
 st.markdown('---')
 

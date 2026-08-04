@@ -4,4 +4,58 @@ primaryColor = "#1E5C37"
 backgroundColor = "#F4F6F1"
 secondaryBackgroundColor = "#EAEFE4"
 textColor = "#1A2518"
-font = "sans serif"
+linkColor = "#1E5C37"
+codeTextColor = "#1A2518"
+codeBackgroundColor = "#EAEFE4"
+borderColor = "#D9E0D3"
+showWidgetBorder = true
+showSidebarBorder = true
+baseRadius = "10px"
+buttonRadius = "10px"
+linkUnderline = false
+
+# Typography — Manrope for headings (a little more character than a plain
+# sans, still clean), Inter for body/widgets.
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+headingFont = "Manrope:https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap"
+codeFont = "'JetBrains Mono':https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+baseFontSize = 15
+baseFontWeight = 400
+headingFontSizes = ["30px", "24px", "19px", "16px", "14px", "13px"]
+headingFontWeights = [700, 700, 600, 600, 600, 500]
+
+# Semantic colors — green/red carry real meaning here (price up/down,
+# ban/duty deltas), so give them intentional values rather than defaults.
+greenColor = "#1E5C37"
+greenBackgroundColor = "#E3EEE1"
+greenTextColor = "#164A2C"
+redColor = "#C0392B"
+redBackgroundColor = "#F8E5E2"
+redTextColor = "#96271B"
+orangeColor = "#A07020"
+yellowColor = "#B8860B"
+blueColor = "#4C86A8"
+violetColor = "#7B2C8E"
+grayColor = "#5B6B57"
+
+# Chart colors — tomato/onion/potato brand colors first (matches CROP_COLOR
+# in the dashboard code), extended for multi-market trend comparisons.
+chartCategoricalColors = [
+    "#C0392B", "#7B2C8E", "#A07020", "#1E5C37",
+    "#4C86A8", "#B8860B", "#5B6B57", "#8E5A3B",
+]
+chartSequentialColors = [
+    "#F4F6F1", "#E3EEE1", "#C9DEC4", "#A9CBA1",
+    "#84B67C", "#5F9E56", "#3F8339", "#286B26",
+    "#1E5C37", "#123D24",
+]
+
+dataframeBorderColor = "#D9E0D3"
+dataframeHeaderBackgroundColor = "#EAEFE4"
+
+[theme.sidebar]
+backgroundColor = "#EFF3E9"
+secondaryBackgroundColor = "#E7EEE0"
+textColor = "#1A2518"
+borderColor = "#CFD9C7"
+primaryColor = "#1E5C37"

@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "top-dashboard",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "streamlit", "run", "scripts/24_Simulation_Dashboard.py", "--server.headless", "true"],
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d \"C:\\Users\\masro\\Documents\\TOP_Digital_Twin\" && python -m streamlit run scripts/24_Simulation_Dashboard.py --server.headless true"],
       "port": 8501
     }
   ]
