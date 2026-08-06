@@ -94,6 +94,15 @@ data/baseline_phase_panel.csv
 # Regenerate with: python scripts/15_Ablation_Study_M0_M4.py (MARKET_LEVEL_DIAGNOSTIC=True)
 Model_Output/dm_market_level_predictions.csv
 
+# Two-phase experiment (rejected architecture, Model_Output/experiments/two_phase/):
+# per-row OOF/combined prediction dumps exceed GitHub's 100 MB limit (94-130 MB each).
+# Regenerate with: python scripts/35_TwoPhase_Baseline_Model.py / 36_TwoPhase_Residual_Model.py
+# The small summary tables (table_*_metrics.csv) that document the negative result
+# are still tracked — only these large per-row dumps are excluded.
+Model_Output/table_baseline_phase_oof_predictions.csv
+Model_Output/experiments/two_phase/table_baseline_phase_oof_predictions.csv
+Model_Output/experiments/two_phase/table_twophase_combined_predictions.csv
+
 # Office lock files (created when a file is open in Word / Excel / PowerPoint)
 ~$*.xlsx
 ~$*.xls
