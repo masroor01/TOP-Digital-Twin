@@ -1,0 +1,4 @@
+crop,full_sample_leader,rank_in_early_period,rank_in_late_period,n_common_markets,spearman_full_vs_early,spearman_full_vs_late
+tomato,Kolar APMC,2,1,16,0.808,0.895
+onion,Chandvad APMC,2,5,16,0.791,0.909
+potato,Chakdah APMC,5,1,20,0.551,0.7

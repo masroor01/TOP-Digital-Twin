@@ -1,0 +1,4 @@
+crop,n_markets,spearman_rho,p_value
+tomato,17,0.27,0.2952
+onion,20,0.372,0.1058
+potato,20,0.06,0.8032

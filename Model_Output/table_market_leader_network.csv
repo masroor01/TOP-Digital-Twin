@@ -1,0 +1,2057 @@
+crop,market_from,market_to,lag_weeks,F_stat,p_value,p_value_fdr,significant_fdr05
+tomato,Kolar APMC,Pimpalgaon Baswant APMC,1,16.077,0.0001,0.0002576923076923077,True
+tomato,Kolar APMC,Pimpalgaon Baswant APMC,4,7.018,0.0,0.0,True
+tomato,Kolar APMC,APMC Azadpur,1,45.349,0.0,0.0,True
+tomato,Kolar APMC,APMC Azadpur,4,10.255,0.0,0.0,True
+tomato,Kolar APMC,Chintamani APMC,1,5.549,0.0189,0.03146086956521739,True
+tomato,Kolar APMC,Chintamani APMC,4,10.382,0.0,0.0,True
+tomato,Kolar APMC,Junnar(Narayangaon) APMC,1,53.333,0.0,0.0,True
+tomato,Kolar APMC,Junnar(Narayangaon) APMC,4,15.906,0.0,0.0,True
+tomato,Kolar APMC,Surat APMC,1,36.745,0.0,0.0,True
+tomato,Kolar APMC,Surat APMC,4,14.708,0.0,0.0,True
+tomato,Kolar APMC,Bowenpally APMC,1,4.948,0.0266,0.04256,True
+tomato,Kolar APMC,Bowenpally APMC,4,12.967,0.0,0.0,True
+tomato,Kolar APMC,Tiphra APMC,1,12.371,0.0005,0.0011551724137931036,True
+tomato,Kolar APMC,Tiphra APMC,4,8.773,0.0,0.0,True
+tomato,Kolar APMC,Ahmedabad APMC,1,15.93,0.0001,0.0002576923076923077,True
+tomato,Kolar APMC,Ahmedabad APMC,4,8.195,0.0,0.0,True
+tomato,Kolar APMC,Mulakalacheruvu APMC,1,8.636,0.0035,0.0068218181818181815,True
+tomato,Kolar APMC,Mulakalacheruvu APMC,4,13.43,0.0,0.0,True
+tomato,Kolar APMC,Mulbagal APMC,1,25.991,0.0,0.0,True
+tomato,Kolar APMC,Mulbagal APMC,4,9.738,0.0,0.0,True
+tomato,Kolar APMC,Pune APMC,1,61.641,0.0,0.0,True
+tomato,Kolar APMC,Pune APMC,4,21.271,0.0,0.0,True
+tomato,Kolar APMC,Sangamner APMC,1,40.716,0.0,0.0,True
+tomato,Kolar APMC,Sangamner APMC,4,14.143,0.0,0.0,True
+tomato,Kolar APMC,Gudimalkapur APMC,1,11.135,0.0009,0.0019851851851851853,True
+tomato,Kolar APMC,Gudimalkapur APMC,4,18.635,0.0,0.0,True
+tomato,Kolar APMC,APMC Shahdara,1,41.168,0.0,0.0,True
+tomato,Kolar APMC,APMC Shahdara,4,14.837,0.0,0.0,True
+tomato,Kolar APMC,"Fruit&Vegetable Market,Gazipur APMC",1,0.097,0.7573,0.8053825396825396,False
+tomato,Kolar APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.371,0.8269,0.8646003898635478,False
+tomato,Kolar APMC,Vadodara(Sayajipura) APMC,1,28.321,0.0,0.0,True
+tomato,Kolar APMC,Vadodara(Sayajipura) APMC,4,13.711,0.0,0.0,True
+tomato,Pimpalgaon Baswant APMC,Kolar APMC,1,0.628,0.4286,0.5071293598233996,False
+tomato,Pimpalgaon Baswant APMC,Kolar APMC,4,0.844,0.4977,0.5700153846153846,False
+tomato,Pimpalgaon Baswant APMC,APMC Azadpur,1,52.226,0.0,0.0,True
+tomato,Pimpalgaon Baswant APMC,APMC Azadpur,4,14.726,0.0,0.0,True
+tomato,Pimpalgaon Baswant APMC,Chintamani APMC,1,0.424,0.5154,0.5852847457627118,False
+tomato,Pimpalgaon Baswant APMC,Chintamani APMC,4,3.756,0.0052,0.00984876325088339,True
+tomato,Pimpalgaon Baswant APMC,Junnar(Narayangaon) APMC,1,12.128,0.0005,0.0011551724137931036,True
+tomato,Pimpalgaon Baswant APMC,Junnar(Narayangaon) APMC,4,7.696,0.0,0.0,True
+tomato,Pimpalgaon Baswant APMC,Surat APMC,1,2.858,0.0917,0.12900577427821525,False
+tomato,Pimpalgaon Baswant APMC,Surat APMC,4,3.54,0.0075,0.013767123287671231,True
+tomato,Pimpalgaon Baswant APMC,Bowenpally APMC,1,2.525,0.1129,0.15411704834605597,False
+tomato,Pimpalgaon Baswant APMC,Bowenpally APMC,4,1.46,0.2137,0.27534423076923076,False
+tomato,Pimpalgaon Baswant APMC,Tiphra APMC,1,7.38,0.0069,0.012709278350515465,True
+tomato,Pimpalgaon Baswant APMC,Tiphra APMC,4,2.891,0.0222,0.03650061349693252,True
+tomato,Pimpalgaon Baswant APMC,Ahmedabad APMC,1,0.965,0.3266,0.4005894736842105,False
+tomato,Pimpalgaon Baswant APMC,Ahmedabad APMC,4,0.864,0.4855,0.5596301075268817,False
+tomato,Pimpalgaon Baswant APMC,Mulakalacheruvu APMC,1,0.017,0.8954,0.916109923664122,False
+tomato,Pimpalgaon Baswant APMC,Mulakalacheruvu APMC,4,1.412,0.2297,0.29384057279236275,False
+tomato,Pimpalgaon Baswant APMC,Mulbagal APMC,1,1.436,0.2315,0.2954380952380952,False
+tomato,Pimpalgaon Baswant APMC,Mulbagal APMC,4,3.074,0.0164,0.027642767295597486,True
+tomato,Pimpalgaon Baswant APMC,Pune APMC,1,12.499,0.0005,0.0011551724137931036,True
+tomato,Pimpalgaon Baswant APMC,Pune APMC,4,8.254,0.0,0.0,True
+tomato,Pimpalgaon Baswant APMC,Sangamner APMC,1,22.041,0.0,0.0,True
+tomato,Pimpalgaon Baswant APMC,Sangamner APMC,4,11.921,0.0,0.0,True
+tomato,Pimpalgaon Baswant APMC,Gudimalkapur APMC,1,0.303,0.5826,0.6425382716049383,False
+tomato,Pimpalgaon Baswant APMC,Gudimalkapur APMC,4,2.087,0.0819,0.11737540106951873,False
+tomato,Pimpalgaon Baswant APMC,APMC Shahdara,1,22.419,0.0,0.0,True
+tomato,Pimpalgaon Baswant APMC,APMC Shahdara,4,6.14,0.0001,0.0002576923076923077,True
+tomato,Pimpalgaon Baswant APMC,"Fruit&Vegetable Market,Gazipur APMC",1,0.007,0.9319,0.9439667924528302,False
+tomato,Pimpalgaon Baswant APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.788,0.5448,0.6096300626304801,False
+tomato,Pimpalgaon Baswant APMC,Vadodara(Sayajipura) APMC,1,12.453,0.0005,0.0011551724137931036,True
+tomato,Pimpalgaon Baswant APMC,Vadodara(Sayajipura) APMC,4,8.072,0.0,0.0,True
+tomato,APMC Azadpur,Kolar APMC,1,12.047,0.0006,0.0013569620253164555,True
+tomato,APMC Azadpur,Kolar APMC,4,1.239,0.2936,0.3668289044289045,False
+tomato,APMC Azadpur,Pimpalgaon Baswant APMC,1,0.66,0.4169,0.4954731707317073,False
+tomato,APMC Azadpur,Pimpalgaon Baswant APMC,4,0.826,0.5094,0.5796993630573248,False
+tomato,APMC Azadpur,Chintamani APMC,1,9.739,0.0019,0.003962645914396887,True
+tomato,APMC Azadpur,Chintamani APMC,4,1.389,0.2368,0.30148408551068884,False
+tomato,APMC Azadpur,Junnar(Narayangaon) APMC,1,0.784,0.3763,0.45223497757847536,False
+tomato,APMC Azadpur,Junnar(Narayangaon) APMC,4,4.113,0.0028,0.0056209737827715356,True
+tomato,APMC Azadpur,Surat APMC,1,8.562,0.0036,0.006991304347826086,True
+tomato,APMC Azadpur,Surat APMC,4,0.725,0.5752,0.6383171842650104,False
+tomato,APMC Azadpur,Bowenpally APMC,1,20.113,0.0,0.0,True
+tomato,APMC Azadpur,Bowenpally APMC,4,2.055,0.0858,0.1213424802110818,False
+tomato,APMC Azadpur,Tiphra APMC,1,0.017,0.8954,0.916109923664122,False
+tomato,APMC Azadpur,Tiphra APMC,4,4.304,0.002,0.004123076923076923,True
+tomato,APMC Azadpur,Ahmedabad APMC,1,6.612,0.0105,0.018392156862745097,True
+tomato,APMC Azadpur,Ahmedabad APMC,4,3.388,0.0096,0.016926315789473685,True
+tomato,APMC Azadpur,Mulakalacheruvu APMC,1,0.638,0.425,0.5039823008849558,False
+tomato,APMC Azadpur,Mulakalacheruvu APMC,4,2.145,0.0748,0.10865257452574527,False
+tomato,APMC Azadpur,Mulbagal APMC,1,4.925,0.027,0.043071428571428566,True
+tomato,APMC Azadpur,Mulbagal APMC,4,1.317,0.2629,0.33392037914691947,False
+tomato,APMC Azadpur,Pune APMC,1,0.878,0.3492,0.4253890909090909,False
+tomato,APMC Azadpur,Pune APMC,4,3.415,0.0091,0.01631304347826087,True
+tomato,APMC Azadpur,Sangamner APMC,1,0.998,0.3185,0.39335483870967747,False
+tomato,APMC Azadpur,Sangamner APMC,4,1.204,0.3084,0.38264444444444445,False
+tomato,APMC Azadpur,Gudimalkapur APMC,1,14.124,0.0002,0.0004940092165898618,True
+tomato,APMC Azadpur,Gudimalkapur APMC,4,0.904,0.4614,0.5393791304347826,False
+tomato,APMC Azadpur,APMC Shahdara,1,2.082,0.1498,0.19923771712158805,False
+tomato,APMC Azadpur,APMC Shahdara,4,2.584,0.0366,0.05637241379310345,False
+tomato,APMC Azadpur,"Fruit&Vegetable Market,Gazipur APMC",1,4.092,0.0521,0.0775711111111111,False
+tomato,APMC Azadpur,"Fruit&Vegetable Market,Gazipur APMC",4,2.442,0.0786,0.11353978494623655,False
+tomato,APMC Azadpur,Vadodara(Sayajipura) APMC,1,0.533,0.4659,0.5405246753246753,False
+tomato,APMC Azadpur,Vadodara(Sayajipura) APMC,4,4.325,0.0019,0.003962645914396887,True
+tomato,Chintamani APMC,Kolar APMC,1,8.186,0.0044,0.008392882562277581,True
+tomato,Chintamani APMC,Kolar APMC,4,3.314,0.0108,0.018733980582524273,True
+tomato,Chintamani APMC,Pimpalgaon Baswant APMC,1,16.099,0.0001,0.0002576923076923077,True
+tomato,Chintamani APMC,Pimpalgaon Baswant APMC,4,5.116,0.0005,0.0011551724137931036,True
+tomato,Chintamani APMC,APMC Azadpur,1,62.521,0.0,0.0,True
+tomato,Chintamani APMC,APMC Azadpur,4,12.321,0.0,0.0,True
+tomato,Chintamani APMC,Junnar(Narayangaon) APMC,1,43.404,0.0,0.0,True
+tomato,Chintamani APMC,Junnar(Narayangaon) APMC,4,13.262,0.0,0.0,True
+tomato,Chintamani APMC,Surat APMC,1,29.029,0.0,0.0,True
+tomato,Chintamani APMC,Surat APMC,4,8.469,0.0,0.0,True
+tomato,Chintamani APMC,Bowenpally APMC,1,15.698,0.0001,0.0002576923076923077,True
+tomato,Chintamani APMC,Bowenpally APMC,4,11.047,0.0,0.0,True
+tomato,Chintamani APMC,Tiphra APMC,1,16.608,0.0001,0.0002576923076923077,True
+tomato,Chintamani APMC,Tiphra APMC,4,7.063,0.0,0.0,True
+tomato,Chintamani APMC,Ahmedabad APMC,1,22.407,0.0,0.0,True
+tomato,Chintamani APMC,Ahmedabad APMC,4,5.373,0.0003,0.0007243243243243243,True
+tomato,Chintamani APMC,Mulakalacheruvu APMC,1,17.464,0.0,0.0,True
+tomato,Chintamani APMC,Mulakalacheruvu APMC,4,20.141,0.0,0.0,True
+tomato,Chintamani APMC,Mulbagal APMC,1,20.987,0.0,0.0,True
+tomato,Chintamani APMC,Mulbagal APMC,4,8.214,0.0,0.0,True
+tomato,Chintamani APMC,Pune APMC,1,60.885,0.0,0.0,True
+tomato,Chintamani APMC,Pune APMC,4,18.057,0.0,0.0,True
+tomato,Chintamani APMC,Sangamner APMC,1,31.652,0.0,0.0,True
+tomato,Chintamani APMC,Sangamner APMC,4,8.953,0.0,0.0,True
+tomato,Chintamani APMC,Gudimalkapur APMC,1,24.461,0.0,0.0,True
+tomato,Chintamani APMC,Gudimalkapur APMC,4,17.59,0.0,0.0,True
+tomato,Chintamani APMC,APMC Shahdara,1,42.643,0.0,0.0,True
+tomato,Chintamani APMC,APMC Shahdara,4,11.89,0.0,0.0,True
+tomato,Chintamani APMC,"Fruit&Vegetable Market,Gazipur APMC",1,0.002,0.9651,0.9669039252336449,False
+tomato,Chintamani APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.189,0.9415,0.9503653483992468,False
+tomato,Chintamani APMC,Vadodara(Sayajipura) APMC,1,25.176,0.0,0.0,True
+tomato,Chintamani APMC,Vadodara(Sayajipura) APMC,4,7.61,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,Kolar APMC,1,3.324,0.0689,0.10062779291553135,False
+tomato,Junnar(Narayangaon) APMC,Kolar APMC,4,1.469,0.2106,0.27200385542168676,False
+tomato,Junnar(Narayangaon) APMC,Pimpalgaon Baswant APMC,1,22.787,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,Pimpalgaon Baswant APMC,4,9.679,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,APMC Azadpur,1,44.095,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,APMC Azadpur,4,12.081,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,Chintamani APMC,1,0.703,0.4022,0.4822800894854586,False
+tomato,Junnar(Narayangaon) APMC,Chintamani APMC,4,2.694,0.0304,0.047784164222873904,True
+tomato,Junnar(Narayangaon) APMC,Surat APMC,1,14.769,0.0001,0.0002576923076923077,True
+tomato,Junnar(Narayangaon) APMC,Surat APMC,4,7.281,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,Bowenpally APMC,1,5.2,0.023,0.037585365853658535,True
+tomato,Junnar(Narayangaon) APMC,Bowenpally APMC,4,3.255,0.012,0.020681672025723474,True
+tomato,Junnar(Narayangaon) APMC,Tiphra APMC,1,10.437,0.0013,0.0028096774193548386,True
+tomato,Junnar(Narayangaon) APMC,Tiphra APMC,4,8.131,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,Ahmedabad APMC,1,7.988,0.0049,0.009313475177304964,True
+tomato,Junnar(Narayangaon) APMC,Ahmedabad APMC,4,4.911,0.0007,0.0015698744769874478,True
+tomato,Junnar(Narayangaon) APMC,Mulakalacheruvu APMC,1,0.088,0.7668,0.8138708910891089,False
+tomato,Junnar(Narayangaon) APMC,Mulakalacheruvu APMC,4,5.634,0.0002,0.0004940092165898618,True
+tomato,Junnar(Narayangaon) APMC,Mulbagal APMC,1,0.016,0.9007,0.9195718095238095,False
+tomato,Junnar(Narayangaon) APMC,Mulbagal APMC,4,1.758,0.1362,0.18296541353383455,False
+tomato,Junnar(Narayangaon) APMC,Pune APMC,1,45.585,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,Pune APMC,4,17.338,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,Sangamner APMC,1,23.742,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,Sangamner APMC,4,9.272,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,Gudimalkapur APMC,1,1.598,0.2068,0.26904077669902915,False
+tomato,Junnar(Narayangaon) APMC,Gudimalkapur APMC,4,4.265,0.0021,0.004279847908745247,True
+tomato,Junnar(Narayangaon) APMC,APMC Shahdara,1,30.107,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,APMC Shahdara,4,9.601,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,"Fruit&Vegetable Market,Gazipur APMC",1,0.083,0.7747,0.8206308300395257,False
+tomato,Junnar(Narayangaon) APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.289,0.8823,0.9094476923076923,False
+tomato,Junnar(Narayangaon) APMC,Vadodara(Sayajipura) APMC,1,17.768,0.0,0.0,True
+tomato,Junnar(Narayangaon) APMC,Vadodara(Sayajipura) APMC,4,9.995,0.0,0.0,True
+tomato,Surat APMC,Kolar APMC,1,1.683,0.1952,0.254567396593674,False
+tomato,Surat APMC,Kolar APMC,4,3.84,0.0044,0.008392882562277581,True
+tomato,Surat APMC,Pimpalgaon Baswant APMC,1,21.771,0.0,0.0,True
+tomato,Surat APMC,Pimpalgaon Baswant APMC,4,10.151,0.0,0.0,True
+tomato,Surat APMC,APMC Azadpur,1,60.392,0.0,0.0,True
+tomato,Surat APMC,APMC Azadpur,4,14.384,0.0,0.0,True
+tomato,Surat APMC,Chintamani APMC,1,0.0,0.9873,0.9873,False
+tomato,Surat APMC,Chintamani APMC,4,2.775,0.0266,0.04256,True
+tomato,Surat APMC,Junnar(Narayangaon) APMC,1,21.707,0.0,0.0,True
+tomato,Surat APMC,Junnar(Narayangaon) APMC,4,11.287,0.0,0.0,True
+tomato,Surat APMC,Bowenpally APMC,1,8.989,0.0029,0.005778438661710036,True
+tomato,Surat APMC,Bowenpally APMC,4,2.586,0.0365,0.05637241379310345,False
+tomato,Surat APMC,Tiphra APMC,1,12.123,0.0005,0.0011551724137931036,True
+tomato,Surat APMC,Tiphra APMC,4,9.673,0.0,0.0,True
+tomato,Surat APMC,Ahmedabad APMC,1,6.545,0.0108,0.018733980582524273,True
+tomato,Surat APMC,Ahmedabad APMC,4,7.073,0.0,0.0,True
+tomato,Surat APMC,Mulakalacheruvu APMC,1,3.09,0.0796,0.11438498659517427,False
+tomato,Surat APMC,Mulakalacheruvu APMC,4,5.799,0.0002,0.0004940092165898618,True
+tomato,Surat APMC,Mulbagal APMC,1,0.698,0.404,0.4822806236080178,False
+tomato,Surat APMC,Mulbagal APMC,4,2.872,0.0227,0.03720856269113151,True
+tomato,Surat APMC,Pune APMC,1,42.156,0.0,0.0,True
+tomato,Surat APMC,Pune APMC,4,22.07,0.0,0.0,True
+tomato,Surat APMC,Sangamner APMC,1,10.098,0.0016,0.0034304,True
+tomato,Surat APMC,Sangamner APMC,4,7.599,0.0,0.0,True
+tomato,Surat APMC,Gudimalkapur APMC,1,1.58,0.2094,0.2711072463768116,False
+tomato,Surat APMC,Gudimalkapur APMC,4,6.033,0.0001,0.0002576923076923077,True
+tomato,Surat APMC,APMC Shahdara,1,38.165,0.0,0.0,True
+tomato,Surat APMC,APMC Shahdara,4,12.622,0.0,0.0,True
+tomato,Surat APMC,"Fruit&Vegetable Market,Gazipur APMC",1,0.823,0.3711,0.44698786516853933,False
+tomato,Surat APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.85,0.5085,0.5796993630573248,False
+tomato,Surat APMC,Vadodara(Sayajipura) APMC,1,20.843,0.0,0.0,True
+tomato,Surat APMC,Vadodara(Sayajipura) APMC,4,13.439,0.0,0.0,True
+tomato,Bowenpally APMC,Kolar APMC,1,3.822,0.0512,0.07644345403899722,False
+tomato,Bowenpally APMC,Kolar APMC,4,2.003,0.0931,0.13029138381201044,False
+tomato,Bowenpally APMC,Pimpalgaon Baswant APMC,1,31.849,0.0,0.0,True
+tomato,Bowenpally APMC,Pimpalgaon Baswant APMC,4,8.482,0.0,0.0,True
+tomato,Bowenpally APMC,APMC Azadpur,1,55.325,0.0,0.0,True
+tomato,Bowenpally APMC,APMC Azadpur,4,10.577,0.0,0.0,True
+tomato,Bowenpally APMC,Chintamani APMC,1,7.573,0.0062,0.011579094076655052,True
+tomato,Bowenpally APMC,Chintamani APMC,4,6.409,0.0001,0.0002576923076923077,True
+tomato,Bowenpally APMC,Junnar(Narayangaon) APMC,1,58.203,0.0,0.0,True
+tomato,Bowenpally APMC,Junnar(Narayangaon) APMC,4,13.919,0.0,0.0,True
+tomato,Bowenpally APMC,Surat APMC,1,54.076,0.0,0.0,True
+tomato,Bowenpally APMC,Surat APMC,4,12.409,0.0,0.0,True
+tomato,Bowenpally APMC,Tiphra APMC,1,29.266,0.0,0.0,True
+tomato,Bowenpally APMC,Tiphra APMC,4,10.384,0.0,0.0,True
+tomato,Bowenpally APMC,Ahmedabad APMC,1,47.554,0.0,0.0,True
+tomato,Bowenpally APMC,Ahmedabad APMC,4,10.278,0.0,0.0,True
+tomato,Bowenpally APMC,Mulakalacheruvu APMC,1,4.486,0.0349,0.05406473988439306,False
+tomato,Bowenpally APMC,Mulakalacheruvu APMC,4,5.739,0.0002,0.0004940092165898618,True
+tomato,Bowenpally APMC,Mulbagal APMC,1,14.897,0.0001,0.0002576923076923077,True
+tomato,Bowenpally APMC,Mulbagal APMC,4,7.76,0.0,0.0,True
+tomato,Bowenpally APMC,Pune APMC,1,57.789,0.0,0.0,True
+tomato,Bowenpally APMC,Pune APMC,4,16.24,0.0,0.0,True
+tomato,Bowenpally APMC,Sangamner APMC,1,43.324,0.0,0.0,True
+tomato,Bowenpally APMC,Sangamner APMC,4,9.908,0.0,0.0,True
+tomato,Bowenpally APMC,Gudimalkapur APMC,1,11.854,0.0006,0.0013569620253164555,True
+tomato,Bowenpally APMC,Gudimalkapur APMC,4,8.986,0.0,0.0,True
+tomato,Bowenpally APMC,APMC Shahdara,1,43.676,0.0,0.0,True
+tomato,Bowenpally APMC,APMC Shahdara,4,11.008,0.0,0.0,True
+tomato,Bowenpally APMC,"Fruit&Vegetable Market,Gazipur APMC",1,0.272,0.6056,0.6640261758691207,False
+tomato,Bowenpally APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.37,0.8275,0.8646003898635478,False
+tomato,Bowenpally APMC,Vadodara(Sayajipura) APMC,1,40.318,0.0,0.0,True
+tomato,Bowenpally APMC,Vadodara(Sayajipura) APMC,4,9.464,0.0,0.0,True
+tomato,Tiphra APMC,Kolar APMC,1,0.059,0.8084,0.8496125490196078,False
+tomato,Tiphra APMC,Kolar APMC,4,0.916,0.4546,0.5331851203501093,False
+tomato,Tiphra APMC,Pimpalgaon Baswant APMC,1,2.983,0.0849,0.12070663129973476,False
+tomato,Tiphra APMC,Pimpalgaon Baswant APMC,4,2.501,0.0421,0.06392521246458922,False
+tomato,Tiphra APMC,APMC Azadpur,1,37.489,0.0,0.0,True
+tomato,Tiphra APMC,APMC Azadpur,4,10.915,0.0,0.0,True
+tomato,Tiphra APMC,Chintamani APMC,1,0.453,0.5012,0.5728,False
+tomato,Tiphra APMC,Chintamani APMC,4,2.08,0.0824,0.11777706666666667,False
+tomato,Tiphra APMC,Junnar(Narayangaon) APMC,1,10.888,0.001,0.0021877551020408163,True
+tomato,Tiphra APMC,Junnar(Narayangaon) APMC,4,5.375,0.0003,0.0007243243243243243,True
+tomato,Tiphra APMC,Surat APMC,1,4.735,0.0301,0.047451764705882346,True
+tomato,Tiphra APMC,Surat APMC,4,4.6,0.0012,0.002604048582995951,True
+tomato,Tiphra APMC,Bowenpally APMC,1,0.828,0.3632,0.4404416289592761,False
+tomato,Tiphra APMC,Bowenpally APMC,4,0.776,0.5411,0.6067564853556486,False
+tomato,Tiphra APMC,Ahmedabad APMC,1,4.296,0.0388,0.05941942857142857,False
+tomato,Tiphra APMC,Ahmedabad APMC,4,3.099,0.0156,0.026377287066246057,True
+tomato,Tiphra APMC,Mulakalacheruvu APMC,1,3.566,0.0598,0.08829972451790633,False
+tomato,Tiphra APMC,Mulakalacheruvu APMC,4,3.471,0.0085,0.015340067340067343,True
+tomato,Tiphra APMC,Mulbagal APMC,1,1.788,0.1818,0.23883529411764706,False
+tomato,Tiphra APMC,Mulbagal APMC,4,2.246,0.0633,0.09295561643835616,False
+tomato,Tiphra APMC,Pune APMC,1,13.804,0.0002,0.0004940092165898618,True
+tomato,Tiphra APMC,Pune APMC,4,7.401,0.0,0.0,True
+tomato,Tiphra APMC,Sangamner APMC,1,4.112,0.0432,0.06522591549295775,False
+tomato,Tiphra APMC,Sangamner APMC,4,3.958,0.0037,0.007133812949640288,True
+tomato,Tiphra APMC,Gudimalkapur APMC,1,0.135,0.7138,0.7651935999999999,False
+tomato,Tiphra APMC,Gudimalkapur APMC,4,2.862,0.0232,0.03779696048632218,True
+tomato,Tiphra APMC,APMC Shahdara,1,25.806,0.0,0.0,True
+tomato,Tiphra APMC,APMC Shahdara,4,8.655,0.0,0.0,True
+tomato,Tiphra APMC,"Fruit&Vegetable Market,Gazipur APMC",1,0.552,0.4628,0.5393791304347826,False
+tomato,Tiphra APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.516,0.7247,0.772244930417495,False
+tomato,Tiphra APMC,Vadodara(Sayajipura) APMC,1,9.712,0.002,0.004123076923076923,True
+tomato,Tiphra APMC,Vadodara(Sayajipura) APMC,4,5.455,0.0003,0.0007243243243243243,True
+tomato,Ahmedabad APMC,Kolar APMC,1,0.383,0.5365,0.6028595387840671,False
+tomato,Ahmedabad APMC,Kolar APMC,4,2.842,0.0239,0.0385855421686747,True
+tomato,Ahmedabad APMC,Pimpalgaon Baswant APMC,1,17.586,0.0,0.0,True
+tomato,Ahmedabad APMC,Pimpalgaon Baswant APMC,4,9.366,0.0,0.0,True
+tomato,Ahmedabad APMC,APMC Azadpur,1,53.004,0.0,0.0,True
+tomato,Ahmedabad APMC,APMC Azadpur,4,14.416,0.0,0.0,True
+tomato,Ahmedabad APMC,Chintamani APMC,1,0.144,0.7047,0.7599791164658635,False
+tomato,Ahmedabad APMC,Chintamani APMC,4,4.32,0.0019,0.003962645914396887,True
+tomato,Ahmedabad APMC,Junnar(Narayangaon) APMC,1,16.519,0.0001,0.0002576923076923077,True
+tomato,Ahmedabad APMC,Junnar(Narayangaon) APMC,4,9.642,0.0,0.0,True
+tomato,Ahmedabad APMC,Surat APMC,1,4.835,0.0284,0.04503668639053255,True
+tomato,Ahmedabad APMC,Surat APMC,4,4.231,0.0023,0.004652075471698113,True
+tomato,Ahmedabad APMC,Bowenpally APMC,1,3.156,0.0764,0.11067675675675674,False
+tomato,Ahmedabad APMC,Bowenpally APMC,4,1.972,0.0979,0.1359440414507772,False
+tomato,Ahmedabad APMC,Tiphra APMC,1,27.017,0.0,0.0,True
+tomato,Ahmedabad APMC,Tiphra APMC,4,12.717,0.0,0.0,True
+tomato,Ahmedabad APMC,Mulakalacheruvu APMC,1,2.355,0.1258,0.17027474747474747,False
+tomato,Ahmedabad APMC,Mulakalacheruvu APMC,4,5.084,0.0005,0.0011551724137931036,True
+tomato,Ahmedabad APMC,Mulbagal APMC,1,1.164,0.2813,0.35310725995316156,False
+tomato,Ahmedabad APMC,Mulbagal APMC,4,3.67,0.0059,0.011096140350877193,True
+tomato,Ahmedabad APMC,Pune APMC,1,16.583,0.0001,0.0002576923076923077,True
+tomato,Ahmedabad APMC,Pune APMC,4,9.163,0.0,0.0,True
+tomato,Ahmedabad APMC,Sangamner APMC,1,7.177,0.0077,0.014086006825938566,True
+tomato,Ahmedabad APMC,Sangamner APMC,4,6.033,0.0001,0.0002576923076923077,True
+tomato,Ahmedabad APMC,Gudimalkapur APMC,1,1.242,0.2657,0.3366789598108747,False
+tomato,Ahmedabad APMC,Gudimalkapur APMC,4,2.86,0.0233,0.03784484848484849,True
+tomato,Ahmedabad APMC,APMC Shahdara,1,31.968,0.0,0.0,True
+tomato,Ahmedabad APMC,APMC Shahdara,4,11.675,0.0,0.0,True
+tomato,Ahmedabad APMC,"Fruit&Vegetable Market,Gazipur APMC",1,0.878,0.3557,0.432324716553288,False
+tomato,Ahmedabad APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.142,0.9648,0.9669039252336449,False
+tomato,Ahmedabad APMC,Vadodara(Sayajipura) APMC,1,34.746,0.0,0.0,True
+tomato,Ahmedabad APMC,Vadodara(Sayajipura) APMC,4,15.099,0.0,0.0,True
+tomato,Mulakalacheruvu APMC,Kolar APMC,1,1.16,0.282,0.35315887850467287,False
+tomato,Mulakalacheruvu APMC,Kolar APMC,4,0.273,0.8956,0.916109923664122,False
+tomato,Mulakalacheruvu APMC,Pimpalgaon Baswant APMC,1,4.568,0.0333,0.05173565217391305,False
+tomato,Mulakalacheruvu APMC,Pimpalgaon Baswant APMC,4,1.841,0.1206,0.16364962025316457,False
+tomato,Mulakalacheruvu APMC,APMC Azadpur,1,13.559,0.0003,0.0007243243243243243,True
+tomato,Mulakalacheruvu APMC,APMC Azadpur,4,4.108,0.0029,0.005778438661710036,True
+tomato,Mulakalacheruvu APMC,Chintamani APMC,1,0.537,0.464,0.5394880694143167,False
+tomato,Mulakalacheruvu APMC,Chintamani APMC,4,0.6,0.6625,0.7202839756592292,False
+tomato,Mulakalacheruvu APMC,Junnar(Narayangaon) APMC,1,15.58,0.0001,0.0002576923076923077,True
+tomato,Mulakalacheruvu APMC,Junnar(Narayangaon) APMC,4,4.873,0.0008,0.001771900826446281,True
+tomato,Mulakalacheruvu APMC,Surat APMC,1,8.519,0.0037,0.007133812949640288,True
+tomato,Mulakalacheruvu APMC,Surat APMC,4,4.017,0.0033,0.006502941176470588,True
+tomato,Mulakalacheruvu APMC,Bowenpally APMC,1,0.17,0.6801,0.7364315151515152,False
+tomato,Mulakalacheruvu APMC,Bowenpally APMC,4,0.697,0.5947,0.6545363449691991,False
+tomato,Mulakalacheruvu APMC,Tiphra APMC,1,3.933,0.0481,0.07242022471910112,False
+tomato,Mulakalacheruvu APMC,Tiphra APMC,4,3.45,0.0088,0.01582818791946309,True
+tomato,Mulakalacheruvu APMC,Ahmedabad APMC,1,3.107,0.0788,0.11353978494623655,False
+tomato,Mulakalacheruvu APMC,Ahmedabad APMC,4,2.001,0.0939,0.13106875,False
+tomato,Mulakalacheruvu APMC,Mulbagal APMC,1,1.224,0.2694,0.3405622641509434,False
+tomato,Mulakalacheruvu APMC,Mulbagal APMC,4,0.531,0.7134,0.7651935999999999,False
+tomato,Mulakalacheruvu APMC,Pune APMC,1,26.391,0.0,0.0,True
+tomato,Mulakalacheruvu APMC,Pune APMC,4,8.234,0.0,0.0,True
+tomato,Mulakalacheruvu APMC,Sangamner APMC,1,9.791,0.0019,0.003962645914396887,True
+tomato,Mulakalacheruvu APMC,Sangamner APMC,4,3.471,0.0085,0.015340067340067343,True
+tomato,Mulakalacheruvu APMC,Gudimalkapur APMC,1,0.174,0.6769,0.7344502024291497,False
+tomato,Mulakalacheruvu APMC,Gudimalkapur APMC,4,3.42,0.0092,0.016437333333333335,True
+tomato,Mulakalacheruvu APMC,APMC Shahdara,1,7.675,0.0059,0.011096140350877193,True
+tomato,Mulakalacheruvu APMC,APMC Shahdara,4,2.663,0.0325,0.05063953488372094,False
+tomato,Mulakalacheruvu APMC,Vadodara(Sayajipura) APMC,1,6.569,0.0108,0.018733980582524273,True
+tomato,Mulakalacheruvu APMC,Vadodara(Sayajipura) APMC,4,3.017,0.0181,0.030223052959501562,True
+tomato,Mulbagal APMC,Kolar APMC,1,2.19,0.1396,0.18706399999999998,False
+tomato,Mulbagal APMC,Kolar APMC,4,1.081,0.3652,0.44087207207207213,False
+tomato,Mulbagal APMC,Pimpalgaon Baswant APMC,1,7.057,0.0082,0.01489898305084746,True
+tomato,Mulbagal APMC,Pimpalgaon Baswant APMC,4,3.991,0.0035,0.0068218181818181815,True
+tomato,Mulbagal APMC,APMC Azadpur,1,37.816,0.0,0.0,True
+tomato,Mulbagal APMC,APMC Azadpur,4,9.054,0.0,0.0,True
+tomato,Mulbagal APMC,Chintamani APMC,1,0.073,0.7866,0.829955905511811,False
+tomato,Mulbagal APMC,Chintamani APMC,4,6.281,0.0001,0.0002576923076923077,True
+tomato,Mulbagal APMC,Junnar(Narayangaon) APMC,1,26.14,0.0,0.0,True
+tomato,Mulbagal APMC,Junnar(Narayangaon) APMC,4,9.002,0.0,0.0,True
+tomato,Mulbagal APMC,Surat APMC,1,17.364,0.0,0.0,True
+tomato,Mulbagal APMC,Surat APMC,4,8.382,0.0,0.0,True
+tomato,Mulbagal APMC,Bowenpally APMC,1,0.142,0.7061,0.7599791164658635,False
+tomato,Mulbagal APMC,Bowenpally APMC,4,8.304,0.0,0.0,True
+tomato,Mulbagal APMC,Tiphra APMC,1,4.601,0.0325,0.05063953488372094,False
+tomato,Mulbagal APMC,Tiphra APMC,4,6.523,0.0,0.0,True
+tomato,Mulbagal APMC,Ahmedabad APMC,1,9.166,0.0026,0.005239097744360902,True
+tomato,Mulbagal APMC,Ahmedabad APMC,4,4.39,0.0017,0.0036302788844621513,True
+tomato,Mulbagal APMC,Mulakalacheruvu APMC,1,5.757,0.0169,0.0283075,True
+tomato,Mulbagal APMC,Mulakalacheruvu APMC,4,10.859,0.0,0.0,True
+tomato,Mulbagal APMC,Pune APMC,1,28.936,0.0,0.0,True
+tomato,Mulbagal APMC,Pune APMC,4,11.247,0.0,0.0,True
+tomato,Mulbagal APMC,Sangamner APMC,1,16.454,0.0001,0.0002576923076923077,True
+tomato,Mulbagal APMC,Sangamner APMC,4,6.564,0.0,0.0,True
+tomato,Mulbagal APMC,Gudimalkapur APMC,1,2.617,0.1064,0.14674550128534702,False
+tomato,Mulbagal APMC,Gudimalkapur APMC,4,14.071,0.0,0.0,True
+tomato,Mulbagal APMC,APMC Shahdara,1,26.034,0.0,0.0,True
+tomato,Mulbagal APMC,APMC Shahdara,4,9.718,0.0,0.0,True
+tomato,Mulbagal APMC,"Fruit&Vegetable Market,Gazipur APMC",1,0.062,0.8044,0.8470695481335953,False
+tomato,Mulbagal APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.316,0.8642,0.8959597678916827,False
+tomato,Mulbagal APMC,Vadodara(Sayajipura) APMC,1,12.591,0.0004,0.0009571428571428573,True
+tomato,Mulbagal APMC,Vadodara(Sayajipura) APMC,4,6.799,0.0,0.0,True
+tomato,Pune APMC,Kolar APMC,1,6.208,0.0131,0.022433226837060703,True
+tomato,Pune APMC,Kolar APMC,4,0.901,0.4629,0.5393791304347826,False
+tomato,Pune APMC,Pimpalgaon Baswant APMC,1,6.838,0.0093,0.01650596026490066,True
+tomato,Pune APMC,Pimpalgaon Baswant APMC,4,3.584,0.0069,0.012709278350515465,True
+tomato,Pune APMC,APMC Azadpur,1,25.684,0.0,0.0,True
+tomato,Pune APMC,APMC Azadpur,4,6.704,0.0,0.0,True
+tomato,Pune APMC,Chintamani APMC,1,0.825,0.3642,0.44065733634311516,False
+tomato,Pune APMC,Chintamani APMC,4,2.384,0.0505,0.07560893854748604,False
+tomato,Pune APMC,Junnar(Narayangaon) APMC,1,17.743,0.0,0.0,True
+tomato,Pune APMC,Junnar(Narayangaon) APMC,4,6.856,0.0,0.0,True
+tomato,Pune APMC,Surat APMC,1,2.339,0.1268,0.17119596977329976,False
+tomato,Pune APMC,Surat APMC,4,2.226,0.0652,0.09548415300546446,False
+tomato,Pune APMC,Bowenpally APMC,1,6.824,0.0093,0.01650596026490066,True
+tomato,Pune APMC,Bowenpally APMC,4,2.668,0.0319,0.0499953216374269,True
+tomato,Pune APMC,Tiphra APMC,1,6.447,0.0114,0.019710967741935485,True
+tomato,Pune APMC,Tiphra APMC,4,8.17,0.0,0.0,True
+tomato,Pune APMC,Ahmedabad APMC,1,0.887,0.3469,0.42354988610478356,False
+tomato,Pune APMC,Ahmedabad APMC,4,1.169,0.3238,0.39898114942528734,False
+tomato,Pune APMC,Mulakalacheruvu APMC,1,0.59,0.4428,0.521628131868132,False
+tomato,Pune APMC,Mulakalacheruvu APMC,4,4.644,0.0011,0.002396747967479675,True
+tomato,Pune APMC,Mulbagal APMC,1,0.002,0.9651,0.9669039252336449,False
+tomato,Pune APMC,Mulbagal APMC,4,3.387,0.0096,0.016926315789473685,True
+tomato,Pune APMC,Sangamner APMC,1,5.748,0.0169,0.0283075,True
+tomato,Pune APMC,Sangamner APMC,4,3.484,0.0081,0.01476734693877551,True
+tomato,Pune APMC,Gudimalkapur APMC,1,4.31,0.0384,0.0589753581661891,False
+tomato,Pune APMC,Gudimalkapur APMC,4,2.515,0.0409,0.062456980056980055,False
+tomato,Pune APMC,APMC Shahdara,1,16.342,0.0001,0.0002576923076923077,True
+tomato,Pune APMC,APMC Shahdara,4,6.515,0.0,0.0,True
+tomato,Pune APMC,"Fruit&Vegetable Market,Gazipur APMC",1,0.02,0.8889,0.9144921305182342,False
+tomato,Pune APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.371,0.8268,0.8646003898635478,False
+tomato,Pune APMC,Vadodara(Sayajipura) APMC,1,5.078,0.0247,0.03975735735735735,True
+tomato,Pune APMC,Vadodara(Sayajipura) APMC,4,3.653,0.0061,0.011432167832167831,True
+tomato,Sangamner APMC,Kolar APMC,1,2.877,0.0906,0.1277936842105263,False
+tomato,Sangamner APMC,Kolar APMC,4,0.879,0.4765,0.5504396551724138,False
+tomato,Sangamner APMC,Pimpalgaon Baswant APMC,1,8.7,0.0034,0.006675457875457875,True
+tomato,Sangamner APMC,Pimpalgaon Baswant APMC,4,4.699,0.001,0.0021877551020408163,True
+tomato,Sangamner APMC,APMC Azadpur,1,33.394,0.0,0.0,True
+tomato,Sangamner APMC,APMC Azadpur,4,7.887,0.0,0.0,True
+tomato,Sangamner APMC,Chintamani APMC,1,0.204,0.6519,0.7116464358452139,False
+tomato,Sangamner APMC,Chintamani APMC,4,1.884,0.1122,0.15380869565217392,False
+tomato,Sangamner APMC,Junnar(Narayangaon) APMC,1,31.435,0.0,0.0,True
+tomato,Sangamner APMC,Junnar(Narayangaon) APMC,4,14.825,0.0,0.0,True
+tomato,Sangamner APMC,Surat APMC,1,9.492,0.0022,0.004466666666666667,True
+tomato,Sangamner APMC,Surat APMC,4,5.935,0.0001,0.0002576923076923077,True
+tomato,Sangamner APMC,Bowenpally APMC,1,7.528,0.0063,0.011725,True
+tomato,Sangamner APMC,Bowenpally APMC,4,5.745,0.0002,0.0004940092165898618,True
+tomato,Sangamner APMC,Tiphra APMC,1,15.536,0.0001,0.0002576923076923077,True
+tomato,Sangamner APMC,Tiphra APMC,4,12.789,0.0,0.0,True
+tomato,Sangamner APMC,Ahmedabad APMC,1,7.395,0.0068,0.012611764705882352,True
+tomato,Sangamner APMC,Ahmedabad APMC,4,4.316,0.002,0.004123076923076923,True
+tomato,Sangamner APMC,Mulakalacheruvu APMC,1,2.152,0.1434,0.19167680798004988,False
+tomato,Sangamner APMC,Mulakalacheruvu APMC,4,4.886,0.0008,0.001771900826446281,True
+tomato,Sangamner APMC,Mulbagal APMC,1,2.06,0.1519,0.20153069306930696,False
+tomato,Sangamner APMC,Mulbagal APMC,4,4.374,0.0018,0.0038134387351778654,True
+tomato,Sangamner APMC,Pune APMC,1,22.432,0.0,0.0,True
+tomato,Sangamner APMC,Pune APMC,4,12.94,0.0,0.0,True
+tomato,Sangamner APMC,Gudimalkapur APMC,1,4.796,0.0291,0.04601061946902655,True
+tomato,Sangamner APMC,Gudimalkapur APMC,4,4.384,0.0018,0.0038134387351778654,True
+tomato,Sangamner APMC,APMC Shahdara,1,19.605,0.0,0.0,True
+tomato,Sangamner APMC,APMC Shahdara,4,7.849,0.0,0.0,True
+tomato,Sangamner APMC,"Fruit&Vegetable Market,Gazipur APMC",1,0.132,0.7191,0.7693365269461078,False
+tomato,Sangamner APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.207,0.9317,0.9439667924528302,False
+tomato,Sangamner APMC,Vadodara(Sayajipura) APMC,1,21.002,0.0,0.0,True
+tomato,Sangamner APMC,Vadodara(Sayajipura) APMC,4,9.202,0.0,0.0,True
+tomato,Gudimalkapur APMC,Kolar APMC,1,1.592,0.2077,0.26955738498789344,False
+tomato,Gudimalkapur APMC,Kolar APMC,4,1.685,0.1523,0.20156246913580245,False
+tomato,Gudimalkapur APMC,Pimpalgaon Baswant APMC,1,24.412,0.0,0.0,True
+tomato,Gudimalkapur APMC,Pimpalgaon Baswant APMC,4,6.803,0.0,0.0,True
+tomato,Gudimalkapur APMC,APMC Azadpur,1,54.582,0.0,0.0,True
+tomato,Gudimalkapur APMC,APMC Azadpur,4,10.525,0.0,0.0,True
+tomato,Gudimalkapur APMC,Chintamani APMC,1,5.907,0.0155,0.026291139240506328,True
+tomato,Gudimalkapur APMC,Chintamani APMC,4,6.319,0.0001,0.0002576923076923077,True
+tomato,Gudimalkapur APMC,Junnar(Narayangaon) APMC,1,49.611,0.0,0.0,True
+tomato,Gudimalkapur APMC,Junnar(Narayangaon) APMC,4,12.201,0.0,0.0,True
+tomato,Gudimalkapur APMC,Surat APMC,1,47.61,0.0,0.0,True
+tomato,Gudimalkapur APMC,Surat APMC,4,10.893,0.0,0.0,True
+tomato,Gudimalkapur APMC,Bowenpally APMC,1,2.972,0.0854,0.1210962962962963,False
+tomato,Gudimalkapur APMC,Bowenpally APMC,4,2.978,0.0191,0.0316953560371517,True
+tomato,Gudimalkapur APMC,Tiphra APMC,1,29.627,0.0,0.0,True
+tomato,Gudimalkapur APMC,Tiphra APMC,4,9.626,0.0,0.0,True
+tomato,Gudimalkapur APMC,Ahmedabad APMC,1,39.152,0.0,0.0,True
+tomato,Gudimalkapur APMC,Ahmedabad APMC,4,7.043,0.0,0.0,True
+tomato,Gudimalkapur APMC,Mulakalacheruvu APMC,1,4.863,0.0281,0.04469317507418398,True
+tomato,Gudimalkapur APMC,Mulakalacheruvu APMC,4,5.141,0.0005,0.0011551724137931036,True
+tomato,Gudimalkapur APMC,Mulbagal APMC,1,5.176,0.0234,0.03789244712990937,True
+tomato,Gudimalkapur APMC,Mulbagal APMC,4,6.074,0.0001,0.0002576923076923077,True
+tomato,Gudimalkapur APMC,Pune APMC,1,57.075,0.0,0.0,True
+tomato,Gudimalkapur APMC,Pune APMC,4,15.048,0.0,0.0,True
+tomato,Gudimalkapur APMC,Sangamner APMC,1,46.013,0.0,0.0,True
+tomato,Gudimalkapur APMC,Sangamner APMC,4,10.363,0.0,0.0,True
+tomato,Gudimalkapur APMC,APMC Shahdara,1,42.52,0.0,0.0,True
+tomato,Gudimalkapur APMC,APMC Shahdara,4,11.08,0.0,0.0,True
+tomato,Gudimalkapur APMC,"Fruit&Vegetable Market,Gazipur APMC",1,0.355,0.5554,0.6189072765072765,False
+tomato,Gudimalkapur APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.805,0.5343,0.6016487394957983,False
+tomato,Gudimalkapur APMC,Vadodara(Sayajipura) APMC,1,53.032,0.0,0.0,True
+tomato,Gudimalkapur APMC,Vadodara(Sayajipura) APMC,4,11.89,0.0,0.0,True
+tomato,APMC Shahdara,Kolar APMC,1,4.164,0.0419,0.06380227272727272,False
+tomato,APMC Shahdara,Kolar APMC,4,1.528,0.1931,0.2524429268292683,False
+tomato,APMC Shahdara,Pimpalgaon Baswant APMC,1,0.306,0.5806,0.6422053608247422,False
+tomato,APMC Shahdara,Pimpalgaon Baswant APMC,4,1.92,0.1065,0.14674550128534702,False
+tomato,APMC Shahdara,APMC Azadpur,1,53.685,0.0,0.0,True
+tomato,APMC Shahdara,APMC Azadpur,4,19.389,0.0,0.0,True
+tomato,APMC Shahdara,Chintamani APMC,1,3.675,0.0559,0.0829983379501385,False
+tomato,APMC Shahdara,Chintamani APMC,4,1.22,0.3014,0.3756986046511628,False
+tomato,APMC Shahdara,Junnar(Narayangaon) APMC,1,2.843,0.0925,0.12979057591623036,False
+tomato,APMC Shahdara,Junnar(Narayangaon) APMC,4,5.211,0.0004,0.0009571428571428573,True
+tomato,APMC Shahdara,Surat APMC,1,2.722,0.0997,0.1380857881136951,False
+tomato,APMC Shahdara,Surat APMC,4,1.187,0.316,0.3911685912240185,False
+tomato,APMC Shahdara,Bowenpally APMC,1,8.25,0.0043,0.008260931899641577,True
+tomato,APMC Shahdara,Bowenpally APMC,4,2.414,0.0484,0.07266778711484594,False
+tomato,APMC Shahdara,Tiphra APMC,1,2.136,0.1446,0.1928,False
+tomato,APMC Shahdara,Tiphra APMC,4,5.432,0.0003,0.0007243243243243243,True
+tomato,APMC Shahdara,Ahmedabad APMC,1,0.044,0.834,0.8696964980544746,False
+tomato,APMC Shahdara,Ahmedabad APMC,4,4.908,0.0007,0.0015698744769874478,True
+tomato,APMC Shahdara,Mulakalacheruvu APMC,1,0.4,0.5275,0.5964978902953586,False
+tomato,APMC Shahdara,Mulakalacheruvu APMC,4,2.279,0.0604,0.08894065934065935,False
+tomato,APMC Shahdara,Mulbagal APMC,1,0.908,0.3412,0.41754155251141556,False
+tomato,APMC Shahdara,Mulbagal APMC,4,2.282,0.0598,0.08829972451790633,False
+tomato,APMC Shahdara,Pune APMC,1,2.039,0.1541,0.2034423645320197,False
+tomato,APMC Shahdara,Pune APMC,4,4.289,0.0021,0.004279847908745247,True
+tomato,APMC Shahdara,Sangamner APMC,1,0.682,0.4094,0.48764088888888885,False
+tomato,APMC Shahdara,Sangamner APMC,4,4.982,0.0006,0.0013569620253164555,True
+tomato,APMC Shahdara,Gudimalkapur APMC,1,4.128,0.0428,0.0648045197740113,False
+tomato,APMC Shahdara,Gudimalkapur APMC,4,2.967,0.0195,0.03225925925925926,True
+tomato,APMC Shahdara,Vadodara(Sayajipura) APMC,1,1.213,0.2714,0.34147981220657275,False
+tomato,APMC Shahdara,Vadodara(Sayajipura) APMC,4,5.61,0.0002,0.0004940092165898618,True
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Kolar APMC,1,0.363,0.5515,0.6158416666666666,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Kolar APMC,4,0.887,0.4886,0.5619948497854077,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Pimpalgaon Baswant APMC,1,2.656,0.113,0.15411704834605597,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Pimpalgaon Baswant APMC,4,0.95,0.4534,0.5329438596491228,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",APMC Azadpur,1,6.739,0.0145,0.024673015873015874,True
+tomato,"Fruit&Vegetable Market,Gazipur APMC",APMC Azadpur,4,2.163,0.1085,0.1491179487179487,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Chintamani APMC,1,0.397,0.5332,0.6016487394957983,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Chintamani APMC,4,0.607,0.6617,0.7202839756592292,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Junnar(Narayangaon) APMC,1,0.129,0.7218,0.7706868525896414,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Junnar(Narayangaon) APMC,4,0.153,0.9598,0.9669039252336449,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Surat APMC,1,1.894,0.1783,0.23481277641277637,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Surat APMC,4,0.313,0.866,0.8960926640926641,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Bowenpally APMC,1,0.012,0.9123,0.9296441064638783,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Bowenpally APMC,4,0.349,0.8422,0.8765421359223301,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Tiphra APMC,1,0.008,0.9295,0.9439667924528302,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Tiphra APMC,4,0.98,0.4378,0.5168740088105728,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Ahmedabad APMC,1,2.59,0.1173,0.15957563451776652,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Ahmedabad APMC,4,0.691,0.6058,0.6640261758691207,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Mulbagal APMC,1,0.718,0.4034,0.4822806236080178,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Mulbagal APMC,4,0.877,0.4945,0.5675631691648821,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Pune APMC,1,0.311,0.5811,0.6422053608247422,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Pune APMC,4,0.827,0.5215,0.5909598308668076,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Sangamner APMC,1,0.996,0.3257,0.4004018348623853,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Sangamner APMC,4,0.3,0.8748,0.9034543352601156,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Gudimalkapur APMC,1,0.324,0.573,0.6371950207468879,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Gudimalkapur APMC,4,0.441,0.778,0.8225009861932939,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Vadodara(Sayajipura) APMC,1,0.036,0.8508,0.8837767441860465,False
+tomato,"Fruit&Vegetable Market,Gazipur APMC",Vadodara(Sayajipura) APMC,4,0.571,0.6887,0.7442403225806451,False
+tomato,Vadodara(Sayajipura) APMC,Kolar APMC,1,1.496,0.222,0.2853525179856115,False
+tomato,Vadodara(Sayajipura) APMC,Kolar APMC,4,1.297,0.2704,0.3410221176470588,False
+tomato,Vadodara(Sayajipura) APMC,Pimpalgaon Baswant APMC,1,9.624,0.0021,0.004279847908745247,True
+tomato,Vadodara(Sayajipura) APMC,Pimpalgaon Baswant APMC,4,4.826,0.0008,0.001771900826446281,True
+tomato,Vadodara(Sayajipura) APMC,APMC Azadpur,1,37.063,0.0,0.0,True
+tomato,Vadodara(Sayajipura) APMC,APMC Azadpur,4,9.117,0.0,0.0,True
+tomato,Vadodara(Sayajipura) APMC,Chintamani APMC,1,0.007,0.9334,0.9439667924528302,False
+tomato,Vadodara(Sayajipura) APMC,Chintamani APMC,4,2.151,0.0737,0.10734565217391305,False
+tomato,Vadodara(Sayajipura) APMC,Junnar(Narayangaon) APMC,1,13.852,0.0002,0.0004940092165898618,True
+tomato,Vadodara(Sayajipura) APMC,Junnar(Narayangaon) APMC,4,6.739,0.0,0.0,True
+tomato,Vadodara(Sayajipura) APMC,Surat APMC,1,2.99,0.0845,0.12045744680851064,False
+tomato,Vadodara(Sayajipura) APMC,Surat APMC,4,3.36,0.0101,0.01774950819672131,True
+tomato,Vadodara(Sayajipura) APMC,Bowenpally APMC,1,6.267,0.0127,0.021817948717948718,True
+tomato,Vadodara(Sayajipura) APMC,Bowenpally APMC,4,1.205,0.3081,0.38264444444444445,False
+tomato,Vadodara(Sayajipura) APMC,Tiphra APMC,1,19.206,0.0,0.0,True
+tomato,Vadodara(Sayajipura) APMC,Tiphra APMC,4,9.212,0.0,0.0,True
+tomato,Vadodara(Sayajipura) APMC,Ahmedabad APMC,1,10.11,0.0016,0.0034304,True
+tomato,Vadodara(Sayajipura) APMC,Ahmedabad APMC,4,5.053,0.0006,0.0013569620253164555,True
+tomato,Vadodara(Sayajipura) APMC,Mulakalacheruvu APMC,1,2.25,0.1345,0.18113567839195982,False
+tomato,Vadodara(Sayajipura) APMC,Mulakalacheruvu APMC,4,4.025,0.0033,0.006502941176470588,True
+tomato,Vadodara(Sayajipura) APMC,Mulbagal APMC,1,0.518,0.472,0.5464190064794816,False
+tomato,Vadodara(Sayajipura) APMC,Mulbagal APMC,4,2.943,0.0203,0.03347938461538461,True
+tomato,Vadodara(Sayajipura) APMC,Pune APMC,1,8.738,0.0033,0.006502941176470588,True
+tomato,Vadodara(Sayajipura) APMC,Pune APMC,4,5.531,0.0002,0.0004940092165898618,True
+tomato,Vadodara(Sayajipura) APMC,Sangamner APMC,1,6.101,0.0139,0.023727388535031847,True
+tomato,Vadodara(Sayajipura) APMC,Sangamner APMC,4,5.036,0.0006,0.0013569620253164555,True
+tomato,Vadodara(Sayajipura) APMC,Gudimalkapur APMC,1,2.791,0.0955,0.13295584415584416,False
+tomato,Vadodara(Sayajipura) APMC,Gudimalkapur APMC,4,1.429,0.2236,0.2867215311004785,False
+tomato,Vadodara(Sayajipura) APMC,APMC Shahdara,1,32.953,0.0,0.0,True
+tomato,Vadodara(Sayajipura) APMC,APMC Shahdara,4,11.479,0.0,0.0,True
+tomato,Vadodara(Sayajipura) APMC,"Fruit&Vegetable Market,Gazipur APMC",1,1.83,0.1899,0.24886650366748167,False
+tomato,Vadodara(Sayajipura) APMC,"Fruit&Vegetable Market,Gazipur APMC",4,0.665,0.6272,0.6860799999999999,False
+onion,Bangalore APMC,Mahuva(Station Road) APMC,1,2.561,0.1103,0.1944965197215777,False
+onion,Bangalore APMC,Mahuva(Station Road) APMC,4,2.478,0.0437,0.09303081232492998,False
+onion,Bangalore APMC,Indore APMC,1,0.3,0.585,0.6968652037617555,False
+onion,Bangalore APMC,Indore APMC,4,1.304,0.2757,0.3923820224719101,False
+onion,Bangalore APMC,Solapur APMC,1,1.42,0.2341,0.3457631067961165,False
+onion,Bangalore APMC,Solapur APMC,4,1.592,0.1753,0.2752644628099174,False
+onion,Bangalore APMC,Pimpalgaon APMC,1,4.044,0.0449,0.0947888888888889,False
+onion,Bangalore APMC,Pimpalgaon APMC,4,0.798,0.5271,0.6450821256038647,False
+onion,Bangalore APMC,Indore(F&V) APMC,1,13.298,0.0003,0.0011014492753623187,True
+onion,Bangalore APMC,Indore(F&V) APMC,4,5.195,0.0005,0.001751152073732719,True
+onion,Bangalore APMC,Ahilyanagar APMC,1,3.274,0.0711,0.1368,False
+onion,Bangalore APMC,Ahilyanagar APMC,4,1.807,0.1268,0.21655730337078652,False
+onion,Bangalore APMC,Lasalgaon APMC,1,3.039,0.082,0.15425742574257426,False
+onion,Bangalore APMC,Lasalgaon APMC,4,2.01,0.0921,0.16907246376811594,False
+onion,Bangalore APMC,Pune APMC,1,0.052,0.8193,0.8783413258110014,False
+onion,Bangalore APMC,Pune APMC,4,0.271,0.8966,0.9321696306429548,False
+onion,Bangalore APMC,Lasalgaon(Vinchur) APMC,1,6.376,0.0121,0.03193055555555555,True
+onion,Bangalore APMC,Lasalgaon(Vinchur) APMC,4,1.181,0.3197,0.43937070524412297,False
+onion,Bangalore APMC,Mumbai-Onion & Potato Market APMC,1,0.432,0.5114,0.6309480519480519,False
+onion,Bangalore APMC,Mumbai-Onion & Potato Market APMC,4,1.182,0.3182,0.43889655172413794,False
+onion,Bangalore APMC,Newasa(Ghodegaon) APMC,1,0.074,0.7864,0.8562521489971346,False
+onion,Bangalore APMC,Newasa(Ghodegaon) APMC,4,0.58,0.6771,0.7738285714285714,False
+onion,Bangalore APMC,Mahboob Manison APMC,1,0.205,0.6533,0.7568719512195121,False
+onion,Bangalore APMC,Mahboob Manison APMC,4,0.617,0.6533,0.7568719512195121,False
+onion,Bangalore APMC,Azadpur APMC,1,32.319,0.0,0.0,True
+onion,Bangalore APMC,Azadpur APMC,4,13.638,0.0,0.0,True
+onion,Bangalore APMC,Umrane APMC,1,0.137,0.7117,0.7966008836524301,False
+onion,Bangalore APMC,Umrane APMC,4,1.433,0.224,0.3338039215686275,False
+onion,Bangalore APMC,Shajapur APMC,1,0.072,0.7897,0.8574971428571428,False
+onion,Bangalore APMC,Shajapur APMC,4,2.678,0.0378,0.0832695652173913,False
+onion,Bangalore APMC,Yeola APMC,1,4.694,0.0308,0.0702942942942943,False
+onion,Bangalore APMC,Yeola APMC,4,0.342,0.8498,0.9007642956764296,False
+onion,Bangalore APMC,Chandvad APMC,1,2.258,0.1336,0.22414128035320086,False
+onion,Bangalore APMC,Chandvad APMC,4,1.55,0.1869,0.2910737704918033,False
+onion,Bangalore APMC,Kanpur(Grain) APMC,1,0.03,0.8639,0.9106296809986131,False
+onion,Bangalore APMC,Kanpur(Grain) APMC,4,0.792,0.5398,0.6553482428115015,False
+onion,Bangalore APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,2.808,0.0947,0.1734265060240964,False
+onion,Bangalore APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,1.527,0.1936,0.30027755102040815,False
+onion,Mahuva(Station Road) APMC,Bangalore APMC,1,11.382,0.0008,0.0027387387387387387,True
+onion,Mahuva(Station Road) APMC,Bangalore APMC,4,9.44,0.0,0.0,True
+onion,Mahuva(Station Road) APMC,Indore APMC,1,0.824,0.3658,0.4851797556719023,False
+onion,Mahuva(Station Road) APMC,Indore APMC,4,1.365,0.2502,0.36427586206896545,False
+onion,Mahuva(Station Road) APMC,Solapur APMC,1,3.856,0.0502,0.10395640326975478,False
+onion,Mahuva(Station Road) APMC,Solapur APMC,4,3.471,0.0083,0.023021897810218978,True
+onion,Mahuva(Station Road) APMC,Pimpalgaon APMC,1,0.384,0.5356,0.6533804173354735,False
+onion,Mahuva(Station Road) APMC,Pimpalgaon APMC,4,0.13,0.9713,0.979029177718833,False
+onion,Mahuva(Station Road) APMC,Indore(F&V) APMC,1,4.711,0.0307,0.07027710843373494,False
+onion,Mahuva(Station Road) APMC,Indore(F&V) APMC,4,1.62,0.1688,0.26951260504201685,False
+onion,Mahuva(Station Road) APMC,Ahilyanagar APMC,1,2.759,0.0975,0.1776978417266187,False
+onion,Mahuva(Station Road) APMC,Ahilyanagar APMC,4,2.252,0.0629,0.1232061855670103,False
+onion,Mahuva(Station Road) APMC,Lasalgaon APMC,1,0.004,0.9492,0.9707828418230562,False
+onion,Mahuva(Station Road) APMC,Lasalgaon APMC,4,0.383,0.8212,0.879030985915493,False
+onion,Mahuva(Station Road) APMC,Pune APMC,1,3.836,0.0508,0.10491304347826086,False
+onion,Mahuva(Station Road) APMC,Pune APMC,4,3.438,0.0088,0.024231884057971016,True
+onion,Mahuva(Station Road) APMC,Lasalgaon(Vinchur) APMC,1,0.301,0.5834,0.696050235478807,False
+onion,Mahuva(Station Road) APMC,Lasalgaon(Vinchur) APMC,4,0.616,0.6517,0.7568719512195121,False
+onion,Mahuva(Station Road) APMC,Mumbai-Onion & Potato Market APMC,1,1.869,0.1723,0.27183402489626557,False
+onion,Mahuva(Station Road) APMC,Mumbai-Onion & Potato Market APMC,4,1.634,0.1645,0.2648728813559322,False
+onion,Mahuva(Station Road) APMC,Newasa(Ghodegaon) APMC,1,2.681,0.1023,0.18423696682464458,False
+onion,Mahuva(Station Road) APMC,Newasa(Ghodegaon) APMC,4,1.877,0.1136,0.19974133949191683,False
+onion,Mahuva(Station Road) APMC,Mahboob Manison APMC,1,0.198,0.6574,0.7572363636363636,False
+onion,Mahuva(Station Road) APMC,Mahboob Manison APMC,4,0.272,0.8951,0.9321696306429548,False
+onion,Mahuva(Station Road) APMC,Azadpur APMC,1,17.015,0.0,0.0,True
+onion,Mahuva(Station Road) APMC,Azadpur APMC,4,7.376,0.0,0.0,True
+onion,Mahuva(Station Road) APMC,Umrane APMC,1,2.763,0.0978,0.1778181818181818,False
+onion,Mahuva(Station Road) APMC,Umrane APMC,4,1.642,0.1645,0.2648728813559322,False
+onion,Mahuva(Station Road) APMC,Shajapur APMC,1,0.29,0.5911,0.7030297339593113,False
+onion,Mahuva(Station Road) APMC,Shajapur APMC,4,0.738,0.5678,0.6817187993680884,False
+onion,Mahuva(Station Road) APMC,Yeola APMC,1,0.001,0.9734,0.979846357615894,False
+onion,Mahuva(Station Road) APMC,Yeola APMC,4,1.134,0.34,0.4599217081850534,False
+onion,Mahuva(Station Road) APMC,Chandvad APMC,1,0.138,0.7105,0.7966008836524301,False
+onion,Mahuva(Station Road) APMC,Chandvad APMC,4,0.986,0.4148,0.5298285714285714,False
+onion,Mahuva(Station Road) APMC,Kanpur(Grain) APMC,1,1.482,0.2275,0.33835616438356164,False
+onion,Mahuva(Station Road) APMC,Kanpur(Grain) APMC,4,1.494,0.2148,0.3240158415841584,False
+onion,Mahuva(Station Road) APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,5.402,0.0206,0.05116339869281046,False
+onion,Mahuva(Station Road) APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,3.124,0.0151,0.03863973063973064,True
+onion,Indore APMC,Bangalore APMC,1,0.114,0.7361,0.8143173216885007,False
+onion,Indore APMC,Bangalore APMC,4,0.146,0.9643,0.9771573333333334,False
+onion,Indore APMC,Mahuva(Station Road) APMC,1,2.693,0.1032,0.1849811320754717,False
+onion,Indore APMC,Mahuva(Station Road) APMC,4,4.764,0.0013,0.004295652173913043,True
+onion,Indore APMC,Solapur APMC,1,0.999,0.3194,0.43937070524412297,False
+onion,Indore APMC,Solapur APMC,4,1.653,0.1653,0.2655983086680761,False
+onion,Indore APMC,Pimpalgaon APMC,1,1.066,0.3037,0.42273260073260077,False
+onion,Indore APMC,Pimpalgaon APMC,4,0.142,0.9664,0.977186170212766,False
+onion,Indore APMC,Indore(F&V) APMC,1,3.841,0.0553,0.11177659574468087,False
+onion,Indore APMC,Indore(F&V) APMC,4,2.347,0.0691,0.13328934010152285,False
+onion,Indore APMC,Ahilyanagar APMC,1,0.197,0.6576,0.7572363636363636,False
+onion,Indore APMC,Ahilyanagar APMC,4,2.374,0.0561,0.1122,False
+onion,Indore APMC,Lasalgaon APMC,1,1.29,0.2582,0.37235673624288423,False
+onion,Indore APMC,Lasalgaon APMC,4,0.224,0.9247,0.9496918918918918,False
+onion,Indore APMC,Pune APMC,1,0.835,0.3624,0.48177622377622376,False
+onion,Indore APMC,Pune APMC,4,1.459,0.2189,0.32813412228796845,False
+onion,Indore APMC,Lasalgaon(Vinchur) APMC,1,1.133,0.2891,0.4068814814814815,False
+onion,Indore APMC,Lasalgaon(Vinchur) APMC,4,0.286,0.8866,0.9268445667125172,False
+onion,Indore APMC,Mumbai-Onion & Potato Market APMC,1,0.11,0.7402,0.8176627906976743,False
+onion,Indore APMC,Mumbai-Onion & Potato Market APMC,4,0.504,0.7328,0.8134773722627737,False
+onion,Indore APMC,Newasa(Ghodegaon) APMC,1,2.19,0.1415,0.23531728665207874,False
+onion,Indore APMC,Newasa(Ghodegaon) APMC,4,0.753,0.5579,0.6719556259904913,False
+onion,Indore APMC,Mahboob Manison APMC,1,8.361,0.005,0.014559386973180077,True
+onion,Indore APMC,Mahboob Manison APMC,4,2.572,0.0455,0.09573480662983426,False
+onion,Indore APMC,Azadpur APMC,1,1.201,0.2752,0.3923820224719101,False
+onion,Indore APMC,Azadpur APMC,4,2.051,0.0916,0.16856174334140436,False
+onion,Indore APMC,Umrane APMC,1,0.679,0.4119,0.5271380471380471,False
+onion,Indore APMC,Umrane APMC,4,0.646,0.6313,0.7381353846153846,False
+onion,Indore APMC,Shajapur APMC,1,7.814,0.006,0.01720754716981132,True
+onion,Indore APMC,Shajapur APMC,4,7.006,0.0,0.0,True
+onion,Indore APMC,Yeola APMC,1,1.457,0.2296,0.3408125,False
+onion,Indore APMC,Yeola APMC,4,0.724,0.5773,0.6909417322834647,False
+onion,Indore APMC,Chandvad APMC,1,0.065,0.7995,0.8643243243243243,False
+onion,Indore APMC,Chandvad APMC,4,0.168,0.9543,0.9709076305220884,False
+onion,Indore APMC,Kanpur(Grain) APMC,1,5.941,0.0172,0.04342857142857143,True
+onion,Indore APMC,Kanpur(Grain) APMC,4,5.137,0.0012,0.003982532751091703,True
+onion,Indore APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,2.76,0.099,0.17914285714285713,False
+onion,Indore APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,1.05,0.3845,0.5046977547495682,False
+onion,Solapur APMC,Bangalore APMC,1,15.167,0.0001,0.00039175257731958763,True
+onion,Solapur APMC,Bangalore APMC,4,7.97,0.0,0.0,True
+onion,Solapur APMC,Mahuva(Station Road) APMC,1,9.876,0.0018,0.005723849372384938,True
+onion,Solapur APMC,Mahuva(Station Road) APMC,4,7.667,0.0,0.0,True
+onion,Solapur APMC,Indore APMC,1,0.001,0.9767,0.9805706737120211,False
+onion,Solapur APMC,Indore APMC,4,2.295,0.0631,0.123280205655527,False
+onion,Solapur APMC,Pimpalgaon APMC,1,0.035,0.851,0.9007799442896935,False
+onion,Solapur APMC,Pimpalgaon APMC,4,1.064,0.374,0.49433043478260874,False
+onion,Solapur APMC,Indore(F&V) APMC,1,12.874,0.0004,0.0014339622641509435,True
+onion,Solapur APMC,Indore(F&V) APMC,4,5.449,0.0003,0.0011014492753623187,True
+onion,Solapur APMC,Ahilyanagar APMC,1,3.669,0.0561,0.1122,False
+onion,Solapur APMC,Ahilyanagar APMC,4,1.822,0.1236,0.21252488687782806,False
+onion,Solapur APMC,Lasalgaon APMC,1,0.745,0.3886,0.5065797598627787,False
+onion,Solapur APMC,Lasalgaon APMC,4,2.577,0.037,0.08174418604651162,False
+onion,Solapur APMC,Pune APMC,1,11.132,0.0009,0.00304,True
+onion,Solapur APMC,Pune APMC,4,6.341,0.0001,0.00039175257731958763,True
+onion,Solapur APMC,Lasalgaon(Vinchur) APMC,1,0.967,0.3263,0.44602158273381287,False
+onion,Solapur APMC,Lasalgaon(Vinchur) APMC,4,1.52,0.1962,0.30245841784989863,False
+onion,Solapur APMC,Mumbai-Onion & Potato Market APMC,1,7.942,0.005,0.014559386973180077,True
+onion,Solapur APMC,Mumbai-Onion & Potato Market APMC,4,4.848,0.0008,0.0027387387387387387,True
+onion,Solapur APMC,Newasa(Ghodegaon) APMC,1,1.958,0.1624,0.26276595744680853,False
+onion,Solapur APMC,Newasa(Ghodegaon) APMC,4,2.064,0.0846,0.15836453201970443,False
+onion,Solapur APMC,Mahboob Manison APMC,1,0.066,0.7987,0.8643243243243243,False
+onion,Solapur APMC,Mahboob Manison APMC,4,1.126,0.3516,0.4729486725663717,False
+onion,Solapur APMC,Azadpur APMC,1,48.744,0.0,0.0,True
+onion,Solapur APMC,Azadpur APMC,4,17.9,0.0,0.0,True
+onion,Solapur APMC,Umrane APMC,1,0.055,0.8143,0.8777086280056577,False
+onion,Solapur APMC,Umrane APMC,4,2.212,0.0682,0.13222448979591836,False
+onion,Solapur APMC,Shajapur APMC,1,0.054,0.816,0.8777086280056577,False
+onion,Solapur APMC,Shajapur APMC,4,2.081,0.0876,0.16277750611246944,False
+onion,Solapur APMC,Yeola APMC,1,0.183,0.6687,0.765722891566265,False
+onion,Solapur APMC,Yeola APMC,4,0.929,0.4467,0.5611438016528926,False
+onion,Solapur APMC,Chandvad APMC,1,0.212,0.6457,0.7526564417177914,False
+onion,Solapur APMC,Chandvad APMC,4,1.141,0.3366,0.45803935599284434,False
+onion,Solapur APMC,Kanpur(Grain) APMC,1,1.019,0.3161,0.43758834244080147,False
+onion,Solapur APMC,Kanpur(Grain) APMC,4,2.73,0.0368,0.08153935860058309,False
+onion,Solapur APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,32.259,0.0,0.0,True
+onion,Solapur APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,12.654,0.0,0.0,True
+onion,Pimpalgaon APMC,Bangalore APMC,1,53.779,0.0,0.0,True
+onion,Pimpalgaon APMC,Bangalore APMC,4,18.914,0.0,0.0,True
+onion,Pimpalgaon APMC,Mahuva(Station Road) APMC,1,24.519,0.0,0.0,True
+onion,Pimpalgaon APMC,Mahuva(Station Road) APMC,4,14.263,0.0,0.0,True
+onion,Pimpalgaon APMC,Indore APMC,1,0.014,0.9071,0.936679347826087,False
+onion,Pimpalgaon APMC,Indore APMC,4,8.743,0.0,0.0,True
+onion,Pimpalgaon APMC,Solapur APMC,1,36.229,0.0,0.0,True
+onion,Pimpalgaon APMC,Solapur APMC,4,10.393,0.0,0.0,True
+onion,Pimpalgaon APMC,Indore(F&V) APMC,1,26.298,0.0,0.0,True
+onion,Pimpalgaon APMC,Indore(F&V) APMC,4,8.558,0.0,0.0,True
+onion,Pimpalgaon APMC,Ahilyanagar APMC,1,21.154,0.0,0.0,True
+onion,Pimpalgaon APMC,Ahilyanagar APMC,4,8.683,0.0,0.0,True
+onion,Pimpalgaon APMC,Lasalgaon APMC,1,17.114,0.0,0.0,True
+onion,Pimpalgaon APMC,Lasalgaon APMC,4,7.517,0.0,0.0,True
+onion,Pimpalgaon APMC,Pune APMC,1,49.928,0.0,0.0,True
+onion,Pimpalgaon APMC,Pune APMC,4,15.649,0.0,0.0,True
+onion,Pimpalgaon APMC,Lasalgaon(Vinchur) APMC,1,8.548,0.0037,0.011027450980392157,True
+onion,Pimpalgaon APMC,Lasalgaon(Vinchur) APMC,4,3.479,0.0085,0.02349090909090909,True
+onion,Pimpalgaon APMC,Mumbai-Onion & Potato Market APMC,1,47.044,0.0,0.0,True
+onion,Pimpalgaon APMC,Mumbai-Onion & Potato Market APMC,4,17.518,0.0,0.0,True
+onion,Pimpalgaon APMC,Newasa(Ghodegaon) APMC,1,26.169,0.0,0.0,True
+onion,Pimpalgaon APMC,Newasa(Ghodegaon) APMC,4,9.271,0.0,0.0,True
+onion,Pimpalgaon APMC,Mahboob Manison APMC,1,0.082,0.7755,0.8468103448275862,False
+onion,Pimpalgaon APMC,Mahboob Manison APMC,4,1.195,0.3209,0.4402238267148014,False
+onion,Pimpalgaon APMC,Azadpur APMC,1,88.654,0.0,0.0,True
+onion,Pimpalgaon APMC,Azadpur APMC,4,30.64,0.0,0.0,True
+onion,Pimpalgaon APMC,Umrane APMC,1,34.715,0.0,0.0,True
+onion,Pimpalgaon APMC,Umrane APMC,4,14.332,0.0,0.0,True
+onion,Pimpalgaon APMC,Shajapur APMC,1,0.014,0.9071,0.936679347826087,False
+onion,Pimpalgaon APMC,Shajapur APMC,4,4.001,0.0045,0.013307392996108948,True
+onion,Pimpalgaon APMC,Yeola APMC,1,1.696,0.1935,0.30027755102040815,False
+onion,Pimpalgaon APMC,Yeola APMC,4,2.899,0.0217,0.053200000000000004,False
+onion,Pimpalgaon APMC,Chandvad APMC,1,9.469,0.0022,0.0068806584362139924,True
+onion,Pimpalgaon APMC,Chandvad APMC,4,6.237,0.0001,0.00039175257731958763,True
+onion,Pimpalgaon APMC,Kanpur(Grain) APMC,1,5.807,0.0185,0.0464026402640264,True
+onion,Pimpalgaon APMC,Kanpur(Grain) APMC,4,3.334,0.0153,0.03902013422818792,True
+onion,Pimpalgaon APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,51.247,0.0,0.0,True
+onion,Pimpalgaon APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,13.849,0.0,0.0,True
+onion,Indore(F&V) APMC,Bangalore APMC,1,14.768,0.0001,0.00039175257731958763,True
+onion,Indore(F&V) APMC,Bangalore APMC,4,6.529,0.0,0.0,True
+onion,Indore(F&V) APMC,Mahuva(Station Road) APMC,1,2.576,0.1094,0.19371162790697677,False
+onion,Indore(F&V) APMC,Mahuva(Station Road) APMC,4,4.41,0.0017,0.0054978723404255315,True
+onion,Indore(F&V) APMC,Indore APMC,1,2.34,0.132,0.2224390243902439,False
+onion,Indore(F&V) APMC,Indore APMC,4,1.026,0.4044,0.5226938775510204,False
+onion,Indore(F&V) APMC,Solapur APMC,1,0.614,0.4337,0.5493533333333332,False
+onion,Indore(F&V) APMC,Solapur APMC,4,1.902,0.1096,0.19371162790697677,False
+onion,Indore(F&V) APMC,Pimpalgaon APMC,1,4.024,0.0456,0.09573480662983426,False
+onion,Indore(F&V) APMC,Pimpalgaon APMC,4,0.591,0.669,0.765722891566265,False
+onion,Indore(F&V) APMC,Ahilyanagar APMC,1,0.372,0.5421,0.6560445859872611,False
+onion,Indore(F&V) APMC,Ahilyanagar APMC,4,1.272,0.281,0.3976908752327747,False
+onion,Indore(F&V) APMC,Lasalgaon APMC,1,2.662,0.1037,0.18544,False
+onion,Indore(F&V) APMC,Lasalgaon APMC,4,1.658,0.1594,0.25996566523605147,False
+onion,Indore(F&V) APMC,Pune APMC,1,4.405,0.0365,0.0811111111111111,False
+onion,Indore(F&V) APMC,Pune APMC,4,5.461,0.0003,0.0011014492753623187,True
+onion,Indore(F&V) APMC,Lasalgaon(Vinchur) APMC,1,1.548,0.2149,0.3240158415841584,False
+onion,Indore(F&V) APMC,Lasalgaon(Vinchur) APMC,4,0.326,0.8601,0.9078833333333334,False
+onion,Indore(F&V) APMC,Mumbai-Onion & Potato Market APMC,1,3.612,0.0581,0.11528981723237598,False
+onion,Indore(F&V) APMC,Mumbai-Onion & Potato Market APMC,4,4.781,0.0009,0.00304,True
+onion,Indore(F&V) APMC,Newasa(Ghodegaon) APMC,1,0.086,0.7692,0.8411395683453238,False
+onion,Indore(F&V) APMC,Newasa(Ghodegaon) APMC,4,2.239,0.0645,0.1256923076923077,False
+onion,Indore(F&V) APMC,Mahboob Manison APMC,1,0.555,0.4596,0.57475,False
+onion,Indore(F&V) APMC,Mahboob Manison APMC,4,0.72,0.5829,0.696050235478807,False
+onion,Indore(F&V) APMC,Azadpur APMC,1,20.885,0.0,0.0,True
+onion,Indore(F&V) APMC,Azadpur APMC,4,8.9,0.0,0.0,True
+onion,Indore(F&V) APMC,Umrane APMC,1,0.549,0.4598,0.57475,False
+onion,Indore(F&V) APMC,Umrane APMC,4,2.469,0.0467,0.0975054945054945,False
+onion,Indore(F&V) APMC,Shajapur APMC,1,0.652,0.4231,0.5377190635451504,False
+onion,Indore(F&V) APMC,Shajapur APMC,4,3.086,0.0255,0.06037383177570094,False
+onion,Indore(F&V) APMC,Yeola APMC,1,2.371,0.1245,0.21358916478555307,False
+onion,Indore(F&V) APMC,Yeola APMC,4,1.19,0.3148,0.4365839416058394,False
+onion,Indore(F&V) APMC,Chandvad APMC,1,4.468,0.0352,0.07867448680351906,False
+onion,Indore(F&V) APMC,Chandvad APMC,4,1.039,0.3869,0.5065797598627787,False
+onion,Indore(F&V) APMC,Kanpur(Grain) APMC,1,0.091,0.7641,0.838299711815562,False
+onion,Indore(F&V) APMC,Kanpur(Grain) APMC,4,0.532,0.7132,0.7966049926578561,False
+onion,Indore(F&V) APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,1.668,0.1975,0.3036929292929293,False
+onion,Indore(F&V) APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,5.181,0.0005,0.001751152073732719,True
+onion,Ahilyanagar APMC,Bangalore APMC,1,28.344,0.0,0.0,True
+onion,Ahilyanagar APMC,Bangalore APMC,4,12.19,0.0,0.0,True
+onion,Ahilyanagar APMC,Mahuva(Station Road) APMC,1,10.623,0.0012,0.003982532751091703,True
+onion,Ahilyanagar APMC,Mahuva(Station Road) APMC,4,8.954,0.0,0.0,True
+onion,Ahilyanagar APMC,Indore APMC,1,0.0,0.9838,0.9863957783641161,False
+onion,Ahilyanagar APMC,Indore APMC,4,6.13,0.0002,0.0007638190954773871,True
+onion,Ahilyanagar APMC,Solapur APMC,1,4.923,0.027,0.06294478527607363,False
+onion,Ahilyanagar APMC,Solapur APMC,4,5.415,0.0003,0.0011014492753623187,True
+onion,Ahilyanagar APMC,Pimpalgaon APMC,1,0.147,0.7013,0.7907833827893176,False
+onion,Ahilyanagar APMC,Pimpalgaon APMC,4,1.562,0.1836,0.28711111111111115,False
+onion,Ahilyanagar APMC,Indore(F&V) APMC,1,22.873,0.0,0.0,True
+onion,Ahilyanagar APMC,Indore(F&V) APMC,4,7.757,0.0,0.0,True
+onion,Ahilyanagar APMC,Lasalgaon APMC,1,0.052,0.8194,0.8783413258110014,False
+onion,Ahilyanagar APMC,Lasalgaon APMC,4,2.877,0.0226,0.05487539936102236,False
+onion,Ahilyanagar APMC,Pune APMC,1,14.727,0.0001,0.00039175257731958763,True
+onion,Ahilyanagar APMC,Pune APMC,4,9.322,0.0,0.0,True
+onion,Ahilyanagar APMC,Lasalgaon(Vinchur) APMC,1,0.096,0.7566,0.8333565217391304,False
+onion,Ahilyanagar APMC,Lasalgaon(Vinchur) APMC,4,1.144,0.3361,0.45803935599284434,False
+onion,Ahilyanagar APMC,Mumbai-Onion & Potato Market APMC,1,20.081,0.0,0.0,True
+onion,Ahilyanagar APMC,Mumbai-Onion & Potato Market APMC,4,11.125,0.0,0.0,True
+onion,Ahilyanagar APMC,Newasa(Ghodegaon) APMC,1,2.046,0.1533,0.25163714902807777,False
+onion,Ahilyanagar APMC,Newasa(Ghodegaon) APMC,4,3.185,0.0135,0.03513698630136986,True
+onion,Ahilyanagar APMC,Mahboob Manison APMC,1,0.734,0.3943,0.5105076660988075,False
+onion,Ahilyanagar APMC,Mahboob Manison APMC,4,0.898,0.4706,0.5853617021276596,False
+onion,Ahilyanagar APMC,Azadpur APMC,1,46.92,0.0,0.0,True
+onion,Ahilyanagar APMC,Azadpur APMC,4,22.423,0.0,0.0,True
+onion,Ahilyanagar APMC,Umrane APMC,1,1.694,0.1942,0.30059470468431776,False
+onion,Ahilyanagar APMC,Umrane APMC,4,2.741,0.0294,0.06750453172205438,False
+onion,Ahilyanagar APMC,Shajapur APMC,1,0.017,0.8961,0.9321696306429548,False
+onion,Ahilyanagar APMC,Shajapur APMC,4,2.524,0.0448,0.0947888888888889,False
+onion,Ahilyanagar APMC,Yeola APMC,1,0.249,0.6182,0.7261700154559505,False
+onion,Ahilyanagar APMC,Yeola APMC,4,0.508,0.7298,0.8120761346998536,False
+onion,Ahilyanagar APMC,Chandvad APMC,1,0.004,0.9518,0.9707828418230562,False
+onion,Ahilyanagar APMC,Chandvad APMC,4,1.796,0.1286,0.21864876957494406,False
+onion,Ahilyanagar APMC,Kanpur(Grain) APMC,1,0.823,0.3674,0.48645296167247387,False
+onion,Ahilyanagar APMC,Kanpur(Grain) APMC,4,2.762,0.0353,0.07867448680351906,False
+onion,Ahilyanagar APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,7.722,0.0057,0.01647148288973384,True
+onion,Ahilyanagar APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,4.95,0.0007,0.002418181818181818,True
+onion,Lasalgaon APMC,Bangalore APMC,1,51.856,0.0,0.0,True
+onion,Lasalgaon APMC,Bangalore APMC,4,19.408,0.0,0.0,True
+onion,Lasalgaon APMC,Mahuva(Station Road) APMC,1,23.148,0.0,0.0,True
+onion,Lasalgaon APMC,Mahuva(Station Road) APMC,4,13.104,0.0,0.0,True
+onion,Lasalgaon APMC,Indore APMC,1,0.005,0.9448,0.9677196765498651,False
+onion,Lasalgaon APMC,Indore APMC,4,6.517,0.0001,0.00039175257731958763,True
+onion,Lasalgaon APMC,Solapur APMC,1,29.361,0.0,0.0,True
+onion,Lasalgaon APMC,Solapur APMC,4,9.164,0.0,0.0,True
+onion,Lasalgaon APMC,Pimpalgaon APMC,1,0.884,0.3476,0.4683971631205674,False
+onion,Lasalgaon APMC,Pimpalgaon APMC,4,1.511,0.1978,0.3036929292929293,False
+onion,Lasalgaon APMC,Indore(F&V) APMC,1,31.318,0.0,0.0,True
+onion,Lasalgaon APMC,Indore(F&V) APMC,4,9.439,0.0,0.0,True
+onion,Lasalgaon APMC,Ahilyanagar APMC,1,19.037,0.0,0.0,True
+onion,Lasalgaon APMC,Ahilyanagar APMC,4,7.783,0.0,0.0,True
+onion,Lasalgaon APMC,Pune APMC,1,52.096,0.0,0.0,True
+onion,Lasalgaon APMC,Pune APMC,4,17.552,0.0,0.0,True
+onion,Lasalgaon APMC,Lasalgaon(Vinchur) APMC,1,4.14,0.0427,0.09167231638418079,False
+onion,Lasalgaon APMC,Lasalgaon(Vinchur) APMC,4,1.989,0.0961,0.1755673076923077,False
+onion,Lasalgaon APMC,Mumbai-Onion & Potato Market APMC,1,51.791,0.0,0.0,True
+onion,Lasalgaon APMC,Mumbai-Onion & Potato Market APMC,4,17.344,0.0,0.0,True
+onion,Lasalgaon APMC,Newasa(Ghodegaon) APMC,1,21.242,0.0,0.0,True
+onion,Lasalgaon APMC,Newasa(Ghodegaon) APMC,4,7.719,0.0,0.0,True
+onion,Lasalgaon APMC,Mahboob Manison APMC,1,0.0,0.9973,0.9976,False
+onion,Lasalgaon APMC,Mahboob Manison APMC,4,1.834,0.1324,0.22261946902654867,False
+onion,Lasalgaon APMC,Azadpur APMC,1,91.707,0.0,0.0,True
+onion,Lasalgaon APMC,Azadpur APMC,4,28.844,0.0,0.0,True
+onion,Lasalgaon APMC,Umrane APMC,1,30.369,0.0,0.0,True
+onion,Lasalgaon APMC,Umrane APMC,4,11.582,0.0,0.0,True
+onion,Lasalgaon APMC,Shajapur APMC,1,0.155,0.6946,0.7867302533532041,False
+onion,Lasalgaon APMC,Shajapur APMC,4,2.601,0.0396,0.08698265895953758,False
+onion,Lasalgaon APMC,Yeola APMC,1,3.023,0.0827,0.1551901234567901,False
+onion,Lasalgaon APMC,Yeola APMC,4,4.396,0.0017,0.0054978723404255315,True
+onion,Lasalgaon APMC,Chandvad APMC,1,4.856,0.028,0.06507645259938838,False
+onion,Lasalgaon APMC,Chandvad APMC,4,3.189,0.0134,0.03499656357388316,True
+onion,Lasalgaon APMC,Kanpur(Grain) APMC,1,5.267,0.0246,0.05879245283018868,False
+onion,Lasalgaon APMC,Kanpur(Grain) APMC,4,3.601,0.0104,0.02802836879432624,True
+onion,Lasalgaon APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,50.418,0.0,0.0,True
+onion,Lasalgaon APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,13.648,0.0,0.0,True
+onion,Pune APMC,Bangalore APMC,1,33.89,0.0,0.0,True
+onion,Pune APMC,Bangalore APMC,4,17.292,0.0,0.0,True
+onion,Pune APMC,Mahuva(Station Road) APMC,1,12.564,0.0004,0.0014339622641509435,True
+onion,Pune APMC,Mahuva(Station Road) APMC,4,7.718,0.0,0.0,True
+onion,Pune APMC,Indore APMC,1,0.243,0.623,0.729553158705701,False
+onion,Pune APMC,Indore APMC,4,3.547,0.009,0.024604316546762588,True
+onion,Pune APMC,Solapur APMC,1,14.681,0.0001,0.00039175257731958763,True
+onion,Pune APMC,Solapur APMC,4,5.49,0.0003,0.0011014492753623187,True
+onion,Pune APMC,Pimpalgaon APMC,1,0.148,0.7003,0.7907833827893176,False
+onion,Pune APMC,Pimpalgaon APMC,4,1.844,0.1193,0.20700456621004565,False
+onion,Pune APMC,Indore(F&V) APMC,1,19.612,0.0,0.0,True
+onion,Pune APMC,Indore(F&V) APMC,4,5.745,0.0002,0.0007638190954773871,True
+onion,Pune APMC,Ahilyanagar APMC,1,9.482,0.0022,0.0068806584362139924,True
+onion,Pune APMC,Ahilyanagar APMC,4,3.498,0.008,0.02235294117647059,True
+onion,Pune APMC,Lasalgaon APMC,1,0.007,0.9357,0.9596923076923077,False
+onion,Pune APMC,Lasalgaon APMC,4,2.05,0.0864,0.16133660933660932,False
+onion,Pune APMC,Lasalgaon(Vinchur) APMC,1,0.468,0.4946,0.6122084690553746,False
+onion,Pune APMC,Lasalgaon(Vinchur) APMC,4,1.22,0.3023,0.42155596330275236,False
+onion,Pune APMC,Mumbai-Onion & Potato Market APMC,1,6.79,0.0095,0.025693950177935944,True
+onion,Pune APMC,Mumbai-Onion & Potato Market APMC,4,4.913,0.0007,0.002418181818181818,True
+onion,Pune APMC,Newasa(Ghodegaon) APMC,1,5.28,0.022,0.053762057877813504,False
+onion,Pune APMC,Newasa(Ghodegaon) APMC,4,2.685,0.031,0.07032835820895522,False
+onion,Pune APMC,Mahboob Manison APMC,1,0.64,0.4261,0.540627712854758,False
+onion,Pune APMC,Mahboob Manison APMC,4,0.378,0.8239,0.879443820224719,False
+onion,Pune APMC,Azadpur APMC,1,53.427,0.0,0.0,True
+onion,Pune APMC,Azadpur APMC,4,20.766,0.0,0.0,True
+onion,Pune APMC,Umrane APMC,1,1.334,0.2491,0.3633704414587332,False
+onion,Pune APMC,Umrane APMC,4,2.805,0.0263,0.06188235294117647,False
+onion,Pune APMC,Shajapur APMC,1,0.244,0.622,0.7295061728395061,False
+onion,Pune APMC,Shajapur APMC,4,1.888,0.1171,0.20411926605504585,False
+onion,Pune APMC,Yeola APMC,1,0.004,0.9515,0.9707828418230562,False
+onion,Pune APMC,Yeola APMC,4,1.596,0.1742,0.27410351966873703,False
+onion,Pune APMC,Chandvad APMC,1,0.137,0.7115,0.7966008836524301,False
+onion,Pune APMC,Chandvad APMC,4,1.374,0.2419,0.35559767891682786,False
+onion,Pune APMC,Kanpur(Grain) APMC,1,1.316,0.2551,0.36858555133079846,False
+onion,Pune APMC,Kanpur(Grain) APMC,4,1.205,0.3174,0.43858909090909093,False
+onion,Pune APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,15.457,0.0001,0.00039175257731958763,True
+onion,Pune APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,4.357,0.0018,0.005723849372384938,True
+onion,Lasalgaon(Vinchur) APMC,Bangalore APMC,1,52.168,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Bangalore APMC,4,21.355,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Mahuva(Station Road) APMC,1,7.989,0.005,0.014559386973180077,True
+onion,Lasalgaon(Vinchur) APMC,Mahuva(Station Road) APMC,4,10.148,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Indore APMC,1,0.011,0.9177,0.9450569105691057,False
+onion,Lasalgaon(Vinchur) APMC,Indore APMC,4,6.365,0.0001,0.00039175257731958763,True
+onion,Lasalgaon(Vinchur) APMC,Solapur APMC,1,24.664,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Solapur APMC,4,8.582,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Pimpalgaon APMC,1,0.05,0.8237,0.879443820224719,False
+onion,Lasalgaon(Vinchur) APMC,Pimpalgaon APMC,4,0.555,0.6958,0.7869166666666667,False
+onion,Lasalgaon(Vinchur) APMC,Indore(F&V) APMC,1,16.179,0.0001,0.00039175257731958763,True
+onion,Lasalgaon(Vinchur) APMC,Indore(F&V) APMC,4,7.262,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Ahilyanagar APMC,1,11.807,0.0007,0.002418181818181818,True
+onion,Lasalgaon(Vinchur) APMC,Ahilyanagar APMC,4,4.417,0.0018,0.005723849372384938,True
+onion,Lasalgaon(Vinchur) APMC,Lasalgaon APMC,1,2.477,0.1166,0.20371494252873565,False
+onion,Lasalgaon(Vinchur) APMC,Lasalgaon APMC,4,1.844,0.1203,0.20826423690205012,False
+onion,Lasalgaon(Vinchur) APMC,Pune APMC,1,62.372,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Pune APMC,4,17.053,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Mumbai-Onion & Potato Market APMC,1,54.149,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Mumbai-Onion & Potato Market APMC,4,18.879,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Newasa(Ghodegaon) APMC,1,19.878,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Newasa(Ghodegaon) APMC,4,5.896,0.0001,0.00039175257731958763,True
+onion,Lasalgaon(Vinchur) APMC,Mahboob Manison APMC,1,0.101,0.7511,0.8284992743105951,False
+onion,Lasalgaon(Vinchur) APMC,Mahboob Manison APMC,4,1.375,0.2519,0.36535114503816796,False
+onion,Lasalgaon(Vinchur) APMC,Azadpur APMC,1,92.723,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Azadpur APMC,4,29.544,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Umrane APMC,1,26.583,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Umrane APMC,4,11.017,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Shajapur APMC,1,0.173,0.6785,0.7742642642642643,False
+onion,Lasalgaon(Vinchur) APMC,Shajapur APMC,4,2.555,0.0424,0.09150141643059491,False
+onion,Lasalgaon(Vinchur) APMC,Yeola APMC,1,2.312,0.1294,0.21951785714285715,False
+onion,Lasalgaon(Vinchur) APMC,Yeola APMC,4,2.946,0.0206,0.05116339869281046,False
+onion,Lasalgaon(Vinchur) APMC,Chandvad APMC,1,0.599,0.4397,0.5552292358803987,False
+onion,Lasalgaon(Vinchur) APMC,Chandvad APMC,4,3.332,0.0109,0.029066666666666668,True
+onion,Lasalgaon(Vinchur) APMC,Kanpur(Grain) APMC,1,3.194,0.078,0.1482,False
+onion,Lasalgaon(Vinchur) APMC,Kanpur(Grain) APMC,4,3.477,0.0124,0.03249655172413793,True
+onion,Lasalgaon(Vinchur) APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,26.115,0.0,0.0,True
+onion,Lasalgaon(Vinchur) APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,10.984,0.0,0.0,True
+onion,Mumbai-Onion & Potato Market APMC,Bangalore APMC,1,28.131,0.0,0.0,True
+onion,Mumbai-Onion & Potato Market APMC,Bangalore APMC,4,14.381,0.0,0.0,True
+onion,Mumbai-Onion & Potato Market APMC,Mahuva(Station Road) APMC,1,7.772,0.0055,0.01595419847328244,True
+onion,Mumbai-Onion & Potato Market APMC,Mahuva(Station Road) APMC,4,8.158,0.0,0.0,True
+onion,Mumbai-Onion & Potato Market APMC,Indore APMC,1,0.054,0.8165,0.8777086280056577,False
+onion,Mumbai-Onion & Potato Market APMC,Indore APMC,4,1.64,0.1684,0.26944,False
+onion,Mumbai-Onion & Potato Market APMC,Solapur APMC,1,4.154,0.0421,0.09115669515669515,False
+onion,Mumbai-Onion & Potato Market APMC,Solapur APMC,4,4.477,0.0015,0.004892703862660944,True
+onion,Mumbai-Onion & Potato Market APMC,Pimpalgaon APMC,1,2.606,0.1071,0.19080093676814988,False
+onion,Mumbai-Onion & Potato Market APMC,Pimpalgaon APMC,4,3.992,0.0034,0.010253968253968255,True
+onion,Mumbai-Onion & Potato Market APMC,Indore(F&V) APMC,1,14.971,0.0001,0.00039175257731958763,True
+onion,Mumbai-Onion & Potato Market APMC,Indore(F&V) APMC,4,6.52,0.0,0.0,True
+onion,Mumbai-Onion & Potato Market APMC,Ahilyanagar APMC,1,10.695,0.0012,0.003982532751091703,True
+onion,Mumbai-Onion & Potato Market APMC,Ahilyanagar APMC,4,5.334,0.0003,0.0011014492753623187,True
+onion,Mumbai-Onion & Potato Market APMC,Lasalgaon APMC,1,0.515,0.4732,0.5876339869281046,False
+onion,Mumbai-Onion & Potato Market APMC,Lasalgaon APMC,4,5.456,0.0003,0.0011014492753623187,True
+onion,Mumbai-Onion & Potato Market APMC,Pune APMC,1,12.676,0.0004,0.0014339622641509435,True
+onion,Mumbai-Onion & Potato Market APMC,Pune APMC,4,11.046,0.0,0.0,True
+onion,Mumbai-Onion & Potato Market APMC,Lasalgaon(Vinchur) APMC,1,3.487,0.0628,0.1232061855670103,False
+onion,Mumbai-Onion & Potato Market APMC,Lasalgaon(Vinchur) APMC,4,2.66,0.0329,0.07397633136094674,False
+onion,Mumbai-Onion & Potato Market APMC,Newasa(Ghodegaon) APMC,1,0.686,0.408,0.5255593220338983,False
+onion,Mumbai-Onion & Potato Market APMC,Newasa(Ghodegaon) APMC,4,1.736,0.1409,0.23483333333333334,False
+onion,Mumbai-Onion & Potato Market APMC,Mahboob Manison APMC,1,0.655,0.4207,0.5355644891122278,False
+onion,Mumbai-Onion & Potato Market APMC,Mahboob Manison APMC,4,1.059,0.3836,0.5043875432525952,False
+onion,Mumbai-Onion & Potato Market APMC,Azadpur APMC,1,37.68,0.0,0.0,True
+onion,Mumbai-Onion & Potato Market APMC,Azadpur APMC,4,26.226,0.0,0.0,True
+onion,Mumbai-Onion & Potato Market APMC,Umrane APMC,1,0.135,0.7138,0.7966049926578561,False
+onion,Mumbai-Onion & Potato Market APMC,Umrane APMC,4,5.366,0.0004,0.0014339622641509435,True
+onion,Mumbai-Onion & Potato Market APMC,Shajapur APMC,1,0.014,0.9047,0.936679347826087,False
+onion,Mumbai-Onion & Potato Market APMC,Shajapur APMC,4,2.562,0.042,0.09115669515669515,False
+onion,Mumbai-Onion & Potato Market APMC,Yeola APMC,1,1.123,0.2898,0.40711275415896486,False
+onion,Mumbai-Onion & Potato Market APMC,Yeola APMC,4,2.088,0.0813,0.15370149253731344,False
+onion,Mumbai-Onion & Potato Market APMC,Chandvad APMC,1,1.182,0.2775,0.3942056074766355,False
+onion,Mumbai-Onion & Potato Market APMC,Chandvad APMC,4,2.474,0.0437,0.09303081232492998,False
+onion,Mumbai-Onion & Potato Market APMC,Kanpur(Grain) APMC,1,2.071,0.1544,0.25235268817204304,False
+onion,Mumbai-Onion & Potato Market APMC,Kanpur(Grain) APMC,4,4.556,0.0027,0.008341463414634147,True
+onion,Mumbai-Onion & Potato Market APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,8.642,0.0035,0.010513833992094863,True
+onion,Mumbai-Onion & Potato Market APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,3.808,0.0047,0.013844961240310079,True
+onion,Newasa(Ghodegaon) APMC,Bangalore APMC,1,44.365,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Bangalore APMC,4,14.612,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Mahuva(Station Road) APMC,1,12.406,0.0005,0.001751152073732719,True
+onion,Newasa(Ghodegaon) APMC,Mahuva(Station Road) APMC,4,9.645,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Indore APMC,1,0.271,0.6034,0.714778816199377,False
+onion,Newasa(Ghodegaon) APMC,Indore APMC,4,7.226,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Solapur APMC,1,17.315,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Solapur APMC,4,6.701,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Pimpalgaon APMC,1,0.485,0.4865,0.6031647634584013,False
+onion,Newasa(Ghodegaon) APMC,Pimpalgaon APMC,4,2.093,0.0808,0.1531371571072319,False
+onion,Newasa(Ghodegaon) APMC,Indore(F&V) APMC,1,36.05,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Indore(F&V) APMC,4,10.533,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Ahilyanagar APMC,1,15.172,0.0001,0.00039175257731958763,True
+onion,Newasa(Ghodegaon) APMC,Ahilyanagar APMC,4,6.642,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Lasalgaon APMC,1,1.558,0.2126,0.3218645418326693,False
+onion,Newasa(Ghodegaon) APMC,Lasalgaon APMC,4,2.513,0.0411,0.08975862068965518,False
+onion,Newasa(Ghodegaon) APMC,Pune APMC,1,26.776,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Pune APMC,4,10.35,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Lasalgaon(Vinchur) APMC,1,0.012,0.9136,0.9421112618724559,False
+onion,Newasa(Ghodegaon) APMC,Lasalgaon(Vinchur) APMC,4,2.36,0.0536,0.10980053908355795,False
+onion,Newasa(Ghodegaon) APMC,Mumbai-Onion & Potato Market APMC,1,27.732,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Mumbai-Onion & Potato Market APMC,4,11.505,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Mahboob Manison APMC,1,0.463,0.4985,0.6160325203252033,False
+onion,Newasa(Ghodegaon) APMC,Mahboob Manison APMC,4,1.315,0.2742,0.39171428571428574,False
+onion,Newasa(Ghodegaon) APMC,Azadpur APMC,1,66.373,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Azadpur APMC,4,26.168,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Umrane APMC,1,2.504,0.1148,0.20103225806451613,False
+onion,Newasa(Ghodegaon) APMC,Umrane APMC,4,3.664,0.0064,0.018285714285714287,True
+onion,Newasa(Ghodegaon) APMC,Shajapur APMC,1,0.214,0.6442,0.7520614439324116,False
+onion,Newasa(Ghodegaon) APMC,Shajapur APMC,4,4.497,0.0021,0.006622406639004149,True
+onion,Newasa(Ghodegaon) APMC,Yeola APMC,1,1.68,0.1956,0.3021463414634146,False
+onion,Newasa(Ghodegaon) APMC,Yeola APMC,4,2.475,0.0437,0.09303081232492998,False
+onion,Newasa(Ghodegaon) APMC,Chandvad APMC,1,1.957,0.1625,0.26276595744680853,False
+onion,Newasa(Ghodegaon) APMC,Chandvad APMC,4,2.861,0.0232,0.05597460317460317,False
+onion,Newasa(Ghodegaon) APMC,Kanpur(Grain) APMC,1,0.991,0.323,0.4423063063063063,False
+onion,Newasa(Ghodegaon) APMC,Kanpur(Grain) APMC,4,1.048,0.3906,0.5083150684931508,False
+onion,Newasa(Ghodegaon) APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,18.6,0.0,0.0,True
+onion,Newasa(Ghodegaon) APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,5.652,0.0002,0.0007638190954773871,True
+onion,Mahboob Manison APMC,Bangalore APMC,1,0.931,0.3401,0.4599217081850534,False
+onion,Mahboob Manison APMC,Bangalore APMC,4,0.751,0.5644,0.6787088607594937,False
+onion,Mahboob Manison APMC,Mahuva(Station Road) APMC,1,2.2,0.1421,0.2357991266375546,False
+onion,Mahboob Manison APMC,Mahuva(Station Road) APMC,4,2.945,0.0265,0.06196923076923077,False
+onion,Mahboob Manison APMC,Indore APMC,1,3.302,0.0731,0.13993954659949623,False
+onion,Mahboob Manison APMC,Indore APMC,4,1.377,0.251,0.36474187380497136,False
+onion,Mahboob Manison APMC,Solapur APMC,1,0.032,0.8593,0.9078833333333334,False
+onion,Mahboob Manison APMC,Solapur APMC,4,1.694,0.1617,0.2625897435897436,False
+onion,Mahboob Manison APMC,Pimpalgaon APMC,1,2.362,0.1284,0.21864876957494406,False
+onion,Mahboob Manison APMC,Pimpalgaon APMC,4,1.12,0.3544,0.4758727915194346,False
+onion,Mahboob Manison APMC,Indore(F&V) APMC,1,0.044,0.8355,0.8880839160839161,False
+onion,Mahboob Manison APMC,Indore(F&V) APMC,4,2.145,0.0911,0.16845742092457422,False
+onion,Mahboob Manison APMC,Ahilyanagar APMC,1,0.667,0.4168,0.5314899328859061,False
+onion,Mahboob Manison APMC,Ahilyanagar APMC,4,0.286,0.8858,0.9268445667125172,False
+onion,Mahboob Manison APMC,Lasalgaon APMC,1,3.49,0.0656,0.12750895140664964,False
+onion,Mahboob Manison APMC,Lasalgaon APMC,4,1.269,0.2908,0.40776383763837637,False
+onion,Mahboob Manison APMC,Pune APMC,1,1.64,0.2041,0.3127338709677419,False
+onion,Mahboob Manison APMC,Pune APMC,4,3.367,0.0142,0.03658305084745763,True
+onion,Mahboob Manison APMC,Lasalgaon(Vinchur) APMC,1,4.814,0.0313,0.07058753709198813,False
+onion,Mahboob Manison APMC,Lasalgaon(Vinchur) APMC,4,1.397,0.2443,0.3577418111753372,False
+onion,Mahboob Manison APMC,Mumbai-Onion & Potato Market APMC,1,3.637,0.0602,0.11914583333333333,False
+onion,Mahboob Manison APMC,Mumbai-Onion & Potato Market APMC,4,1.156,0.3378,0.45844285714285715,False
+onion,Mahboob Manison APMC,Newasa(Ghodegaon) APMC,1,0.739,0.393,0.5105076660988075,False
+onion,Mahboob Manison APMC,Newasa(Ghodegaon) APMC,4,1.008,0.4104,0.5268648648648648,False
+onion,Mahboob Manison APMC,Azadpur APMC,1,5.588,0.0207,0.0512442996742671,False
+onion,Mahboob Manison APMC,Azadpur APMC,4,4.312,0.0037,0.011027450980392157,True
+onion,Mahboob Manison APMC,Umrane APMC,1,0.251,0.6178,0.7261700154559505,False
+onion,Mahboob Manison APMC,Umrane APMC,4,0.578,0.68,0.7748125937031485,False
+onion,Mahboob Manison APMC,Shajapur APMC,1,0.003,0.9556,0.9709304812834225,False
+onion,Mahboob Manison APMC,Shajapur APMC,4,1.428,0.2343,0.3457631067961165,False
+onion,Mahboob Manison APMC,Yeola APMC,1,0.145,0.7044,0.7931022222222223,False
+onion,Mahboob Manison APMC,Yeola APMC,4,1.049,0.3886,0.5065797598627787,False
+onion,Mahboob Manison APMC,Chandvad APMC,1,0.252,0.6168,0.7261700154559505,False
+onion,Mahboob Manison APMC,Chandvad APMC,4,1.915,0.1181,0.2053913043478261,False
+onion,Mahboob Manison APMC,Kanpur(Grain) APMC,1,0.125,0.7248,0.8076950146627566,False
+onion,Mahboob Manison APMC,Kanpur(Grain) APMC,4,2.449,0.055,0.11176470588235295,False
+onion,Mahboob Manison APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,2.166,0.1452,0.24041830065359474,False
+onion,Mahboob Manison APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,1.334,0.2662,0.38100188323917134,False
+onion,Azadpur APMC,Bangalore APMC,1,1.422,0.2338,0.3457631067961165,False
+onion,Azadpur APMC,Bangalore APMC,4,1.826,0.1231,0.2121451247165533,False
+onion,Azadpur APMC,Mahuva(Station Road) APMC,1,1.815,0.1786,0.2798680412371134,False
+onion,Azadpur APMC,Mahuva(Station Road) APMC,4,3.485,0.0082,0.02282783882783883,True
+onion,Azadpur APMC,Indore APMC,1,0.677,0.412,0.5271380471380471,False
+onion,Azadpur APMC,Indore APMC,4,1.724,0.1491,0.24580477223427333,False
+onion,Azadpur APMC,Solapur APMC,1,0.089,0.7653,0.838299711815562,False
+onion,Azadpur APMC,Solapur APMC,4,1.828,0.1226,0.21176363636363635,False
+onion,Azadpur APMC,Pimpalgaon APMC,1,6.898,0.009,0.024604316546762588,True
+onion,Azadpur APMC,Pimpalgaon APMC,4,0.781,0.5377,0.6546944,False
+onion,Azadpur APMC,Indore(F&V) APMC,1,1.897,0.1693,0.2697442348008386,False
+onion,Azadpur APMC,Indore(F&V) APMC,4,2.861,0.0236,0.05675949367088607,False
+onion,Azadpur APMC,Ahilyanagar APMC,1,0.854,0.356,0.4771781305114638,False
+onion,Azadpur APMC,Ahilyanagar APMC,4,1.622,0.1681,0.26944,False
+onion,Azadpur APMC,Lasalgaon APMC,1,5.812,0.0164,0.04154666666666667,True
+onion,Azadpur APMC,Lasalgaon APMC,4,0.401,0.8081,0.8723806818181818,False
+onion,Azadpur APMC,Pune APMC,1,0.832,0.3622,0.48177622377622376,False
+onion,Azadpur APMC,Pune APMC,4,2.443,0.0462,0.09672727272727273,False
+onion,Azadpur APMC,Lasalgaon(Vinchur) APMC,1,4.686,0.0313,0.07058753709198813,False
+onion,Azadpur APMC,Lasalgaon(Vinchur) APMC,4,0.943,0.4398,0.5552292358803987,False
+onion,Azadpur APMC,Mumbai-Onion & Potato Market APMC,1,0.766,0.3819,0.5030225303292895,False
+onion,Azadpur APMC,Mumbai-Onion & Potato Market APMC,4,1.196,0.3121,0.4336307129798903,False
+onion,Azadpur APMC,Newasa(Ghodegaon) APMC,1,0.538,0.4639,0.5789228243021346,False
+onion,Azadpur APMC,Newasa(Ghodegaon) APMC,4,0.502,0.7346,0.8138425655976677,False
+onion,Azadpur APMC,Mahboob Manison APMC,1,6.143,0.0154,0.0391438127090301,True
+onion,Azadpur APMC,Mahboob Manison APMC,4,2.447,0.0548,0.11165683646112601,False
+onion,Azadpur APMC,Umrane APMC,1,0.003,0.9529,0.9707828418230562,False
+onion,Azadpur APMC,Umrane APMC,4,0.695,0.5958,0.7075125,False
+onion,Azadpur APMC,Shajapur APMC,1,0.392,0.5321,0.6501543408360129,False
+onion,Azadpur APMC,Shajapur APMC,4,2.863,0.0264,0.061925925925925926,False
+onion,Azadpur APMC,Yeola APMC,1,1.336,0.2485,0.3631923076923077,False
+onion,Azadpur APMC,Yeola APMC,4,0.462,0.7638,0.838299711815562,False
+onion,Azadpur APMC,Chandvad APMC,1,2.281,0.1318,0.2224390243902439,False
+onion,Azadpur APMC,Chandvad APMC,4,0.266,0.9,0.9344262295081968,False
+onion,Azadpur APMC,Kanpur(Grain) APMC,1,0.049,0.8262,0.8806619915848528,False
+onion,Azadpur APMC,Kanpur(Grain) APMC,4,8.81,0.0,0.0,True
+onion,Azadpur APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,0.37,0.5434,0.6565723370429253,False
+onion,Azadpur APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,2.691,0.0309,0.07031137724550898,False
+onion,Umrane APMC,Bangalore APMC,1,20.885,0.0,0.0,True
+onion,Umrane APMC,Bangalore APMC,4,7.631,0.0,0.0,True
+onion,Umrane APMC,Mahuva(Station Road) APMC,1,5.164,0.0239,0.05729968454258675,False
+onion,Umrane APMC,Mahuva(Station Road) APMC,4,4.548,0.0015,0.004892703862660944,True
+onion,Umrane APMC,Indore APMC,1,0.377,0.5408,0.6555151515151515,False
+onion,Umrane APMC,Indore APMC,4,1.987,0.1031,0.1849811320754717,False
+onion,Umrane APMC,Solapur APMC,1,18.058,0.0,0.0,True
+onion,Umrane APMC,Solapur APMC,4,5.438,0.0003,0.0011014492753623187,True
+onion,Umrane APMC,Pimpalgaon APMC,1,0.926,0.3369,0.45803935599284434,False
+onion,Umrane APMC,Pimpalgaon APMC,4,0.781,0.5384,0.6546944,False
+onion,Umrane APMC,Indore(F&V) APMC,1,7.277,0.0077,0.021674074074074075,True
+onion,Umrane APMC,Indore(F&V) APMC,4,2.431,0.0496,0.10299453551912569,False
+onion,Umrane APMC,Ahilyanagar APMC,1,7.475,0.0067,0.019000000000000003,True
+onion,Umrane APMC,Ahilyanagar APMC,4,1.788,0.132,0.2224390243902439,False
+onion,Umrane APMC,Lasalgaon APMC,1,0.009,0.923,0.9492286874154263,False
+onion,Umrane APMC,Lasalgaon APMC,4,0.61,0.6556,0.7572363636363636,False
+onion,Umrane APMC,Pune APMC,1,42.31,0.0,0.0,True
+onion,Umrane APMC,Pune APMC,4,9.993,0.0,0.0,True
+onion,Umrane APMC,Lasalgaon(Vinchur) APMC,1,0.416,0.5193,0.638621359223301,False
+onion,Umrane APMC,Lasalgaon(Vinchur) APMC,4,1.439,0.2215,0.33072691552062866,False
+onion,Umrane APMC,Mumbai-Onion & Potato Market APMC,1,26.137,0.0,0.0,True
+onion,Umrane APMC,Mumbai-Onion & Potato Market APMC,4,6.294,0.0001,0.00039175257731958763,True
+onion,Umrane APMC,Newasa(Ghodegaon) APMC,1,8.823,0.0033,0.009992031872509959,True
+onion,Umrane APMC,Newasa(Ghodegaon) APMC,4,2.337,0.0561,0.1122,False
+onion,Umrane APMC,Mahboob Manison APMC,1,0.692,0.4088,0.5256988155668358,False
+onion,Umrane APMC,Mahboob Manison APMC,4,2.955,0.0281,0.06510975609756098,False
+onion,Umrane APMC,Azadpur APMC,1,37.788,0.0,0.0,True
+onion,Umrane APMC,Azadpur APMC,4,11.223,0.0,0.0,True
+onion,Umrane APMC,Shajapur APMC,1,0.575,0.45,0.5643564356435643,False
+onion,Umrane APMC,Shajapur APMC,4,1.276,0.2856,0.4027012987012987,False
+onion,Umrane APMC,Yeola APMC,1,0.264,0.6078,0.7183950233281493,False
+onion,Umrane APMC,Yeola APMC,4,0.936,0.4433,0.5587197346600332,False
+onion,Umrane APMC,Chandvad APMC,1,0.833,0.3623,0.48177622377622376,False
+onion,Umrane APMC,Chandvad APMC,4,0.424,0.791,0.8575748930099858,False
+onion,Umrane APMC,Kanpur(Grain) APMC,1,3.309,0.0738,0.1409246231155779,False
+onion,Umrane APMC,Kanpur(Grain) APMC,4,1.056,0.3877,0.5065797598627787,False
+onion,Umrane APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,9.141,0.0028,0.008580645161290323,True
+onion,Umrane APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,3.57,0.0078,0.021874538745387452,True
+onion,Shajapur APMC,Bangalore APMC,1,1.773,0.1865,0.291047227926078,False
+onion,Shajapur APMC,Bangalore APMC,4,0.539,0.7075,0.795414201183432,False
+onion,Shajapur APMC,Mahuva(Station Road) APMC,1,10.726,0.0014,0.004606060606060606,True
+onion,Shajapur APMC,Mahuva(Station Road) APMC,4,4.293,0.0028,0.008580645161290323,True
+onion,Shajapur APMC,Indore APMC,1,12.76,0.0005,0.001751152073732719,True
+onion,Shajapur APMC,Indore APMC,4,2.806,0.0287,0.06629787234042553,False
+onion,Shajapur APMC,Solapur APMC,1,1.159,0.2837,0.4007657992565056,False
+onion,Shajapur APMC,Solapur APMC,4,1.489,0.2098,0.31889599999999996,False
+onion,Shajapur APMC,Pimpalgaon APMC,1,2.892,0.0915,0.16856174334140436,False
+onion,Shajapur APMC,Pimpalgaon APMC,4,2.066,0.0898,0.16645853658536586,False
+onion,Shajapur APMC,Indore(F&V) APMC,1,0.014,0.907,0.936679347826087,False
+onion,Shajapur APMC,Indore(F&V) APMC,4,0.776,0.5469,0.659752380952381,False
+onion,Shajapur APMC,Ahilyanagar APMC,1,1.173,0.2809,0.3976908752327747,False
+onion,Shajapur APMC,Ahilyanagar APMC,4,2.317,0.0614,0.12120519480519482,False
+onion,Shajapur APMC,Lasalgaon APMC,1,3.765,0.0546,0.1115483870967742,False
+onion,Shajapur APMC,Lasalgaon APMC,4,3.228,0.015,0.038513513513513516,True
+onion,Shajapur APMC,Pune APMC,1,1.596,0.2088,0.3180120240480962,False
+onion,Shajapur APMC,Pune APMC,4,1.702,0.1542,0.25235268817204304,False
+onion,Shajapur APMC,Lasalgaon(Vinchur) APMC,1,4.109,0.0448,0.0947888888888889,False
+onion,Shajapur APMC,Lasalgaon(Vinchur) APMC,4,2.367,0.0567,0.11280628272251308,False
+onion,Shajapur APMC,Mumbai-Onion & Potato Market APMC,1,6.952,0.0094,0.025514285714285715,True
+onion,Shajapur APMC,Mumbai-Onion & Potato Market APMC,4,2.383,0.0553,0.11177659574468087,False
+onion,Shajapur APMC,Newasa(Ghodegaon) APMC,1,6.663,0.011,0.02923076923076923,True
+onion,Shajapur APMC,Newasa(Ghodegaon) APMC,4,2.315,0.0617,0.12148186528497408,False
+onion,Shajapur APMC,Mahboob Manison APMC,1,0.845,0.3609,0.48177622377622376,False
+onion,Shajapur APMC,Mahboob Manison APMC,4,0.825,0.514,0.633128038897893,False
+onion,Shajapur APMC,Azadpur APMC,1,6.18,0.0142,0.03658305084745763,True
+onion,Shajapur APMC,Azadpur APMC,4,2.415,0.0527,0.10824864864864864,False
+onion,Shajapur APMC,Umrane APMC,1,6.487,0.0124,0.03249655172413793,True
+onion,Shajapur APMC,Umrane APMC,4,1.728,0.1509,0.24823376623376625,False
+onion,Shajapur APMC,Yeola APMC,1,2.215,0.1392,0.2325098901098901,False
+onion,Shajapur APMC,Yeola APMC,4,1.405,0.2367,0.3486279069767442,False
+onion,Shajapur APMC,Chandvad APMC,1,1.266,0.2627,0.37670188679245287,False
+onion,Shajapur APMC,Chandvad APMC,4,2.569,0.0416,0.09059025787965616,False
+onion,Shajapur APMC,Kanpur(Grain) APMC,1,13.678,0.0004,0.0014339622641509435,True
+onion,Shajapur APMC,Kanpur(Grain) APMC,4,4.574,0.0026,0.008098360655737704,True
+onion,Shajapur APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,14.227,0.0002,0.0007638190954773871,True
+onion,Shajapur APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,4.56,0.0018,0.005723849372384938,True
+onion,Yeola APMC,Bangalore APMC,1,87.242,0.0,0.0,True
+onion,Yeola APMC,Bangalore APMC,4,27.201,0.0,0.0,True
+onion,Yeola APMC,Mahuva(Station Road) APMC,1,32.163,0.0,0.0,True
+onion,Yeola APMC,Mahuva(Station Road) APMC,4,18.635,0.0,0.0,True
+onion,Yeola APMC,Indore APMC,1,0.089,0.7655,0.838299711815562,False
+onion,Yeola APMC,Indore APMC,4,7.187,0.0,0.0,True
+onion,Yeola APMC,Solapur APMC,1,21.026,0.0,0.0,True
+onion,Yeola APMC,Solapur APMC,4,6.886,0.0,0.0,True
+onion,Yeola APMC,Pimpalgaon APMC,1,7.462,0.0065,0.01850187265917603,True
+onion,Yeola APMC,Pimpalgaon APMC,4,7.526,0.0,0.0,True
+onion,Yeola APMC,Indore(F&V) APMC,1,39.771,0.0,0.0,True
+onion,Yeola APMC,Indore(F&V) APMC,4,10.939,0.0,0.0,True
+onion,Yeola APMC,Ahilyanagar APMC,1,23.903,0.0,0.0,True
+onion,Yeola APMC,Ahilyanagar APMC,4,7.929,0.0,0.0,True
+onion,Yeola APMC,Lasalgaon APMC,1,7.685,0.0058,0.016696969696969696,True
+onion,Yeola APMC,Lasalgaon APMC,4,4.742,0.0009,0.00304,True
+onion,Yeola APMC,Pune APMC,1,51.965,0.0,0.0,True
+onion,Yeola APMC,Pune APMC,4,18.165,0.0,0.0,True
+onion,Yeola APMC,Lasalgaon(Vinchur) APMC,1,2.75,0.0983,0.17830071599045347,False
+onion,Yeola APMC,Lasalgaon(Vinchur) APMC,4,0.362,0.8355,0.8880839160839161,False
+onion,Yeola APMC,Mumbai-Onion & Potato Market APMC,1,80.32,0.0,0.0,True
+onion,Yeola APMC,Mumbai-Onion & Potato Market APMC,4,22.356,0.0,0.0,True
+onion,Yeola APMC,Newasa(Ghodegaon) APMC,1,25.165,0.0,0.0,True
+onion,Yeola APMC,Newasa(Ghodegaon) APMC,4,9.319,0.0,0.0,True
+onion,Yeola APMC,Mahboob Manison APMC,1,0.415,0.5216,0.6404135702746364,False
+onion,Yeola APMC,Mahboob Manison APMC,4,1.135,0.3474,0.4683971631205674,False
+onion,Yeola APMC,Azadpur APMC,1,101.752,0.0,0.0,True
+onion,Yeola APMC,Azadpur APMC,4,31.61,0.0,0.0,True
+onion,Yeola APMC,Umrane APMC,1,19.432,0.0,0.0,True
+onion,Yeola APMC,Umrane APMC,4,6.678,0.0,0.0,True
+onion,Yeola APMC,Shajapur APMC,1,0.259,0.6118,0.7220000000000001,False
+onion,Yeola APMC,Shajapur APMC,4,2.947,0.0232,0.05597460317460317,False
+onion,Yeola APMC,Chandvad APMC,1,5.024,0.0255,0.06037383177570094,False
+onion,Yeola APMC,Chandvad APMC,4,2.801,0.0255,0.06037383177570094,False
+onion,Yeola APMC,Kanpur(Grain) APMC,1,3.325,0.0724,0.13894949494949496,False
+onion,Yeola APMC,Kanpur(Grain) APMC,4,4.555,0.0027,0.008341463414634147,True
+onion,Yeola APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,43.716,0.0,0.0,True
+onion,Yeola APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,13.593,0.0,0.0,True
+onion,Chandvad APMC,Bangalore APMC,1,67.219,0.0,0.0,True
+onion,Chandvad APMC,Bangalore APMC,4,20.347,0.0,0.0,True
+onion,Chandvad APMC,Mahuva(Station Road) APMC,1,26.092,0.0,0.0,True
+onion,Chandvad APMC,Mahuva(Station Road) APMC,4,15.426,0.0,0.0,True
+onion,Chandvad APMC,Indore APMC,1,0.027,0.8709,0.9167368421052632,False
+onion,Chandvad APMC,Indore APMC,4,7.192,0.0,0.0,True
+onion,Chandvad APMC,Solapur APMC,1,36.303,0.0,0.0,True
+onion,Chandvad APMC,Solapur APMC,4,11.585,0.0,0.0,True
+onion,Chandvad APMC,Pimpalgaon APMC,1,5.346,0.0212,0.052311688311688316,False
+onion,Chandvad APMC,Pimpalgaon APMC,4,3.919,0.0039,0.011578125,True
+onion,Chandvad APMC,Indore(F&V) APMC,1,37.872,0.0,0.0,True
+onion,Chandvad APMC,Indore(F&V) APMC,4,10.166,0.0,0.0,True
+onion,Chandvad APMC,Ahilyanagar APMC,1,20.128,0.0,0.0,True
+onion,Chandvad APMC,Ahilyanagar APMC,4,7.074,0.0,0.0,True
+onion,Chandvad APMC,Lasalgaon APMC,1,9.708,0.0019,0.006016666666666667,True
+onion,Chandvad APMC,Lasalgaon APMC,4,4.028,0.0032,0.00976706827309237,True
+onion,Chandvad APMC,Pune APMC,1,50.45,0.0,0.0,True
+onion,Chandvad APMC,Pune APMC,4,16.935,0.0,0.0,True
+onion,Chandvad APMC,Lasalgaon(Vinchur) APMC,1,24.162,0.0,0.0,True
+onion,Chandvad APMC,Lasalgaon(Vinchur) APMC,4,6.631,0.0,0.0,True
+onion,Chandvad APMC,Mumbai-Onion & Potato Market APMC,1,76.148,0.0,0.0,True
+onion,Chandvad APMC,Mumbai-Onion & Potato Market APMC,4,21.779,0.0,0.0,True
+onion,Chandvad APMC,Newasa(Ghodegaon) APMC,1,29.142,0.0,0.0,True
+onion,Chandvad APMC,Newasa(Ghodegaon) APMC,4,10.892,0.0,0.0,True
+onion,Chandvad APMC,Mahboob Manison APMC,1,0.001,0.9696,0.9786135458167331,False
+onion,Chandvad APMC,Mahboob Manison APMC,4,1.038,0.3943,0.5105076660988075,False
+onion,Chandvad APMC,Azadpur APMC,1,109.224,0.0,0.0,True
+onion,Chandvad APMC,Azadpur APMC,4,32.508,0.0,0.0,True
+onion,Chandvad APMC,Umrane APMC,1,29.565,0.0,0.0,True
+onion,Chandvad APMC,Umrane APMC,4,9.193,0.0,0.0,True
+onion,Chandvad APMC,Shajapur APMC,1,0.039,0.8444,0.8962905027932961,False
+onion,Chandvad APMC,Shajapur APMC,4,3.543,0.0091,0.024788530465949823,True
+onion,Chandvad APMC,Yeola APMC,1,12.262,0.0005,0.001751152073732719,True
+onion,Chandvad APMC,Yeola APMC,4,6.176,0.0001,0.00039175257731958763,True
+onion,Chandvad APMC,Kanpur(Grain) APMC,1,4.689,0.0337,0.07555162241887906,False
+onion,Chandvad APMC,Kanpur(Grain) APMC,4,4.408,0.0033,0.009992031872509959,True
+onion,Chandvad APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,62.114,0.0,0.0,True
+onion,Chandvad APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,17.473,0.0,0.0,True
+onion,Kanpur(Grain) APMC,Bangalore APMC,1,1.611,0.2121,0.321748502994012,False
+onion,Kanpur(Grain) APMC,Bangalore APMC,4,0.736,0.575,0.6892744479495267,False
+onion,Kanpur(Grain) APMC,Mahuva(Station Road) APMC,1,3.118,0.0817,0.15407444168734488,False
+onion,Kanpur(Grain) APMC,Mahuva(Station Road) APMC,4,2.673,0.0399,0.08738904899135447,False
+onion,Kanpur(Grain) APMC,Indore APMC,1,0.194,0.6608,0.7597700453857792,False
+onion,Kanpur(Grain) APMC,Indore APMC,4,3.102,0.0214,0.05263430420711974,False
+onion,Kanpur(Grain) APMC,Solapur APMC,1,0.021,0.8856,0.9268445667125172,False
+onion,Kanpur(Grain) APMC,Solapur APMC,4,1.659,0.1708,0.2715648535564854,False
+onion,Kanpur(Grain) APMC,Pimpalgaon APMC,1,1.528,0.2204,0.32973228346456696,False
+onion,Kanpur(Grain) APMC,Pimpalgaon APMC,4,2.44,0.0557,0.1122,False
+onion,Kanpur(Grain) APMC,Indore(F&V) APMC,1,3.817,0.0563,0.11230446194225724,False
+onion,Kanpur(Grain) APMC,Indore(F&V) APMC,4,1.374,0.2598,0.37324763705103964,False
+onion,Kanpur(Grain) APMC,Ahilyanagar APMC,1,0.169,0.6818,0.7751091180866966,False
+onion,Kanpur(Grain) APMC,Ahilyanagar APMC,4,1.483,0.2183,0.3278814229249012,False
+onion,Kanpur(Grain) APMC,Lasalgaon APMC,1,2.004,0.1612,0.262338329764454,False
+onion,Kanpur(Grain) APMC,Lasalgaon APMC,4,2.291,0.0691,0.13328934010152285,False
+onion,Kanpur(Grain) APMC,Pune APMC,1,1.563,0.2153,0.3240158415841584,False
+onion,Kanpur(Grain) APMC,Pune APMC,4,1.806,0.1386,0.23201762114537447,False
+onion,Kanpur(Grain) APMC,Lasalgaon(Vinchur) APMC,1,0.002,0.9669,0.977186170212766,False
+onion,Kanpur(Grain) APMC,Lasalgaon(Vinchur) APMC,4,3.571,0.0108,0.028901408450704227,True
+onion,Kanpur(Grain) APMC,Mumbai-Onion & Potato Market APMC,1,0.839,0.3626,0.48177622377622376,False
+onion,Kanpur(Grain) APMC,Mumbai-Onion & Potato Market APMC,4,2.557,0.0471,0.09807123287671234,False
+onion,Kanpur(Grain) APMC,Newasa(Ghodegaon) APMC,1,0.001,0.9759,0.9805706737120211,False
+onion,Kanpur(Grain) APMC,Newasa(Ghodegaon) APMC,4,1.886,0.1251,0.2141351351351351,False
+onion,Kanpur(Grain) APMC,Mahboob Manison APMC,1,0.206,0.6514,0.7568719512195121,False
+onion,Kanpur(Grain) APMC,Mahboob Manison APMC,4,0.687,0.6038,0.714778816199377,False
+onion,Kanpur(Grain) APMC,Azadpur APMC,1,0.169,0.6823,0.7751091180866966,False
+onion,Kanpur(Grain) APMC,Azadpur APMC,4,0.61,0.657,0.7572363636363636,False
+onion,Kanpur(Grain) APMC,Umrane APMC,1,1.913,0.1717,0.27183402489626557,False
+onion,Kanpur(Grain) APMC,Umrane APMC,4,1.963,0.1138,0.19974133949191683,False
+onion,Kanpur(Grain) APMC,Shajapur APMC,1,0.189,0.6647,0.7630996978851963,False
+onion,Kanpur(Grain) APMC,Shajapur APMC,4,0.504,0.7332,0.8134773722627737,False
+onion,Kanpur(Grain) APMC,Yeola APMC,1,0.026,0.8733,0.9179917012448132,False
+onion,Kanpur(Grain) APMC,Yeola APMC,4,1.655,0.1716,0.27183402489626557,False
+onion,Kanpur(Grain) APMC,Chandvad APMC,1,1.292,0.2594,0.37324763705103964,False
+onion,Kanpur(Grain) APMC,Chandvad APMC,4,1.521,0.207,0.31590361445783127,False
+onion,Kanpur(Grain) APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,1,0.0,0.9976,0.9976,False
+onion,Kanpur(Grain) APMC,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,4,3.222,0.018,0.04529801324503311,True
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Bangalore APMC,1,6.58,0.0107,0.028734982332155476,True
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Bangalore APMC,4,5.643,0.0002,0.0007638190954773871,True
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Mahuva(Station Road) APMC,1,3.776,0.0527,0.10824864864864864,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Mahuva(Station Road) APMC,4,2.724,0.0293,0.06747878787878787,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Indore APMC,1,0.692,0.407,0.5251612903225806,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Indore APMC,4,1.625,0.1724,0.27183402489626557,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Solapur APMC,1,0.071,0.7898,0.8574971428571428,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Solapur APMC,4,1.701,0.1489,0.24580477223427333,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Pimpalgaon APMC,1,7.354,0.007,0.019776951672862454,True
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Pimpalgaon APMC,4,2.044,0.0875,0.16277750611246944,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Indore(F&V) APMC,1,4.148,0.0425,0.09150141643059491,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Indore(F&V) APMC,4,1.485,0.2065,0.31577464788732396,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Ahilyanagar APMC,1,0.078,0.7808,0.851374461979914,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Ahilyanagar APMC,4,6.076,0.0001,0.00039175257731958763,True
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Lasalgaon APMC,1,5.573,0.0187,0.04675,True
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Lasalgaon APMC,4,0.93,0.4466,0.5611438016528926,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Pune APMC,1,2.607,0.1072,0.19080093676814988,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Pune APMC,4,4.738,0.001,0.00336283185840708,True
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Lasalgaon(Vinchur) APMC,1,5.019,0.026,0.061366459627329194,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Lasalgaon(Vinchur) APMC,4,0.896,0.4669,0.581711475409836,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Mumbai-Onion & Potato Market APMC,1,0.002,0.961,0.9751134846461949,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Mumbai-Onion & Potato Market APMC,4,1.961,0.0997,0.17998099762470307,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Newasa(Ghodegaon) APMC,1,0.162,0.6879,0.7803044776119403,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Newasa(Ghodegaon) APMC,4,1.368,0.2443,0.3577418111753372,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Mahboob Manison APMC,1,1.094,0.2988,0.41744117647058826,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Mahboob Manison APMC,4,1.065,0.3806,0.5021805555555555,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Azadpur APMC,1,45.368,0.0,0.0,True
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Azadpur APMC,4,16.447,0.0,0.0,True
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Umrane APMC,1,0.019,0.8914,0.9305824175824176,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Umrane APMC,4,1.919,0.1089,0.19337383177570094,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Shajapur APMC,1,0.409,0.5234,0.6415870967741936,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Shajapur APMC,4,3.386,0.0116,0.030717770034843203,True
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Yeola APMC,1,1.097,0.2956,0.4137311233885819,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Yeola APMC,4,0.303,0.8756,0.9191381215469614,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Chandvad APMC,1,3.188,0.075,0.14285714285714285,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Chandvad APMC,4,3.165,0.0141,0.03657337883959044,True
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Kanpur(Grain) APMC,1,1.317,0.2549,0.36858555133079846,False
+onion,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,Kanpur(Grain) APMC,4,3.076,0.0222,0.05407692307692308,False
+potato,Burdwan APMC,Guskara APMC,1,20.733,0.0,0.0,True
+potato,Burdwan APMC,Guskara APMC,4,4.508,0.0014,0.002391011235955056,True
+potato,Burdwan APMC,Jangipur APMC,1,49.568,0.0,0.0,True
+potato,Burdwan APMC,Jangipur APMC,4,17.724,0.0,0.0,True
+potato,Burdwan APMC,Siliguri APMC,1,34.766,0.0,0.0,True
+potato,Burdwan APMC,Siliguri APMC,4,13.518,0.0,0.0,True
+potato,Burdwan APMC,Barasat APMC,1,3.928,0.0481,0.0663448275862069,False
+potato,Burdwan APMC,Barasat APMC,4,2.914,0.0211,0.030428842504743835,True
+potato,Burdwan APMC,Dehradoon APMC,1,20.384,0.0,0.0,True
+potato,Burdwan APMC,Dehradoon APMC,4,4.892,0.0007,0.0012429906542056075,True
+potato,Burdwan APMC,Chakdah APMC,1,3.161,0.0761,0.10218374558303887,False
+potato,Burdwan APMC,Chakdah APMC,4,6.458,0.0,0.0,True
+potato,Burdwan APMC,Sainthia APMC,1,75.904,0.0,0.0,True
+potato,Burdwan APMC,Sainthia APMC,4,36.453,0.0,0.0,True
+potato,Burdwan APMC,Haldwani APMC,1,28.211,0.0,0.0,True
+potato,Burdwan APMC,Haldwani APMC,4,6.7,0.0,0.0,True
+potato,Burdwan APMC,Birbhum APMC,1,56.327,0.0,0.0,True
+potato,Burdwan APMC,Birbhum APMC,4,18.246,0.0,0.0,True
+potato,Burdwan APMC,Durgapur APMC,1,106.536,0.0,0.0,True
+potato,Burdwan APMC,Durgapur APMC,4,23.066,0.0,0.0,True
+potato,Burdwan APMC,Bolpur APMC,1,17.063,0.0,0.0,True
+potato,Burdwan APMC,Bolpur APMC,4,6.461,0.0,0.0,True
+potato,Burdwan APMC,Katwa APMC,1,0.007,0.9325,0.939920424403183,False
+potato,Burdwan APMC,Katwa APMC,4,4.483,0.0015,0.002550335570469799,True
+potato,Burdwan APMC,Purulia APMC,1,0.374,0.5409,0.5855897435897437,False
+potato,Burdwan APMC,Purulia APMC,4,1.296,0.2706,0.3193416149068323,False
+potato,Burdwan APMC,Champadanga APMC,1,1.214,0.2711,0.3194356589147287,False
+potato,Burdwan APMC,Champadanga APMC,4,4.352,0.0018,0.003019867549668874,True
+potato,Burdwan APMC,Baxirhat APMC,1,47.751,0.0,0.0,True
+potato,Burdwan APMC,Baxirhat APMC,4,12.717,0.0,0.0,True
+potato,Burdwan APMC,Rampurhat APMC,1,55.553,0.0,0.0,True
+potato,Burdwan APMC,Rampurhat APMC,4,25.663,0.0,0.0,True
+potato,Burdwan APMC,Habra APMC,1,4.278,0.0391,0.05452477064220184,False
+potato,Burdwan APMC,Habra APMC,4,4.087,0.0029,0.00471948608137045,True
+potato,Burdwan APMC,Asansol APMC,1,137.323,0.0,0.0,True
+potato,Burdwan APMC,Asansol APMC,4,32.764,0.0,0.0,True
+potato,Burdwan APMC,Ghatal APMC,1,86.448,0.0,0.0,True
+potato,Burdwan APMC,Ghatal APMC,4,22.756,0.0,0.0,True
+potato,Guskara APMC,Burdwan APMC,1,0.03,0.8616,0.8782222222222222,False
+potato,Guskara APMC,Burdwan APMC,4,3.839,0.0044,0.0069958158995815905,True
+potato,Guskara APMC,Jangipur APMC,1,28.013,0.0,0.0,True
+potato,Guskara APMC,Jangipur APMC,4,12.093,0.0,0.0,True
+potato,Guskara APMC,Siliguri APMC,1,27.946,0.0,0.0,True
+potato,Guskara APMC,Siliguri APMC,4,14.114,0.0,0.0,True
+potato,Guskara APMC,Barasat APMC,1,0.303,0.5822,0.6232000000000001,False
+potato,Guskara APMC,Barasat APMC,4,4.798,0.0008,0.0014074074074074076,True
+potato,Guskara APMC,Dehradoon APMC,1,22.611,0.0,0.0,True
+potato,Guskara APMC,Dehradoon APMC,4,5.615,0.0002,0.00038287153652392947,True
+potato,Guskara APMC,Chakdah APMC,1,0.057,0.8118,0.8326153846153846,False
+potato,Guskara APMC,Chakdah APMC,4,5.587,0.0002,0.00038287153652392947,True
+potato,Guskara APMC,Sainthia APMC,1,40.711,0.0,0.0,True
+potato,Guskara APMC,Sainthia APMC,4,25.164,0.0,0.0,True
+potato,Guskara APMC,Haldwani APMC,1,30.416,0.0,0.0,True
+potato,Guskara APMC,Haldwani APMC,4,8.129,0.0,0.0,True
+potato,Guskara APMC,Birbhum APMC,1,25.799,0.0,0.0,True
+potato,Guskara APMC,Birbhum APMC,4,16.664,0.0,0.0,True
+potato,Guskara APMC,Durgapur APMC,1,68.615,0.0,0.0,True
+potato,Guskara APMC,Durgapur APMC,4,18.403,0.0,0.0,True
+potato,Guskara APMC,Bolpur APMC,1,5.127,0.024,0.03448015122873346,True
+potato,Guskara APMC,Bolpur APMC,4,4.283,0.0021,0.0034545454545454545,True
+potato,Guskara APMC,Katwa APMC,1,1.388,0.2394,0.28541692789968653,False
+potato,Guskara APMC,Katwa APMC,4,4.517,0.0014,0.002391011235955056,True
+potato,Guskara APMC,Purulia APMC,1,0.907,0.3414,0.39017142857142856,False
+potato,Guskara APMC,Purulia APMC,4,1.191,0.3139,0.3636646341463415,False
+potato,Guskara APMC,Champadanga APMC,1,10.08,0.0016,0.0027022222222222226,True
+potato,Guskara APMC,Champadanga APMC,4,3.12,0.015,0.02217898832684825,True
+potato,Guskara APMC,Baxirhat APMC,1,38.395,0.0,0.0,True
+potato,Guskara APMC,Baxirhat APMC,4,12.097,0.0,0.0,True
+potato,Guskara APMC,Rampurhat APMC,1,26.031,0.0,0.0,True
+potato,Guskara APMC,Rampurhat APMC,4,18.606,0.0,0.0,True
+potato,Guskara APMC,Habra APMC,1,0.533,0.4656,0.514656976744186,False
+potato,Guskara APMC,Habra APMC,4,3.991,0.0034,0.00547457627118644,True
+potato,Guskara APMC,Asansol APMC,1,82.018,0.0,0.0,True
+potato,Guskara APMC,Asansol APMC,4,23.315,0.0,0.0,True
+potato,Guskara APMC,Ghatal APMC,1,43.764,0.0,0.0,True
+potato,Guskara APMC,Ghatal APMC,4,15.184,0.0,0.0,True
+potato,Jangipur APMC,Burdwan APMC,1,0.878,0.3493,0.3980029985007496,False
+potato,Jangipur APMC,Burdwan APMC,4,6.9,0.0,0.0,True
+potato,Jangipur APMC,Guskara APMC,1,0.195,0.6586,0.6913480662983426,False
+potato,Jangipur APMC,Guskara APMC,4,5.012,0.0006,0.0010883054892601432,True
+potato,Jangipur APMC,Siliguri APMC,1,10.072,0.0016,0.0027022222222222226,True
+potato,Jangipur APMC,Siliguri APMC,4,10.693,0.0,0.0,True
+potato,Jangipur APMC,Barasat APMC,1,9.559,0.0021,0.0034545454545454545,True
+potato,Jangipur APMC,Barasat APMC,4,0.848,0.4955,0.5441907514450867,False
+potato,Jangipur APMC,Dehradoon APMC,1,15.814,0.0001,0.0001963824289405685,True
+potato,Jangipur APMC,Dehradoon APMC,4,3.63,0.0063,0.009831622176591375,True
+potato,Jangipur APMC,Chakdah APMC,1,17.287,0.0,0.0,True
+potato,Jangipur APMC,Chakdah APMC,4,1.147,0.3339,0.38275113122171944,False
+potato,Jangipur APMC,Sainthia APMC,1,0.997,0.3184,0.36831659056316596,False
+potato,Jangipur APMC,Sainthia APMC,4,7.361,0.0,0.0,True
+potato,Jangipur APMC,Haldwani APMC,1,27.388,0.0,0.0,True
+potato,Jangipur APMC,Haldwani APMC,4,8.678,0.0,0.0,True
+potato,Jangipur APMC,Birbhum APMC,1,1.435,0.2316,0.2776277602523659,False
+potato,Jangipur APMC,Birbhum APMC,4,8.035,0.0,0.0,True
+potato,Jangipur APMC,Durgapur APMC,1,3.061,0.0808,0.10735664335664336,False
+potato,Jangipur APMC,Durgapur APMC,4,6.325,0.0001,0.0001963824289405685,True
+potato,Jangipur APMC,Bolpur APMC,1,0.104,0.7475,0.7771545827633379,False
+potato,Jangipur APMC,Bolpur APMC,4,3.256,0.0119,0.017873517786561266,True
+potato,Jangipur APMC,Katwa APMC,1,1.306,0.2537,0.30126875,False
+potato,Jangipur APMC,Katwa APMC,4,3.104,0.0154,0.022638297872340427,True
+potato,Jangipur APMC,Purulia APMC,1,12.972,0.0004,0.0007396593673965938,True
+potato,Jangipur APMC,Purulia APMC,4,1.987,0.0954,0.12436363636363636,False
+potato,Jangipur APMC,Champadanga APMC,1,4.495,0.0345,0.048287292817679565,True
+potato,Jangipur APMC,Champadanga APMC,4,4.258,0.0021,0.0034545454545454545,True
+potato,Jangipur APMC,Baxirhat APMC,1,32.607,0.0,0.0,True
+potato,Jangipur APMC,Baxirhat APMC,4,14.247,0.0,0.0,True
+potato,Jangipur APMC,Rampurhat APMC,1,1.608,0.2054,0.25016666666666665,False
+potato,Jangipur APMC,Rampurhat APMC,4,6.654,0.0,0.0,True
+potato,Jangipur APMC,Habra APMC,1,9.163,0.0026,0.004249462365591398,True
+potato,Jangipur APMC,Habra APMC,4,1.169,0.3235,0.3725151515151515,False
+potato,Jangipur APMC,Asansol APMC,1,7.604,0.006,0.009402061855670102,True
+potato,Jangipur APMC,Asansol APMC,4,9.237,0.0,0.0,True
+potato,Jangipur APMC,Ghatal APMC,1,3.123,0.0778,0.10409859154929577,False
+potato,Jangipur APMC,Ghatal APMC,4,10.626,0.0,0.0,True
+potato,Siliguri APMC,Burdwan APMC,1,3.139,0.0771,0.10334391534391534,False
+potato,Siliguri APMC,Burdwan APMC,4,12.59,0.0,0.0,True
+potato,Siliguri APMC,Guskara APMC,1,2.257,0.1337,0.16963606010016696,False
+potato,Siliguri APMC,Guskara APMC,4,10.047,0.0,0.0,True
+potato,Siliguri APMC,Jangipur APMC,1,11.172,0.0009,0.001576036866359447,True
+potato,Siliguri APMC,Jangipur APMC,4,16.877,0.0,0.0,True
+potato,Siliguri APMC,Barasat APMC,1,0.632,0.427,0.47723529411764704,False
+potato,Siliguri APMC,Barasat APMC,4,10.625,0.0,0.0,True
+potato,Siliguri APMC,Dehradoon APMC,1,28.208,0.0,0.0,True
+potato,Siliguri APMC,Dehradoon APMC,4,7.965,0.0,0.0,True
+potato,Siliguri APMC,Chakdah APMC,1,0.103,0.7487,0.7773387978142077,False
+potato,Siliguri APMC,Chakdah APMC,4,8.324,0.0,0.0,True
+potato,Siliguri APMC,Sainthia APMC,1,3.83,0.051,0.07009041591320073,False
+potato,Siliguri APMC,Sainthia APMC,4,8.637,0.0,0.0,True
+potato,Siliguri APMC,Haldwani APMC,1,32.61,0.0,0.0,True
+potato,Siliguri APMC,Haldwani APMC,4,8.682,0.0,0.0,True
+potato,Siliguri APMC,Birbhum APMC,1,3.426,0.0649,0.08807857142857144,False
+potato,Siliguri APMC,Birbhum APMC,4,3.835,0.0045,0.0071398747390396654,True
+potato,Siliguri APMC,Durgapur APMC,1,10.512,0.0013,0.0022454545454545453,True
+potato,Siliguri APMC,Durgapur APMC,4,15.049,0.0,0.0,True
+potato,Siliguri APMC,Bolpur APMC,1,1.473,0.2255,0.2724642289348172,False
+potato,Siliguri APMC,Bolpur APMC,4,6.54,0.0,0.0,True
+potato,Siliguri APMC,Katwa APMC,1,0.016,0.9008,0.9115952063914781,False
+potato,Siliguri APMC,Katwa APMC,4,7.305,0.0,0.0,True
+potato,Siliguri APMC,Purulia APMC,1,1.457,0.2281,0.2750189873417721,False
+potato,Siliguri APMC,Purulia APMC,4,7.808,0.0,0.0,True
+potato,Siliguri APMC,Champadanga APMC,1,1.33,0.2494,0.29662597809076685,False
+potato,Siliguri APMC,Champadanga APMC,4,8.727,0.0,0.0,True
+potato,Siliguri APMC,Baxirhat APMC,1,32.662,0.0,0.0,True
+potato,Siliguri APMC,Baxirhat APMC,4,24.995,0.0,0.0,True
+potato,Siliguri APMC,Rampurhat APMC,1,7.871,0.0052,0.008182194616977225,True
+potato,Siliguri APMC,Rampurhat APMC,4,11.131,0.0,0.0,True
+potato,Siliguri APMC,Habra APMC,1,0.943,0.3319,0.3810332326283987,False
+potato,Siliguri APMC,Habra APMC,4,8.909,0.0,0.0,True
+potato,Siliguri APMC,Asansol APMC,1,12.557,0.0004,0.0007396593673965938,True
+potato,Siliguri APMC,Asansol APMC,4,11.486,0.0,0.0,True
+potato,Siliguri APMC,Ghatal APMC,1,9.747,0.0019,0.003159737417943107,True
+potato,Siliguri APMC,Ghatal APMC,4,8.367,0.0,0.0,True
+potato,Barasat APMC,Burdwan APMC,1,14.646,0.0001,0.0001963824289405685,True
+potato,Barasat APMC,Burdwan APMC,4,17.222,0.0,0.0,True
+potato,Barasat APMC,Guskara APMC,1,17.274,0.0,0.0,True
+potato,Barasat APMC,Guskara APMC,4,10.596,0.0,0.0,True
+potato,Barasat APMC,Jangipur APMC,1,58.28,0.0,0.0,True
+potato,Barasat APMC,Jangipur APMC,4,23.966,0.0,0.0,True
+potato,Barasat APMC,Siliguri APMC,1,31.278,0.0,0.0,True
+potato,Barasat APMC,Siliguri APMC,4,15.867,0.0,0.0,True
+potato,Barasat APMC,Dehradoon APMC,1,24.626,0.0,0.0,True
+potato,Barasat APMC,Dehradoon APMC,4,6.365,0.0001,0.0001963824289405685,True
+potato,Barasat APMC,Chakdah APMC,1,0.751,0.3867,0.4358459259259259,False
+potato,Barasat APMC,Chakdah APMC,4,9.98,0.0,0.0,True
+potato,Barasat APMC,Sainthia APMC,1,102.79,0.0,0.0,True
+potato,Barasat APMC,Sainthia APMC,4,41.691,0.0,0.0,True
+potato,Barasat APMC,Haldwani APMC,1,33.156,0.0,0.0,True
+potato,Barasat APMC,Haldwani APMC,4,7.987,0.0,0.0,True
+potato,Barasat APMC,Birbhum APMC,1,74.118,0.0,0.0,True
+potato,Barasat APMC,Birbhum APMC,4,27.018,0.0,0.0,True
+potato,Barasat APMC,Durgapur APMC,1,83.287,0.0,0.0,True
+potato,Barasat APMC,Durgapur APMC,4,28.782,0.0,0.0,True
+potato,Barasat APMC,Bolpur APMC,1,16.958,0.0,0.0,True
+potato,Barasat APMC,Bolpur APMC,4,9.921,0.0,0.0,True
+potato,Barasat APMC,Katwa APMC,1,1.41,0.2356,0.28197795275590554,False
+potato,Barasat APMC,Katwa APMC,4,15.194,0.0,0.0,True
+potato,Barasat APMC,Purulia APMC,1,1.131,0.2882,0.3369723076923077,False
+potato,Barasat APMC,Purulia APMC,4,8.311,0.0,0.0,True
+potato,Barasat APMC,Champadanga APMC,1,0.902,0.3428,0.3911831831831832,False
+potato,Barasat APMC,Champadanga APMC,4,6.647,0.0,0.0,True
+potato,Barasat APMC,Baxirhat APMC,1,58.738,0.0,0.0,True
+potato,Barasat APMC,Baxirhat APMC,4,16.726,0.0,0.0,True
+potato,Barasat APMC,Rampurhat APMC,1,35.68,0.0,0.0,True
+potato,Barasat APMC,Rampurhat APMC,4,23.783,0.0,0.0,True
+potato,Barasat APMC,Habra APMC,1,5.116,0.0241,0.03455849056603774,True
+potato,Barasat APMC,Habra APMC,4,5.81,0.0001,0.0001963824289405685,True
+potato,Barasat APMC,Asansol APMC,1,102.08,0.0,0.0,True
+potato,Barasat APMC,Asansol APMC,4,39.972,0.0,0.0,True
+potato,Barasat APMC,Ghatal APMC,1,60.124,0.0,0.0,True
+potato,Barasat APMC,Ghatal APMC,4,22.296,0.0,0.0,True
+potato,Dehradoon APMC,Burdwan APMC,1,0.353,0.5529,0.5951898016997167,False
+potato,Dehradoon APMC,Burdwan APMC,4,1.078,0.3666,0.4153383010432191,False
+potato,Dehradoon APMC,Guskara APMC,1,0.426,0.5142,0.5631008645533141,False
+potato,Dehradoon APMC,Guskara APMC,4,1.073,0.3692,0.41754761904761906,False
+potato,Dehradoon APMC,Jangipur APMC,1,1.586,0.2084,0.2526060606060606,False
+potato,Dehradoon APMC,Jangipur APMC,4,4.736,0.0009,0.001576036866359447,True
+potato,Dehradoon APMC,Siliguri APMC,1,0.299,0.5845,0.6247819971870605,False
+potato,Dehradoon APMC,Siliguri APMC,4,1.505,0.1997,0.24439935587761671,False
+potato,Dehradoon APMC,Barasat APMC,1,0.02,0.8864,0.8994178905206942,False
+potato,Dehradoon APMC,Barasat APMC,4,1.674,0.1548,0.1938187808896211,False
+potato,Dehradoon APMC,Chakdah APMC,1,0.008,0.9269,0.9355166002656041,False
+potato,Dehradoon APMC,Chakdah APMC,4,1.701,0.1486,0.1866710743801653,False
+potato,Dehradoon APMC,Sainthia APMC,1,1.454,0.2285,0.2750189873417721,False
+potato,Dehradoon APMC,Sainthia APMC,4,1.996,0.094,0.12274914089347078,False
+potato,Dehradoon APMC,Haldwani APMC,1,14.346,0.0002,0.00038287153652392947,True
+potato,Dehradoon APMC,Haldwani APMC,4,4.909,0.0007,0.0012429906542056075,True
+potato,Dehradoon APMC,Birbhum APMC,1,0.831,0.3624,0.411695067264574,False
+potato,Dehradoon APMC,Birbhum APMC,4,1.801,0.1274,0.16218425460636515,False
+potato,Dehradoon APMC,Durgapur APMC,1,1.076,0.3002,0.3488562691131499,False
+potato,Dehradoon APMC,Durgapur APMC,4,2.784,0.0262,0.03735834896810507,True
+potato,Dehradoon APMC,Bolpur APMC,1,1.453,0.2287,0.2750189873417721,False
+potato,Dehradoon APMC,Bolpur APMC,4,2.372,0.0515,0.07064981949458483,False
+potato,Dehradoon APMC,Katwa APMC,1,0.274,0.6007,0.6385062937062937,False
+potato,Dehradoon APMC,Katwa APMC,4,1.055,0.3783,0.4272035661218425,False
+potato,Dehradoon APMC,Purulia APMC,1,0.001,0.9747,0.9759841897233201,False
+potato,Dehradoon APMC,Purulia APMC,4,1.93,0.1043,0.13526962457337885,False
+potato,Dehradoon APMC,Champadanga APMC,1,0.05,0.8228,0.8427601078167115,False
+potato,Dehradoon APMC,Champadanga APMC,4,0.884,0.473,0.5217416545718432,False
+potato,Dehradoon APMC,Baxirhat APMC,1,2.704,0.1008,0.13095384615384614,False
+potato,Dehradoon APMC,Baxirhat APMC,4,1.604,0.1722,0.21314657980456025,False
+potato,Dehradoon APMC,Rampurhat APMC,1,1.823,0.1776,0.21947317073170733,False
+potato,Dehradoon APMC,Rampurhat APMC,4,2.563,0.0378,0.05280882352941176,False
+potato,Dehradoon APMC,Habra APMC,1,0.058,0.8102,0.8320972972972973,False
+potato,Dehradoon APMC,Habra APMC,4,2.201,0.0679,0.0918220640569395,False
+potato,Dehradoon APMC,Asansol APMC,1,1.651,0.1995,0.24439935587761671,False
+potato,Dehradoon APMC,Asansol APMC,4,2.937,0.0204,0.02947528517110266,True
+potato,Dehradoon APMC,Ghatal APMC,1,5.613,0.0182,0.026447418738049715,True
+potato,Dehradoon APMC,Ghatal APMC,4,5.067,0.0005,0.0009134615384615384,True
+potato,Chakdah APMC,Burdwan APMC,1,39.252,0.0,0.0,True
+potato,Chakdah APMC,Burdwan APMC,4,19.321,0.0,0.0,True
+potato,Chakdah APMC,Guskara APMC,1,40.486,0.0,0.0,True
+potato,Chakdah APMC,Guskara APMC,4,16.924,0.0,0.0,True
+potato,Chakdah APMC,Jangipur APMC,1,92.566,0.0,0.0,True
+potato,Chakdah APMC,Jangipur APMC,4,25.137,0.0,0.0,True
+potato,Chakdah APMC,Siliguri APMC,1,38.217,0.0,0.0,True
+potato,Chakdah APMC,Siliguri APMC,4,15.753,0.0,0.0,True
+potato,Chakdah APMC,Barasat APMC,1,16.933,0.0,0.0,True
+potato,Chakdah APMC,Barasat APMC,4,7.396,0.0,0.0,True
+potato,Chakdah APMC,Dehradoon APMC,1,21.756,0.0,0.0,True
+potato,Chakdah APMC,Dehradoon APMC,4,5.798,0.0001,0.0001963824289405685,True
+potato,Chakdah APMC,Sainthia APMC,1,75.428,0.0,0.0,True
+potato,Chakdah APMC,Sainthia APMC,4,28.09,0.0,0.0,True
+potato,Chakdah APMC,Haldwani APMC,1,31.723,0.0,0.0,True
+potato,Chakdah APMC,Haldwani APMC,4,8.885,0.0,0.0,True
+potato,Chakdah APMC,Birbhum APMC,1,49.965,0.0,0.0,True
+potato,Chakdah APMC,Birbhum APMC,4,22.557,0.0,0.0,True
+potato,Chakdah APMC,Durgapur APMC,1,87.505,0.0,0.0,True
+potato,Chakdah APMC,Durgapur APMC,4,25.007,0.0,0.0,True
+potato,Chakdah APMC,Bolpur APMC,1,20.476,0.0,0.0,True
+potato,Chakdah APMC,Bolpur APMC,4,11.852,0.0,0.0,True
+potato,Chakdah APMC,Katwa APMC,1,13.945,0.0002,0.00038287153652392947,True
+potato,Chakdah APMC,Katwa APMC,4,17.804,0.0,0.0,True
+potato,Chakdah APMC,Purulia APMC,1,7.135,0.0078,0.011975757575757575,True
+potato,Chakdah APMC,Purulia APMC,4,7.609,0.0,0.0,True
+potato,Chakdah APMC,Champadanga APMC,1,13.455,0.0003,0.0005657568238213399,True
+potato,Chakdah APMC,Champadanga APMC,4,9.573,0.0,0.0,True
+potato,Chakdah APMC,Baxirhat APMC,1,57.332,0.0,0.0,True
+potato,Chakdah APMC,Baxirhat APMC,4,15.525,0.0,0.0,True
+potato,Chakdah APMC,Rampurhat APMC,1,62.114,0.0,0.0,True
+potato,Chakdah APMC,Rampurhat APMC,4,22.079,0.0,0.0,True
+potato,Chakdah APMC,Habra APMC,1,21.127,0.0,0.0,True
+potato,Chakdah APMC,Habra APMC,4,9.609,0.0,0.0,True
+potato,Chakdah APMC,Asansol APMC,1,104.908,0.0,0.0,True
+potato,Chakdah APMC,Asansol APMC,4,28.465,0.0,0.0,True
+potato,Chakdah APMC,Ghatal APMC,1,67.544,0.0,0.0,True
+potato,Chakdah APMC,Ghatal APMC,4,25.371,0.0,0.0,True
+potato,Sainthia APMC,Burdwan APMC,1,1.604,0.206,0.250496,False
+potato,Sainthia APMC,Burdwan APMC,4,2.416,0.048,0.06632727272727272,False
+potato,Sainthia APMC,Guskara APMC,1,0.36,0.5486,0.5913985815602836,False
+potato,Sainthia APMC,Guskara APMC,4,2.142,0.0747,0.10048141592920354,False
+potato,Sainthia APMC,Jangipur APMC,1,16.252,0.0001,0.0001963824289405685,True
+potato,Sainthia APMC,Jangipur APMC,4,6.754,0.0,0.0,True
+potato,Sainthia APMC,Siliguri APMC,1,18.636,0.0,0.0,True
+potato,Sainthia APMC,Siliguri APMC,4,12.668,0.0,0.0,True
+potato,Sainthia APMC,Barasat APMC,1,14.887,0.0001,0.0001963824289405685,True
+potato,Sainthia APMC,Barasat APMC,4,0.413,0.7994,0.823230352303523,False
+potato,Sainthia APMC,Dehradoon APMC,1,18.455,0.0,0.0,True
+potato,Sainthia APMC,Dehradoon APMC,4,4.587,0.0012,0.0020869565217391303,True
+potato,Sainthia APMC,Chakdah APMC,1,9.661,0.002,0.0033115468409586056,True
+potato,Sainthia APMC,Chakdah APMC,4,0.72,0.5783,0.619898448519041,False
+potato,Sainthia APMC,Haldwani APMC,1,29.672,0.0,0.0,True
+potato,Sainthia APMC,Haldwani APMC,4,6.8,0.0,0.0,True
+potato,Sainthia APMC,Birbhum APMC,1,5.927,0.0153,0.02253488372093023,True
+potato,Sainthia APMC,Birbhum APMC,4,8.872,0.0,0.0,True
+potato,Sainthia APMC,Durgapur APMC,1,15.716,0.0001,0.0001963824289405685,True
+potato,Sainthia APMC,Durgapur APMC,4,8.409,0.0,0.0,True
+potato,Sainthia APMC,Bolpur APMC,1,0.09,0.7643,0.7902965986394558,False
+potato,Sainthia APMC,Bolpur APMC,4,3.238,0.0123,0.01836542239685658,True
+potato,Sainthia APMC,Katwa APMC,1,5.417,0.0204,0.02947528517110266,True
+potato,Sainthia APMC,Katwa APMC,4,2.29,0.0589,0.08036624775583483,False
+potato,Sainthia APMC,Purulia APMC,1,10.404,0.0013,0.0022454545454545453,True
+potato,Sainthia APMC,Purulia APMC,4,1.918,0.1064,0.13775809199318567,False
+potato,Sainthia APMC,Champadanga APMC,1,11.482,0.0008,0.0014074074074074076,True
+potato,Sainthia APMC,Champadanga APMC,4,1.01,0.4018,0.4517278106508876,False
+potato,Sainthia APMC,Baxirhat APMC,1,40.199,0.0,0.0,True
+potato,Sainthia APMC,Baxirhat APMC,4,13.842,0.0,0.0,True
+potato,Sainthia APMC,Rampurhat APMC,1,0.041,0.8403,0.8583709677419354,False
+potato,Sainthia APMC,Rampurhat APMC,4,3.509,0.0078,0.011975757575757575,True
+potato,Sainthia APMC,Habra APMC,1,2.861,0.0914,0.1197655172413793,False
+potato,Sainthia APMC,Habra APMC,4,0.579,0.6779,0.7096473829201102,False
+potato,Sainthia APMC,Asansol APMC,1,18.895,0.0,0.0,True
+potato,Sainthia APMC,Asansol APMC,4,11.186,0.0,0.0,True
+potato,Sainthia APMC,Ghatal APMC,1,5.985,0.0148,0.021925925925925925,True
+potato,Sainthia APMC,Ghatal APMC,4,5.325,0.0003,0.0005657568238213399,True
+potato,Haldwani APMC,Burdwan APMC,1,0.423,0.5157,0.5639309352517986,False
+potato,Haldwani APMC,Burdwan APMC,4,1.548,0.1872,0.23021359223300972,False
+potato,Haldwani APMC,Guskara APMC,1,1.793,0.1812,0.2231961102106969,False
+potato,Haldwani APMC,Guskara APMC,4,1.172,0.3224,0.3718118361153263,False
+potato,Haldwani APMC,Jangipur APMC,1,0.393,0.5312,0.5783839541547278,False
+potato,Haldwani APMC,Jangipur APMC,4,1.315,0.2633,0.3112099533437014,False
+potato,Haldwani APMC,Siliguri APMC,1,0.137,0.7112,0.7424615384615385,False
+potato,Haldwani APMC,Siliguri APMC,4,2.408,0.0489,0.06732608695652173,False
+potato,Haldwani APMC,Barasat APMC,1,5.116,0.0242,0.03463653483992467,True
+potato,Haldwani APMC,Barasat APMC,4,1.818,0.1241,0.158248322147651,False
+potato,Haldwani APMC,Dehradoon APMC,1,10.541,0.0013,0.0022454545454545453,True
+potato,Haldwani APMC,Dehradoon APMC,4,1.89,0.111,0.1432258064516129,False
+potato,Haldwani APMC,Chakdah APMC,1,4.117,0.043,0.05974405850091408,False
+potato,Haldwani APMC,Chakdah APMC,4,0.525,0.7173,0.7478024691358025,False
+potato,Haldwani APMC,Sainthia APMC,1,0.451,0.5021,0.5506435786435786,False
+potato,Haldwani APMC,Sainthia APMC,4,0.789,0.533,0.5793371428571429,False
+potato,Haldwani APMC,Birbhum APMC,1,0.916,0.339,0.3880120481927711,False
+potato,Haldwani APMC,Birbhum APMC,4,0.414,0.7987,0.823230352303523,False
+potato,Haldwani APMC,Durgapur APMC,1,0.533,0.4659,0.514656976744186,False
+potato,Haldwani APMC,Durgapur APMC,4,0.73,0.5721,0.6141186440677967,False
+potato,Haldwani APMC,Bolpur APMC,1,1.386,0.2396,0.28541692789968653,False
+potato,Haldwani APMC,Bolpur APMC,4,0.323,0.8625,0.8782222222222222,False
+potato,Haldwani APMC,Katwa APMC,1,1.987,0.1593,0.19847213114754098,False
+potato,Haldwani APMC,Katwa APMC,4,0.957,0.4308,0.48007038123167156,False
+potato,Haldwani APMC,Purulia APMC,1,6.902,0.0089,0.013609657947686118,True
+potato,Haldwani APMC,Purulia APMC,4,0.903,0.4621,0.5119475218658892,False
+potato,Haldwani APMC,Champadanga APMC,1,1.077,0.3,0.3488562691131499,False
+potato,Haldwani APMC,Champadanga APMC,4,2.652,0.0326,0.04579667282809611,True
+potato,Haldwani APMC,Baxirhat APMC,1,3.037,0.0821,0.10889354275741711,False
+potato,Haldwani APMC,Baxirhat APMC,4,3.114,0.0152,0.022431067961165046,True
+potato,Haldwani APMC,Rampurhat APMC,1,0.478,0.4899,0.5396,False
+potato,Haldwani APMC,Rampurhat APMC,4,0.624,0.6454,0.6793684210526316,False
+potato,Haldwani APMC,Habra APMC,1,3.294,0.0702,0.09476376554174067,False
+potato,Haldwani APMC,Habra APMC,4,1.768,0.1342,0.16998666666666667,False
+potato,Haldwani APMC,Asansol APMC,1,0.102,0.7501,0.7777298772169168,False
+potato,Haldwani APMC,Asansol APMC,4,0.706,0.5879,0.6275337078651685,False
+potato,Haldwani APMC,Ghatal APMC,1,0.003,0.9531,0.9568771466314397,False
+potato,Haldwani APMC,Ghatal APMC,4,1.334,0.2564,0.30352647975077884,False
+potato,Birbhum APMC,Burdwan APMC,1,0.19,0.663,0.6950068965517242,False
+potato,Birbhum APMC,Burdwan APMC,4,1.887,0.1116,0.14375593220338984,False
+potato,Birbhum APMC,Guskara APMC,1,0.608,0.436,0.4851537335285505,False
+potato,Birbhum APMC,Guskara APMC,4,3.194,0.0132,0.019632093933463796,True
+potato,Birbhum APMC,Jangipur APMC,1,11.363,0.0008,0.0014074074074074076,True
+potato,Birbhum APMC,Jangipur APMC,4,8.4,0.0,0.0,True
+potato,Birbhum APMC,Siliguri APMC,1,8.836,0.0031,0.005012765957446808,True
+potato,Birbhum APMC,Siliguri APMC,4,5.085,0.0005,0.0009134615384615384,True
+potato,Birbhum APMC,Barasat APMC,1,1.598,0.2068,0.2510670926517572,False
+potato,Birbhum APMC,Barasat APMC,4,1.263,0.2835,0.33249999999999996,False
+potato,Birbhum APMC,Dehradoon APMC,1,23.573,0.0,0.0,True
+potato,Birbhum APMC,Dehradoon APMC,4,6.295,0.0001,0.0001963824289405685,True
+potato,Birbhum APMC,Chakdah APMC,1,2.913,0.0885,0.1161658031088083,False
+potato,Birbhum APMC,Chakdah APMC,4,1.334,0.2564,0.30352647975077884,False
+potato,Birbhum APMC,Sainthia APMC,1,7.594,0.0061,0.009539094650205762,True
+potato,Birbhum APMC,Sainthia APMC,4,6.269,0.0001,0.0001963824289405685,True
+potato,Birbhum APMC,Haldwani APMC,1,32.495,0.0,0.0,True
+potato,Birbhum APMC,Haldwani APMC,4,8.913,0.0,0.0,True
+potato,Birbhum APMC,Durgapur APMC,1,12.693,0.0004,0.0007396593673965938,True
+potato,Birbhum APMC,Durgapur APMC,4,7.651,0.0,0.0,True
+potato,Birbhum APMC,Bolpur APMC,1,0.099,0.7535,0.7801907356948228,False
+potato,Birbhum APMC,Bolpur APMC,4,3.962,0.0036,0.005784355179704017,True
+potato,Birbhum APMC,Katwa APMC,1,3.098,0.079,0.10528196147110334,False
+potato,Birbhum APMC,Katwa APMC,4,0.989,0.4132,0.46249189985272465,False
+potato,Birbhum APMC,Purulia APMC,1,3.202,0.0742,0.09998581560283688,False
+potato,Birbhum APMC,Purulia APMC,4,2.434,0.0467,0.06464845173041894,False
+potato,Birbhum APMC,Champadanga APMC,1,3.376,0.0668,0.09049554367201426,False
+potato,Birbhum APMC,Champadanga APMC,4,2.063,0.0846,0.1118191304347826,False
+potato,Birbhum APMC,Baxirhat APMC,1,30.78,0.0,0.0,True
+potato,Birbhum APMC,Baxirhat APMC,4,10.303,0.0,0.0,True
+potato,Birbhum APMC,Rampurhat APMC,1,2.851,0.092,0.12034423407917384,False
+potato,Birbhum APMC,Rampurhat APMC,4,4.188,0.0024,0.003939524838012959,True
+potato,Birbhum APMC,Habra APMC,1,0.022,0.8822,0.8963529411764706,False
+potato,Birbhum APMC,Habra APMC,4,2.332,0.055,0.07517985611510791,False
+potato,Birbhum APMC,Asansol APMC,1,16.151,0.0001,0.0001963824289405685,True
+potato,Birbhum APMC,Asansol APMC,4,7.694,0.0,0.0,True
+potato,Birbhum APMC,Ghatal APMC,1,8.033,0.0048,0.0075841995841995835,True
+potato,Birbhum APMC,Ghatal APMC,4,5.101,0.0005,0.0009134615384615384,True
+potato,Durgapur APMC,Burdwan APMC,1,10.153,0.0015,0.002550335570469799,True
+potato,Durgapur APMC,Burdwan APMC,4,0.668,0.6144,0.6512468619246862,False
+potato,Durgapur APMC,Guskara APMC,1,6.794,0.0094,0.014288,True
+potato,Durgapur APMC,Guskara APMC,4,0.991,0.4121,0.4619410029498525,False
+potato,Durgapur APMC,Jangipur APMC,1,6.874,0.009,0.013734939759036143,True
+potato,Durgapur APMC,Jangipur APMC,4,7.579,0.0,0.0,True
+potato,Durgapur APMC,Siliguri APMC,1,14.968,0.0001,0.0001963824289405685,True
+potato,Durgapur APMC,Siliguri APMC,4,9.354,0.0,0.0,True
+potato,Durgapur APMC,Barasat APMC,1,18.642,0.0,0.0,True
+potato,Durgapur APMC,Barasat APMC,4,1.227,0.2985,0.34847926267281104,False
+potato,Durgapur APMC,Dehradoon APMC,1,18.46,0.0,0.0,True
+potato,Durgapur APMC,Dehradoon APMC,4,4.074,0.003,0.004871794871794872,True
+potato,Durgapur APMC,Chakdah APMC,1,11.831,0.0006,0.0010883054892601432,True
+potato,Durgapur APMC,Chakdah APMC,4,1.709,0.1468,0.18471523178807947,False
+potato,Durgapur APMC,Sainthia APMC,1,6.312,0.0123,0.01836542239685658,True
+potato,Durgapur APMC,Sainthia APMC,4,10.914,0.0,0.0,True
+potato,Durgapur APMC,Haldwani APMC,1,29.309,0.0,0.0,True
+potato,Durgapur APMC,Haldwani APMC,4,8.658,0.0,0.0,True
+potato,Durgapur APMC,Birbhum APMC,1,3.033,0.0823,0.10896864111498257,False
+potato,Durgapur APMC,Birbhum APMC,4,6.7,0.0,0.0,True
+potato,Durgapur APMC,Bolpur APMC,1,0.124,0.7254,0.7552109589041096,False
+potato,Durgapur APMC,Bolpur APMC,4,0.628,0.6428,0.6775700416088766,False
+potato,Durgapur APMC,Katwa APMC,1,8.174,0.0044,0.0069958158995815905,True
+potato,Durgapur APMC,Katwa APMC,4,0.771,0.5445,0.5878125,False
+potato,Durgapur APMC,Purulia APMC,1,25.022,0.0,0.0,True
+potato,Durgapur APMC,Purulia APMC,4,1.848,0.1186,0.152,False
+potato,Durgapur APMC,Champadanga APMC,1,21.576,0.0,0.0,True
+potato,Durgapur APMC,Champadanga APMC,4,1.493,0.2032,0.24788443017656497,False
+potato,Durgapur APMC,Baxirhat APMC,1,43.479,0.0,0.0,True
+potato,Durgapur APMC,Baxirhat APMC,4,15.876,0.0,0.0,True
+potato,Durgapur APMC,Rampurhat APMC,1,2.119,0.1462,0.1842653399668325,False
+potato,Durgapur APMC,Rampurhat APMC,4,4.49,0.0014,0.002391011235955056,True
+potato,Durgapur APMC,Habra APMC,1,10.772,0.0011,0.0019174311926605505,True
+potato,Durgapur APMC,Habra APMC,4,0.788,0.5336,0.5793371428571429,False
+potato,Durgapur APMC,Asansol APMC,1,20.439,0.0,0.0,True
+potato,Durgapur APMC,Asansol APMC,4,11.801,0.0,0.0,True
+potato,Durgapur APMC,Ghatal APMC,1,1.205,0.273,0.32068006182380215,False
+potato,Durgapur APMC,Ghatal APMC,4,2.659,0.0323,0.04545925925925926,True
+potato,Bolpur APMC,Burdwan APMC,1,1.079,0.2995,0.3488562691131499,False
+potato,Bolpur APMC,Burdwan APMC,4,3.507,0.0078,0.011975757575757575,True
+potato,Bolpur APMC,Guskara APMC,1,4.232,0.0402,0.055956043956043956,False
+potato,Bolpur APMC,Guskara APMC,4,5.009,0.0006,0.0010883054892601432,True
+potato,Bolpur APMC,Jangipur APMC,1,15.649,0.0001,0.0001963824289405685,True
+potato,Bolpur APMC,Jangipur APMC,4,6.916,0.0,0.0,True
+potato,Bolpur APMC,Siliguri APMC,1,11.572,0.0007,0.0012429906542056075,True
+potato,Bolpur APMC,Siliguri APMC,4,6.355,0.0001,0.0001963824289405685,True
+potato,Bolpur APMC,Barasat APMC,1,0.239,0.6249,0.6605340751043115,False
+potato,Bolpur APMC,Barasat APMC,4,1.449,0.2168,0.26236942675159236,False
+potato,Bolpur APMC,Dehradoon APMC,1,24.931,0.0,0.0,True
+potato,Bolpur APMC,Dehradoon APMC,4,6.91,0.0,0.0,True
+potato,Bolpur APMC,Chakdah APMC,1,0.042,0.8383,0.8574804845222074,False
+potato,Bolpur APMC,Chakdah APMC,4,1.892,0.1108,0.1432108843537415,False
+potato,Bolpur APMC,Sainthia APMC,1,11.565,0.0007,0.0012429906542056075,True
+potato,Bolpur APMC,Sainthia APMC,4,7.419,0.0,0.0,True
+potato,Bolpur APMC,Haldwani APMC,1,31.06,0.0,0.0,True
+potato,Bolpur APMC,Haldwani APMC,4,7.671,0.0,0.0,True
+potato,Bolpur APMC,Birbhum APMC,1,39.99,0.0,0.0,True
+potato,Bolpur APMC,Birbhum APMC,4,15.175,0.0,0.0,True
+potato,Bolpur APMC,Durgapur APMC,1,16.265,0.0001,0.0001963824289405685,True
+potato,Bolpur APMC,Durgapur APMC,4,7.056,0.0,0.0,True
+potato,Bolpur APMC,Katwa APMC,1,0.003,0.9581,0.9606279683377308,False
+potato,Bolpur APMC,Katwa APMC,4,4.117,0.0027,0.00440343347639485,True
+potato,Bolpur APMC,Purulia APMC,1,0.205,0.6508,0.6841051175656985,False
+potato,Bolpur APMC,Purulia APMC,4,2.76,0.0274,0.038923364485981306,True
+potato,Bolpur APMC,Champadanga APMC,1,0.005,0.9414,0.9476344370860927,False
+potato,Bolpur APMC,Champadanga APMC,4,3.913,0.0039,0.00624,True
+potato,Bolpur APMC,Baxirhat APMC,1,27.161,0.0,0.0,True
+potato,Bolpur APMC,Baxirhat APMC,4,8.346,0.0,0.0,True
+potato,Bolpur APMC,Rampurhat APMC,1,5.813,0.0163,0.02377735124760077,True
+potato,Bolpur APMC,Rampurhat APMC,4,4.932,0.0007,0.0012429906542056075,True
+potato,Bolpur APMC,Habra APMC,1,0.864,0.353,0.40161676646706584,False
+potato,Bolpur APMC,Habra APMC,4,2.113,0.0781,0.10431634446397188,False
+potato,Bolpur APMC,Asansol APMC,1,20.534,0.0,0.0,True
+potato,Bolpur APMC,Asansol APMC,4,8.369,0.0,0.0,True
+potato,Bolpur APMC,Ghatal APMC,1,10.349,0.0014,0.002391011235955056,True
+potato,Bolpur APMC,Ghatal APMC,4,5.405,0.0003,0.0005657568238213399,True
+potato,Katwa APMC,Burdwan APMC,1,12.826,0.0004,0.0007396593673965938,True
+potato,Katwa APMC,Burdwan APMC,4,7.57,0.0,0.0,True
+potato,Katwa APMC,Guskara APMC,1,19.699,0.0,0.0,True
+potato,Katwa APMC,Guskara APMC,4,5.915,0.0001,0.0001963824289405685,True
+potato,Katwa APMC,Jangipur APMC,1,33.269,0.0,0.0,True
+potato,Katwa APMC,Jangipur APMC,4,16.002,0.0,0.0,True
+potato,Katwa APMC,Siliguri APMC,1,41.035,0.0,0.0,True
+potato,Katwa APMC,Siliguri APMC,4,15.765,0.0,0.0,True
+potato,Katwa APMC,Barasat APMC,1,7.821,0.0054,0.008479338842975206,True
+potato,Katwa APMC,Barasat APMC,4,5.656,0.0002,0.00038287153652392947,True
+potato,Katwa APMC,Dehradoon APMC,1,19.413,0.0,0.0,True
+potato,Katwa APMC,Dehradoon APMC,4,4.142,0.0026,0.004249462365591398,True
+potato,Katwa APMC,Chakdah APMC,1,4.536,0.0337,0.047254612546125466,True
+potato,Katwa APMC,Chakdah APMC,4,9.076,0.0,0.0,True
+potato,Katwa APMC,Sainthia APMC,1,41.708,0.0,0.0,True
+potato,Katwa APMC,Sainthia APMC,4,27.042,0.0,0.0,True
+potato,Katwa APMC,Haldwani APMC,1,23.34,0.0,0.0,True
+potato,Katwa APMC,Haldwani APMC,4,6.799,0.0,0.0,True
+potato,Katwa APMC,Birbhum APMC,1,26.931,0.0,0.0,True
+potato,Katwa APMC,Birbhum APMC,4,11.075,0.0,0.0,True
+potato,Katwa APMC,Durgapur APMC,1,51.723,0.0,0.0,True
+potato,Katwa APMC,Durgapur APMC,4,14.049,0.0,0.0,True
+potato,Katwa APMC,Bolpur APMC,1,15.268,0.0001,0.0001963824289405685,True
+potato,Katwa APMC,Bolpur APMC,4,8.174,0.0,0.0,True
+potato,Katwa APMC,Purulia APMC,1,2.958,0.0862,0.11373611111111111,False
+potato,Katwa APMC,Purulia APMC,4,2.815,0.025,0.03571428571428572,True
+potato,Katwa APMC,Champadanga APMC,1,5.474,0.0197,0.02857251908396946,True
+potato,Katwa APMC,Champadanga APMC,4,4.514,0.0014,0.002391011235955056,True
+potato,Katwa APMC,Baxirhat APMC,1,42.318,0.0,0.0,True
+potato,Katwa APMC,Baxirhat APMC,4,13.342,0.0,0.0,True
+potato,Katwa APMC,Rampurhat APMC,1,37.975,0.0,0.0,True
+potato,Katwa APMC,Rampurhat APMC,4,21.665,0.0,0.0,True
+potato,Katwa APMC,Habra APMC,1,5.872,0.0158,0.023136801541425823,True
+potato,Katwa APMC,Habra APMC,4,4.34,0.0019,0.003159737417943107,True
+potato,Katwa APMC,Asansol APMC,1,64.069,0.0,0.0,True
+potato,Katwa APMC,Asansol APMC,4,18.269,0.0,0.0,True
+potato,Katwa APMC,Ghatal APMC,1,52.812,0.0,0.0,True
+potato,Katwa APMC,Ghatal APMC,4,17.098,0.0,0.0,True
+potato,Purulia APMC,Burdwan APMC,1,40.535,0.0,0.0,True
+potato,Purulia APMC,Burdwan APMC,4,22.76,0.0,0.0,True
+potato,Purulia APMC,Guskara APMC,1,45.399,0.0,0.0,True
+potato,Purulia APMC,Guskara APMC,4,15.195,0.0,0.0,True
+potato,Purulia APMC,Jangipur APMC,1,80.909,0.0,0.0,True
+potato,Purulia APMC,Jangipur APMC,4,24.473,0.0,0.0,True
+potato,Purulia APMC,Siliguri APMC,1,43.471,0.0,0.0,True
+potato,Purulia APMC,Siliguri APMC,4,15.786,0.0,0.0,True
+potato,Purulia APMC,Barasat APMC,1,29.013,0.0,0.0,True
+potato,Purulia APMC,Barasat APMC,4,14.223,0.0,0.0,True
+potato,Purulia APMC,Dehradoon APMC,1,24.269,0.0,0.0,True
+potato,Purulia APMC,Dehradoon APMC,4,5.859,0.0001,0.0001963824289405685,True
+potato,Purulia APMC,Chakdah APMC,1,22.692,0.0,0.0,True
+potato,Purulia APMC,Chakdah APMC,4,24.729,0.0,0.0,True
+potato,Purulia APMC,Sainthia APMC,1,90.47,0.0,0.0,True
+potato,Purulia APMC,Sainthia APMC,4,30.109,0.0,0.0,True
+potato,Purulia APMC,Haldwani APMC,1,35.405,0.0,0.0,True
+potato,Purulia APMC,Haldwani APMC,4,8.473,0.0,0.0,True
+potato,Purulia APMC,Birbhum APMC,1,89.024,0.0,0.0,True
+potato,Purulia APMC,Birbhum APMC,4,26.085,0.0,0.0,True
+potato,Purulia APMC,Durgapur APMC,1,112.612,0.0,0.0,True
+potato,Purulia APMC,Durgapur APMC,4,35.432,0.0,0.0,True
+potato,Purulia APMC,Bolpur APMC,1,24.953,0.0,0.0,True
+potato,Purulia APMC,Bolpur APMC,4,11.664,0.0,0.0,True
+potato,Purulia APMC,Katwa APMC,1,20.809,0.0,0.0,True
+potato,Purulia APMC,Katwa APMC,4,14.14,0.0,0.0,True
+potato,Purulia APMC,Champadanga APMC,1,17.994,0.0,0.0,True
+potato,Purulia APMC,Champadanga APMC,4,13.136,0.0,0.0,True
+potato,Purulia APMC,Baxirhat APMC,1,66.557,0.0,0.0,True
+potato,Purulia APMC,Baxirhat APMC,4,18.293,0.0,0.0,True
+potato,Purulia APMC,Rampurhat APMC,1,72.811,0.0,0.0,True
+potato,Purulia APMC,Rampurhat APMC,4,24.307,0.0,0.0,True
+potato,Purulia APMC,Habra APMC,1,31.734,0.0,0.0,True
+potato,Purulia APMC,Habra APMC,4,16.351,0.0,0.0,True
+potato,Purulia APMC,Asansol APMC,1,132.761,0.0,0.0,True
+potato,Purulia APMC,Asansol APMC,4,43.867,0.0,0.0,True
+potato,Purulia APMC,Ghatal APMC,1,99.452,0.0,0.0,True
+potato,Purulia APMC,Ghatal APMC,4,26.74,0.0,0.0,True
+potato,Champadanga APMC,Burdwan APMC,1,34.008,0.0,0.0,True
+potato,Champadanga APMC,Burdwan APMC,4,26.612,0.0,0.0,True
+potato,Champadanga APMC,Guskara APMC,1,77.322,0.0,0.0,True
+potato,Champadanga APMC,Guskara APMC,4,27.041,0.0,0.0,True
+potato,Champadanga APMC,Jangipur APMC,1,58.26,0.0,0.0,True
+potato,Champadanga APMC,Jangipur APMC,4,18.658,0.0,0.0,True
+potato,Champadanga APMC,Siliguri APMC,1,31.413,0.0,0.0,True
+potato,Champadanga APMC,Siliguri APMC,4,14.082,0.0,0.0,True
+potato,Champadanga APMC,Barasat APMC,1,21.448,0.0,0.0,True
+potato,Champadanga APMC,Barasat APMC,4,23.605,0.0,0.0,True
+potato,Champadanga APMC,Dehradoon APMC,1,18.891,0.0,0.0,True
+potato,Champadanga APMC,Dehradoon APMC,4,4.82,0.0008,0.0014074074074074076,True
+potato,Champadanga APMC,Chakdah APMC,1,13.906,0.0002,0.00038287153652392947,True
+potato,Champadanga APMC,Chakdah APMC,4,18.066,0.0,0.0,True
+potato,Champadanga APMC,Sainthia APMC,1,78.416,0.0,0.0,True
+potato,Champadanga APMC,Sainthia APMC,4,46.377,0.0,0.0,True
+potato,Champadanga APMC,Haldwani APMC,1,27.522,0.0,0.0,True
+potato,Champadanga APMC,Haldwani APMC,4,6.238,0.0001,0.0001963824289405685,True
+potato,Champadanga APMC,Birbhum APMC,1,68.244,0.0,0.0,True
+potato,Champadanga APMC,Birbhum APMC,4,39.023,0.0,0.0,True
+potato,Champadanga APMC,Durgapur APMC,1,118.442,0.0,0.0,True
+potato,Champadanga APMC,Durgapur APMC,4,32.391,0.0,0.0,True
+potato,Champadanga APMC,Bolpur APMC,1,26.051,0.0,0.0,True
+potato,Champadanga APMC,Bolpur APMC,4,20.312,0.0,0.0,True
+potato,Champadanga APMC,Katwa APMC,1,6.669,0.0101,0.015260437375745527,True
+potato,Champadanga APMC,Katwa APMC,4,21.276,0.0,0.0,True
+potato,Champadanga APMC,Purulia APMC,1,4.877,0.0277,0.039276119402985074,True
+potato,Champadanga APMC,Purulia APMC,4,14.754,0.0,0.0,True
+potato,Champadanga APMC,Baxirhat APMC,1,55.448,0.0,0.0,True
+potato,Champadanga APMC,Baxirhat APMC,4,16.754,0.0,0.0,True
+potato,Champadanga APMC,Rampurhat APMC,1,63.168,0.0,0.0,True
+potato,Champadanga APMC,Rampurhat APMC,4,35.445,0.0,0.0,True
+potato,Champadanga APMC,Habra APMC,1,15.173,0.0001,0.0001963824289405685,True
+potato,Champadanga APMC,Habra APMC,4,16.537,0.0,0.0,True
+potato,Champadanga APMC,Asansol APMC,1,138.669,0.0,0.0,True
+potato,Champadanga APMC,Asansol APMC,4,40.14,0.0,0.0,True
+potato,Champadanga APMC,Ghatal APMC,1,98.598,0.0,0.0,True
+potato,Champadanga APMC,Ghatal APMC,4,40.934,0.0,0.0,True
+potato,Baxirhat APMC,Burdwan APMC,1,2.396,0.1224,0.15634285714285712,False
+potato,Baxirhat APMC,Burdwan APMC,4,2.665,0.032,0.04512059369202226,True
+potato,Baxirhat APMC,Guskara APMC,1,0.75,0.3871,0.4358459259259259,False
+potato,Baxirhat APMC,Guskara APMC,4,1.497,0.202,0.24681672025723475,False
+potato,Baxirhat APMC,Jangipur APMC,1,0.409,0.5228,0.5708735632183909,False
+potato,Baxirhat APMC,Jangipur APMC,4,3.388,0.0095,0.014411177644710579,True
+potato,Baxirhat APMC,Siliguri APMC,1,2.011,0.1569,0.19580295566502465,False
+potato,Baxirhat APMC,Siliguri APMC,4,4.924,0.0007,0.0012429906542056075,True
+potato,Baxirhat APMC,Barasat APMC,1,8.855,0.0031,0.005012765957446808,True
+potato,Baxirhat APMC,Barasat APMC,4,0.746,0.5613,0.6033776520509194,False
+potato,Baxirhat APMC,Dehradoon APMC,1,14.458,0.0002,0.00038287153652392947,True
+potato,Baxirhat APMC,Dehradoon APMC,4,3.184,0.0135,0.0200390625,True
+potato,Baxirhat APMC,Chakdah APMC,1,9.777,0.0019,0.003159737417943107,True
+potato,Baxirhat APMC,Chakdah APMC,4,0.796,0.5279,0.5756154949784792,False
+potato,Baxirhat APMC,Sainthia APMC,1,0.03,0.8632,0.8782222222222222,False
+potato,Baxirhat APMC,Sainthia APMC,4,3.102,0.0155,0.02274131274131274,True
+potato,Baxirhat APMC,Haldwani APMC,1,17.271,0.0,0.0,True
+potato,Baxirhat APMC,Haldwani APMC,4,3.554,0.0072,0.01116734693877551,True
+potato,Baxirhat APMC,Birbhum APMC,1,0.064,0.8006,0.8233504736129905,False
+potato,Baxirhat APMC,Birbhum APMC,4,3.226,0.0126,0.018776470588235294,True
+potato,Baxirhat APMC,Durgapur APMC,1,0.28,0.5966,0.6350364145658264,False
+potato,Baxirhat APMC,Durgapur APMC,4,5.257,0.0004,0.0007396593673965938,True
+potato,Baxirhat APMC,Bolpur APMC,1,0.981,0.3224,0.3718118361153263,False
+potato,Baxirhat APMC,Bolpur APMC,4,0.071,0.9907,0.9907,False
+potato,Baxirhat APMC,Katwa APMC,1,3.56,0.0598,0.08144802867383513,False
+potato,Baxirhat APMC,Katwa APMC,4,1.293,0.2719,0.31988235294117645,False
+potato,Baxirhat APMC,Purulia APMC,1,7.139,0.0078,0.011975757575757575,True
+potato,Baxirhat APMC,Purulia APMC,4,3.407,0.0093,0.014164328657314628,True
+potato,Baxirhat APMC,Champadanga APMC,1,6.312,0.0123,0.01836542239685658,True
+potato,Baxirhat APMC,Champadanga APMC,4,1.405,0.2312,0.2775860979462875,False
+potato,Baxirhat APMC,Rampurhat APMC,1,2.53,0.1124,0.1445414551607445,False
+potato,Baxirhat APMC,Rampurhat APMC,4,6.223,0.0001,0.0001963824289405685,True
+potato,Baxirhat APMC,Habra APMC,1,5.818,0.0162,0.023676923076923075,True
+potato,Baxirhat APMC,Habra APMC,4,0.697,0.5943,0.6334754558204769,False
+potato,Baxirhat APMC,Asansol APMC,1,1.394,0.2383,0.28476100628930817,False
+potato,Baxirhat APMC,Asansol APMC,4,8.343,0.0,0.0,True
+potato,Baxirhat APMC,Ghatal APMC,1,0.227,0.6336,0.6688000000000001,False
+potato,Baxirhat APMC,Ghatal APMC,4,3.372,0.0098,0.014836653386454181,True
+potato,Rampurhat APMC,Burdwan APMC,1,3.097,0.0791,0.10528196147110334,False
+potato,Rampurhat APMC,Burdwan APMC,4,5.361,0.0003,0.0005657568238213399,True
+potato,Rampurhat APMC,Guskara APMC,1,7.418,0.0067,0.010434426229508197,True
+potato,Rampurhat APMC,Guskara APMC,4,5.955,0.0001,0.0001963824289405685,True
+potato,Rampurhat APMC,Jangipur APMC,1,33.12,0.0,0.0,True
+potato,Rampurhat APMC,Jangipur APMC,4,10.587,0.0,0.0,True
+potato,Rampurhat APMC,Siliguri APMC,1,43.525,0.0,0.0,True
+potato,Rampurhat APMC,Siliguri APMC,4,18.593,0.0,0.0,True
+potato,Rampurhat APMC,Barasat APMC,1,0.268,0.605,0.6421787709497206,False
+potato,Rampurhat APMC,Barasat APMC,4,2.45,0.0454,0.06296350364963504,False
+potato,Rampurhat APMC,Dehradoon APMC,1,21.782,0.0,0.0,True
+potato,Rampurhat APMC,Dehradoon APMC,4,5.302,0.0004,0.0007396593673965938,True
+potato,Rampurhat APMC,Chakdah APMC,1,0.674,0.4121,0.4619410029498525,False
+potato,Rampurhat APMC,Chakdah APMC,4,5.595,0.0002,0.00038287153652392947,True
+potato,Rampurhat APMC,Sainthia APMC,1,13.208,0.0003,0.0005657568238213399,True
+potato,Rampurhat APMC,Sainthia APMC,4,4.402,0.0017,0.0028584070796460175,True
+potato,Rampurhat APMC,Haldwani APMC,1,29.571,0.0,0.0,True
+potato,Rampurhat APMC,Haldwani APMC,4,6.762,0.0,0.0,True
+potato,Rampurhat APMC,Birbhum APMC,1,26.275,0.0,0.0,True
+potato,Rampurhat APMC,Birbhum APMC,4,11.524,0.0,0.0,True
+potato,Rampurhat APMC,Durgapur APMC,1,47.34,0.0,0.0,True
+potato,Rampurhat APMC,Durgapur APMC,4,14.933,0.0,0.0,True
+potato,Rampurhat APMC,Bolpur APMC,1,8.099,0.0046,0.0072833333333333335,True
+potato,Rampurhat APMC,Bolpur APMC,4,5.723,0.0002,0.00038287153652392947,True
+potato,Rampurhat APMC,Katwa APMC,1,2.198,0.1389,0.17535548172757473,False
+potato,Rampurhat APMC,Katwa APMC,4,4.939,0.0007,0.0012429906542056075,True
+potato,Rampurhat APMC,Purulia APMC,1,0.248,0.6186,0.6547855153203342,False
+potato,Rampurhat APMC,Purulia APMC,4,3.78,0.0049,0.0077261410788381744,True
+potato,Rampurhat APMC,Champadanga APMC,1,0.019,0.8898,0.901664,False
+potato,Rampurhat APMC,Champadanga APMC,4,3.018,0.0178,0.025915708812260536,True
+potato,Rampurhat APMC,Baxirhat APMC,1,38.959,0.0,0.0,True
+potato,Rampurhat APMC,Baxirhat APMC,4,12.069,0.0,0.0,True
+potato,Rampurhat APMC,Habra APMC,1,1.067,0.3022,0.35064427480916033,False
+potato,Rampurhat APMC,Habra APMC,4,3.328,0.0106,0.01595247524752475,True
+potato,Rampurhat APMC,Asansol APMC,1,42.085,0.0,0.0,True
+potato,Rampurhat APMC,Asansol APMC,4,12.413,0.0,0.0,True
+potato,Rampurhat APMC,Ghatal APMC,1,32.572,0.0,0.0,True
+potato,Rampurhat APMC,Ghatal APMC,4,12.722,0.0,0.0,True
+potato,Habra APMC,Burdwan APMC,1,14.368,0.0002,0.00038287153652392947,True
+potato,Habra APMC,Burdwan APMC,4,16.295,0.0,0.0,True
+potato,Habra APMC,Guskara APMC,1,26.827,0.0,0.0,True
+potato,Habra APMC,Guskara APMC,4,15.204,0.0,0.0,True
+potato,Habra APMC,Jangipur APMC,1,78.488,0.0,0.0,True
+potato,Habra APMC,Jangipur APMC,4,23.939,0.0,0.0,True
+potato,Habra APMC,Siliguri APMC,1,42.385,0.0,0.0,True
+potato,Habra APMC,Siliguri APMC,4,17.6,0.0,0.0,True
+potato,Habra APMC,Barasat APMC,1,1.984,0.1596,0.19852045826513912,False
+potato,Habra APMC,Barasat APMC,4,6.112,0.0001,0.0001963824289405685,True
+potato,Habra APMC,Dehradoon APMC,1,24.477,0.0,0.0,True
+potato,Habra APMC,Dehradoon APMC,4,6.383,0.0001,0.0001963824289405685,True
+potato,Habra APMC,Chakdah APMC,1,0.968,0.3256,0.37436611195158853,False
+potato,Habra APMC,Chakdah APMC,4,9.777,0.0,0.0,True
+potato,Habra APMC,Sainthia APMC,1,53.568,0.0,0.0,True
+potato,Habra APMC,Sainthia APMC,4,29.16,0.0,0.0,True
+potato,Habra APMC,Haldwani APMC,1,36.938,0.0,0.0,True
+potato,Habra APMC,Haldwani APMC,4,9.777,0.0,0.0,True
+potato,Habra APMC,Birbhum APMC,1,35.907,0.0,0.0,True
+potato,Habra APMC,Birbhum APMC,4,22.81,0.0,0.0,True
+potato,Habra APMC,Durgapur APMC,1,84.629,0.0,0.0,True
+potato,Habra APMC,Durgapur APMC,4,29.992,0.0,0.0,True
+potato,Habra APMC,Bolpur APMC,1,10.017,0.0016,0.0027022222222222226,True
+potato,Habra APMC,Bolpur APMC,4,10.506,0.0,0.0,True
+potato,Habra APMC,Katwa APMC,1,5.346,0.0212,0.030515151515151513,True
+potato,Habra APMC,Katwa APMC,4,16.663,0.0,0.0,True
+potato,Habra APMC,Purulia APMC,1,0.011,0.9147,0.9244308510638298,False
+potato,Habra APMC,Purulia APMC,4,4.29,0.002,0.0033115468409586056,True
+potato,Habra APMC,Champadanga APMC,1,2.928,0.0877,0.11551473136915079,False
+potato,Habra APMC,Champadanga APMC,4,5.42,0.0003,0.0005657568238213399,True
+potato,Habra APMC,Baxirhat APMC,1,62.239,0.0,0.0,True
+potato,Habra APMC,Baxirhat APMC,4,18.277,0.0,0.0,True
+potato,Habra APMC,Rampurhat APMC,1,44.471,0.0,0.0,True
+potato,Habra APMC,Rampurhat APMC,4,20.719,0.0,0.0,True
+potato,Habra APMC,Asansol APMC,1,97.61,0.0,0.0,True
+potato,Habra APMC,Asansol APMC,4,40.399,0.0,0.0,True
+potato,Habra APMC,Ghatal APMC,1,60.707,0.0,0.0,True
+potato,Habra APMC,Ghatal APMC,4,26.919,0.0,0.0,True
+potato,Asansol APMC,Burdwan APMC,1,6.583,0.0106,0.01595247524752475,True
+potato,Asansol APMC,Burdwan APMC,4,0.78,0.5389,0.5842567760342369,False
+potato,Asansol APMC,Guskara APMC,1,2.298,0.1302,0.16547157190635453,False
+potato,Asansol APMC,Guskara APMC,4,0.96,0.4292,0.4789897209985316,False
+potato,Asansol APMC,Jangipur APMC,1,7.019,0.0083,0.01271774193548387,True
+potato,Asansol APMC,Jangipur APMC,4,10.063,0.0,0.0,True
+potato,Asansol APMC,Siliguri APMC,1,17.581,0.0,0.0,True
+potato,Asansol APMC,Siliguri APMC,4,17.173,0.0,0.0,True
+potato,Asansol APMC,Barasat APMC,1,15.434,0.0001,0.0001963824289405685,True
+potato,Asansol APMC,Barasat APMC,4,1.762,0.1354,0.17122129783693843,False
+potato,Asansol APMC,Dehradoon APMC,1,17.894,0.0,0.0,True
+potato,Asansol APMC,Dehradoon APMC,4,3.892,0.004,0.00638655462184874,True
+potato,Asansol APMC,Chakdah APMC,1,12.661,0.0004,0.0007396593673965938,True
+potato,Asansol APMC,Chakdah APMC,4,0.932,0.4452,0.49466666666666664,False
+potato,Asansol APMC,Sainthia APMC,1,7.231,0.0074,0.011454175152749492,True
+potato,Asansol APMC,Sainthia APMC,4,15.895,0.0,0.0,True
+potato,Asansol APMC,Haldwani APMC,1,29.053,0.0,0.0,True
+potato,Asansol APMC,Haldwani APMC,4,9.757,0.0,0.0,True
+potato,Asansol APMC,Birbhum APMC,1,3.472,0.063,0.08565295169946333,False
+potato,Asansol APMC,Birbhum APMC,4,6.078,0.0001,0.0001963824289405685,True
+potato,Asansol APMC,Durgapur APMC,1,12.757,0.0004,0.0007396593673965938,True
+potato,Asansol APMC,Durgapur APMC,4,4.933,0.0007,0.0012429906542056075,True
+potato,Asansol APMC,Bolpur APMC,1,0.066,0.7979,0.823230352303523,False
+potato,Asansol APMC,Bolpur APMC,4,1.078,0.3667,0.4153383010432191,False
+potato,Asansol APMC,Katwa APMC,1,4.952,0.0265,0.03771535580524345,True
+potato,Asansol APMC,Katwa APMC,4,1.686,0.152,0.1906270627062706,False
+potato,Asansol APMC,Purulia APMC,1,18.337,0.0,0.0,True
+potato,Asansol APMC,Purulia APMC,4,0.551,0.6982,0.7298927097661624,False
+potato,Asansol APMC,Champadanga APMC,1,17.894,0.0,0.0,True
+potato,Asansol APMC,Champadanga APMC,4,0.173,0.952,0.9568771466314397,False
+potato,Asansol APMC,Baxirhat APMC,1,43.57,0.0,0.0,True
+potato,Asansol APMC,Baxirhat APMC,4,18.016,0.0,0.0,True
+potato,Asansol APMC,Rampurhat APMC,1,2.743,0.0984,0.12805479452054797,False
+potato,Asansol APMC,Rampurhat APMC,4,6.129,0.0001,0.0001963824289405685,True
+potato,Asansol APMC,Habra APMC,1,10.767,0.0011,0.0019174311926605505,True
+potato,Asansol APMC,Habra APMC,4,0.771,0.5442,0.5878125,False
+potato,Asansol APMC,Ghatal APMC,1,3.727,0.0541,0.07408288288288288,False
+potato,Asansol APMC,Ghatal APMC,4,8.673,0.0,0.0,True
+potato,Ghatal APMC,Burdwan APMC,1,2.497,0.1148,0.1473783783783784,False
+potato,Ghatal APMC,Burdwan APMC,4,1.539,0.1897,0.23291114701130855,False
+potato,Ghatal APMC,Guskara APMC,1,0.471,0.4931,0.5423386396526773,False
+potato,Ghatal APMC,Guskara APMC,4,3.587,0.0068,0.010568507157464213,True
+potato,Ghatal APMC,Jangipur APMC,1,11.643,0.0007,0.0012429906542056075,True
+potato,Ghatal APMC,Jangipur APMC,4,11.326,0.0,0.0,True
+potato,Ghatal APMC,Siliguri APMC,1,12.447,0.0005,0.0009134615384615384,True
+potato,Ghatal APMC,Siliguri APMC,4,8.012,0.0,0.0,True
+potato,Ghatal APMC,Barasat APMC,1,2.432,0.1195,0.1528956228956229,False
+potato,Ghatal APMC,Barasat APMC,4,1.672,0.1552,0.194,False
+potato,Ghatal APMC,Dehradoon APMC,1,18.094,0.0,0.0,True
+potato,Ghatal APMC,Dehradoon APMC,4,3.91,0.0039,0.00624,True
+potato,Ghatal APMC,Chakdah APMC,1,1.818,0.1783,0.21998051948051947,False
+potato,Ghatal APMC,Chakdah APMC,4,5.116,0.0005,0.0009134615384615384,True
+potato,Ghatal APMC,Sainthia APMC,1,18.03,0.0,0.0,True
+potato,Ghatal APMC,Sainthia APMC,4,13.078,0.0,0.0,True
+potato,Ghatal APMC,Haldwani APMC,1,27.916,0.0,0.0,True
+potato,Ghatal APMC,Haldwani APMC,4,7.565,0.0,0.0,True
+potato,Ghatal APMC,Birbhum APMC,1,17.512,0.0,0.0,True
+potato,Ghatal APMC,Birbhum APMC,4,11.435,0.0,0.0,True
+potato,Ghatal APMC,Durgapur APMC,1,21.675,0.0,0.0,True
+potato,Ghatal APMC,Durgapur APMC,4,13.008,0.0,0.0,True
+potato,Ghatal APMC,Bolpur APMC,1,4.807,0.0288,0.04068401486988848,True
+potato,Ghatal APMC,Bolpur APMC,4,6.1,0.0001,0.0001963824289405685,True
+potato,Ghatal APMC,Katwa APMC,1,1.951,0.1631,0.2022120717781403,False
+potato,Ghatal APMC,Katwa APMC,4,1.64,0.1631,0.2022120717781403,False
+potato,Ghatal APMC,Purulia APMC,1,9.915,0.0017,0.0028584070796460175,True
+potato,Ghatal APMC,Purulia APMC,4,2.74,0.0283,0.04005214152700186,True
+potato,Ghatal APMC,Champadanga APMC,1,9.715,0.0019,0.003159737417943107,True
+potato,Ghatal APMC,Champadanga APMC,4,0.927,0.4482,0.49727299270072994,False
+potato,Ghatal APMC,Baxirhat APMC,1,24.888,0.0,0.0,True
+potato,Ghatal APMC,Baxirhat APMC,4,9.458,0.0,0.0,True
+potato,Ghatal APMC,Rampurhat APMC,1,8.696,0.0033,0.00532484076433121,True
+potato,Ghatal APMC,Rampurhat APMC,4,8.103,0.0,0.0,True
+potato,Ghatal APMC,Habra APMC,1,1.146,0.2848,0.3335100154083205,False
+potato,Ghatal APMC,Habra APMC,4,2.034,0.0885,0.1161658031088083,False
+potato,Ghatal APMC,Asansol APMC,1,27.122,0.0,0.0,True
+potato,Ghatal APMC,Asansol APMC,4,15.565,0.0,0.0,True
