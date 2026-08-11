@@ -48,7 +48,8 @@ TOP_Digital_Twin/
 └── .claude/launch.json        Dashboard launch config for the Claude Code browser preview tool
 ```
 
-GitHub: `https://github.com/masroor01/TOP-Digital-Twin` (private repo).
+GitHub: `https://github.com/masroor01/TOP-Digital-Twin` (public repo as of
+2026-08-10 — see §9 for the visibility history and the separate, deliberately-restricted Streamlit app-sharing setting).
 
 ---
 
@@ -337,12 +338,18 @@ instead of the button.
   Streamlit's GitHub App wasn't granted access. Fix at
   [github.com/settings/installations](https://github.com/settings/installations) →
   find "Streamlit" → Configure → grant access to this repo.
-- **If the deployed app shows "you do not have access"**: the app's
-  visibility is still tied to the private repo. Either make the GitHub repo
-  public (Settings → Danger Zone → Change visibility — check first that
-  nothing sensitive is in the repo, though as of this writing it's all
-  public government data + your own code/models), or use Streamlit's viewer
-  invite feature if you're on a paid tier.
+- **If the deployed app shows "you do not have access"**: this is NOT
+  necessarily the GitHub repo's visibility — confirmed 2026-08-10 that
+  making the repo public did not by itself fix this message. Streamlit
+  Community Cloud has its OWN separate app-level sharing control
+  (share.streamlit.io → the app → Settings → Sharing → "Only specific
+  people" vs. public/anyone-with-link) that does not automatically follow
+  the GitHub repo's visibility. Check that setting directly; if it's
+  deliberately set to "Only specific people" (current state as of
+  2026-08-10, a deliberate choice, not a bug), add viewers individually
+  there rather than via GitHub repo access — GitHub collaborator access
+  does not grant Streamlit app viewer access, they're independent
+  permission systems.
 
 ---
 
@@ -465,16 +472,16 @@ checked and stability-checked).
 - Confirming the `ANTHROPIC_API_KEY` Streamlit Cloud secret is actually
   live on the deployed dashboard (only ever verified locally with a
   dummy key).
-- **Live dashboard still shows "you do not have access to this app" for
-  anonymous visitors, even after the repo was switched back to public
-  (2026-08-10, `gh repo edit --visibility public`, confirmed via
-  `gh api`).** So the repo's GitHub visibility was NOT the (or not the
-  only) blocker — Streamlit Community Cloud has its own separate app-level
-  access/sharing setting that doesn't automatically follow a repo's GitHub
-  visibility. This needs the account owner signed in at
-  [share.streamlit.io](https://share.streamlit.io) → the app → Settings →
-  Sharing, to check/fix directly; not something fixable via `gh`/`git`.
-  Re-verify the live URL after that check.
+- **Live dashboard viewer access is deliberately restricted, not broken.**
+  The GitHub repo itself was switched back to public (2026-08-10,
+  `gh repo edit --visibility public`, confirmed via `gh api`), but the app
+  still shows "you do not have access" to an anonymous visitor — this is
+  Streamlit Community Cloud's own separate app-level sharing setting
+  (Settings → Sharing on share.streamlit.io), independent of GitHub repo
+  visibility, and the account owner confirmed (2026-08-10) it's
+  deliberately kept at "Only specific people" for now rather than public.
+  Team members need to be added individually there (not via GitHub repo
+  access) to view the deployed app.
 - NAFED/APEDA RTI request (sent early in the project for Layer 6 sourcing)
   — likely moot now that a verified policy-event dataset was found instead;
   not formally closed out.
