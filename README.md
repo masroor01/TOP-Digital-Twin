@@ -465,15 +465,16 @@ checked and stability-checked).
 - Confirming the `ANTHROPIC_API_KEY` Streamlit Cloud secret is actually
   live on the deployed dashboard (only ever verified locally with a
   dummy key).
-- **The GitHub repo is currently PRIVATE** (`gh api repos/masroor01/TOP-Digital-Twin`
-  confirmed 2026-08-10), despite earlier session notes and the comprehensive
-  review report's title page both stating it was made public for Streamlit
-  Community Cloud's free-tier viewer access. Either it was reverted to
-  private at some point, or that record was wrong — worth resolving, since
-  §6's own troubleshooting note above states a private repo can break
-  anonymous viewer access to the live dashboard, and a direct check of the
-  live URL on 2026-08-10 redirected to a Streamlit sign-in page rather than
-  loading the app.
+- **Live dashboard still shows "you do not have access to this app" for
+  anonymous visitors, even after the repo was switched back to public
+  (2026-08-10, `gh repo edit --visibility public`, confirmed via
+  `gh api`).** So the repo's GitHub visibility was NOT the (or not the
+  only) blocker — Streamlit Community Cloud has its own separate app-level
+  access/sharing setting that doesn't automatically follow a repo's GitHub
+  visibility. This needs the account owner signed in at
+  [share.streamlit.io](https://share.streamlit.io) → the app → Settings →
+  Sharing, to check/fix directly; not something fixable via `gh`/`git`.
+  Re-verify the live URL after that check.
 - NAFED/APEDA RTI request (sent early in the project for Layer 6 sourcing)
   — likely moot now that a verified policy-event dataset was found instead;
   not formally closed out.
