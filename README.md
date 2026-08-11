@@ -100,7 +100,9 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 | `28_Crisis_Backtesting_Case_Studies.py` | Backtests 4 real, verified crisis episodes (tomato's Jun-Sep 2023 spike/crash, onion's Aug 2023-Jan 2024 export-restriction escalation/post-ban crash, potato's Apr 2024 spike and Jan 2025 crash) against Script 15's out-of-sample fold predictions, cross-referenced with Script 19's verified policy-event log. Answers whether "naive wins on average" still holds specifically during the crises policy cares about (it does at h=1w; the data layers pull decisively ahead at h=13w/26w for tomato/onion, but not for potato). **<1 min.** | Script 15 output (`ablation_predictions.csv`), Script 19 output (`export_policy_events.csv`) |
 | `29_Granger_Causality_Analysis.py` | Bidirectional Granger causality tests (ADF-checked for stationarity, FDR-corrected within crop) between price and each data layer (arrivals, climate, satellite, macro, policy), plus a light lead-lag network among each crop's top-5-by-volume markets. Complements the ablation study's "does this layer improve accuracy" question with "does this layer have independent predictive content for price at all." **<2 min.** | Script 09 output (weekly panel), Scripts 14/10b/19 outputs |
 | `30_Formal_Stress_Testing.py` | Systematises the dashboard's what-if simulator into a fixed, reproducible battery of named stress scenarios, run across every market using the saved M6 production models (Script 23) -- no retraining. Onion's policy scenarios replay the exact verified 2023-24 event values (Script 19); diesel and climate scenarios are calibrated to real historical extremes. Originally surfaced a wrong-signed prediction for onion's export-duty scenario, traced to the same reactive-not-causal relationship Script 29 found; fixed via a monotonic sign constraint on the three export-control features in Script 15/23 (negligible accuracy cost). The constrained model still can't recover a realistic *magnitude* for these scenarios (median response ~0%) -- see Script 31 for why, and for the real-world-calibrated alternative. **<1 min.** | Script 23 output (production models, `reference_rows.csv`), Script 19 output |
-| `31_Synthetic_DID_Policy_Effect.py` | Estimates the 2023-24 onion export-restriction episode's causal price effect directly via Synthetic Difference-in-Differences (Arkhangelsky et al. 2021), since Script 30's forecasting model can't recover a reliable counterfactual magnitude (an identification problem, not a training-signal one -- duty, MEP, and the ban only ever moved together once). Tries two designs: cross-crop (tomato/potato as donors -- fails its own placebo check for the post-ban window) and within-onion (Nashik export-hub markets vs non-hub, sidesteps the cross-crop confound -- small, inconclusive effect either way). Honest conclusion: neither design reliably isolates the ban's magnitude with the available data. **~5 min** (constrained regressions over several hundred donor markets). | `data/agmarknet_weekly/top_weekly_panel.csv`, Script 19 output |
+| `31_Synthetic_DID_Policy_Effect.py` | Estimates the 2023-24 onion export-restriction episode's causal price effect directly via Synthetic Difference-in-Differences (Arkhangelsky et al. 2021), since Script 30's forecasting model can't recover a reliable counterfactual magnitude (an identification problem, not a training-signal one -- duty, MEP, and the ban only ever moved together once). Part A (cross-crop, tomato/potato as donors) and Part B (within-onion, Nashik export-hub vs non-hub) — see `Model_Output/MANIFEST.md` for the full Part A/B/C breakdown, including 2026-08-01's Part C addendum (event-study trajectories, jackknife CIs, donor-pool robustness, arrivals/quantity effect). **~5 min.** | `data/agmarknet_weekly/top_weekly_panel.csv`, Script 19 output |
+| `38_SDID_InSpace_Placebo_Test.py` | Follow-up to Script 31: standard synthetic-control-literature falsification test (Abadie, Diamond & Hainmueller 2010) — treats every individual tomato/potato market as a placebo "treated" unit against the same donor pool, builds a null distribution of placebo ATTs, and judges the real onion postban ATT against it via a rank-based p-value. Result: p=0.131 — the postban effect does not clear significance against this stronger test either. **~5-10 min.** | Script 31's fitted SDID weights |
+| `39_SDID_Stacked_MultiEpisode_EventStudy.py` | Extends Script 31's single-episode (2023-24) design to all 3 verified onion export bans in the panel window (Sep 2019, Sep 2020, 2023-24), stacking them into one multi-episode event study — addresses the n=1 identification problem (a single confounded natural experiment can't separate the ban's effect from the coincident weather shock that prompted it) by pooling 3 independent episodes. **~5-10 min.** | Script 19 output, `data/agmarknet_weekly/top_weekly_panel.csv` |
 
 ### Phase E — Deep learning (secondary model)
 
@@ -116,6 +118,35 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 | `24_Simulation_Dashboard.py` | Interactive Streamlit "what-if" scenario simulator. Run with `streamlit run scripts/24_Simulation_Dashboard.py`, not `python`. See §6. | Script 23 output |
 | `25_Horizon_SHAP_Analysis.py` | SHAP feature importance per crop×horizon, grouped by data layer — explains *why* the ablation study shows crop/horizon-dependent results. **~5-10 min.** | Script 23 output (the saved models) |
 | `26_Weekly_To_Daily_Disaggregation.py` | Exploratory: turns the weekly model's 4 forecast points into a smooth daily curve (PCHIP interpolation) with an honest uncertainty band from real historical daily residual std-dev — NOT a new daily-trained model (see §7 for why daily-native models were tried and abandoned). Backs the dashboard's "Show daily price forecast" view. **<1 min.** | Script 23 output |
+
+### Phase G — Exploratory: Two-Phase Residual Architecture (REJECTED, 2026-08-01/04)
+
+Tests whether a 23-year (2003-2026) price/arrivals-only "baseline" model plus
+a narrow 2017+ "residual" model (correcting the baseline using the richer
+modern-era layers) beats production M6. **Verdict: rejected** — kept in the
+repo as a documented negative result, not part of the active pipeline.
+
+| Script | What it does | Depends on |
+|---|---|---|
+| `32_LongHistory_Panel_Builder.py` | Builds a 2003-2026 price/arrivals panel (exact copy of Script 09's logic, only the start year differs) — validates that Script 09's 2017 floor is a filter choice, not a source limitation, for price/arrivals specifically. | Raw Agmarknet CSVs |
+| `33_LongHistory_Validation_Experiment.py` | Controlled single-variable test: does the 23-year window measurably improve accuracy over the 9-year (2017-2026) production window, same market set/features/CV folds/model config? Found a real, modest ~1.2pp average MAPE improvement. | Script 32 output |
+| `34_Baseline_Phase_Panel_Join.py` | Builds the full 2003-2026 joined panel (all layers except Sentinel-2, which stays reserved for Phase 2) for the two-phase architecture's Phase 1 model. | Script 32, `10c_RBI_LongHistory_Parser.py` output |
+| `35_TwoPhase_Baseline_Model.py` | Trains the long-window Phase 1 baseline model (price/arrivals/climate-non-S2/macro/policy) using 9 annual expanding folds (2017-2025), saves out-of-fold predictions for Script 36. | Script 34 output |
+| `36_TwoPhase_Residual_Model.py` | Trains Phase 2 to predict the residual (`actual_log_price - phase1_pred`) from Sentinel-2 vegetation features only. **Result: the combined Phase1+residual forecast is worse than Phase 1 alone and worse than M6 at nearly every crop/horizon cell.** Outputs in `Model_Output/experiments/two_phase/`, not the main results tree. | Script 35 output |
+| `37_DM_Test_M6_vs_Phase1Alone.py` | Ad-hoc follow-up: Phase 1 alone (not the combined stack) beat M6 on several raw MAPE cells, notably onion — formally DM-tested to check if that edge is real. **Result: does not survive formal testing (1/12 cells significant at p<0.05).** M6 confirmed as the correct production choice. | Scripts 15, 35 outputs |
+
+### Phase H — Exploratory: Early-Warning Prototype & Market Network (2026-08-08/10)
+
+Two independent extensions built on top of the already-published policy
+findings (Sections 8/13 of the comprehensive review report), each iterated
+through several rounds of increasingly rigorous validation and reported
+honestly including their partial/negative results.
+
+| Script | What it does | Depends on |
+|---|---|---|
+| `40_Escalation_Signature_Head.py` | Prototype early-warning classifier: a per-crop LightGBM model scoring each week on how closely it resembles the price-escalation pattern that has historically preceded a real policy intervention (backward-looking features only). Validated per-crop with leave-one-episode-out CV plus a placebo-in-time significance test and a data-driven (threshold-based) labeling redesign. 2 of 3 onion episodes (2019, 2023) validate cleanly (p=0.000); the 2020 episode does not (p=0.660) — diagnosed as a real, different-shaped price path, not a labeling artifact. Deliberately not iterated further (data-volume limited, matches the Section 8/Section 10 stopping-rule pattern). | `data/agmarknet_weekly/longhistory/top_weekly_panel_longhistory.csv`, `data/satellite_climate/crop_weekly_features.csv` |
+| `41_Escalation_Signature_Nashik_Hub_Test.py` | Follow-up testing whether onion 2020's weak signal was real-but-geographically-diluted (its documented trigger was Nashik-region flooding specifically). Rebuilds the same detector on Nashik-hub-only price. 2020's placebo p-value falls tenfold (0.660→0.064) — a partial, honest result (doesn't cross 0.05, but strongly supports the localization hypothesis). | Script 40's detector, Nashik-hub market list (from Script 31) |
+| `42_Market_Leader_Network.py` | Extends Script 29's light top-5-market lead-lag test to the top-20 markets per crop, with a net-leadership-score summary (out-rate − in-rate) designed to surface asymmetry that a small bidirectional-significance test washes out. Finds clear, geographically coherent leader clusters per crop (Karnataka for tomato, Nashik belt for onion, West Bengal for potato) with consumption hubs (Azadpur, Shahdara) as consistent followers. Includes a confound check (leadership isn't just a reporting-coverage artefact — clean for all 3 crops) and a two-period stability check (tomato/potato leaders hold up; onion's single top market shuffles rank, though the Nashik-belt cluster stays dominant throughout). | `data/agmarknet_weekly/top_weekly_panel.csv` |
 
 ---
 
@@ -374,7 +405,14 @@ their age relative to the current pipeline).
 - `table_crisis_backtests.csv` — Script 28's crisis-episode backtests (tomato/onion/potato)
 - `table_granger_layers.csv`, `table_granger_market_network.csv` — Script 29's Granger causality results (data layers and top-5-market network)
 - `table_stress_test_results.csv` — Script 30's stress-testing scenario battery results
-- `table_sdid_policy_effect.csv`, `table_sdid_hub_policy_effect.csv` — Script 31's Synthetic DID onion export-restriction effect estimates
+- `table_sdid_policy_effect.csv`, `table_sdid_hub_policy_effect.csv` — Script 31 Part A/B's Synthetic DID onion export-restriction effect estimates
+- `table_sdid_event_study.csv`, `table_sdid_donor_robustness.csv`, `table_sdid_arrivals_effect.csv` — Script 31 Part C's event-study trajectories, jackknife CIs, donor-pool robustness, and arrivals/quantity effect
+- `table_sdid_inspace_placebo.csv` — Script 38's in-space placebo falsification test (postban ATT p=0.131)
+- `table_sdid_stacked_event_study.csv`, `table_sdid_stacked_summary.csv` — Script 39's stacked 3-episode (2019/2020/2023-24) event study
+- `table_dm_m6_vs_phase1alone.csv` — Script 37's DM test (Phase-1-alone vs M6; edge does not survive formal testing)
+- `Model_Output/experiments/two_phase/` — Scripts 34-36's two-phase residual architecture outputs, archived as a documented rejected experiment, separate from the production results above
+- `table_escalation_signature_*.csv` — Scripts 40/41's early-warning prototype (per-crop LOEO scores, placebo-in-time tests, Nashik-hub localization test)
+- `table_market_leader_*.csv` — Script 42's market leader-follower network (rankings, confound check, stability check)
 - `table_shap_by_layer.csv`, `table_shap_top_features.csv` — Script 25's interpretability results
 - `table_spike_auc.csv`, `table_rolling_origin_metrics.csv` — Script 12's spike-detection classifier
 - `table_dow_pattern.csv`, `table_disagg_backtest.csv` — Script 26's daily-disaggregation backtest (feeds the dashboard's daily view)
@@ -383,7 +421,7 @@ their age relative to the current pipeline).
 
 ---
 
-## 9. Project Status (as of this writing)
+## 9. Project Status (as of 2026-08-10 — see git log for anything after this date)
 
 **Done**: all data layers M0-M6, ablation study, model-family comparisons
 (tree ensembles, LSTM/Transformer), statistical validation (crop- and
@@ -391,14 +429,55 @@ market-level DM tests, plus a Model Confidence Set jointly testing all
 variants), horizon-conditional skill analysis, production models, deployed
 dashboard (with a daily-resolution price view), horizon-stratified SHAP
 analysis, crisis backtesting, Granger causality, formal stress-testing
-(with a monotonic sign fix), Synthetic DID policy-effect estimation, and
-(2026-08-01) a market-panel coverage-grid bug fix that grew the analytical
-panel from 517/246/82 to 834/809/82 markets, with the full downstream
-cascade re-run on the corrected panel.
+(with a monotonic sign fix), Synthetic DID policy-effect estimation
+(Parts A/B/C plus two follow-up robustness scripts — in-space placebo,
+stacked multi-episode event study), a market-panel coverage-grid bug fix
+(2026-08-01, grew the analytical panel from 517/246/82 to 834/809/82
+markets, full downstream cascade re-run), a `PANEL_END` staleness bug fix
+plus 5 newly-verified 2026 policy events (2026-08-01), a WPI/diesel-LPG
+data-vintage refresh (CMIE restates its full history on every pull —
+production files had drifted 1.3-13.7% from current vintage; refreshed
+2026-08-01), a macro long-history extension that also fixed a pre-existing
+2026 gap in `export_veg`/`import_veg`/`crude_oil` (2026-08-03), a
+look-ahead leakage fix in `s2_ndvi_anom`'s seasonal climatology with a
+full M6 cascade retrain (2026-08-04), a 23-year two-phase residual
+architecture — explored fully and **rejected** under a pre-agreed
+stopping rule (Scripts 32-37, 2026-08-01/04, see Phase G above), and two
+new exploratory investigations folded into the comprehensive review
+report as Sections 14-15: an escalation-signature early-warning prototype
+(Scripts 40/41, 2026-08-08, deliberately stopped once data-volume-limited)
+and a market leader-follower network (Script 42, 2026-08-10, confound-
+checked and stability-checked).
 
-**Not yet done**: full-capacity TFT run (deliberately deferred),
-manuscript draft, re-running Scripts 15b/15c/18b/26 on the grid-fixed
-panel (see `Model_Output/MANIFEST.md`), and a decision on whether to
-adopt the validated-but-not-yet-adopted 23-year (2003-2026) panel
-extension (Scripts 32/33 found a real, modest ~1.2pp average MAPE
-improvement from it).
+**Not yet done / genuinely open**:
+- Full-capacity TFT run (deliberately deferred).
+- Re-running Scripts 12, 13, 15b, 15c, 17, 18b, 26 on the current panel —
+  these predate not just the 2026-08-01 grid fix but also the policy/
+  macro-vintage/leakage fixes that landed after it (see
+  `Model_Output/MANIFEST.md` for the up-to-date per-file staleness flags).
+- Manuscript: 3 of an estimated 6 sections drafted (methods/data, crisis
+  backtesting, policy causal-effect investigation).
+- A correctness decision on two pre-existing mislabeled macro series kept
+  as-is for continuity: `agri_wages_rs_day` is actually an all-occupations
+  rural wage series (not agriculture-specific), and `iip_food_proc` is
+  actually the overall manufacturing IIP (not the food-processing
+  sub-index). Would need a full retrain + re-validation if corrected.
+- Confirming the `ANTHROPIC_API_KEY` Streamlit Cloud secret is actually
+  live on the deployed dashboard (only ever verified locally with a
+  dummy key).
+- **The GitHub repo is currently PRIVATE** (`gh api repos/masroor01/TOP-Digital-Twin`
+  confirmed 2026-08-10), despite earlier session notes and the comprehensive
+  review report's title page both stating it was made public for Streamlit
+  Community Cloud's free-tier viewer access. Either it was reverted to
+  private at some point, or that record was wrong — worth resolving, since
+  §6's own troubleshooting note above states a private repo can break
+  anonymous viewer access to the live dashboard, and a direct check of the
+  live URL on 2026-08-10 redirected to a Streamlit sign-in page rather than
+  loading the app.
+- NAFED/APEDA RTI request (sent early in the project for Layer 6 sourcing)
+  — likely moot now that a verified policy-event dataset was found instead;
+  not formally closed out.
+- Onion's leader-market identification (Script 42) is a stable *regional*
+  finding (Nashik belt) but not a stable *single-market* one — its
+  full-sample #1 market's rank shuffles between the early/late time-period
+  split. Not a bug, just an honestly-reported limit of the current data.
