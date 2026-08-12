@@ -2,6 +2,10 @@
 # feature) — never commit real keys. See .streamlit/secrets.toml.example.
 .streamlit/secrets.toml
 
+# Patent/IPR draft documents — kept local only, deliberately not pushed to
+# the public GitHub repo since they cover unfiled IP (see 2026-08-12 session).
+docs/
+
 # CatBoost's per-run training log directory (Script 15b) — regenerated
 # every run, not a real output (see table_tree_model_comparison*.csv instead)
 catboost_info/
