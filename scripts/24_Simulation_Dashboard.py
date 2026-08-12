@@ -497,6 +497,24 @@ if data_weeks_stale >= 8:
         f'conditions — there is no live data feed behind this dashboard.'
     )
 
+# Sufficient-history flag: this market has no real price one week before
+# the reference week at all (brand-new / near-first appearance) -- the
+# exact condition training itself excludes rows on. pct_imputed_last_52w
+# alone can't catch this (a 1-real-week market scores 0% imputed, since
+# tail(52) just returns the 1 row it has). Found 2026-08-12 via a live
+# 1-week-ahead validation: markets in this state got confident-looking
+# forecasts >75% off the real outcome, driven by LightGBM's missing-value
+# split rather than any real signal for that market. Check this BEFORE the
+# softer pct_imputed messaging below -- it supersedes it.
+sufficient_history = base_row.get('sufficient_history')
+if pd.notna(sufficient_history) and not bool(sufficient_history):
+    st.error(
+        '🛑 Insufficient history: this market has no real recorded price from the week '
+        'before the forecast baseline (it likely just appeared in the data). The forecast '
+        'below is not grounded in any real momentum signal for this specific market and '
+        'should not be trusted — treat it as a placeholder, not a prediction.'
+    )
+
 # Data-sufficiency flag: warn when this market's recent history is mostly
 # imputed (no real trades) rather than presenting every market's prediction
 # with equal implied confidence — a reviewer correctly flagged this gap.

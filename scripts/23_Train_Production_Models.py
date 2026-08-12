@@ -372,6 +372,32 @@ for crop in CROPS:
     pct_imputed = recent.groupby('market')['imputed'].mean().mul(100).rename('pct_imputed_last_52w')
     latest = latest.merge(pct_imputed, on='market', how='left')
 
+    # Sufficient-history flag: markets that would NOT have qualified for
+    # training (dropna(['target','price_lag_1']) above excludes any row
+    # with no real week-before-last price -- i.e. brand-new/very sparse
+    # markets) still get a reference row here, since this block builds one
+    # per market unconditionally. That mismatch was found 2026-08-12 via a
+    # live 1-week-ahead validation against fresh real data: a cluster of
+    # onion markets with pct_imputed_last_52w == 0.0% (looks perfectly
+    # clean by that metric) turned out to have exactly ONE week of history
+    # ever -- their own first appearance in the panel -- so price_lag_1 and
+    # every rolling/lag feature was genuinely NaN, and LightGBM's missing-
+    # value split produced a confident-looking but ungrounded forecast
+    # (~75%+ error vs the real outcome). pct_imputed_last_52w cannot catch
+    # this because tail(52) silently returns fewer than 52 rows for a new
+    # market, so a 1-real-week market scores 0% imputed by construction.
+    # This flag instead asks the exact question training itself asks:
+    # does this market have a real price one week before the reference
+    # week at all. Downstream (dashboard, any validation) should suppress
+    # or clearly caveat forecasts where this is False, the same way
+    # pct_imputed_last_52w already gates the thin-data warning.
+    latest['sufficient_history'] = latest['price_lag_1'].notna()
+    n_insufficient = (~latest['sufficient_history']).sum()
+    if n_insufficient:
+        print(f'  {crop}: {n_insufficient} / {len(latest)} reference-row markets have '
+              f'insufficient price history for a grounded forecast (price_lag_1 is NaN) '
+              f'-- flagged via sufficient_history=False, not excluded from the file.')
+
     reference_rows.append(latest)
 
     # Price history (last 2 years per market): for the dashboard's
@@ -397,7 +423,7 @@ ref_df = pd.concat(reference_rows, ignore_index=True)
 # dashboard needs it to display "last observed price" — include explicitly
 keep_cols = (['crop', 'market', 'state', 'week_start', 'log_price',
               'imputed', 'last_observed_price', 'last_observed_date',
-              'pct_imputed_last_52w'] +
+              'pct_imputed_last_52w', 'sufficient_history'] +
              sorted(set(M6_FEATS) & set(ref_df.columns)))
 ref_df = ref_df[keep_cols]
 ref_path = os.path.join(OUT_DIR, 'reference_rows.csv')
