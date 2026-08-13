@@ -191,6 +191,19 @@ refresh notes, then re-run just Script 09 onward through whichever phases
 depend on the layer you updated, finishing with 23 (dashboard) and 15
 (ablation study) if you want updated results and forecasts.
 
+**Always run the sanity checker after Script 09 and again after Script 23**:
+```bash
+python scripts/44_Pipeline_Sanity_Check.py
+```
+This is not optional busywork — every bug listed in §7 "Known Gotchas" was
+originally found by someone noticing a suspicious number by hand, days
+after it shipped (a phantom 100%-imputed tail week, a stale `data/` copy,
+a forward-fill gap, a NaN-as-truthy slider, a silently-dropped output
+column). Script 44 encodes exactly those five failure signatures as
+automated checks and exits non-zero if any of them recur — it will not
+catch a NEW class of bug it doesn't know about, but it closes the specific
+gaps this project has actually hit.
+
 ---
 
 ## 5. Data Sources & Refresh Guide
