@@ -88,11 +88,24 @@ TIMING_TEST = False
 # Set to False for the full-capacity run (2026-08-13): all markets, full
 # 52-week encoder, now 5 folds instead of 4 -- expect well beyond the
 # original 3-5h estimate. Run in background.
+#
+# BUG FOUND 2026-08-13: MARKETS_PER_CROP_FAST / MAX_ENCODER_LENGTH=26 /
+# EARLY_STOP_PATIENCE / MAX_EPOCHS_CAP used to be set unconditionally
+# right here, regardless of FAST_MODE's value -- so setting FAST_MODE=
+# False silently did NOT restore the 52-week encoder (confirmed live:
+# the run's own printed config banner showed "Encoder length: 26w" with
+# FAST_MODE=False). Caught ~30 min into the full-capacity run via its
+# own startup banner, before real time was lost on folds/epochs -- run
+# was killed and restarted only after this fix. Now properly gated
+# behind `if FAST_MODE:` so False means "use the module-level defaults
+# defined above" (encoder=52w), not "silently keep the fast-mode values."
 FAST_MODE = False
-MARKETS_PER_CROP_FAST = {'tomato': 35, 'onion': 30, 'potato': 35}
-MAX_ENCODER_LENGTH = 26          # was 52w; halves sequence compute
-EARLY_STOP_PATIENCE = 5
-MAX_EPOCHS_CAP = 20              # ceiling; early stopping usually ends sooner
+MAX_EPOCHS_CAP = 20              # ceiling; early stopping usually ends sooner (both modes)
+EARLY_STOP_PATIENCE = 5          # both modes
+
+if FAST_MODE:
+    MARKETS_PER_CROP_FAST = {'tomato': 35, 'onion': 30, 'potato': 35}
+    MAX_ENCODER_LENGTH = 26      # was 52w; halves sequence compute
 
 if SMOKE_TEST:
     CROPS = ['onion']
