@@ -515,6 +515,25 @@ if pd.notna(sufficient_history) and not bool(sufficient_history):
         'should not be trusted — treat it as a placeholder, not a prediction.'
     )
 
+# Stale-reference flag: the market has history, but its most recent REAL trade
+# is weeks old -- the baseline price is a long-gap fallback (climatological
+# seasonal-median estimate), not a recent-momentum estimate. Found 2026-08-13
+# via live tomato validation: a market with 3 straight weeks of the identical
+# imputed price made both the model AND the naive "last price" comparison miss
+# badly, since neither had anything real to anchor on. Distinct from
+# sufficient_history above (that's "no history at all ever"; this is "history
+# exists, but not recently") -- check separately, don't conflate the two.
+stale_reference = base_row.get('stale_reference')
+if pd.notna(stale_reference) and bool(stale_reference) and (pd.isna(sufficient_history) or bool(sufficient_history)):
+    last_real = base_row.get('last_observed_date')
+    last_real_str = pd.to_datetime(last_real).date() if pd.notna(last_real) else 'unknown'
+    st.warning(
+        f'⚠️ Stale reference price: this market\'s most recent REAL trade was {last_real_str}, '
+        f'well before the forecast baseline week. The starting price both the forecast and '
+        f'the naive comparison use is a long-gap estimate, not a recent observation — treat '
+        f'this market\'s forecast with extra caution.'
+    )
+
 # Data-sufficiency flag: warn when this market's recent history is mostly
 # imputed (no real trades) rather than presenting every market's prediction
 # with equal implied confidence — a reviewer correctly flagged this gap.

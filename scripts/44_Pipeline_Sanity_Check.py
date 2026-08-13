@@ -25,6 +25,12 @@ discoveries:
      flag column was computed correctly but silently excluded from the
      saved CSV by an allowlist that wasn't updated to include it. Caught by
      a live forecast-validation script finding ungrounded predictions.
+  6. stale_reference (2026-08-13) -- markets that DO have price history
+     (sufficient_history=True) but whose most recent REAL trade is weeks
+     old at the reference row, because a long reporting gap fell back to a
+     climatological seasonal-median estimate. Both the model and the
+     dashboard's naive-persistence comparison were silently anchored on
+     that stale estimate. Caught by a live tomato forecast validation.
 
 Run this after Script 09 (data refresh) and again after Script 23
 (retrain) -- see README Sec 4. Exits non-zero if any check FAILs, so it can
@@ -147,6 +153,22 @@ else:
                   f'{n_insufficient}/{len(sub)} markets flagged sufficient_history=False '
                   f'(expected to be a small minority, not all or none).')
 
+    # B1b: stale_reference column must exist -- the 2026-08-13 stale-anchor bug.
+    if 'stale_reference' not in ref.columns:
+        check('FAIL', 'B1b',
+              'reference_rows.csv has no stale_reference column -- it was computed in '
+              'Script 23 but dropped by the keep_cols allowlist (same failure shape as the '
+              'sufficient_history bug -- check keep_cols includes every computed column).')
+    else:
+        for crop in CROPS:
+            sub = ref[ref['crop'] == crop]
+            if len(sub) == 0:
+                continue
+            n_stale = sub['stale_reference'].astype(bool).sum()
+            check('PASS', f'B1b {crop}',
+                  f'{n_stale}/{len(sub)} markets flagged stale_reference=True '
+                  f'(expected to be a minority, not all or none).')
+
     # B2: feature_columns.json -- every listed feature must actually exist in reference_rows.
     if os.path.exists(fcols_path):
         with open(fcols_path) as f:
@@ -193,7 +215,7 @@ else:
 
     # B5: expected metadata columns present (the ones added across this project's bugfixes).
     expected_meta = ['imputed', 'last_observed_price', 'last_observed_date',
-                      'pct_imputed_last_52w', 'sufficient_history']
+                      'pct_imputed_last_52w', 'sufficient_history', 'stale_reference']
     missing_meta = [c for c in expected_meta if c not in ref.columns]
     if missing_meta:
         check('FAIL', 'B5', f'Expected metadata columns missing from reference_rows.csv: {missing_meta}')

@@ -398,6 +398,28 @@ for crop in CROPS:
               f'insufficient price history for a grounded forecast (price_lag_1 is NaN) '
               f'-- flagged via sufficient_history=False, not excluded from the file.')
 
+    # Stale-reference flag: the market HAS real price history (sufficient_history
+    # above can be True) but its most recent REAL trade is weeks old relative to
+    # the reference week -- the cutoff row itself is carrying a long-gap fallback
+    # value (imputed_method 'seasonal_median', a climatological average, not a
+    # recent-momentum estimate) rather than anything connected to where the
+    # market actually is right now. Found 2026-08-13 via live tomato validation:
+    # a market showed 3 straight weeks of the IDENTICAL imputed price (the
+    # seasonal-median fallback), so both the model's forecast and the naive
+    # baseline were anchored on a stale climatological guess -- both missed the
+    # real outcome badly, through no fault of either method. A single ordinary
+    # 1-week imputed gap is normal and NOT flagged; only a real multi-week
+    # reporting gap is, since that's what breaks the "recent price" assumption
+    # both the model and the dashboard's naive comparison depend on.
+    STALE_REFERENCE_WEEKS = 3
+    days_since_real = (latest['week_start'] - latest['last_observed_date']).dt.days
+    latest['stale_reference'] = (days_since_real >= STALE_REFERENCE_WEEKS * 7) | latest['last_observed_date'].isna()
+    n_stale_ref = latest['stale_reference'].sum()
+    if n_stale_ref:
+        print(f'  {crop}: {n_stale_ref} / {len(latest)} reference-row markets have not had a '
+              f'real trade in >={STALE_REFERENCE_WEEKS} weeks -- flagged via '
+              f'stale_reference=True, not excluded from the file.')
+
     reference_rows.append(latest)
 
     # Price history (last 2 years per market): for the dashboard's
@@ -423,7 +445,7 @@ ref_df = pd.concat(reference_rows, ignore_index=True)
 # dashboard needs it to display "last observed price" — include explicitly
 keep_cols = (['crop', 'market', 'state', 'week_start', 'log_price',
               'imputed', 'last_observed_price', 'last_observed_date',
-              'pct_imputed_last_52w', 'sufficient_history'] +
+              'pct_imputed_last_52w', 'sufficient_history', 'stale_reference'] +
              sorted(set(M6_FEATS) & set(ref_df.columns)))
 ref_df = ref_df[keep_cols]
 ref_path = os.path.join(OUT_DIR, 'reference_rows.csv')
