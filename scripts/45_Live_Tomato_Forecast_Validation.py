@@ -111,7 +111,8 @@ actual = actual.dropna(subset=['market'])
 # [4] Merge forecast vs actual vs naive, compute error metrics
 # ---------------------------------------------------------------------------
 print('\n[4] Merging forecast vs actual vs naive-persistence baseline ...')
-merged = ref[['market', 'state', 'forecast_price', 'naive_price', 'imputed', 'sufficient_history']].merge(
+merged = ref[['market', 'state', 'forecast_price', 'naive_price', 'imputed',
+              'sufficient_history', 'stale_reference']].merge(
     actual[['market', 'state', 'actual_price', 'trading_days']], on=['market', 'state'], how='inner'
 )
 print(f'  Matched markets (forecast + real actual both available): {len(merged)}')
@@ -120,6 +121,18 @@ if n_excluded:
     print(f'  Excluding {n_excluded} markets flagged sufficient_history=False '
           f'(insufficient price-lag history -- see Script 23 Sec 3) from the comparison below.')
     merged = merged[merged['sufficient_history']].copy()
+
+# stale_reference: market HAS history, but its reference-row anchor is a
+# long-gap fallback (e.g. seasonal-median), not a recent real trade -- both
+# the forecast and the naive comparison are anchored on the same stale
+# guess in these cases, so including them isn't a fair test of either
+# method. Excluded separately from sufficient_history since it's a distinct
+# failure mode (see Script 23 Sec 3 / README Known Gotchas).
+n_stale = merged['stale_reference'].sum()
+if n_stale:
+    print(f'  Excluding {n_stale} additional markets flagged stale_reference=True '
+          f'(reference price is a long-gap fallback, not a recent real trade) from the comparison below.')
+    merged = merged[~merged['stale_reference']].copy()
 
 merged['model_ape'] = (merged['forecast_price'] - merged['actual_price']).abs() / merged['actual_price'] * 100
 merged['naive_ape'] = (merged['naive_price'] - merged['actual_price']).abs() / merged['actual_price'] * 100
