@@ -85,7 +85,10 @@ TIMING_TEST = False
 # stopping so a 4-fold x 3-crop run finishes in hours, not days.
 # 5.5 min/epoch was measured at hidden_size=64/encoder=52w/50 markets —
 # scaled down here to keep the full run in a ~4-6h budget.
-FAST_MODE = True
+# Set to False for the full-capacity run (2026-08-13): all markets, full
+# 52-week encoder, now 5 folds instead of 4 -- expect well beyond the
+# original 3-5h estimate. Run in background.
+FAST_MODE = False
 MARKETS_PER_CROP_FAST = {'tomato': 35, 'onion': 30, 'potato': 35}
 MAX_ENCODER_LENGTH = 26          # was 52w; halves sequence compute
 EARLY_STOP_PATIENCE = 5
@@ -116,6 +119,13 @@ FOLDS = [
     {'fold': 4, 'train_end': '2024-06-30',
      'val_start': '2024-07-01', 'val_end': '2024-12-31',
      'test_start': '2025-01-01', 'test_end': '2025-12-31', 'test_year': 2025},
+    # Fold 5, added 2026-08-13: same extension as Script 15 -- purely
+    # additive, folds 1-4 unchanged. Test window is Jan-Jul 2026 only
+    # (~7 months), all the 2026 data that exists yet, not padded to match
+    # the other folds' full-year width.
+    {'fold': 5, 'train_end': '2025-06-30',
+     'val_start': '2025-07-01', 'val_end': '2025-12-31',
+     'test_start': '2026-01-01', 'test_end': '2026-12-31', 'test_year': 2026},
 ]
 if FOLDS_LIMIT is not None:
     FOLDS = FOLDS[:FOLDS_LIMIT]
@@ -175,7 +185,7 @@ print(f'  Max epochs     : {TRAINER_PARAMS["max_epochs"]}\n')
 
 print('[1] Loading panel ...')
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
-df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2025-12-31')]
+df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2026-12-31')]
 df = df.sort_values(['crop', 'market', 'week_start']).reset_index(drop=True)
 df['year']  = df['week_start'].dt.year
 df['month'] = df['week_start'].dt.month

@@ -89,6 +89,16 @@ FOLDS = [
     {'fold': 4, 'train_end': '2024-06-30',
      'val_start': '2024-07-01', 'val_end': '2024-12-31',
      'test_start': '2025-01-01', 'test_end': '2025-12-31'},
+    # Fold 5, added 2026-08-13: extends the rolling-origin design one step
+    # further using the 2026 data added to the panel this session. Folds
+    # 1-4 above are UNCHANGED from the original published ablation study --
+    # this is purely additive, so those results remain exactly reproducible.
+    # Test window is Jan-Jul 2026 only (~7 months, not a full year like
+    # folds 1-4) because that's genuinely all the 2026 data that exists yet
+    # -- not padded or faked to match the other folds' width.
+    {'fold': 5, 'train_end': '2025-06-30',
+     'val_start': '2025-07-01', 'val_end': '2025-12-31',
+     'test_start': '2026-01-01', 'test_end': '2026-12-31'},
 ]
 
 LGBM_PARAMS = dict(
@@ -201,7 +211,7 @@ print(f'  Total fits: {7 * len(FOLDS) * len(HORIZONS_RUN) * len(CROPS)}\n')
 
 print('[1] Loading panel ...')
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
-df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2025-12-31')]
+df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2026-12-31')]
 df = df.sort_values(['crop', 'market', 'week_start']).reset_index(drop=True)
 df['year']  = df['week_start'].dt.year
 df['month'] = df['week_start'].dt.month
@@ -339,6 +349,31 @@ if os.path.exists(POLICY_FILE):
     assert len(df) == n_before, 'policy join changed row count'
     POLICY_FEATS += policy_cols
     print(f'   Policy joined     : {df["export_banned"].notna().mean():.1%} coverage')
+
+# Forward-fill infrastructure columns that stop before the panel's own end
+# date: wage_agri_men/women (wages data ends 2025-12) and
+# road_density_per_100_sqkm (ends 2025). Found 2026-08-13 adding Fold 5
+# (2026-01 to 2026-12 test window): without this, every 2026+ row gets
+# these columns fillna(0)'d at train/test matrix construction below --
+# literal wage=0 and road_density=0 are nonsensical inputs, not "no
+# effect" values, and were silently tanking M5/M6's Fold-5 accuracy
+# (onion h=13w R² 0.104 vs M4's 0.420) in a way that looked like a real
+# model-quality finding but was actually a data-coverage artifact. This
+# mirrors the exact forward-fill Script 23 already applies for the
+# dashboard's reference row -- applied here to training/eval data too.
+# Per-state ffill sorted by week_start; a no-op for any row within each
+# column's real coverage, so Folds 1-4 (entirely pre-2026) are byte-
+# identical to before this change -- only Fold 5 rows are affected.
+_ffill_cols = [c for c in ['wage_agri_men', 'wage_agri_women', 'road_density_per_100_sqkm']
+               if c in df.columns]
+if _ffill_cols:
+    n_before = df[_ffill_cols].isna().sum().sum()
+    df = df.sort_values(['state', 'week_start'])
+    df[_ffill_cols] = df.groupby('state')[_ffill_cols].ffill()
+    df = df.sort_values(['crop', 'market', 'week_start']).reset_index(drop=True)
+    n_after = df[_ffill_cols].isna().sum().sum()
+    print(f'   Infrastructure forward-fill: {n_before - n_after:,} cell(s) filled '
+          f'(beyond each source\'s real coverage, e.g. 2026+)')
 
 print(f'   Infrastructure features (M5): {len(INFRA_FEATS)} → {INFRA_FEATS}')
 print(f'   Policy features (M6)        : {len(POLICY_FEATS)} → {POLICY_FEATS}')
