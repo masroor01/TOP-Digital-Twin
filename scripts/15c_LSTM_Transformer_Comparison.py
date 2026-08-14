@@ -222,28 +222,31 @@ print('\n[3] Engineering features ...')
 
 
 def build_features(df_in):
+    # FIXED 2026-08-14 (full-layer audit): grouping/sorting used to key on
+    # 'market' NAME, not market_id -- see Script 23/15's commits for the
+    # full discovery story.
     out = {}
     for crop in CROPS:
         sub = df_in[df_in['crop'] == crop].copy()
-        sub = sub.sort_values(['market', 'week_start'])
+        sub = sub.sort_values(['market_id', 'week_start'])
         sub['log_price'] = np.log1p(sub['modal_price_weighted'])
 
         for lag in LAG_WEEKS:
-            sub[f'price_lag_{lag}'] = sub.groupby('market')['log_price'].shift(lag)
+            sub[f'price_lag_{lag}'] = sub.groupby('market_id')['log_price'].shift(lag)
         for w in ROLL_WINS:
-            g = sub.groupby('market')['log_price']
+            g = sub.groupby('market_id')['log_price']
             sub[f'price_roll_mean_{w}'] = g.transform(lambda x: x.shift(1).rolling(w, min_periods=2).mean())
             sub[f'price_roll_std_{w}'] = g.transform(lambda x: x.shift(1).rolling(w, min_periods=2).std())
 
         if 'arrivals_tonnes_week' in sub.columns:
             sub['log_arr'] = np.log1p(sub['arrivals_tonnes_week'].clip(lower=0))
             for lag in [1, 2, 4]:
-                sub[f'arr_lag_{lag}'] = sub.groupby('market')['log_arr'].shift(lag)
+                sub[f'arr_lag_{lag}'] = sub.groupby('market_id')['log_arr'].shift(lag)
             for w in [4, 8]:
-                sub[f'arr_roll_mean_{w}'] = sub.groupby('market')['log_arr'].transform(
+                sub[f'arr_roll_mean_{w}'] = sub.groupby('market_id')['log_arr'].transform(
                     lambda x: x.shift(1).rolling(w, min_periods=2).mean())
 
-        sub['price_yoy'] = sub.groupby('market')['log_price'].shift(52)
+        sub['price_yoy'] = sub.groupby('market_id')['log_price'].shift(52)
         sub['week_num'] = sub['week_start'].dt.isocalendar().week.astype(int)
         sub['sin_week'] = np.sin(2 * np.pi * sub['week_num'] / 52)
         sub['cos_week'] = np.cos(2 * np.pi * sub['week_num'] / 52)
@@ -264,7 +267,9 @@ def build_features(df_in):
             sub['season_storage']      = m.isin([5, 6, 7, 8, 9]).astype(int)
             sub['season_lean']         = m.isin([10, 11]).astype(int)
 
-        for col in ['state', 'market']:
+        if 'market_id' in sub.columns:
+            sub['market_enc'] = pd.Categorical(sub['market_id']).codes
+        for col in ['state']:
             if col in sub.columns:
                 sub[f'{col}_enc'] = pd.Categorical(sub[col]).codes
         sub['year_trend'] = sub['week_start'].dt.year - 2017
@@ -305,8 +310,14 @@ for crop in CROPS:
 def build_sequences(df_crop, fcols, h, date_lo, date_hi, max_n=None):
     """Returns (X, y) where X: (n, LOOKBACK, n_features), y: (n,) log-price target,
     for as-of weeks within [date_lo, date_hi] (inclusive)."""
+    # FIXED 2026-08-14: grouped by 'market' NAME, not market_id -- same
+    # collision bug as Scripts 15/15b/23. Here it's worse than a feature
+    # value being wrong: g.sort_values('week_start') on a combined group
+    # would interleave two DIFFERENT markets' weeks into one sequence
+    # window, feeding the LSTM/Transformer a physically nonsensical
+    # lookback (part Haryana, part UP for "Fatehabad APMC").
     Xs, ys = [], []
-    for market, g in df_crop.groupby('market'):
+    for market_id, g in df_crop.groupby('market_id'):
         g = g.sort_values('week_start').reset_index(drop=True)
         vals = g[fcols].fillna(0).to_numpy(dtype=np.float32)
         log_price = g['log_price'].to_numpy(dtype=np.float32)

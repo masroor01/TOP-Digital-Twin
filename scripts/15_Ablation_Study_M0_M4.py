@@ -394,20 +394,32 @@ _EXCLUDE = {
 
 def build_features(df_in):
     """Build all features; returns per-crop dict of DataFrames."""
+    # FIXED 2026-08-14 (full-layer audit, propagated from Script 23): every
+    # groupby/sort here used to key on 'market' NAME, not market_id. A few
+    # market names repeat across different states (e.g. "Fatehabad APMC" in
+    # both Haryana and Uttar Pradesh) -- grouping by name interleaves TWO
+    # physically different markets' price series into one shift/rolling
+    # computation, corrupting every lag/rolling feature for BOTH markets
+    # across their entire history. Affects a small number of markets (2-4
+    # name-colliding pairs per crop out of 800+), so crop-level AVERAGED
+    # ablation results are unlikely to move meaningfully, but the specific
+    # affected markets' own features were wrong. See Script 23's commit for
+    # the full discovery story (a user-reported dashboard anomaly on
+    # Fatehabad APMC traced back to this).
     out = {}
     for crop in CROPS:
         sub = df_in[df_in['crop'] == crop].copy()
-        sub = sub.sort_values(['market', 'week_start'])
+        sub = sub.sort_values(['market_id', 'week_start'])
 
         sub['log_price'] = np.log1p(sub['modal_price_weighted'])
 
         # Price lags
         for lag in LAG_WEEKS:
-            sub[f'price_lag_{lag}'] = sub.groupby('market')['log_price'].shift(lag)
+            sub[f'price_lag_{lag}'] = sub.groupby('market_id')['log_price'].shift(lag)
 
         # Rolling price stats (shift-1 to avoid leakage)
         for w in ROLL_WINS:
-            g = sub.groupby('market')['log_price']
+            g = sub.groupby('market_id')['log_price']
             sub[f'price_roll_mean_{w}'] = g.transform(
                 lambda x: x.shift(1).rolling(w, min_periods=2).mean())
             sub[f'price_roll_std_{w}'] = g.transform(
@@ -417,13 +429,13 @@ def build_features(df_in):
         if 'arrivals_tonnes_week' in sub.columns:
             sub['log_arr'] = np.log1p(sub['arrivals_tonnes_week'].clip(lower=0))
             for lag in [1, 2, 4]:
-                sub[f'arr_lag_{lag}'] = sub.groupby('market')['log_arr'].shift(lag)
+                sub[f'arr_lag_{lag}'] = sub.groupby('market_id')['log_arr'].shift(lag)
             for w in [4, 8]:
-                sub[f'arr_roll_mean_{w}'] = sub.groupby('market')['log_arr'].transform(
+                sub[f'arr_roll_mean_{w}'] = sub.groupby('market_id')['log_arr'].transform(
                     lambda x: x.shift(1).rolling(w, min_periods=2).mean())
 
         # YoY price
-        sub['price_yoy'] = sub.groupby('market')['log_price'].shift(52)
+        sub['price_yoy'] = sub.groupby('market_id')['log_price'].shift(52)
 
         # Sinusoidal seasonality
         sub['week_num'] = sub['week_start'].dt.isocalendar().week.astype(int)
@@ -447,8 +459,13 @@ def build_features(df_in):
             sub['season_storage']      = m.isin([5, 6, 7, 8, 9]).astype(int)  # cold-storage release sustains supply
             sub['season_lean']         = m.isin([10, 11]).astype(int)          # storage tail; highest price risk
 
-        # Market / state encodings
-        for col in ['state', 'market']:
+        # Market / state encodings. market_enc used to be
+        # pd.Categorical(sub['market']).codes -- two same-named markets in
+        # different states would get the IDENTICAL code, unable to be told
+        # apart by this feature at all. Categorical on market_id instead.
+        if 'market_id' in sub.columns:
+            sub['market_enc'] = pd.Categorical(sub['market_id']).codes
+        for col in ['state']:
             if col in sub.columns:
                 sub[f'{col}_enc'] = pd.Categorical(sub[col]).codes
 
@@ -554,7 +571,7 @@ for variant, feat_list_all in MODEL_FEATURE_SETS.items():
                 t0 = time.time()
 
                 df_h = df_crop.copy()
-                df_h['target'] = df_h.groupby('market')['log_price'].shift(-h)
+                df_h['target'] = df_h.groupby('market_id')['log_price'].shift(-h)
 
                 # Filter: must have target and enough price lags
                 required = ['target', 'price_lag_1']
@@ -667,7 +684,7 @@ if not MARKET_LEVEL_DIAGNOSTIC:
             te_end   = pd.Timestamp(fold_info['test_end'])
             for h in HORIZONS_RUN:
                 df_h = df_crop.copy()
-                df_h['target'] = df_h.groupby('market')['log_price'].shift(-h)
+                df_h['target'] = df_h.groupby('market_id')['log_price'].shift(-h)
                 df_h = df_h.dropna(subset=['target', 'log_price'])
                 test = df_h[(df_h['week_start'] >= te_start) & (df_h['week_start'] <= te_end)]
                 if len(test) < 10:
