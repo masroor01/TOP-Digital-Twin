@@ -284,16 +284,26 @@ rows_b = []
 
 for crop in CROPS:
     sub = panel_real[panel_real['crop'] == crop]
-    top5 = sub.groupby('market')['arrivals_tonnes_week'].mean().nlargest(5).index.tolist()
-    print(f'  {crop:7s} top-5 markets by mean arrivals: {top5}')
+    # FIXED 2026-08-14 (full-layer audit): selection/keying used to be by
+    # 'market' NAME -- a few names repeat across states (e.g. "Fatehabad
+    # APMC" in both Haryana and UP), so grouping/filtering by name risks
+    # silently blending two different markets' arrivals/price series if a
+    # colliding name happened to rank in the top 5. Selecting and keying by
+    # market_id instead; labels below include state for readability and to
+    # disambiguate any name that does repeat.
+    id_to_label = sub.drop_duplicates('market_id').set_index('market_id').apply(
+        lambda r: f"{r['market']} ({r['state']})" if 'state' in r else r['market'], axis=1)
+    top5_ids = sub.groupby('market_id')['arrivals_tonnes_week'].mean().nlargest(5).index.tolist()
+    print(f'  {crop:7s} top-5 markets by mean arrivals: {[id_to_label.get(i, i) for i in top5_ids]}')
 
     market_series = {}
-    for m in top5:
-        s = sub[sub['market'] == m].sort_values('week_start').set_index('week_start')['modal_price_weighted']
+    for mid in top5_ids:
+        m_label = id_to_label.get(mid, str(mid))
+        s = sub[sub['market_id'] == mid].sort_values('week_start').set_index('week_start')['modal_price_weighted']
         s = np.log(s)
-        s_stat, note = make_stationary(s, m)
+        s_stat, note = make_stationary(s, m_label)
         if s_stat is not None:
-            market_series[m] = s_stat
+            market_series[m_label] = s_stat
 
     pairs_tested = 0
     for m_from in market_series:
