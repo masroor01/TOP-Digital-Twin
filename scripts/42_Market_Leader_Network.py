@@ -93,6 +93,31 @@ print('=' * 65)
 print('\n[1] Selecting top-20 markets per crop (by volume, >=70% real coverage) ...')
 panel = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
 
+# FIXED 2026-08-14 (full-layer audit): every function in this script keys
+# candidate selection, Granger series, and net-leadership scoring by
+# 'market' NAME (build_market_series, run_network, net_scores, the
+# confound check, the stability check, both figures). A few names repeat
+# across different states within the same crop (e.g. "Fatehabad APMC" is
+# two different physical markets for both tomato and onion). Left
+# unfixed, groupby('market') would silently blend two different markets'
+# coverage/volume/price series into one -- directly corrupting which
+# market gets crowned "the leader," which is exactly the number this
+# script's output feeds into the patent disclosure document. Same
+# minimal fix as Script 31: relabel colliding names to include state
+# ONCE, here, before any candidate-selection or Granger logic runs, so
+# every downstream 'market' string is genuinely unique with zero changes
+# to the actual statistical logic below.
+_collision_keys = (panel.drop_duplicates(['crop', 'market_id'])
+                   .groupby(['crop', 'market'])['market_id'].nunique())
+_collision_keys = set(_collision_keys[_collision_keys > 1].index)
+if _collision_keys:
+    _mask = panel.set_index(['crop', 'market']).index.isin(_collision_keys)
+    n_relabeled = _mask.sum()
+    panel.loc[_mask, 'market'] = (panel.loc[_mask, 'market'] + ' (' + panel.loc[_mask, 'state'] + ')')
+    print(f'  Relabeled {n_relabeled:,} rows across {len(_collision_keys)} (crop, market) name '
+          f'collision(s) to include state, so every "market" value used below is genuinely unique: '
+          f'{sorted(_collision_keys)}')
+
 candidate_markets = {}
 for crop in CROPS:
     sub = panel[panel['crop'] == crop]
