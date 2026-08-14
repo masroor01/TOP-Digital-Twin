@@ -46,7 +46,7 @@ OUTDIR = r'C:\Users\masro\Downloads\Agmarknet_Weekly'
 os.makedirs(OUTDIR, exist_ok=True)
 
 START_DATE = '2017-01-01'
-END_DATE   = '2026-07-27'
+END_DATE   = '2026-08-12'
 
 # Minimum share of a market's own full grid that must be real (non-imputed)
 # for the market to be retained. Added 2026-07-27, originally 0.80. Revised
