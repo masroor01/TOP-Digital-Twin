@@ -210,6 +210,35 @@ print('\n[1] Building the market-level weekly log-price panel ...')
 
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
 window = df[(df['week_start'] >= WINDOW_START) & (df['week_start'] <= WINDOW_END)].copy()
+
+# FIXED 2026-08-14 (full-layer audit): this script's entire market-keying
+# scheme -- every groupby(['crop','market']) and pivot_table(columns=
+# ['crop','market']) below -- assumes 'market' is unique within a crop.
+# A few names repeat across different states within the same crop (e.g.
+# "Fatehabad APMC" is TWO different physical markets for both tomato and
+# onion, one in Haryana and one in Uttar Pradesh; "Pratapgarh APMC" for
+# onion; "Balugaon APMC" for tomato). Without this fix, pivot_table's
+# default aggfunc='mean' would silently AVERAGE two different markets'
+# price series together under one column whenever both fall in the
+# window -- corrupting not just the pivot but the coverage/qualification
+# stats computed from it (which decide the treated/donor pools for the
+# causal estimate). Rather than rewrite every pivot/groupby call site (an
+# 8-site, 900-line script doing statistically sensitive causal inference
+# -- a bigger surface for new bugs than the fix is worth), relabel
+# colliding names to include state HERE, once, before any groupby/pivot
+# happens. Every downstream 'market' reference becomes genuinely unique
+# with zero changes to the actual pivot/groupby logic.
+_collision_keys = (window.drop_duplicates(['crop', 'market_id'])
+                   .groupby(['crop', 'market'])['market_id'].nunique())
+_collision_keys = set(_collision_keys[_collision_keys > 1].index)
+if _collision_keys:
+    _mask = window.set_index(['crop', 'market']).index.isin(_collision_keys)
+    n_relabeled = _mask.sum()
+    window.loc[_mask, 'market'] = (window.loc[_mask, 'market'] + ' (' + window.loc[_mask, 'state'] + ')')
+    print(f'  Relabeled {n_relabeled:,} rows across {len(_collision_keys)} (crop, market) name '
+          f'collision(s) to include state, so every "market" value used below is genuinely unique: '
+          f'{sorted(_collision_keys)}')
+
 all_weeks = sorted(window['week_start'].unique())
 n_weeks = len(all_weeks)
 print(f'  Window: {WINDOW_START.date()} to {WINDOW_END.date()} ({n_weeks} weeks)')

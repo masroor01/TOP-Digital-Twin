@@ -1,30 +1,30 @@
 subwindow,dropped_donor,original_weight,ATT_pct_full,ATT_pct_leave_out,delta_pct_pts
 escalation_preban,tomato__Rayya APMC,0.1334,56.2,46.1,-10.1
-escalation_preban,tomato__Vikasnagar APMC,0.1164,56.2,56.5,0.3
-escalation_preban,tomato__Pehowa APMC,0.1157,56.2,60.8,4.7
-escalation_preban,tomato__Champaknagar APMC,0.0791,56.2,58.7,2.5
-escalation_preban,tomato__Roorkee APMC,0.074,56.2,54.8,-1.3
-escalation_preban,potato__Gangarampur(Dakshin Dinajpur) APMC,0.07,56.2,55.2,-0.9
-escalation_preban,tomato__Barara APMC,0.0663,56.2,56.9,0.8
+escalation_preban,tomato__Vikasnagar APMC,0.1163,56.2,56.5,0.3
+escalation_preban,tomato__Pehowa APMC,0.1157,56.2,60.9,4.7
+escalation_preban,tomato__Champaknagar APMC,0.079,56.2,58.7,2.5
+escalation_preban,tomato__Roorkee APMC,0.0739,56.2,54.9,-1.3
+escalation_preban,potato__Gangarampur(Dakshin Dinajpur) APMC,0.07,56.2,55.3,-0.9
+escalation_preban,tomato__Barara APMC,0.0662,56.2,57.0,0.8
 escalation_preban,potato__Islampur APMC,0.0517,56.2,54.9,-1.3
-escalation_preban,potato__Vikasnagar APMC,0.0501,56.2,56.5,0.4
-escalation_preban,potato__Mekhliganj APMC,0.0421,56.2,55.8,-0.3
-escalation_preban,tomato__Sadhaura APMC,0.0383,56.2,56.8,0.7
+escalation_preban,potato__Vikasnagar APMC,0.0501,56.2,56.6,0.4
+escalation_preban,potato__Mekhliganj APMC,0.0421,56.2,55.9,-0.3
+escalation_preban,tomato__Sadhaura APMC,0.0384,56.2,56.9,0.7
 escalation_preban,tomato__Chelakkara Market,0.0318,56.2,55.9,-0.3
 escalation_preban,tomato__SMY Bhuntar,0.0299,56.2,54.5,-1.6
 escalation_preban,potato__Toofanganj APMC,0.0268,56.2,55.8,-0.4
 escalation_preban,potato__Gajol APMC,0.0255,56.2,56.0,-0.2
 postban,tomato__Rayya APMC,0.1284,14.5,9.2,-5.3
 postban,tomato__Pehowa APMC,0.1114,14.5,16.2,1.7
-postban,tomato__Vikasnagar APMC,0.111,14.5,9.9,-4.7
+postban,tomato__Vikasnagar APMC,0.111,14.5,9.9,-4.6
 postban,tomato__Champaknagar APMC,0.0745,14.5,14.3,-0.2
-postban,tomato__Roorkee APMC,0.0716,14.5,15.2,0.7
-postban,potato__Gangarampur(Dakshin Dinajpur) APMC,0.0658,14.5,15.3,0.8
+postban,tomato__Roorkee APMC,0.0715,14.5,15.2,0.7
+postban,potato__Gangarampur(Dakshin Dinajpur) APMC,0.0657,14.5,15.3,0.8
 postban,tomato__Barara APMC,0.0648,14.5,14.3,-0.2
 postban,potato__Islampur APMC,0.049,14.5,14.4,-0.2
 postban,potato__Vikasnagar APMC,0.049,14.5,12.2,-2.4
 postban,potato__Mekhliganj APMC,0.0404,14.5,14.8,0.3
-postban,tomato__Sadhaura APMC,0.0397,14.5,13.7,-0.8
+postban,tomato__Sadhaura APMC,0.0398,14.5,13.7,-0.8
 postban,tomato__Chelakkara Market,0.0343,14.5,14.9,0.4
 postban,tomato__SMY Bhuntar,0.0331,14.5,14.9,0.4
 postban,potato__Toofanganj APMC,0.0271,14.5,14.8,0.3
