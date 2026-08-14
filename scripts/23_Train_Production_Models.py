@@ -324,7 +324,16 @@ for crop in CROPS:
     # Reference rows: latest available feature vector per market, for the
     # dashboard's baseline "current state" (built once per crop, reused
     # across all 4 horizon models since features are the same up to target)
-    latest_idx = df_crop.sort_values('week_start').groupby('market').tail(1).index
+    #
+    # FIXED 2026-08-14 (full-layer audit): grouping used to be by 'market'
+    # NAME, not market_id. A handful of market names repeat across
+    # different states (e.g. "Fatehabad APMC" exists in both Haryana and
+    # Uttar Pradesh) -- groupby('market') silently collapsed each such
+    # pair into ONE row, so one of the two real, independently-tracked
+    # markets got no reference row at all (not even flagged, just absent).
+    # market_id is the panel's actual unique key; grouping by it gives
+    # every physical market its own row.
+    latest_idx = df_crop.sort_values('week_start').groupby('market_id').tail(1).index
     latest = df_crop.loc[latest_idx].copy()
     latest['crop'] = crop
 
@@ -373,18 +382,18 @@ for crop in CROPS:
     # imputed) price + its date per market, so the dashboard can be honest
     # about staleness instead of implying every row is a real trade.
     observed = df_crop[df_crop['imputed'] == 0].sort_values('week_start')
-    last_observed = (observed.groupby('market')
+    last_observed = (observed.groupby('market_id')
                       .agg(last_observed_price=('modal_price_weighted', 'last'),
                            last_observed_date=('week_start', 'last')))
-    latest = latest.merge(last_observed, on='market', how='left')
+    latest = latest.merge(last_observed, on='market_id', how='left')
 
     # Data-sufficiency signal: % of the last 52 weeks that were imputed
     # (not a real trade) for this market — lets the dashboard flag thin-
     # data markets instead of presenting every prediction with equal
     # confidence regardless of how much real data backs it.
-    recent = df_crop.sort_values('week_start').groupby('market').tail(52)
-    pct_imputed = recent.groupby('market')['imputed'].mean().mul(100).rename('pct_imputed_last_52w')
-    latest = latest.merge(pct_imputed, on='market', how='left')
+    recent = df_crop.sort_values('week_start').groupby('market_id').tail(52)
+    pct_imputed = recent.groupby('market_id')['imputed'].mean().mul(100).rename('pct_imputed_last_52w')
+    latest = latest.merge(pct_imputed, on='market_id', how='left')
 
     # Sufficient-history flag: markets that would NOT have qualified for
     # training (dropna(['target','price_lag_1']) above excludes any row
@@ -438,10 +447,13 @@ for crop in CROPS:
 
     # Price history (last 2 years per market): for the dashboard's
     # historical-context line chart, so forecasts plot against real actual
-    # prices instead of a single disconnected baseline point
-    hist = df_crop.sort_values('week_start').groupby('market').tail(HISTORY_WEEKS).copy()
+    # prices instead of a single disconnected baseline point.
+    # Grouped by market_id (not name) for the same reason as latest_idx
+    # above -- otherwise two same-named markets in different states would
+    # have their histories silently blended together downstream.
+    hist = df_crop.sort_values('week_start').groupby('market_id').tail(HISTORY_WEEKS).copy()
     hist['crop'] = crop
-    history_rows.append(hist[['crop', 'market', 'week_start', 'modal_price_weighted']])
+    history_rows.append(hist[['crop', 'market_id', 'market', 'state', 'week_start', 'modal_price_weighted']])
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -457,7 +469,7 @@ print(f'  Saved: {fcols_path}')
 ref_df = pd.concat(reference_rows, ignore_index=True)
 # log_price isn't an M6 feature (it's the target's source column) but the
 # dashboard needs it to display "last observed price" — include explicitly
-keep_cols = (['crop', 'market', 'state', 'week_start', 'log_price',
+keep_cols = (['crop', 'market_id', 'market', 'state', 'week_start', 'log_price',
               'imputed', 'last_observed_price', 'last_observed_date',
               'pct_imputed_last_52w', 'sufficient_history', 'stale_reference'] +
              sorted(set(M6_FEATS) & set(ref_df.columns)))

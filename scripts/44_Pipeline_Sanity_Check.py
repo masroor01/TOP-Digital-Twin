@@ -31,6 +31,20 @@ discoveries:
      climatological seasonal-median estimate. Both the model and the
      dashboard's naive-persistence comparison were silently anchored on
      that stale estimate. Caught by a live tomato forecast validation.
+  7. Hardcoded upper-bound date cap in Script 23 (2026-08-14) -- a
+     copy-paste leftover silently discarded every row past a stale fixed
+     date BEFORE any feature engineering, so a "successful" retrain on
+     freshly-refreshed data was actually still training on the old
+     cutoff. Caught by a full-layer audit: two brand-new markets whose
+     only real rows were past the cap were silently ABSENT from
+     reference_rows.csv entirely, not just flagged.
+  8. market-name key collisions (2026-08-14) -- reference_rows.csv used
+     to be keyed by market NAME, not market_id. A few names repeat across
+     different states (e.g. "Fatehabad APMC" in both Haryana and Uttar
+     Pradesh); grouping by name silently collapsed each such pair into
+     ONE row, dropping the other real market entirely. Caught by the same
+     full-layer audit, comparing market_id counts against reference_rows
+     row counts per crop.
 
 Run this after Script 09 (data refresh) and again after Script 23
 (retrain) -- see README Sec 4. Exits non-zero if any check FAILs, so it can
@@ -168,6 +182,50 @@ else:
             check('PASS', f'B1b {crop}',
                   f'{n_stale}/{len(sub)} markets flagged stale_reference=True '
                   f'(expected to be a minority, not all or none).')
+
+    # B1c: reference_rows.csv week_start must match the panel's own max week --
+    # the hardcoded-date-cap bug (2026-08-14): a stale fixed upper bound
+    # silently truncated the panel before feature engineering, so a
+    # "successful" retrain kept using an old cutoff despite fresher data
+    # being on disk. A gap of more than 1 week is a red flag.
+    for crop in CROPS:
+        panel_path = os.path.join(DATA_DIR, f'{crop}_weekly_panel.csv')
+        sub = ref[ref['crop'] == crop]
+        if not os.path.exists(panel_path) or len(sub) == 0 or 'week_start' not in sub.columns:
+            continue
+        panel_max = pd.to_datetime(pd.read_csv(panel_path, usecols=['week_start'])['week_start']).max()
+        ref_max = pd.to_datetime(sub['week_start']).max()
+        gap_days = (panel_max - ref_max).days
+        if gap_days > 7:
+            check('FAIL', f'B1c {crop}',
+                  f'reference_rows.csv week_start ({ref_max.date()}) is {gap_days} days behind '
+                  f'the panel\'s own max week ({panel_max.date()}) -- check Script 23 for a '
+                  f'hardcoded upper-bound date filter silently truncating the panel.')
+        else:
+            check('PASS', f'B1c {crop}', f'reference_rows.csv week_start ({ref_max.date()}) matches the panel.')
+
+    # B1d: market_id column must exist and its distinct count must match the
+    # panel exactly -- the market-name-collision bug (2026-08-14): grouping
+    # reference rows by market NAME silently collapsed same-named markets in
+    # different states (e.g. two "Fatehabad APMC"s) into one row, dropping
+    # the other entirely.
+    if 'market_id' not in ref.columns:
+        check('FAIL', 'B1d',
+              'reference_rows.csv has no market_id column -- markets are being keyed by name, '
+              'which silently drops same-named markets in different states. See Script 23.')
+    else:
+        for crop in CROPS:
+            panel_path = os.path.join(DATA_DIR, f'{crop}_weekly_panel.csv')
+            if not os.path.exists(panel_path):
+                continue
+            panel_ids = pd.read_csv(panel_path, usecols=['market_id'])['market_id'].nunique()
+            ref_ids = ref[ref['crop'] == crop]['market_id'].nunique()
+            if panel_ids != ref_ids:
+                check('FAIL', f'B1d {crop}',
+                      f'panel has {panel_ids} distinct market_ids but reference_rows.csv has '
+                      f'{ref_ids} -- some markets are being silently dropped or merged.')
+            else:
+                check('PASS', f'B1d {crop}', f'{ref_ids} distinct market_ids match the panel exactly.')
 
     # B2: feature_columns.json -- every listed feature must actually exist in reference_rows.
     if os.path.exists(fcols_path):

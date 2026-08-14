@@ -297,7 +297,7 @@ st.sidebar.title('🌾 TOP Digital Twin')
 st.sidebar.caption('Price scenario simulator (M6 production models)')
 
 with st.sidebar.expander('Data & coverage'):
-    _counts = reference.groupby('crop')['market'].nunique()
+    _counts = reference.groupby('crop')['market_id'].nunique()
     st.markdown(
         'Source: Agmarknet (price/arrivals), CMIE/RBI/PPAC (macro), '
         'GEE Sentinel-2/MODIS/ERA5/CHIRPS (satellite/climate), 2017-2026.\n\n'
@@ -327,11 +327,19 @@ state_sel = st.sidebar.selectbox('State / UT', states)
 crop_markets = crop_ref[crop_ref['state'] == state_sel].sort_values('market')
 market = st.sidebar.selectbox('Market', crop_markets['market'].unique())
 
+# A handful of market names repeat across different states (e.g. "Fatehabad
+# APMC" exists in both Haryana and Uttar Pradesh) -- reference_rows.csv now
+# carries both as separate rows (market_id-keyed, see Script 23), and since
+# crop_markets is already filtered to state_sel before this lookup, matching
+# on name here is safe: names are unique WITHIN a state. base_row['market_id']
+# is used below wherever a market must be matched without an accompanying
+# state filter (price history, charts), since name alone is not a safe key.
 base_row_df = crop_markets[crop_markets['market'] == market]
 if base_row_df.empty:
     st.error('No baseline data for this crop/market combination.')
     st.stop()
 base_row = base_row_df.iloc[0].to_dict()
+market_id = base_row['market_id']
 as_of = pd.Timestamp(base_row['week_start'])
 today = pd.Timestamp(datetime.date.today())
 data_weeks_stale = int((today - as_of).days // 7)
@@ -565,7 +573,7 @@ st.caption(
 )
 # Trailing 12 weeks of REAL observed price up to as_of, for the sparkline
 # on each ticker card — genuine recent trend context, not decoration.
-_ticker_hist = (history[(history['crop'] == crop) & (history['market'] == market)
+_ticker_hist = (history[(history['crop'] == crop) & (history['market_id'] == market_id)
                          & (history['week_start'] <= as_of)]
                  .sort_values('week_start')
                  .tail(12))
@@ -792,7 +800,7 @@ st.caption(
     f'horizons, not just changing this chart.'
 )
 
-mkt_history = (history[(history['crop'] == crop) & (history['market'] == market)]
+mkt_history = (history[(history['crop'] == crop) & (history['market_id'] == market_id)]
                .sort_values('week_start'))
 
 fig = go.Figure()
@@ -877,14 +885,23 @@ arr_top = (crop_ref.dropna(subset=['log_arr'])
            .nlargest(TOP_N, 'arrivals_tonnes')
            .sort_values('arrivals_tonnes'))
 
+
+def _disambiguated_labels(df):
+    """Market names repeat across states (e.g. two "Fatehabad APMC"s) --
+    append the state only for names that actually collide within this
+    specific top-N list, so the common case stays clean."""
+    dup_names = set(df['market'][df['market'].duplicated(keep=False)])
+    return [f"{m} ({s})" if m in dup_names else m for m, s in zip(df['market'], df['state'])]
+
+
 mkt_col1, mkt_col2 = st.columns(2)
 with mkt_col1:
     if price_top.empty:
         st.info('No real (non-imputed) price data available to rank markets.')
     else:
         fig_price = go.Figure(go.Bar(
-            x=price_top['last_observed_price'], y=price_top['market'], orientation='h',
-            marker_color=['#e64980' if m == market else '#495057' for m in price_top['market']]))
+            x=price_top['last_observed_price'], y=_disambiguated_labels(price_top), orientation='h',
+            marker_color=['#e64980' if mid == market_id else '#495057' for mid in price_top['market_id']]))
         fig_price.update_layout(title='By last observed price (Rs/quintal)', height=440,
                                  margin=dict(l=10, r=10, t=40, b=10))
         st.plotly_chart(fig_price, use_container_width=True)
@@ -893,8 +910,8 @@ with mkt_col2:
         st.info('No arrivals data available to rank markets.')
     else:
         fig_arr = go.Figure(go.Bar(
-            x=arr_top['arrivals_tonnes'], y=arr_top['market'], orientation='h',
-            marker_color=['#e64980' if m == market else '#495057' for m in arr_top['market']]))
+            x=arr_top['arrivals_tonnes'], y=_disambiguated_labels(arr_top), orientation='h',
+            marker_color=['#e64980' if mid == market_id else '#495057' for mid in arr_top['market_id']]))
         fig_arr.update_layout(title='By arrivals, latest week (tonnes)', height=440,
                                margin=dict(l=10, r=10, t=40, b=10))
         st.plotly_chart(fig_arr, use_container_width=True)
@@ -930,37 +947,43 @@ with trend_col2:
     )
 
 trend_crop_history = history[history['crop'] == trend_crop]
-market_state = trend_crop_ref.drop_duplicates('market').set_index('market')['state']
-trend_selectable_markets = set(trend_crop_ref[trend_crop_ref['state'].isin(trend_states_sel)]['market'])
-history_markets = sorted(m for m in trend_crop_history['market'].unique() if m in trend_selectable_markets)
-default_trend_markets = [market] if (trend_crop == crop and market in history_markets) else []
-selected_trend_markets = st.multiselect(
-    'Markets to compare', options=history_markets, default=default_trend_markets,
-    max_selections=15, format_func=lambda m: f'{m} — {market_state.get(m, "?")}',
+# Selection unit is market_id, not market name -- names repeat across states
+# (e.g. two "Fatehabad APMC"s), so name alone can't safely identify a market
+# once both duplicates have real reference rows (see Script 23). Display
+# labels are built from a market_id -> "Name — State" lookup instead.
+id_to_name = trend_crop_ref.drop_duplicates('market_id').set_index('market_id')['market']
+id_to_state = trend_crop_ref.drop_duplicates('market_id').set_index('market_id')['state']
+trend_selectable_ids = set(trend_crop_ref[trend_crop_ref['state'].isin(trend_states_sel)]['market_id'])
+history_market_ids = sorted(mid for mid in trend_crop_history['market_id'].unique() if mid in trend_selectable_ids)
+default_trend_ids = [market_id] if (trend_crop == crop and market_id in history_market_ids) else []
+selected_trend_ids = st.multiselect(
+    'Markets to compare', options=history_market_ids, default=default_trend_ids,
+    max_selections=15, format_func=lambda mid: f'{id_to_name.get(mid, "?")} — {id_to_state.get(mid, "?")}',
     help='Select up to 15 markets from the state(s) chosen above — defaults to the sidebar\'s '
          'currently selected market when crop and state both match. Mixing states is fine; '
          'each market keeps its own line and legend label.'
 )
 
-if not selected_trend_markets:
+if not selected_trend_ids:
     st.info('Select at least one market above to see its price trend.')
 else:
     fig_trend = go.Figure()
-    no_data_markets = []
-    for m in selected_trend_markets:
-        mdata = trend_crop_history[trend_crop_history['market'] == m].sort_values('week_start')
+    no_data_labels = []
+    for mid in selected_trend_ids:
+        mdata = trend_crop_history[trend_crop_history['market_id'] == mid].sort_values('week_start')
+        m_name, m_state = id_to_name.get(mid, '?'), id_to_state.get(mid, '?')
         if mdata['modal_price_weighted'].notna().sum() == 0:
-            no_data_markets.append(m)
+            no_data_labels.append(f'{m_name} ({m_state})')
             continue
-        legend_name = m if len(trend_states_sel) <= 1 else f'{m} ({market_state.get(m, "?")})'
+        legend_name = m_name if len(trend_states_sel) <= 1 else f'{m_name} ({m_state})'
         fig_trend.add_trace(go.Scatter(
             x=mdata['week_start'], y=mdata['modal_price_weighted'],
             mode='lines', name=legend_name,
-            line=dict(width=3 if (trend_crop == crop and m == market) else 1.5)
+            line=dict(width=3 if (trend_crop == crop and mid == market_id) else 1.5)
         ))
-    if no_data_markets:
+    if no_data_labels:
         st.warning(
-            f'⚠️ No real observed trades in this window for: {", ".join(no_data_markets)} '
+            f'⚠️ No real observed trades in this window for: {", ".join(no_data_labels)} '
             f'— entirely imputed/missing, so left off the chart rather than plotting a '
             f'flat/empty line.'
         )
@@ -1065,7 +1088,7 @@ elif not _api_key():
     )
 else:
     scenario_key = hashlib.md5(
-        f"{crop}|{market}|{horizon}|{sorted((c, scenario.get(c)) for c in diff_cols)}".encode()
+        f"{crop}|{market_id}|{horizon}|{sorted((c, scenario.get(c)) for c in diff_cols)}".encode()
     ).hexdigest()
     reco_state_key = f'ai_reco_{scenario_key}'
 
@@ -1081,7 +1104,8 @@ else:
             'forecasting dashboard for Indian APMC markets (Tomato/Onion/Potato, HADP-04, '
             'SKUAST-K). A user ran a what-if scenario. Ground your answer STRICTLY in the '
             'numbers given below — do not invent statistics, events, or data you were not given.\n\n'
-            f'Crop: {crop.capitalize()}\nMarket: {market}\nForecast horizon: {horizon} weeks ahead\n'
+            f'Crop: {crop.capitalize()}\nMarket: {market}, {base_row.get("state", "")}\n'
+            f'Forecast horizon: {horizon} weeks ahead\n'
             f'Baseline prediction: Rs {baseline_pred:,.0f}/quintal\n'
             f'Scenario prediction: Rs {scenario_pred:,.0f}/quintal '
             f'({delta_pct:+.1f}%, {delta:+,.0f} Rs/quintal)\n'
