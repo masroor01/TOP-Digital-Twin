@@ -202,25 +202,39 @@ print(f'  Panel joined: {len(df):,} rows x {df.shape[1]} columns')
 print('\n[2] Engineering features ...')
 
 def build_features(df_in):
+    # FIXED 2026-08-14 (full-layer audit, part 2): every groupby/sort in this
+    # function used to key on 'market' NAME, not market_id. A few market
+    # names repeat across different states (e.g. "Fatehabad APMC" in both
+    # Haryana and Uttar Pradesh) -- grouping by name silently interleaves
+    # TWO physically different markets' price series into one shift/rolling
+    # computation, corrupting every lag/rolling feature (price_lag_*,
+    # price_roll_*, arr_lag_*, arr_roll_*, price_yoy) for BOTH markets, for
+    # their entire history, not just the latest row. This is a deeper bug
+    # than the reference-row grouping fixed earlier today -- that fix only
+    # stopped one of the two markets from being silently dropped; this fix
+    # is needed for either market's features to be computed correctly at
+    # all. Found by the user reporting an unexpected "insufficient history"
+    # warning for Fatehabad APMC despite it having 9 years of real data --
+    # traced to price_lag_1 being NaN due to this exact interleaving.
     out = {}
     for crop in CROPS:
         sub = df_in[df_in['crop'] == crop].copy()
-        sub = sub.sort_values(['market', 'week_start'])
+        sub = sub.sort_values(['market_id', 'week_start'])
         sub['log_price'] = np.log1p(sub['modal_price_weighted'])
         for lag in LAG_WEEKS:
-            sub[f'price_lag_{lag}'] = sub.groupby('market')['log_price'].shift(lag)
+            sub[f'price_lag_{lag}'] = sub.groupby('market_id')['log_price'].shift(lag)
         for w in ROLL_WINS:
-            g = sub.groupby('market')['log_price']
+            g = sub.groupby('market_id')['log_price']
             sub[f'price_roll_mean_{w}'] = g.transform(lambda x: x.shift(1).rolling(w, min_periods=2).mean())
             sub[f'price_roll_std_{w}']  = g.transform(lambda x: x.shift(1).rolling(w, min_periods=2).std())
         if 'arrivals_tonnes_week' in sub.columns:
             sub['log_arr'] = np.log1p(sub['arrivals_tonnes_week'].clip(lower=0))
             for lag in [1, 2, 4]:
-                sub[f'arr_lag_{lag}'] = sub.groupby('market')['log_arr'].shift(lag)
+                sub[f'arr_lag_{lag}'] = sub.groupby('market_id')['log_arr'].shift(lag)
             for w in [4, 8]:
-                sub[f'arr_roll_mean_{w}'] = sub.groupby('market')['log_arr'].transform(
+                sub[f'arr_roll_mean_{w}'] = sub.groupby('market_id')['log_arr'].transform(
                     lambda x: x.shift(1).rolling(w, min_periods=2).mean())
-        sub['price_yoy'] = sub.groupby('market')['log_price'].shift(52)
+        sub['price_yoy'] = sub.groupby('market_id')['log_price'].shift(52)
         sub['week_num'] = sub['week_start'].dt.isocalendar().week.astype(int)
         sub['sin_week'] = np.sin(2 * np.pi * sub['week_num'] / 52)
         sub['cos_week'] = np.cos(2 * np.pi * sub['week_num'] / 52)
@@ -239,7 +253,14 @@ def build_features(df_in):
             sub['season_harvest']      = m.isin([2, 3, 4]).astype(int)
             sub['season_storage']      = m.isin([5, 6, 7, 8, 9]).astype(int)
             sub['season_lean']         = m.isin([10, 11]).astype(int)
-        for col in ['state', 'market']:
+        # market_enc used to be pd.Categorical(sub['market']).codes -- two
+        # same-named markets in different states would get the IDENTICAL
+        # code, making this feature unable to distinguish them at all.
+        # Categorical on market_id instead (still a compact, model-friendly
+        # integer code, just keyed on the actual unique identifier).
+        if 'market_id' in sub.columns:
+            sub['market_enc'] = pd.Categorical(sub['market_id']).codes
+        for col in ['state']:
             if col in sub.columns:
                 sub[f'{col}_enc'] = pd.Categorical(sub[col]).codes
         sub['year_trend'] = sub['week_start'].dt.year - 2017
@@ -282,7 +303,7 @@ for crop in CROPS:
 
     for h in HORIZONS:
         df_h = df_crop.copy()
-        df_h['target'] = df_h.groupby('market')['log_price'].shift(-h)
+        df_h['target'] = df_h.groupby('market_id')['log_price'].shift(-h)
         required = ['target', 'price_lag_1']
         df_h = df_h.dropna(subset=[c for c in required if c in df_h.columns])
 
