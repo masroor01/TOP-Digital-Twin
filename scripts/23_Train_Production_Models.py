@@ -119,7 +119,21 @@ print('=' * 65)
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[1] Loading panel + all layers ...')
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
-df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2026-07-27')]
+# BUG FOUND 2026-08-14 (full-layer audit): this upper bound was a hardcoded
+# copy-paste leftover, same failure shape as the earlier 2025-12-31 cap
+# (see git history) -- it silently discarded every row from the 2026-08-03/
+# 2026-08-10 merge (Script 09e) BEFORE any feature engineering, so a full
+# retrain that appeared to succeed was actually training and building
+# reference_rows.csv from the exact same stale 2026-07-27 cutoff as before.
+# Caught because two brand-new markets whose ONLY real rows are 2026-08-03/
+# 08-10 (Alwal,RBZ / Goraya APMC) were silently absent from reference_rows.csv
+# entirely, not just flagged sufficient_history=False. This is a PRODUCTION
+# script, not a fixed-evaluation-window study like Script 15 -- it should
+# never need a manually-maintained upper date bound at all; the panel's own
+# real max date is the only limit that should apply. Left a generous bound
+# here (not removed outright) only as a sanity guard against a corrupted
+# future-dated row, matching Scripts 09/15/17's convention.
+df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2030-12-31')]
 df = df.sort_values(['crop', 'market', 'week_start']).reset_index(drop=True)
 df['year']  = df['week_start'].dt.year
 df['month'] = df['week_start'].dt.month
