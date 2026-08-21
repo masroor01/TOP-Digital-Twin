@@ -64,7 +64,7 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 
 | Script | What it does | Depends on |
 |---|---|---|
-| `09_Agmarknet_Weekly_Panel.py` | Builds the core weekly price/arrivals panel from raw Agmarknet CSVs (tomato/onion/potato, all-India). Handles ISO-week alignment and gap imputation (see §7 imputation caveat). Applies a real-coverage filter (`MIN_REAL_COVERAGE = 0.70`, added 2026-07-27, revised same day from an initial 0.80): markets are dropped unless >=70% of their own real reporting span is real (non-imputed) data — potato additionally keeps its own >=8-of-9-years balanced-panel rule first. Kept market counts: tomato 834 (was 1,725 unfiltered), onion 809 (was 1,580), potato 82 (was 87). Revised down from 80% because the market-level DM test (Script 18b) at 80% found onion's h=1w result resting on only 34/189 significant markets; 70% roughly triples that to a sturdier sample. **Grid-adaptivity fix, 2026-08-01**: each market's coverage grid now starts at its own first real observation rather than a fixed global `START_DATE` — the earlier fixed-grid version silently scored a market as "missing" for every week before it existed in the system, undercounting coverage for markets that onboarded later. Fixing this grew tomato from 517 and onion from 246 to the counts above (potato unaffected — its balanced-panel prefilter already cleared this bar). See `paper_drafts/methods_data_section.txt` Sec 3.3 for the full account. `data/market_coverage_browser.html` is a separate, purely exploratory viewer over ALL markets (unfiltered) — it was never wired into this filter and isn't a decision record. | Raw Agmarknet CSVs (see §5) |
+| `09_Agmarknet_Weekly_Panel.py` | Builds the core weekly price/arrivals panel from raw Agmarknet CSVs (tomato/onion/potato, all-India). Handles ISO-week alignment and gap imputation (see §7 imputation caveat). Applies a real-coverage filter (`MIN_REAL_COVERAGE = 0.70`, added 2026-07-27, revised same day from an initial 0.80): markets are dropped unless >=70% of their own real reporting span is real (non-imputed) data — potato additionally keeps its own >=8-of-9-years balanced-panel rule first. Kept market counts (current, 2026-08-21): tomato 840 (was 1,729 unfiltered), onion 814 (was 1,587), potato 82 (was 87, balanced-panel-prefiltered count — 1,258 raw markets have at least one observation, but only 87 clear the >=8-of-10-years bar). Counts were 834/809/82 as of the 2026-08-01 grid fix (below) and have since grown slightly as the panel picked up more 2026 weeks, letting a few more borderline markets clear the 70% threshold — filter logic itself unchanged. Threshold revised down from 80% to 70% on 2026-07-27 because the market-level DM test (Script 18b) at 80% found onion's h=1w result resting on only 34/189 significant markets; 70% roughly triples that to a sturdier sample. **Grid-adaptivity fix, 2026-08-01**: each market's coverage grid now starts at its own first real observation rather than a fixed global `START_DATE` — the earlier fixed-grid version silently scored a market as "missing" for every week before it existed in the system, undercounting coverage for markets that onboarded later. Fixing this grew tomato from 517 and onion from 246 to (at the time) 834/809 (potato unaffected — its balanced-panel prefilter already cleared this bar). See `Model_Output/MANIFEST.md` for the full account and current counts — `paper_drafts/` is a working folder cleared between manuscript passes, not a stable citation target. `data/market_coverage_browser.html` is a separate, purely exploratory viewer over ALL markets (unfiltered) — it was never wired into this filter and isn't a decision record. | Raw Agmarknet CSVs (see §5) |
 | `09b_Merge_Onion_2026_Update.py` | One-off/refresh utility: merges the Agmarknet **portal's** separate "Daily Price Report" + "Daily Arrival Report" CSVs into the same row schema as the main onion raw file, matching markets to existing `market_id`s by normalized (state, market) name and assigning new sequential IDs for markets not seen before. Needed because onion's original scraper source doesn't get topped up the way tomato/potato's does — see §5. Run before `09_Agmarknet_Weekly_Panel.py` when refreshing onion. | Onion Daily Price/Arrival Report CSVs (see §5) |
 | `10_CMIE_Macro_Parser.py` | Parses CMIE macro Excel exports into `data/cmie_macro/` | Raw CMIE Excel files |
 | `10b_Extend_Macro_2026.py` | One-off/refresh utility: extends `data/rbi_dbie/`, `data/ppac_macro/`, and `data/cmie_macro/` CSVs in place with new CMIE Economic Outlook exports (repo/reverse-repo rate, USD/INR, WPI, diesel/LPG, agri credit, agri wages, IIP). Column mappings for each series are validated against known overlapping historical values before trusting them — see the script's own docstring for exact source-file → column notes, including two pre-existing mislabeling quirks found in the already-published data (`agri_wages_rs_day`, `iip_food_proc`) that were kept as-is for continuity rather than silently changed. | New CMIE Excel exports (see §5) |
@@ -104,6 +104,8 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 | `31_Synthetic_DID_Policy_Effect.py` | Estimates the 2023-24 onion export-restriction episode's causal price effect directly via Synthetic Difference-in-Differences (Arkhangelsky et al. 2021), since Script 30's forecasting model can't recover a reliable counterfactual magnitude (an identification problem, not a training-signal one -- duty, MEP, and the ban only ever moved together once). Part A (cross-crop, tomato/potato as donors) and Part B (within-onion, Nashik export-hub vs non-hub) — see `Model_Output/MANIFEST.md` for the full Part A/B/C breakdown, including 2026-08-01's Part C addendum (event-study trajectories, jackknife CIs, donor-pool robustness, arrivals/quantity effect). **~5 min.** | `data/agmarknet_weekly/top_weekly_panel.csv`, Script 19 output |
 | `38_SDID_InSpace_Placebo_Test.py` | Follow-up to Script 31: standard synthetic-control-literature falsification test (Abadie, Diamond & Hainmueller 2010) — treats every individual tomato/potato market as a placebo "treated" unit against the same donor pool, builds a null distribution of placebo ATTs, and judges the real onion postban ATT against it via a rank-based p-value. Result: p=0.131 — the postban effect does not clear significance against this stronger test either. **~5-10 min.** | Script 31's fitted SDID weights |
 | `39_SDID_Stacked_MultiEpisode_EventStudy.py` | Extends Script 31's single-episode (2023-24) design to all 3 verified onion export bans in the panel window (Sep 2019, Sep 2020, 2023-24), stacking them into one multi-episode event study — addresses the n=1 identification problem (a single confounded natural experiment can't separate the ban's effect from the coincident weather shock that prompted it) by pooling 3 independent episodes. **~5-10 min.** | Script 19 output, `data/agmarknet_weekly/top_weekly_panel.csv` |
+| `38b_SDID_Arrivals_InSpace_Placebo_Test.py` | Arrivals/quantity-outcome analogue of Script 38 (added 2026-08-21) — same in-space placebo design applied to `log1p(arrivals)` instead of price. Result: p=0.680 — fails decisively (placebo noise ~5x larger than for price). **~5-10 min.** | Script 31's fitted SDID weights |
+| `39b_SDID_Arrivals_Stacked_MultiEpisode_EventStudy.py` | Arrivals/quantity-outcome analogue of Script 39 (added 2026-08-21) — same 3-episode stacked design applied to arrivals, with per-episode requalification (≥95% arrivals coverage). Onion separates from the placebo band in 10/13 post-ban week-bins, but the effect is wrong-signed and pre-dates the ban — read as corroborating reverse-causality, not an independent ban effect on quantity. **~5-10 min.** | Script 19 output, `data/agmarknet_weekly/top_weekly_panel.csv` |
 
 ### Phase E — Deep learning (secondary model)
 
@@ -429,6 +431,8 @@ their age relative to the current pipeline).
 - `table_sdid_event_study.csv`, `table_sdid_donor_robustness.csv`, `table_sdid_arrivals_effect.csv` — Script 31 Part C's event-study trajectories, jackknife CIs, donor-pool robustness, and arrivals/quantity effect
 - `table_sdid_inspace_placebo.csv` — Script 38's in-space placebo falsification test (postban ATT p=0.131)
 - `table_sdid_stacked_event_study.csv`, `table_sdid_stacked_summary.csv` — Script 39's stacked 3-episode (2019/2020/2023-24) event study
+- `table_sdid_arrivals_inspace_placebo.csv` — Script 38b's arrivals-outcome placebo test (postban ATT p=0.680, fails decisively)
+- `table_sdid_arrivals_stacked_event_study.csv`, `table_sdid_arrivals_stacked_summary.csv` — Script 39b's arrivals-outcome stacked event study (onion separates from placebo band in 10/13 post-ban week-bins, but wrong-signed and pre-existing — corroborates reverse-causality rather than an independent effect)
 - `table_dm_m6_vs_phase1alone.csv` — Script 37's DM test (Phase-1-alone vs M6; edge does not survive formal testing)
 - `Model_Output/experiments/two_phase/` — Scripts 34-36's two-phase residual architecture outputs, archived as a documented rejected experiment, separate from the production results above
 - `table_escalation_signature_*.csv` — Scripts 40/41's early-warning prototype (per-crop LOEO scores, placebo-in-time tests, Nashik-hub localization test)
@@ -441,42 +445,67 @@ their age relative to the current pipeline).
 
 ---
 
-## 9. Project Status (as of 2026-08-10 — see git log for anything after this date)
+## 9. Project Status (as of 2026-08-21 — see git log for anything after this date)
 
-**Done**: all data layers M0-M6, ablation study, model-family comparisons
-(tree ensembles, LSTM/Transformer), statistical validation (crop- and
-market-level DM tests, plus a Model Confidence Set jointly testing all
-variants), horizon-conditional skill analysis, production models, deployed
-dashboard (with a daily-resolution price view), horizon-stratified SHAP
-analysis, crisis backtesting, Granger causality, formal stress-testing
-(with a monotonic sign fix), Synthetic DID policy-effect estimation
-(Parts A/B/C plus two follow-up robustness scripts — in-space placebo,
-stacked multi-episode event study), a market-panel coverage-grid bug fix
-(2026-08-01, grew the analytical panel from 517/246/82 to 834/809/82
-markets, full downstream cascade re-run), a `PANEL_END` staleness bug fix
-plus 5 newly-verified 2026 policy events (2026-08-01), a WPI/diesel-LPG
-data-vintage refresh (CMIE restates its full history on every pull —
-production files had drifted 1.3-13.7% from current vintage; refreshed
-2026-08-01), a macro long-history extension that also fixed a pre-existing
-2026 gap in `export_veg`/`import_veg`/`crude_oil` (2026-08-03), a
-look-ahead leakage fix in `s2_ndvi_anom`'s seasonal climatology with a
-full M6 cascade retrain (2026-08-04), a 23-year two-phase residual
-architecture — explored fully and **rejected** under a pre-agreed
-stopping rule (Scripts 32-37, 2026-08-01/04, see Phase G above), and two
-new exploratory investigations folded into the comprehensive review
-report as Sections 14-15: an escalation-signature early-warning prototype
-(Scripts 40/41, 2026-08-08, deliberately stopped once data-volume-limited)
-and a market leader-follower network (Script 42, 2026-08-10, confound-
-checked and stability-checked).
+**Done**: all data layers M0-M6, ablation study (extended from 4 to 5
+rolling-origin folds on 2026-08-13, 420 LightGBM fits), model-family
+comparisons (tree ensembles, LSTM/Transformer), statistical validation
+(crop- and market-level DM tests, plus a Model Confidence Set jointly
+testing all variants), horizon-conditional skill analysis, production
+models, deployed dashboard (with a daily-resolution price view),
+horizon-stratified SHAP analysis, crisis backtesting, Granger causality,
+formal stress-testing (with a monotonic sign fix), Synthetic DID
+policy-effect estimation (Parts A/B/C plus four follow-up robustness
+scripts — in-space placebo and stacked multi-episode event study, each
+now run for BOTH the price outcome and the arrivals/quantity outcome), a
+market-panel coverage-grid bug fix (2026-08-01, grew the analytical panel
+from 517/246/82 to 834/809/82 markets, later growing further to
+840/814/82 as more 2026 weeks were added; full downstream cascade
+re-run), a `PANEL_END` staleness bug fix plus 5 newly-verified 2026
+policy events (2026-08-01), a WPI/diesel-LPG data-vintage refresh
+(2026-08-01), a macro long-history extension (2026-08-03), a look-ahead
+leakage fix in `s2_ndvi_anom`'s seasonal climatology with a full M6
+cascade retrain (2026-08-04), a 23-year two-phase residual architecture
+explored fully and **rejected** under a pre-agreed stopping rule (Scripts
+32-37, 2026-08-01/04, see Phase G above), a project-wide
+market-name-vs-`market_id` collision bug found and fixed across eleven
+scripts total (2026-08-14 for the first nine, 2026-08-20 for two more
+found later — Scripts 38/39), the market-level DM test (18b) re-run
+against the corrected data (2026-08-15, no longer deferred), and the
+escalation-signature early-warning prototype expanded from a partial
+4-episode design to a genuine 8-episode, fully held-out one across all
+three crops (Scripts 40/41, 2026-08-19/20), alongside the market
+leader-follower network (Script 42, 2026-08-10, confound-checked and
+stability-checked).
 
 **Not yet done / genuinely open**:
-- Full-capacity TFT run (deliberately deferred).
-- Re-running Scripts 12, 13, 15b, 15c, 17, 18b, 26 on the current panel —
-  these predate not just the 2026-08-01 grid fix but also the policy/
-  macro-vintage/leakage fixes that landed after it (see
-  `Model_Output/MANIFEST.md` for the up-to-date per-file staleness flags).
-- Manuscript: 3 of an estimated 6 sections drafted (methods/data, crisis
-  backtesting, policy causal-effect investigation).
+- Full-capacity TFT run (deliberately deferred). Also still carries the
+  market-name/`market_id` collision bug (see below) — a second,
+  independent reason not to trust its current numbers.
+- Re-running Scripts 12, 13, 15b, 15c, 17, 26 on the current panel — these
+  predate not just the 2026-08-01 grid fix but also the policy/
+  macro-vintage/leakage fixes that landed after it, and (for all but 15b/
+  15c, which were already fixed) the 2026-08-14 collision fix and the
+  panel's further growth to 840/814/82 markets (see
+  `Model_Output/MANIFEST.md` for the up-to-date per-file staleness
+  flags). **18b is no longer on this list** — re-run 2026-08-15.
+- Scripts 34/35/36 (the rejected two-phase architecture) still group
+  markets by name, not `market_id`, and have never been re-verified
+  against the 2026-08-14 collision fix. Low priority since the
+  architecture is already a documented rejected result regardless, but
+  genuinely open.
+- Manuscript: a full section-by-section drafting pass was completed and
+  then intentionally cleared from `paper_drafts/` on 2026-08-21 to start
+  fresh with a clean audit baseline — `paper_drafts/` is a working folder
+  that does not persist between passes, not a place to look for the
+  current manuscript state; check chat/session history for where the
+  fresh pass currently stands.
+- Roughly a week of fixes (2026-08-14 through 2026-08-20: the collision
+  fix, the 18b re-run, the escalation-detector expansion) sat uncommitted
+  locally before being committed and pushed to `origin/master` on
+  2026-08-21 (commit `b8686fa`). No outstanding gap now, but worth
+  keeping commit/push a routine part of closing out a work session going
+  forward rather than letting another backlog accumulate.
 - A correctness decision on two pre-existing mislabeled macro series kept
   as-is for continuity: `agri_wages_rs_day` is actually an all-occupations
   rural wage series (not agriculture-specific), and `iip_food_proc` is
