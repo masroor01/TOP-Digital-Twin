@@ -613,6 +613,7 @@ for variant, feat_list_all in MODEL_FEATURE_SETS.items():
 
                 pred_df = pd.DataFrame({
                     'market':     test['market'].values,
+                    'market_id':  test['market_id'].values,
                     'week_start': test['week_start'].values,
                     'y_true': np.expm1(y_te.values),
                     'y_pred': np.expm1(y_pred),
@@ -696,6 +697,7 @@ if not MARKET_LEVEL_DIAGNOSTIC:
 
                 pred_df = pd.DataFrame({
                     'market':     test['market'].values,
+                    'market_id':  test['market_id'].values,
                     'week_start': test['week_start'].values,
                     'y_true': np.expm1(y_te.values),
                     'y_pred': np.expm1(y_pred),
@@ -732,7 +734,7 @@ if MARKET_LEVEL_DIAGNOSTIC:
 
     predictions = pd.concat(all_pred_rows, ignore_index=True)
     predictions = predictions[['variant', 'crop', 'fold', 'horizon_weeks',
-                                'market', 'week_start', 'y_true', 'y_pred']]
+                                'market', 'market_id', 'week_start', 'y_true', 'y_pred']]
     diag_pred_path = os.path.join(OUT_DIR, 'dm_market_level_predictions.csv')
     predictions.to_csv(diag_pred_path, index=False)
     print(f'  Saved: {diag_pred_path}  ({len(predictions):,} rows)')

@@ -51,31 +51,71 @@ v2 changes (both requested directly), still in effect:
      inside a pooled AUC number, and gives onion (which has 3 episodes)
      a genuine same-crop leave-one-out test for the first time.
 
-Episode count by crop after adding potato 2014:
-  Onion:  3 episodes (2019, 2020, 2023) -- genuine within-crop leave-one-
-          episode-out is possible (3 folds, train on 2, test on 1).
-  Tomato: 1 episode (2023) -- NOT enough for within-crop leave-one-out.
-          Reported as an in-sample fit only, explicitly labelled as such,
-          not presented as a held-out test.
-  Potato: 1 episode (2014) -- same limitation as tomato, same honest
-          labelling.
+v5 addition (2026-08-19, after a deck fact-check found the deck/disclosure
+documents were describing tomato and potato's IN-SAMPLE fits with the same
+confidence as onion's genuine held-out test -- a real, undisclosed gap):
+added 3 more real, primary-source-verified episodes (tomato x2, potato x1),
+researched and citation-checked specifically to fix this. The held_out/
+in_sample branching in Sections 4-6 was ALREADY keyed off len(crop_episodes)
+>= 2, not off crop name, so it required no logic change -- but Section 5's
+placebo score_type label and Section 6's figure grouping WERE hardcoded to
+'onion' by name; both fixed here to key off episode count like Section 4
+already did, since otherwise tomato/potato's new genuine held-out folds
+would still have been mislabeled 'in_sample' in the output.
 
-This asymmetry -- onion validated properly, tomato/potato not -- is
-itself the most informative result of this iteration: it is a direct,
-mechanical consequence of episode count, not a modelling failure, and
-mirrors exactly the same n-is-too-small caveat that has applied
-throughout this project's causal-inference work (Section 8) and the
-first version of this prototype.
+Episode count by crop after v5:
+  Onion:  3 episodes (2019, 2020, 2023) -- genuine within-crop leave-one-
+          episode-out (3 folds, train on 2, test on 1).
+  Tomato: 3 episodes (2023, 2024, 2025) -- NEW: now also a genuine
+          within-crop leave-one-out. 2024 actually had TWO candidate
+          spikes, checked against the real weekly price series before
+          deciding what to do with them: price peaked ~5,275 on
+          2024-07-15, fully receded to a trough of ~2,490 by 2024-09-02 (a
+          real recovery, not one sustained crisis), then re-spiked to
+          ~5,174 on 2024-10-07 -- genuinely two independent crises, not
+          one double-counted. Only the July one (2024-07-29, NCCF
+          Delhi-NCR retail sale) was added here, deliberately: the two
+          intervention dates are 70 days apart, inside MAX_LOOKBACK_WEEKS's
+          ~140-day ceiling, so including both risked one episode's lookback
+          window swallowing the other's recovery/response tail and
+          contaminating the leave-one-out test. The October spike is just
+          as real and could become a 4th tomato episode later if that
+          overlap risk is examined properly (e.g. shortening the lookback
+          ceiling, or checking the actual detected-week spans don't
+          intersect) -- left out for now rather than risk a silently
+          contaminated fold. 2025-08-04 (NCCF Azadpur Mandi procurement,
+          PIB PRID=2154078) added as the 3rd episode; it sits ~370 days
+          from both 2023 and 2024's dates, comfortably clear.
+  Potato: 2 episodes (2014, 2016) -- NEW: genuine within-crop leave-one-out
+          now possible, but only 2 folds (train on 1, test on 1) -- a much
+          thinner test than onion/tomato's 3 folds each, honestly reflected
+          in n_train_episodes=1 in the output table, not hidden. 2016-07-26
+          MEP $360/MT reintroduction (DGFT Notification 15) added; sourced
+          from an official APEDA-hosted PDF, a stronger primary source than
+          2014's episode has.
+
+A real 4th tomato candidate (Oct-2019, a Centre-directed Mother Dairy price
+cap) was investigated and deliberately EXCLUDED: multiple independent news
+outlets corroborate it with consistent detail, but no PIB primary-source
+citation could be found for it, unlike every other episode here. Left out
+to keep this list's verification standard uniform; worth adding later if a
+primary citation turns up.
+
+This asymmetry -- onion and tomato now validated properly, potato only
+partially -- is itself an informative result: it is a direct, mechanical
+consequence of episode count, not a modelling failure, and mirrors the
+same n-is-too-small caveat that has applied throughout this project's
+causal-inference work (Section 8) and earlier versions of this prototype.
 
 Inputs:
   data/agmarknet_weekly/longhistory/top_weekly_panel_longhistory.csv
   data/satellite_climate/crop_weekly_features.csv
 
 Outputs (Model_Output/):
-  table_escalation_signature_loeo_percrop.csv   within-crop LOEO metrics (onion only)
+  table_escalation_signature_loeo_percrop.csv   within-crop LOEO metrics (onion + tomato + potato)
   table_escalation_signature_scores_percrop.csv full weekly held-out/in-sample score series
-  fig_escalation_signature_percrop_onion.png     onion's 3-fold leave-one-out case studies
-  fig_escalation_signature_percrop_single.png    tomato/potato in-sample fits (labelled as such)
+  fig_escalation_signature_percrop_heldout.png   all held-out folds (any crop with >=2 episodes)
+  fig_escalation_signature_percrop_single.png    any crop with exactly 1 episode (in-sample, labelled)
 
 Run: python scripts/40_Escalation_Signature_Head.py
 """
@@ -109,8 +149,14 @@ EPISODES = [
          label='Onion Aug-2023 duty (first action of 2023-24 sequence)'),
     dict(name='tomato_2023', crop='tomato', first_action=pd.Timestamp('2023-07-20'),
          label='Tomato Jul-2023 NCCF/NAFED procurement'),
+    dict(name='tomato_2024', crop='tomato', first_action=pd.Timestamp('2024-07-29'),
+         label='Tomato Jul-2024 NCCF Delhi-NCR retail sale (PIB PRID=2038421)'),
+    dict(name='tomato_2025', crop='tomato', first_action=pd.Timestamp('2025-08-04'),
+         label='Tomato Aug-2025 NCCF Azadpur Mandi procurement (PIB PRID=2154078)'),
     dict(name='potato_2014', crop='potato', first_action=pd.Timestamp('2014-06-26'),
          label='Potato Jun-2014 MEP ($450/MT, DGFT 85(RE-2013)/2009-2014)'),
+    dict(name='potato_2016', crop='potato', first_action=pd.Timestamp('2016-07-26'),
+         label='Potato Jul-2016 MEP $360/MT (DGFT Notification 15/26.07.2016)'),
 ]
 CROPS = ['tomato', 'onion', 'potato']
 CROP_COLORS = {'tomato': '#C0392B', 'onion': '#7B2C8E', 'potato': '#A07020'}
@@ -121,9 +167,10 @@ plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 10,
 print('=' * 65)
 print('SCRIPT 40 v2: ESCALATION-SIGNATURE HEAD (per-crop, all episodes)')
 print('=' * 65)
-print(f'\nEpisodes by crop: onion x3 (within-crop leave-one-out possible),')
-print(f'tomato x1, potato x1 (neither has enough episodes for within-crop')
-print(f'held-out validation -- reported as in-sample fits, clearly labelled).\n')
+_counts_preview = {c: len([e for e in EPISODES if e['crop'] == c]) for c in CROPS}
+print('\nEpisodes by crop: ' + ', '.join(f'{c} x{n}' for c, n in _counts_preview.items())
+      + ' -- within-crop leave-one-out where a crop has >=2 episodes,')
+print('reported as an in-sample fit only (clearly labelled) where a crop has just 1.\n')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -295,11 +342,14 @@ loeo_path = os.path.join(OUT_DIR, 'table_escalation_signature_loeo_percrop.csv')
 loeo_df.to_csv(loeo_path, index=False)
 print(f'\n  Saved: {loeo_path}')
 
-onion_aucs = loeo_df[(loeo_df['crop'] == 'onion') & loeo_df['auc'].notna()]['auc']
-if len(onion_aucs):
-    print(f'\n  Onion within-crop LOEO mean AUC: {onion_aucs.mean():.3f} (std {onion_aucs.std(ddof=1):.3f}, '
-          f'n={len(onion_aucs)} folds -- still thin, but now a genuine same-crop test, unlike v1\'s pooled result).')
-print('  Tomato and potato: no AUC reported -- honestly not computable with 1 episode each.')
+for _crop in CROPS:
+    _aucs = loeo_df[(loeo_df['crop'] == _crop) & loeo_df['auc'].notna()]['auc']
+    if len(_aucs):
+        _std = f'{_aucs.std(ddof=1):.3f}' if len(_aucs) > 1 else 'n/a (1 fold)'
+        print(f'\n  {_crop.capitalize()} within-crop LOEO mean AUC: {_aucs.mean():.3f} '
+              f'(std {_std}, n={len(_aucs)} folds).')
+    else:
+        print(f'\n  {_crop.capitalize()}: no AUC reported -- honestly not computable with 1 episode.')
 
 scores_path = os.path.join(OUT_DIR, 'table_escalation_signature_scores_percrop.csv')
 crop_weekly[['crop', 'week_start', 'label', 'episode', 'score', 'score_type']].to_csv(scores_path, index=False)
@@ -328,6 +378,8 @@ def detected_intensity(crop_data, end_date):
     if mask.sum() == 0:
         return 0.0
     return float(crop_data.loc[mask, 'score_all'].mean())
+
+EPISODE_COUNT_BY_CROP = {c: len([e for e in EPISODES if e['crop'] == c]) for c in CROPS}
 
 placebo_rows = []
 placebo_detail = {}   # episode name -> array of placebo candidate intensities
@@ -364,7 +416,7 @@ for ep in EPISODES:
                           'n_placebo_windows': n_placebo,
                           'n_placebo_as_extreme': n_as_extreme,
                           'p_value': round(float(p_value), 3) if pd.notna(p_value) else None,
-                          'score_type': 'held_out' if crop == 'onion' else 'in_sample'})
+                          'score_type': 'held_out' if EPISODE_COUNT_BY_CROP[crop] >= 2 else 'in_sample'})
     print(f'  [{ep["name"]:12s}] real intensity={real_intensity:.5f}  vs {n_placebo} placebo candidates '
           f'({crop}\'s full history)  -- {n_as_extreme} as extreme  p={p_value:.3f}')
 
@@ -372,14 +424,27 @@ placebo_df = pd.DataFrame(placebo_rows)
 placebo_path = os.path.join(OUT_DIR, 'table_escalation_signature_placebo_test.csv')
 placebo_df.to_csv(placebo_path, index=False)
 print(f'\n  Saved: {placebo_path}')
-print('  NOTE: tomato/potato p-values use an IN-SAMPLE model (the real window\'s own labels')
-print('  were part of its training data), so those p-values are optimistic/biased low and')
-print('  should be read as descriptive, not a genuine significance test -- only onion\'s three')
-print('  p-values come from models that never saw that episode\'s labels.')
+in_sample_crops = [c for c in CROPS if EPISODE_COUNT_BY_CROP[c] < 2]
+held_out_crops = [c for c in CROPS if EPISODE_COUNT_BY_CROP[c] >= 2]
+if in_sample_crops:
+    print(f'  NOTE: {", ".join(in_sample_crops)} p-value(s) use an IN-SAMPLE model (the real window\'s')
+    print('  own labels were part of its training data), so those p-values are optimistic/biased low')
+    print('  and should be read as descriptive, not a genuine significance test.')
+print(f'  Genuine held-out p-values (model never saw that episode\'s labels): {", ".join(held_out_crops)}.')
 
-# Placebo distribution figure -- mirrors fig_sdid_inspace_placebo.png's design
-fig, axes = plt.subplots(2, 3, figsize=(15, 8))
-for ax, ep in zip(axes.flat, EPISODES):
+# Placebo distribution figure -- mirrors fig_sdid_inspace_placebo.png's design.
+# FIXED 2026-08-19: was a hardcoded 2x3 grid (6 slots) left over from when
+# there were exactly 6 episodes -- with 8 episodes now, zip() silently
+# truncated to the first 6 in EPISODES order and dropped potato entirely
+# from this figure (the CSV was always complete; only this plot was short).
+# Sized dynamically off len(EPISODES) so this can't silently drop a crop
+# again if more episodes are added later.
+n_ep = len(EPISODES)
+n_cols = 3
+n_rows = -(-n_ep // n_cols)   # ceil division
+fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 4 * n_rows), squeeze=False)
+axes_flat = axes.flat
+for ax, ep in zip(axes_flat, EPISODES):
     intens = placebo_detail[ep['name']]
     real_val = placebo_df.loc[placebo_df['episode'] == ep['name'], 'real_window_intensity'].iloc[0]
     pval = placebo_df.loc[placebo_df['episode'] == ep['name'], 'p_value'].iloc[0]
@@ -390,7 +455,8 @@ for ax, ep in zip(axes.flat, EPISODES):
     ax.set_xlabel('Mean score over detected escalation weeks (0 if none)')
     ax.set_ylabel('Count of placebo windows')
     ax.legend(fontsize=7, frameon=False)
-axes.flat[-1].axis('off')
+for ax in list(axes_flat)[n_ep:]:
+    ax.axis('off')
 plt.tight_layout()
 placebo_fig_path = os.path.join(OUT_DIR, 'fig_escalation_signature_placebo_test.png')
 plt.savefig(placebo_fig_path, dpi=200, bbox_inches='tight')
@@ -431,36 +497,55 @@ def plot_episode(ax, ep, score_type_label):
     ax.grid(axis='y', alpha=0.25, which='both')
     ax.legend(fontsize=7, loc='lower left', frameon=False)
 
-onion_eps = [ep for ep in EPISODES if ep['crop'] == 'onion']
-fig, axes = plt.subplots(1, 3, figsize=(15, 4.5))
-for ax, ep in zip(axes, onion_eps):
-    plot_episode(ax, ep, 'within-crop held-out')
-fig.suptitle('Onion: within-crop leave-one-episode-out (genuine held-out test, 3 folds)',
-              fontsize=11, fontweight='bold', y=1.03)
-plt.tight_layout()
-fig_path1 = os.path.join(OUT_DIR, 'fig_escalation_signature_percrop_onion.png')
-plt.savefig(fig_path1, dpi=200, bbox_inches='tight')
-plt.close()
-print(f'  Saved: {fig_path1}')
+held_out_crops = [c for c in CROPS if EPISODE_COUNT_BY_CROP[c] >= 2]
+single_crops = [c for c in CROPS if EPISODE_COUNT_BY_CROP[c] < 2]
 
-single_eps = [ep for ep in EPISODES if ep['crop'] in ('tomato', 'potato')]
-fig, axes = plt.subplots(1, 2, figsize=(10, 4.5))
-for ax, ep in zip(axes, single_eps):
-    plot_episode(ax, ep, 'IN-SAMPLE fit -- not held-out, only 1 episode available')
-fig.suptitle('Tomato & potato: single episode each -- in-sample fit only, NOT a validated test',
-              fontsize=11, fontweight='bold', y=1.03)
-plt.tight_layout()
-fig_path2 = os.path.join(OUT_DIR, 'fig_escalation_signature_percrop_single.png')
-plt.savefig(fig_path2, dpi=200, bbox_inches='tight')
-plt.close()
-print(f'  Saved: {fig_path2}')
+if held_out_crops:
+    n_cols = max(EPISODE_COUNT_BY_CROP[c] for c in held_out_crops)
+    n_rows = len(held_out_crops)
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4.5 * n_rows), squeeze=False)
+    for row, crop in enumerate(held_out_crops):
+        crop_eps = [ep for ep in EPISODES if ep['crop'] == crop]
+        for col in range(n_cols):
+            ax = axes[row][col]
+            if col < len(crop_eps):
+                fold_label = f'within-crop held-out, {len(crop_eps)} folds'
+                plot_episode(ax, crop_eps[col], fold_label)
+            else:
+                ax.axis('off')   # crop has fewer episodes than the widest row
+    fig.suptitle('Within-crop leave-one-episode-out (genuine held-out test) -- '
+                  + ', '.join(f'{c} x{EPISODE_COUNT_BY_CROP[c]}' for c in held_out_crops),
+                  fontsize=11, fontweight='bold', y=1.01)
+    plt.tight_layout()
+    fig_path1 = os.path.join(OUT_DIR, 'fig_escalation_signature_percrop_heldout.png')
+    plt.savefig(fig_path1, dpi=200, bbox_inches='tight')
+    plt.close()
+    print(f'  Saved: {fig_path1}')
+else:
+    print('  No crop has >=2 episodes -- skipping held-out figure.')
+
+single_eps = [ep for ep in EPISODES if ep['crop'] in single_crops]
+if single_eps:
+    fig, axes = plt.subplots(1, len(single_eps), figsize=(5 * len(single_eps), 4.5), squeeze=False)
+    for ax, ep in zip(axes[0], single_eps):
+        plot_episode(ax, ep, 'IN-SAMPLE fit -- not held-out, only 1 episode available')
+    fig.suptitle(', '.join(c for c in single_crops) + ': single episode each -- '
+                  'in-sample fit only, NOT a validated test',
+                  fontsize=11, fontweight='bold', y=1.03)
+    plt.tight_layout()
+    fig_path2 = os.path.join(OUT_DIR, 'fig_escalation_signature_percrop_single.png')
+    plt.savefig(fig_path2, dpi=200, bbox_inches='tight')
+    plt.close()
+    print(f'  Saved: {fig_path2}')
+else:
+    print('  Every crop now has >=2 episodes -- no in-sample-only figure needed.')
 
 print('\n' + '=' * 65)
-print('Script 40 v3 complete.')
-print('\nHonest summary: separating by crop changed what could be validated at all --')
-print('onion (3 episodes) now has a genuine same-crop held-out test; tomato/potato (1')
-print('episode each) still cannot be, no matter how the pooling is done. The placebo-in-')
-print('time test adds a second, independent layer: for onion, does the real pre-')
-print('intervention window actually stand out against EVERY OTHER window in that crop\'s')
-print('23-year history, not just against a small hand-picked test set -- see the p-values')
-print('and table_escalation_signature_placebo_test.csv for the answer.')
+print('Script 40 v5 complete.')
+print('\nHonest summary: ' + ', '.join(f'{c} x{EPISODE_COUNT_BY_CROP[c]}' for c in CROPS) + '.')
+print(f'Held-out (genuine same-crop leave-one-out): {", ".join(held_out_crops) or "none"}.')
+print(f'In-sample only (not a validated test): {", ".join(in_sample_crops) or "none"}.')
+print('The placebo-in-time test adds a second, independent layer on top: for each held-out')
+print('crop, does the real pre-intervention window actually stand out against EVERY OTHER')
+print('window in that crop\'s 23-year history, not just against a small hand-picked test')
+print('set -- see the p-values and table_escalation_signature_placebo_test.csv.')

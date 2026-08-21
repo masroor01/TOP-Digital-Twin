@@ -101,18 +101,26 @@ if not os.path.exists(PRED_FILE):
 
 preds = pd.read_csv(PRED_FILE, parse_dates=['week_start'])
 print(f'  Loaded: {len(preds):,} rows')
-print(f'  Markets: {preds["market"].nunique()}  Variants: {sorted(preds["variant"].unique())}\n')
+print(f'  Markets: {preds["market_id"].nunique()}  Variants: {sorted(preds["variant"].unique())}\n')
+
+# FIXED 2026-08-15: was grouping by 'market' NAME, which collides across
+# states for a handful of markets (e.g. "Fatehabad APMC" in both Haryana and
+# UP) -- the same bug found and fixed elsewhere in the pipeline on 2026-08-14
+# (see Script 15/23 commits). Grouping by market_id keeps each physically
+# distinct market's DM test independent; 'market_label' below is carried
+# through for readability only, not used for any grouping/join.
+market_label = preds.drop_duplicates('market_id').set_index('market_id')['market']
 
 detail_rows = []
 for crop in CROPS:
     csub = preds[preds['crop'] == crop]
-    markets = sorted(csub['market'].unique())
+    market_ids = sorted(csub['market_id'].unique())
     for h in HORIZONS:
         hsub = csub[csub['horizon_weeks'] == h]
         if hsub.empty:
             continue
-        for market in markets:
-            msub = hsub[hsub['market'] == market]
+        for market_id in market_ids:
+            msub = hsub[hsub['market_id'] == market_id]
             base = (msub[msub['variant'] == BASELINE]
                     .sort_values(['fold', 'week_start'])
                     .drop_duplicates(subset='week_start')
@@ -131,7 +139,8 @@ for crop in CROPS:
             better = (RICHER if (not pd.isna(result['mean_d']) and result['mean_d'] > 0)
                       else (BASELINE if not pd.isna(result['mean_d']) else 'n/a'))
             detail_rows.append({
-                'crop': crop, 'horizon_weeks': h, 'market': market,
+                'crop': crop, 'horizon_weeks': h, 'market_id': market_id,
+                'market': market_label.get(market_id, ''),
                 **result, 'better_model': better,
                 'significant_5pct': (not pd.isna(result['p_value'])) and result['p_value'] < ALPHA,
             })

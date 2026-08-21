@@ -7,7 +7,7 @@ potato,Beldanga APMC,-0.0928,-8.9
 potato,Bishnupur(Bankura) APMC,0.0009,0.1
 potato,Burdwan APMC,0.0046,0.5
 potato,Champadanga APMC,0.0072,0.7
-potato,Coochbehar APMC,0.0491,5.0
+potato,Coochbehar APMC,0.049,5.0
 potato,Dehradoon APMC,-0.2337,-20.8
 potato,Dinhata APMC,0.0493,5.1
 potato,Durgapur APMC,0.0883,9.2
@@ -17,7 +17,7 @@ potato,Gangarampur(Dakshin Dinajpur) APMC,0.0586,6.0
 potato,Ghatal APMC,0.09,9.4
 potato,Guskara APMC,0.0056,0.6
 potato,Habra APMC,-0.0642,-6.2
-potato,Haridwar Union APMC,0.0531,5.5
+potato,Haridwar Union APMC,0.053,5.4
 potato,Indus(Bankura Sadar) APMC,0.0055,0.6
 potato,Islampur APMC,-0.0306,-3.0
 potato,Jangipur APMC,-0.1008,-9.6
@@ -32,15 +32,15 @@ potato,Memari APMC,0.0367,3.7
 potato,Nadia APMC,0.024,2.4
 potato,Pandua APMC,0.0092,0.9
 potato,Pundibari APMC,0.0327,3.3
-potato,Purulia APMC,-0.0449,-4.4
+potato,Purulia APMC,-0.0448,-4.4
 potato,Ramkrishanpur(Howrah) APMC,-0.0332,-3.3
 potato,Rampurhat APMC,0.0227,2.3
 potato,Ranaghat APMC,-0.0596,-5.8
-potato,Rishikesh APMC,-0.1568,-14.5
+potato,Rishikesh APMC,-0.1569,-14.5
 potato,Roorkee APMC,0.0335,3.4
 potato,Sainthia APMC,0.0169,1.7
 potato,Sheoraphuly APMC,-0.0076,-0.8
-potato,Sitarganj APMC,-0.0479,-4.7
+potato,Sitarganj APMC,-0.0478,-4.7
 potato,Toofanganj APMC,0.0539,5.5
 potato,Uluberia APMC,0.0309,3.1
 potato,Vikasnagar APMC,-0.3015,-26.0
@@ -48,54 +48,54 @@ tomato,APMC Azadpur,0.1455,15.7
 tomato,Agra APMC,-0.0108,-1.1
 tomato,Akbarpur APMC,0.0408,4.2
 tomato,Aligarh APMC,0.0691,7.2
-tomato,Aluva Market,-0.0581,-5.6
+tomato,Aluva Market,-0.0582,-5.7
 tomato,Amritsar(Amritsar Mewa Mandi) APMC,0.1465,15.8
 tomato,"Anand(Veg,Yard,Anand) APMC",-0.1388,-13.0
 tomato,Angamaly Market,0.0042,0.4
 tomato,Ankleshwar APMC,-0.0894,-8.6
 tomato,Asansol APMC,0.0452,4.6
-tomato,Athirampuzha Market,0.0456,4.7
-tomato,Attingal Market,-0.0394,-3.9
+tomato,Athirampuzha Market,0.0455,4.7
+tomato,Attingal Market,-0.0393,-3.9
 tomato,Auraiya APMC,0.0672,7.0
 tomato,Azamgarh APMC,0.002,0.2
 tomato,Badayoun APMC,-0.0527,-5.1
 tomato,Bahraich APMC,-0.0227,-2.2
-tomato,Balarampur APMC,0.3101,36.4
-tomato,Ballabhgarh APMC,-0.0108,-1.1
+tomato,Balarampur APMC,0.31,36.3
+tomato,Ballabhgarh APMC,-0.0109,-1.1
 tomato,Banda APMC,0.039,4.0
-tomato,Barabanki APMC,0.0163,1.6
-tomato,Barara APMC,-0.0496,-4.8
+tomato,Barabanki APMC,0.0162,1.6
+tomato,Barara APMC,-0.0497,-4.8
 tomato,Bareilly APMC,-0.1515,-14.1
 tomato,Baripada APMC,-0.0409,-4.0
-tomato,Barnala APMC,0.0341,3.5
-tomato,Barwala APMC,-0.0395,-3.9
+tomato,Barnala APMC,0.034,3.5
+tomato,Barwala APMC,-0.0394,-3.9
 tomato,Bassi Pathana APMC,-0.0879,-8.4
 tomato,Bharthna APMC,0.0053,0.5
 tomato,Bhawanigarh APMC,0.0523,5.4
 tomato,"Binny Mill (F&V), Bengaluru APMC",0.0048,0.5
 tomato,Bishalgarh APMC,0.0697,7.2
 tomato,Buland Shahr APMC,-0.0166,-1.6
-tomato,Burdwan APMC,-0.0872,-8.3
+tomato,Burdwan APMC,-0.0872,-8.4
 tomato,Champaknagar APMC,0.0049,0.5
 tomato,Chattrapati Sambhajinagar APMC,-0.0089,-0.9
-tomato,Chavakkad Market,-0.0944,-9.0
+tomato,Chavakkad Market,-0.0945,-9.0
 tomato,Chelakkara Market,0.0298,3.0
-tomato,Chengannur Market,0.0824,8.6
+tomato,Chengannur Market,0.0822,8.6
 tomato,Chickkaballapura APMC,0.0053,0.5
 tomato,Chikkamagaluru APMC,-0.0288,-2.8
 tomato,Chintamani APMC,-0.0532,-5.2
-tomato,Chomu FV APMC,-0.0279,-2.8
+tomato,Chomu FV APMC,-0.028,-2.8
 tomato,Choubepur APMC,0.0149,1.5
 tomato,Dadri APMC,-0.0435,-4.3
 tomato,Dahod(Veg. Market) APMC,0.0318,3.2
 tomato,Dasuya APMC,0.0135,1.4
 tomato,Davangere APMC,0.1003,10.6
-tomato,Doddaballapur APMC,0.0893,9.3
-tomato,Durg APMC,0.0062,0.6
+tomato,Doddaballapur APMC,0.0894,9.4
+tomato,Durg APMC,0.0066,0.7
 tomato,Durgapur APMC,0.0859,9.0
-tomato,Etah APMC,0.1087,11.5
-tomato,Etawah APMC,0.0114,1.2
-tomato,Fatehpur APMC,-0.0125,-1.2
+tomato,Etah APMC,0.109,11.5
+tomato,Etawah APMC,0.0115,1.2
+tomato,Fatehpur APMC,-0.0124,-1.2
 tomato,Firozabad APMC,0.0752,7.8
 tomato,Firozepur City APMC,-0.078,-7.5
 tomato,Ghaziabad APMC,0.0499,5.1
@@ -103,43 +103,43 @@ tomato,Gohana APMC,0.1151,12.2
 tomato,Gonda APMC,0.0811,8.5
 tomato,Gorakhpur APMC,0.0137,1.4
 tomato,Haathras APMC,0.0344,3.5
-tomato,Habra APMC,-0.2556,-22.6
+tomato,Habra APMC,-0.2555,-22.6
 tomato,Hapur APMC,-0.0145,-1.4
 tomato,Hardoi APMC,-0.0063,-0.6
-tomato,Jalandhar City(Jalandhar) APMC,0.2268,25.5
+tomato,Jalandhar City(Jalandhar) APMC,0.2267,25.4
 tomato,Jalaun APMC,0.1703,18.6
 tomato,Jalgaon APMC,-0.0823,-7.9
 tomato,Jalore APMC,-0.1133,-10.7
 tomato,Jaunpur APMC,-0.0093,-0.9
 tomato,Jhansi APMC,-0.054,-5.3
-tomato,Junnar(Narayangaon) APMC,0.0509,5.2
-tomato,Kallachi Market,0.0047,0.5
+tomato,Junnar(Narayangaon) APMC,0.051,5.2
+tomato,Kallachi Market,0.0052,0.5
 tomato,Kalmeshwar APMC,0.1681,18.3
-tomato,Kalna APMC,-0.0899,-8.6
+tomato,Kalna APMC,-0.0898,-8.6
 tomato,Kamakhyanagar APMC,0.0112,1.1
-tomato,Kamthi APMC,0.0467,4.8
+tomato,Kamthi APMC,0.0466,4.8
 tomato,Kanjirappally Market,0.1583,17.2
 tomato,Kannauj APMC,-0.0327,-3.2
-tomato,Kanpur(Grain) APMC,-0.0871,-8.3
+tomato,Kanpur(Grain) APMC,-0.0872,-8.3
 tomato,Karad APMC,-0.0162,-1.6
-tomato,Kasganj APMC,0.103,10.8
+tomato,Kasganj APMC,0.1028,10.8
 tomato,Kayamkulam Market,-0.0942,-9.0
 tomato,Kendrapara(Marshaghai) APMC,-0.0699,-6.8
 tomato,Kharar APMC,0.212,23.6
-tomato,Khariar APMC,-0.0656,-6.3
+tomato,Khariar APMC,-0.0656,-6.4
 tomato,Khariar Road APMC,-0.0689,-6.7
 tomato,Khatra APMC,-0.1828,-16.7
-tomato,Kolar APMC,-0.1247,-11.7
+tomato,Kolar APMC,-0.1246,-11.7
 tomato,Kolhapur APMC,0.0929,9.7
-tomato,Konch APMC,0.0364,3.7
-tomato,Kondotty Market,-0.1408,-13.1
+tomato,Konch APMC,0.0365,3.7
+tomato,Kondotty Market,-0.1409,-13.1
 tomato,Kottakkal Market,0.1223,13.0
 tomato,Lakhimpur APMC,0.0081,0.8
 tomato,Lalru APMC,0.0292,3.0
-tomato,Lucknow APMC,-0.028,-2.8
+tomato,Lucknow APMC,-0.0281,-2.8
 tomato,Madhoganj APMC,-0.025,-2.5
 tomato,Mainpuri APMC,0.05,5.1
-tomato,Malout APMC,-0.2212,-19.8
+tomato,Malout APMC,-0.2213,-19.9
 tomato,Manjeri Market,0.0864,9.0
 tomato,Manjeswaram Market,-0.0693,-6.7
 tomato,Mansa(Manas Veg Yard) APMC,-0.0457,-4.5
@@ -147,7 +147,7 @@ tomato,Meerut APMC,-0.0241,-2.4
 tomato,Mehsana(Mehsana Veg) APMC,0.0081,0.8
 tomato,Memari APMC,-0.1023,-9.7
 tomato,Mirzapur APMC,-0.0063,-0.6
-tomato,Mulbagal APMC,0.0072,0.7
+tomato,Mulbagal APMC,0.0073,0.7
 tomato,Muradabad APMC,-0.0635,-6.2
 tomato,Muzzafarnagar APMC,0.0877,9.2
 tomato,Mysuru APMC,0.0818,8.5
@@ -157,59 +157,59 @@ tomato,Orai APMC,0.0099,1.0
 tomato,PMY Kullu,-0.0188,-1.9
 tomato,Padra APMC,0.0404,4.1
 tomato,Pala Market,0.0697,7.2
-tomato,Palakkad Market,0.0418,4.3
-tomato,Palayam Market,0.013,1.3
-tomato,Panisagar APMC,-0.0546,-5.3
+tomato,Palakkad Market,0.042,4.3
+tomato,Palayam Market,0.0129,1.3
+tomato,Panisagar APMC,-0.0547,-5.3
 tomato,Partaval APMC,0.0231,2.3
-tomato,Patan APMC,0.0743,7.7
+tomato,Patan APMC,0.0742,7.7
 tomato,Pattamundai APMC,-0.0745,-7.2
-tomato,Patti APMC,-0.0116,-1.1
-tomato,Pehowa APMC,0.1001,10.5
+tomato,Patti APMC,-0.0115,-1.1
+tomato,Pehowa APMC,0.1,10.5
 tomato,Perumbavoor Market,0.1006,10.6
 tomato,Pilibhit APMC,-0.08,-7.7
 tomato,Pratapgarh APMC,-0.0632,-6.1
-tomato,Prayagraj APMC,0.0019,0.2
-tomato,Pukharayan APMC,-0.0066,-0.7
+tomato,Prayagraj APMC,0.0022,0.2
+tomato,Pukharayan APMC,-0.0065,-0.6
 tomato,Pune APMC,0.0761,7.9
 tomato,Raibareilly APMC,-0.012,-1.2
-tomato,Raigarh APMC,0.0471,4.8
-tomato,Rajkot(Veg.Sub Yard) APMC,-0.1401,-13.1
+tomato,Raigarh APMC,0.047,4.8
+tomato,Rajkot(Veg.Sub Yard) APMC,-0.1402,-13.1
 tomato,Rajpura APMC,-0.152,-14.1
 tomato,Raman APMC,0.0332,3.4
-tomato,Ramanagara APMC,0.0106,1.1
+tomato,Ramanagara APMC,0.0105,1.1
 tomato,Ramkrishanpur(Howrah) APMC,0.0784,8.2
 tomato,Ramtek APMC,0.0925,9.7
 tomato,Ranaghat APMC,0.0253,2.6
 tomato,Ratnagiri (Nachane) APMC,-0.0301,-3.0
 tomato,Rayya APMC,-0.4174,-34.1
-tomato,Rishikesh APMC,0.2467,28.0
+tomato,Rishikesh APMC,0.2468,28.0
 tomato,Roorkee APMC,0.0447,4.6
 tomato,SHRI.SIDDHESHWAR APMC,0.0692,7.2
 tomato,SMY Bhuntar,0.0493,5.1
-tomato,SMY Dhanotu,0.0979,10.3
-tomato,Sadhaura APMC,-0.1392,-13.0
+tomato,SMY Dhanotu,0.0978,10.3
+tomato,Sadhaura APMC,-0.1391,-13.0
 tomato,Saharanpur APMC,0.1487,16.0
-tomato,Sahnewal APMC,0.1026,10.8
+tomato,Sahnewal APMC,0.1023,10.8
 tomato,Sainthia APMC,-0.0012,-0.1
-tomato,Saraskana APMC,-0.014,-1.4
-tomato,Sargipali APMC,-0.3305,-28.1
+tomato,Saraskana APMC,-0.0141,-1.4
+tomato,Sargipali APMC,-0.3306,-28.1
 tomato,Satara APMC,-0.0513,-5.0
 tomato,Sealdah Koley Market APMC,-0.0743,-7.2
 tomato,Shahabad APMC,0.0552,5.7
 tomato,Shahganj APMC,0.0242,2.5
 tomato,Shahjahanpur APMC,-0.0394,-3.9
-tomato,Shrirampur APMC,-0.0011,-0.1
+tomato,Shrirampur APMC,-0.0012,-0.1
 tomato,Sirsaganj APMC,-0.2325,-20.7
-tomato,Sitarganj APMC,-0.0642,-6.2
+tomato,Sitarganj APMC,-0.0643,-6.2
 tomato,Srinivasapur APMC,-0.0188,-1.9
 tomato,Sultanpur APMC,0.0783,8.1
-tomato,Thrippunithura Market,-0.0656,-6.3
-tomato,Tiphra APMC,0.2412,27.3
-tomato,Udaipur (F&V) APMC,-0.0342,-3.4
+tomato,Thrippunithura Market,-0.0657,-6.4
+tomato,Tiphra APMC,0.2411,27.3
+tomato,Udaipur (F&V) APMC,-0.0343,-3.4
 tomato,Uluberia APMC,-0.0357,-3.5
 tomato,Unnao APMC,0.0539,5.5
 tomato,Vadhvan APMC,0.0374,3.8
 tomato,Vai APMC,-0.0517,-5.0
-tomato,Vikasnagar APMC,-0.3531,-29.8
-tomato,Wadakkanchery Market,-0.0768,-7.4
-tomato,Zira APMC,0.1553,16.8
+tomato,Vikasnagar APMC,-0.3531,-29.7
+tomato,Wadakkanchery Market,-0.0766,-7.4
+tomato,Zira APMC,0.1554,16.8
