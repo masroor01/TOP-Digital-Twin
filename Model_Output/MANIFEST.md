@@ -7,18 +7,85 @@ specifically because two stale-output bugs (`table_benchmarks.csv`,
 `table_spike_auc.csv`) went unnoticed for weeks in July 2026 before being
 caught during the 2026-07-29 results review.
 
-**Current pipeline state (as of 2026-08-21):** market panel filtered to
->=70% real coverage per market (**840 tomato / 814 onion / 82 potato** —
-grown further since 2026-08-10 as the panel was extended with more 2026
-weeks; potato unchanged), potato zones P1-P3 relocated to
-Darjeeling/Diamond Harbour/Dehradun with real climate+satellite data. The
-panel/pipeline has moved **five more times since the 2026-08-10 snapshot
-this file previously reflected** (a market-name/`market_id` collision fix
-across nine scripts plus two more found later, an escalation-detector
-expansion from a partial 4-episode design to a genuine 8-episode one, and
-two new arrivals-outcome SDID robustness checks — each documented below)
-— any output dated before 2026-08-14 should be treated as stale relative
-to the current pipeline, not just anything before 2026-08-04.
+**Current pipeline state (as of 2026-08-29):** market panel filtered to
+>=70% real coverage per market (**842 tomato / 813 onion / 82 potato**,
+all three now landing on the **same week, 2026-08-24**, for the first time
+— previously tomato/onion/potato each lagged behind at different real
+cutoffs). Imputed rate on each crop's latest week is now genuinely low
+(tomato 15.9%, onion 10.9%, potato 4.9% — potato specifically was 80.5%
+imputed two weeks ago; see the 2026-08-21 and 2026-08-29 entries below for
+the full story). Potato zones P1-P3 relocated to Darjeeling/Diamond
+Harbour/Dehradun with real climate+satellite data. Any output dated before
+2026-08-14 should be treated as stale relative to the current pipeline.
+
+**2026-08-29 weekly-refresh automation built and stress-tested.**
+`scripts/weekly_refresh/` (new) fully automates the data-pull-through-
+retrain cycle: a genuine unattended scraper (`agmarknet_onion_prices.py`,
+commodity-parameterized despite its name, hits `api.agmarknet.gov.in`
+directly — no login/captcha) feeds `validate_scrape.py` (schema, price
+sanity, market_id conflict, overlap-vs-trusted-file checks) then
+`merge_scrape.py` (replaces the trusted file's current-year portion,
+backing up first) then Scripts 09 -> 23 -> 44, orchestrated by
+`run_weekly_refresh.ps1` and scheduled via Windows Task Scheduler
+(`register_task.ps1`, Tuesdays 03:00). Building and live-testing this
+found and fixed **two real bugs** before it ever ran unattended for real:
+(1) a PowerShell function parameter named `$Args` collided with the
+reserved automatic variable of the same name, silently splatting an EMPTY
+argument list to `python` — this launched an interactive REPL instead of
+the scraper, which then hung for **~46 hours** issuing console errors in
+the non-interactive redirected context before being caught and killed;
+(2) the same function's live log echo used `Write-Output`, which fed every
+echoed line into the function's own return value, so `$code` became a
+polluted array instead of a clean exit code and `if ($code -ne 0)` was
+true almost regardless of the real result -- a genuinely successful
+146,842-row tomato scrape got reported as FAILED and silently skipped
+because of this. Both fixed, verified via isolated smoke tests, then
+proven live through a full successful cycle. Also found: potato's price-
+sanity check was mis-calibrated (see next entry) and a task-registration
+script that printed "Registered" even when `Register-ScheduledTask`
+actually failed with Access Denied under `-LogonType S4U` (no "Log on as a
+batch job" right on this account) -- fixed to verify registration
+independently and default to `-LogonType Interactive`. Full writeup in
+`scripts/weekly_refresh/README.md`.
+
+**2026-08-29 all-India potato scrape investigated, then scrapers scoped
+down.** A live all-India potato scrape (done to test the automation above)
+tripped `validate_scrape.py`'s price-sanity check: 9.6% of rows outside
+[40, 3500] Rs/quintal. Investigated rather than just loosened the
+tolerance blindly -- found this is NOT a data-quality problem: 97% of the
+out-of-range rows are Tamil Nadu (median 0.22 tonnes/report, ~3800-4500
+Rs/quintal) and Kerala. Tamil Nadu's "potato markets" turned out to be the
+**Uzhavar Sandhai retail farmer-market scheme**, not wholesale APMC mandis
+-- confirmed via arrivals volume (55x smaller than West Bengal's median 12
+tonnes/report) and market naming. Kerala is a genuine but thin,
+import-dependent consumption market. Neither is comparable to the
+wholesale mandi data the rest of the panel is built from, and Script 09's
+existing 8-year-balanced-panel + price-clip filters already exclude both
+from the actual trained panel regardless (confirmed: still exactly 82
+markets / 2 states after this refresh). `validate_scrape.py`'s price check
+was changed from a hard 5% fail threshold to a WARN-at-5%/FAIL-at-20%
+tier to reflect that this is expected non-panel-state variation, not
+corruption. Given none of this ever reaches the model, the weekly
+scraper's potato pull is now restricted to `--states
+"West Bengal,Uttarakhand"` -- smaller, faster, and stops re-litigating a
+non-issue every week. The trusted `potato_all_india_apmcs_2000_2026.csv`
+will not gain further all-India history going forward as a result
+(acceptable -- it never fed the model).
+
+**2026-08-29 dashboard redesign found and fixed while reviewing
+uncommitted work.** `scripts/24_Simulation_Dashboard.py` had a substantial
+uncommitted UI/styling overhaul sitting locally since 2026-08-14 (new
+font/color system, restyled labels, a `apply_react_chart_theme()` chart
+helper) -- not produced by an assistant session, found while checking the
+repo before this commit. Live-testing it in the browser preview surfaced a
+crash: `apply_react_chart_theme()` set `titlefont` inside `xaxis`/`yaxis`
+dicts, a Plotly property removed in current Plotly versions (`title` must
+now be a nested dict with its own `font`) -- the dashboard failed on its
+very first chart render. Fixed both occurrences; also fixed a minor cosmetic
+issue found in the same pass (the "Target" star-marker trace had no
+explicit hover text, leaking a literal "undefined" into the unified-hover
+tooltip -- added a proper `hovertemplate`). Verified live in-browser after
+the fix: dashboard renders fully, no console errors.
 
 **2026-08-21 arrivals-outcome SDID robustness checks (new scripts).**
 Script 31 Part C.4's arrivals/quantity ATT (onion arrivals fell relative
@@ -200,7 +267,7 @@ Status legend: 🟢 current · 🟡 stale, known, re-run pending · ⚫ deprecat
 
 | Script | Outputs | Last generated | Status | Notes |
 |---|---|---|---|---|
-| `09_Agmarknet_Weekly_Panel.py` | `data/agmarknet_weekly/*.csv` (not in Model_Output) | 2026-08-10 (panel extended with more 2026 weeks since; grid/filter logic unchanged since 2026-08-01) | 🟢 | Grid-adaptivity fix (see 2026-08-01 note below). Current market count 840 tomato / 814 onion / 82 potato (grown from 834/809/82 as the panel picked up several 2026 weeks — filter logic and threshold unchanged, just more weeks for borderline markets to clear 70%), 70% real-coverage filter, 2017-2026 window. |
+| `09_Agmarknet_Weekly_Panel.py` | `data/agmarknet_weekly/*.csv` (not in Model_Output) | 2026-08-29 | 🟢 | Grid-adaptivity fix (see 2026-08-01 note below). `END_DATE` now defaults to today automatically (`TOP_DT_END_DATE` env var to override) — added for the weekly-refresh automation, see 2026-08-29 entry above; safe by construction since each crop's grid still caps at its own real max date. Current market count 842 tomato / 813 onion / 82 potato, all three now on the same latest week (2026-08-24) for the first time. 70% real-coverage filter, 2017-2026 window. |
 | `11_Market_Selection_And_DataStructure.py` | `filtered_panel_top.csv`, `appendix_market_selection.xlsx`, `fig01-05_*.png` | 2026-08-01 | 🟢 | Re-run on the grid-fixed panel. Confirms 832/807/82 markets selected at ~100% (small 2-market discrepancy vs Script 09's raw count is a pre-existing, minor date-window edge effect between the two scripts, not a new issue). Median coverage 92.4% tomato / 95.6% onion / 95.6% potato. |
 | `12_ModuleB_RollingOrigin_MultiHorizon.py` | `table_rolling_origin_metrics.csv`, `table_spike_auc.csv`, `fig_horizon_r2.png`, `fig_rolling_origin_rmse.png`, `fig_spike_roc.png`, `fig_mape_by_horizon.png` | 2026-07-29 | 🟡 | Predates the 2026-08-01 grid fix — market set has since grown substantially (esp. onion, 246->809). Own 3-fold structure (test years 2022-2024), independent of Script 15. Re-run pending. |
 | `13_Benchmark_Models.py` | `table_benchmarks.csv`, `table_comparison.csv`, `fig_benchmark_comparison.png`, `fig_skill_score.png`, `fig_r2_comparison_heatmap.png` | 2026-07-29 | 🟡 | Predates the 2026-08-01 grid fix. **B1_Naive here is still not the ablation study's naive baseline** — use Script 15's inline B1_Naive for any M0-M6 comparison. Re-run pending. |

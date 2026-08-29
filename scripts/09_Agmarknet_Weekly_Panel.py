@@ -28,6 +28,7 @@ Processing steps per crop:
 import io
 import os
 import sys
+from datetime import datetime
 import pandas as pd
 import numpy as np
 
@@ -46,7 +47,14 @@ OUTDIR = r'C:\Users\masro\Downloads\Agmarknet_Weekly'
 os.makedirs(OUTDIR, exist_ok=True)
 
 START_DATE = '2017-01-01'
-END_DATE   = '2026-08-12'
+# Defaults to today so the weekly automated refresh (scripts/weekly_refresh/)
+# never needs a manual edit here. Each crop's actual grid end is still capped
+# at that crop's own real max observed date (see impute_price_gaps's
+# grid_end computation below), so leaving this at "today" can never
+# manufacture data past what's genuinely on disk -- it's a safe default, not
+# a promise that data reaches this date. Override with TOP_DT_END_DATE for a
+# manual/reproducible run pinned to a specific historical cutoff.
+END_DATE = os.environ.get('TOP_DT_END_DATE', datetime.now().strftime('%Y-%m-%d'))
 
 # Minimum share of a market's own full grid that must be real (non-imputed)
 # for the market to be retained. Added 2026-07-27, originally 0.80. Revised
@@ -84,10 +92,26 @@ def _gap_lengths(series: pd.Series) -> pd.Series:
 def impute_price_gaps(agg: pd.DataFrame, grid_end: pd.Timestamp) -> pd.DataFrame:
     """
     Expand weekly aggregates to a full (market × week) grid and impute price gaps:
-      <=2 weeks   : linear interpolation (price varies smoothly at short horizons)
-      3-8 weeks   : seasonal-median fill (same market, same calendar month, observed years)
-      >8 weeks    : left NaN -- systematic absence, excluded from modelling
+      <=2 weeks, interior : linear interpolation (price varies smoothly at short horizons)
+      <=2 weeks, trailing : forward-fill from the last real price (see note below)
+      3-8 weeks            : seasonal-median fill (same market, same calendar month, observed years)
+      >8 weeks             : left NaN -- systematic absence, excluded from modelling
     Returns grid with added columns: imputed (0/1), imputed_method.
+
+    Trailing short gaps get their own fill (2026-08-21): pandas' interpolate()
+    with limit_area='inside' can never fill a gap at the very end of a series
+    -- there's no future anchor to interpolate toward -- so a market that is
+    simply 1-2 weeks behind on reporting (the normal case at the panel's most
+    recent weeks, not a data-quality problem) fell through both stages
+    untouched: gap<3 excluded it from the seasonal-median stage, and
+    limit_area='inside' excluded it from linear interpolation. Caught when
+    potato's latest week showed 80.5% imputed, traced to West Bengal/
+    Uttarakhand markets each sitting on an ordinary 1-2 week trailing lag,
+    every one of them left as raw NaN with no imputed_method at all. A
+    forward-fill of the last real price is the right estimate at this
+    horizon -- better than a same-month historical seasonal median, since
+    recent price is more informative than seasonal climatology for a gap
+    this short.
 
     grid_end: the END of the grid for THIS crop specifically -- must be
     min(END_DATE, this crop's own actual max observed date), not the global
@@ -144,6 +168,16 @@ def impute_price_gaps(agg: pd.DataFrame, grid_end: pd.Timestamp) -> pd.DataFrame
     )
     s1 = full['imputed'].eq(1) & full[price_col].notna()
     full.loc[s1, 'imputed_method'] = 'linear'
+
+    # Stage 1b: <=2 week gaps still unfilled after Stage 1 are trailing by
+    # construction (every market's grid starts at its own first real week,
+    # so there is no leading gap for interpolate() to have skipped) — carry
+    # the last real price forward instead.
+    s1b = full[price_col].isna() & full['_gap'].between(1, 2)
+    full.loc[s1b, price_col] = (
+        full.groupby('market_id')[price_col].transform(lambda x: x.ffill())
+    )[s1b]
+    full.loc[s1b & full[price_col].notna(), 'imputed_method'] = 'trailing_ffill'
 
     # Stage 2: 3-8 week gaps — seasonal median (from observed rows only)
     full['_month'] = full['week_start'].dt.month
@@ -266,12 +300,13 @@ def process_crop(crop: str) -> pd.DataFrame:
           f'{full["market_id"].nunique()} / {before_n} markets kept')
 
     # Imputation summary
-    n_obs  = (full['imputed'] == 0).sum()
-    n_lin  = (full['imputed_method'] == 'linear').sum()
-    n_smed = (full['imputed_method'] == 'seasonal_median').sum()
-    n_long = full['modal_price_weighted'].isna().sum()
-    print(f'  Grid rows: {len(full):,}  '
-          f'observed={n_obs:,}  linear={n_lin:,}  seasonal_median={n_smed:,}  long_gap_NaN={n_long:,}')
+    n_obs   = (full['imputed'] == 0).sum()
+    n_lin   = (full['imputed_method'] == 'linear').sum()
+    n_ffill = (full['imputed_method'] == 'trailing_ffill').sum()
+    n_smed  = (full['imputed_method'] == 'seasonal_median').sum()
+    n_long  = full['modal_price_weighted'].isna().sum()
+    print(f'  Grid rows: {len(full):,}  observed={n_obs:,}  linear={n_lin:,}  '
+          f'trailing_ffill={n_ffill:,}  seasonal_median={n_smed:,}  long_gap_NaN={n_long:,}')
 
     # 12. Column order
     out_cols = [

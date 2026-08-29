@@ -117,3 +117,9 @@ Model_Output/experiments/two_phase/table_twophase_combined_predictions.csv
 *.tmp
 *.bak
 *.swp
+
+# Weekly refresh automation (scripts/weekly_refresh/): scratch scrape staging
+# and per-run logs, not repo content. See scripts/weekly_refresh/README.md.
+scripts/weekly_refresh/staging/
+logs/weekly_refresh/
+*.csv.backup_*

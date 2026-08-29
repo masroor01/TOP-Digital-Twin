@@ -64,7 +64,7 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 
 | Script | What it does | Depends on |
 |---|---|---|
-| `09_Agmarknet_Weekly_Panel.py` | Builds the core weekly price/arrivals panel from raw Agmarknet CSVs (tomato/onion/potato, all-India). Handles ISO-week alignment and gap imputation (see §7 imputation caveat). Applies a real-coverage filter (`MIN_REAL_COVERAGE = 0.70`, added 2026-07-27, revised same day from an initial 0.80): markets are dropped unless >=70% of their own real reporting span is real (non-imputed) data — potato additionally keeps its own >=8-of-9-years balanced-panel rule first. Kept market counts (current, 2026-08-21): tomato 840 (was 1,729 unfiltered), onion 814 (was 1,587), potato 82 (was 87, balanced-panel-prefiltered count — 1,258 raw markets have at least one observation, but only 87 clear the >=8-of-10-years bar). Counts were 834/809/82 as of the 2026-08-01 grid fix (below) and have since grown slightly as the panel picked up more 2026 weeks, letting a few more borderline markets clear the 70% threshold — filter logic itself unchanged. Threshold revised down from 80% to 70% on 2026-07-27 because the market-level DM test (Script 18b) at 80% found onion's h=1w result resting on only 34/189 significant markets; 70% roughly triples that to a sturdier sample. **Grid-adaptivity fix, 2026-08-01**: each market's coverage grid now starts at its own first real observation rather than a fixed global `START_DATE` — the earlier fixed-grid version silently scored a market as "missing" for every week before it existed in the system, undercounting coverage for markets that onboarded later. Fixing this grew tomato from 517 and onion from 246 to (at the time) 834/809 (potato unaffected — its balanced-panel prefilter already cleared this bar). See `Model_Output/MANIFEST.md` for the full account and current counts — `paper_drafts/` is a working folder cleared between manuscript passes, not a stable citation target. `data/market_coverage_browser.html` is a separate, purely exploratory viewer over ALL markets (unfiltered) — it was never wired into this filter and isn't a decision record. | Raw Agmarknet CSVs (see §5) |
+| `09_Agmarknet_Weekly_Panel.py` | Builds the core weekly price/arrivals panel from raw Agmarknet CSVs (tomato/onion/potato, all-India). Handles ISO-week alignment and gap imputation (see §7 imputation caveat). Applies a real-coverage filter (`MIN_REAL_COVERAGE = 0.70`, added 2026-07-27, revised same day from an initial 0.80): markets are dropped unless >=70% of their own real reporting span is real (non-imputed) data — potato additionally keeps its own >=8-of-9-years balanced-panel rule first. Kept market counts (current, 2026-08-29): tomato 842 (was 1,729 unfiltered), onion 813 (was 1,587), potato 82 (was 87, balanced-panel-prefiltered count — 1,258 raw markets have at least one observation, but only 87 clear the >=8-of-10-years bar). Counts were 834/809/82 as of the 2026-08-01 grid fix (below), 840/814/82 as of 2026-08-21, and are 842/813/82 as of 2026-08-29 (onion's -1 vs. 814 not individually traced — within the normal week-to-week noise of markets sitting right at the 70% threshold, not investigated further since it's a single market) — filter logic itself unchanged. Threshold revised down from 80% to 70% on 2026-07-27 because the market-level DM test (Script 18b) at 80% found onion's h=1w result resting on only 34/189 significant markets; 70% roughly triples that to a sturdier sample. **Grid-adaptivity fix, 2026-08-01**: each market's coverage grid now starts at its own first real observation rather than a fixed global `START_DATE` — the earlier fixed-grid version silently scored a market as "missing" for every week before it existed in the system, undercounting coverage for markets that onboarded later. Fixing this grew tomato from 517 and onion from 246 to (at the time) 834/809 (potato unaffected — its balanced-panel prefilter already cleared this bar). See `Model_Output/MANIFEST.md` for the full account and current counts — `paper_drafts/` is a working folder cleared between manuscript passes, not a stable citation target. `data/market_coverage_browser.html` is a separate, purely exploratory viewer over ALL markets (unfiltered) — it was never wired into this filter and isn't a decision record. | Raw Agmarknet CSVs (see §5) |
 | `09b_Merge_Onion_2026_Update.py` | One-off/refresh utility: merges the Agmarknet **portal's** separate "Daily Price Report" + "Daily Arrival Report" CSVs into the same row schema as the main onion raw file, matching markets to existing `market_id`s by normalized (state, market) name and assigning new sequential IDs for markets not seen before. Needed because onion's original scraper source doesn't get topped up the way tomato/potato's does — see §5. Run before `09_Agmarknet_Weekly_Panel.py` when refreshing onion. | Onion Daily Price/Arrival Report CSVs (see §5) |
 | `10_CMIE_Macro_Parser.py` | Parses CMIE macro Excel exports into `data/cmie_macro/` | Raw CMIE Excel files |
 | `10b_Extend_Macro_2026.py` | One-off/refresh utility: extends `data/rbi_dbie/`, `data/ppac_macro/`, and `data/cmie_macro/` CSVs in place with new CMIE Economic Outlook exports (repo/reverse-repo rate, USD/INR, WPI, diesel/LPG, agri credit, agri wages, IIP). Column mappings for each series are validated against known overlapping historical values before trusting them — see the script's own docstring for exact source-file → column notes, including two pre-existing mislabeling quirks found in the already-published data (`agri_wages_rs_day`, `iip_food_proc`) that were kept as-is for continuity rather than silently changed. | New CMIE Excel exports (see §5) |
@@ -210,11 +210,21 @@ gaps this project has actually hit.
 
 ## 5. Data Sources & Refresh Guide
 
-Most raw sources require **manual download** (no public API) — this has been
-your workflow throughout the project, and there's no way around it for most
-of these. Here's where everything comes from and how often to refresh it.
+Most raw sources require **manual download** (no public API) — that's still
+true for macro/climate/satellite/policy below. The market layer is the
+exception as of 2026-08-29: it's now **fully automated**, see the next
+subsection.
 
-### Agmarknet (price + arrivals) — weekly-ish refresh
+### Agmarknet (price + arrivals) — automated weekly, or manual as a fallback
+**Automated (current, recommended):** `scripts/weekly_refresh/` scrapes
+`api.agmarknet.gov.in` directly — no login, no captcha — validates the
+result, merges it, and reruns Scripts 09→23→44, on a Windows Task Scheduler
+job (Tuesdays 03:00). See `scripts/weekly_refresh/README.md` for the full
+setup and safety model. `END_DATE` in `09_Agmarknet_Weekly_Panel.py`
+defaults to today automatically now, so this needs no manual editing.
+
+**Manual fallback**, if the automation isn't set up or you want an ad-hoc
+pull outside the schedule:
 - Source: [agmarknet.gov.in](https://agmarknet.gov.in) → Price & Arrivals → Download
 - Download separately for each crop, place in the same folder as
   `09_Agmarknet_Weekly_Panel.py` expects (see the script's own docstring for
@@ -225,8 +235,8 @@ of these. Here's where everything comes from and how often to refresh it.
   Report" for onion (same Price & Arrivals page, filter by commodity) and run
   `09b_Merge_Onion_2026_Update.py` first — it merges them into the main raw
   file's schema and writes an updated `onion_all_india_apmcs_2000_2026.csv`.
-- Re-run `09_Agmarknet_Weekly_Panel.py` after each download (bump `END_DATE`
-  at the top of the script to match your new data's actual cutoff).
+- Re-run `09_Agmarknet_Weekly_Panel.py` after each download — `END_DATE`
+  no longer needs manual bumping (see above), it picks up whatever's on disk.
 
 ### CMIE Macro — monthly refresh
 - Source: CMIE Economic Outlook (subscription-based data service) — exports
@@ -445,7 +455,7 @@ their age relative to the current pipeline).
 
 ---
 
-## 9. Project Status (as of 2026-08-21 — see git log for anything after this date)
+## 9. Project Status (as of 2026-08-29 — see git log for anything after this date)
 
 **Done**: all data layers M0-M6, ablation study (extended from 4 to 5
 rolling-origin folds on 2026-08-13, 420 LightGBM fits), model-family
@@ -476,7 +486,21 @@ escalation-signature early-warning prototype expanded from a partial
 4-episode design to a genuine 8-episode, fully held-out one across all
 three crops (Scripts 40/41, 2026-08-19/20), alongside the market
 leader-follower network (Script 42, 2026-08-10, confound-checked and
-stability-checked).
+stability-checked). Since then: a fully automated weekly data-refresh
+pipeline (`scripts/weekly_refresh/`, 2026-08-29) that scrapes fresh
+Agmarknet data unattended (no login/captcha — hits `api.agmarknet.gov.in`
+directly), validates it, merges it, and reruns Scripts 09→23→44, scheduled
+via Windows Task Scheduler; building and live-testing it found and fixed
+two real automation bugs (a reserved-variable collision that silently
+launched `python` with no arguments and hung it for ~46 hours; an exit-code-
+pollution bug that misreported a genuinely successful scrape as failed) —
+see `scripts/weekly_refresh/README.md` and the 2026-08-29 MANIFEST entries
+for the full account. The same cycle brought tomato/onion/potato to the
+same latest week (2026-08-24) for the first time and dropped potato's
+latest-week imputed rate from 80.5% to 4.9%. It also surfaced and fixed a
+crash in an uncommitted dashboard UI redesign (`scripts/24_Simulation_
+Dashboard.py` — a deprecated Plotly `titlefont` property) found while
+reviewing the repo before committing, not something introduced this pass.
 
 **Not yet done / genuinely open**:
 - Full-capacity TFT run (deliberately deferred). Also still carries the
@@ -486,7 +510,7 @@ stability-checked).
   predate not just the 2026-08-01 grid fix but also the policy/
   macro-vintage/leakage fixes that landed after it, and (for all but 15b/
   15c, which were already fixed) the 2026-08-14 collision fix and the
-  panel's further growth to 840/814/82 markets (see
+  panel's further growth to 842/813/82 markets (see
   `Model_Output/MANIFEST.md` for the up-to-date per-file staleness
   flags). **18b is no longer on this list** — re-run 2026-08-15.
 - Scripts 34/35/36 (the rejected two-phase architecture) still group
