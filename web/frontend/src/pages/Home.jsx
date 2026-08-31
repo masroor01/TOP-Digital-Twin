@@ -75,11 +75,11 @@ export default function Home() {
           </FadeIn>
           <FadeIn delay={0.05}>
             <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight leading-[1.08] max-w-4xl mx-auto">
-              <span className="text-[var(--text-primary)]">Price forecasting for India's </span>
+              <span className="text-[var(--text-primary)]">India's </span>
               <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(120deg, var(--brand) 0%, var(--accent) 100%)' }}>
-                Tomato, Onion &amp; Potato
+                Digital Twin
               </span>
-              <span className="text-[var(--text-primary)]"> markets</span>
+              <span className="text-[var(--text-primary)]"> for Tomato, Onion &amp; Potato Markets</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.1}>
