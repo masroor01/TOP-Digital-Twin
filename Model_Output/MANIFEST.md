@@ -1,5 +1,18 @@
 # Model_Output Manifest
 
+**2026-08-31 per-market accuracy added (Script 47, new).** The dashboard's
+"Model Accuracy" KPI (100% - MAPE) is a crop+horizon-level statistic --
+production models are trained one per (crop, horizon) across ALL markets
+combined (Script 23), so it's genuinely the SAME number for every market at
+a given crop/horizon, not a bug. A user flagged this (reasonably) as looking
+wrong. Script 47 adds the real fix: a per-MARKET MAPE computed from actual
+per-market backtest predictions (`dm_market_level_predictions.csv`, M6
+variant -- the same file Script 18b/46 use), so the dashboard can show a
+market's own track record alongside the crop-wide average. 6,819
+(crop, market, horizon) cells; median 171 backtested weeks per cell, only
+1.1% below the n=10 threshold used to hide noisy low-sample figures.
+Output: `table_market_level_accuracy.csv`.
+
 Tracks which script produced each output group, when it was last regenerated,
 and whether it reflects the **current** data pipeline. Update the relevant
 entry every time you re-run a script that writes here — this file exists
@@ -317,6 +330,7 @@ Status legend: 🟢 current · 🟡 stale, known, re-run pending · ⚫ deprecat
 | `38b_SDID_Arrivals_InSpace_Placebo_Test.py` | `table_sdid_arrivals_inspace_placebo.csv`, `fig_sdid_arrivals_inspace_placebo.png` | 2026-08-21 | 🟢 | New. Arrivals-outcome analogue of Script 38, same in-space design applied to log1p(arrivals). Real ATT recomputation matched Script 31 Part C.4's postban row exactly (-0.1548 log-pts, -14.3%) before trusting the placebo result. 169 donor markets (fewer than 38's 214 — arrivals reporting is patchier than price). Placebo std 0.492 log-pts (~5x noisier than price's 0.096). Result: **fails decisively**, p=0.680 (115/169 placebo markets at least as extreme). |
 | `39b_SDID_Arrivals_Stacked_MultiEpisode_EventStudy.py` | `table_sdid_arrivals_stacked_event_study.csv`, `table_sdid_arrivals_stacked_summary.csv`, `fig_sdid_arrivals_stacked_event_study.png` | 2026-08-21 | 🟢 | New. Arrivals-outcome analogue of Script 39, per-episode arrivals requalification (95% coverage, gaps <=4wk interpolated, mirroring Script 31 Part C.4). All 3 episodes produced usable fits (onion: 51/45/40 arrivals-qualifying markets for 2019/2020/2023). Onion's stacked mean sits outside the tomato/potato placebo band in 10/13 post-ban week-bins — but wrong-signed (arrivals fell, not rose, under an export ban meant to retain domestic supply) and already negative pre-ban. Read as corroborating the reverse-causality finding, not an independent effect — see 2026-08-21 note above. |
 | `46_Directional_Accuracy_Test.py` | `table_directional_accuracy.csv`, `table_directional_accuracy_naive.csv`, `fig_directional_accuracy.png` | 2026-08-31 | 🟢 | New. Fills a real gap — every other metric in the project (RMSE/MAE/MAPE/R2/MASE) is magnitude-based; this is the first test of whether the model calls the right price DIRECTION. Per-market (`dm_market_level_predictions.csv`, M0/M6 only), origin price looked up from the raw panel, binomial-tested vs. 50% (all 24 cells significant, n=17k-153k each). Cross-validates the existing ablation story on an independent metric: potato's M0 pulls decisively ahead of M6 at long horizons (h=26w: 78% vs 65%), matching the "richer features don't help potato" finding; tomato/onion directional accuracy generally holds or improves with horizon (tomato M6 84% at h=13w). B1_Naive scores exactly 0.0% everywhere by construction (always predicts "no change") — crop-level context baseline, not a fair per-market comparison. |
+| `47_Market_Level_Accuracy.py` | `table_market_level_accuracy.csv` | 2026-08-31 | 🟢 | New. Per-(crop, market_id, horizon) MAPE from real per-market backtest predictions (`dm_market_level_predictions.csv`, M6 only), feeding the React dashboard's "This market: ~X%" figure alongside the existing crop+horizon-wide "Model Accuracy" KPI. 6,819 cells, median 171 backtested weeks/cell; cells with n<10 flagged as insufficient rather than shown. Not byte-identical to the actual deployed production models (Script 23 trains separately) — same feature config/CV scheme, the best available real per-market proxy since no production model has its own stored per-market backtest. |
 | *(none found)* | `table4_model_metrics.csv`, `fig_feature_importance.png`, `fig_actual_vs_pred_2024.png`, `test_predictions_2024.csv`, `lgbm_{tomato,onion,potato}.txt`, `market_list_by_crop.xlsx`, `fig_shap_{tomato,onion,potato}.png` (July 8 versions, not the July 29 SHAP figures) | 2026-07-08 | ⚪ | No script in the current `scripts/` folder produces these — orphaned from an early prototype, likely predating this repo's current script numbering. Safe to delete once confirmed unneeded; not referenced by README §3. |
 
 ## Exploratory, not part of the main numbered pipeline

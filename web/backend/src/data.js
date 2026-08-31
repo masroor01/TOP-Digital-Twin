@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { parse } from 'csv-parse/sync';
-import { MODEL_DIR, DOW_PATTERN_FILE, DIRECTIONAL_ACCURACY_FILE } from './config.js';
+import { MODEL_DIR, DOW_PATTERN_FILE, DIRECTIONAL_ACCURACY_FILE, MARKET_ACCURACY_FILE } from './config.js';
 
 function readJSON(file) {
   const p = path.join(MODEL_DIR, file);
@@ -60,10 +60,24 @@ export function loadAll() {
     directionalAccuracy = readCSV(DIRECTIONAL_ACCURACY_FILE).map(coerceRow);
   }
 
+  // Script 47's per-market MAPE (M6 variant, from real per-market backtest
+  // predictions -- distinct from model_uncertainty.json's crop+horizon-wide
+  // figure, which is the same for every market by construction since one
+  // shared model serves all markets for a given crop/horizon). Indexed for
+  // O(1) lookup per /simulate request.
+  const marketAccuracy = new Map();
+  if (fs.existsSync(MARKET_ACCURACY_FILE)) {
+    const rows = readCSV(MARKET_ACCURACY_FILE).map(coerceRow);
+    for (const r of rows) {
+      marketAccuracy.set(`${r.crop}_${r.market_id}_${r.horizon_weeks}`, { mape: r.mape, n: r.n });
+    }
+  }
+
   console.log(
     `[data] Loaded ${reference.length} reference rows, ${history.length} history rows, ` +
-    `${Object.keys(featureColumns).length} feature-column specs, ${directionalAccuracy.length} directional-accuracy rows.`
+    `${Object.keys(featureColumns).length} feature-column specs, ${directionalAccuracy.length} directional-accuracy rows, ` +
+    `${marketAccuracy.size} market-accuracy cells.`
   );
 
-  return { featureColumns, featureRanges, uncertainty, staleness, reference, history, dailyNoise, directionalAccuracy };
+  return { featureColumns, featureRanges, uncertainty, staleness, reference, history, dailyNoise, directionalAccuracy, marketAccuracy };
 }

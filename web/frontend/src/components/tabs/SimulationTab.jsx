@@ -102,7 +102,14 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
           value={kpis.lastObservedPrice != null ? fmtRs(kpis.lastObservedPrice, { perQ: true }) : 'N/A'}
           help="Most recent non-imputed trade price." />
         <Metric label="Model Accuracy" value={kpis.mape != null ? `~${Math.max(0, 100 - kpis.mape).toFixed(0)}%` : 'N/A'}
-          help={kpis.mape != null ? `100% - MAPE (${kpis.mape.toFixed(0)}%) from backtesting.` : ''} />
+          delta={
+            kpis.marketMape != null
+              ? `This market: ~${Math.max(0, 100 - kpis.marketMape).toFixed(0)}% (${kpis.marketMapeN}wk history)`
+              : 'This market: not enough backtest history'
+          }
+          help={kpis.mape != null
+            ? `100% - MAPE (${kpis.mape.toFixed(0)}%), validated across every market for this crop+horizon — one shared model serves all markets, so this figure is the same regardless of which market is selected. "This market" below is this specific market's own backtested accuracy, computed separately (Script 47) — the two can differ meaningfully.`
+            : ''} />
       </div>
 
       <Card className="p-3" accent={cropColor}>

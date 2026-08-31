@@ -7,7 +7,7 @@ React/Node rebuild of `scripts/24_Simulation_Dashboard.py` (the Streamlit app). 
 - `frontend/` — React (Vite) SPA. Builds to `frontend/dist/`.
 - `backend/` — Express API + static file server. Serves the built frontend from the same origin/port, and exposes `/api/*`.
 - `backend/src/models/` — the 12 production LightGBM models, each exported to plain JavaScript via [m2cgen](https://github.com/BayesWitnesses/m2cgen) (a direct if/else transliteration of the trained tree logic — not a semantic re-encoding like ONNX). Runs in-process, no Python, no network hop.
-- `data/` — a **bundled copy** of the reference data the backend needs (`production_models/reference_rows.csv`, `price_history.csv`, `feature_columns.json`, `feature_ranges.json`, `model_uncertainty.json`, `macro_climate_staleness.json`, and `table_dow_pattern.csv`), ~13MB total.
+- `data/` — a **bundled copy** of the reference data the backend needs (`production_models/reference_rows.csv`, `price_history.csv`, `feature_columns.json`, `feature_ranges.json`, `model_uncertainty.json`, `macro_climate_staleness.json`, `table_dow_pattern.csv`, `table_directional_accuracy.csv`/`_naive.csv`, and `table_market_level_accuracy.csv`), ~13MB total.
 
 There is no Python service in this deployment. An earlier version of this app (`web/inference/app.py`, superseded) called out to a FastAPI microservice for inference — that approach was abandoned once we needed to deploy on a Node-only host (Hostinger) that can't run Python. See "Why not ONNX" below.
 

@@ -194,6 +194,13 @@ export function buildRouter(store) {
       const delta = scenarioPred - baselinePred;
       const deltaPct = baselinePred ? (100 * delta) / baselinePred : 0;
       const err = store.uncertainty[`${crop}_${horizon}w`] || {};
+      // This market's OWN backtested accuracy (Script 47), distinct from the
+      // crop+horizon-wide figure above -- see the KPI's help text for why
+      // they can differ. Only surfaced when there's enough backtest history
+      // to not be noise (n >= 10 weeks).
+      const marketErr = store.marketAccuracy.get(`${crop}_${baseRow.market_id}_${horizon}`);
+      const marketMape = marketErr && marketErr.n >= 10 ? marketErr.mape : null;
+      const marketMapeN = marketErr && marketErr.n >= 10 ? marketErr.n : null;
 
       const isolatedEffects = diffCols
         .map((col) => {
@@ -250,6 +257,8 @@ export function buildRouter(store) {
           deltaPct,
           rmse: err.rmse ?? null,
           mape: err.mape ?? null,
+          marketMape,
+          marketMapeN,
           lastObservedPrice: baseRow.last_observed_price ?? null,
           lastObservedDate: baseRow.last_observed_date ?? null,
         },
