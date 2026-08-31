@@ -1,0 +1,25 @@
+crop,state,horizon_weeks,mape_shared,mape_state_restricted,DM_stat,p_value,mean_d,n,better_model,significant_5pct
+tomato,Uttar Pradesh,1,23.78,21.89,-13.6422,0.0,-79382.364615,36448,shared,True
+tomato,Uttar Pradesh,4,38.97,35.53,-20.2327,0.0,-234914.2018,35711,shared,True
+tomato,Uttar Pradesh,13,40.36,40.64,-19.7896,0.0,-303765.318678,33787,shared,True
+tomato,Uttar Pradesh,26,44.82,47.74,-24.6594,0.0,-387806.510038,31649,shared,True
+tomato,Keralam,1,22.94,25.49,-10.3379,0.0,-131140.528096,14656,shared,True
+tomato,Keralam,4,34.24,32.65,8.5107,0.0,471769.336609,14428,state-restricted,True
+tomato,Keralam,13,29.7,30.91,1.7093,0.0874,100168.341718,13793,state-restricted,False
+tomato,Keralam,26,33.46,40.0,-1.5656,0.1175,-123711.229828,12966,shared,False
+onion,Maharashtra,1,20.3,20.22,-5.1603,0.0,-11383.980207,16136,shared,True
+onion,Maharashtra,4,28.73,32.56,-12.8007,0.0,-145448.821505,15864,shared,True
+onion,Maharashtra,13,41.76,40.05,-6.0132,0.0,-60076.452501,15133,shared,True
+onion,Maharashtra,26,46.35,36.54,-0.8805,0.3786,-37476.162404,14231,shared,False
+onion,Kerala,1,12.83,13.81,-2.3476,0.0189,-7514.06207,13631,shared,True
+onion,Kerala,4,17.99,21.6,-11.1183,0.0,-138207.974507,13436,shared,True
+onion,Kerala,13,24.47,24.28,-0.9228,0.3561,-17046.283411,12862,shared,False
+onion,Kerala,26,28.01,27.81,7.5668,0.0,437112.390348,12067,state-restricted,True
+potato,West Bengal,1,11.19,11.34,-10.1409,0.0,-3479.542991,15749,shared,True
+potato,West Bengal,4,18.81,19.06,-12.8086,0.0,-24488.874988,15515,shared,True
+potato,West Bengal,13,44.69,42.13,14.908,0.0,107188.172158,14870,state-restricted,True
+potato,West Bengal,26,38.12,41.75,-4.4839,0.0,-49658.833195,14020,shared,True
+potato,Uttarakhand,1,15.13,14.14,-2.0459,0.0408,-2041.454558,3481,shared,True
+potato,Uttarakhand,4,21.3,21.23,-5.9503,0.0,-39682.056709,3424,shared,True
+potato,Uttarakhand,13,38.9,27.92,6.6027,0.0,59853.558341,3259,state-restricted,True
+potato,Uttarakhand,26,42.13,29.23,3.2156,0.0013,47028.198111,3060,state-restricted,True

@@ -1,5 +1,28 @@
 # Model_Output Manifest
 
+**2026-08-31 per-state models tested head-to-head vs. the shared model
+(Script 48, new) -- shared model wins.** Follow-up to the per-market/state
+accuracy work above: a user argued that fitting one model per (crop, state)
+would beat the current design (one shared model per crop+horizon, pooling
+every market, with market_id/state as features) since it wouldn't be
+"diluted" by other states. Tested empirically rather than argued: trained a
+state-restricted M6 model for the TOP 2 highest-data states per crop
+(tomato: Uttar Pradesh/Keralam; onion: Maharashtra/Kerala; potato: West
+Bengal/Uttarakhand -- deliberately the best-case scenario for the per-state
+argument), same 5 rolling-origin folds/hyperparameters as the shared
+model's own recorded backtest, then ran a Diebold-Mariano test against the
+shared model's predictions for the identical (market, week) cells. Result:
+shared model wins 15/24 comparisons significantly (p<0.05), state-
+restricted wins only 5/24 (mostly Uttarakhand and Keralam -- the two
+smallest-data states in the sample, where the shared model's richer
+training pool seems to help least, or Kerala/UP at longer horizons where
+the state series may behave more idiosyncratically). Confirms the
+bias-variance argument: even in the best-data-availability case, cutting
+training data down to one state usually costs more (variance from thinner
+data) than it gains (removing cross-state dilution). Outputs:
+`table_state_vs_shared_model_dm_test.csv`, `state_model_predictions.csv`
+(audit trail).
+
 **2026-08-31 per-market accuracy added, then made hierarchical with
 shrinkage (Script 47, revised same day).** The dashboard's "Model Accuracy"
 KPI (100% - MAPE) is a crop+horizon-level statistic -- production models are
@@ -340,6 +363,7 @@ Status legend: 🟢 current · 🟡 stale, known, re-run pending · ⚫ deprecat
 | `39b_SDID_Arrivals_Stacked_MultiEpisode_EventStudy.py` | `table_sdid_arrivals_stacked_event_study.csv`, `table_sdid_arrivals_stacked_summary.csv`, `fig_sdid_arrivals_stacked_event_study.png` | 2026-08-21 | 🟢 | New. Arrivals-outcome analogue of Script 39, per-episode arrivals requalification (95% coverage, gaps <=4wk interpolated, mirroring Script 31 Part C.4). All 3 episodes produced usable fits (onion: 51/45/40 arrivals-qualifying markets for 2019/2020/2023). Onion's stacked mean sits outside the tomato/potato placebo band in 10/13 post-ban week-bins — but wrong-signed (arrivals fell, not rose, under an export ban meant to retain domestic supply) and already negative pre-ban. Read as corroborating the reverse-causality finding, not an independent effect — see 2026-08-21 note above. |
 | `46_Directional_Accuracy_Test.py` | `table_directional_accuracy.csv`, `table_directional_accuracy_naive.csv`, `fig_directional_accuracy.png` | 2026-08-31 | 🟢 | New. Fills a real gap — every other metric in the project (RMSE/MAE/MAPE/R2/MASE) is magnitude-based; this is the first test of whether the model calls the right price DIRECTION. Per-market (`dm_market_level_predictions.csv`, M0/M6 only), origin price looked up from the raw panel, binomial-tested vs. 50% (all 24 cells significant, n=17k-153k each). Cross-validates the existing ablation story on an independent metric: potato's M0 pulls decisively ahead of M6 at long horizons (h=26w: 78% vs 65%), matching the "richer features don't help potato" finding; tomato/onion directional accuracy generally holds or improves with horizon (tomato M6 84% at h=13w). B1_Naive scores exactly 0.0% everywhere by construction (always predicts "no change") — crop-level context baseline, not a fair per-market comparison. |
 | `47_Market_Level_Accuracy.py` | `table_market_level_accuracy.csv` | 2026-08-31 (revised) | 🟢 | Revised same day. Hierarchical crop -> state -> market MAPE from real backtest predictions (`dm_market_level_predictions.csv`, M6 only) joined to `production_models/reference_rows.csv` for the market->state map, with two-level empirical-Bayes shrinkage (market toward its own state, state toward crop-wide) so every cell gets a trustworthy figure instead of a hidden or noisy one. Feeds the React dashboard's "This market: ~X% · State: ~Y%" figures alongside the existing crop+horizon-wide "Model Accuracy" KPI. 6,788 market cells + 194 state cells, median 173 backtested weeks/market cell. Not byte-identical to the actual deployed production models (Script 23 trains separately) — same feature config/CV scheme, the best available real per-market proxy since no production model has its own stored per-market backtest. |
+| `48_State_vs_Shared_Model_Comparison.py` | `table_state_vs_shared_model_dm_test.csv`, `state_model_predictions.csv` | 2026-08-31 | 🟢 | New. Empirical test of "should we fit one model per (crop, state) instead of one shared pooled model" — trains a state-restricted M6 model for the top-2 highest-data states per crop (best-case for the per-state argument), same 5-fold rolling-origin CV/hyperparameters as the shared model's own recorded backtest, DM-tests it against the shared model's predictions for identical (market, week) cells. Result: shared model wins 15/24 comparisons significantly (p<0.05) vs. 5/24 for state-restricted, confirming the bias-variance argument for pooling — cutting training data to one state costs more from variance (thinner data, ~60-feature M6 set) than it gains from removing cross-state dilution, even in the best-data states. |
 | *(none found)* | `table4_model_metrics.csv`, `fig_feature_importance.png`, `fig_actual_vs_pred_2024.png`, `test_predictions_2024.csv`, `lgbm_{tomato,onion,potato}.txt`, `market_list_by_crop.xlsx`, `fig_shap_{tomato,onion,potato}.png` (July 8 versions, not the July 29 SHAP figures) | 2026-07-08 | ⚪ | No script in the current `scripts/` folder produces these — orphaned from an early prototype, likely predating this repo's current script numbering. Safe to delete once confirmed unneeded; not referenced by README §3. |
 
 ## Exploratory, not part of the main numbered pipeline
