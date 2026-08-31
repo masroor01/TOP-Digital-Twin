@@ -1,0 +1,82 @@
+{
+  "export_banned": {
+    "min": 0.0,
+    "median": 0.0,
+    "max": 1.0
+  },
+  "mep_usd_per_tonne": {
+    "min": 0.0,
+    "median": 0.0,
+    "max": 850.0
+  },
+  "export_duty_pct": {
+    "min": 0.0,
+    "median": 0.0,
+    "max": 40.0
+  },
+  "market_intervention_flag": {
+    "min": 0.0,
+    "median": 0.0,
+    "max": 1.0
+  },
+  "operation_greens_active": {
+    "min": 0.0,
+    "median": 1.0,
+    "max": 1.0
+  },
+  "era5_tmax": {
+    "min": 15.645238533978564,
+    "median": 29.433206225220665,
+    "max": 39.99586274007012
+  },
+  "chirps_rain_mm": {
+    "min": 0.2677280170717817,
+    "median": 24.549184434706994,
+    "max": 780.9115372781631
+  },
+  "s2_ndvi": {
+    "min": 0.0824819979668465,
+    "median": 0.3922249715566676,
+    "max": 0.7719852382618868
+  },
+  "s2_evi": {
+    "min": -746149202.9691712,
+    "median": 0.6549120632782468,
+    "max": 1193622186.4111235
+  },
+  "s2_valid_frac": {
+    "min": 0.1464912883454664,
+    "median": 0.7711372766443695,
+    "max": 0.9999464720663862
+  },
+  "s2_ndvi_anom": {
+    "min": -0.2403492103021891,
+    "median": 0.0067541855882916,
+    "max": 0.1810833952834143
+  },
+  "diesel_4city_rs_litre": {
+    "min": 57.0,
+    "median": 90.475,
+    "max": 100.17499999999998
+  },
+  "repo_rate_pct": {
+    "min": 4.0,
+    "median": 5.9,
+    "max": 6.5
+  },
+  "usdinr_monthly_avg": {
+    "min": 63.64,
+    "median": 79.55,
+    "max": 95.6
+  },
+  "wage_agri_men": {
+    "min": 184.1,
+    "median": 358.2,
+    "max": 887.2
+  },
+  "wage_agri_women": {
+    "min": 158.8,
+    "median": 291.5,
+    "max": 777.8
+  }
+}

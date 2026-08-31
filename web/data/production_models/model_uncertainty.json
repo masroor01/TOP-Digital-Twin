@@ -1,0 +1,50 @@
+{
+  "onion_1w": {
+    "rmse": 493.9,
+    "mape": 16.5
+  },
+  "onion_4w": {
+    "rmse": 669.3,
+    "mape": 23.4
+  },
+  "onion_13w": {
+    "rmse": 894.7,
+    "mape": 33.1
+  },
+  "onion_26w": {
+    "rmse": 1019.3,
+    "mape": 34.0
+  },
+  "potato_1w": {
+    "rmse": 201.6,
+    "mape": 12.5
+  },
+  "potato_4w": {
+    "rmse": 298.9,
+    "mape": 20.2
+  },
+  "potato_13w": {
+    "rmse": 675.4,
+    "mape": 46.4
+  },
+  "potato_26w": {
+    "rmse": 567.6,
+    "mape": 41.0
+  },
+  "tomato_1w": {
+    "rmse": 936.8,
+    "mape": 25.8
+  },
+  "tomato_4w": {
+    "rmse": 1315.9,
+    "mape": 38.8
+  },
+  "tomato_13w": {
+    "rmse": 1380.2,
+    "mape": 40.6
+  },
+  "tomato_26w": {
+    "rmse": 1425.4,
+    "mape": 49.1
+  }
+}

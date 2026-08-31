@@ -3,10 +3,18 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// web/backend/src -> web/backend -> web -> TOP_Digital_Twin (repo root)
-export const REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
-export const MODEL_DIR = path.join(REPO_ROOT, 'Model_Output', 'production_models');
-export const DOW_PATTERN_FILE = path.join(REPO_ROOT, 'Model_Output', 'table_dow_pattern.csv');
+// Reference data lives inside web/data/ (a bundled copy), NOT the wider
+// TOP_Digital_Twin repo's Model_Output/ -- deliberate. Hosting platforms
+// that deploy from a "root directory" subtree (e.g. Hostinger's Deploy Web
+// App pointed at `web`) never check out anything outside that subtree, so
+// a path reaching up to ../../Model_Output would silently not exist there
+// and crash the process on startup (confirmed: this caused a 503 on first
+// deploy attempt). Keeping web/ fully self-contained avoids that whole
+// class of bug regardless of a given platform's checkout behavior. See
+// web/README.md "Updating the bundled data" for how to refresh this copy.
+const WEB_ROOT = path.resolve(__dirname, '..', '..');
+export const MODEL_DIR = path.join(WEB_ROOT, 'data', 'production_models');
+export const DOW_PATTERN_FILE = path.join(WEB_ROOT, 'data', 'table_dow_pattern.csv');
 
 export const CROPS = ['tomato', 'onion', 'potato'];
 export const HORIZONS = [1, 4, 13, 26];
