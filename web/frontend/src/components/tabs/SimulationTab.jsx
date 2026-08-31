@@ -104,11 +104,15 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
         <Metric label="Model Accuracy" value={kpis.mape != null ? `~${Math.max(0, 100 - kpis.mape).toFixed(0)}%` : 'N/A'}
           delta={
             kpis.marketMape != null
-              ? `This market: ~${Math.max(0, 100 - kpis.marketMape).toFixed(0)}% (${kpis.marketMapeN}wk history)`
+              ? `This market: ~${Math.max(0, 100 - kpis.marketMape).toFixed(0)}%` +
+                (kpis.stateMape != null ? ` · State: ~${Math.max(0, 100 - kpis.stateMape).toFixed(0)}%` : '') +
+                ` (${kpis.marketMapeN}wk history)`
               : 'This market: not enough backtest history'
           }
           help={kpis.mape != null
-            ? `100% - MAPE (${kpis.mape.toFixed(0)}%), validated across every market for this crop+horizon — one shared model serves all markets, so this figure is the same regardless of which market is selected. "This market" below is this specific market's own backtested accuracy, computed separately (Script 47) — the two can differ meaningfully.`
+            ? `100% - MAPE (${kpis.mape.toFixed(0)}%), validated across every market for this crop+horizon — one shared model serves all markets, so this figure is the same regardless of which market is selected. "This market" and "State" below are this market's and its state's own backtested accuracy (Script 47), each shrinkage-blended toward its parent level to stay reliable even with thin history` +
+              (kpis.marketMapeRaw != null ? ` (this market's raw, un-blended figure: ~${Math.max(0, 100 - kpis.marketMapeRaw).toFixed(0)}%)` : '') +
+              ` — these can differ meaningfully from the crop-wide figure.`
             : ''} />
       </div>
 

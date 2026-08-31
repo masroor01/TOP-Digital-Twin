@@ -196,11 +196,15 @@ export function buildRouter(store) {
       const err = store.uncertainty[`${crop}_${horizon}w`] || {};
       // This market's OWN backtested accuracy (Script 47), distinct from the
       // crop+horizon-wide figure above -- see the KPI's help text for why
-      // they can differ. Only surfaced when there's enough backtest history
-      // to not be noise (n >= 10 weeks).
+      // they can differ. Every market gets a number now (no hidden cells) --
+      // thin-history markets get a shrinkage-blended figure (pulled toward
+      // their state's own estimate) instead of a noisy raw one or nothing.
       const marketErr = store.marketAccuracy.get(`${crop}_${baseRow.market_id}_${horizon}`);
-      const marketMape = marketErr && marketErr.n >= 10 ? marketErr.mape : null;
-      const marketMapeN = marketErr && marketErr.n >= 10 ? marketErr.n : null;
+      const marketMape = marketErr ? marketErr.marketMapeShrunk : null;
+      const marketMapeN = marketErr ? marketErr.marketN : null;
+      const marketMapeRaw = marketErr ? marketErr.marketMapeRaw : null;
+      const stateMape = marketErr ? marketErr.stateMapeShrunk : null;
+      const stateMapeN = marketErr ? marketErr.stateN : null;
 
       const isolatedEffects = diffCols
         .map((col) => {
@@ -259,6 +263,9 @@ export function buildRouter(store) {
           mape: err.mape ?? null,
           marketMape,
           marketMapeN,
+          marketMapeRaw,
+          stateMape,
+          stateMapeN,
           lastObservedPrice: baseRow.last_observed_price ?? null,
           lastObservedDate: baseRow.last_observed_date ?? null,
         },
