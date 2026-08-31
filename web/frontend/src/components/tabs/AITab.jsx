@@ -32,12 +32,12 @@ export default function AITab({ sim, crop, market, horizon }) {
   return (
     <div>
       <SectionLabel>AI Policy Briefing</SectionLabel>
-      <p className="text-sm text-slate-500 mb-3 max-w-3xl">
+      <p className="text-sm text-[var(--text-secondary)] mb-3 max-w-3xl">
         Generates a grounded, plain-language commentary on the current scenario — strictly based on the baseline/scenario
         numbers and isolated feature effects computed above. Not a validated forecast; treat as decision-support only.
       </p>
       <button onClick={generate} disabled={loading}
-        className="text-sm font-semibold rounded-lg border border-slate-300 bg-white px-4 py-2 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition disabled:opacity-40 mb-4">
+        className="text-sm font-semibold rounded-lg border border-[var(--border-color-strong)] bg-white px-4 py-2 hover:bg-[var(--brand)] hover:text-white hover:border-[var(--brand)] transition disabled:opacity-40 mb-4">
         {loading ? 'Generating…' : '✨ Generate Briefing'}
       </button>
 
@@ -45,7 +45,7 @@ export default function AITab({ sim, crop, market, horizon }) {
       {error && <Alert tone="error">{error}</Alert>}
       {brief && (
         <Card className="p-5 max-w-3xl">
-          <p className="text-sm leading-relaxed text-slate-700">{brief}</p>
+          <p className="text-sm leading-relaxed text-[var(--text-primary)]">{brief}</p>
         </Card>
       )}
     </div>

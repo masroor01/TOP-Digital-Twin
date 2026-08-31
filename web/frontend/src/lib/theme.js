@@ -1,5 +1,5 @@
 export const CROP_ICON = { tomato: '🍅', onion: '🧅', potato: '🥔' };
-export const CROP_COLOR = { tomato: '#EF4444', onion: '#A855F7', potato: '#F59E0B' };
+export const CROP_COLOR = { tomato: '#DC2626', onion: '#7C3AED', potato: '#B45309' };
 export const HORIZONS = [1, 4, 13, 26];
 
 export function fmtRs(v, opts = {}) {

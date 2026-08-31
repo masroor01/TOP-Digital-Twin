@@ -20,8 +20,8 @@ export default function BenchmarksTab({ crop }) {
     <div>
       <SectionLabel>Cross-Market Benchmarks</SectionLabel>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <Card className="p-3">
-          <p className="text-sm font-semibold text-slate-700 mb-2 px-1">Top 15 Markets by Last Observed Price</p>
+        <Card className="p-3" accent={color}>
+          <p className="text-sm font-semibold text-[var(--text-primary)] mb-2 px-1">Top 15 Markets by Last Observed Price</p>
           <PlotChart height={460} layout={{ xaxis: { title: { text: 'Rs/quintal' } }, yaxis: { automargin: true } }} data={[{
             type: 'bar', orientation: 'h',
             x: data.priceTop.map((r) => r.value),
@@ -31,12 +31,12 @@ export default function BenchmarksTab({ crop }) {
           }]} />
         </Card>
         <Card className="p-3">
-          <p className="text-sm font-semibold text-slate-700 mb-2 px-1">Top 15 Markets by Arrivals (Tonnes)</p>
+          <p className="text-sm font-semibold text-[var(--text-primary)] mb-2 px-1">Top 15 Markets by Arrivals (Tonnes)</p>
           <PlotChart height={460} layout={{ xaxis: { title: { text: 'Tonnes' } }, yaxis: { automargin: true } }} data={[{
             type: 'bar', orientation: 'h',
             x: data.arrTop.map((r) => r.value),
             y: data.arrTop.map((r) => r.label),
-            marker: { color: '#64748B' },
+            marker: { color: '#5B6B60' },
             hovertemplate: '%{y}<br>%{x:,.0f} t<extra></extra>',
           }]} />
         </Card>

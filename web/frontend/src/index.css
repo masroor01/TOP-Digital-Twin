@@ -1,15 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Lexend', var(--font-sans);
   --font-mono: 'JetBrains Mono', monospace;
-  --bg-app: #F8FAFC;
+
+  /* Agriculture-rooted palette: deep forest green primary, warm terracotta accent */
+  --brand: #1B4332;
+  --brand-light: #2D6A4F;
+  --brand-dark: #0F2D20;
+  --accent: #B45309;
+  --accent-light: #D97706;
+
+  --bg-app: #F7F8F5;
+  --bg-app-alt: #F1F3EE;
   --card-bg: #FFFFFF;
-  --border-color: #E2E8F0;
-  --text-primary: #0F172A;
-  --text-secondary: #64748B;
-  --text-muted: #94A3B8;
+  --border-color: #E3E6DE;
+  --border-color-strong: #C9CEC1;
+  --text-primary: #1C2620;
+  --text-secondary: #5B6B60;
+  --text-muted: #8B9A8F;
+
+  --crop-tomato: #DC2626;
+  --crop-onion: #7C3AED;
+  --crop-potato: #B45309;
 }
 
 html, body, #root {
@@ -20,20 +35,27 @@ body {
   font-family: var(--font-sans);
   color: var(--text-primary);
   background-color: var(--bg-app);
+  background-image:
+    radial-gradient(circle at 100% 0%, rgba(27, 67, 50, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 0% 100%, rgba(180, 83, 9, 0.04) 0%, transparent 40%);
+  background-attachment: fixed;
   margin: 0;
 }
 
 .font-mono {
   font-family: var(--font-mono);
 }
+.font-display {
+  font-family: var(--font-display);
+}
 
 @keyframes pulse-ring {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(45, 106, 79, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(45, 106, 79, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(45, 106, 79, 0); }
 }
 .pulse-dot {
-  width: 7px; height: 7px; background-color: #10B981; border-radius: 9999px;
+  width: 7px; height: 7px; background-color: var(--brand-light); border-radius: 9999px;
   animation: pulse-ring 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
 }
 

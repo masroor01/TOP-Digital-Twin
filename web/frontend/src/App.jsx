@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import SimulationTab from './components/tabs/SimulationTab';
@@ -94,7 +95,7 @@ export default function App() {
       <Navbar crop={crop} market={market} healthy={healthy} onMenuClick={() => setSidebarOpen(true)} />
       <div className="flex flex-1 min-h-0 relative">
         {sidebarOpen && (
-          <div className="fixed inset-0 bg-slate-900/40 z-30 md:hidden" onClick={() => setSidebarOpen(false)} />
+          <div className="fixed inset-0 bg-[var(--brand-dark)]/40 z-30 md:hidden" onClick={() => setSidebarOpen(false)} />
         )}
         <div className={`fixed inset-y-0 left-0 z-40 transition-transform duration-200 md:static md:translate-x-0 md:z-auto ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -110,13 +111,19 @@ export default function App() {
           />
         </div>
         <main className="flex-1 min-w-0 overflow-y-auto px-3 sm:px-6 py-5">
-          <div className="flex gap-1.5 mb-4 border-b border-slate-200 overflow-x-auto whitespace-nowrap">
+          <div className="flex gap-1 mb-5 border-b border-[var(--border-color)] overflow-x-auto whitespace-nowrap relative">
             {TABS.map((t) => (
               <button key={t.key} onClick={() => setTab(t.key)}
-                className={`shrink-0 text-sm font-semibold px-3.5 py-2 border-b-2 -mb-px transition ${
-                  tab === t.key ? 'border-slate-900 text-slate-900' : 'border-transparent text-slate-500 hover:text-slate-700'
+                className={`relative shrink-0 font-display text-sm font-semibold px-3.5 py-2.5 -mb-px transition rounded-t-md ${
+                  tab === t.key
+                    ? 'text-[var(--brand)] bg-[var(--bg-app-alt)]'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--brand)] hover:bg-[var(--bg-app-alt)]/60'
                 }`}>
                 {t.label}
+                {tab === t.key && (
+                  <motion.span layoutId="tab-underline" className="absolute left-0 right-0 -bottom-[1px] h-[3px] rounded-full"
+                    style={{ background: 'var(--accent)' }} transition={{ type: 'spring', stiffness: 500, damping: 35 }} />
+                )}
               </button>
             ))}
           </div>
@@ -125,16 +132,21 @@ export default function App() {
           {!meta || !market ? (
             <Spinner label="Loading dashboard…" />
           ) : (
-            <>
-              {tab === 'simulation' && (
-                <SimulationTab sim={sim} crop={crop} market={market} marketId={market.marketId} overrides={overrides} />
-              )}
-              {tab === 'attribution' && <AttributionTab sim={sim} />}
-              {tab === 'benchmarks' && <BenchmarksTab crop={crop} />}
-              {tab === 'multimarket' && <MultiMarketTab crop={crop} markets={markets} />}
-              {tab === 'ai' && <AITab sim={sim} crop={crop} market={market} horizon={horizon} />}
-              {tab === 'audit' && <AuditTab sim={sim} overrides={overrides} />}
-            </>
+            <AnimatePresence mode="wait">
+              <motion.div key={tab}
+                initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.18 }}
+              >
+                {tab === 'simulation' && (
+                  <SimulationTab sim={sim} crop={crop} market={market} marketId={market.marketId} overrides={overrides} />
+                )}
+                {tab === 'attribution' && <AttributionTab sim={sim} />}
+                {tab === 'benchmarks' && <BenchmarksTab crop={crop} />}
+                {tab === 'multimarket' && <MultiMarketTab crop={crop} markets={markets} />}
+                {tab === 'ai' && <AITab sim={sim} crop={crop} market={market} horizon={horizon} />}
+                {tab === 'audit' && <AuditTab sim={sim} overrides={overrides} />}
+              </motion.div>
+            </AnimatePresence>
           )}
         </main>
       </div>

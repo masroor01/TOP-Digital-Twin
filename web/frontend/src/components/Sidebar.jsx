@@ -1,15 +1,41 @@
 import React from 'react';
-import { CROP_ICON, HORIZONS } from '../lib/theme';
+import { motion } from 'framer-motion';
+import { CROP_ICON, CROP_COLOR, HORIZONS } from '../lib/theme';
 import { SectionLabel } from './ui';
 
 function fnum(v, d = 0) {
   return v == null || Number.isNaN(v) ? d : Number(v);
 }
 
+function CropPicker({ crop, setCrop }) {
+  return (
+    <div className="grid grid-cols-3 gap-1.5 mb-2.5">
+      {['tomato', 'onion', 'potato'].map((c) => {
+        const active = crop === c;
+        const color = CROP_COLOR[c];
+        return (
+          <motion.button
+            key={c}
+            onClick={() => setCrop(c)}
+            whileTap={{ scale: 0.95 }}
+            className="flex flex-col items-center gap-1 py-2.5 rounded-xl border text-xs font-semibold capitalize transition-colors"
+            style={active
+              ? { background: `${color}14`, borderColor: color, color }
+              : { background: 'white', borderColor: 'var(--border-color-strong)', color: 'var(--text-secondary)' }}
+          >
+            <span className="text-xl leading-none">{CROP_ICON[c]}</span>
+            {c}
+          </motion.button>
+        );
+      })}
+    </div>
+  );
+}
+
 function StaleCaption({ staleness, crop, field }) {
   const s = staleness?.[crop]?.[field];
   if (!s) return null;
-  return <p className="text-[0.7rem] text-slate-400 mt-0.5">📌 Stale feed: {s.as_of} ({s.weeks_stale}w)</p>;
+  return <p className="text-[0.7rem] text-[var(--text-muted)] mt-0.5">📌 Stale feed: {s.as_of} ({s.weeks_stale}w)</p>;
 }
 
 function SliderField({ label, help, min, max, step = 1, value, onChange, staleness, crop, field, obsMin, obsMax }) {
@@ -17,16 +43,16 @@ function SliderField({ label, help, min, max, step = 1, value, onChange, stalene
   return (
     <div className="mb-3.5" title={help}>
       <div className="flex items-center justify-between mb-1">
-        <label className="text-[0.8rem] font-semibold text-slate-700">{label}</label>
-        <span className="font-mono text-xs text-slate-500">{Number(value).toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+        <label className="text-[0.8rem] font-semibold text-[var(--text-primary)]">{label}</label>
+        <span className="font-mono text-xs text-[var(--brand)] bg-[var(--bg-app-alt)] px-1.5 py-0.5 rounded">{Number(value).toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
       </div>
       <input
         type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full h-1.5 rounded-full bg-slate-200 cursor-pointer"
+        className="w-full h-1.5 rounded-full bg-[var(--border-color-strong)] cursor-pointer accent-[var(--brand)]"
       />
       {outOfObserved && (
-        <p className="text-[0.7rem] text-amber-600 mt-0.5">⚠️ Speculative range ({obsMin.toLocaleString()}–{obsMax.toLocaleString()})</p>
+        <p className="text-[0.7rem] text-amber-700 mt-0.5">⚠️ Speculative range ({obsMin.toLocaleString()}–{obsMax.toLocaleString()})</p>
       )}
       <StaleCaption staleness={staleness} crop={crop} field={field} />
     </div>
@@ -36,8 +62,8 @@ function SliderField({ label, help, min, max, step = 1, value, onChange, stalene
 function CheckField({ label, help, checked, onChange, staleness, crop, field }) {
   return (
     <div className="mb-3.5" title={help}>
-      <label className="flex items-center gap-2 text-[0.8rem] font-semibold text-slate-700 cursor-pointer">
-        <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="w-4 h-4 accent-slate-900" />
+      <label className="flex items-center gap-2 text-[0.8rem] font-semibold text-[var(--text-primary)] cursor-pointer">
+        <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="w-4 h-4 accent-[var(--brand)]" />
         {label}
       </label>
       <StaleCaption staleness={staleness} crop={crop} field={field} />
@@ -57,21 +83,24 @@ export default function Sidebar({
   const val = (field) => (overrides[field] !== undefined ? overrides[field] : fnum(baseRow?.[field]));
 
   return (
-    <aside className="w-[300px] max-w-[85vw] shrink-0 bg-[#FAFAFC] border-r border-slate-200 h-full overflow-y-auto px-4 py-5">
+    <aside className="w-[300px] max-w-[85vw] shrink-0 bg-[var(--bg-app-alt)] border-r border-[var(--border-color)] h-full overflow-y-auto px-4 py-5">
       <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <span className="text-2xl">⚡</span>
+        <div className="flex items-center gap-2.5">
+          <span className="w-9 h-9 rounded-xl bg-[var(--brand)] flex items-center justify-center text-lg shrink-0">⚡</span>
           <div>
-            <h3 className="text-sm font-extrabold text-slate-900 tracking-tight leading-none">TOP Digital Twin</h3>
-            <p className="text-[0.68rem] text-slate-500 font-semibold mt-0.5">HADP-04 · APMC Simulator</p>
+            <h3 className="font-display text-sm font-bold text-[var(--text-primary)] tracking-tight leading-none">TOP Digital Twin</h3>
+            <p className="text-[0.68rem] text-[var(--text-secondary)] font-semibold mt-1">HADP-04 · APMC Simulator</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[0.7rem] font-semibold">
+          <span
+            className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-[0.7rem] font-semibold"
+            style={{ background: `${CROP_COLOR[crop]}14`, borderColor: `${CROP_COLOR[crop]}55`, color: CROP_COLOR[crop] }}
+          >
             <span className="pulse-dot" /> M6
           </span>
           {onClose && (
-            <button onClick={onClose} aria-label="Close menu" className="md:hidden p-1 rounded-md text-slate-500 hover:bg-slate-200">
+            <button onClick={onClose} aria-label="Close menu" className="md:hidden p-1 rounded-md text-[var(--text-secondary)] hover:bg-[var(--border-color)]">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <path d="M6 6l12 12M18 6L6 18" />
               </svg>
@@ -81,8 +110,8 @@ export default function Sidebar({
       </div>
 
       <details className="mb-3 text-xs">
-        <summary className="cursor-pointer text-slate-600 font-medium">📦 Data & Market Specs</summary>
-        <div className="mt-2 text-slate-500 leading-relaxed">
+        <summary className="cursor-pointer text-[var(--text-secondary)] font-medium">📦 Data & Market Specs</summary>
+        <div className="mt-2 text-[var(--text-secondary)] leading-relaxed">
           <p className="mb-1">Feeds: Agmarknet (prices/arrivals), CMIE/RBI/PPAC (macro), Sentinel-2/MODIS/ERA5/CHIRPS (remote sensing), 2017-2026.</p>
           <ul className="list-none space-y-0.5">
             {Object.entries(marketCounts || {}).map(([c, n]) => (
@@ -92,38 +121,35 @@ export default function Sidebar({
         </div>
       </details>
 
-      <hr className="border-slate-200 my-3" />
+      <hr className="border-[var(--border-color)] my-3" />
       <SectionLabel>Market Selection</SectionLabel>
 
-      <select value={crop} onChange={(e) => setCrop(e.target.value)} className="w-full mb-2.5 text-sm rounded-lg border border-slate-300 px-2.5 py-1.5 bg-white">
-        {['tomato', 'onion', 'potato'].map((c) => (
-          <option key={c} value={c}>{CROP_ICON[c]} {c[0].toUpperCase() + c.slice(1)}</option>
-        ))}
-      </select>
+      <CropPicker crop={crop} setCrop={setCrop} />
 
-      <select value={stateSel || ''} onChange={(e) => setStateSel(e.target.value)} className="w-full mb-2.5 text-sm rounded-lg border border-slate-300 px-2.5 py-1.5 bg-white">
+      <select value={stateSel || ''} onChange={(e) => setStateSel(e.target.value)} className="w-full mb-2.5 text-sm rounded-lg border border-[var(--border-color-strong)] px-2.5 py-1.5 bg-white text-[var(--text-primary)]">
         {states.map((s) => <option key={s} value={s}>{s}</option>)}
       </select>
 
       <select value={market?.marketId || ''} onChange={(e) => setMarket(markets.find((m) => String(m.marketId) === e.target.value))}
-        className="w-full mb-3 text-sm rounded-lg border border-slate-300 px-2.5 py-1.5 bg-white">
+        className="w-full mb-3 text-sm rounded-lg border border-[var(--border-color-strong)] px-2.5 py-1.5 bg-white text-[var(--text-primary)]">
         {markets.map((m) => <option key={m.marketId} value={m.marketId}>{m.market}</option>)}
       </select>
 
-      <label className="text-[0.8rem] font-semibold text-slate-700">Forecast Horizon</label>
+      <label className="text-[0.8rem] font-semibold text-[var(--text-primary)]">Forecast Horizon</label>
       <div className="flex gap-1.5 mt-1.5 mb-1.5">
         {HORIZONS.map((h) => (
-          <button key={h} onClick={() => setHorizon(h)}
-            className={`flex-1 text-xs font-semibold rounded-md py-1.5 border transition ${
-              horizon === h ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-600 border-slate-300 hover:border-slate-400'
-            }`}>
+          <motion.button key={h} onClick={() => setHorizon(h)} whileTap={{ scale: 0.94 }}
+            className="flex-1 text-xs font-semibold rounded-md py-1.5 border transition-colors"
+            style={horizon === h
+              ? { background: CROP_COLOR[crop], color: 'white', borderColor: CROP_COLOR[crop] }
+              : { background: 'white', color: 'var(--text-secondary)', borderColor: 'var(--border-color-strong)' }}>
             {h}W
-          </button>
+          </motion.button>
         ))}
       </div>
-      {targetDate && <p className="text-xs text-slate-500 mb-3">🎯 Target Date: <b>{targetDate}</b></p>}
+      {targetDate && <p className="text-xs text-[var(--text-secondary)] mb-3">🎯 Target Date: <b className="text-[var(--text-primary)]">{targetDate}</b></p>}
 
-      <hr className="border-slate-200 my-3" />
+      <hr className="border-[var(--border-color)] my-3" />
       <SectionLabel>Policy Scenarios</SectionLabel>
       {policyFields.includes('export_banned') && (
         <CheckField label={featureInfo.export_banned.label} help={featureInfo.export_banned.help}
@@ -145,7 +171,7 @@ export default function Sidebar({
         checked={!!val('market_intervention_flag')} onChange={(v) => setOverride('market_intervention_flag', v ? 1 : 0)}
         staleness={staleness} crop={crop} field="market_intervention_flag" />
 
-      <hr className="border-slate-200 my-3" />
+      <hr className="border-[var(--border-color)] my-3" />
       <SectionLabel>Climate & Satellite</SectionLabel>
       {climateFields.map((field) => {
         const r = featureRanges[field];
@@ -158,7 +184,7 @@ export default function Sidebar({
         );
       })}
 
-      <hr className="border-slate-200 my-3" />
+      <hr className="border-[var(--border-color)] my-3" />
       <SectionLabel>Macro & Logistics</SectionLabel>
       {macroFields.map((field) => {
         const r = featureRanges[field];
@@ -174,7 +200,7 @@ export default function Sidebar({
       })}
 
       <button onClick={() => setOverrides({})}
-        className="w-full mt-2 text-sm font-semibold rounded-lg border border-slate-300 bg-white py-2 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition">
+        className="w-full mt-2 text-sm font-semibold rounded-lg border border-[var(--border-color-strong)] bg-white text-[var(--text-primary)] py-2 hover:bg-[var(--brand)] hover:text-white hover:border-[var(--brand)] transition">
         🔄 Reset to Baseline Vector
       </button>
     </aside>

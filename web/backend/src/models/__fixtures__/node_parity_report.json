@@ -1,0 +1,86 @@
+[
+ {
+  "key": "tomato_1w",
+  "n": 200,
+  "maxDiff": 0,
+  "meanDiff": 0,
+  "ok": true
+ },
+ {
+  "key": "tomato_4w",
+  "n": 200,
+  "maxDiff": 0,
+  "meanDiff": 0,
+  "ok": true
+ },
+ {
+  "key": "tomato_13w",
+  "n": 200,
+  "maxDiff": 0,
+  "meanDiff": 0,
+  "ok": true
+ },
+ {
+  "key": "tomato_26w",
+  "n": 200,
+  "maxDiff": 0,
+  "meanDiff": 0,
+  "ok": true
+ },
+ {
+  "key": "onion_1w",
+  "n": 200,
+  "maxDiff": 0,
+  "meanDiff": 0,
+  "ok": true
+ },
+ {
+  "key": "onion_4w",
+  "n": 200,
+  "maxDiff": 0,
+  "meanDiff": 0,
+  "ok": true
+ },
+ {
+  "key": "onion_13w",
+  "n": 200,
+  "maxDiff": 0,
+  "meanDiff": 0,
+  "ok": true
+ },
+ {
+  "key": "onion_26w",
+  "n": 200,
+  "maxDiff": 0,
+  "meanDiff": 0,
+  "ok": true
+ },
+ {
+  "key": "potato_1w",
+  "n": 82,
+  "maxDiff": 0,
+  "meanDiff": 0,
+  "ok": true
+ },
+ {
+  "key": "potato_4w",
+  "n": 82,
+  "maxDiff": 0,
+  "meanDiff": 0,
+  "ok": true
+ },
+ {
+  "key": "potato_13w",
+  "n": 82,
+  "maxDiff": 0,
+  "meanDiff": 0,
+  "ok": true
+ },
+ {
+  "key": "potato_26w",
+  "n": 82,
+  "maxDiff": 0,
+  "meanDiff": 0,
+  "ok": true
+ }
+]

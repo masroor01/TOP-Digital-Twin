@@ -14,7 +14,6 @@ export const HORIZONS = [1, 4, 13, 26];
 export const CROP_ICON = { tomato: '🍅', onion: '🧅', potato: '🥔' };
 export const CROP_COLOR = { tomato: '#EF4444', onion: '#A855F7', potato: '#F59E0B' };
 
-export const INFERENCE_URL = process.env.INFERENCE_URL || 'http://127.0.0.1:8721';
 export const PORT = process.env.PORT || 4000;
 
 // Ported verbatim from scripts/24_Simulation_Dashboard.py — keep in sync if

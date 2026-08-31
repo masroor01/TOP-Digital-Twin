@@ -1,0 +1,10 @@
+{
+  "name": "top-digital-twin-web",
+  "version": "1.0.0",
+  "description": "TOP Digital Twin dashboard -- React frontend + Express backend, single deployable Node process (pure-JS model inference, no Python).",
+  "private": true,
+  "scripts": {
+    "build": "npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend",
+    "start": "npm start --prefix backend"
+  }
+}

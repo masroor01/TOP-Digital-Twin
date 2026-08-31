@@ -169,14 +169,18 @@ export function buildRouter(store) {
       const err = store.uncertainty[`${crop}_${horizon}w`] || {};
 
       const isolatedEffects = diffCols
-        .map((col) => ({
-          field: col,
-          label: FEATURE_INFO[col]?.label || col,
-          before: baseRow[col],
-          after: scenario[col],
-          effect: preds[`isolated_${col}`] - baselinePred,
-          mechanism: FEATURE_INFO[col]?.mechanism || null,
-        }))
+        .map((col) => {
+          const effect = preds[`isolated_${col}`] - baselinePred;
+          const direction = effect > 0 ? 'higher' : effect < 0 ? 'lower' : 'about the same';
+          return {
+            field: col,
+            label: FEATURE_INFO[col]?.label || col,
+            before: baseRow[col],
+            after: scenario[col],
+            effect,
+            mechanism: FEATURE_INFO[col]?.mechanism ? FEATURE_INFO[col].mechanism.replace('{dir}', direction) : null,
+          };
+        })
         .sort((a, b) => Math.abs(b.effect) - Math.abs(a.effect));
       const sumIsolated = isolatedEffects.reduce((s, e) => s + e.effect, 0);
       const interactionGap = delta - sumIsolated;
@@ -198,10 +202,19 @@ export function buildRouter(store) {
 
       const targetDate = new Date(asOf.getTime() + horizon * WEEK_MS);
 
+      const dataWeeksStale = Math.floor((Date.now() - asOf.getTime()) / WEEK_MS);
+      const dataQuality = {
+        dataWeeksStale,
+        sufficientHistory: baseRow.sufficient_history ?? null,
+        staleReference: baseRow.stale_reference ?? null,
+        pctImputedLast52w: baseRow.pct_imputed_last_52w ?? null,
+      };
+
       res.json({
         baseRow,
         asOf: asOf.toISOString().slice(0, 10),
         targetDate: targetDate.toISOString().slice(0, 10),
+        dataQuality,
         ticker,
         kpis: {
           baseline: baselinePred,
@@ -258,7 +271,6 @@ export function buildRouter(store) {
       const points = [];
       for (let day = 0; day <= maxDay; day++) {
         const date = new Date(asOf.getTime() + day * DAY_MS);
-        if (date < today && date < asOf) continue;
         if (date < (today > asOf ? today : asOf)) continue;
         const price = Math.expm1(interp(day));
         points.push({

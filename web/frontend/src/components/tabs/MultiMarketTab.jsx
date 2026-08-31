@@ -36,19 +36,19 @@ export default function MultiMarketTab({ crop, markets }) {
   return (
     <div>
       <SectionLabel>Multi-Market Price Comparison</SectionLabel>
-      <p className="text-sm text-slate-500 mb-3">Select up to 8 markets to overlay their historical weekly price trajectories.</p>
+      <p className="text-sm text-[var(--text-secondary)] mb-3">Select up to 8 markets to overlay their historical weekly price trajectories.</p>
 
       <Card className="p-3 mb-4">
         <div className="max-h-40 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 mb-3">
           {options.map((m) => (
-            <label key={m.marketId} className="flex items-center gap-1.5 text-xs text-slate-600 cursor-pointer">
-              <input type="checkbox" checked={selected.includes(m.marketId)} onChange={() => toggle(m.marketId)} className="accent-slate-900" />
+            <label key={m.marketId} className="flex items-center gap-1.5 text-xs text-[var(--text-secondary)] cursor-pointer">
+              <input type="checkbox" checked={selected.includes(m.marketId)} onChange={() => toggle(m.marketId)} className="accent-[var(--brand)]" />
               <span className="truncate">{m.market} ({m.state})</span>
             </label>
           ))}
         </div>
         <button onClick={compare} disabled={!selected.length || loading}
-          className="text-sm font-semibold rounded-lg border border-slate-300 bg-white px-4 py-2 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition disabled:opacity-40 disabled:pointer-events-none">
+          className="text-sm font-semibold rounded-lg border border-[var(--border-color-strong)] bg-white px-4 py-2 hover:bg-[var(--brand)] hover:text-white hover:border-[var(--brand)] transition disabled:opacity-40 disabled:pointer-events-none">
           {loading ? 'Loading…' : `Compare ${selected.length} Market${selected.length === 1 ? '' : 's'}`}
         </button>
       </Card>
