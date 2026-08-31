@@ -4,6 +4,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import cors from 'cors';
+import { rateLimit } from 'express-rate-limit';
 import { loadAll } from './data.js';
 import { buildRouter } from './routes.js';
 import { PORT } from './config.js';
@@ -12,8 +13,24 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const store = loadAll();
 
 const app = express();
+app.disable('x-powered-by');
+app.set('trust proxy', 1); // behind Hostinger's edge/CDN -- needed for rate-limit to key on the real client IP, not the proxy's
+
+// Minimal manual security headers (no helmet dependency for one line each).
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
 app.use(cors());
 app.use(express.json({ limit: '2mb' }));
+
+// General API rate limit -- generous (this is a public, read-mostly demo
+// tool with no accounts), but stops a single client from hammering it.
+app.use('/api', rateLimit({ windowMs: 60 * 1000, limit: 120, standardHeaders: true, legacyHeaders: false }));
+
 app.use('/api', buildRouter(store));
 
 // Serve the built React frontend (web/frontend/dist) as static files, with

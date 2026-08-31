@@ -1,5 +1,6 @@
 import express from 'express';
 import Anthropic from '@anthropic-ai/sdk';
+import { rateLimit } from 'express-rate-limit';
 import { predictBatch, inferenceHealth } from './inference.js';
 import { pchip } from './pchip.js';
 import {
@@ -9,6 +10,25 @@ import {
 
 const WEEK_MS = 7 * 24 * 3600 * 1000;
 const DAY_MS = 24 * 3600 * 1000;
+
+// The real, exposed scenario controls in the sidebar top out at ~11 fields
+// (4 policy + 3 climate + 3 macro, at most). Anything past a generous
+// multiple of that in a single request's `overrides` object isn't a real
+// user interaction -- it's either a bug or an attempt to force the server
+// into computing thousands of isolated-effect predictions in one synchronous
+// request (confirmed exploitable: 500 garbage keys measured at ~1.1s live;
+// linear scaling means a 2MB body full of short keys could block the
+// single-threaded Node process for minutes). Reject rather than silently
+// truncate, so a real bug upstream doesn't get masked.
+const MAX_OVERRIDE_KEYS = 40;
+function tooManyOverrides(overrides) {
+  return overrides && typeof overrides === 'object' && Object.keys(overrides).length > MAX_OVERRIDE_KEYS;
+}
+
+// /ai-brief calls the real Anthropic API with a server-side key -- unlike
+// every other endpoint here, each call has a real dollar cost. Rate-limited
+// much tighter than the general API limit for that reason.
+const aiBriefLimiter = rateLimit({ windowMs: 60 * 60 * 1000, limit: 12, standardHeaders: true, legacyHeaders: false });
 
 export function buildRouter(store) {
   const router = express.Router();
@@ -124,6 +144,7 @@ export function buildRouter(store) {
       const { crop, marketId, horizon, overrides = {} } = req.body;
       if (!CROPS.includes(crop)) return res.status(400).json({ error: 'invalid crop' });
       if (!HORIZONS.includes(horizon)) return res.status(400).json({ error: 'invalid horizon' });
+      if (tooManyOverrides(overrides)) return res.status(400).json({ error: `too many override fields (max ${MAX_OVERRIDE_KEYS})` });
 
       const baseRow = findBaseRow(store.reference, crop, marketId);
       if (!baseRow) return res.status(404).json({ error: 'no baseline row for this crop/market' });
@@ -255,6 +276,7 @@ export function buildRouter(store) {
   router.post('/daily-curve', async (req, res) => {
     try {
       const { crop, marketId, overrides = {} } = req.body;
+      if (tooManyOverrides(overrides)) return res.status(400).json({ error: `too many override fields (max ${MAX_OVERRIDE_KEYS})` });
       const baseRow = findBaseRow(store.reference, crop, marketId);
       if (!baseRow) return res.status(404).json({ error: 'no baseline row' });
       if (!(crop in store.dailyNoise)) return res.json({ points: [], note: 'no daily-noise factor for this crop' });
@@ -294,13 +316,48 @@ export function buildRouter(store) {
   });
 
   // ── AI policy briefing (Anthropic proxy, server-side key) ──────────────
-  router.post('/ai-brief', async (req, res) => {
+  // Calls a real, billed Anthropic API with a server-side key, so this
+  // route is deliberately more defensive than the others: rate-limited
+  // separately and tighter (aiBriefLimiter, above), crop/horizon checked
+  // against known lists, and market/state resolved server-side from
+  // `marketId` via the trusted reference data rather than trusted as raw
+  // client-supplied strings (both used to be free-text fields interpolated
+  // straight into the LLM prompt -- a real prompt-injection surface: a
+  // crafted `market`/`state` string could try to override the system-style
+  // instructions above it). isolatedEffects is still client-supplied
+  // (recomputing baselinePred/scenarioPred/isolatedEffects server-side from
+  // a stored simulate result would close that too -- not done here since
+  // this feature isn't live on any deployment yet; worth doing before it is).
+  router.post('/ai-brief', aiBriefLimiter, async (req, res) => {
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) return res.status(503).json({ error: 'ANTHROPIC_API_KEY not configured on the server' });
     try {
-      const { crop, market, state, horizon, baselinePred, scenarioPred, deltaPct, delta, rmse, mape, isolatedEffects } = req.body;
+      const { crop, marketId, horizon, baselinePred, scenarioPred, deltaPct, delta, rmse, mape, isolatedEffects } = req.body;
+
+      if (!CROPS.includes(crop)) return res.status(400).json({ error: 'invalid crop' });
+      if (!HORIZONS.includes(horizon)) return res.status(400).json({ error: 'invalid horizon' });
+      const baseRow = findBaseRow(store.reference, crop, marketId);
+      if (!baseRow) return res.status(404).json({ error: 'no baseline row for this crop/market' });
+      const market = baseRow.market;
+      const state = baseRow.state;
+
+      const numericFields = { baselinePred, scenarioPred, deltaPct, delta, rmse, mape };
+      for (const [key, val] of Object.entries(numericFields)) {
+        if (val != null && (typeof val !== 'number' || !Number.isFinite(val))) {
+          return res.status(400).json({ error: `${key} must be a finite number` });
+        }
+      }
+      if (!Array.isArray(isolatedEffects) || isolatedEffects.length > MAX_OVERRIDE_KEYS) {
+        return res.status(400).json({ error: `isolatedEffects must be an array of at most ${MAX_OVERRIDE_KEYS} items` });
+      }
+      for (const e of isolatedEffects) {
+        if (typeof e?.effect !== 'number' || !Number.isFinite(e.effect)) {
+          return res.status(400).json({ error: 'each isolatedEffects entry needs a finite numeric effect' });
+        }
+      }
+
       const changesText = isolatedEffects
-        .map((e) => `- ${e.label}: ${e.before} -> ${e.after} (isolated effect: ${e.effect >= 0 ? '+' : ''}${e.effect.toFixed(0)} Rs/quintal)`)
+        .map((e) => `- ${String(e.label ?? '').slice(0, 120)}: ${String(e.before).slice(0, 40)} -> ${String(e.after).slice(0, 40)} (isolated effect: ${e.effect >= 0 ? '+' : ''}${e.effect.toFixed(0)} Rs/quintal)`)
         .join('\n');
       const prompt = `You are a policy-analysis assistant embedded in an agricultural price forecasting dashboard for Indian APMC markets (Tomato/Onion/Potato, HADP-04, SKUAST-K). A user ran a what-if scenario. Ground your answer STRICTLY in the numbers given below — do not invent statistics, events, or data you were not given.
 

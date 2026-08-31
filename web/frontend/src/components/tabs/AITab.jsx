@@ -15,7 +15,7 @@ export default function AITab({ sim, crop, market, horizon }) {
     setBrief(null);
     try {
       const res = await api.aiBrief({
-        crop, market: market?.market, state: market?.state, horizon,
+        crop, marketId: market?.marketId, horizon,
         baselinePred: sim.kpis.baseline, scenarioPred: sim.kpis.scenario,
         deltaPct: sim.kpis.deltaPct, delta: sim.kpis.delta,
         rmse: sim.kpis.rmse, mape: sim.kpis.mape,

@@ -52,4 +52,12 @@ Or for hot-reload during development: `npm run dev` in `frontend/` (Vite, proxie
 
 ## Deployment
 
-Deployed as a single Node.js app (build command: `npm run build`, start command: `npm start`, both run from this `web/` directory). `ANTHROPIC_API_KEY` (optional — powers the AI Briefing tab) is set as an environment variable, not committed; see `backend/.env.example`.
+Deployed as a single Node.js app (build command: `npm run build`, start command: `npm start`, both run from this `web/` directory). `ANTHROPIC_API_KEY` (optional — powers the AI Briefing tab) is set as an environment variable, not committed; see `backend/.env.example`. Hostinger auto-redeploys on every push to `master` (confirmed 2026-08-31 — no manual redeploy click needed).
+
+## Security notes (from the 2026-08-31 audit)
+
+- **Rate limiting**: general API limit 120 req/min/IP; `/api/ai-brief` specifically limited to 12 req/hour/IP since it calls a real, billed Anthropic API. `app.set('trust proxy', 1)` is required for this to key on the real client IP rather than Hostinger's edge — don't remove it.
+- **`overrides` size cap** (`/api/simulate`, `/api/daily-curve`): capped at `MAX_OVERRIDE_KEYS` (40). Confirmed exploitable before this fix — 500 garbage override keys measured at ~1.1s live; a 2MB request body full of short keys (Node's single-threaded, this blocks everyone) would have scaled to minutes.
+- **`/api/ai-brief` hardening**: `market`/`state` are now resolved server-side from `marketId` via the trusted reference data, not accepted as free-text client strings (they used to be interpolated directly into the LLM prompt — a real prompt-injection surface). All numeric fields are type/finiteness-checked; `isolatedEffects` is length-capped and each entry's text fields are truncated. **Not fully closed**: `baselinePred`/`scenarioPred`/`isolatedEffects` are still client-supplied rather than recomputed server-side from a stored `/simulate` result — the gold-standard fix, not done here since this feature isn't live on any deployment yet (no `ANTHROPIC_API_KEY` configured on Hostinger as of this audit). Do this before adding a real key.
+- Basic headers: `X-Powered-By` disabled, `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`.
+- **Not done, lower priority**: CORS is still wide open (`cors()` with no origin restriction) — acceptable for now since this is a public, read-mostly tool with no accounts/cookies, but worth tightening to the deployed origin if that ever changes. Dependency audit (`npm audit`) is clean on both `frontend/` and `backend/` as of this date.
