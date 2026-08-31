@@ -34,6 +34,12 @@ export function buildRouter(store) {
     res.json({ ok: true, inference: await inferenceHealth() });
   });
 
+  // Script 46's per-market directional (up/down) accuracy test -- static
+  // validation results, not computed live. See Model_Output/MANIFEST.md.
+  router.get('/directional-accuracy', (req, res) => {
+    res.json({ rows: store.directionalAccuracy });
+  });
+
   // ── Market selection ────────────────────────────────────────────────────
   router.get('/states', (req, res) => {
     const { crop } = req.query;

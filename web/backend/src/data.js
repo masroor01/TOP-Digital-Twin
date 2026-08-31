@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { parse } from 'csv-parse/sync';
-import { MODEL_DIR, DOW_PATTERN_FILE } from './config.js';
+import { MODEL_DIR, DOW_PATTERN_FILE, DIRECTIONAL_ACCURACY_FILE } from './config.js';
 
 function readJSON(file) {
   const p = path.join(MODEL_DIR, file);
@@ -14,7 +14,7 @@ function readCSV(fullPath) {
 }
 
 // Numeric/boolean coercion — csv-parse gives everything as strings.
-const NUMERIC_HINT = /^-?\d+(\.\d+)?$/;
+const NUMERIC_HINT = /^-?\d+(\.\d+)?(e-?\d+)?$/i;
 function coerceRow(row) {
   const out = {};
   for (const [k, v] of Object.entries(row)) {
@@ -55,10 +55,15 @@ export function loadAll() {
     for (const crop of Object.keys(sums)) dailyNoise[crop] = sums[crop] / counts[crop];
   }
 
+  let directionalAccuracy = [];
+  if (fs.existsSync(DIRECTIONAL_ACCURACY_FILE)) {
+    directionalAccuracy = readCSV(DIRECTIONAL_ACCURACY_FILE).map(coerceRow);
+  }
+
   console.log(
     `[data] Loaded ${reference.length} reference rows, ${history.length} history rows, ` +
-    `${Object.keys(featureColumns).length} feature-column specs.`
+    `${Object.keys(featureColumns).length} feature-column specs, ${directionalAccuracy.length} directional-accuracy rows.`
   );
 
-  return { featureColumns, featureRanges, uncertainty, staleness, reference, history, dailyNoise };
+  return { featureColumns, featureRanges, uncertainty, staleness, reference, history, dailyNoise, directionalAccuracy };
 }

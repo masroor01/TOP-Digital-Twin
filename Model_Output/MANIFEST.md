@@ -7,6 +7,30 @@ specifically because two stale-output bugs (`table_benchmarks.csv`,
 `table_spike_auc.csv`) went unnoticed for weeks in July 2026 before being
 caught during the 2026-07-29 results review.
 
+**2026-08-31 directional accuracy test added (Script 46, new).** Every
+metric used elsewhere in this project (RMSE, MAE, MAPE, R2, MASE) is
+magnitude-based -- none of them ask whether the model called the right
+DIRECTION of the price move. Script 46 closes this gap: per-market
+(`market_id`-keyed), using the same `dm_market_level_predictions.csv`
+Script 18b's DM tests are built on (M0/M6 only -- that's what exists in
+this file), it looks up the origin price (horizon weeks before the target
+week, from the raw weekly panel) and compares `sign(actual_change)` vs
+`sign(predicted_change)`, with a binomial test against a 50% null per
+(variant, crop, horizon) cell. All 24 cells are significant at p<0.05
+given the large per-market sample sizes (17k-153k rows each). Headline
+finding, cross-validating rather than contradicting the existing ablation
+story: **onion and tomato improve or hold steady with horizon** (tomato
+M6 hits 84% at h=13w; onion climbs from 55% at h=1w to 72% at h=13w), while
+**potato's M0 pulls decisively ahead of M6 at long horizons** (h=26w: M0
+78% vs M6 65%) -- the same "richer features don't help potato" pattern
+the ablation study already found via MAPE/R2, now confirmed on an
+entirely independent metric. B1_Naive's directional accuracy is exactly
+0.0% in every cell by mathematical construction (it always predicts "no
+change," so it never calls a direction) -- reported as a crop-level
+context baseline only, not a fair per-market comparison. Outputs:
+`table_directional_accuracy.csv`, `table_directional_accuracy_naive.csv`,
+`fig_directional_accuracy.png`.
+
 **Current pipeline state (as of 2026-08-29):** market panel filtered to
 >=70% real coverage per market (**842 tomato / 813 onion / 82 potato**,
 all three now landing on the **same week, 2026-08-24**, for the first time
@@ -292,6 +316,7 @@ Status legend: 🟢 current · 🟡 stale, known, re-run pending · ⚫ deprecat
 | `39_SDID_Stacked_MultiEpisode_EventStudy.py` | `table_sdid_stacked_event_study.csv`, `table_sdid_stacked_summary.csv` | 2026-08-20 | 🟢 | Extends the single-episode (2023-24) SDID design to all 3 verified onion export bans in the panel window (Sep 2019, Sep 2020, 2023-24), addressing the underlying n=1 identification problem by pooling 3 independent episodes into one event study. **Patched 2026-08-20 for the market_id collision fix** and re-run — result bit-for-bit identical to the pre-fix version. |
 | `38b_SDID_Arrivals_InSpace_Placebo_Test.py` | `table_sdid_arrivals_inspace_placebo.csv`, `fig_sdid_arrivals_inspace_placebo.png` | 2026-08-21 | 🟢 | New. Arrivals-outcome analogue of Script 38, same in-space design applied to log1p(arrivals). Real ATT recomputation matched Script 31 Part C.4's postban row exactly (-0.1548 log-pts, -14.3%) before trusting the placebo result. 169 donor markets (fewer than 38's 214 — arrivals reporting is patchier than price). Placebo std 0.492 log-pts (~5x noisier than price's 0.096). Result: **fails decisively**, p=0.680 (115/169 placebo markets at least as extreme). |
 | `39b_SDID_Arrivals_Stacked_MultiEpisode_EventStudy.py` | `table_sdid_arrivals_stacked_event_study.csv`, `table_sdid_arrivals_stacked_summary.csv`, `fig_sdid_arrivals_stacked_event_study.png` | 2026-08-21 | 🟢 | New. Arrivals-outcome analogue of Script 39, per-episode arrivals requalification (95% coverage, gaps <=4wk interpolated, mirroring Script 31 Part C.4). All 3 episodes produced usable fits (onion: 51/45/40 arrivals-qualifying markets for 2019/2020/2023). Onion's stacked mean sits outside the tomato/potato placebo band in 10/13 post-ban week-bins — but wrong-signed (arrivals fell, not rose, under an export ban meant to retain domestic supply) and already negative pre-ban. Read as corroborating the reverse-causality finding, not an independent effect — see 2026-08-21 note above. |
+| `46_Directional_Accuracy_Test.py` | `table_directional_accuracy.csv`, `table_directional_accuracy_naive.csv`, `fig_directional_accuracy.png` | 2026-08-31 | 🟢 | New. Fills a real gap — every other metric in the project (RMSE/MAE/MAPE/R2/MASE) is magnitude-based; this is the first test of whether the model calls the right price DIRECTION. Per-market (`dm_market_level_predictions.csv`, M0/M6 only), origin price looked up from the raw panel, binomial-tested vs. 50% (all 24 cells significant, n=17k-153k each). Cross-validates the existing ablation story on an independent metric: potato's M0 pulls decisively ahead of M6 at long horizons (h=26w: 78% vs 65%), matching the "richer features don't help potato" finding; tomato/onion directional accuracy generally holds or improves with horizon (tomato M6 84% at h=13w). B1_Naive scores exactly 0.0% everywhere by construction (always predicts "no change") — crop-level context baseline, not a fair per-market comparison. |
 | *(none found)* | `table4_model_metrics.csv`, `fig_feature_importance.png`, `fig_actual_vs_pred_2024.png`, `test_predictions_2024.csv`, `lgbm_{tomato,onion,potato}.txt`, `market_list_by_crop.xlsx`, `fig_shap_{tomato,onion,potato}.png` (July 8 versions, not the July 29 SHAP figures) | 2026-07-08 | ⚪ | No script in the current `scripts/` folder produces these — orphaned from an early prototype, likely predating this repo's current script numbering. Safe to delete once confirmed unneeded; not referenced by README §3. |
 
 ## Exploratory, not part of the main numbered pipeline

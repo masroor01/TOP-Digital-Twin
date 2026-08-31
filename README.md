@@ -106,6 +106,7 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 | `39_SDID_Stacked_MultiEpisode_EventStudy.py` | Extends Script 31's single-episode (2023-24) design to all 3 verified onion export bans in the panel window (Sep 2019, Sep 2020, 2023-24), stacking them into one multi-episode event study — addresses the n=1 identification problem (a single confounded natural experiment can't separate the ban's effect from the coincident weather shock that prompted it) by pooling 3 independent episodes. **~5-10 min.** | Script 19 output, `data/agmarknet_weekly/top_weekly_panel.csv` |
 | `38b_SDID_Arrivals_InSpace_Placebo_Test.py` | Arrivals/quantity-outcome analogue of Script 38 (added 2026-08-21) — same in-space placebo design applied to `log1p(arrivals)` instead of price. Result: p=0.680 — fails decisively (placebo noise ~5x larger than for price). **~5-10 min.** | Script 31's fitted SDID weights |
 | `39b_SDID_Arrivals_Stacked_MultiEpisode_EventStudy.py` | Arrivals/quantity-outcome analogue of Script 39 (added 2026-08-21) — same 3-episode stacked design applied to arrivals, with per-episode requalification (≥95% arrivals coverage). Onion separates from the placebo band in 10/13 post-ban week-bins, but the effect is wrong-signed and pre-dates the ban — read as corroborating reverse-causality, not an independent ban effect on quantity. **~5-10 min.** | Script 19 output, `data/agmarknet_weekly/top_weekly_panel.csv` |
+| `46_Directional_Accuracy_Test.py` | Every other metric in this project (RMSE/MAE/MAPE/R²/MASE) is magnitude-based — this asks whether the model called the right price DIRECTION. Per-market (`market_id`-keyed), looks up the origin price (horizon weeks before the target week) from the raw panel and compares `sign(actual_change)` vs `sign(predicted_change)`, binomial-tested against a 50% null. M0 vs M6 only (that's what `dm_market_level_predictions.csv` has). Cross-validates the ablation story on an independent metric — potato's M0 pulls ahead of M6 at long horizons (h=26w: 78% vs 65%), matching its known "richer features don't help" pattern. B1_Naive scores exactly 0% everywhere by construction (always predicts "no change"). **~1 min.** | `Model_Output/dm_market_level_predictions.csv`, `Model_Output/ablation_predictions.csv`, `data/agmarknet_weekly/top_weekly_panel.csv` |
 
 ### Phase E — Deep learning (secondary model)
 
@@ -443,6 +444,7 @@ their age relative to the current pipeline).
 - `table_sdid_stacked_event_study.csv`, `table_sdid_stacked_summary.csv` — Script 39's stacked 3-episode (2019/2020/2023-24) event study
 - `table_sdid_arrivals_inspace_placebo.csv` — Script 38b's arrivals-outcome placebo test (postban ATT p=0.680, fails decisively)
 - `table_sdid_arrivals_stacked_event_study.csv`, `table_sdid_arrivals_stacked_summary.csv` — Script 39b's arrivals-outcome stacked event study (onion separates from placebo band in 10/13 post-ban week-bins, but wrong-signed and pre-existing — corroborates reverse-causality rather than an independent effect)
+- `table_directional_accuracy.csv`, `table_directional_accuracy_naive.csv`, `fig_directional_accuracy.png` — Script 46's directional (up/down) accuracy test, per-market, M0 vs M6, binomial-tested against a 50% null
 - `table_dm_m6_vs_phase1alone.csv` — Script 37's DM test (Phase-1-alone vs M6; edge does not survive formal testing)
 - `Model_Output/experiments/two_phase/` — Scripts 34-36's two-phase residual architecture outputs, archived as a documented rejected experiment, separate from the production results above
 - `table_escalation_signature_*.csv` — Scripts 40/41's early-warning prototype (per-crop LOEO scores, placebo-in-time tests, Nashik-hub localization test)
@@ -501,6 +503,12 @@ latest-week imputed rate from 80.5% to 4.9%. It also surfaced and fixed a
 crash in an uncommitted dashboard UI redesign (`scripts/24_Simulation_
 Dashboard.py` — a deprecated Plotly `titlefont` property) found while
 reviewing the repo before committing, not something introduced this pass.
+Since then: a React/Node rebuild of the dashboard (`web/`, deployed
+separately from the Streamlit app) and a directional accuracy test
+(Script 46, 2026-08-31) — the project's only metric so far that asks
+whether the model calls the right price direction rather than just how
+close the magnitude is; cross-validates the ablation study's crop/horizon
+heterogeneity finding on an independent axis (see MANIFEST.md).
 
 **Not yet done / genuinely open**:
 - Full-capacity TFT run (deliberately deferred). Also still carries the

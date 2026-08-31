@@ -8,6 +8,7 @@ import BenchmarksTab from '../components/tabs/BenchmarksTab';
 import MultiMarketTab from '../components/tabs/MultiMarketTab';
 import AITab from '../components/tabs/AITab';
 import AuditTab from '../components/tabs/AuditTab';
+import ValidationTab from '../components/tabs/ValidationTab';
 import { Spinner, Alert } from '../components/ui';
 import { api } from '../lib/api';
 import { HORIZONS } from '../lib/theme';
@@ -17,6 +18,7 @@ const TABS = [
   { key: 'attribution', label: '🎯 Attribution' },
   { key: 'benchmarks', label: '🏆 Benchmarks' },
   { key: 'multimarket', label: '🗺️ Multi-Market' },
+  { key: 'validation', label: '📐 Validation' },
   { key: 'ai', label: '✨ AI Briefing' },
   { key: 'audit', label: '🔍 Audit' },
 ];
@@ -143,6 +145,7 @@ export default function Dashboard() {
                 {tab === 'attribution' && <AttributionTab sim={sim} />}
                 {tab === 'benchmarks' && <BenchmarksTab crop={crop} />}
                 {tab === 'multimarket' && <MultiMarketTab crop={crop} markets={markets} />}
+                {tab === 'validation' && <ValidationTab />}
                 {tab === 'ai' && <AITab sim={sim} crop={crop} market={market} horizon={horizon} />}
                 {tab === 'audit' && <AuditTab sim={sim} overrides={overrides} />}
               </motion.div>

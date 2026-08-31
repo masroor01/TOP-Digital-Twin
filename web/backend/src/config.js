@@ -15,6 +15,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const WEB_ROOT = path.resolve(__dirname, '..', '..');
 export const MODEL_DIR = path.join(WEB_ROOT, 'data', 'production_models');
 export const DOW_PATTERN_FILE = path.join(WEB_ROOT, 'data', 'table_dow_pattern.csv');
+export const DIRECTIONAL_ACCURACY_FILE = path.join(WEB_ROOT, 'data', 'table_directional_accuracy.csv');
 
 export const CROPS = ['tomato', 'onion', 'potato'];
 export const HORIZONS = [1, 4, 13, 26];

@@ -15,4 +15,5 @@ export const api = {
   simulate: (payload) => client.post('/simulate', payload).then((r) => r.data),
   dailyCurve: (payload) => client.post('/daily-curve', payload).then((r) => r.data),
   aiBrief: (payload) => client.post('/ai-brief', payload).then((r) => r.data),
+  directionalAccuracy: () => client.get('/directional-accuracy').then((r) => r.data),
 };
