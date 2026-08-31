@@ -1,0 +1,122 @@
+# -*- coding: utf-8 -*-
+"""
+TOP Digital Twin — Inference Microservice
+==========================================
+Single responsibility: load the 12 production LightGBM models once at
+startup and serve predictions. This is a VERBATIM port of the `predict()`
+function from scripts/24_Simulation_Dashboard.py — deliberately not
+reimplemented or converted to another runtime (e.g. ONNX), so there is
+zero risk of the React/Node redesign silently drifting from the model's
+actual trained behavior. Everything else (data serving, business logic,
+the AI proxy) lives in the Node backend; this service does inference only.
+
+Run:
+  cd web/inference
+  uvicorn app:app --host 127.0.0.1 --port 8721 --reload
+"""
+import os
+import json
+import joblib
+import numpy as np
+import pandas as pd
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+MODEL_DIR = os.path.join(BASE, 'Model_Output', 'production_models')
+CROPS = ['tomato', 'onion', 'potato']
+HORIZONS = [1, 4, 13, 26]
+
+app = FastAPI(title='TOP Digital Twin Inference Service')
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:4000'],
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
+
+_models = {}
+_feature_columns = {}
+
+
+@app.on_event('startup')
+def load_artifacts():
+    if not os.path.exists(MODEL_DIR):
+        raise RuntimeError(f'Production models not found at {MODEL_DIR}. Run scripts/23_Train_Production_Models.py first.')
+    for crop in CROPS:
+        for h in HORIZONS:
+            path = os.path.join(MODEL_DIR, f'{crop}_{h}w.joblib')
+            if os.path.exists(path):
+                _models[(crop, h)] = joblib.load(path)
+    with open(os.path.join(MODEL_DIR, 'feature_columns.json'), encoding='utf-8') as f:
+        _feature_columns.update(json.load(f))
+    print(f'[inference] Loaded {len(_models)} models, {len(_feature_columns)} feature-column specs.')
+
+
+class PredictRequest(BaseModel):
+    crop: str
+    horizon: int
+    features: dict
+
+
+class PredictResponse(BaseModel):
+    price: float
+
+
+class BatchPredictItem(BaseModel):
+    id: str
+    crop: str
+    horizon: int
+    features: dict
+
+
+class BatchPredictRequest(BaseModel):
+    items: list[BatchPredictItem]
+
+
+def _predict_one(crop: str, horizon: int, features: dict) -> float:
+    key = (crop, horizon)
+    if key not in _models:
+        raise HTTPException(status_code=400, detail=f'No model for crop={crop} horizon={horizon}w')
+    cols_key = f'{crop}_{horizon}w'
+    if cols_key not in _feature_columns:
+        raise HTTPException(status_code=400, detail=f'No feature-column spec for {cols_key}')
+    cols = _feature_columns[cols_key]
+    # features.get(c, 0) only substitutes 0 when the KEY is absent, not when
+    # it's present with a JSON null -- the JS side sends null for genuinely
+    # missing values (mirroring the CSV's own NaNs), which arrives here as
+    # Python None. A None in a pandas column makes the whole column dtype
+    # 'object', which LightGBM rejects outright ("pandas dtypes must be int,
+    # float or bool") -- confirmed live. Coerce to NaN/numeric explicitly so
+    # LightGBM's native missing-value handling applies, matching exactly how
+    # the original Streamlit app's real (float-NaN) CSV-sourced rows always
+    # behaved.
+    row = {c: features.get(c) for c in cols}
+    X = pd.DataFrame([row])
+    for c in X.columns:
+        X[c] = pd.to_numeric(X[c], errors='coerce')
+    log_pred = _models[key].predict(X)[0]
+    return float(np.expm1(log_pred))
+
+
+@app.get('/health')
+def health():
+    return {'status': 'ok', 'models_loaded': len(_models)}
+
+
+@app.post('/predict', response_model=PredictResponse)
+def predict(req: PredictRequest):
+    return PredictResponse(price=_predict_one(req.crop, req.horizon, req.features))
+
+
+@app.post('/predict/batch')
+def predict_batch(req: BatchPredictRequest):
+    """Batches many predictions in one round-trip — the dashboard needs
+    dozens of predict() calls per interaction (ticker x4 horizons, baseline
+    vs scenario, isolated per-feature effects x N changed features), and
+    doing those as separate HTTP calls from Node would be needlessly slow."""
+    out = {}
+    for item in req.items:
+        out[item.id] = _predict_one(item.crop, item.horizon, item.features)
+    return {'predictions': out}

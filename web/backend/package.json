@@ -1,0 +1,22 @@
+{
+  "name": "top-digital-twin-backend",
+  "version": "1.0.0",
+  "description": "TOP Digital Twin dashboard API — data serving, inference orchestration, AI proxy",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.122.0",
+    "cors": "^2.8.6",
+    "csv-parse": "^7.0.2",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "node-fetch": "^3.3.2"
+  }
+}
