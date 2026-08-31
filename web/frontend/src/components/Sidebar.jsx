@@ -21,7 +21,7 @@ function CropPicker({ crop, setCrop }) {
             className="flex flex-col items-center gap-1 py-2.5 rounded-xl border text-xs font-semibold capitalize transition-colors"
             style={active
               ? { background: `${color}14`, borderColor: color, color }
-              : { background: 'white', borderColor: 'var(--border-color-strong)', color: 'var(--text-secondary)' }}
+              : { background: 'var(--card-bg)', borderColor: 'var(--border-color-strong)', color: 'var(--text-secondary)' }}
           >
             <span className="text-xl leading-none">{CROP_ICON[c]}</span>
             {c}
@@ -126,12 +126,12 @@ export default function Sidebar({
 
       <CropPicker crop={crop} setCrop={setCrop} />
 
-      <select value={stateSel || ''} onChange={(e) => setStateSel(e.target.value)} className="w-full mb-2.5 text-sm rounded-lg border border-[var(--border-color-strong)] px-2.5 py-1.5 bg-white text-[var(--text-primary)]">
+      <select value={stateSel || ''} onChange={(e) => setStateSel(e.target.value)} className="w-full mb-2.5 text-sm rounded-lg border border-[var(--border-color-strong)] px-2.5 py-1.5 bg-[var(--card-bg)] text-[var(--text-primary)]">
         {states.map((s) => <option key={s} value={s}>{s}</option>)}
       </select>
 
       <select value={market?.marketId || ''} onChange={(e) => setMarket(markets.find((m) => String(m.marketId) === e.target.value))}
-        className="w-full mb-3 text-sm rounded-lg border border-[var(--border-color-strong)] px-2.5 py-1.5 bg-white text-[var(--text-primary)]">
+        className="w-full mb-3 text-sm rounded-lg border border-[var(--border-color-strong)] px-2.5 py-1.5 bg-[var(--card-bg)] text-[var(--text-primary)]">
         {markets.map((m) => <option key={m.marketId} value={m.marketId}>{m.market}</option>)}
       </select>
 
@@ -142,7 +142,7 @@ export default function Sidebar({
             className="flex-1 text-xs font-semibold rounded-md py-1.5 border transition-colors"
             style={horizon === h
               ? { background: CROP_COLOR[crop], color: 'white', borderColor: CROP_COLOR[crop] }
-              : { background: 'white', color: 'var(--text-secondary)', borderColor: 'var(--border-color-strong)' }}>
+              : { background: 'var(--card-bg)', color: 'var(--text-secondary)', borderColor: 'var(--border-color-strong)' }}>
             {h}W
           </motion.button>
         ))}
@@ -200,7 +200,7 @@ export default function Sidebar({
       })}
 
       <button onClick={() => setOverrides({})}
-        className="w-full mt-2 text-sm font-semibold rounded-lg border border-[var(--border-color-strong)] bg-white text-[var(--text-primary)] py-2 hover:bg-[var(--brand)] hover:text-white hover:border-[var(--brand)] transition">
+        className="w-full mt-2 text-sm font-semibold rounded-lg border border-[var(--border-color-strong)] bg-[var(--card-bg)] text-[var(--text-primary)] py-2 hover:bg-[var(--brand)] hover:text-white hover:border-[var(--brand)] transition">
         🔄 Reset to Baseline Vector
       </button>
     </aside>

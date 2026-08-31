@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-:root {
+:root,
+:root[data-theme='light'] {
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Lexend', var(--font-sans);
   --font-mono: 'JetBrains Mono', monospace;
@@ -10,6 +11,7 @@
   --brand: #1B4332;
   --brand-light: #2D6A4F;
   --brand-dark: #0F2D20;
+  --brand-text: #1B4332;
   --accent: #B45309;
   --accent-light: #D97706;
 
@@ -22,13 +24,78 @@
   --text-secondary: #5B6B60;
   --text-muted: #8B9A8F;
 
+  --glow-1: rgba(27, 67, 50, 0.10);
+  --glow-2: rgba(180, 83, 9, 0.08);
+
   --crop-tomato: #DC2626;
   --crop-onion: #7C3AED;
   --crop-potato: #B45309;
 }
 
+:root[data-theme='dark'] {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Lexend', var(--font-sans);
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --brand: #34D399;
+  --brand-light: #6EE7B7;
+  --brand-dark: #052E1C;
+  --brand-text: #34D399;
+  --accent: #F59E0B;
+  --accent-light: #FBBF24;
+
+  --bg-app: #0B1210;
+  --bg-app-alt: #121A17;
+  --card-bg: #161F1B;
+  --border-color: #22302A;
+  --border-color-strong: #34443C;
+  --text-primary: #EDF2EF;
+  --text-secondary: #9FB0A8;
+  --text-muted: #6B7D74;
+
+  --glow-1: rgba(52, 211, 153, 0.14);
+  --glow-2: rgba(245, 158, 11, 0.10);
+
+  --crop-tomato: #F87171;
+  --crop-onion: #A78BFA;
+  --crop-potato: #FBBF24;
+}
+
+:root[data-theme='warm'] {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Lexend', var(--font-sans);
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --brand: #1B4332;
+  --brand-light: #2D6A4F;
+  --brand-dark: #0F2D20;
+  --brand-text: #1B4332;
+  --accent: #C2410C;
+  --accent-light: #EA580C;
+
+  --bg-app: #FBF3E7;
+  --bg-app-alt: #F5E8D3;
+  --card-bg: #FFFDF8;
+  --border-color: #E8D9BE;
+  --border-color-strong: #D4BD95;
+  --text-primary: #2B2013;
+  --text-secondary: #6B5D45;
+  --text-muted: #9C8B6C;
+
+  --glow-1: rgba(194, 65, 12, 0.10);
+  --glow-2: rgba(27, 67, 50, 0.08);
+
+  --crop-tomato: #DC2626;
+  --crop-onion: #7C3AED;
+  --crop-potato: #C2410C;
+}
+
 html, body, #root {
   height: 100%;
+}
+
+html {
+  transition: background-color 0.25s ease;
 }
 
 body {
@@ -36,10 +103,11 @@ body {
   color: var(--text-primary);
   background-color: var(--bg-app);
   background-image:
-    radial-gradient(circle at 100% 0%, rgba(27, 67, 50, 0.05) 0%, transparent 45%),
-    radial-gradient(circle at 0% 100%, rgba(180, 83, 9, 0.04) 0%, transparent 40%);
+    radial-gradient(circle at 100% 0%, var(--glow-1) 0%, transparent 45%),
+    radial-gradient(circle at 0% 100%, var(--glow-2) 0%, transparent 40%);
   background-attachment: fixed;
   margin: 0;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .font-mono {

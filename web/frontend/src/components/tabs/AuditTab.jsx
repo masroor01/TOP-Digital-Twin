@@ -17,7 +17,7 @@ export default function AuditTab({ sim, overrides }) {
       <Card className="p-4">
         <div className="overflow-auto max-h-[600px]">
           <table className="w-full text-xs min-w-[480px]">
-            <thead className="sticky top-0 bg-white">
+            <thead className="sticky top-0 bg-[var(--card-bg)]">
               <tr className="text-left text-[var(--text-secondary)] uppercase tracking-wide border-b border-[var(--border-color)]">
                 <th className="py-1.5 pr-3">Field</th>
                 <th className="py-1.5 pr-3">Baseline Value</th>

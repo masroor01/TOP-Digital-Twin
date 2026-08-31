@@ -48,7 +48,7 @@ export default function MultiMarketTab({ crop, markets }) {
           ))}
         </div>
         <button onClick={compare} disabled={!selected.length || loading}
-          className="text-sm font-semibold rounded-lg border border-[var(--border-color-strong)] bg-white px-4 py-2 hover:bg-[var(--brand)] hover:text-white hover:border-[var(--brand)] transition disabled:opacity-40 disabled:pointer-events-none">
+          className="text-sm font-semibold rounded-lg border border-[var(--border-color-strong)] bg-[var(--card-bg)] px-4 py-2 hover:bg-[var(--brand)] hover:text-white hover:border-[var(--brand)] transition disabled:opacity-40 disabled:pointer-events-none">
           {loading ? 'Loading…' : `Compare ${selected.length} Market${selected.length === 1 ? '' : 's'}`}
         </button>
       </Card>

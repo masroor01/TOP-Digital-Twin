@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CROP_ICON, CROP_COLOR } from '../lib/theme';
 import { Badge } from './ui';
+import ThemeToggle from './ThemeToggle';
 
 export default function Navbar({ crop, market, healthy, onMenuClick }) {
   return (
@@ -41,12 +42,14 @@ export default function Navbar({ crop, market, healthy, onMenuClick }) {
           <span className="text-white/45 truncate hidden sm:inline">{market?.state || '—'}</span>
         </div>
       </div>
-      <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-semibold ${
-        healthy ? 'bg-[var(--brand-light)]/20 border-[var(--brand-light)]/40 text-emerald-200' : 'bg-white/5 border-white/15 text-white/50'
-      }`}>
-        <span className="pulse-dot" /> <span className="hidden sm:inline">{healthy ? 'Inference Engine Live' : 'Connecting…'}</span>
-        <span className="sm:hidden">{healthy ? 'Live' : '…'}</span>
-      </span>
+      <div className="flex items-center gap-2 shrink-0">
+        <ThemeToggle compact onDark />
+        <span className={`hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-semibold ${
+          healthy ? 'bg-[var(--brand-light)]/20 border-[var(--brand-light)]/40 text-emerald-200' : 'bg-white/5 border-white/15 text-white/50'
+        }`}>
+          <span className="pulse-dot" /> Inference Engine Live
+        </span>
+      </div>
     </header>
   );
 }

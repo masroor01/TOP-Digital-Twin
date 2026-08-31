@@ -10,7 +10,7 @@ export function Card({ children, className = '', accent, hover = true, ...rest }
       animate={{ opacity: 1, y: 0 }}
       transition={cardTransition}
       whileHover={hover ? { y: -3, boxShadow: '0 1px 2px rgba(28,38,32,0.06), 0 16px 32px -14px rgba(28,38,32,0.22)' } : undefined}
-      className={`bg-white border border-[var(--border-color)] rounded-2xl shadow-[0_1px_2px_rgba(28,38,32,0.04),0_8px_24px_-16px_rgba(28,38,32,0.12)] relative overflow-hidden ${className}`}
+      className={`bg-[var(--card-bg)] border border-[var(--border-color)] rounded-2xl shadow-[0_1px_2px_rgba(28,38,32,0.04),0_8px_24px_-16px_rgba(28,38,32,0.12)] relative overflow-hidden ${className}`}
       {...rest}
     >
       {accent && <span className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: accent }} />}

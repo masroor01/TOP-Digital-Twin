@@ -116,7 +116,7 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
       </Card>
 
       <div className="mt-3">
-        <button onClick={toggleDaily} className="text-sm font-semibold rounded-lg border border-[var(--border-color-strong)] bg-white text-[var(--text-primary)] px-4 py-2 hover:bg-[var(--brand)] hover:text-white hover:border-[var(--brand)] transition">
+        <button onClick={toggleDaily} className="text-sm font-semibold rounded-lg border border-[var(--border-color-strong)] bg-[var(--card-bg)] text-[var(--text-primary)] px-4 py-2 hover:bg-[var(--brand)] hover:text-white hover:border-[var(--brand)] transition">
           {dailyOpen ? '🔼 Hide Daily Disaggregation' : '📅 Expand Daily Disaggregation Curve'}
         </button>
       </div>
@@ -132,7 +132,7 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
               <div className="marquee-wrap overflow-hidden whitespace-nowrap border border-[var(--border-color)] rounded-lg py-2 mb-3 bg-[var(--bg-app-alt)]">
                 <div className="marquee-track text-xs text-[var(--text-primary)]" style={{ animationDuration: `${Math.max(80, daily.points.length * 1.4)}s` }}>
                   {daily.points.map((p) => (
-                    <span key={p.date} className="bg-white px-2 py-0.5 rounded-md border border-[var(--border-color)] mr-4">
+                    <span key={p.date} className="bg-[var(--card-bg)] px-2 py-0.5 rounded-md border border-[var(--border-color)] mr-4">
                       {fmtDate(p.date)}: <b>{fmtRs(p.price)}</b>
                     </span>
                   ))}
