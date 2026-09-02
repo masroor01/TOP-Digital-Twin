@@ -1,9 +1,9 @@
 crop,episode,label,real_window_intensity,n_placebo_windows,n_placebo_as_extreme,p_value,score_type
-onion,onion_2019,Onion Sep-2019 ban,0.18891,47,0,0.0,held_out
-onion,onion_2020,Onion Sep-2020 ban,0.0009,47,31,0.66,held_out
-onion,onion_2023,Onion Aug-2023 duty (first action of 2023-24 sequence),0.08169,47,0,0.0,held_out
-tomato,tomato_2023,Tomato Jul-2023 NCCF/NAFED procurement,0.14591,48,2,0.042,held_out
-tomato,tomato_2024,Tomato Jul-2024 NCCF Delhi-NCR retail sale (PIB PRID=2038421),0.01221,48,28,0.583,held_out
-tomato,tomato_2025,Tomato Aug-2025 NCCF Azadpur Mandi procurement (PIB PRID=2154078),0.05959,48,6,0.125,held_out
-potato,potato_2014,"Potato Jun-2014 MEP ($450/MT, DGFT 85(RE-2013)/2009-2014)",0.27679,50,0,0.0,held_out
-potato,potato_2016,Potato Jul-2016 MEP $360/MT (DGFT Notification 15/26.07.2016),0.13042,50,0,0.0,held_out
+onion,onion_2019,Onion Sep-2019 ban,0.18369,47,0,0.0,held_out
+onion,onion_2020,Onion Sep-2020 ban,0.03385,47,4,0.085,held_out
+onion,onion_2023,Onion Aug-2023 duty (first action of 2023-24 sequence),0.08655,47,0,0.0,held_out
+tomato,tomato_2023,Tomato Jul-2023 NCCF/NAFED procurement,0.17569,48,2,0.042,held_out
+tomato,tomato_2024,Tomato Jul-2024 NCCF Delhi-NCR retail sale (PIB PRID=2038421),0.01254,48,30,0.625,held_out
+tomato,tomato_2025,Tomato Aug-2025 NCCF Azadpur Mandi procurement (PIB PRID=2154078),0.05768,48,5,0.104,held_out
+potato,potato_2014,"Potato Jun-2014 MEP ($450/MT, DGFT 85(RE-2013)/2009-2014)",0.3455,50,0,0.0,held_out
+potato,potato_2016,Potato Jul-2016 MEP $360/MT (DGFT Notification 15/26.07.2016),0.13154,50,0,0.0,held_out

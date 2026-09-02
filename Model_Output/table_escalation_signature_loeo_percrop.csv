@@ -1,9 +1,9 @@
 crop,episode,label,n_test_weeks,n_test_positive,auc,avg_precision,n_train_episodes
-tomato,tomato_2023,Tomato Jul-2023 NCCF/NAFED procurement,50,19,0.927,0.907,2
-tomato,tomato_2024,Tomato Jul-2024 NCCF Delhi-NCR retail sale (PIB PRID=2038421),51,20,0.661,0.478,2
-tomato,tomato_2025,Tomato Aug-2025 NCCF Azadpur Mandi procurement (PIB PRID=2154078),51,20,0.816,0.824,2
-onion,onion_2019,Onion Sep-2019 ban,50,20,0.928,0.898,2
-onion,onion_2020,Onion Sep-2020 ban,51,13,0.678,0.375,2
-onion,onion_2023,Onion Aug-2023 duty (first action of 2023-24 sequence),50,20,0.887,0.816,2
-potato,potato_2014,"Potato Jun-2014 MEP ($450/MT, DGFT 85(RE-2013)/2009-2014)",50,20,0.758,0.78,1
-potato,potato_2016,Potato Jul-2016 MEP $360/MT (DGFT Notification 15/26.07.2016),50,20,0.94,0.882,1
+tomato,tomato_2023,Tomato Jul-2023 NCCF/NAFED procurement,50,19,0.927,0.917,2
+tomato,tomato_2024,Tomato Jul-2024 NCCF Delhi-NCR retail sale (PIB PRID=2038421),51,20,0.631,0.452,2
+tomato,tomato_2025,Tomato Aug-2025 NCCF Azadpur Mandi procurement (PIB PRID=2154078),51,20,0.787,0.78,2
+onion,onion_2019,Onion Sep-2019 ban,50,20,0.945,0.89,2
+onion,onion_2020,Onion Sep-2020 ban,51,13,0.621,0.331,2
+onion,onion_2023,Onion Aug-2023 duty (first action of 2023-24 sequence),50,20,0.848,0.776,2
+potato,potato_2014,"Potato Jun-2014 MEP ($450/MT, DGFT 85(RE-2013)/2009-2014)",50,20,0.702,0.652,1
+potato,potato_2016,Potato Jul-2016 MEP $360/MT (DGFT Notification 15/26.07.2016),50,20,0.918,0.792,1

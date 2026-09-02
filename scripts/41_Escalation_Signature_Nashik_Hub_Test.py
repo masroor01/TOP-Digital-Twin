@@ -178,10 +178,15 @@ data['score'] = np.nan
 
 for ep in EPISODES:
     test_mask = data['episode'] == ep['name']
-    train_mask = data['episode'] != ep['name']
     around = ((data['week_start'] >= ep['first_action'] - pd.Timedelta(weeks=MAX_LOOKBACK_WEEKS * 2)) &
               (data['week_start'] <= ep['first_action'] + pd.Timedelta(weeks=MAX_LOOKBACK_WEEKS // 2)))
-    test_mask_full = test_mask | (around & (data['episode'] != ep['name']) & (data['label'] == 0))
+    # FIXED 2026-09-02 (audit finding, inherited from Script 40 -- see its
+    # matching 2026-09-02 fix comment): these padding negatives satisfied
+    # `episode != ep['name']`, identical to train_mask's own condition, so
+    # they were being trained AND tested on. Excluded from train_mask now.
+    extra_test_negatives = around & (data['episode'] != ep['name']) & (data['label'] == 0)
+    test_mask_full = test_mask | extra_test_negatives
+    train_mask = (data['episode'] != ep['name']) & (~extra_test_negatives)
 
     X_train, y_train = data.loc[train_mask, FEATURES], data.loc[train_mask, 'label']
     X_test, y_test = data.loc[test_mask_full, FEATURES], data.loc[test_mask_full, 'label']

@@ -282,10 +282,23 @@ for crop in CROPS:
         # Genuine within-crop leave-one-episode-out.
         for ep in crop_episodes:
             test_mask = crop_data['episode'] == ep['name']
-            train_mask = (crop_data['episode'] != ep['name'])   # all other crop weeks, incl. other episodes
             around = ((crop_data['week_start'] >= ep['first_action'] - pd.Timedelta(weeks=LOOKBACK_WEEKS * 4)) &
                       (crop_data['week_start'] <= ep['first_action'] + pd.Timedelta(weeks=LOOKBACK_WEEKS)))
-            test_mask_full = test_mask | (around & (crop_data['episode'] != ep['name']) & (crop_data['label'] == 0))
+            # Padding negatives near the event window, added to the test set
+            # for a fuller precision/recall picture than the episode's own
+            # (mostly escalation-week) rows alone would give.
+            #
+            # FIXED 2026-09-02 (audit finding, confirmed real): these padding
+            # rows satisfy `episode != ep['name']`, which is EXACTLY
+            # `train_mask`'s condition below -- every one of them used to be
+            # trained AND tested on. Only the episode's own held-out rows
+            # were genuinely unseen; the AUC/AP reported here were computed
+            # on a test set most of which the model had already fit. Now
+            # explicitly excluded from train_mask so every row scored below
+            # is one the model never saw.
+            extra_test_negatives = around & (crop_data['episode'] != ep['name']) & (crop_data['label'] == 0)
+            test_mask_full = test_mask | extra_test_negatives
+            train_mask = (crop_data['episode'] != ep['name']) & (~extra_test_negatives)
 
             X_train = crop_data.loc[train_mask, FEATURES]
             y_train = crop_data.loc[train_mask, 'label']
