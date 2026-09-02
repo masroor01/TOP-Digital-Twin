@@ -30,6 +30,7 @@ Run: python scripts/32_LongHistory_Panel_Builder.py
 import io
 import os
 import sys
+from pathlib import Path
 import pandas as pd
 import numpy as np
 
@@ -40,10 +41,11 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 # ----------------------------------------------------------------
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+DOWNLOADS_DIR = Path(os.environ.get('TOP_DOWNLOADS_DIR', r'C:\Users\masro\Downloads'))
 INFILES = {
-    'tomato': r'C:\Users\masro\Downloads\tomato_all_india_apmcs_2000_2026.csv',
-    'onion':  r'C:\Users\masro\Downloads\onion_all_india_apmcs_2000_2026.csv',
-    'potato': r'C:\Users\masro\Downloads\potato_all_india_apmcs_2000_2026.csv',
+    'tomato': DOWNLOADS_DIR / 'tomato_all_india_apmcs_2000_2026.csv',
+    'onion':  DOWNLOADS_DIR / 'onion_all_india_apmcs_2000_2026.csv',
+    'potato': DOWNLOADS_DIR / 'potato_all_india_apmcs_2000_2026.csv',
 }
 
 OUTDIR = os.path.join(BASE, 'data', 'agmarknet_weekly', 'longhistory')

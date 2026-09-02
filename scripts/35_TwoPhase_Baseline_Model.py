@@ -108,8 +108,13 @@ SEED = 42
 # start being real, so every recoverable year in that window matters).
 # Folds 1-8 keep their original numbers/test years unchanged -- purely
 # additive, no renumbering.
+# train_end moved back to {y-1}-06-30 (was {y-1}-12-31, same as val_end) so
+# the early-stopping val window (H2 of y-1) is a true holdout strictly after
+# train_end, not a subset of the training rows themselves -- same
+# non-overlapping train_end < val_start convention as Script 33's folds.
+# test_start/test_end (the actual OOF prediction window) are unchanged.
 FOLDS = [
-    {'fold': y - 2017, 'train_end': f'{y-1}-12-31', 'val_start': f'{y-1}-07-01', 'val_end': f'{y-1}-12-31',
+    {'fold': y - 2017, 'train_end': f'{y-1}-06-30', 'val_start': f'{y-1}-07-01', 'val_end': f'{y-1}-12-31',
      'test_start': f'{y}-01-01', 'test_end': f'{y}-12-31'}
     for y in range(2017, 2026)
 ]
@@ -162,24 +167,29 @@ def build_features(df_in):
     out = {}
     for crop in CROPS:
         sub = df_in[df_in['crop'] == crop].copy()
-        sub = sub.sort_values(['market', 'week_start'])
+        # Keyed on market_id, not market NAME -- a few market names repeat
+        # across different states (e.g. "Fatehabad APMC" in both Haryana and
+        # Uttar Pradesh), which would interleave two physically different
+        # markets' price series into one shift/rolling computation. See
+        # Script 15's build_features() for the reference fix.
+        sub = sub.sort_values(['market_id', 'week_start'])
         sub['log_price'] = np.log1p(sub['modal_price_weighted'])
 
         for lag in LAG_WEEKS:
-            sub[f'price_lag_{lag}'] = sub.groupby('market')['log_price'].shift(lag)
+            sub[f'price_lag_{lag}'] = sub.groupby('market_id')['log_price'].shift(lag)
         for w in ROLL_WINS:
-            g = sub.groupby('market')['log_price']
+            g = sub.groupby('market_id')['log_price']
             sub[f'price_roll_mean_{w}'] = g.transform(lambda x: x.shift(1).rolling(w, min_periods=2).mean())
             sub[f'price_roll_std_{w}'] = g.transform(lambda x: x.shift(1).rolling(w, min_periods=2).std())
 
         sub['log_arr'] = np.log1p(sub['arrivals_tonnes_week'].clip(lower=0))
         for lag in [1, 2, 4]:
-            sub[f'arr_lag_{lag}'] = sub.groupby('market')['log_arr'].shift(lag)
+            sub[f'arr_lag_{lag}'] = sub.groupby('market_id')['log_arr'].shift(lag)
         for w in [4, 8]:
-            sub[f'arr_roll_mean_{w}'] = sub.groupby('market')['log_arr'].transform(
+            sub[f'arr_roll_mean_{w}'] = sub.groupby('market_id')['log_arr'].transform(
                 lambda x: x.shift(1).rolling(w, min_periods=2).mean())
 
-        sub['price_yoy'] = sub.groupby('market')['log_price'].shift(52)
+        sub['price_yoy'] = sub.groupby('market_id')['log_price'].shift(52)
         sub['week_num'] = sub['week_start'].dt.isocalendar().week.astype(int)
         sub['sin_week'] = np.sin(2 * np.pi * sub['week_num'] / 52)
         sub['cos_week'] = np.cos(2 * np.pi * sub['week_num'] / 52)
@@ -200,7 +210,10 @@ def build_features(df_in):
             sub['season_storage'] = m.isin([5, 6, 7, 8, 9]).astype(int)
             sub['season_lean'] = m.isin([10, 11]).astype(int)
 
-        for col in ['state', 'market']:
+        # market_enc keyed on market_id, not market NAME -- two same-named
+        # markets in different states would otherwise get the identical code.
+        sub['market_enc'] = pd.Categorical(sub['market_id']).codes
+        for col in ['state']:
             sub[f'{col}_enc'] = pd.Categorical(sub[col]).codes
         sub['year_trend'] = sub['week_start'].dt.year - 2017
 
@@ -267,7 +280,7 @@ for crop in CROPS:
         for h in HORIZONS:
             t0 = time.time()
             df_h = df_crop.copy()
-            df_h['target'] = df_h.groupby('market')['log_price'].shift(-h)
+            df_h['target'] = df_h.groupby('market_id')['log_price'].shift(-h)
             df_h = df_h.dropna(subset=['target', 'price_lag_1'])
 
             train = df_h[df_h['week_start'] <= t_end]
@@ -291,7 +304,8 @@ for crop in CROPS:
                                  'test_start': te_start, 'test_end': te_end, **m})
 
             oof_frames.append(pd.DataFrame({
-                'crop': crop, 'market': test['market'].values, 'week_start': test['week_start'].values,
+                'crop': crop, 'market': test['market'].values, 'market_id': test['market_id'].values,
+                'week_start': test['week_start'].values,
                 'horizon_weeks': h, 'fold': fold,
                 'log_price_actual': y_te.values, 'log_price_baseline_pred': y_pred,
             }))

@@ -150,24 +150,29 @@ def build_features(df_in):
     out = {}
     for crop in CROPS:
         sub = df_in[df_in['crop'] == crop].copy()
-        sub = sub.sort_values(['market', 'week_start'])
+        # Keyed on market_id, not market NAME -- a few market names repeat
+        # across different states (e.g. "Fatehabad APMC" in both Haryana and
+        # Uttar Pradesh), which would interleave two physically different
+        # markets' price series into one shift/rolling computation. See
+        # Script 15's build_features() for the reference fix.
+        sub = sub.sort_values(['market_id', 'week_start'])
         sub['log_price'] = np.log1p(sub['modal_price_weighted'])
 
         for lag in LAG_WEEKS:
-            sub[f'price_lag_{lag}'] = sub.groupby('market')['log_price'].shift(lag)
+            sub[f'price_lag_{lag}'] = sub.groupby('market_id')['log_price'].shift(lag)
         for w in ROLL_WINS:
-            g = sub.groupby('market')['log_price']
+            g = sub.groupby('market_id')['log_price']
             sub[f'price_roll_mean_{w}'] = g.transform(lambda x: x.shift(1).rolling(w, min_periods=2).mean())
             sub[f'price_roll_std_{w}'] = g.transform(lambda x: x.shift(1).rolling(w, min_periods=2).std())
 
         sub['log_arr'] = np.log1p(sub['arrivals_tonnes_week'].clip(lower=0))
         for lag in [1, 2, 4]:
-            sub[f'arr_lag_{lag}'] = sub.groupby('market')['log_arr'].shift(lag)
+            sub[f'arr_lag_{lag}'] = sub.groupby('market_id')['log_arr'].shift(lag)
         for w in [4, 8]:
-            sub[f'arr_roll_mean_{w}'] = sub.groupby('market')['log_arr'].transform(
+            sub[f'arr_roll_mean_{w}'] = sub.groupby('market_id')['log_arr'].transform(
                 lambda x: x.shift(1).rolling(w, min_periods=2).mean())
 
-        sub['price_yoy'] = sub.groupby('market')['log_price'].shift(52)
+        sub['price_yoy'] = sub.groupby('market_id')['log_price'].shift(52)
         sub['week_num'] = sub['week_start'].dt.isocalendar().week.astype(int)
         sub['sin_week'] = np.sin(2 * np.pi * sub['week_num'] / 52)
         sub['cos_week'] = np.cos(2 * np.pi * sub['week_num'] / 52)
@@ -188,7 +193,10 @@ def build_features(df_in):
             sub['season_storage'] = m.isin([5, 6, 7, 8, 9]).astype(int)
             sub['season_lean'] = m.isin([10, 11]).astype(int)
 
-        for col in ['state', 'market']:
+        # market_enc keyed on market_id, not market NAME -- two same-named
+        # markets in different states would otherwise get the identical code.
+        sub['market_enc'] = pd.Categorical(sub['market_id']).codes
+        for col in ['state']:
             sub[f'{col}_enc'] = pd.Categorical(sub[col]).codes
         sub['year_trend'] = sub['week_start'].dt.year - 2017
 
@@ -259,16 +267,29 @@ for crop in CROPS:
     for h in HORIZONS:
         t0 = time.time()
         df_h = df_crop.copy()
-        df_h['target'] = df_h.groupby('market')['log_price'].shift(-h)
+        df_h['target'] = df_h.groupby('market_id')['log_price'].shift(-h)
         df_h = df_h.dropna(subset=['target', 'price_lag_1'])
         oof_ch = oof_crop[oof_crop['horizon_weeks'] == h]
 
         # Attach residual target: join Phase-1 OOF predictions onto this
-        # horizon's feature rows by (market, week_start) -- week_start here
-        # is the reference/feature week, same convention Script 35 used.
+        # horizon's feature rows by (market_id, week_start) -- week_start
+        # here is the reference/feature week, same convention Script 35
+        # used. Joining on market NAME instead of market_id (as this used
+        # to) is unsafe: a few market names repeat across different states
+        # (e.g. "Fatehabad APMC" in both Haryana and Uttar Pradesh), which
+        # would fan the join out and cross-wire one market's Phase-1
+        # residual target onto a different market's features.
+        _n_before = len(df_h)
         merged = df_h.merge(
-            oof_ch[['market', 'week_start', 'fold', 'log_price_actual', 'log_price_baseline_pred']],
-            on=['market', 'week_start'], how='inner'
+            oof_ch[['market_id', 'week_start', 'fold', 'log_price_actual', 'log_price_baseline_pred']],
+            on=['market_id', 'week_start'], how='inner'
+        )
+        # An inner join legitimately dropping unmatched rows is fine; row-
+        # count GROWTH means the join fanned out on a duplicate key, which
+        # would silently mix predictions across markets/folds.
+        assert len(merged) <= _n_before, (
+            f'Unexpected row-count growth after OOF join: {_n_before} -> {len(merged)} '
+            '-- check for duplicate (market_id, week_start) keys'
         )
         merged['residual_target'] = merged['log_price_actual'] - merged['log_price_baseline_pred']
 
