@@ -16,15 +16,16 @@ B4  ARIMA(1,1,1)         : fitted per market, h=1 only (rolling-origin)
 Scope
 -----
 B1–B3 : per-market evaluation, all 4 horizons, all 3 folds
-B4    : per-market ARIMA(1,1,1), h=1 all folds; h=4,13,26 national-level
-        (per-market ARIMA at long horizons is computationally prohibitive
-        for 2,495 markets — noted as limitation in Methods)
-        STATUS: the h=4,13,26 national-level variants described above are
-        NOT implemented in this script (still only h=1 runs below) — this
-        remains an open gap versus the docstring, not just a Methods
-        footnote. The h=1 forecast itself was date-misaligned (compared
-        against the wrong test weeks by position) until the fix noted at
-        the ARIMA forecast call below.
+B4    : per-market ARIMA(1,1,1), h=1, all folds (date-aligned against the
+        actual test window -- see the fix note at the forecast call below);
+        h=4,13,26 NATIONAL-LEVEL (IMPLEMENTED 2026-09-02, closing a prior
+        docstring gap), one national ARIMA per crop per fold instead of one
+        per market (per-market ARIMA at these horizons is computationally
+        prohibitive across 2,495 markets — noted as a limitation in
+        Methods). table_benchmarks.csv's `arima_scope` column ('per_market'
+        vs 'national') distinguishes the two evaluation scopes for B4_ARIMA
+        rows -- do not compare their N or read them as the same kind of
+        evaluation. See the "4b" section below for the exact convention.
 
 Outputs (Model_Output/)
 -----------------------
@@ -253,8 +254,8 @@ if HAS_ARIMA:
 
             if y_true_all:
                 m = compute_metrics(np.array(y_true_all), np.array(y_pred_all), 'B4_ARIMA')
-                m.update({'crop': crop, 'fold': fold,
-                          'horizon_weeks': 1, 'test_year': te_end.year})
+                m.update({'crop': crop, 'fold': fold, 'horizon_weeks': 1,
+                          'test_year': te_end.year, 'arima_scope': 'per_market'})
                 arima_results.append(m)
                 print(f'    {crop:8s} fold {fold} | RMSE={m["RMSE"]:>7.1f}  '
                       f'MAPE={m["MAPE"]:>5.1f}%  R²={m["R2"]:>6.3f}  '
@@ -262,6 +263,81 @@ if HAS_ARIMA:
 
     all_bench.extend(arima_results)
     print(f'\n    ARIMA total time: {(time.time()-t0)/60:.1f} min')
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 4b. B4: ARIMA(1,1,1) — h=4/13/26, NATIONAL-LEVEL (IMPLEMENTED 2026-09-02,
+#     closing the docstring gap flagged above: per-market ARIMA at these
+#     horizons is computationally prohibitive across 2,495 markets, so this
+#     fits ONE national series per crop instead of one per market. National
+#     aggregation matches Script 29's Granger-causality convention exactly:
+#     non-imputed rows only, median price per (crop, week).
+#
+#     Evaluation convention differs from the h=1 block above by necessity:
+#     h=1 fits once per fold and compares its forecast to the actual at the
+#     SAME calendar date (an implicit "how far past train_end are we"
+#     horizon that grows across the test window). h=4/13/26 instead follow
+#     the SAME rolling-origin convention as B1-B3 and Script 12's LightGBM:
+#     for every origin week t within the test window, the target is the
+#     forecast/actual pair at t + h weeks (which can fall past te_end). The
+#     forecast itself still comes from a single ARIMA fit at train_end
+#     (statsmodels' own recursive multi-step forecast, per the docstring),
+#     extended far enough past te_end to cover every origin's h=26 target --
+#     it is NOT refit at each origin.
+# ══════════════════════════════════════════════════════════════════════════════
+if HAS_ARIMA:
+    print('\n[3b] Fitting ARIMA(1,1,1) national-level (h=4/13/26, all folds) ...')
+    t0 = time.time()
+    LONG_HORIZONS = [h for h in HORIZONS if h != 1]
+
+    for crop in CROPS:
+        nat = (df[(df['crop'] == crop) & (df['imputed'] == 0)]
+               .groupby('week_start')['modal_price_weighted'].median()
+               .sort_index())
+
+        for fold_info in FOLDS:
+            fold     = fold_info['fold']
+            t_end    = pd.Timestamp(fold_info['train_end'])
+            te_start = pd.Timestamp(fold_info['test_start'])
+            te_end   = pd.Timestamp(fold_info['test_end'])
+
+            train_vals = nat[nat.index <= t_end].dropna()
+            if len(train_vals) < MIN_OBS:
+                print(f'    {crop:8s} fold {fold} — skipped (only {len(train_vals)} '
+                      f'national weeks of history, need >={MIN_OBS})')
+                continue
+
+            try:
+                log_train = np.log1p(np.clip(train_vals.values, 1, None))
+                with _w.catch_warnings():
+                    _w.simplefilter('ignore')
+                    mdl = _ARIMA(log_train, order=(1, 1, 1)).fit()
+                    last_train_date = train_vals.index.max()
+                    n_steps = int(round((te_end - last_train_date).days / 7)) + max(LONG_HORIZONS)
+                    fc_log = mdl.forecast(steps=n_steps)
+                fc_dates  = pd.date_range(last_train_date + pd.Timedelta(weeks=1),
+                                           periods=n_steps, freq='7D')
+                fc_series = pd.Series(np.expm1(np.array(fc_log)), index=fc_dates)
+            except Exception as e:
+                print(f'    ARIMA (national) skip for {crop} fold{fold}: {e}')
+                continue
+
+            origins = nat[(nat.index >= te_start) & (nat.index <= te_end)].index
+            for h in LONG_HORIZONS:
+                target_dates = origins + pd.Timedelta(weeks=h)
+                y_pred = fc_series.reindex(target_dates).values
+                y_true = nat.reindex(target_dates).values
+                valid  = np.isfinite(y_pred.astype(float)) & np.isfinite(y_true.astype(float))
+                if valid.sum() == 0:
+                    continue
+                m = compute_metrics(y_true[valid], y_pred[valid], 'B4_ARIMA')
+                m.update({'crop': crop, 'fold': fold, 'horizon_weeks': h,
+                          'test_year': te_end.year, 'arima_scope': 'national'})
+                all_bench.append(m)
+            print(f'    {crop:8s} fold {fold} — national ARIMA h={LONG_HORIZONS} done '
+                  f'({len(origins)} origin weeks)')
+
+    print(f'    ARIMA (national, h=4/13/26) total time: {(time.time()-t0)/60:.1f} min')
 
 
 # ══════════════════════════════════════════════════════════════════════════════
