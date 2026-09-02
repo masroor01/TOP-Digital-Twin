@@ -17,6 +17,7 @@ import os
 import json
 import hashlib
 import datetime
+import time
 import numpy as np
 import pandas as pd
 import joblib
@@ -591,22 +592,46 @@ with st.sidebar:
     scenario['export_banned'] = int(export_banned)
     _policy_staleness_caption('export_banned')
 
+    def safe_slider(col, extend_pct=0.0, slider_range=None, step=None):
+        info = FEATURE_INFO[col]
+        label = info['label']
+        if col not in feature_ranges or col not in base_row or pd.isna(base_row[col]):
+            return None
+        r = feature_ranges[col]
+        obs_lo, obs_hi, val = float(r['min']), float(r['max']), float(base_row[col])
+        if slider_range is not None:
+            # Explicit UI bounds (e.g. a domain cap wider than the observed
+            # data span) -- the "speculative" check below still compares
+            # against the real observed obs_lo/obs_hi, not these UI bounds.
+            lo, hi = slider_range
+        else:
+            span = obs_hi - obs_lo
+            lo, hi = obs_lo - span * extend_pct, obs_hi + span * extend_pct
+        val = min(max(val, lo), hi)
+        if obs_hi <= obs_lo:
+            st.caption(f'{label}: {val:g} (fixed)')
+            return val
+        slider_kwargs = dict(help=info['help'])
+        if step is not None:
+            slider_kwargs['step'] = step
+        result = st.slider(label, lo, hi, val, **slider_kwargs)
+        if result < obs_lo or result > obs_hi:
+            st.caption(f'⚠️ Speculative range ({obs_lo:g}–{obs_hi:g})')
+        stale = staleness.get(crop, {}).get(col)
+        if stale:
+            st.caption(f'📌 Stale feed: {stale["as_of"]} ({stale["weeks_stale"]}w)')
+        return result
+
     if 'mep_usd_per_tonne' in feature_ranges:
         r = feature_ranges['mep_usd_per_tonne']
-        _mi = FEATURE_INFO['mep_usd_per_tonne']
-        scenario['mep_usd_per_tonne'] = st.slider(
-            _mi['label'], 0.0, max(r['max'], 900.0),
-            _num('mep_usd_per_tonne'), step=10.0, help=_mi['help']
-        )
-        _policy_staleness_caption('mep_usd_per_tonne')
+        val = safe_slider('mep_usd_per_tonne', slider_range=(0.0, max(r['max'], 900.0)), step=10.0)
+        if val is not None:
+            scenario['mep_usd_per_tonne'] = val
 
     if 'export_duty_pct' in feature_ranges:
-        _di = FEATURE_INFO['export_duty_pct']
-        scenario['export_duty_pct'] = st.slider(
-            _di['label'], 0.0, 50.0, _num('export_duty_pct'),
-            step=1.0, help=_di['help']
-        )
-        _policy_staleness_caption('export_duty_pct')
+        val = safe_slider('export_duty_pct', slider_range=(0.0, 50.0), step=1.0)
+        if val is not None:
+            scenario['export_duty_pct'] = val
 
     _mii = FEATURE_INFO['market_intervention_flag']
     market_intervention = st.checkbox(
@@ -614,27 +639,6 @@ with st.sidebar:
     )
     scenario['market_intervention_flag'] = int(market_intervention)
     _policy_staleness_caption('market_intervention_flag')
-
-    def safe_slider(col, extend_pct=0.0):
-        info = FEATURE_INFO[col]
-        label = info['label']
-        if col not in feature_ranges or col not in base_row or pd.isna(base_row[col]):
-            return None
-        r = feature_ranges[col]
-        obs_lo, obs_hi, val = float(r['min']), float(r['max']), float(base_row[col])
-        span = obs_hi - obs_lo
-        lo, hi = obs_lo - span * extend_pct, obs_hi + span * extend_pct
-        val = min(max(val, lo), hi)
-        if obs_hi <= obs_lo:
-            st.caption(f'{label}: {val:g} (fixed)')
-            return val
-        result = st.slider(label, lo, hi, val, help=info['help'])
-        if result < obs_lo or result > obs_hi:
-            st.caption(f'⚠️ Speculative range ({obs_lo:g}–{obs_hi:g})')
-        stale = staleness.get(crop, {}).get(col)
-        if stale:
-            st.caption(f'📌 Stale feed: {stale["as_of"]} ({stale["weeks_stale"]}w)')
-        return result
 
     st.markdown("<hr>", unsafe_allow_html=True)
     st.markdown("<p style='font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#64748B; margin-bottom:6px;'>Climate & Satellite</p>", unsafe_allow_html=True)
@@ -769,7 +773,7 @@ with tab_sim:
     t_cols = st.columns(len(HORIZONS))
     for tcol, h in zip(t_cols, HORIZONS):
         res = ticker_results[h]
-        herr_note = f" ±₹{res['rmse']:,.0f} ({res['mape']:.0f}% MAPE)" if res['rmse'] else ""
+        herr_note = f" ±₹{res['rmse']:,.0f} ({res['mape']:.0f}% MAPE)" if res['rmse'] is not None else ""
         with tcol:
             st.metric(
                 f"Horizon {h}W · {res['date'].strftime('%d %b')}",
@@ -1142,44 +1146,55 @@ with tab_ai:
         ).hexdigest()
         reco_state_key = f'ai_reco_{scenario_key}'
 
+        AI_BRIEF_COOLDOWN_SECONDS = 30
+
         if st.button('✨ Generate Policy Briefing', key='ai_brief_btn'):
-            changes_text = '\n'.join(
-                f"- {FEATURE_INFO.get(c, {}).get('label', c)}: "
-                f"{base_row.get(c):g} -> {scenario.get(c):g} "
-                f"(isolated effect: {eff:+,.0f} Rs/quintal)"
-                for c, eff in sorted(isolated_effects, key=lambda x: -abs(x[1]))
-            )
-            prompt = (
-                'You are a policy-analysis assistant embedded in an agricultural price '
-                'forecasting dashboard for Indian APMC markets (Tomato/Onion/Potato, HADP-04, '
-                'SKUAST-K). A user ran a what-if scenario. Ground your answer STRICTLY in the '
-                'numbers given below — do not invent statistics, events, or data you were not given.\n\n'
-                f'Crop: {crop.capitalize()}\nMarket: {market}, {base_row.get("state", "")}\n'
-                f'Forecast horizon: {horizon} weeks ahead\n'
-                f'Baseline prediction: Rs {baseline_pred:,.0f}/quintal\n'
-                f'Scenario prediction: Rs {scenario_pred:,.0f}/quintal '
-                f'({delta_pct:+.1f}%, {delta:+,.0f} Rs/quintal)\n'
-                f"Model's typical error at this horizon: "
-                f"{f'±Rs {rmse:,.0f} ({mape:.0f}% MAPE)' if rmse else 'not available'}\n\n"
-                f'Changes made in this scenario, with the isolated effect of each:\n{changes_text}\n\n'
-                'Write ONE paragraph (120-160 words) of plain-language policy commentary for an '
-                'agricultural-market analyst. Cover: (1) what this price move would mean for '
-                'farmers vs consumers, (2) which lever is doing most of the work and whether that '
-                'matches known market structure for this crop, (3) one caveat about relying on this '
-                'scenario (it is a what-if from a single model, not a validated forecast; thin-data '
-                'markets and feature interactions add uncertainty). Plain prose only — no bullet '
-                'points, headers, or markdown.'
-            )
-            try:
-                with st.spinner('Generating analysis...'):
-                    client = anthropic.Anthropic(api_key=_api_key())
-                    resp = client.messages.create(
-                        model='claude-haiku-4-5-20251001', max_tokens=400,
-                        messages=[{'role': 'user', 'content': prompt}])
-                    st.session_state[reco_state_key] = resp.content[0].text
-            except Exception as e:
-                st.session_state[reco_state_key] = None
-                st.error(f'AI generation failed: {e}')
+            _last_brief_time = st.session_state.get('last_ai_brief_time')
+            _now = time.time()
+            if _last_brief_time is not None and (_now - _last_brief_time) < AI_BRIEF_COOLDOWN_SECONDS:
+                st.warning(
+                    f'⏳ Please wait a moment before requesting another AI briefing '
+                    f'({int(AI_BRIEF_COOLDOWN_SECONDS - (_now - _last_brief_time))}s).'
+                )
+            else:
+                st.session_state['last_ai_brief_time'] = _now
+                changes_text = '\n'.join(
+                    f"- {FEATURE_INFO.get(c, {}).get('label', c)}: "
+                    f"{base_row.get(c):g} -> {scenario.get(c):g} "
+                    f"(isolated effect: {eff:+,.0f} Rs/quintal)"
+                    for c, eff in sorted(isolated_effects, key=lambda x: -abs(x[1]))
+                )
+                prompt = (
+                    'You are a policy-analysis assistant embedded in an agricultural price '
+                    'forecasting dashboard for Indian APMC markets (Tomato/Onion/Potato, HADP-04, '
+                    'SKUAST-K). A user ran a what-if scenario. Ground your answer STRICTLY in the '
+                    'numbers given below — do not invent statistics, events, or data you were not given.\n\n'
+                    f'Crop: {crop.capitalize()}\nMarket: {market}, {base_row.get("state", "")}\n'
+                    f'Forecast horizon: {horizon} weeks ahead\n'
+                    f'Baseline prediction: Rs {baseline_pred:,.0f}/quintal\n'
+                    f'Scenario prediction: Rs {scenario_pred:,.0f}/quintal '
+                    f'({delta_pct:+.1f}%, {delta:+,.0f} Rs/quintal)\n'
+                    f"Model's typical error at this horizon: "
+                    f"{f'±Rs {rmse:,.0f} ({mape:.0f}% MAPE)' if rmse is not None else 'not available'}\n\n"
+                    f'Changes made in this scenario, with the isolated effect of each:\n{changes_text}\n\n'
+                    'Write ONE paragraph (120-160 words) of plain-language policy commentary for an '
+                    'agricultural-market analyst. Cover: (1) what this price move would mean for '
+                    'farmers vs consumers, (2) which lever is doing most of the work and whether that '
+                    'matches known market structure for this crop, (3) one caveat about relying on this '
+                    'scenario (it is a what-if from a single model, not a validated forecast; thin-data '
+                    'markets and feature interactions add uncertainty). Plain prose only — no bullet '
+                    'points, headers, or markdown.'
+                )
+                try:
+                    with st.spinner('Generating analysis...'):
+                        client = anthropic.Anthropic(api_key=_api_key())
+                        resp = client.messages.create(
+                            model='claude-haiku-4-5-20251001', max_tokens=400,
+                            messages=[{'role': 'user', 'content': prompt}])
+                        st.session_state[reco_state_key] = resp.content[0].text
+                except Exception as e:
+                    st.session_state[reco_state_key] = None
+                    st.error(f'AI generation failed: {e}')
 
         cached = st.session_state.get(reco_state_key)
         if cached:

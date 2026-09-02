@@ -79,7 +79,13 @@ print('=' * 65)
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[1] Loading panel + all layers ...')
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
-df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2025-12-31')]
+# Stale hardcoded upper bound -- same failure shape Script 23 found and fixed
+# (see its lines ~122-136): this silently dropped every row added after
+# 2025-12-31 before feature engineering, so SHAP importances would be
+# computed on a stale window not matching what the production models were
+# actually trained on. Widened to match Script 23's generous sanity-guard
+# bound rather than removed outright.
+df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2030-12-31')]
 df = df.sort_values(['crop', 'market', 'week_start']).reset_index(drop=True)
 df['year']  = df['week_start'].dt.year
 df['month'] = df['week_start'].dt.month

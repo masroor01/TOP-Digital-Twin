@@ -173,8 +173,20 @@ def predict(crop, h, feature_row, models_cache={}):
 fig, axes = plt.subplots(1, 3, figsize=(16, 4.5))
 for ax, crop in zip(axes, CROPS):
     crop_ref = reference[reference['crop'] == crop].dropna(subset=['log_price'])
+    # Prefer a market whose baseline is a genuinely-observed, non-stale trade
+    # (not just non-NaN -- log_price can be an imputed/stale fallback value,
+    # see reference_rows.csv's 'imputed'/'stale_reference' columns from
+    # Script 23). Fall back to the original non-NaN-only pick if every row
+    # for this crop happens to be imputed or stale, so this never crashes.
+    clean_ref = crop_ref
+    if {'imputed', 'stale_reference'}.issubset(crop_ref.columns):
+        clean_ref = crop_ref[(crop_ref['imputed'] == False) & (crop_ref['stale_reference'] == False)]
+        if clean_ref.empty:
+            print(f'  {crop}: no market has a non-imputed, non-stale baseline -- '
+                  f'demo example falls back to the first available row (may be imputed/stale).')
+            clean_ref = crop_ref
     # Pick a market with a real (non-NaN) baseline price for a clean demo
-    market = crop_ref.iloc[0]['market']
+    market = clean_ref.iloc[0]['market']
     base_row = crop_ref[crop_ref['market'] == market].iloc[0].to_dict()
     as_of = pd.Timestamp(base_row['week_start'])
 

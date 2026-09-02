@@ -489,7 +489,11 @@ print(f'  Saved: {fcols_path}')
 
 ref_df = pd.concat(reference_rows, ignore_index=True)
 # log_price isn't an M6 feature (it's the target's source column) but the
-# dashboard needs it to display "last observed price" — include explicitly
+# dashboard needs it — include explicitly. NOTE: this is the LATEST row's
+# price (per market), which may itself be imputed (see 'imputed' column) —
+# it is NOT guaranteed to be a real observed trade. When a genuinely
+# non-imputed "last real trade" value is needed, use last_observed_price /
+# last_observed_date instead (built above specifically to avoid this).
 keep_cols = (['crop', 'market_id', 'market', 'state', 'week_start', 'log_price',
               'imputed', 'last_observed_price', 'last_observed_date',
               'pct_imputed_last_52w', 'sufficient_history', 'stale_reference'] +
