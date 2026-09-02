@@ -135,10 +135,19 @@ data = data.merge(yearly[['iso_wk', 'iso_yr', 'norm']], on=['iso_wk', 'iso_yr'],
 data['price_vs_seasonal_norm'] = (data['price'] - data['norm']) / data['norm']
 data = data.drop(columns=['iso_wk', 'iso_yr', 'norm'])
 
-FEATURES = ['price_roll4_pct', 'price_roll8_pct', 'price_vs_seasonal_norm',
+# FIXED 2026-09-02 (audit finding, confirmed, same fix as Script 40):
+# price_vs_seasonal_norm is excluded from FEATURES -- it's the exact
+# quantity thresholded against DEV_THRESHOLD to define the label itself
+# (Section 3 below), so feeding it to the classifier as a raw input gives
+# it a near-deterministic shortcut within any episode's labelled window.
+# It stays in `data` for label construction (and the placebo scoring
+# below); only excluded from FEATURES.
+FEATURES = ['price_roll4_pct', 'price_roll8_pct',
             'arrivals_roll4_pct', 'era5_heat_35_roll4', 'chirps_rain_mm_roll4']
 before = len(data)
-data = data.dropna(subset=FEATURES).reset_index(drop=True)
+# Drop on FEATURES plus price_vs_seasonal_norm so removing it from FEATURES
+# doesn't change which rows survive (see Script 40's identical fix note).
+data = data.dropna(subset=FEATURES + ['price_vs_seasonal_norm']).reset_index(drop=True)
 print(f'  {len(data):,} / {before:,} rows have complete features')
 
 
@@ -308,7 +317,10 @@ for ep in EPISODES:
     placebo_intensities = np.array(placebo_intensities)
     n_placebo = len(placebo_intensities)
     n_extreme = int((placebo_intensities >= real_intensity).sum())
-    p_value = n_extreme / n_placebo if n_placebo else np.nan
+    # +1/+1 permutation-test adjustment (same fix as Script 40 / Scripts
+    # 38/38b): the real/observed window is always at least as extreme as
+    # itself, so the theoretical floor is 1/(n_placebo+1), not 0.
+    p_value = (n_extreme + 1) / (n_placebo + 1) if n_placebo else np.nan
     placebo_detail[ep['name']] = placebo_intensities
     placebo_rows.append({'episode': ep['name'], 'label': ep['label'],
                           'real_window_intensity': round(float(real_intensity), 5),

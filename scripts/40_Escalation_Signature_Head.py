@@ -220,11 +220,25 @@ def add_features(g):
 crop_weekly = pd.concat([add_features(crop_weekly[crop_weekly['crop'] == c]) for c in CROPS], ignore_index=True)
 crop_weekly = crop_weekly.drop(columns=['iso_wk', 'iso_yr', 'price_seasonal_norm'])
 
-FEATURES = ['price_roll4_pct', 'price_roll8_pct', 'price_vs_seasonal_norm',
+# FIXED 2026-09-02 (audit finding, confirmed): price_vs_seasonal_norm is
+# excluded here even though it's engineered above -- it's the EXACT
+# quantity thresholded against DEV_THRESHOLD to define the label itself
+# (Section 3 below). Feeding it to the classifier as a raw input gives it
+# a near-deterministic shortcut within any episode's labelled window (the
+# model just has to learn "threshold this one column"), which isn't a
+# genuine early-warning signal. It stays in crop_weekly for label
+# construction and detected_intensity() below; only excluded from FEATURES.
+FEATURES = ['price_roll4_pct', 'price_roll8_pct',
             'arrivals_roll4_pct', 'era5_heat_35_roll4', 'chirps_rain_mm_roll4']
 
 before = len(crop_weekly)
-crop_weekly = crop_weekly.dropna(subset=FEATURES)
+# Drop on FEATURES plus price_vs_seasonal_norm (not itself a model input,
+# but still needed for the label in Section 3 and detected_intensity()
+# below) -- keeps the "first ~2 years lost to the expanding seasonal norm"
+# row count the same as before price_vs_seasonal_norm was removed from
+# FEATURES; dropping on FEATURES alone would no longer exclude those rows,
+# since the other features only need ~8 weeks of history, not ~2 years.
+crop_weekly = crop_weekly.dropna(subset=FEATURES + ['price_vs_seasonal_norm'])
 print(f'  {len(crop_weekly):,} / {before:,} rows have complete features '
       f'(first ~2 years of each crop lost to the expanding seasonal norm)')
 
@@ -516,7 +530,11 @@ for ep in EPISODES:
     placebo_intensities = np.array(placebo_intensities)
     n_placebo = len(placebo_intensities)
     n_as_extreme = int((placebo_intensities >= real_intensity).sum())
-    p_value = n_as_extreme / n_placebo if n_placebo else np.nan
+    # +1/+1 permutation-test adjustment (same fix as Scripts 38/38b's
+    # in-space placebo p-value): the real/observed window is always at
+    # least as extreme as itself, so the theoretical floor is
+    # 1/(n_placebo+1), not 0 -- this formula could previously hit exactly 0.
+    p_value = (n_as_extreme + 1) / (n_placebo + 1) if n_placebo else np.nan
     placebo_detail[ep['name']] = placebo_intensities
 
     placebo_rows.append({'crop': crop, 'episode': ep['name'], 'label': ep['label'],
