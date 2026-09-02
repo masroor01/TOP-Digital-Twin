@@ -208,7 +208,17 @@ a forward-fill gap, a NaN-as-truthy slider, a silently-dropped output
 column). Script 44 encodes exactly those five failure signatures as
 automated checks and exits non-zero if any of them recur — it will not
 catch a NEW class of bug it doesn't know about, but it closes the specific
-gaps this project has actually hit.
+gaps this project has actually hit. **Fixed 2026-09-02** (audit finding,
+confirmed and reproduced): the `B1d` market_id-collision check used to
+compare only the *count* of distinct market_ids between the panel and
+`reference_rows.csv` — a real collision dropping one market could
+coincidentally go undetected if the panel's own roster happened to shrink
+by exactly one in the same run, since the counts would still match. Now
+compares the actual *sets*. Verified the fix closes this exact gap:
+deliberately swapped one real market_id for a fake one (same total count,
+different set) on a throwaway copy — the old logic would have reported
+`[PASS]`; the fixed check correctly reports `[FAIL]`, naming the specific
+missing/extra market_id.
 
 ---
 

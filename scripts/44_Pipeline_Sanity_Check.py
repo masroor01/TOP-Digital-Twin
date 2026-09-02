@@ -218,14 +218,34 @@ else:
             panel_path = os.path.join(DATA_DIR, f'{crop}_weekly_panel.csv')
             if not os.path.exists(panel_path):
                 continue
-            panel_ids = pd.read_csv(panel_path, usecols=['market_id'])['market_id'].nunique()
-            ref_ids = ref[ref['crop'] == crop]['market_id'].nunique()
-            if panel_ids != ref_ids:
+            panel_ids = set(pd.read_csv(panel_path, usecols=['market_id'])['market_id'].unique())
+            ref_ids = set(ref[ref['crop'] == crop]['market_id'].unique())
+            # FIXED 2026-09-02 (audit finding, confirmed): this used to compare
+            # only nunique() COUNTS, not the actual sets -- a real collision
+            # dropping one market from reference_rows.csv could coincidentally
+            # go undetected if the panel's own market roster happened to shrink
+            # by exactly one in the same run (a market aging out, a new one
+            # appearing), a false-negative the audit specifically flagged.
+            # Comparing sets catches that: a dropped/swapped market_id shows up
+            # even when the two counts happen to match.
+            missing_from_ref = panel_ids - ref_ids
+            extra_in_ref = ref_ids - panel_ids
+            if missing_from_ref or extra_in_ref:
+                detail = []
+                if missing_from_ref:
+                    sample = sorted(missing_from_ref)[:10]
+                    detail.append(f'{len(missing_from_ref)} market_id(s) in the panel missing from '
+                                   f'reference_rows.csv (e.g. {sample})')
+                if extra_in_ref:
+                    sample = sorted(extra_in_ref)[:10]
+                    detail.append(f'{len(extra_in_ref)} market_id(s) in reference_rows.csv not in the '
+                                   f'panel (e.g. {sample})')
                 check('FAIL', f'B1d {crop}',
-                      f'panel has {panel_ids} distinct market_ids but reference_rows.csv has '
-                      f'{ref_ids} -- some markets are being silently dropped or merged.')
+                      '; '.join(detail) + ' -- some markets are being silently dropped or merged. '
+                      f'(counts alone: panel={len(panel_ids)}, reference={len(ref_ids)})')
             else:
-                check('PASS', f'B1d {crop}', f'{ref_ids} distinct market_ids match the panel exactly.')
+                check('PASS', f'B1d {crop}',
+                      f'{len(ref_ids)} distinct market_ids match the panel exactly (set comparison, not just counts).')
 
     # B2: feature_columns.json -- every listed feature must actually exist in reference_rows.
     if os.path.exists(fcols_path):
