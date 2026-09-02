@@ -26,7 +26,7 @@ Outputs (Model_Output/):
   fig_tft_intervals.png        — prediction intervals for onion (fold 4)
   fig_tft_importance.png       — variable importance from TFT encoder
 
-CV:   4-fold rolling-origin (same folds as Script 15)
+CV:   5-fold rolling-origin (same folds as Script 15)
 Horizons: h = 1, 4, 13, 26 weeks (max encoder → 52 weeks lookback)
 Crops:  tomato, onion, potato (one model per crop per fold)
 
@@ -35,7 +35,7 @@ Estimated runtime: 3–5 hours on CPU (14 threads). Use FAST_MODE=True
 for a quick test (~30 min) with reduced markets and shorter training.
 """
 
-import io, os, sys, time, warnings
+import io, os, sys, time, traceback, warnings
 import pandas as pd
 import numpy as np
 import matplotlib
@@ -318,7 +318,7 @@ def build_dataset(data, train_cutoff_idx, val_size, predict=False):
 # ─────────────────────────────────────────────────────────────────────────────
 # 4. MAIN CV LOOP
 # ─────────────────────────────────────────────────────────────────────────────
-print('\n[3] Running TFT: 4 folds × 4 horizons × 3 crops ...')
+print(f'\n[3] Running TFT: {len(FOLDS)} folds × {len(HORIZONS)} horizons × {len(CROPS)} crops ...')
 print(f'    Using pytorch-forecasting {__import__("pytorch_forecasting").__version__}')
 print(f'    Torch {torch.__version__}  |  CPU threads: {torch.get_num_threads()}\n')
 
@@ -345,6 +345,11 @@ for crop in CROPS:
     for fold in FOLDS:
         t_fold = time.time()
         fnum   = fold['fold']
+
+        # Reset RNG state per (crop, fold) fit so an isolated single-fit
+        # rerun reproduces the same result as this fit had within the full
+        # run, independent of what ran before it in this script execution.
+        pl.seed_everything(SEED, workers=True)
 
         # Time-index boundaries
         train_end_ts  = pd.Timestamp(fold['train_end'])
@@ -393,6 +398,7 @@ for crop in CROPS:
                 stop_randomization=True)
         except Exception as e:
             print(f'  {crop} fold{fnum}: dataset build failed — {e}')
+            traceback.print_exc()
             continue
 
         train_dl = training.to_dataloader(
@@ -417,6 +423,7 @@ for crop in CROPS:
             trainer.fit(tft, train_dataloaders=train_dl, val_dataloaders=val_dl)
         except Exception as e:
             print(f'  {crop} fold{fnum}: training failed — {e}')
+            traceback.print_exc()
             continue
 
         # Predict on test period
@@ -437,6 +444,7 @@ for crop in CROPS:
             median_preds = raw_preds['prediction'][:, :, MEDIAN_IDX]  # (N, 26)
         except Exception as e:
             print(f'  {crop} fold{fnum}: prediction failed — {e}')
+            traceback.print_exc()
             continue
 
         # Evaluate at each horizon h
@@ -641,7 +649,9 @@ if onion_interval_store is not None:
 # ── Fig 3: Variable importance from TFT encoder (last trained model) ──
 try:
     # Get feature importance from variable selection weights
-    # This uses the last trained TFT model (potato fold 4)
+    # This uses the last trained TFT model (whichever crop/fold ran last
+    # in the loop -- not pinned to a specific fold number, since that
+    # changes whenever FOLDS is extended)
     interpretation = tft.interpret_output(
         raw_preds, reduction='sum')
     encoder_vars = interpretation.get('encoder_variables', None)

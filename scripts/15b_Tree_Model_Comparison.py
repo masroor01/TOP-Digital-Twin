@@ -327,12 +327,25 @@ def fit_predict(model_name, X_tr, y_tr, X_va, y_va, X_te):
         m.fit(X_tr, y_tr, eval_set=(X_va, y_va), use_best_model=True)
         trees = m.get_best_iteration() or 1000
     elif model_name == 'RandomForest':
-        # No boosting/early-stopping concept -- fit on train only, same as
-        # the other models' train split (val is simply unused for RF).
+        # No native early-stopping concept, so instead we grow the forest
+        # incrementally via warm_start and pick whichever n_estimators
+        # checkpoint scores best on the validation split -- same spirit as
+        # early stopping for the boosted models above. warm_start means each
+        # step only builds the *new* trees, so the total work across the grid
+        # is ~800 trees (vs. the old fixed 300), a small constant factor.
+        n_estimators_grid = [100, 300, 500, 800]
         m = RandomForestRegressor(
-            n_estimators=300, max_depth=20, min_samples_leaf=5, n_jobs=-1, random_state=SEED)
-        m.fit(X_tr, y_tr)
-        trees = 300
+            n_estimators=n_estimators_grid[0], max_depth=20, min_samples_leaf=5,
+            n_jobs=-1, random_state=SEED, warm_start=True)
+        best_rmse, best_n, best_estimators = np.inf, n_estimators_grid[0], None
+        for n in n_estimators_grid:
+            m.n_estimators = n
+            m.fit(X_tr, y_tr)
+            va_rmse = np.sqrt(mean_squared_error(y_va, m.predict(X_va)))
+            if va_rmse < best_rmse:
+                best_rmse, best_n, best_estimators = va_rmse, n, list(m.estimators_)
+        m.estimators_ = best_estimators
+        trees = best_n
     else:
         raise ValueError(model_name)
     return m.predict(X_te), trees

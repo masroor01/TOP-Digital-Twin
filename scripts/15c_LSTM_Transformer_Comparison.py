@@ -307,9 +307,16 @@ for crop in CROPS:
 # padding-awareness, consistent with the "fillna(0)" convention already
 # used for missing tabular features in Scripts 15/15b).
 # ─────────────────────────────────────────────────────────────────────────────
-def build_sequences(df_crop, fcols, h, date_lo, date_hi, max_n=None):
+def build_sequences(df_crop, fcols, h, date_lo, date_hi, max_n=None, target_date_hi=None):
     """Returns (X, y) where X: (n, LOOKBACK, n_features), y: (n,) log-price target,
-    for as-of weeks within [date_lo, date_hi] (inclusive)."""
+    for as-of weeks within [date_lo, date_hi] (inclusive).
+
+    target_date_hi: if given, also require the sample's TARGET date
+    (as-of date + h weeks) to be <= target_date_hi. Used for the training
+    split so that, for large h, an as-of date near the fold's train_end
+    can't pull in a target date that has already crossed into the
+    validation window (see Script 17's train_end_idx guard for the same
+    fold-boundary leakage concern)."""
     # FIXED 2026-08-14: grouped by 'market' NAME, not market_id -- same
     # collision bug as Scripts 15/15b/23. Here it's worse than a feature
     # value being wrong: g.sort_values('week_start') on a combined group
@@ -329,6 +336,8 @@ def build_sequences(df_crop, fcols, h, date_lo, date_hi, max_n=None):
                 continue
             j = i + h
             if j >= n or not np.isfinite(log_price[j]):
+                continue
+            if target_date_hi is not None and dates[j] > target_date_hi.to_datetime64():
                 continue
             lo = max(0, i - LOOKBACK + 1)
             window = vals[lo:i + 1]
@@ -484,8 +493,15 @@ for model_name in MODELS:
             for h in HORIZONS:
                 t0 = time.time()
 
+                # Reset RNG state per (model, crop, fold, horizon) fit so an
+                # isolated single-fit rerun reproduces the same result as
+                # this fit had within the full run, independent of what ran
+                # before it in this script execution.
+                torch.manual_seed(SEED)
+                np.random.seed(SEED)
+
                 X_tr, y_tr = build_sequences(df_crop, fcols, h, pd.Timestamp('2017-01-01'), t_end,
-                                              max_n=MAX_TRAIN_SEQ)
+                                              max_n=MAX_TRAIN_SEQ, target_date_hi=t_end)
                 X_va, y_va = build_sequences(df_crop, fcols, h, v_start, v_end, max_n=MAX_TRAIN_SEQ // 4)
                 X_te, y_te = build_sequences(df_crop, fcols, h, te_start, te_end)
 
