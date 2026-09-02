@@ -53,7 +53,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 # ─────────────────────────────────────────────────────────────────────────────
 # Configuration
 # ─────────────────────────────────────────────────────────────────────────────
-DOWNLOADS = Path(r'C:\Users\masro\Downloads')
+DOWNLOADS = Path(os.environ.get('TOP_DOWNLOADS_DIR', r'C:\Users\masro\Downloads'))
 PROJ      = Path(__file__).resolve().parent.parent
 OUT_DIR   = PROJ / 'data' / 'satellite_climate'
 RAW_DIR   = OUT_DIR / 'raw'

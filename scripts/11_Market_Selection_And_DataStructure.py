@@ -75,14 +75,19 @@ def compute_coverage(sub):
     # matches Script 09's MIN_REAL_COVERAGE definition exactly (updated
     # 2026-07-29; previously used a fixed-window denominator that could
     # understate coverage for markets with a genuinely shorter real history).
+    # Grouped by market_id, NOT market name -- market names collide across
+    # states/districts (e.g. "Balugaon APMC" is market_id 1523 in Odisha AND
+    # market_id 4247 in Assam). market_id is the true unique key; market name
+    # is carried through below as a display-only column via .agg(market=...).
     sub = sub.copy()
     sub['year'] = sub['week_start'].dt.year
-    sub['pct_coverage_row'] = (1 - sub.groupby('market')['imputed'].transform('mean')) * 100 \
+    sub['pct_coverage_row'] = (1 - sub.groupby('market_id')['imputed'].transform('mean')) * 100 \
         if 'imputed' in sub.columns else 100.0
 
     obs = sub[sub['imputed'] == 0].copy() if 'imputed' in sub.columns else sub.copy()
-    return (obs.groupby('market')
-               .agg(state         = ('state', 'first'),
+    return (obs.groupby('market_id')
+               .agg(market        = ('market', 'first'),
+                    state         = ('state', 'first'),
                     district      = ('district', 'first'),
                     weeks_present = ('week_start', 'nunique'),
                     years_present = ('year',       'nunique'),
@@ -90,7 +95,7 @@ def compute_coverage(sub):
                     mean_arrivals = ('arrivals_tonnes_week',  'mean'),
                     cv_price      = ('modal_price_weighted',
                                      lambda x: x.std()/x.mean()*100 if x.mean()>0 else 0))
-               .join(sub.groupby('market')['pct_coverage_row'].first().rename('pct_coverage').round(1))
+               .join(sub.groupby('market_id')['pct_coverage_row'].first().rename('pct_coverage').round(1))
                .reset_index())
 
 coverage = {}
@@ -112,8 +117,12 @@ for crop in CROPS:
           f'({n_sel/n_all*100:.0f}%)')
 
 # Save filtered panel
-sel_ids = {crop: set(selected[crop]['market']) for crop in CROPS}
-df_filtered = df[df.apply(lambda r: r['market'] in sel_ids[r['crop']], axis=1)]
+# Keyed on market_id (not market name) -- see compute_coverage() note above;
+# a name-keyed filter would let a passing market_id's coverage smuggle in a
+# same-named, different-market_id market's rows (or vice versa, exclude a
+# passing market_id because its name-twin failed).
+sel_ids = {crop: set(selected[crop]['market_id']) for crop in CROPS}
+df_filtered = df[df.apply(lambda r: r['market_id'] in sel_ids[r['crop']], axis=1)]
 filtered_path = os.path.join(OUT_DIR, 'filtered_panel_top.csv')
 df_filtered.to_csv(filtered_path, index=False)
 print(f'\nFiltered panel saved: {filtered_path}  ({len(df_filtered):,} rows)')
@@ -339,13 +348,18 @@ cmap = LinearSegmentedColormap.from_list('cov', ['#FFEBEE','#EF5350','#1B5E20'],
 
 for ax, crop in zip(axes, CROPS):
     sub = df[df['crop'] == crop]
-    top30 = (selected[crop].nlargest(30, 'pct_coverage')['market'].tolist())
-    sub30 = sub[sub['market'].isin(top30)]
+    # Keyed on market_id, not market name -- two markets can share a name
+    # within the same crop (e.g. across states), and a name-based isin/pivot
+    # would silently merge their rows into one heatmap row. market name is
+    # only reattached at the end, for the y-axis labels.
+    top30 = selected[crop].nlargest(30, 'pct_coverage')[['market_id', 'market']]
+    id_to_name = dict(zip(top30['market_id'], top30['market']))
+    sub30 = sub[sub['market_id'].isin(top30['market_id'])]
 
     sub30 = sub30.copy()
     sub30['year'] = sub30['week_start'].dt.year
     matrix = pd.pivot_table(sub30, values='week_start',
-                             index='market', columns='year',
+                             index='market_id', columns='year',
                              aggfunc='count', fill_value=0)
     # % of weeks per year (52 or 53)
     sub_yr = sub.copy(); sub_yr['year'] = sub_yr['week_start'].dt.year
@@ -358,7 +372,8 @@ for ax, crop in zip(axes, CROPS):
 
     im = ax.imshow(matrix.values, aspect='auto', cmap=cmap, vmin=0, vmax=100)
     ax.set_xticks(range(len(years))); ax.set_xticklabels(years, fontsize=8, rotation=45)
-    ax.set_yticks(range(len(matrix))); ax.set_yticklabels(matrix.index, fontsize=7)
+    ax.set_yticks(range(len(matrix)))
+    ax.set_yticklabels([id_to_name.get(i, i) for i in matrix.index], fontsize=7)
     ax.set_title(f'{crop.capitalize()} — Top 30 markets\n(% weeks with data per year)',
                  fontsize=9, fontweight='bold', color=CROP_COLORS[crop])
     plt.colorbar(im, ax=ax, shrink=0.6, label='Coverage %')

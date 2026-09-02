@@ -65,7 +65,7 @@ if sys.stdout.encoding != 'utf-8':
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE, 'data', 'agmarknet_weekly')
-DOWNLOADS_DIR = r'C:\Users\masro\Downloads\Agmarknet_Weekly'
+DOWNLOADS_DIR = os.environ.get('TOP_DOWNLOADS_DIR', r'C:\Users\masro\Downloads\Agmarknet_Weekly')
 MODEL_DIR = os.path.join(BASE, 'Model_Output', 'production_models')
 CROPS = ['tomato', 'onion', 'potato']
 
@@ -252,6 +252,10 @@ else:
         'macro/climate/satellite': [c for c in ref.columns if any(
             s in c for s in ['era5_', 'chirps_', 's2_', 'modis_', 'diesel', 'repo_rate',
                               'usd_inr', 'wpi_', 'bank_credit', 'agri_wages', 'iip_'])],
+        # NOTE: this only checks that the *persisted* policy columns in reference_rows.csv
+        # are NaN-free. It does NOT verify absence of the underlying NaN-is-truthy bug
+        # pattern (`float(x or 0)`), which could recur for any runtime-computed value in
+        # the dashboard, not just these stored columns. See B3/B4 comment above.
         'policy': [c for c in ref.columns if any(
             s in c for s in ['export_ban', 'mep_', 'export_duty', 'market_intervention', 'operation_greens'])],
     }

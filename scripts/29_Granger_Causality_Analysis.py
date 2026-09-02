@@ -133,7 +133,8 @@ def make_stationary(s, name):
         return None, 'insufficient_data'
     try:
         p = adfuller(s, autolag='AIC')[1]
-    except Exception:
+    except Exception as e:
+        print(f'[warn] ADF test failed for series "{name}" (n={len(s)}): {e}')
         return None, 'adf_failed'
     if p < 0.05:
         return s, 'level'
@@ -171,7 +172,10 @@ def run_granger_pair(y_stat, x_stat, lags):
         return None
     try:
         res = grangercausalitytests(merged[['y', 'x']], maxlag=max(lags), verbose=False)
-    except Exception:
+    except Exception as e:
+        y_name = y_stat.name if hasattr(y_stat, 'name') and y_stat.name else 'y'
+        x_name = x_stat.name if hasattr(x_stat, 'name') and x_stat.name else 'x'
+        print(f'[warn] Granger test failed for {y_name} <- {x_name} (n={len(merged)}, maxlag={max(lags)}): {e}')
         return None
     out = {}
     for lag in lags:

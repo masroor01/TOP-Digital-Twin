@@ -32,6 +32,7 @@ import math
 import os
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -49,7 +50,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 # Paths
 # ─────────────────────────────────────────────────────────────────────────────
 PROJ      = Path(__file__).resolve().parent.parent
-PANEL_DIR = Path(r'C:\Users\masro\Downloads\Agmarknet_Weekly')
+PANEL_DIR = Path(os.environ.get('TOP_DOWNLOADS_DIR', r'C:\Users\masro\Downloads\Agmarknet_Weekly'))
 DATA_DIR  = PROJ / 'data'
 FIG_DIR   = PROJ / 'Model_Output'
 
@@ -144,8 +145,18 @@ NOMINATIM = 'https://nominatim.openstreetmap.org/search'
 USER_AGENT = 'TOP_DigitalTwin_SKUAST_Research'
 
 
-def _nominatim_query(query: str) -> tuple:
-    """Return (lat, lon) or None. Caller must enforce rate limiting."""
+def _nominatim_query(query: str):
+    """
+    Query Nominatim for a single location. Caller must enforce rate limiting.
+    Returns:
+      (lat, lon) -- a match was found
+      None       -- the API responded cleanly with no match (genuine miss --
+                    safe for the caller to cache)
+      'RETRY'    -- a transient/network failure (timeout, connection error,
+                    malformed response) -- caller must NOT cache this so the
+                    query is retried on a later run instead of being
+                    permanently mistaken for a genuine no-match.
+    """
     params = urllib.parse.urlencode({
         'q': query,
         'format': 'json',
@@ -156,12 +167,20 @@ def _nominatim_query(query: str) -> tuple:
     req = urllib.request.Request(url, headers={'User-Agent': USER_AGENT})
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read().decode())
-        if data:
-            return float(data[0]['lat']), float(data[0]['lon'])
-    except Exception:
-        pass
-    return None
+            raw = resp.read().decode()
+    except (urllib.error.URLError, TimeoutError, ConnectionError, OSError) as e:
+        print(f'    [transient] Nominatim request failed for "{query}": {e} -- will retry next run')
+        return 'RETRY'
+
+    try:
+        data = json.loads(raw)
+    except (json.JSONDecodeError, ValueError) as e:
+        print(f'    [transient] Nominatim returned malformed JSON for "{query}": {e} -- will retry next run')
+        return 'RETRY'
+
+    if data:
+        return float(data[0]['lat']), float(data[0]['lon'])
+    return None  # genuine no-match — safe to cache
 
 
 def geocode_district(district: str, state: str, cache: dict) -> tuple:
@@ -187,7 +206,12 @@ def geocode_district(district: str, state: str, cache: dict) -> tuple:
             continue  # cached miss — skip
         time.sleep(1.1)  # Nominatim policy: max 1 req/s
         result = _nominatim_query(query)
-        cache[query] = result  # cache hit or miss
+        if result == 'RETRY':
+            # Transient/network failure -- do NOT cache, so it's retried on
+            # the next run instead of being permanently treated as a
+            # genuine no-match. Fall through to the next, broader query.
+            continue
+        cache[query] = result  # genuine cache hit (tuple) or genuine miss (None)
         if result is not None:
             return result[0], result[1], level
 
@@ -211,8 +235,20 @@ def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return R * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
 
+# A market whose nearest same-crop zone is farther than this is not a
+# reliable climate proxy (300km reference line already drawn in Figure 2;
+# 500km gives some margin above that before we refuse the assignment
+# outright). Confirmed 113/839 markets (13%) exceed this today, worst case
+# 1941km (a Manipur market assigned an Andhra Pradesh zone) -- those are
+# left with zone_id=None rather than a climatically unrelated zone.
+MAX_ZONE_DISTANCE_KM = 500
+
+
 def assign_zone(lat: float, lon: float, crop: str) -> tuple:
-    """Return (zone_id, zone_market, zone_state, dist_km) for nearest same-crop zone."""
+    """Return (zone_id, zone_market, zone_state, dist_km) for nearest same-crop
+    zone, or (None, None, None, dist_km) if the nearest zone is farther than
+    MAX_ZONE_DISTANCE_KM (dist_km is still returned so the caller can report
+    how far away the nearest -- rejected -- zone was)."""
     candidates = ZONE_DF[ZONE_DF['crop'] == crop]
     best_zone, best_dist = None, float('inf')
     for _, row in candidates.iterrows():
@@ -222,6 +258,8 @@ def assign_zone(lat: float, lon: float, crop: str) -> tuple:
             best_zone = row
     if best_zone is None:
         return None, None, None, None
+    if best_dist > MAX_ZONE_DISTANCE_KM:
+        return None, None, None, round(best_dist, 1)
     return best_zone['zone_id'], best_zone['zone_market'], best_zone['zone_state'], round(best_dist, 1)
 
 
@@ -318,6 +356,7 @@ print('\nSTEP 3: Assigning markets to nearest production zone')
 print('-' * 45)
 
 rows = []
+excluded = []  # markets whose nearest same-crop zone exceeded MAX_ZONE_DISTANCE_KM
 for _, mkt in markets.iterrows():
     key = f'{mkt["district"]}||{mkt["state"]}'
     lat, lon, geocode_level = geo_results.get(key, (None, None, 'failed'))
@@ -327,6 +366,8 @@ for _, mkt in markets.iterrows():
         dist_km = None
     else:
         zone_id, zone_market, zone_state, dist_km = assign_zone(lat, lon, mkt['crop'])
+        if zone_id is None and dist_km is not None:
+            excluded.append((mkt['market'], mkt['state'], mkt['crop'], dist_km))
 
     rows.append({
         'market_id':     mkt['market_id'],
@@ -347,6 +388,13 @@ assignment = pd.DataFrame(rows)
 assignment.to_csv(OUT_FILE, index=False)
 print(f'  Saved: {OUT_FILE}')
 print(f'  Total markets assigned: {assignment["zone_id"].notna().sum()} / {len(assignment)}')
+
+if excluded:
+    print(f'\n  WARNING: {len(excluded)} market(s) had no same-crop zone within '
+          f'{MAX_ZONE_DISTANCE_KM}km and were left UNASSIGNED (zone_id=None) '
+          f'rather than given a climatically unrelated zone. Review these:')
+    for m_name, m_state, m_crop, d in sorted(excluded, key=lambda x: -x[3]):
+        print(f'    {m_name} ({m_state}, {m_crop}): nearest zone was {d:.0f}km away')
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Step 4: Summary tables

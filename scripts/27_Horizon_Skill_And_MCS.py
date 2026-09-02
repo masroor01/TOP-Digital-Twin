@@ -114,6 +114,11 @@ skill_table = skill_table.sort_values(['crop', 'horizon_weeks'])
 crossover_rows = []
 for crop in CROPS:
     sub = mase[(mase['crop'] == crop) & (mase['variant'] == 'M6')].sort_values('horizon_weeks')
+    if sub.empty:
+        crossover_rows.append({'crop': crop, 'M6_crossover_horizon_weeks': None})
+        print(f'  {crop:7s}: M6 crossover horizon = '
+              f'no data available for this crop -- crossover horizon cannot be determined')
+        continue
     beats = sub[sub['skill_pct'] > 0]
     crossover_h = int(beats['horizon_weeks'].iloc[0]) if not beats.empty else None
     crossover_rows.append({'crop': crop, 'M6_crossover_horizon_weeks': crossover_h})
