@@ -10,8 +10,10 @@ a week.
 | File | What it does |
 |---|---|
 | `run_weekly_refresh.ps1` | The orchestrator. This is what Task Scheduler runs. |
-| `validate_scrape.py` | Gate before merging: schema, price sanity, market_id conflicts, overlap-vs-trusted-file comparison. Exits 1 on any failure. |
-| `merge_scrape.py` | Replaces the trusted file's current-year portion with the new scrape, backing up first. Only run after `validate_scrape.py` passes. |
+| `validate_scrape.py` | Gate before merging: schema, price sanity, market_id conflicts, staleness, internal coverage continuity, row density, overlap-vs-trusted-file comparison. Exits 1 on any failure. |
+| `merge_scrape.py` | Replaces the trusted file's current-year portion with the new scrape, backing up first. Only run after `validate_scrape.py` passes. Aborts (unless `--force`) if the new rows are under half the size of what they'd replace. |
+
+**Fixed 2026-09-02** (audit finding, confirmed live risk): `validate_scrape.py` originally defined a `MAX_SCRAPE_AGE_DAYS` staleness tolerance but never actually checked it, and had no check for a silent gap or thin-density stretch *inside* the scrape's own claimed date range. Since `merge_scrape.py` replaces every trusted row from the new file's own minimum date onward, a scrape that stalled or was cut off mid-run (network drop, pagination bug) could pass every original check and then delete months of real trusted data on merge — while logging "refresh complete." Added 3 new checks to `validate_scrape.py` (staleness, internal gap continuity, row density vs. the trusted file's recent history) plus an independent row-count safety net directly in `merge_scrape.py` as defense in depth. All new checks tested against synthetic clean/truncated/stale/thin-density scenarios before trusting them.
 | `register_task.ps1` | One-time setup — registers the Tuesday 03:00 Task Scheduler entry. |
 | `staging/` | Scratch folder for each week's raw scrape output. Gitignored. |
 | `../../logs/weekly_refresh/` | One timestamped log per run; failed runs get `_FAILED` in the filename. Gitignored. |

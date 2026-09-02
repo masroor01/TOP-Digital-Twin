@@ -4,8 +4,21 @@ Weekly Refresh -- Step 2: Validate a Fresh Scrape Before Trusting It
 ======================================================================
 Scripts a repeatable version of the manual checks used for every prior raw-
 data refresh in this project (see MANIFEST.md / project memory): schema,
-commodity labelling, price sanity, market_id null rate, and a deduped
-overlap price-comparison against the currently-trusted file.
+commodity labelling, price sanity, market_id null rate, staleness, internal
+coverage continuity, a deduped overlap price-comparison against the
+currently-trusted file, market_id conflict detection, and row density.
+
+FIXED 2026-09-02 (audit finding, confirmed live production risk): the
+original version of this file defined MAX_SCRAPE_AGE_DAYS but never
+actually used it anywhere -- none of the original 8 checks verified the new
+scrape's date coverage was recent or complete. Combined with
+merge_scrape.py's "replace everything from the new file's own min-date
+onward" strategy, a scrape that silently stalled or was truncated mid-run
+(a network drop, a pagination bug) could pass every check and then delete
+months of real trusted data on merge, while logging "refresh complete" the
+whole time. Checks 7-8 and 12 below close that gap: staleness (7), internal
+gap continuity (8), and row density vs. the trusted file's own recent
+history (12).
 
 This is a GATE, not a report -- exits 1 (and prints why) the moment any
 check fails, so the calling orchestrator (run_weekly_refresh.ps1) can stop
@@ -24,6 +37,13 @@ PRICE_SANITY = {
     'onion':  (50, 12000),
     'potato': (40, 3500),
 }
+
+# A weekly-refresh cadence with some slack for a late/delayed run -- a scrape
+# whose newest row is older than this looks stalled/truncated even though
+# every other check above can still pass (wrong units, bad rows, etc. are
+# what checks 1-6 catch; neither of those checks says anything about HOW
+# MUCH of the year the scrape actually covers).
+MAX_SCRAPE_AGE_DAYS = 14
 
 REQUIRED_COLS = [
     'source', 'commodity', 'commodity_id', 'state', 'state_id', 'state_code',
@@ -127,11 +147,48 @@ def main():
              f'exceeds 10% tolerance (market directory lookup may have failed)')
     ok(f'market_id null rate {null_mkt/len(new):.2%} (within tolerance)')
 
-    # 7. Overlap comparison against the trusted file
+    # 7. Scrape staleness -- does the new file actually reach recent dates?
+    # Checks 1-6 above can all pass on a scrape that stalled or was cut off
+    # partway through and never reached anywhere near today -- none of them
+    # say anything about HOW RECENT the data actually is. merge_scrape.py
+    # trusts this file to be current; a stale-but-otherwise-clean scrape
+    # would silently anchor the trusted panel's "latest" data on old rows.
+    today = pd.Timestamp.now().normalize()
+    days_stale = (today - dmax).days
+    if days_stale > MAX_SCRAPE_AGE_DAYS:
+        fail(f'newest row is {dmax.date()}, {days_stale} days old -- exceeds the '
+             f'{MAX_SCRAPE_AGE_DAYS}-day staleness tolerance. This scrape looks '
+             f'stalled or was cut off before reaching recent dates.')
+    ok(f'staleness OK ({days_stale} days since newest row, tolerance {MAX_SCRAPE_AGE_DAYS})')
+
+    # 8. Coverage continuity -- no large silent gap INSIDE the scrape's own
+    # date range. A scrape that dies partway through and resumes (a network
+    # drop, a pagination bug) can still have a recent max date and pass every
+    # check above, while leaving a multi-week hole in the middle of its
+    # claimed range. merge_scrape.py replaces every trusted row from this
+    # file's own min date onward -- a hole here becomes a permanent hole in
+    # the trusted panel, not just a gap in this one file.
+    MAX_GAP_DAYS = 7
+    present_dates = pd.Series(sorted(new['arrival_date'].dt.normalize().unique()))
+    if len(present_dates) > 1:
+        gaps = present_dates.diff().dt.days.dropna()
+        max_gap = int(gaps.max())
+        if max_gap > MAX_GAP_DAYS:
+            gap_idx = gaps.idxmax()
+            gap_start, gap_end = present_dates[gap_idx - 1], present_dates[gap_idx]
+            fail(f'{max_gap}-day gap with zero rows found inside the scrape '
+                 f'({gap_start.date()} to {gap_end.date()}) -- looks like the scrape '
+                 f'stalled and resumed, not ordinary reporting variance')
+        ok(f'coverage continuity OK (largest internal gap: {max_gap} day(s), '
+           f'tolerance {MAX_GAP_DAYS})')
+    else:
+        ok('coverage continuity check skipped (only one distinct date in scrape)')
+
+    # 10. Overlap comparison against the trusted file
     try:
         old = pd.read_csv(trusted_path, low_memory=False)
     except Exception as exc:
-        warn(f'could not read trusted file for overlap check: {exc} -- skipping check 7')
+        warn(f'could not read trusted file for overlap check: {exc} -- skipping checks 10-12')
         old = None
 
     if old is not None:
@@ -153,7 +210,7 @@ def main():
             ok(f'overlap check OK: {frac_bad:.3%} of {len(m):,} overlapping rows differ '
                f'by >Rs.100 (within 2% tolerance)')
 
-        # 8. market_id conflicts
+        # 11. market_id conflicts
         old_lookup = old.drop_duplicates(['state', 'market'])[['state', 'market', 'market_id']]
         new_lookup = new.drop_duplicates(['state', 'market'])[['state', 'market', 'market_id']]
         mm = old_lookup.merge(new_lookup, on=['state', 'market'], suffixes=('_old', '_new'), how='inner')
@@ -163,6 +220,28 @@ def main():
             fail(f'{len(conflict)} markets map to a DIFFERENT market_id than the trusted '
                  f'file -- real conflict, not a null-vs-null artifact:\n{conflict.head(10)}')
         ok(f'market_id consistency OK (0 genuine conflicts across {len(mm)} shared markets)')
+
+        # 12. Row density vs. the trusted file's own recent history -- catches
+        # a scrape that covers the right DATE range but returns far fewer rows
+        # per day than normal (e.g. a pagination bug that only captures the
+        # first page of results per day). Checks 1-11 above can all pass on
+        # this failure mode: schema/commodity/price/market_id checks don't
+        # care how MANY rows per day, and the coverage-continuity check (8)
+        # only catches a full day going completely empty, not every day being
+        # thinly populated.
+        new_dates_covered = new['arrival_date'].dt.normalize().nunique()
+        new_density = len(new) / max(new_dates_covered, 1)
+        recent_cutoff = old['arrival_date'].max() - pd.Timedelta(days=90)
+        recent_old = old[old['arrival_date'] >= recent_cutoff]
+        old_dates_covered = recent_old['arrival_date'].dt.normalize().nunique()
+        old_density = len(recent_old) / max(old_dates_covered, 1)
+        if old_density > 0 and new_density < 0.5 * old_density:
+            fail(f'new scrape averages {new_density:.0f} rows/day vs. the trusted '
+                 f'file\'s recent {old_density:.0f} rows/day (last 90 days) -- less '
+                 f'than 50%, looks like a partial/truncated pull even though the '
+                 f'date range looks complete')
+        ok(f'row density OK ({new_density:.0f} rows/day vs. trusted recent average '
+           f'{old_density:.0f} rows/day)')
 
     print(f'--- {crop}: ALL CHECKS PASSED ---')
     sys.exit(0)

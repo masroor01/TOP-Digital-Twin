@@ -14,8 +14,20 @@ way every prior refresh in this project has (match by (state, market)
 against the trusted file's existing lookup; assign new sequential IDs only
 for genuinely new markets).
 
+FIXED 2026-09-02 (audit finding, confirmed live production risk): this
+replace-the-suffix strategy silently deletes real trusted data if the new
+scrape happens to be thinner than what it's replacing -- validate_scrape.py
+now checks for this before merge is ever called (see its 2026-09-02 fix),
+but this script had no safety net of its own if it were ever invoked
+directly, out of order, or against a file validate_scrape.py didn't see.
+Added a second, independent guard right before the overwrite: if the new
+rows are less than half the size of the trusted rows they're about to
+replace, abort rather than merge (pass --force to override for a
+deliberate narrow rebuild, e.g. a cleaner re-pull with fewer duplicate
+rows by design, matching the 09c/09d precedent).
+
 Usage:
-    python merge_scrape.py <crop> <trusted_csv> <new_scrape_csv>
+    python merge_scrape.py <crop> <trusted_csv> <new_scrape_csv> [--force]
 
 Overwrites <trusted_csv> in place after writing a timestamped backup
 alongside it (<trusted_csv>.backup_YYYYMMDD_HHMMSS).
@@ -48,10 +60,12 @@ def prune_backups(trusted_path):
 
 
 def main():
-    if len(sys.argv) != 4:
+    args = [a for a in sys.argv[1:] if a != '--force']
+    force = len(args) != len(sys.argv[1:])
+    if len(args) != 3:
         print(__doc__)
         sys.exit(2)
-    crop, trusted_path, new_path = sys.argv[1], sys.argv[2], sys.argv[3]
+    crop, trusted_path, new_path = args
     crop = crop.lower()
 
     print(f'=== Merging {crop} ===')
@@ -114,6 +128,25 @@ def main():
     if not bad.empty:
         print(f'  NOTE: {len(bad)} market_id(s) map to >1 market name (spelling-variant '
               f'match, as seen before) -- not treated as an error.')
+
+    # Safety net independent of validate_scrape.py: the rows we're ABOUT TO
+    # DELETE (everything in the trusted file from cutoff onward) vs. the rows
+    # replacing them. A healthy weekly refresh's new_rows is comparable to or
+    # larger than what it replaces (same or better coverage, moving forward
+    # in time); a truncated/stalled scrape that still has an old-enough min
+    # date to trigger a big cutoff would show up here as a large loss.
+    replaced = old[old_dates >= cutoff]
+    if len(replaced) > 500 and len(new_rows) < 0.5 * len(replaced):
+        print(f'  [ABORT] New scrape has {len(new_rows):,} rows but would replace '
+              f'{len(replaced):,} existing trusted rows from {cutoff.date()} onward '
+              f'(less than 50%) -- this looks like a truncated scrape about to '
+              f'delete real trusted data. Refusing to merge.', file=sys.stderr)
+        print(f'  If this is a genuine, deliberate narrow rebuild (e.g. a cleaner '
+              f're-pull with intentionally fewer duplicate rows), re-run with --force.',
+              file=sys.stderr)
+        if not force:
+            sys.exit(1)
+        print(f'  --force given, proceeding despite the row-count drop.')
 
     combined = pd.concat([old_kept, new_rows], ignore_index=True)
 
