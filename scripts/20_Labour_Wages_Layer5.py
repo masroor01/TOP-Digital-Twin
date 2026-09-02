@@ -142,8 +142,14 @@ women_df = pd.DataFrame(women_series); women_df['date'] = dates.values
 
 men_long = men_df.melt(id_vars='date', var_name='lb_state', value_name='wage_agri_men')
 women_long = women_df.melt(id_vars='date', var_name='lb_state', value_name='wage_agri_women')
+assert men_long[['date', 'lb_state']].duplicated().sum() == 0, 'men wage table has duplicate (date,lb_state) rows'
+assert women_long[['date', 'lb_state']].duplicated().sum() == 0, 'women wage table has duplicate (date,lb_state) rows'
 wages = men_long.merge(women_long, on=['date', 'lb_state'], how='outer')
 wages['panel_state'] = wages['lb_state'].map(LB_TO_PANEL_STATE)
+unmatched = sorted(wages.loc[wages['panel_state'].isna(), 'lb_state'].unique())
+if unmatched:
+    print(f'  WARNING: {len(unmatched)} source label(s) did not match LB_TO_PANEL_STATE '
+          f'and will be dropped: {unmatched}')
 wages = wages.dropna(subset=['panel_state'])
 
 wages = wages[(wages['date'] >= PANEL_START) & (wages['date'] <= PANEL_END)]

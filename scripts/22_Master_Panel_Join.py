@@ -45,7 +45,8 @@ OUT_DIR  = os.path.join(BASE, 'data')
 OUT_FILE = os.path.join(OUT_DIR, 'master_weekly_panel_all_layers.csv')
 
 PANEL_START = '2017-01-01'
-PANEL_END   = '2025-12-31'
+PANEL_END   = '2030-12-31'  # generous future ceiling, not a real cutoff — matches
+                             # Script 23's pattern so new data isn't silently truncated
 
 
 def checked_merge(left, right, on, how, label):
@@ -86,6 +87,9 @@ for fpath in [CMIE_FILE, RBI_FILE, PPAC_FILE]:
 macro = macro_dfs[0]
 for m in macro_dfs[1:]:
     macro = macro.merge(m, on=['year', 'month'], how='outer', suffixes=('', '_dup'))
+    dup_cols = [c for c in macro.columns if c.endswith('_dup')]
+    if dup_cols:
+        print(f'  WARNING: dropping overlapping macro columns from a later source: {dup_cols}')
     macro = macro[[c for c in macro.columns if not c.endswith('_dup')]]
 macro = macro.drop(columns=[c for c in ['date', 'date_x', 'date_y'] if c in macro.columns])
 assert macro[['year', 'month']].duplicated().sum() == 0, 'macro table has duplicate (year,month) rows'

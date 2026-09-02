@@ -29,7 +29,7 @@ Builds two panel-joinable infrastructure features per state:
 
 Outputs (data/infrastructure/):
   cold_storage_by_state.csv      state, state_code, n_facilities, capacity_mt, source_note
-  road_density_state_annual.csv  state, state_code, year, road_density_per_100_sqkm, is_forward_filled
+  road_density_state_annual.csv  state, state_code, year, road_density_per_100_sqkm, is_forward_filled, source_note
 
 Run: python scripts/21_Infrastructure_Layer5.py
 """
@@ -157,6 +157,13 @@ for _, prow in panel_states.iterrows():
 
     if match.empty:
         print(f'  WARNING: no road density match for {pstate}')
+        for year in PANEL_YEARS:
+            road_rows.append({
+                'state': pstate, 'state_code': pcode, 'year': year,
+                'road_density_per_100_sqkm': np.nan,
+                'is_forward_filled': False,
+                'source_note': 'no_road_density_match',
+            })
         continue
 
     last_row = match[match['year'] == match['year'].max()].iloc[0]
@@ -167,12 +174,14 @@ for _, prow in panel_states.iterrows():
                 'state': pstate, 'state_code': pcode, 'year': year,
                 'road_density_per_100_sqkm': exact['road_density_per_100_sqkm'].iloc[0],
                 'is_forward_filled': False,
+                'source_note': 'direct',
             })
         else:
             road_rows.append({
                 'state': pstate, 'state_code': pcode, 'year': year,
                 'road_density_per_100_sqkm': last_row['road_density_per_100_sqkm'],
                 'is_forward_filled': True,
+                'source_note': 'forward_filled',
             })
 
 road_out = pd.DataFrame(road_rows)

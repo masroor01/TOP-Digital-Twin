@@ -101,7 +101,16 @@ print(src.groupby('verification_status').size().to_string())
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[1] Building Onion export-policy state timeline ...')
 
-pe = src[src['record_type'] == 'policy_event'].sort_values('effective_date')
+VERIFIED_STATUSES = {'primary_source_verified', 'primary_source_retrospective'}
+
+pe_all = src[src['record_type'] == 'policy_event'].sort_values('effective_date')
+pe = pe_all[pe_all['verification_status'].isin(VERIFIED_STATUSES)]
+excluded = pe_all[~pe_all['verification_status'].isin(VERIFIED_STATUSES)]
+if not excluded.empty:
+    print(f'  WARNING: excluding {len(excluded)} policy_event row(s) with unverified '
+          f'status (not in {VERIFIED_STATUSES}):')
+    for _, r in excluded.iterrows():
+        print(f'    - [{r["verification_status"]}] {r["description"]}')
 
 ban_state = []   # (start, end_inclusive)
 mep_state = []   # (start, end_inclusive, value)
@@ -165,6 +174,9 @@ for _, row in pe.iterrows():
             else:
                 duty_state.append((duty_start, eff - pd.Timedelta(days=1), duty_value))
         duty_value, duty_start = 0, None
+    else:
+        print(f'  WARNING: unrecognized policy_type {ptype!r} on row '
+              f'{row.get("event_date")} / {row.get("description")!r} — skipped')
 
 # close any still-open spans at panel end
 if ban_start is not None:
