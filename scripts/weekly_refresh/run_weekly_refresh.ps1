@@ -159,10 +159,28 @@ $code = RunLogged $Python @("scripts\09_Agmarknet_Weekly_Panel.py")
 if ($code -ne 0) { Pop-Location; FailAndExit "Script 09 failed (exit $code)" }
 
 Log "--- Syncing panels into repo (data/agmarknet_weekly/) ---"
-Copy-Item (Join-Path $Downloads "Agmarknet_Weekly\tomato_weekly_panel.csv") "data\agmarknet_weekly\" -Force
-Copy-Item (Join-Path $Downloads "Agmarknet_Weekly\onion_weekly_panel.csv") "data\agmarknet_weekly\" -Force
-Copy-Item (Join-Path $Downloads "Agmarknet_Weekly\potato_weekly_panel.csv") "data\agmarknet_weekly\" -Force
-Copy-Item (Join-Path $Downloads "Agmarknet_Weekly\top_weekly_panel.csv") "data\agmarknet_weekly\" -Force
+# FIXED 2026-09-02 (audit finding, confirmed): this used to be four bare
+# Copy-Item calls with no existence check or error handling -- a missing
+# source file (e.g. Script 09 silently not writing one of the four) would
+# print a red error to the console and then fall straight through to
+# Script 23 training on a stale or partial panel copy, with no FailAndExit
+# guard like every other step in this script already has. Now verifies
+# each source file exists first, and stops the run (matching the rest of
+# the script's own established safety pattern) if any sync fails.
+$syncFiles = @("tomato_weekly_panel.csv", "onion_weekly_panel.csv", "potato_weekly_panel.csv", "top_weekly_panel.csv")
+foreach ($f in $syncFiles) {
+    $src = Join-Path $Downloads "Agmarknet_Weekly\$f"
+    if (-not (Test-Path $src)) {
+        Pop-Location
+        FailAndExit "sync source file missing: $src -- Script 09 may not have written it, refusing to proceed with a stale/incomplete panel copy"
+    }
+    try {
+        Copy-Item $src "data\agmarknet_weekly\" -Force -ErrorAction Stop
+    } catch {
+        Pop-Location
+        FailAndExit "failed to copy $src into data\agmarknet_weekly\ : $($_.Exception.Message)"
+    }
+}
 
 Log "--- Script 23: retraining production models ---"
 $code = RunLogged $Python @("scripts\23_Train_Production_Models.py")
@@ -194,9 +212,23 @@ $filesToAdd = @(
     "Model_Output\production_models\potato_1w.joblib", "Model_Output\production_models\potato_4w.joblib",
     "Model_Output\production_models\potato_13w.joblib", "Model_Output\production_models\potato_26w.joblib"
 )
+# FIXED 2026-09-02 (audit finding, confirmed): neither git call's exit code
+# was checked -- a failed `git add` (e.g. a path typo) or failed `git commit`
+# (e.g. a pre-commit hook rejection, or an index lock held by a concurrent
+# git process) would still fall through to "Committed locally" and
+# "Weekly Refresh Completed OK" (exit 0), silently reporting success on a
+# run whose retrained models were never actually committed.
 & git add $filesToAdd 2>&1 | ForEach-Object { $LogStream.WriteLine($_) }
+if ($LASTEXITCODE -ne 0) {
+    Pop-Location
+    FailAndExit "git add failed (exit $LASTEXITCODE) -- see log for git's own error output"
+}
 $commitMsg = "Automated weekly data refresh ($ts) -- crops: $($mergedCrops -join ', ')"
 & git commit -m $commitMsg 2>&1 | ForEach-Object { $LogStream.WriteLine($_) }
+if ($LASTEXITCODE -ne 0) {
+    Pop-Location
+    FailAndExit "git commit failed (exit $LASTEXITCODE) -- changes are staged but NOT committed; see log for git's own error output (e.g. a pre-commit hook rejection or an index lock from a concurrent git process)"
+}
 Log "Committed locally (not pushed): $commitMsg"
 
 Pop-Location
