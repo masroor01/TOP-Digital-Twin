@@ -3,9 +3,21 @@
 Script 18 — Diebold-Mariano Statistical Significance Tests
 =============================================================
 Converts the ablation study's MAPE/R² differences (Script 15) into formal
-p-values, testing whether each added data layer (M0→M1→M2→M3→M4) produces a
+p-values, testing whether each added data layer (M0→M1→...→M6) produces a
 statistically significant improvement in forecast accuracy — not just a
 numerically larger metric.
+
+FIXED 2026-09-02 (audit finding, confirmed): Script 15 has trained M0-M6
+(7 variants, full pipeline through Infrastructure/Policy) since long before
+this fix, but this script's HEADLINE_PAIR/LAYER_PAIRS/VARIANT_LABELS were
+still hardcoded to stop at M4 -- so every DM significance test this script
+ever ran validated an outdated intermediate variant (M0 vs M4, "+Satellite")
+rather than the actual current headline comparison other scripts (15, 27)
+treat as the full pipeline (M0 vs M6, "+Policy/Trade"). M5/M6 were silently
+absent from every table/figure this script produced. Extended to the full
+chain; M0 vs M6 is now the headline pair, M0 vs M4 is kept as an ADDITIONAL
+named comparison (not removed) since some earlier write-ups may reference it
+specifically.
 
 Method: Diebold & Mariano (1995) test on squared-error loss differentials,
 with the Harvey-Leybourne-Newbold (1997) small-sample correction (t-distribution
@@ -14,14 +26,16 @@ adjustment for finite T) and Newey-West-style autocovariance truncated at
 lag h-1, since an h-step-ahead forecast error series is MA(h-1) under
 correct model specification.
 
-Test series: for each (crop, horizon), the 4 folds' test-period weeks
-(2022, 2023, 2024, 2025 — non-overlapping) are concatenated in chronological
-order into one continuous crop-level weekly time series, using the
-crop-level average predictions Script 15 saves per variant.
+Test series: for each (crop, horizon), each fold's test-period weeks are
+concatenated in chronological order into one continuous crop-level weekly
+time series, using the crop-level average predictions Script 15 saves per
+variant. Fold count is read from the data itself (Script 15 has run 5 folds,
+2022-2026, since 2026-08-13 -- not hardcoded here).
 
 Comparisons:
-  Headline:      M0 (price only) vs M4 (full pipeline)
-  Layer-by-layer: M0 vs M1, M1 vs M2, M2 vs M3, M3 vs M4 — isolates whether
+  Headline:       M0 (price only) vs M6 (full pipeline)
+  Also reported:  M0 vs M4 (the pre-2026-08 headline pair, kept for continuity)
+  Layer-by-layer: M0 vs M1, M1 vs M2, ..., M5 vs M6 — isolates whether
                    each individual data layer's addition is significant
 
 Inputs:
@@ -59,13 +73,17 @@ CROPS    = ['tomato', 'onion', 'potato']
 HORIZONS = [1, 4, 13, 26]
 ALPHA    = 0.05
 
-HEADLINE_PAIR = ('M0', 'M4')
-LAYER_PAIRS   = [('M0', 'M1'), ('M1', 'M2'), ('M2', 'M3'), ('M3', 'M4')]
-ALL_PAIRS     = [HEADLINE_PAIR] + LAYER_PAIRS
+VARIANTS = ['M0', 'M1', 'M2', 'M3', 'M4', 'M5', 'M6']
+
+HEADLINE_PAIR   = ('M0', 'M6')
+SECONDARY_PAIRS = [('M0', 'M4')]   # pre-2026-08 headline pair, kept for continuity
+LAYER_PAIRS     = list(zip(VARIANTS[:-1], VARIANTS[1:]))
+ALL_PAIRS       = [HEADLINE_PAIR] + SECONDARY_PAIRS + LAYER_PAIRS
 
 VARIANT_LABELS = {
     'M0': 'Price only', 'M1': '+ Arrivals', 'M2': '+ Macro',
-    'M3': '+ Climate', 'M4': '+ Satellite',
+    'M3': '+ Climate', 'M4': '+ Satellite', 'M5': '+ Infrastructure',
+    'M6': '+ Policy/Trade',
 }
 
 CROP_COLORS = {'tomato': '#E63946', 'onion': '#F4A261', 'potato': '#457B9D'}
@@ -167,7 +185,7 @@ print(f'  Horizons: {sorted(preds["horizon_weeks"].unique())}\n')
 # ─────────────────────────────────────────────────────────────────────────────
 # 4. RUN DM TESTS
 # ─────────────────────────────────────────────────────────────────────────────
-print('[1] Running DM tests: headline (M0 vs M4) + layer-by-layer ...\n')
+print(f'[1] Running DM tests: headline ({HEADLINE_PAIR[0]} vs {HEADLINE_PAIR[1]}) + layer-by-layer ...\n')
 
 rows = []
 for crop in CROPS:
@@ -176,9 +194,11 @@ for crop in CROPS:
         if sub.empty:
             continue
 
-        # Concatenate all 4 folds chronologically per variant
+        # Concatenate every available fold chronologically per variant (fold
+        # count comes from whatever's actually in the data -- see the
+        # 2026-09-02 fix note above; do not hardcode a fold count here).
         series = {}
-        for variant in ['M0', 'M1', 'M2', 'M3', 'M4']:
+        for variant in VARIANTS:
             vsub = (sub[sub['variant'] == variant]
                     .sort_values(['fold', 'week_start'])
                     .drop_duplicates(subset='week_start'))
@@ -231,11 +251,18 @@ print(f'\n  {n_sig}/{n_total} comparisons significant at p<0.05')
 
 headline = dm_results[dm_results['is_headline']]
 n_sig_headline = headline['significant_5pct'].sum()
-print(f'  Headline (M0 vs M4): {n_sig_headline}/{len(headline)} significant')
+print(f'  Headline ({HEADLINE_PAIR[0]} vs {HEADLINE_PAIR[1]}): {n_sig_headline}/{len(headline)} significant')
 for _, r in headline.iterrows():
     sig = sig_stars(r['p_value'])
-    direction = 'M4 better' if r['better_model'] == 'richer' else 'M0 better' if r['better_model'] == 'baseline' else 'n/a'
+    direction = (f'{HEADLINE_PAIR[1]} better' if r['better_model'] == 'richer'
+                 else f'{HEADLINE_PAIR[0]} better' if r['better_model'] == 'baseline' else 'n/a')
     print(f'    {r["crop"]:7s} h={r["horizon_weeks"]:>2}w: p={r["p_value"]:.4f}{sig:<4s} ({direction})')
+
+secondary = dm_results[(dm_results['baseline'] == SECONDARY_PAIRS[0][0]) &
+                        (dm_results['richer'] == SECONDARY_PAIRS[0][1])]
+n_sig_secondary = secondary['significant_5pct'].sum()
+print(f'\n  Secondary ({SECONDARY_PAIRS[0][0]} vs {SECONDARY_PAIRS[0][1]}, pre-2026-08 headline pair, '
+      f'kept for continuity): {n_sig_secondary}/{len(secondary)} significant')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -245,7 +272,7 @@ print('\n[3] Generating figure ...')
 
 fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 
-# Panel A: headline M0 vs M4, crops x horizons
+# Panel A: headline M0 vs M6, crops x horizons
 pivot_headline = headline.pivot(index='crop', columns='horizon_weeks', values='p_value')
 pivot_headline = pivot_headline.reindex(index=CROPS, columns=HORIZONS)
 neglog_p = -np.log10(pivot_headline.clip(lower=1e-10))
@@ -256,7 +283,8 @@ ax.set_xticks(range(len(HORIZONS)))
 ax.set_xticklabels([f'{h}w' for h in HORIZONS])
 ax.set_yticks(range(len(CROPS)))
 ax.set_yticklabels([c.capitalize() for c in CROPS])
-ax.set_title('Headline: M0 vs M4\n(−log₁₀ p-value; darker green = more significant)',
+ax.set_title(f'Headline: {HEADLINE_PAIR[0]} vs {HEADLINE_PAIR[1]}\n'
+             '(−log₁₀ p-value; darker green = more significant)',
              fontsize=10, fontweight='bold')
 for i in range(len(CROPS)):
     for j in range(len(HORIZONS)):
