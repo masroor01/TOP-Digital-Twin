@@ -38,7 +38,7 @@ if sys.stdout.encoding != 'utf-8':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-DOWNLOADS = r'C:\Users\masro\Downloads'
+DOWNLOADS = os.environ.get('TOP_DOWNLOADS_DIR', r'C:\Users\masro\Downloads')
 
 MERGES = [
     {
@@ -81,6 +81,11 @@ for m in MERGES:
     to_append = new[new['arrival_date'] > main_max].copy()
     print(f'  Appending {len(to_append):,} rows strictly after {main_max.date()} '
           f'(new coverage: {to_append["arrival_date"].min().date()} to {new_max.date()})')
+
+    n_null = to_append['market_id'].isna().sum()
+    assert n_null == 0, (
+        f'{n_null} rows in to_append have unresolved market_id -- these would '
+        f'silently vanish via groupby(\'market_id\') in Script 09')
 
     # Restore the original string date format so the merged file matches
     # what Script 09 expects (it re-parses arrival_date itself).

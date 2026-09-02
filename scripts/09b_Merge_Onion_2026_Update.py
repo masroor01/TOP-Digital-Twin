@@ -45,7 +45,7 @@ import re
 import pandas as pd
 import numpy as np
 
-DOWNLOADS = r'C:\Users\masro\Downloads'
+DOWNLOADS = os.environ.get('TOP_DOWNLOADS_DIR', r'C:\Users\masro\Downloads')
 OLD_FILE = os.path.join(DOWNLOADS, 'onion_all_india_apmcs_2000_2025.csv')
 PRICE_FILE = os.path.join(DOWNLOADS, 'Daily Price Report-01-01-2026 to 24-07-2026.csv')
 ARRIVAL_FILE = os.path.join(DOWNLOADS, 'Daily Arrival Report-01-01-2026 to 24-07-2026.csv')
@@ -74,6 +74,21 @@ def main():
     ].copy()
     lookup['state_n'] = norm(lookup['state'])
     lookup['market_n'] = norm(lookup['market'])
+
+    # Detect (state_n, market_n) normalized-name collisions BEFORE the
+    # first-wins dedup below silently drops them: two distinct market_ids
+    # that normalize to the same (state, market) string would otherwise
+    # lose all but the first-seen market_id with no trace.
+    dupe_groups = lookup.groupby(['state_n', 'market_n'])['market_id'].nunique()
+    collisions = dupe_groups[dupe_groups > 1]
+    if not collisions.empty:
+        print(f'  WARNING: {len(collisions)} normalized (state, market) name(s) map to '
+              f'>1 market_id -- keeping only the first-seen market_id for each '
+              f'(known limitation, now surfaced instead of silent):')
+        for (state_n, market_n), n in collisions.items():
+            ids = lookup.loc[(lookup['state_n'] == state_n) & (lookup['market_n'] == market_n), 'market_id'].tolist()
+            print(f'    ({state_n!r}, {market_n!r}) -> market_ids {ids}')
+
     lookup = lookup.drop_duplicates(['state_n', 'market_n'])
 
     max_market_id = int(old['market_id'].max())
@@ -176,6 +191,21 @@ def main():
     )
     bad = dupe_ids_conflict[dupe_ids_conflict > 1]
     assert bad.empty, f'market_id maps to >1 market name: {bad.index.tolist()}'
+
+    # Cross-check against the OLD file: for any market_id in new_rows that
+    # already exists in the old file, the market name must match. This
+    # catches a market_id that was matched (or newly assigned) to the wrong
+    # market -- internal self-consistency above wouldn't catch it.
+    old_names = old.drop_duplicates('market_id').set_index('market_id')['market']
+    new_names = new_rows.drop_duplicates('market_id').set_index('market_id')['market']
+    common_ids = new_names.index.intersection(old_names.index)
+    mismatch_mask = new_names.loc[common_ids] != old_names.loc[common_ids]
+    mismatches = common_ids[mismatch_mask]
+    if len(mismatches):
+        print(f'  WARNING: {len(mismatches)} market_id(s) in new rows have a different '
+              f'market name than the OLD file for the same market_id:')
+        for mid in mismatches:
+            print(f'    market_id={mid}: old={old_names.loc[mid]!r} vs new={new_names.loc[mid]!r}')
 
     print(f'\n2026 new rows: {len(new_rows):,}  '
           f'markets: {new_rows["market_id"].nunique()}  '

@@ -29,6 +29,7 @@ import io
 import os
 import sys
 from datetime import datetime
+from pathlib import Path
 import pandas as pd
 import numpy as np
 
@@ -37,13 +38,15 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 # ----------------------------------------------------------------
 # Paths
 # ----------------------------------------------------------------
+DOWNLOADS = Path(os.environ.get('TOP_DOWNLOADS_DIR', r'C:\Users\masro\Downloads'))
+
 INFILES = {
-    'tomato': r'C:\Users\masro\Downloads\tomato_all_india_apmcs_2000_2026.csv',
-    'onion':  r'C:\Users\masro\Downloads\onion_all_india_apmcs_2000_2026.csv',
-    'potato': r'C:\Users\masro\Downloads\potato_all_india_apmcs_2000_2026.csv',
+    'tomato': str(DOWNLOADS / 'tomato_all_india_apmcs_2000_2026.csv'),
+    'onion':  str(DOWNLOADS / 'onion_all_india_apmcs_2000_2026.csv'),
+    'potato': str(DOWNLOADS / 'potato_all_india_apmcs_2000_2026.csv'),
 }
 
-OUTDIR = r'C:\Users\masro\Downloads\Agmarknet_Weekly'
+OUTDIR = str(DOWNLOADS / 'Agmarknet_Weekly')
 os.makedirs(OUTDIR, exist_ok=True)
 
 START_DATE = '2017-01-01'
@@ -161,7 +164,15 @@ def impute_price_gaps(agg: pd.DataFrame, grid_end: pd.Timestamp) -> pd.DataFrame
     # Gap lengths computed before any filling
     full['_gap'] = full.groupby('market_id')[price_col].transform(_gap_lengths)
 
-    # Stage 1: <=2 week gaps — linear interpolation
+    # Stage 1: <=2 week gaps — linear interpolation. NOTE: for an interior
+    # gap this interpolates BETWEEN the surrounding real observations, i.e.
+    # it can borrow a future week's real price to fill an earlier week.
+    # That is an accepted design choice at this short horizon (see README),
+    # but it means any lag/rolling/rolling-window feature built downstream
+    # from log_price (or this price_col) on this panel MUST filter out
+    # imputed==1 rows first -- otherwise a "past" feature value can
+    # actually encode information from a later week (look-ahead leakage).
+    # imputed_method=='linear' identifies exactly these rows.
     full[price_col] = (
         full.groupby('market_id')[price_col]
             .transform(lambda x: x.interpolate(method='linear', limit=2, limit_area='inside'))

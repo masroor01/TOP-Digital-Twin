@@ -26,7 +26,7 @@ import numpy as np
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-INDIR   = r'C:\Users\masro\Downloads\CMIE_Macro'
+INDIR   = os.path.join(os.environ.get('TOP_DOWNLOADS_DIR', r'C:\Users\masro\Downloads'), 'CMIE_Macro')
 OUTFILE = os.path.join(INDIR, 'cmie_macro_2017_2025.csv')
 os.makedirs(INDIR, exist_ok=True)
 
@@ -248,7 +248,12 @@ def parse_bank_credit(fpath, col_name):
     data.columns = range(df.shape[1])
     data['date'] = pd.to_datetime(data[0].astype(str).str.strip(), format='%Y%m%d', errors='coerce')
     data = data.dropna(subset=['date'])
-    # Col 3 = Agriculture and allied activities
+    # Col 3 = Agriculture and allied activities -- verify against the actual
+    # header row (computed above but previously unused) so a future CMIE
+    # column reorder fails loudly instead of silently mis-mapping.
+    assert len(headers) > 3 and 'agriculture' in headers[3], (
+        f'parse_bank_credit: expected column 3 header to contain "agriculture", '
+        f'got {headers[3]!r} -- CMIE column layout may have changed')
     data[col_name] = pd.to_numeric(data[3], errors='coerce')
     out = data[['date', col_name]].dropna()
     out['date'] = out['date'].dt.to_period('M').dt.to_timestamp()
@@ -264,6 +269,17 @@ def parse_crude_oil(fpath, col_name):
     df = pd.read_excel(fpath, header=None, engine='openpyxl')
     # Col 0 = FY label (e.g. '2017-18'), Cols 1-12 = Apr..Mar
     month_map = {1:4, 2:5, 3:6, 4:7, 5:8, 6:9, 7:10, 8:11, 9:12, 10:1, 11:2, 12:3}
+
+    # Structural check: row 12 (just above the iloc[13:39] data slice) should
+    # be the header row naming the months (e.g. contains "Apr") or otherwise
+    # look like a header for this table, not a stray data/FY row -- catches
+    # a sheet-layout shift that would silently misalign the FY/month slice.
+    header_row = ' '.join(str(v) for v in df.iloc[12].values if pd.notna(v))
+    assert re.search(r'apr|month|fy|year', header_row, re.IGNORECASE), (
+        f'parse_crude_oil: expected row 12 to look like a header row (month names, '
+        f'"FY", "Year"), got {header_row!r} -- PPAC sheet layout may have changed, '
+        f'iloc[13:39] slice cannot be trusted')
+
     records = []
     for _, row in df.iloc[13:39].iterrows():
         fy = str(row[0]).strip()

@@ -35,10 +35,13 @@ docstring): for every month that overlaps the existing production window
 existing data/rbi_dbie/rbi_dbie_macro_2017_2025.csv value already in
 production. Two different outcomes are expected for two different reasons:
 
-  - repo_rate_pct / reverse_repo_pct / usdinr_monthly_avg: these are
-    point-in-time administered/reference rates that do not get restated.
-    A mismatch here IS a bug (column drift, wrong file) and blocks
-    the output -- confirmed clean on the run that produced this file.
+  - repo_rate_pct / reverse_repo_pct: these are point-in-time administered
+    rates that do not get restated. A mismatch here IS a bug (column
+    drift, wrong file) and blocks the output -- confirmed clean on the
+    run that produced this file. usdinr_monthly_avg was originally treated
+    the same way but is now INFORMATIONAL, not blocking (see the code
+    below): a monthly average of daily FX rates can legitimately shift by
+    a few paise on recomputation without being a real restatement.
 
   - wpi_* (all 5 columns) and the PPAC diesel/LPG columns: CMIE RESTATES
     THE ENTIRE HISTORY on every pull of these item-level series, not just
@@ -79,7 +82,7 @@ import pandas as pd
 import openpyxl
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DOWNLOADS = r'C:\Users\masro\Downloads'
+DOWNLOADS = os.environ.get('TOP_DOWNLOADS_DIR', r'C:\Users\masro\Downloads')
 OUT_RBI_DIR = os.path.join(BASE, 'data', 'rbi_dbie')
 OUT_PPAC_DIR = os.path.join(BASE, 'data', 'ppac_macro')
 
@@ -248,15 +251,32 @@ n_bad_ppac = check_overlap(ppac_long, EXISTING_PPAC_FILE, {}, RESTATED_COLS_PPAC
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 5. SAVE
+# 5. SAVE -- gated on the correctness check above. Each file's own blocking
+# verdict decides whether it is written: a blocking mismatch must never
+# produce (or overwrite) a file that looks like a normal, trustworthy
+# output. Saved independently since RBI and PPAC have independent checks.
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[4] Saving ...')
 os.makedirs(OUT_RBI_DIR, exist_ok=True)
 os.makedirs(OUT_PPAC_DIR, exist_ok=True)
-rbi_long.to_csv(OUT_RBI_FILE, index=False)
-ppac_long.to_csv(OUT_PPAC_FILE, index=False)
-print(f'  Saved: {OUT_RBI_FILE}  ({len(rbi_long)} rows)')
-print(f'  Saved: {OUT_PPAC_FILE}  ({len(ppac_long)} rows)')
+
+if n_bad_rbi == 0:
+    rbi_long.to_csv(OUT_RBI_FILE, index=False)
+    print(f'  Saved: {OUT_RBI_FILE}  ({len(rbi_long)} rows)')
+else:
+    blocked_path = OUT_RBI_FILE + '.BLOCKED'
+    rbi_long.to_csv(blocked_path, index=False)
+    print(f'  NOT SAVED — blocking mismatch, see above ({OUT_RBI_FILE})')
+    print(f'  Diagnostic copy written instead to: {blocked_path} (do NOT use as production input)')
+
+if n_bad_ppac == 0:
+    ppac_long.to_csv(OUT_PPAC_FILE, index=False)
+    print(f'  Saved: {OUT_PPAC_FILE}  ({len(ppac_long)} rows)')
+else:
+    blocked_path = OUT_PPAC_FILE + '.BLOCKED'
+    ppac_long.to_csv(blocked_path, index=False)
+    print(f'  NOT SAVED — blocking mismatch, see above ({OUT_PPAC_FILE})')
+    print(f'  Diagnostic copy written instead to: {blocked_path} (do NOT use as production input)')
 
 print('\nPer-series real floor (NaN before this, by construction -- not a bug):')
 for col in ['repo_rate_pct', 'usdinr_monthly_avg', 'wpi_fruits_vegetables', 'wpi_onion']:
@@ -269,8 +289,8 @@ for col in ['diesel_delhi_per_L']:
 print('\n' + '=' * 65)
 print('Script 10c complete.')
 if n_bad_rbi:
-    print('BLOCKING VALIDATION FAILED on repo/reverse-repo/USD-INR -- do not use '
-          'rbi_dbie_macro_longhistory.csv until resolved.')
+    print('BLOCKING VALIDATION FAILED on repo/reverse-repo -- rbi_dbie_macro_longhistory.csv '
+          'was NOT saved (see .BLOCKED diagnostic copy above); resolve and re-run.')
 else:
     print('Validation passed. These files are additive (data/*_longhistory.csv) --')
     print('production data/rbi_dbie/rbi_dbie_macro_2017_2025.csv and')

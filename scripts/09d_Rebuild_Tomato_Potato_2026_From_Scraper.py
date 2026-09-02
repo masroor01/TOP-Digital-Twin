@@ -32,7 +32,7 @@ import os
 import pandas as pd
 import numpy as np
 
-DOWNLOADS = r'C:\Users\masro\Downloads'
+DOWNLOADS = os.environ.get('TOP_DOWNLOADS_DIR', r'C:\Users\masro\Downloads')
 
 OUT_COLS = ['source', 'commodity', 'commodity_id', 'state', 'state_id', 'state_code',
             'district', 'district_id', 'market', 'market_id', 'arrival_date',
@@ -73,13 +73,17 @@ def rebuild_crop(crop, old_file, new_file):
     unmatched['market_id_new'] = max_market_id + 1 + unmatched.index
     unmatched['district_id_new'] = max_district_id + 1 + unmatched.index
 
+    _n_before = len(new)
     new = new.merge(
         matched[['state', 'market', 'market_id', 'district', 'district_id']]
         .rename(columns={'market_id': 'market_id_fill', 'district': 'district_fill',
                           'district_id': 'district_id_fill'}),
         on=['state', 'market'], how='left')
+    assert len(new) == _n_before, f'Merge fan-out detected (matched): {_n_before} -> {len(new)} rows'
+    _n_before = len(new)
     new = new.merge(unmatched[['state', 'market', 'market_id_new', 'district_id_new']],
                      on=['state', 'market'], how='left')
+    assert len(new) == _n_before, f'Merge fan-out detected (unmatched): {_n_before} -> {len(new)} rows'
     new['market_id'] = new['market_id'].fillna(new['market_id_fill']).fillna(new['market_id_new'])
     new['district'] = new['district'].fillna(new['district_fill'])
     new['district_id'] = new['district_id'].fillna(new['district_id_fill']).fillna(new['district_id_new'])

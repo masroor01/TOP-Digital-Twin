@@ -13,6 +13,9 @@ its Dec-2025 (or latest overlapping month) value against the existing CSV
 before trusting it as the same series:
   - diesel_4city_rs_litre / lpg_nonsub_4city_rs_cyl / diesel_delhi_per_L /
     lpg_nonsub_delhi_per14kg: EXACT match (90.475, ~863, 87.7, ~853)
+  - repo_rate_pct / reverse_repo_pct: pulled from the same hardcoded-index
+    pattern (Scheme II-00719118-M.xlsx, cols r[1]/r[11]) as the other
+    validated series above; listed here for completeness alongside them.
   - usdinr_monthly_avg: EXACT match (90.09)
   - bank_credit_agri_cr: EXACT match (25,549,785.8 ~ 25,549,785.9)
   - agri_wages_rs_day: EXACT match (518.7) -- but the matching column is
@@ -66,7 +69,7 @@ import pandas as pd
 import numpy as np
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DOWNLOADS = r'C:\Users\masro\Downloads'
+DOWNLOADS = os.environ.get('TOP_DOWNLOADS_DIR', r'C:\Users\masro\Downloads')
 
 RBI_FILE = os.path.join(BASE, 'data', 'rbi_dbie', 'rbi_dbie_macro_2017_2025.csv')
 PPAC_FILE = os.path.join(BASE, 'data', 'ppac_macro', 'ppac_diesel_lpg_2017_2025.csv')
@@ -179,7 +182,7 @@ old_cmie = pd.read_csv(CMIE_FILE)
 last_year, last_month = int(old_cmie.iloc[-1]['year']), int(old_cmie.iloc[-1]['month'])
 print(f'  Existing data ends: {last_year}-{last_month:02d}')
 
-credit_rows = [r for r in load_ceic_int_dates(os.path.join(DOWNLOADS, 'cmie_agri_credit.xlsx'))]
+credit_rows = [r for r in load_ceic_int_dates(os.path.join(DOWNLOADS, 'cmie_agri_credit.xlsx')) if r[1] == 'M']
 credit_by_ym = {yyyymmdd_to_year_month(r[0]): r[3] for r in credit_rows}
 
 wages_rows = load_ceic_str_dates(os.path.join(DOWNLOADS, 'cmie_agri_wages.xlsx'))
