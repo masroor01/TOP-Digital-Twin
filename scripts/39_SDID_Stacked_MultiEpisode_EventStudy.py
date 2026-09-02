@@ -41,6 +41,16 @@ is stated explicitly in the output, not glossed over) -- the visual
 alignment (or lack of it) across differently-shocked episodes is the
 primary evidence here, not a p-value from n=3.
 
+Further caveat: each episode's own pre-treatment baseline window (which
+runs from PANEL_START to that episode's own ban_start, used to fit its
+unit/time weights) is not clean of the OTHER real ban episodes. The 2020
+episode's pre-period fully contains the 2019 ban; the 2023 episode's
+pre-period contains BOTH the 2019 and 2020 bans. So the "three
+independently confounded natural experiments" framing above should be
+read with that caveat: later episodes are stacked against baselines that
+themselves include earlier real export-ban shocks, not fully ban-free
+history.
+
 Inputs:
   data/agmarknet_weekly/top_weekly_panel.csv
   data/satellite_climate/crop_weekly_features.csv   (rainfall anomaly recap only)

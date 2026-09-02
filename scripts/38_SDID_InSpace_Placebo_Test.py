@@ -225,7 +225,7 @@ print(f'\n  Saved: {placebo_path}  ({len(placebo_df)} placebo markets)')
 placebo_atts_log = placebo_df['ATT_log_points'].values
 n_placebo = len(placebo_atts_log)
 n_as_extreme = int(np.sum(np.abs(placebo_atts_log) >= np.abs(att_real)))
-p_value = n_as_extreme / n_placebo
+p_value = (n_as_extreme + 1) / (n_placebo + 1)
 
 print('\n[4] In-space placebo distribution (postban window):')
 print(f'  n placebo markets: {n_placebo}')

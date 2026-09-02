@@ -69,6 +69,16 @@ each as a placebo "treated" unit, where no real policy shock occurred)
 is used instead to gauge whether the estimated onion effect is larger
 than what the same procedure finds for units with no real treatment.
 
+Further caveat: the shared pre-period (2 Jan 2017-19 Aug 2023, ~350
+weeks) used to fit both weighting steps for the headline postban/
+escalation estimates is not itself policy-shock-free -- it contains the
+Sep 2019-Mar 2020 and Sep 2020-Dec 2020 onion export-ban episodes
+(~40 of the ~350 pre-period weeks), which are treated as ordinary
+untreated pre-period here. Unit weights are therefore fit against a
+pre-period that isn't fully "untreated"; narrowing the pre-period to
+avoid this would be a larger design change outside this script's scope,
+so the exposure is disclosed rather than silently fixed.
+
 PART B -- a second, stronger design. The cross-crop placebo check above
 FAILS for the postban window: onion's ATT there (+14.3%) is statistically
 indistinguishable from the placebo ATTs found for tomato (+14.8%) and
@@ -209,7 +219,6 @@ print('=' * 65)
 print('\n[1] Building the market-level weekly log-price panel ...')
 
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
-window = df[(df['week_start'] >= WINDOW_START) & (df['week_start'] <= WINDOW_END)].copy()
 
 # FIXED 2026-08-14 (full-layer audit): this script's entire market-keying
 # scheme -- every groupby(['crop','market']) and pivot_table(columns=
@@ -225,19 +234,23 @@ window = df[(df['week_start'] >= WINDOW_START) & (df['week_start'] <= WINDOW_END
 # causal estimate). Rather than rewrite every pivot/groupby call site (an
 # 8-site, 900-line script doing statistically sensitive causal inference
 # -- a bigger surface for new bugs than the fix is worth), relabel
-# colliding names to include state HERE, once, before any groupby/pivot
-# happens. Every downstream 'market' reference becomes genuinely unique
-# with zero changes to the actual pivot/groupby logic.
-_collision_keys = (window.drop_duplicates(['crop', 'market_id'])
+# colliding names to include state HERE, once, on `df` itself before ANY
+# window-slicing/groupby/pivot happens (including Part B's
+# build_onion_hub_panel, which filters straight from `df`). Every
+# downstream 'market' reference -- in every part of the script -- becomes
+# genuinely unique with zero changes to the actual pivot/groupby logic.
+_collision_keys = (df.drop_duplicates(['crop', 'market_id'])
                    .groupby(['crop', 'market'])['market_id'].nunique())
 _collision_keys = set(_collision_keys[_collision_keys > 1].index)
 if _collision_keys:
-    _mask = window.set_index(['crop', 'market']).index.isin(_collision_keys)
+    _mask = df.set_index(['crop', 'market']).index.isin(_collision_keys)
     n_relabeled = _mask.sum()
-    window.loc[_mask, 'market'] = (window.loc[_mask, 'market'] + ' (' + window.loc[_mask, 'state'] + ')')
+    df.loc[_mask, 'market'] = (df.loc[_mask, 'market'] + ' (' + df.loc[_mask, 'state'] + ')')
     print(f'  Relabeled {n_relabeled:,} rows across {len(_collision_keys)} (crop, market) name '
           f'collision(s) to include state, so every "market" value used below is genuinely unique: '
           f'{sorted(_collision_keys)}')
+
+window = df[(df['week_start'] >= WINDOW_START) & (df['week_start'] <= WINDOW_END)].copy()
 
 all_weeks = sorted(window['week_start'].unique())
 n_weeks = len(all_weeks)

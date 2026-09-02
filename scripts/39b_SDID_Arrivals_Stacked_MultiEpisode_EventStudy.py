@@ -294,6 +294,11 @@ print(merged[['week_bin', 'mean_pct_onion', 'min_pct_placebo', 'max_pct_placebo'
 print('\n  NOTE: with only 3 episodes (fewer if any were skipped above for lack of arrivals')
 print('  coverage), a formal cross-episode standard error is weak -- read this alongside the')
 print('  figure and the outside-band count above, not as a p-value from n=3.')
+print('\n  FURTHER CAVEAT: each episode\'s own pre-treatment baseline window (PANEL_START to')
+print('  that episode\'s own ban_start, used to fit its unit/time weights) is not clean of the')
+print('  OTHER real ban episodes -- the 2020 episode\'s pre-period fully contains the 2019 ban,')
+print('  and the 2023 episode\'s pre-period contains BOTH the 2019 and 2020 bans, so the')
+print('  "independently confounded natural experiments" framing should be read with that in mind.')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
