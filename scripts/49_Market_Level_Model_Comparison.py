@@ -24,7 +24,7 @@ coverage gaps) per crop, all of which are also the project's own
 identified "market leader" markets (Script 42) -- deliberately the
 best-case scenario for the per-market argument, same principle as Script
 48's best-case state selection:
-  tomato: Kolar APMC (Karnataka), Shadnagar APMC (Telangana), Kota (F&V) APMC (Rajasthan)
+  tomato: Shadnagar APMC (Telangana), Kolar APMC (Karnataka), Kota (F&V) APMC (Rajasthan)
   onion:  Chandvad APMC (Maharashtra), Pimpalgaon APMC (Maharashtra), Bharuch APMC (Gujarat)
   potato: Chakdah APMC (West Bengal), Dehradoon APMC (Uttarakhand), Kashipur APMC (Uttarakhand)
 (Dehradoon/Kashipur chosen for potato specifically to test Uttarakhand
@@ -339,6 +339,14 @@ merged = market_preds.merge(
 print(f'  {len(merged):,} matched (market, week) cells between market-restricted model and shared model')
 mismatch = (merged['y_true'] - merged['y_true_shared']).abs()
 print(f'  y_true sanity check: max |diff| = {mismatch.max():.6f} (should be ~0, same ground truth)')
+
+# Guard the MAPE division below against a zero (or non-finite) actual price
+# -- same filter as Script 47's market-level accuracy table.
+n_before = len(merged)
+merged = merged[(merged['y_true'] > 0) & np.isfinite(merged['y_true']) &
+                 np.isfinite(merged['y_pred_shared']) & np.isfinite(merged['y_pred_market'])].copy()
+if len(merged) < n_before:
+    print(f'  Dropped {n_before - len(merged):,} rows with y_true<=0 or non-finite prices before MAPE calc')
 
 
 # ── 5. DM test: market-restricted model vs. shared model, per (crop, market, horizon) ──

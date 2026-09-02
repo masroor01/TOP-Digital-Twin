@@ -30,7 +30,7 @@ if sys.stdout.encoding != 'utf-8':
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_DIR = os.path.join(BASE, 'Model_Output', 'production_models')
 OUT_DIR = os.path.join(BASE, 'Model_Output')
-DOWNLOADS = 'C:\\Users\\masro\\Downloads'
+DOWNLOADS = os.environ.get('TOP_DOWNLOADS_DIR', 'C:\\Users\\masro\\Downloads')
 NEW_RAW_FILE = os.path.join(DOWNLOADS, 'tomato_all_india_apmcs_2026_new.csv')
 PANEL_FILE = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
 
@@ -52,6 +52,13 @@ cols_1w = feature_columns['tomato_1w']
 ref = pd.read_csv(os.path.join(MODEL_DIR, 'reference_rows.csv'))
 ref = ref[ref['crop'] == 'tomato'].copy()
 print(f'  Reference rows: {len(ref)} tomato markets, week_start = {ref["week_start"].iloc[0]}')
+
+expected_target = pd.Timestamp(ref['week_start'].iloc[0]) + pd.Timedelta(weeks=1)
+assert TARGET_WEEK == expected_target, (
+    f'TARGET_WEEK ({TARGET_WEEK.date()}) does not match reference_rows.csv\'s actual '
+    f'week_start + 1 week ({expected_target.date()}) -- reference_rows.csv may have been '
+    f'regenerated with a different cutoff; update TARGET_WEEK'
+)
 
 model = joblib.load(os.path.join(MODEL_DIR, 'tomato_1w.joblib'))
 X = pd.DataFrame([{c: row.get(c, 0) for c in cols_1w} for _, row in ref.iterrows()])
@@ -111,9 +118,9 @@ actual = actual.dropna(subset=['market'])
 # [4] Merge forecast vs actual vs naive, compute error metrics
 # ---------------------------------------------------------------------------
 print('\n[4] Merging forecast vs actual vs naive-persistence baseline ...')
-merged = ref[['market', 'state', 'forecast_price', 'naive_price', 'imputed',
+merged = ref[['market_id', 'market', 'state', 'forecast_price', 'naive_price', 'imputed',
               'sufficient_history', 'stale_reference']].merge(
-    actual[['market', 'state', 'actual_price', 'trading_days']], on=['market', 'state'], how='inner'
+    actual[['market_id', 'actual_price', 'trading_days']], on=['market_id'], how='inner'
 )
 print(f'  Matched markets (forecast + real actual both available): {len(merged)}')
 n_excluded = (~merged['sufficient_history']).sum()

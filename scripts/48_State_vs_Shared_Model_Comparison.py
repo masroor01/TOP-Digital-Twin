@@ -340,6 +340,14 @@ print(f'  {len(merged):,} matched (market, week) cells between state model and s
 mismatch = (merged['y_true'] - merged['y_true_shared']).abs()
 print(f'  y_true sanity check: max |diff| = {mismatch.max():.6f} (should be ~0, same ground truth)')
 
+# Guard the MAPE division below against a zero (or non-finite) actual price
+# -- same filter as Script 47's market-level accuracy table.
+n_before = len(merged)
+merged = merged[(merged['y_true'] > 0) & np.isfinite(merged['y_true']) &
+                 np.isfinite(merged['y_pred_shared']) & np.isfinite(merged['y_pred_state'])].copy()
+if len(merged) < n_before:
+    print(f'  Dropped {n_before - len(merged):,} rows with y_true<=0 or non-finite prices before MAPE calc')
+
 
 # ── 5. DM test: state-restricted model vs. shared model, per (crop, state, horizon) ──
 def diebold_mariano_test(y_true, pred_a, pred_b, h):
