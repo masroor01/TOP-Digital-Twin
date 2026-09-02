@@ -186,6 +186,46 @@ Log "--- Script 23: retraining production models ---"
 $code = RunLogged $Python @("scripts\23_Train_Production_Models.py")
 if ($code -ne 0) { Pop-Location; FailAndExit "Script 23 failed (exit $code) -- production models may be in an inconsistent state, check Model_Output/production_models/ before trusting the dashboard" }
 
+# FIXED 2026-09-02 (audit finding, confirmed): this job retrained Script 23's
+# models and committed Model_Output/production_models/*.joblib, but never
+# re-synced the web dashboard's own bundled copy (web/data/production_models/)
+# or regenerated its JS model translations (web/backend/src/models/*.js) --
+# so the live public dashboard could silently keep serving the PREVIOUS
+# training run indefinitely while this job kept reporting success. Follows
+# the exact steps documented in web/README.md's "Regenerating the models"
+# section. Placed after Script 23 (needs the freshly retrained models) and
+# before the git commit (the new web/ files must be committed alongside the
+# retrained Model_Output/ files, or the two would drift apart again).
+Log "--- Syncing retrained models into web/ + regenerating JS models ---"
+$webModelFiles = @("feature_columns.json", "feature_ranges.json", "model_uncertainty.json",
+                    "macro_climate_staleness.json", "reference_rows.csv", "price_history.csv")
+foreach ($f in $webModelFiles) {
+    $src = Join-Path $RepoRoot "Model_Output\production_models\$f"
+    if (-not (Test-Path $src)) {
+        Pop-Location
+        FailAndExit "web bundle sync source missing: $src -- Script 23 may not have written it"
+    }
+    try {
+        Copy-Item $src (Join-Path $RepoRoot "web\data\production_models\") -Force -ErrorAction Stop
+    } catch {
+        Pop-Location
+        FailAndExit "failed to copy $src into web\data\production_models\ : $($_.Exception.Message)"
+    }
+}
+
+Push-Location (Join-Path $RepoRoot "web")
+$code = RunLogged $Python @("generate_js_models.py")
+if ($code -ne 0) {
+    Pop-Location; Pop-Location
+    FailAndExit "generate_js_models.py failed (exit $code) -- web dashboard's bundled JS models NOT updated, still serving the previous training run"
+}
+$code = RunLogged "node" @("backend\src\models\__fixtures__\verify.mjs")
+if ($code -ne 0) {
+    Pop-Location; Pop-Location
+    FailAndExit "verify.mjs cross-language parity check FAILED (exit $code) -- newly generated JS models do not reproduce Python predictions, refusing to commit them; check the log above for which model(s) diverged"
+}
+Pop-Location
+
 Log "--- Script 44: final sanity check (informational) ---"
 $code = RunLogged $Python @("scripts\44_Pipeline_Sanity_Check.py")
 if ($code -ne 0) {
@@ -210,7 +250,20 @@ $filesToAdd = @(
     "Model_Output\production_models\onion_1w.joblib", "Model_Output\production_models\onion_4w.joblib",
     "Model_Output\production_models\onion_13w.joblib", "Model_Output\production_models\onion_26w.joblib",
     "Model_Output\production_models\potato_1w.joblib", "Model_Output\production_models\potato_4w.joblib",
-    "Model_Output\production_models\potato_13w.joblib", "Model_Output\production_models\potato_26w.joblib"
+    "Model_Output\production_models\potato_13w.joblib", "Model_Output\production_models\potato_26w.joblib",
+    # web/ bundle synced + regenerated above -- must travel with the retrain
+    # it was generated from, or the live dashboard's models drift out of
+    # step with Model_Output/production_models/ again.
+    "web\data\production_models\feature_columns.json", "web\data\production_models\feature_ranges.json",
+    "web\data\production_models\model_uncertainty.json", "web\data\production_models\macro_climate_staleness.json",
+    "web\data\production_models\reference_rows.csv", "web\data\production_models\price_history.csv",
+    "web\backend\src\models\feature_columns.json",
+    "web\backend\src\models\tomato_1w.js", "web\backend\src\models\tomato_4w.js",
+    "web\backend\src\models\tomato_13w.js", "web\backend\src\models\tomato_26w.js",
+    "web\backend\src\models\onion_1w.js", "web\backend\src\models\onion_4w.js",
+    "web\backend\src\models\onion_13w.js", "web\backend\src\models\onion_26w.js",
+    "web\backend\src\models\potato_1w.js", "web\backend\src\models\potato_4w.js",
+    "web\backend\src\models\potato_13w.js", "web\backend\src\models\potato_26w.js"
 )
 # FIXED 2026-09-02 (audit finding, confirmed): neither git call's exit code
 # was checked -- a failed `git add` (e.g. a path typo) or failed `git commit`

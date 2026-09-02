@@ -25,6 +25,13 @@ function tooManyOverrides(overrides) {
   return overrides && typeof overrides === 'object' && Object.keys(overrides).length > MAX_OVERRIDE_KEYS;
 }
 
+// FIXED 2026-09-02 (audit finding): /multi-history's marketIds query param
+// had no cap, unlike every other list-type input in this file -- a
+// comma-separated list of thousands of ids would filter store.history that
+// many times over in one synchronous request. Same defensive-cap pattern
+// as MAX_OVERRIDE_KEYS above.
+const MAX_MARKET_IDS = 40;
+
 // /ai-brief calls the real Anthropic API with a server-side key -- unlike
 // every other endpoint here, each call has a real dollar cost. Rate-limited
 // much tighter than the general API limit for that reason.
@@ -119,6 +126,9 @@ export function buildRouter(store) {
   router.get('/multi-history', (req, res) => {
     const { crop, marketIds } = req.query;
     const ids = new Set(String(marketIds || '').split(',').filter(Boolean).map(Number));
+    if (ids.size > MAX_MARKET_IDS) {
+      return res.status(400).json({ error: `too many marketIds (max ${MAX_MARKET_IDS})` });
+    }
     const nameById = new Map();
     for (const r of store.reference) {
       if (r.crop === crop) nameById.set(r.market_id, { market: r.market, state: r.state });

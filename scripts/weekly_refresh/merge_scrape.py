@@ -72,8 +72,12 @@ def main():
     old = pd.read_csv(trusted_path, low_memory=False)
     new = pd.read_csv(new_path, low_memory=False)
 
-    assert (new['commodity'].str.lower() == crop).all(), \
-        f'non-{crop} rows found in {new_path} -- run validate_scrape.py first'
+    # FIXED 2026-09-02 (audit finding): these were bare `assert`s, which
+    # `python -O` strips entirely -- turning a data-integrity gate into a
+    # silent no-op. Explicit checks so they fire regardless of how this
+    # script is invoked in the unattended weekly job.
+    if not (new['commodity'].str.lower() == crop).all():
+        raise ValueError(f'non-{crop} rows found in {new_path} -- run validate_scrape.py first')
 
     cutoff = pd.to_datetime(new['arrival_date']).min()
     old_dates = pd.to_datetime(old['arrival_date'])
@@ -114,14 +118,17 @@ def main():
     new = new.drop(columns=['market_id_fill', 'district_fill', 'district_id_fill',
                              'market_id_new', 'district_id_new'])
 
-    assert new['market_id'].notna().all(), 'unresolved null market_id after backfill'
+    if not new['market_id'].notna().all():
+        raise ValueError('unresolved null market_id after backfill')
     new['market_id'] = new['market_id'].astype(int)
     new['district_id'] = new['district_id'].astype(int)
     new['district'] = new['district'].fillna(new['market'])
 
     new_rows = new[OUT_COLS]
-    assert new_rows['modal_price_rs_per_quintal'].notna().all()
-    assert new_rows['arrivals_tonnes'].notna().all()
+    if not new_rows['modal_price_rs_per_quintal'].notna().all():
+        raise ValueError('null modal_price_rs_per_quintal in new_rows')
+    if not new_rows['arrivals_tonnes'].notna().all():
+        raise ValueError('null arrivals_tonnes in new_rows')
 
     conflict = new_rows.groupby('market_id')['market'].nunique()
     bad = conflict[conflict > 1]
