@@ -139,6 +139,7 @@ os.makedirs(OUT_DIR, exist_ok=True)
 LOOKBACK_WEEKS = 10          # kept for the wide plotting window only (display range)
 MAX_LOOKBACK_WEEKS = 20      # ceiling within which an escalation week can be detected
 DEV_THRESHOLD = 0.15         # price must be >=15% above the crop's own seasonal norm
+N_OOF_FOLDS = 8               # time-block CV folds for Section 4.5/5's full-history OOF scoring
 
 EPISODES = [
     dict(name='onion_2019',  crop='onion',  first_action=pd.Timestamp('2019-09-29'),
@@ -271,7 +272,9 @@ def fit_lgbm(X_train, y_train):
 loeo_rows = []
 crop_weekly['score'] = np.nan
 crop_weekly['score_type'] = ''   # 'held_out' or 'in_sample'
-episode_models = {}   # episode name -> (model, crop) -- reused for the placebo-in-time test below
+episode_models = {}   # episode name -> (model, crop) -- kept for potential external reuse/inspection;
+                       # no longer consumed downstream in this script since the 2026-09-02 fix (Section
+                       # 4.5/5 now use a separate full-history out-of-fold score, not these per-episode ones)
 
 for crop in CROPS:
     crop_episodes = [ep for ep in EPISODES if ep['crop'] == crop]
@@ -370,37 +373,129 @@ print(f'  Saved: {scores_path}')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# 4.5 FULL-HISTORY OUT-OF-FOLD SCORING for the placebo-in-time test (Section 5)
+# ─────────────────────────────────────────────────────────────────────────────
+# FIXED 2026-09-02 (audit finding, confirmed): Section 5 used to reuse
+# Section 4's per-episode LOEO models to score EVERY candidate window across
+# a crop's full history. Those models exclude only ONE episode's own rows --
+# every background (non-episode) week, which is the vast majority of the
+# placebo candidate pool, WAS in that model's training set. The real
+# episode's own window was genuinely out-of-fold (that's what the LOEO
+# models are for), but nearly every placebo candidate was scored in-sample.
+# A confident in-sample score on background weeks makes the genuinely
+# out-of-sample real window look artificially more "extreme" by comparison
+# -- a systematic bias that deflates every placebo p-value below, in the
+# same direction every time (never accidentally the other way), which is
+# exactly what a real leakage effect looks like rather than noise.
+#
+# Fix: K-fold TIME-BLOCK cross-validation across each crop's ENTIRE weekly
+# history (not just near episodes), with block boundaries nudged so no
+# episode's own labelled window is ever split across two folds -- each
+# episode's full window (and its positive labels) sits entirely inside one
+# fold, mirroring Section 4's per-episode exclusion but extended to the
+# background weeks too. Every week in the timeline, episode or background,
+# gets scored by a model that never saw that week (or, for episode weeks,
+# that whole episode) during training. This single out-of-fold score series
+# feeds BOTH the real window's intensity and every placebo candidate's
+# intensity in Section 5, so that comparison is finally apples-to-apples.
+print(f'\n[4.5] Building full-history out-of-fold scores for the placebo test '
+      f'(K={N_OOF_FOLDS}-fold time-block CV, episode-window-safe) ...')
+
+
+def build_oof_fold_map(crop_data, episodes_for_crop, k):
+    """Returns a Series indexed like crop_data, giving each row's fold
+    number. Fold boundaries are placed at roughly equal calendar-time
+    spacing, then nudged to the nearest point outside every episode's own
+    [win_start, first_action) window so no episode is split across folds."""
+    weeks = crop_data['week_start'].sort_values().unique()
+    protected = [(ep['first_action'] - pd.Timedelta(weeks=MAX_LOOKBACK_WEEKS), ep['first_action'])
+                 for ep in episodes_for_crop]
+
+    def in_protected(ts):
+        return any(lo <= ts < hi for lo, hi in protected)
+
+    raw_boundaries = np.linspace(0, len(weeks), k + 1).astype(int)[1:-1]
+    boundaries = set()
+    for b in raw_boundaries:
+        idx = b
+        while idx < len(weeks) and in_protected(pd.Timestamp(weeks[idx])):
+            idx += 1
+        if idx >= len(weeks):
+            idx = b
+            while idx > 0 and in_protected(pd.Timestamp(weeks[idx - 1])):
+                idx -= 1
+        if 0 < idx < len(weeks):
+            boundaries.add(idx)
+    edges = [0] + sorted(boundaries) + [len(weeks)]
+    fold_of_week = {}
+    for i in range(len(edges) - 1):
+        for w in weeks[edges[i]:edges[i + 1]]:
+            fold_of_week[w] = i
+    return crop_data['week_start'].map(fold_of_week)
+
+
+crop_weekly['score_oof'] = np.nan
+for crop in CROPS:
+    crop_episodes = [ep for ep in EPISODES if ep['crop'] == crop]
+    crop_data = crop_weekly[crop_weekly['crop'] == crop].sort_values('week_start')
+    fold_of_row = build_oof_fold_map(crop_data, crop_episodes, N_OOF_FOLDS)
+    n_folds_actual = fold_of_row.nunique()
+    for fold in sorted(fold_of_row.unique()):
+        train_idx = crop_data.index[fold_of_row != fold]
+        test_idx = crop_data.index[fold_of_row == fold]
+        y_tr = crop_weekly.loc[train_idx, 'label']
+        if y_tr.nunique() < 2:
+            print(f'  WARNING: {crop} OOF fold {fold} has a degenerate training label set '
+                  f'({y_tr.nunique()} class(es)) -- skipping, rows left unscored.')
+            continue
+        oof_model = fit_lgbm(crop_weekly.loc[train_idx, FEATURES], y_tr)
+        crop_weekly.loc[test_idx, 'score_oof'] = oof_model.predict_proba(
+            crop_weekly.loc[test_idx, FEATURES])[:, 1]
+    n_scored = crop_weekly.loc[crop_data.index, 'score_oof'].notna().sum()
+    print(f'  {crop}: {n_folds_actual} time-block folds (target K={N_OOF_FOLDS}), '
+          f'{n_scored}/{len(crop_data)} rows scored out-of-fold')
+
+# Re-save with score_oof included -- makes the out-of-fold scores that feed
+# Section 5 directly auditable from disk, not just recomputable.
+crop_weekly[['crop', 'week_start', 'label', 'episode', 'score', 'score_type', 'score_oof']].to_csv(
+    scores_path, index=False)
+print(f'  Re-saved with score_oof: {scores_path}')
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # 5. PLACEBO-IN-TIME SIGNIFICANCE TEST — directly analogous to the in-space
 # placebo permutation test used for the SDID postban ATT (Script 38). Uses
 # the SAME data-driven detection rule as the real labels (Section 3): for any
 # candidate end-date, look at the MAX_LOOKBACK_WEEKS window before it, find
 # weeks where price deviated >=DEV_THRESHOLD from seasonal norm, and take the
-# mean SCORE over just those detected weeks (0 if none detected). Applying
-# the identical rule to real and placebo candidates keeps the comparison
-# apples-to-apples -- a candidate with no detected escalation weeks at all
-# gets an intensity of 0, exactly like a real week with a flat price would.
+# mean out-of-fold SCORE over just those detected weeks (0 if none detected).
+# Applying the identical rule to real and placebo candidates keeps the
+# comparison apples-to-apples -- a candidate with no detected escalation
+# weeks at all gets an intensity of 0, exactly like a real week with a flat
+# price would. Uses `score_oof` (Section 4.5) throughout, NOT any single
+# episode's LOEO model -- every candidate, real or placebo, is scored by a
+# model that never saw its own week during training.
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[5] Placebo-in-time significance test (data-driven window, real vs. every other candidate) ...')
 
 def detected_intensity(crop_data, end_date):
-    """Mean score over weeks in [end_date - MAX_LOOKBACK_WEEKS, end_date) whose
-    price deviates >=DEV_THRESHOLD from seasonal norm; 0.0 if none detected."""
+    """Mean out-of-fold score over weeks in [end_date - MAX_LOOKBACK_WEEKS,
+    end_date) whose price deviates >=DEV_THRESHOLD from seasonal norm;
+    0.0 if none detected."""
     win_start = end_date - pd.Timedelta(weeks=MAX_LOOKBACK_WEEKS)
     mask = ((crop_data['week_start'] >= win_start) & (crop_data['week_start'] < end_date) &
             (crop_data['price_vs_seasonal_norm'] >= DEV_THRESHOLD))
     if mask.sum() == 0:
         return 0.0
-    return float(crop_data.loc[mask, 'score_all'].mean())
+    return float(crop_data.loc[mask, 'score_oof'].mean())
 
 EPISODE_COUNT_BY_CROP = {c: len([e for e in EPISODES if e['crop'] == c]) for c in CROPS}
 
 placebo_rows = []
 placebo_detail = {}   # episode name -> array of placebo candidate intensities
 for ep in EPISODES:
-    model, crop = episode_models[ep['name']]
+    crop = ep['crop']
     crop_data = crop_weekly[crop_weekly['crop'] == crop].sort_values('week_start').reset_index(drop=True)
-    X_all = crop_data[FEATURES]
-    crop_data = crop_data.assign(score_all=model.predict_proba(X_all)[:, 1])
 
     real_intensity = detected_intensity(crop_data, ep['first_action'])
 

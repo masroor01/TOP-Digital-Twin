@@ -19,6 +19,12 @@ B1–B3 : per-market evaluation, all 4 horizons, all 3 folds
 B4    : per-market ARIMA(1,1,1), h=1 all folds; h=4,13,26 national-level
         (per-market ARIMA at long horizons is computationally prohibitive
         for 2,495 markets — noted as limitation in Methods)
+        STATUS: the h=4,13,26 national-level variants described above are
+        NOT implemented in this script (still only h=1 runs below) — this
+        remains an open gap versus the docstring, not just a Methods
+        footnote. The h=1 forecast itself was date-misaligned (compared
+        against the wrong test weeks by position) until the fix noted at
+        the ARIMA forecast call below.
 
 Outputs (Model_Output/)
 -----------------------
@@ -109,14 +115,18 @@ t0 = time.time()
 for crop in CROPS:
     sub = df[df['crop'] == crop].copy()
 
-    # Build per-market lookup: (market, week) → price
-    sub = sub.set_index(['market', 'week_start'])['modal_price_weighted'].to_frame()
-    sub = sub.reset_index().sort_values(['market', 'week_start'])
+    # Build per-market lookup: (market, market_id, week) → price. Grouped/
+    # sorted on market_id (not the 'market' NAME) below -- a few market
+    # names repeat across different states (e.g. "Fatehabad APMC" in both
+    # Haryana and Uttar Pradesh), so grouping by name would interleave two
+    # physically different markets' price series into one shift/rolling
+    # computation. Matches the fix in Script 15 / Script 12.
+    sub = sub.set_index(['market', 'market_id', 'week_start'])['modal_price_weighted'].to_frame()
+    sub = sub.reset_index().sort_values(['market_id', 'week_start'])
 
     # Create shifted columns within each market
-    sub['p_lag1']  = sub.groupby('market')['modal_price_weighted'].shift(1)
-    sub['p_lag52'] = sub.groupby('market')['modal_price_weighted'].shift(52)
-    sub['p_ma4']   = (sub.groupby('market')['modal_price_weighted']
+    sub['p_lag52'] = sub.groupby('market_id')['modal_price_weighted'].shift(52)
+    sub['p_ma4']   = (sub.groupby('market_id')['modal_price_weighted']
                          .transform(lambda x: x.shift(1).rolling(4, min_periods=2).mean()))
 
     for fold_info in FOLDS:
@@ -127,14 +137,19 @@ for crop in CROPS:
         for h in HORIZONS:
             # True future price (h weeks ahead)
             sub_h = sub.copy()
-            sub_h['y_true'] = sub_h.groupby('market')['modal_price_weighted'].shift(-h)
+            sub_h['y_true'] = sub_h.groupby('market_id')['modal_price_weighted'].shift(-h)
             test = sub_h[(sub_h['week_start'] >= te_start) &
                          (sub_h['week_start'] <= te_end)].dropna(subset=['y_true'])
 
             yt = test['y_true'].values
 
-            # B1: Naive persistence — use CURRENT price (p_lag1 relative to test week)
-            yp_naive   = test['p_lag1'].values          # last known price
+            # B1: Naive persistence — use the origin-week price P_t itself
+            # (test row's own 'modal_price_weighted' IS the price as of the
+            # forecast's as-of week_start). FIXED: this previously used
+            # p_lag1 (P_{t-1}, shift(1)), which staled the naive baseline
+            # by one week and inflated every other model's reported
+            # "skill vs naive".
+            yp_naive   = test['modal_price_weighted'].values   # P_t, current/origin price
             # B2: Seasonal naive — same week last year
             yp_seasonal= test['p_lag52'].values
             # B3: 4-week moving average
@@ -175,9 +190,11 @@ if HAS_ARIMA:
 
     for crop in CROPS:
         sub = (df[df['crop'] == crop]
-               .sort_values(['market', 'week_start'])
-               [['market', 'week_start', 'modal_price_weighted']])
-        markets = sub['market'].unique()
+               .sort_values(['market_id', 'week_start'])
+               [['market', 'market_id', 'week_start', 'modal_price_weighted']])
+        # Grouped/iterated by market_id, not the 'market' NAME -- see fix
+        # note in section 3 above (same name-collision issue applies here).
+        markets = sub['market_id'].unique()
         print(f'\n    {crop.upper()} — {len(markets)} markets')
 
         for fold_info in FOLDS:
@@ -190,12 +207,13 @@ if HAS_ARIMA:
             skipped = 0
 
             for mkt in markets:
-                mkt_df = sub[sub['market'] == mkt].sort_values('week_start')
-                train_vals = mkt_df[mkt_df['week_start'] <= t_end]['modal_price_weighted'].dropna().values
-                test_vals  = mkt_df[(mkt_df['week_start'] >= te_start) &
-                                    (mkt_df['week_start'] <= te_end)]['modal_price_weighted'].dropna().values
+                mkt_df   = sub[sub['market_id'] == mkt].sort_values('week_start')
+                train_df = mkt_df[mkt_df['week_start'] <= t_end].dropna(subset=['modal_price_weighted'])
+                test_df  = mkt_df[(mkt_df['week_start'] >= te_start) &
+                                   (mkt_df['week_start'] <= te_end)].dropna(subset=['modal_price_weighted'])
+                train_vals = train_df['modal_price_weighted'].values
 
-                if len(train_vals) < MIN_OBS or len(test_vals) == 0:
+                if len(train_vals) < MIN_OBS or len(test_df) == 0:
                     skipped += 1
                     continue
 
@@ -204,13 +222,34 @@ if HAS_ARIMA:
                     with _w.catch_warnings():
                         _w.simplefilter('ignore')
                         mdl = _ARIMA(log_train, order=(1, 1, 1)).fit()
-                        # Forecast len(test) steps ahead from end of training
-                        fc_log = mdl.forecast(steps=len(test_vals))
-                    preds = np.expm1(np.array(fc_log))
-                    y_true_all.extend(test_vals.tolist())
-                    y_pred_all.extend(preds.tolist())
-                except Exception:
+                        # FIXED: forecast now spans the FULL gap from the
+                        # last training observation through the end of the
+                        # test window (there's a ~26-week gap between
+                        # train_end and te_start per the fold definition),
+                        # then is aligned to the actual test dates below --
+                        # previously `steps=len(test_vals)` forecast the
+                        # weeks immediately after train_end (not the real
+                        # test-year window) and was compared to test-year
+                        # actuals purely by POSITION, pairing forecast-for-
+                        # week-X against actual-price-for-a-different-week.
+                        last_train_date = train_df['week_start'].max()
+                        n_steps = int(round(
+                            (test_df['week_start'].max() - last_train_date).days / 7))
+                        fc_log = mdl.forecast(steps=n_steps)
+                    fc_dates  = pd.date_range(last_train_date + pd.Timedelta(weeks=1),
+                                               periods=n_steps, freq='7D')
+                    fc_series = pd.Series(np.expm1(np.array(fc_log)), index=fc_dates)
+                    # Slice by actual DATE, not position
+                    aligned = fc_series.reindex(test_df['week_start'].values)
+                    valid   = aligned.notna().values
+                    if valid.sum() == 0:
+                        skipped += 1
+                        continue
+                    y_true_all.extend(test_df['modal_price_weighted'].values[valid].tolist())
+                    y_pred_all.extend(aligned.values[valid].tolist())
+                except Exception as e:
                     skipped += 1
+                    print(f'    ARIMA skip for {crop} fold{fold} market_id={mkt}: {e}')
 
             if y_true_all:
                 m = compute_metrics(np.array(y_true_all), np.array(y_pred_all), 'B4_ARIMA')

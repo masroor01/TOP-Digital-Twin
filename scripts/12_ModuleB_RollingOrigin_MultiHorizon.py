@@ -134,6 +134,9 @@ if macro_dfs:
     for m in macro_dfs[1:]:
         macro = macro.merge(m, on=['year', 'month'], how='outer',
                             suffixes=('', '_dup'))
+        dup_cols = [c for c in macro.columns if c.endswith('_dup')]
+        if dup_cols:
+            print(f'   Dropping duplicate macro columns: {dup_cols}')
         macro = macro[[c for c in macro.columns if not c.endswith('_dup')]]
     df['year']  = df['week_start'].dt.year
     df['month'] = df['week_start'].dt.month
@@ -162,18 +165,27 @@ def build_features(df):
     feat = {}
     for crop in CROPS:
         sub = df[df['crop'] == crop].copy()
-        sub = sub.sort_values(['market', 'week_start'])
+        # FIXED: was sort_values(['market', ...]) / groupby('market') for all
+        # lag/rolling/target math below -- 'market' is a NAME, and a few
+        # names repeat across different states (e.g. "Fatehabad APMC" in
+        # both Haryana and Uttar Pradesh; "Balugaon APMC" in Odisha and
+        # Assam). Grouping by name interleaves two physically different
+        # markets' price series into one shift/rolling computation,
+        # corrupting every lag/rolling feature for BOTH markets. market_id
+        # is the real unique key; 'market' is kept only as a display column.
+        # Matches the fix already applied in Script 15.
+        sub = sub.sort_values(['market_id', 'week_start'])
 
         # Log price (primary target base)
         sub['log_price'] = np.log1p(sub['modal_price_weighted'])
 
         # Lag features (price)
         for lag in LAG_WEEKS:
-            sub[f'price_lag_{lag}'] = (sub.groupby('market')['log_price']
+            sub[f'price_lag_{lag}'] = (sub.groupby('market_id')['log_price']
                                           .shift(lag))
         # Rolling stats on log price
         for w in ROLL_WINS:
-            g = sub.groupby('market')['log_price']
+            g = sub.groupby('market_id')['log_price']
             sub[f'price_roll_mean_{w}'] = g.transform(
                 lambda x: x.shift(1).rolling(w, min_periods=2).mean())
             sub[f'price_roll_std_{w}']  = g.transform(
@@ -183,14 +195,14 @@ def build_features(df):
         if 'arrivals_tonnes_week' in sub.columns:
             sub['log_arr'] = np.log1p(sub['arrivals_tonnes_week'].clip(lower=0))
             for lag in [1, 2, 4]:
-                sub[f'arr_lag_{lag}'] = (sub.groupby('market')['log_arr']
+                sub[f'arr_lag_{lag}'] = (sub.groupby('market_id')['log_arr']
                                              .shift(lag))
             for w in [4, 8]:
-                sub[f'arr_roll_mean_{w}'] = (sub.groupby('market')['log_arr']
+                sub[f'arr_roll_mean_{w}'] = (sub.groupby('market_id')['log_arr']
                     .transform(lambda x: x.shift(1).rolling(w, min_periods=2).mean()))
 
         # YoY price change
-        sub['price_yoy'] = (sub.groupby('market')['log_price']
+        sub['price_yoy'] = (sub.groupby('market_id')['log_price']
                                .shift(52))
 
         # Sinusoidal seasonality
@@ -213,8 +225,12 @@ def build_features(df):
             sub['season_storage']      = m.isin([5, 6, 7, 8, 9]).astype(int)  # cold-storage release sustains supply
             sub['season_lean']         = m.isin([10, 11]).astype(int)          # storage tail; highest price risk
 
-        # Market / state encodings
-        for col in ['state', 'market']:
+        # Market / state encodings. market_enc keyed on market_id (not the
+        # 'market' name) so two same-named markets in different states get
+        # distinct codes -- see market_id fix note above.
+        if 'market_id' in sub.columns:
+            sub['market_enc'] = pd.Categorical(sub['market_id']).codes
+        for col in ['state']:
             if col in sub.columns:
                 sub[f'{col}_enc'] = pd.Categorical(sub[col]).codes
 
@@ -294,19 +310,37 @@ for crop in CROPS:
 
             # Create h-step-ahead log price target (within each market)
             df_h = df_crop.copy()
-            df_h['target'] = (df_h.groupby('market')['log_price']
+            df_h['target'] = (df_h.groupby('market_id')['log_price']
                                   .shift(-h))
 
             # Drop rows where target is NaN (last h rows per market)
             df_h = df_h.dropna(subset=['target'] + fcols[:5])  # quick NaN filter
 
-            # Split
-            train = df_h[df_h['week_start'] <= t_end]
-            val   = df_h[(df_h['week_start'] > v_start) & (df_h['week_start'] <= v_end)]
+            # Split. Train is filtered on TARGET date (week_start + h weeks),
+            # not just origin week -- filtering only on week_start <= t_end
+            # let training rows near t_end carry targets landing past t_end,
+            # inside the validation window, leaking val-window information
+            # into the fit that eval_set (X_va/y_va) is then scored against
+            # for early stopping. val's lower bound uses >= v_start (was
+            # > v_start, silently dropping the validation window's first week).
+            train = df_h[df_h['week_start'] + pd.Timedelta(weeks=h) <= t_end]
+            val   = df_h[(df_h['week_start'] >= v_start) & (df_h['week_start'] <= v_end)]
             test  = df_h[(df_h['week_start'] >= te_start) & (df_h['week_start'] <= te_end)]
 
             if len(train) < 100 or len(test) < 10:
                 continue
+
+            # Diagnostic: NaN counts across ALL feature columns before
+            # fillna(0) below -- previously only fcols[:5] was inspected,
+            # hiding how much of the fillna(0) was zero-filling real
+            # lag/rolling features (e.g. each market's first ~52 weeks of
+            # price_lag_52) with a nonsensical zero log-price.
+            nan_report = train[fcols].isna().sum()
+            nan_report = nan_report[nan_report > 0]
+            if len(nan_report):
+                print(f'   [{crop} fold{fold} h={h}w] NaN before fillna(0): '
+                      f'{len(nan_report)}/{len(fcols)} cols, max={nan_report.max()} rows '
+                      f'(e.g. {nan_report.idxmax()})')
 
             X_tr, y_tr = train[fcols].fillna(0), train['target']
             X_va, y_va = val[fcols].fillna(0),   val['target']
@@ -360,11 +394,15 @@ for crop in CROPS:
 
         # h=1 spike target
         df_h = df_crop.copy()
-        df_h['next_price'] = df_h.groupby('market')['modal_price_weighted'].shift(-1)
+        df_h['next_price'] = df_h.groupby('market_id')['modal_price_weighted'].shift(-1)
         df_h = df_h.dropna(subset=['next_price'])
 
-        train = df_h[df_h['week_start'] <= t_end]
-        val   = df_h[(df_h['week_start'] > v_start) & (df_h['week_start'] <= v_end)]
+        # Train filtered on TARGET date (week_start + 1 week), not just
+        # origin week -- see identical fix/rationale in section 4 above.
+        # val's lower bound uses >= v_start (was > v_start, silently
+        # dropping the validation window's first week).
+        train = df_h[df_h['week_start'] + pd.Timedelta(weeks=1) <= t_end]
+        val   = df_h[(df_h['week_start'] >= v_start) & (df_h['week_start'] <= v_end)]
         test  = df_h[(df_h['week_start'] >= te_start) & (df_h['week_start'] <= te_end)]
 
         # Threshold on TRAIN prices
@@ -376,6 +414,15 @@ for crop in CROPS:
 
         if train['spike'].sum() < 10:
             continue
+
+        # Diagnostic: NaN counts across ALL feature columns before
+        # fillna(0) below -- see identical fix/rationale in section 4 above.
+        nan_report = train[fcols].isna().sum()
+        nan_report = nan_report[nan_report > 0]
+        if len(nan_report):
+            print(f'   [{crop} fold{fold} spike] NaN before fillna(0): '
+                  f'{len(nan_report)}/{len(fcols)} cols, max={nan_report.max()} rows '
+                  f'(e.g. {nan_report.idxmax()})')
 
         X_tr, y_tr = train[fcols].fillna(0), train['spike']
         X_va, y_va = val[fcols].fillna(0),   val['spike']

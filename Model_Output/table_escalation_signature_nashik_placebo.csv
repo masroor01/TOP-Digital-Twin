@@ -1,4 +1,4 @@
 episode,label,real_window_intensity,n_placebo_windows,n_placebo_as_extreme,p_value
-onion_2019,Onion Sep-2019 ban,0.06114,47,0,0.0
-onion_2020,Onion Sep-2020 ban,0.37864,47,0,0.0
-onion_2023,Onion Aug-2023 duty (first action of 2023-24 sequence),0.04422,47,0,0.0
+onion_2019,Onion Sep-2019 ban,0.05422,47,10,0.213
+onion_2020,Onion Sep-2020 ban,0.03027,47,16,0.34
+onion_2023,Onion Aug-2023 duty (first action of 2023-24 sequence),0.04607,47,11,0.234

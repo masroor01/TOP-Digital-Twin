@@ -60,6 +60,7 @@ os.makedirs(OUT_DIR, exist_ok=True)
 
 MAX_LOOKBACK_WEEKS = 20
 DEV_THRESHOLD = 0.15
+N_OOF_FOLDS = 8   # time-block CV folds for the placebo test's full-history OOF scoring (matches Script 40)
 
 # Same list as scripts/31_Synthetic_DID_Policy_Effect.py's NASHIK_HUB_MARKETS.
 # Kalvan APMC and Satana APMC are not present in the longhistory panel
@@ -217,30 +218,91 @@ loeo_path = os.path.join(OUT_DIR, 'table_escalation_signature_nashik_loeo.csv')
 loeo_df.to_csv(loeo_path, index=False)
 print(f'\n  Saved: {loeo_path}')
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 4.5 FULL-HISTORY OUT-OF-FOLD SCORING for the placebo-in-time test
+# ─────────────────────────────────────────────────────────────────────────────
+# FIXED 2026-09-02 (audit finding, inherited from Script 40 -- see its
+# matching 2026-09-02 fix comment for the full rationale). The placebo test
+# below used to reuse each episode's LOEO model to score the ENTIRE Nashik-
+# hub history -- nearly every placebo candidate week was in that model's
+# training set (only the one held-out episode's own window was genuinely
+# unseen). Same fix as Script 40: K-fold time-block CV across the full
+# series, boundaries nudged so no episode's own window is split across
+# folds, giving every week (episode or background) a genuinely out-of-fold
+# score.
+print(f'\n[4.5] Building full-history out-of-fold scores for the placebo test '
+      f'(K={N_OOF_FOLDS}-fold time-block CV, episode-window-safe) ...')
+
+
+def build_oof_fold_map(d, episodes, k):
+    weeks = d['week_start'].sort_values().unique()
+    protected = [(ep['first_action'] - pd.Timedelta(weeks=MAX_LOOKBACK_WEEKS), ep['first_action'])
+                 for ep in episodes]
+
+    def in_protected(ts):
+        return any(lo <= ts < hi for lo, hi in protected)
+
+    raw_boundaries = np.linspace(0, len(weeks), k + 1).astype(int)[1:-1]
+    boundaries = set()
+    for b in raw_boundaries:
+        idx = b
+        while idx < len(weeks) and in_protected(pd.Timestamp(weeks[idx])):
+            idx += 1
+        if idx >= len(weeks):
+            idx = b
+            while idx > 0 and in_protected(pd.Timestamp(weeks[idx - 1])):
+                idx -= 1
+        if 0 < idx < len(weeks):
+            boundaries.add(idx)
+    edges = [0] + sorted(boundaries) + [len(weeks)]
+    fold_of_week = {}
+    for i in range(len(edges) - 1):
+        for w in weeks[edges[i]:edges[i + 1]]:
+            fold_of_week[w] = i
+    return d['week_start'].map(fold_of_week)
+
+
+data['score_oof'] = np.nan
+fold_of_row = build_oof_fold_map(data, EPISODES, N_OOF_FOLDS)
+n_folds_actual = fold_of_row.nunique()
+for fold in sorted(fold_of_row.unique()):
+    train_idx = data.index[fold_of_row != fold]
+    test_idx = data.index[fold_of_row == fold]
+    y_tr = data.loc[train_idx, 'label']
+    if y_tr.nunique() < 2:
+        print(f'  WARNING: OOF fold {fold} has a degenerate training label set '
+              f'({y_tr.nunique()} class(es)) -- skipping, rows left unscored.')
+        continue
+    oof_model = fit_lgbm(data.loc[train_idx, FEATURES], y_tr)
+    data.loc[test_idx, 'score_oof'] = oof_model.predict_proba(data.loc[test_idx, FEATURES])[:, 1]
+n_scored = data['score_oof'].notna().sum()
+print(f'  {n_folds_actual} time-block folds (target K={N_OOF_FOLDS}), '
+      f'{n_scored}/{len(data)} rows scored out-of-fold')
+
+
 print('\n[5] Placebo-in-time significance test (Nashik-hub price) ...')
 
 def detected_intensity(df, end_date):
     win_start = end_date - pd.Timedelta(weeks=MAX_LOOKBACK_WEEKS)
     mask = ((df['week_start'] >= win_start) & (df['week_start'] < end_date) &
             (df['price_vs_seasonal_norm'] >= DEV_THRESHOLD))
-    return float(df.loc[mask, 'score_all'].mean()) if mask.sum() else 0.0
+    return float(df.loc[mask, 'score_oof'].mean()) if mask.sum() else 0.0
 
 placebo_rows = []
 placebo_detail = {}
 ep_dates = [e['first_action'] for e in EPISODES]
 for ep in EPISODES:
-    model = episode_models[ep['name']]
-    d = data.assign(score_all=model.predict_proba(data[FEATURES])[:, 1])
-    real_intensity = detected_intensity(d, ep['first_action'])
+    real_intensity = detected_intensity(data, ep['first_action'])
 
-    weeks = d['week_start'].tolist()
+    weeks = data['week_start'].tolist()
     placebo_intensities = []
     i = MAX_LOOKBACK_WEEKS
     while i < len(weeks):
         cand_end = weeks[i]
         too_close = any(abs((cand_end - dt).days) < MAX_LOOKBACK_WEEKS * 2 * 7 for dt in ep_dates)
         if not too_close:
-            placebo_intensities.append(detected_intensity(d, cand_end))
+            placebo_intensities.append(detected_intensity(data, cand_end))
         i += MAX_LOOKBACK_WEEKS
 
     placebo_intensities = np.array(placebo_intensities)

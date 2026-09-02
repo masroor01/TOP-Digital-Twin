@@ -151,8 +151,8 @@ honestly including their partial/negative results.
 
 | Script | What it does | Depends on |
 |---|---|---|
-| `40_Escalation_Signature_Head.py` | Prototype early-warning classifier: a per-crop LightGBM model scoring each week on how closely it resembles the price-escalation pattern that has historically preceded a real policy intervention (backward-looking features only). Validated per-crop with leave-one-episode-out CV plus a placebo-in-time significance test and a data-driven (threshold-based) labeling redesign. **Fixed 2026-09-02**: an audit found the LOEO test set included padding negatives that were also in the training set (both used the same `episode != ep['name']` condition) — fixed by excluding them from training; mean held-out AUC moved modestly down (tomato 0.801→0.782, onion 0.831→0.805, potato 0.849→0.810), the qualitative story unchanged. The placebo-in-time p-values shifted too as a side effect but have their OWN separate, still-open in-sample-scoring issue (see MANIFEST.md) — treat only the corrected AUC/AP numbers as validated for now, not the placebo significance claims. | `data/agmarknet_weekly/longhistory/top_weekly_panel_longhistory.csv`, `data/satellite_climate/crop_weekly_features.csv` |
-| `41_Escalation_Signature_Nashik_Hub_Test.py` | Follow-up testing whether onion 2020's weak signal was real-but-geographically-diluted (its documented trigger was Nashik-region flooding specifically). Rebuilds the same detector on Nashik-hub-only price. **Fixed 2026-09-02**: inherited and fixed the same LOEO train/test overlap as Script 40. The previously-reported "2020's placebo p falls tenfold (0.660→0.064)" headline is now stale — pending a fix to the placebo test's own in-sample-scoring issue (shared with Script 40), don't cite either the old or the newly-shifted p-value as a validated localization result yet. | Script 40's detector, Nashik-hub market list (from Script 31) |
+| `40_Escalation_Signature_Head.py` | Prototype early-warning classifier: a per-crop LightGBM model scoring each week on how closely it resembles the price-escalation pattern that has historically preceded a real policy intervention (backward-looking features only). Validated per-crop with leave-one-episode-out CV plus a placebo-in-time significance test and a data-driven (threshold-based) labeling redesign. **Twice-fixed 2026-09-02** (both from an independent audit): (1) the LOEO test set included padding negatives also present in training — fixed, AUC moved modestly down (tomato 0.801→0.782, onion 0.831→0.805, potato 0.849→0.810), story unchanged; (2) the placebo-in-time test's own candidate pool was scored mostly in-sample — replaced with genuine K=8-fold time-block out-of-fold scoring across each crop's full 23-year history. **Honest result: only potato_2014 clears p<0.05 (was 5 of 8 episodes under the old, leaky methodology, including onion 2019/2023 which now fail at p=0.19-0.19)** — a real, substantial downward revision; supersede "5 of 8 significant" anywhere it was previously cited. Per-episode discrimination (AUC) remains genuinely good; the significance test, now correctly built, mostly doesn't clear conventional thresholds at this data volume — an honest negative result. | `data/agmarknet_weekly/longhistory/top_weekly_panel_longhistory.csv`, `data/satellite_climate/crop_weekly_features.csv` |
+| `41_Escalation_Signature_Nashik_Hub_Test.py` | Follow-up testing whether onion 2020's weak signal was real-but-geographically-diluted (its documented trigger was Nashik-region flooding specifically). Rebuilds the same detector on Nashik-hub-only price. **Twice-fixed 2026-09-02, same fixes as Script 40.** After the full correction: onion_2020 Nashik-hub placebo p=0.340 vs. Script 40's corrected national p=0.915 for the same episode — the localization hypothesis's directional signal survives (Nashik-hub scores meaningfully lower than national), but neither reaches p<0.05. Supersedes both the original "0.660→0.064" headline and this session's brief, still-leaky intermediate "→0.000" figure — the honest answer is partial, non-significant support for localization. | Script 40's detector, Nashik-hub market list (from Script 31) |
 | `42_Market_Leader_Network.py` | Extends Script 29's light top-5-market lead-lag test to the top-20 markets per crop, with a net-leadership-score summary (out-rate − in-rate) designed to surface asymmetry that a small bidirectional-significance test washes out. Finds clear, geographically coherent leader clusters per crop (Karnataka for tomato, Nashik belt for onion, West Bengal for potato) with consumption hubs (Azadpur, Shahdara) as consistent followers. Includes a confound check (leadership isn't just a reporting-coverage artefact — clean for all 3 crops) and a two-period stability check (tomato/potato leaders hold up; onion's single top market shuffles rank, though the Nashik-belt cluster stays dominant throughout). | `data/agmarknet_weekly/top_weekly_panel.csv` |
 
 ---
@@ -530,18 +530,15 @@ heterogeneity finding on an independent axis (see MANIFEST.md).
   against the 2026-08-14 collision fix. Low priority since the
   architecture is already a documented rejected result regardless, but
   genuinely open.
-- Scripts 40/41's placebo-in-time significance test (Section 5 of each)
-  scores its placebo candidate pool mostly in-sample (the LOEO model was
-  trained on nearly all of it) while only the real episode's window is
-  genuinely held out — an audit finding fixed 2026-09-02 for the LOEO
-  classifier itself (train/test overlap in Section 4), but this separate
-  Section 5 issue is NOT yet fixed. The reported placebo p-values moved
-  substantially as a side effect of the classifier fix alone (e.g. onion
-  2020 Nashik-hub: 0.064→0.000) — don't cite any placebo p-value from
-  either script as validated until Section 5 gets a genuine out-of-fold
-  scoring redesign (e.g. rolling/expanding CV across the full crop
-  timeline, not just per-episode LOEO). The corrected LOEO AUC/AP numbers
-  themselves ARE trustworthy now.
+- ~~Scripts 40/41's placebo-in-time significance test scored its candidate
+  pool mostly in-sample~~ — **DONE 2026-09-02**: replaced with genuine
+  K=8-fold time-block out-of-fold scoring across each crop's full
+  timeline (see MANIFEST.md for both scripts). **Action item, not yet
+  done**: the corrected result is a real, substantial downward revision
+  (only potato_2014 now clears p<0.05, vs. the previously-reported 5 of 8
+  episodes) — any deck, disclosure document, or progress-review slide
+  that cited the old escalation-detector placebo significance numbers
+  needs updating to match. Not yet swept for/updated as of this entry.
 - Manuscript: a full section-by-section drafting pass was completed and
   then intentionally cleared from `paper_drafts/` on 2026-08-21 to start
   fresh with a clean audit baseline — `paper_drafts/` is a working folder

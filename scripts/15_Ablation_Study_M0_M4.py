@@ -375,6 +375,43 @@ if _ffill_cols:
     print(f'   Infrastructure forward-fill: {n_before - n_after:,} cell(s) filled '
           f'(beyond each source\'s real coverage, e.g. 2026+)')
 
+# Forward-fill macro columns (CMIE/RBI/PPAC) that stop before the panel's
+# own end date -- same failure mode as wage_agri_men/women and
+# road_density_per_100_sqkm above, just for the macro layer, which lags
+# even further behind. Macro is a national monthly series broadcast onto
+# every crop/market row for a given (year, month), so there's no per-state
+# grouping to do here -- just sort by date and carry the last known
+# national value forward. A no-op for any row within each series' real
+# coverage, so Folds 1-4 are unaffected -- only rows past each macro
+# source's last real month (e.g. 2026+) are filled.
+_ffill_macro_cols = [c for c in MACRO_COLS if c in df.columns]
+if _ffill_macro_cols:
+    n_before = df[_ffill_macro_cols].isna().sum().sum()
+    df = df.sort_values('week_start')
+    df[_ffill_macro_cols] = df[_ffill_macro_cols].ffill()
+    df = df.sort_values(['crop', 'market', 'week_start']).reset_index(drop=True)
+    n_after = df[_ffill_macro_cols].isna().sum().sum()
+    print(f'   Macro forward-fill: {n_before - n_after:,} cell(s) filled '
+          f'(beyond each source\'s real coverage, e.g. 2026+)')
+
+# Forward-fill climate/satellite columns (Script 14 output) that stop
+# before the panel's own end date: crop_weekly_features.csv has no rows
+# past ~2026-07-27, so without this the back half of Fold 5's 2026 test
+# window gets every ERA5/CHIRPS/Sentinel-2/MODIS feature fillna(0)'d --
+# the same silent-zero-fill failure mode already fixed above for
+# wages/road_density/macro. These features are crop-level (joined on
+# crop + week_start, uniform across all markets of a crop), so forward-
+# fill per crop, sorted by week_start.
+_ffill_sat_cols = [c for c in (CLIMATE_FEATS + SAT_FEATS) if c in df.columns]
+if _ffill_sat_cols:
+    n_before = df[_ffill_sat_cols].isna().sum().sum()
+    df = df.sort_values(['crop', 'week_start'])
+    df[_ffill_sat_cols] = df.groupby('crop')[_ffill_sat_cols].ffill()
+    df = df.sort_values(['crop', 'market', 'week_start']).reset_index(drop=True)
+    n_after = df[_ffill_sat_cols].isna().sum().sum()
+    print(f'   Climate/satellite forward-fill: {n_before - n_after:,} cell(s) filled '
+          f'(beyond each source\'s real coverage, e.g. 2026+)')
+
 print(f'   Infrastructure features (M5): {len(INFRA_FEATS)} → {INFRA_FEATS}')
 print(f'   Policy features (M6)        : {len(POLICY_FEATS)} → {POLICY_FEATS}')
 
