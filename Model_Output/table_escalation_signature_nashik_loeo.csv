@@ -1,4 +1,4 @@
 episode,label,n_test_weeks,n_test_positive,auc,avg_precision
-onion_2019,Onion Sep-2019 ban,50,18,0.809,0.801
-onion_2020,Onion Sep-2020 ban,51,5,0.787,0.293
-onion_2023,Onion Aug-2023 duty (first action of 2023-24 sequence),50,10,0.947,0.832
+onion_2019,Onion Sep-2019 ban,50,18,0.757,0.696
+onion_2020,Onion Sep-2020 ban,51,5,0.785,0.341
+onion_2023,Onion Aug-2023 duty (first action of 2023-24 sequence),50,10,0.878,0.625
