@@ -17,6 +17,8 @@ export const MODEL_DIR = path.join(WEB_ROOT, 'data', 'production_models');
 export const DOW_PATTERN_FILE = path.join(WEB_ROOT, 'data', 'table_dow_pattern.csv');
 export const DIRECTIONAL_ACCURACY_FILE = path.join(WEB_ROOT, 'data', 'table_directional_accuracy.csv');
 export const MARKET_ACCURACY_FILE = path.join(WEB_ROOT, 'data', 'table_market_level_accuracy.csv');
+export const SHAP_LAYER_FILE = path.join(WEB_ROOT, 'data', 'table_shap_by_layer.csv');
+export const SHAP_FEATURES_FILE = path.join(WEB_ROOT, 'data', 'table_shap_top_features.csv');
 
 export const CROPS = ['tomato', 'onion', 'potato'];
 export const HORIZONS = [1, 4, 13, 26];

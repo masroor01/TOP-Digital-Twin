@@ -76,7 +76,44 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
         <Alert tone="warning">⚠️ <b>Data Quality:</b> {Math.round(dq.pctImputedLast52w)}% of last 52 weeks are imputed.</Alert>
       )}
 
-      <SectionLabel>Multi-Horizon Baseline Forecasts</SectionLabel>
+      <div className="flex items-center gap-2">
+        <SectionLabel>Multi-Horizon Baseline Forecasts</SectionLabel>
+        <InfoButton title="Why four horizons?">
+          <p className="mb-2">
+            The model produces four independent forecasts — <b>1, 4, 13, and 26 weeks</b> ahead — from the same
+            reference date, each trained and validated separately rather than derived from one another. Together
+            they cover different planning needs: 1W for near-term trading decisions, 4W for monthly procurement
+            planning, and 13W/26W for seasonal positioning (sowing, storage, and export/import timing).
+          </p>
+          <p className="mb-2">
+            Accuracy is <i>not</i> simply worse at longer horizons. A longer horizon means less reliance on very
+            recent price momentum and more reliance on seasonal/calendar and macro signals, which for some
+            crops and target periods are actually more predictable than the near-term noise — see below for
+            potato's specific case.
+          </p>
+          {crop === 'potato' && (
+            <>
+              <p className="mb-2 font-semibold text-[var(--text-primary)]">
+                Why does Potato's Model Accuracy go up from 13W to 26W?
+              </p>
+              <p className="mb-2">
+                This is real, not a bug — potato's backtested accuracy is genuinely higher at 26 weeks than at 13
+                weeks. The cause is the harvest season (Feb-Apr): a <b>13-week-ahead</b> forecast that targets the
+                harvest-driven price trough is issued around Nov-Jan, the volatile "lean/storage-tail" period —
+                the model is anchored on an elevated, unstable recent price and under-corrects for the incoming
+                seasonal crash. A <b>26-week-ahead</b> forecast targeting that same trough is issued further back,
+                leans less on recent momentum and more on genuine seasonal/calendar signal, and better anticipates
+                the predictable harvest collapse. Verified by breaking down error by target month: April, for
+                example, shows ~16% error at the 26W horizon versus ~51% at 13W.
+              </p>
+              <p className="text-[var(--text-secondary)] italic opacity-80">
+                Based on the per-fold ablation results as of their last full run — the exact percentages may shift
+                slightly on a future re-run, but the underlying seasonal mechanism is expected to hold.
+              </p>
+            </>
+          )}
+        </InfoButton>
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
         {ticker.map((t) => (
           <div key={t.horizon}>
@@ -98,9 +135,9 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
         <Metric label={`Scenario`} value={fmtRs(kpis.scenario, { perQ: true })}
           delta={`${fmtRs(kpis.delta)} (${fmtPct(kpis.deltaPct)})`} deltaTone={deltaTone}
           help="Model projection with active scenario modifier inputs." />
-        <Metric label="Last Real Trade"
+        <Metric label="Live Mandi Price"
           value={kpis.lastObservedPrice != null ? fmtRs(kpis.lastObservedPrice, { perQ: true }) : 'N/A'}
-          help="Most recent non-imputed trade price." />
+          help="Most recent non-imputed trade price reported from the mandi." />
         <Metric label="Model Accuracy" value={kpis.wape != null ? `~${Math.max(0, 100 - kpis.wape).toFixed(0)}%` : 'N/A'}
           delta={
             kpis.marketWape != null

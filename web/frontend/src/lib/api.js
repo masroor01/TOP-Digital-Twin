@@ -16,4 +16,5 @@ export const api = {
   dailyCurve: (payload) => client.post('/daily-curve', payload).then((r) => r.data),
   aiBrief: (payload) => client.post('/ai-brief', payload).then((r) => r.data),
   directionalAccuracy: () => client.get('/directional-accuracy').then((r) => r.data),
+  shap: () => client.get('/shap').then((r) => r.data),
 };

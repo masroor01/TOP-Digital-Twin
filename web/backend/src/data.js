@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { parse } from 'csv-parse/sync';
-import { MODEL_DIR, DOW_PATTERN_FILE, DIRECTIONAL_ACCURACY_FILE, MARKET_ACCURACY_FILE } from './config.js';
+import { MODEL_DIR, DOW_PATTERN_FILE, DIRECTIONAL_ACCURACY_FILE, MARKET_ACCURACY_FILE, SHAP_LAYER_FILE, SHAP_FEATURES_FILE } from './config.js';
 
 function readJSON(file) {
   const p = path.join(MODEL_DIR, file);
@@ -87,11 +87,26 @@ export function loadAll() {
     }
   }
 
+  // Script 25's SHAP feature-importance analysis -- crop+horizon level ONLY
+  // (computed on a training-time sample per crop, not per state/market; the
+  // shared model itself doesn't vary by market, so a genuine per-market SHAP
+  // breakdown would need a whole new analysis, not just a different slice of
+  // this file). Two tables: layer-level composition (Price/Macro/Climate/...)
+  // and the top individual features within each (crop, horizon).
+  let shapLayers = [];
+  if (fs.existsSync(SHAP_LAYER_FILE)) {
+    shapLayers = readCSV(SHAP_LAYER_FILE).map(coerceRow);
+  }
+  let shapFeatures = [];
+  if (fs.existsSync(SHAP_FEATURES_FILE)) {
+    shapFeatures = readCSV(SHAP_FEATURES_FILE).map(coerceRow);
+  }
+
   console.log(
     `[data] Loaded ${reference.length} reference rows, ${history.length} history rows, ` +
     `${Object.keys(featureColumns).length} feature-column specs, ${directionalAccuracy.length} directional-accuracy rows, ` +
-    `${marketAccuracy.size} market-accuracy cells.`
+    `${marketAccuracy.size} market-accuracy cells, ${shapLayers.length} SHAP layer rows, ${shapFeatures.length} SHAP feature rows.`
   );
 
-  return { featureColumns, featureRanges, uncertainty, staleness, reference, history, dailyNoise, directionalAccuracy, marketAccuracy };
+  return { featureColumns, featureRanges, uncertainty, staleness, reference, history, dailyNoise, directionalAccuracy, marketAccuracy, shapLayers, shapFeatures };
 }

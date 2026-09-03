@@ -67,6 +67,13 @@ export function buildRouter(store) {
     res.json({ rows: store.directionalAccuracy });
   });
 
+  // Script 25's SHAP feature-importance analysis -- static, crop+horizon
+  // level (the shared model doesn't vary by market/state, so there is no
+  // per-market SHAP to serve here; see the tab's own disclosure copy).
+  router.get('/shap', (req, res) => {
+    res.json({ layers: store.shapLayers, features: store.shapFeatures });
+  });
+
   // ── Market selection ────────────────────────────────────────────────────
   router.get('/states', (req, res) => {
     const { crop } = req.query;
