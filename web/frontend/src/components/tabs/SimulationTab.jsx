@@ -97,18 +97,19 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
                 Why does Potato's Model Accuracy go up from 13W to 26W?
               </p>
               <p className="mb-2">
-                This is real, not a bug — potato's backtested accuracy is genuinely higher at 26 weeks than at 13
-                weeks. The cause is the harvest season (Feb-Apr): a <b>13-week-ahead</b> forecast that targets the
-                harvest-driven price trough is issued around Nov-Jan, the volatile "lean/storage-tail" period —
-                the model is anchored on an elevated, unstable recent price and under-corrects for the incoming
-                seasonal crash. A <b>26-week-ahead</b> forecast targeting that same trough is issued further back,
-                leans less on recent momentum and more on genuine seasonal/calendar signal, and better anticipates
-                the predictable harvest collapse. Verified by breaking down error by target month: April, for
-                example, shows ~16% error at the 26W horizon versus ~51% at 13W.
+                This is real, not a bug — potato's backtested accuracy is genuinely higher at 26 weeks (~65%) than
+                at 13 weeks (~57%). But the crop-wide average hides a sharp seasonal split, confirmed directly from
+                the per-market backtest predictions: for forecasts <b>targeting the storage/lean months
+                (July-October)</b>, 26W is dramatically more accurate than 13W (~72% vs ~51%). For forecasts
+                <b> targeting the harvest months (February-April)</b>, the two horizons are roughly comparable, with
+                13W actually a little ahead (~63% vs ~59%). Because storage/lean-season targets make up most of the
+                year, this seasonal split is what pulls the crop-wide 26W figure above 13W overall.
               </p>
               <p className="text-[var(--text-secondary)] italic opacity-80">
-                Based on the per-fold ablation results as of their last full run — the exact percentages may shift
-                slightly on a future re-run, but the underlying seasonal mechanism is expected to hold.
+                The exact mechanism behind the July-October gap isn't fully pinned down yet — an earlier hypothesis
+                specifically about harvest-season targets and Nov-Jan momentum did not hold up under a direct
+                recheck against real per-market target dates, and has been withdrawn rather than left uncorrected.
+                Treat the seasonal split above as the confirmed finding; a causal explanation for it is still open.
               </p>
             </>
           )}
