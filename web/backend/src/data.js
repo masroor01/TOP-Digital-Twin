@@ -60,27 +60,29 @@ export function loadAll() {
     directionalAccuracy = readCSV(DIRECTIONAL_ACCURACY_FILE).map(coerceRow);
   }
 
-  // Script 47's hierarchical per-market/state MAPE (M6 variant, from real
+  // Script 47's hierarchical per-market/state WAPE (M6 variant, from real
   // backtest predictions -- distinct from model_uncertainty.json's
   // crop+horizon-wide figure, which is the same for every market by
   // construction since one shared model serves all markets for a given
   // crop/horizon). Two shrinkage tiers: market shrinks toward its own
   // state's (already-shrunk) estimate, state shrinks toward the crop-wide
   // mean -- see scripts/47_Market_Level_Accuracy.py for the formula.
-  // Indexed for O(1) lookup per /simulate request.
+  // WAPE, not MAPE, since 2026-09-02 (see that script's docstring and
+  // scripts/50_MAPE_vs_WAPE_Comparison.py for why). Indexed for O(1)
+  // lookup per /simulate request.
   const marketAccuracy = new Map();
   if (fs.existsSync(MARKET_ACCURACY_FILE)) {
     const rows = readCSV(MARKET_ACCURACY_FILE).map(coerceRow);
     for (const r of rows) {
       marketAccuracy.set(`${r.crop}_${r.market_id}_${r.horizon_weeks}`, {
         state: r.state,
-        marketMapeRaw: r.market_mape_raw,
+        marketWapeRaw: r.market_wape_raw,
         marketN: r.market_n,
-        marketMapeShrunk: r.market_mape_shrunk,
-        stateMapeRaw: r.state_mape_raw,
+        marketWapeShrunk: r.market_wape_shrunk,
+        stateWapeRaw: r.state_wape_raw,
         stateN: r.state_n,
-        stateMapeShrunk: r.state_mape_shrunk,
-        cropMapeRaw: r.crop_mape_raw,
+        stateWapeShrunk: r.state_wape_shrunk,
+        cropWapeRaw: r.crop_wape_raw,
       });
     }
   }

@@ -21,7 +21,7 @@ export default function ValidationTab() {
     <div>
       <SectionLabel>Directional Accuracy — Did the Model Call the Right Direction?</SectionLabel>
       <p className="text-sm text-[var(--text-secondary)] mb-4 max-w-3xl">
-        Every other metric in this dashboard (RMSE, MAPE, Model Accuracy) measures how close the predicted price
+        Every other metric in this dashboard (RMSE, WAPE, Model Accuracy) measures how close the predicted price
         <em> level</em> was. This measures something different: for every per-market forecast, did the model correctly
         call whether the price would go <b>up</b> or <b>down</b> from where it stood when the forecast was made —
         regardless of by how much? Tested against a 50% coin-flip null with a binomial test (all cells below are

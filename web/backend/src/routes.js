@@ -193,7 +193,7 @@ export function buildRouter(store) {
           date: fdate.toISOString().slice(0, 10),
           price,
           rmse: err.rmse ?? null,
-          mape: err.mape ?? null,
+          wape: err.wape ?? null,
           season: seasonFor(crop, fdate),
           spark: recentHist.length ? [...recentHist, price] : null,
         };
@@ -209,12 +209,13 @@ export function buildRouter(store) {
       // they can differ. Every market gets a number now (no hidden cells) --
       // thin-history markets get a shrinkage-blended figure (pulled toward
       // their state's own estimate) instead of a noisy raw one or nothing.
+      // WAPE, not MAPE, since 2026-09-02 -- see Script 47's docstring.
       const marketErr = store.marketAccuracy.get(`${crop}_${baseRow.market_id}_${horizon}`);
-      const marketMape = marketErr ? marketErr.marketMapeShrunk : null;
-      const marketMapeN = marketErr ? marketErr.marketN : null;
-      const marketMapeRaw = marketErr ? marketErr.marketMapeRaw : null;
-      const stateMape = marketErr ? marketErr.stateMapeShrunk : null;
-      const stateMapeN = marketErr ? marketErr.stateN : null;
+      const marketWape = marketErr ? marketErr.marketWapeShrunk : null;
+      const marketWapeN = marketErr ? marketErr.marketN : null;
+      const marketWapeRaw = marketErr ? marketErr.marketWapeRaw : null;
+      const stateWape = marketErr ? marketErr.stateWapeShrunk : null;
+      const stateWapeN = marketErr ? marketErr.stateN : null;
 
       const isolatedEffects = diffCols
         .map((col) => {
@@ -270,12 +271,12 @@ export function buildRouter(store) {
           delta,
           deltaPct,
           rmse: err.rmse ?? null,
-          mape: err.mape ?? null,
-          marketMape,
-          marketMapeN,
-          marketMapeRaw,
-          stateMape,
-          stateMapeN,
+          wape: err.wape ?? null,
+          marketWape,
+          marketWapeN,
+          marketWapeRaw,
+          stateWape,
+          stateWapeN,
           lastObservedPrice: baseRow.last_observed_price ?? null,
           lastObservedDate: baseRow.last_observed_date ?? null,
         },
@@ -358,7 +359,7 @@ export function buildRouter(store) {
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) return res.status(503).json({ error: 'ANTHROPIC_API_KEY not configured on the server' });
     try {
-      const { crop, marketId, horizon, baselinePred, scenarioPred, deltaPct, delta, rmse, mape, isolatedEffects } = req.body;
+      const { crop, marketId, horizon, baselinePred, scenarioPred, deltaPct, delta, rmse, wape, isolatedEffects } = req.body;
 
       if (!CROPS.includes(crop)) return res.status(400).json({ error: 'invalid crop' });
       if (!HORIZONS.includes(horizon)) return res.status(400).json({ error: 'invalid horizon' });
@@ -367,7 +368,7 @@ export function buildRouter(store) {
       const market = baseRow.market;
       const state = baseRow.state;
 
-      const numericFields = { baselinePred, scenarioPred, deltaPct, delta, rmse, mape };
+      const numericFields = { baselinePred, scenarioPred, deltaPct, delta, rmse, wape };
       for (const [key, val] of Object.entries(numericFields)) {
         if (val != null && (typeof val !== 'number' || !Number.isFinite(val))) {
           return res.status(400).json({ error: `${key} must be a finite number` });
@@ -392,7 +393,7 @@ Market: ${market}, ${state}
 Forecast horizon: ${horizon} weeks ahead
 Baseline prediction: Rs ${Math.round(baselinePred).toLocaleString()}/quintal
 Scenario prediction: Rs ${Math.round(scenarioPred).toLocaleString()}/quintal (${deltaPct >= 0 ? '+' : ''}${deltaPct.toFixed(1)}%, ${delta >= 0 ? '+' : ''}${delta.toFixed(0)} Rs/quintal)
-Model's typical error at this horizon: ${rmse ? `±Rs ${Math.round(rmse).toLocaleString()} (${mape.toFixed(0)}% MAPE)` : 'not available'}
+Model's typical error at this horizon: ${rmse ? `±Rs ${Math.round(rmse).toLocaleString()} (${wape.toFixed(0)}% WAPE)` : 'not available'}
 
 Changes made in this scenario, with the isolated effect of each:
 ${changesText}

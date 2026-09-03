@@ -546,26 +546,58 @@ with open(stale_path, 'w', encoding='utf-8') as f:
 n_stale = sum(len(v) for v in staleness.values())
 print(f'  Saved: {stale_path}  ({n_stale} crop x feature entries forward-filled)')
 
-# Validated M6 error rates per (crop, horizon), from Script 15's actual
-# out-of-sample CV results (ablation_raw_results.csv) — lets the dashboard
-# show real, validated uncertainty (e.g. "±RMSE") instead of a bare point
+# Validated M6 error rates per (crop, horizon) — lets the dashboard show
+# real, validated uncertainty (e.g. "±RMSE") instead of a bare point
 # estimate with no sense of how reliable it typically is.
+#
+# SWITCHED FROM MAPE TO WAPE (2026-09-02, user-requested after an empirical
+# comparison -- see scripts/50_MAPE_vs_WAPE_Comparison.py). Plain MAPE
+# (mean of per-row percentage errors) is distorted by any row with an
+# unusually low true price -- a handful of near-zero-price rows can produce
+# 1000%+ individual errors that get averaged in at full weight. WAPE
+# (sum(|err|)/sum(actual)) uses the same errors weighted by each row's own
+# actual value instead, which is both more robust to that failure mode and
+# a more economically meaningful aggregate. Computed from
+# dm_market_level_predictions.csv's M6 rows (pooled across every fold,
+# market, and week for that crop+horizon -- the same granular predictions
+# Script 47's market/state accuracy already uses), NOT from
+# ablation_raw_results.csv's fold-level MAPE averages, since WAPE needs the
+# raw per-row errors to sum, not a pre-aggregated scalar per fold. RMSE
+# stays sourced from ablation_raw_results.csv (that metric isn't affected
+# by this issue -- it's already sum-of-squares based, not row-averaged
+# percentages -- so no reason to change its source).
 ablation_path = os.path.join(BASE, 'Model_Output', 'ablation_raw_results.csv')
-if os.path.exists(ablation_path):
+dm_pred_path = os.path.join(BASE, 'Model_Output', 'dm_market_level_predictions.csv')
+if os.path.exists(ablation_path) and os.path.exists(dm_pred_path):
     ablation = pd.read_csv(ablation_path)
-    m6_errors = (ablation[ablation['variant'] == 'M6']
-                 .groupby(['crop', 'horizon_weeks'])[['RMSE', 'MAPE']]
-                 .mean().round(1).reset_index())
+    rmse_by_cell = (ablation[ablation['variant'] == 'M6']
+                    .groupby(['crop', 'horizon_weeks'])['RMSE']
+                    .mean().round(1).reset_index())
+
+    dm_pred = pd.read_csv(dm_pred_path, usecols=['variant', 'crop', 'horizon_weeks', 'y_true', 'y_pred'])
+    dm_pred = dm_pred[dm_pred['variant'] == 'M6'].copy()
+    dm_pred = dm_pred[(dm_pred['y_true'] > 0) & np.isfinite(dm_pred['y_true']) & np.isfinite(dm_pred['y_pred'])]
+    dm_pred['abs_err'] = (dm_pred['y_true'] - dm_pred['y_pred']).abs()
+    wape_by_cell = (dm_pred.groupby(['crop', 'horizon_weeks'])
+                    .agg(_abs_err=('abs_err', 'sum'), _y_true=('y_true', 'sum'))
+                    .reset_index())
+    wape_by_cell['WAPE'] = (100 * wape_by_cell['_abs_err'] / wape_by_cell['_y_true']).round(1)
+
+    m6_errors = rmse_by_cell.merge(wape_by_cell[['crop', 'horizon_weeks', 'WAPE']],
+                                    on=['crop', 'horizon_weeks'], how='inner')
     uncertainty = {
-        f"{r['crop']}_{int(r['horizon_weeks'])}w": {'rmse': r['RMSE'], 'mape': r['MAPE']}
+        f"{r['crop']}_{int(r['horizon_weeks'])}w": {'rmse': r['RMSE'], 'wape': r['WAPE']}
         for _, r in m6_errors.iterrows()
     }
     uncertainty_path = os.path.join(OUT_DIR, 'model_uncertainty.json')
     with open(uncertainty_path, 'w', encoding='utf-8') as f:
         json.dump(uncertainty, f, indent=2)
-    print(f'  Saved: {uncertainty_path}  ({len(uncertainty)} crop x horizon error rates)')
-else:
+    print(f'  Saved: {uncertainty_path}  ({len(uncertainty)} crop x horizon error rates, WAPE-based)')
+elif not os.path.exists(ablation_path):
     print(f'  WARNING: {ablation_path} not found — dashboard will have no uncertainty bands')
+else:
+    print(f'  WARNING: {dm_pred_path} not found (needs Script 15 run with MARKET_LEVEL_DIAGNOSTIC=True) '
+          f'— dashboard will have no uncertainty bands')
 
 print('\n' + '=' * 65)
 print('Script 23 complete. 12 production models saved to')

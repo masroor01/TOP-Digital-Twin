@@ -83,7 +83,7 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
             <Metric label={`Horizon ${t.horizon}W · ${fmtDate(t.date)}`} value={fmtRs(t.price)}
               spark={t.spark} sparkColor={cropColor} accent={cropColor}
               icon={<CropBadge crop={crop} icon={CROP_ICON[crop]} color={cropColor} size="sm" />}
-              help={t.rmse ? `±₹${Math.round(t.rmse).toLocaleString()} (${t.mape.toFixed(0)}% MAPE)` : ''} />
+              help={t.rmse ? `±₹${Math.round(t.rmse).toLocaleString()} (${t.wape.toFixed(0)}% WAPE)` : ''} />
             {t.season && (
               <div className="text-center -mt-1.5">
                 <Badge>🌾 {SEASON_LABEL[t.season] || t.season}</Badge>
@@ -101,12 +101,12 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
         <Metric label="Last Real Trade"
           value={kpis.lastObservedPrice != null ? fmtRs(kpis.lastObservedPrice, { perQ: true }) : 'N/A'}
           help="Most recent non-imputed trade price." />
-        <Metric label="Model Accuracy" value={kpis.mape != null ? `~${Math.max(0, 100 - kpis.mape).toFixed(0)}%` : 'N/A'}
+        <Metric label="Model Accuracy" value={kpis.wape != null ? `~${Math.max(0, 100 - kpis.wape).toFixed(0)}%` : 'N/A'}
           delta={
-            kpis.marketMape != null
-              ? `This market: ~${Math.max(0, 100 - kpis.marketMape).toFixed(0)}%` +
-                (kpis.stateMape != null ? ` · State: ~${Math.max(0, 100 - kpis.stateMape).toFixed(0)}%` : '') +
-                ` (${kpis.marketMapeN}wk history)`
+            kpis.marketWape != null
+              ? `This market: ~${Math.max(0, 100 - kpis.marketWape).toFixed(0)}%` +
+                (kpis.stateWape != null ? ` · State: ~${Math.max(0, 100 - kpis.stateWape).toFixed(0)}%` : '') +
+                ` (${kpis.marketWapeN}wk history)`
               : 'This market: not enough backtest history'
           }
           icon={
@@ -116,23 +116,25 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
                 one another.
               </p>
               <p>
-                <b>Crop-wide (main number{kpis.mape != null ? `, ~${Math.max(0, 100 - kpis.mape).toFixed(0)}%` : ''}):</b>{' '}
-                100% − MAPE from the shared model's validated backtest across <i>every</i> market of this crop at this
-                horizon. One model serves all markets, so this is identical no matter which market is selected.
+                <b>Crop-wide (main number{kpis.wape != null ? `, ~${Math.max(0, 100 - kpis.wape).toFixed(0)}%` : ''}):</b>{' '}
+                100% − WAPE from the shared model's validated backtest across <i>every</i> market of this crop at this
+                horizon (WAPE = total absolute error ÷ total actual value — more robust than a plain average of
+                percentage errors, since one oddly-low-price week can't distort it the way it would a simple average).
+                One model serves all markets, so this is identical no matter which market is selected.
               </p>
               <p>
                 <b>State{market?.state ? ` (${market.state})` : ''}
-                {kpis.stateMape != null ? `, ~${Math.max(0, 100 - kpis.stateMape).toFixed(0)}%` : ''}:</b>{' '}
+                {kpis.stateWape != null ? `, ~${Math.max(0, 100 - kpis.stateWape).toFixed(0)}%` : ''}:</b>{' '}
                 this state's own backtested accuracy, pooling every market in it
-                {kpis.stateMapeN != null ? ` (${kpis.stateMapeN} backtested weeks)` : ''}. Blended ("shrunk") toward
+                {kpis.stateWapeN != null ? ` (${kpis.stateWapeN} backtested weeks)` : ''}. Blended ("shrunk") toward
                 the crop-wide figure when the state has too little history to trust on its own.
               </p>
               <p>
                 <b>This market{market?.market ? ` (${market.market})` : ''}
-                {kpis.marketMape != null ? `, ~${Math.max(0, 100 - kpis.marketMape).toFixed(0)}%` : ''}:</b>{' '}
+                {kpis.marketWape != null ? `, ~${Math.max(0, 100 - kpis.marketWape).toFixed(0)}%` : ''}:</b>{' '}
                 this specific market's own backtested accuracy
-                {kpis.marketMapeN != null ? ` (${kpis.marketMapeN} backtested weeks` : ''}
-                {kpis.marketMapeRaw != null ? `, raw un-blended figure ~${Math.max(0, 100 - kpis.marketMapeRaw).toFixed(0)}%)` : kpis.marketMapeN != null ? ')' : ''}.
+                {kpis.marketWapeN != null ? ` (${kpis.marketWapeN} backtested weeks` : ''}
+                {kpis.marketWapeRaw != null ? `, raw un-blended figure ~${Math.max(0, 100 - kpis.marketWapeRaw).toFixed(0)}%)` : kpis.marketWapeN != null ? ')' : ''}.
                 Blended toward its <i>state's</i> estimate (not straight to the crop-wide one) when this market's own
                 history is thin — so a market with little data still shows a trustworthy number instead of a noisy
                 or hidden one.
@@ -144,9 +146,9 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
               </p>
             </InfoButton>
           }
-          help={kpis.mape != null
-            ? `100% - MAPE (${kpis.mape.toFixed(0)}%), validated across every market for this crop+horizon — one shared model serves all markets, so this figure is the same regardless of which market is selected. "This market" and "State" below are this market's and its state's own backtested accuracy (Script 47), each shrinkage-blended toward its parent level to stay reliable even with thin history` +
-              (kpis.marketMapeRaw != null ? ` (this market's raw, un-blended figure: ~${Math.max(0, 100 - kpis.marketMapeRaw).toFixed(0)}%)` : '') +
+          help={kpis.wape != null
+            ? `100% - WAPE (${kpis.wape.toFixed(0)}%), validated across every market for this crop+horizon — one shared model serves all markets, so this figure is the same regardless of which market is selected. "This market" and "State" below are this market's and its state's own backtested accuracy (Script 47), each shrinkage-blended toward its parent level to stay reliable even with thin history` +
+              (kpis.marketWapeRaw != null ? ` (this market's raw, un-blended figure: ~${Math.max(0, 100 - kpis.marketWapeRaw).toFixed(0)}%)` : '') +
               ` — these can differ meaningfully from the crop-wide figure.`
             : ''} />
       </div>

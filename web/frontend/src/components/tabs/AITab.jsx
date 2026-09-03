@@ -18,7 +18,7 @@ export default function AITab({ sim, crop, market, horizon }) {
         crop, marketId: market?.marketId, horizon,
         baselinePred: sim.kpis.baseline, scenarioPred: sim.kpis.scenario,
         deltaPct: sim.kpis.deltaPct, delta: sim.kpis.delta,
-        rmse: sim.kpis.rmse, mape: sim.kpis.mape,
+        rmse: sim.kpis.rmse, wape: sim.kpis.wape,
         isolatedEffects: sim.isolatedEffects,
       });
       setBrief(res.text);
