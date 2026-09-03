@@ -74,10 +74,23 @@ values before trusting them, same standard as above):
     -- Jun-2026 overlap 5.25=5.25 / 3.35=3.35 exact.
   - IIP (Scheme II-00810943-M.xlsx) checked but NOT extended -- its own
     latest month was Mar-2026, same as already on file, no new data yet.
-  - LPG weekly (Scheme II-00991452-W.xlsx) was also checked: non-subsidised
-    Delhi price was close but not an exact match to the existing monthly
-    figure (weekly-vs-monthly aggregation gap, needs a real convention
-    decision) -- not applied, left as future work if revisited.
+  - diesel_4city_rs_litre / diesel_delhi_per_L: extended Jul/Aug 2026
+    (98.1 / 95.2, unchanged from Jun -- diesel prices were flat across
+    every reported week in both months, confirmed row-by-row) from
+    Scheme II-00781298-W.xlsx ("Price of High speed diesel oil: Average:
+    <city>: IOC" columns, weekly), a combined fuel-price report matching
+    the original "Domestic prices for fuel.xlsx" source. Jun-2026 overlap
+    exact on both the Delhi column (95.2=95.2) and the row-wise 4-city
+    mean (98.1=98.1).
+  - LPG (from this same file, and the earlier LPG-only weekly export
+    Scheme II-00991452-W.xlsx) was checked again and still NOT applied:
+    unlike diesel, LPG's non-subsidised Delhi price changes mid-month in
+    several months (e.g. Jun-2026 913->942), so a naive equal-weighted
+    mean of reported weeks doesn't reproduce the existing monthly figure
+    (Apr/May, flat within the month, matched exactly; Mar/Jun, which
+    changed mid-month, came out ~1.5-2 points off). Needs a real
+    day-weighted monthly-average decision matching PPAC's own convention,
+    not a plain mean of available weeks -- still future work.
   - bank_credit_agri_cr: five prior export attempts (Scheme II-00080984-W/M,
     "Bank Credit.xlsx", "Bank Credit New.xlsx") all pulled the WRONG CMIE
     report (Food/Non-food-by-type, or Non-food-by-industrial-activity --
