@@ -74,13 +74,21 @@ values before trusting them, same standard as above):
     -- Jun-2026 overlap 5.25=5.25 / 3.35=3.35 exact.
   - IIP (Scheme II-00810943-M.xlsx) checked but NOT extended -- its own
     latest month was Mar-2026, same as already on file, no new data yet.
-  - LPG weekly (Scheme II-00991452-W.xlsx) and a bank-credit weekly file
-    were also checked: LPG's non-subsidised Delhi price was close but not
-    an exact match to the existing monthly figure (weekly-vs-monthly
-    aggregation gap, needs a real convention decision, not applied); the
-    bank-credit file only had "Total"/"Food credit", not the
-    "Agriculture & allied" indicator bank_credit_agri_cr actually tracks
-    -- not usable, not applied. Both left as future work if revisited.
+  - LPG weekly (Scheme II-00991452-W.xlsx) was also checked: non-subsidised
+    Delhi price was close but not an exact match to the existing monthly
+    figure (weekly-vs-monthly aggregation gap, needs a real convention
+    decision) -- not applied, left as future work if revisited.
+  - bank_credit_agri_cr: five prior export attempts (Scheme II-00080984-W/M,
+    "Bank Credit.xlsx", "Bank Credit New.xlsx") all pulled the WRONG CMIE
+    report (Food/Non-food-by-type, or Non-food-by-industrial-activity --
+    neither has an Agriculture breakdown by construction). The right one,
+    found 2026-09-03: Scheme II-00984274-M.xlsx, column 4 ("...Priority
+    sector: Agriculture & allied activities") -- NOT column 1 (plain
+    "Agriculture and allied activities", a different, non-identical
+    sub-series, e.g. May-2026 26,414,836.1 vs the Priority-sector column's
+    25,937,085.6). Column 4's May-2026 value matched the existing CSV
+    exactly (25,937,085.6). Extended Jun/Jul 2026 (27,278,751.6 /
+    27,324,305.7) from this column.
 """
 
 import os
