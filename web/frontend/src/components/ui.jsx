@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const cardTransition = { type: 'spring', stiffness: 300, damping: 26 };
@@ -111,6 +112,78 @@ export function Metric({ label, value, delta, deltaTone, help, spark, sparkColor
         </p>
       )}
     </Card>
+  );
+}
+
+export function InfoButton({ title, children }) {
+  const [open, setOpen] = React.useState(false);
+  const [pos, setPos] = React.useState(null);
+  const btnRef = React.useRef(null);
+  const panelRef = React.useRef(null);
+  const PANEL_WIDTH = 288; // matches w-72
+
+  const reposition = React.useCallback(() => {
+    if (!btnRef.current) return;
+    const r = btnRef.current.getBoundingClientRect();
+    const left = Math.min(Math.max(8, r.right - PANEL_WIDTH), window.innerWidth - PANEL_WIDTH - 8);
+    setPos({ top: r.bottom + 6, left });
+  }, []);
+
+  React.useEffect(() => {
+    if (!open) return;
+    reposition();
+    function onClick(e) {
+      if (btnRef.current?.contains(e.target) || panelRef.current?.contains(e.target)) return;
+      setOpen(false);
+    }
+    function onKey(e) { if (e.key === 'Escape') setOpen(false); }
+    document.addEventListener('mousedown', onClick);
+    document.addEventListener('keydown', onKey);
+    window.addEventListener('resize', reposition);
+    window.addEventListener('scroll', reposition, true);
+    return () => {
+      document.removeEventListener('mousedown', onClick);
+      document.removeEventListener('keydown', onKey);
+      window.removeEventListener('resize', reposition);
+      window.removeEventListener('scroll', reposition, true);
+    };
+  }, [open, reposition]);
+
+  return (
+    <>
+      <button
+        ref={btnRef}
+        type="button"
+        aria-label={title ? `About: ${title}` : 'More info'}
+        onClick={(e) => { e.stopPropagation(); setOpen((v) => !v); }}
+        className="w-4 h-4 rounded-full inline-flex items-center justify-center text-[0.62rem] font-bold leading-none
+                   border border-[var(--border-color-strong)] text-[var(--text-secondary)] bg-[var(--card-bg)]
+                   hover:bg-[var(--brand)] hover:text-white hover:border-[var(--brand)] transition-colors"
+      >
+        i
+      </button>
+      {ReactDOM.createPortal(
+        <AnimatePresence>
+          {open && pos && (
+            <motion.div
+              ref={panelRef}
+              initial={{ opacity: 0, y: -4, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -4, scale: 0.97 }}
+              transition={{ duration: 0.15 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{ position: 'fixed', top: pos.top, left: pos.left, width: PANEL_WIDTH }}
+              className="z-[100] max-w-[85vw] p-3 rounded-xl border border-[var(--border-color-strong)]
+                         bg-[var(--card-bg)] shadow-[0_4px_16px_-4px_rgba(28,38,32,0.28)] text-left"
+            >
+              {title && <p className="text-[0.72rem] font-bold uppercase tracking-wide text-[var(--brand)] mb-1.5">{title}</p>}
+              <div className="text-[0.78rem] leading-snug text-[var(--text-secondary)] space-y-1.5">{children}</div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, SectionLabel, Metric, Badge, Spinner, CropBadge, Alert } from '../ui';
+import { Card, SectionLabel, Metric, Badge, Spinner, CropBadge, Alert, InfoButton } from '../ui';
 import PlotChart from '../PlotChart';
 import { fmtRs, fmtPct, fmtDate, HORIZONS, CROP_ICON, CROP_COLOR } from '../../lib/theme';
 import { api } from '../../lib/api';
@@ -108,6 +108,41 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
                 (kpis.stateMape != null ? ` · State: ~${Math.max(0, 100 - kpis.stateMape).toFixed(0)}%` : '') +
                 ` (${kpis.marketMapeN}wk history)`
               : 'This market: not enough backtest history'
+          }
+          icon={
+            <InfoButton title="How accuracy is calculated">
+              <p>
+                Three figures below, each a different level of pooling — they can legitimately differ from
+                one another.
+              </p>
+              <p>
+                <b>Crop-wide (main number{kpis.mape != null ? `, ~${Math.max(0, 100 - kpis.mape).toFixed(0)}%` : ''}):</b>{' '}
+                100% − MAPE from the shared model's validated backtest across <i>every</i> market of this crop at this
+                horizon. One model serves all markets, so this is identical no matter which market is selected.
+              </p>
+              <p>
+                <b>State{market?.state ? ` (${market.state})` : ''}
+                {kpis.stateMape != null ? `, ~${Math.max(0, 100 - kpis.stateMape).toFixed(0)}%` : ''}:</b>{' '}
+                this state's own backtested accuracy, pooling every market in it
+                {kpis.stateMapeN != null ? ` (${kpis.stateMapeN} backtested weeks)` : ''}. Blended ("shrunk") toward
+                the crop-wide figure when the state has too little history to trust on its own.
+              </p>
+              <p>
+                <b>This market{market?.market ? ` (${market.market})` : ''}
+                {kpis.marketMape != null ? `, ~${Math.max(0, 100 - kpis.marketMape).toFixed(0)}%` : ''}:</b>{' '}
+                this specific market's own backtested accuracy
+                {kpis.marketMapeN != null ? ` (${kpis.marketMapeN} backtested weeks` : ''}
+                {kpis.marketMapeRaw != null ? `, raw un-blended figure ~${Math.max(0, 100 - kpis.marketMapeRaw).toFixed(0)}%)` : kpis.marketMapeN != null ? ')' : ''}.
+                Blended toward its <i>state's</i> estimate (not straight to the crop-wide one) when this market's own
+                history is thin — so a market with little data still shows a trustworthy number instead of a noisy
+                or hidden one.
+              </p>
+              <p className="text-[var(--text-secondary)] italic opacity-80">
+                Why shrinkage: a market backtested on only a few weeks can show a wildly noisy raw accuracy by chance.
+                Blending it toward its state (and the state toward the crop) pulls thin-data estimates toward a more
+                reliable parent average, weighted by how much data each level actually has.
+              </p>
+            </InfoButton>
           }
           help={kpis.mape != null
             ? `100% - MAPE (${kpis.mape.toFixed(0)}%), validated across every market for this crop+horizon — one shared model serves all markets, so this figure is the same regardless of which market is selected. "This market" and "State" below are this market's and its state's own backtested accuracy (Script 47), each shrinkage-blended toward its parent level to stay reliable even with thin history` +
