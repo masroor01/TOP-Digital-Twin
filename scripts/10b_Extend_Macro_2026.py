@@ -62,6 +62,25 @@ Outputs (extended in place -- same filenames downstream scripts expect):
   data/rbi_dbie/rbi_dbie_macro_2017_2025.csv
   data/ppac_macro/ppac_diesel_lpg_2017_2025.csv
   data/cmie_macro/cmie_macro_2017_2025.csv
+
+2026-09-03 manual top-up (applied directly, not via this script's own
+logic -- fresh CMIE exports validated against exact overlapping-month
+values before trusting them, same standard as above):
+  - agri_wages_rs_day extended Apr/May/Jun 2026 (523.3/525.1/526.4) from
+    Scheme II-00119460-M.xlsx ("All occupations: Men", same known
+    mislabel as always -- Mar-2026 overlap 521.8 = 521.8 exact).
+  - repo_rate_pct / reverse_repo_pct extended Jul/Aug 2026 (5.25/3.35,
+    unchanged from Jun) from Scheme II-00719118-M.xlsx's successor export
+    -- Jun-2026 overlap 5.25=5.25 / 3.35=3.35 exact.
+  - IIP (Scheme II-00810943-M.xlsx) checked but NOT extended -- its own
+    latest month was Mar-2026, same as already on file, no new data yet.
+  - LPG weekly (Scheme II-00991452-W.xlsx) and a bank-credit weekly file
+    were also checked: LPG's non-subsidised Delhi price was close but not
+    an exact match to the existing monthly figure (weekly-vs-monthly
+    aggregation gap, needs a real convention decision, not applied); the
+    bank-credit file only had "Total"/"Food credit", not the
+    "Agriculture & allied" indicator bank_credit_agri_cr actually tracks
+    -- not usable, not applied. Both left as future work if revisited.
 """
 
 import os
