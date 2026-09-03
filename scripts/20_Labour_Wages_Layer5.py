@@ -49,7 +49,13 @@ OUT_DIR    = os.path.join(BASE, 'data', 'labour_wages')
 os.makedirs(OUT_DIR, exist_ok=True)
 
 PANEL_START = pd.Timestamp('2017-01-01')
-PANEL_END   = pd.Timestamp('2025-12-31')
+# FIXED 2026-09-02 (audit finding, confirmed still open despite a same-day
+# commit claiming "PANEL_END truncation" fixed -- that commit only widened
+# Script 22's own PANEL_END; this script's separate hardcoded bound was
+# untouched and still silently dropped every 2026 wage row before the join).
+# Generous sanity-guard ceiling, matching the convention already used in
+# Scripts 09/22/23 -- not a manually-maintained exact cutoff.
+PANEL_END   = pd.Timestamp('2030-12-31')
 
 # Column index ranges in the source file (0-indexed, from the header/description
 # row) — confirmed by inspection: Men = cols 1-25, Women = cols 73-94.

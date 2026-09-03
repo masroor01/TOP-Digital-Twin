@@ -1,9 +1,5 @@
 state,state_code,n_facilities,capacity_mt,source_note
 Telangana,TL,108,541397,direct
-Arunachal Pradesh,AR,2,6000,direct
-Assam,AS,45,216388,direct
-Bihar,BI,315,1483700,direct
-Jharkhand,JR,60,248629,direct
 Chandigarh,CH,7,12462,direct
 Gujarat,GJ,1023,4042770,direct
 Himachal Pradesh,HP,89,181318,direct
@@ -14,7 +10,6 @@ Keralam,KL,202,96655,Kerala (alternate spelling in panel)
 Maharashtra,MH,655,1172005,direct
 Madhya Pradesh,MP,315,1364003,direct
 Chattisgarh,CG,126,571693,direct
-Nagaland,NG,5,8150,direct
 Odisha,OR,182,579321,direct
 Punjab,PB,770,2606203,direct
 Rajasthan,RJ,191,652879,direct
@@ -23,11 +18,10 @@ Tripura,TR,14,46354,direct
 Uttar Pradesh,UP,2481,15089883,direct
 Uttarakhand,UC,60,206621,direct
 West Bengal,WB,517,5952997,direct
-Andaman and Nicobar,AN,4,2210,direct
-Andhra Pradesh,AP,363,1370045,direct
 NCT of Delhi,DL,97,129857,direct
-Meghalaya,MG,4,8200,direct
-Mizoram,MZ,3,4071,direct
+Andhra Pradesh,AP,363,1370045,direct
+Assam,AS,45,216388,direct
 Kerala,KL,202,96655,direct
 Manipur,MN,2,4500,direct
+Bihar,BI,315,1483700,direct
 Goa,GO,29,7705,direct

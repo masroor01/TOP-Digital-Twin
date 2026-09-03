@@ -45,7 +45,15 @@ PANEL_FILE  = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.c
 OUT_DIR     = os.path.join(BASE, 'data', 'infrastructure')
 os.makedirs(OUT_DIR, exist_ok=True)
 
-PANEL_YEARS = list(range(2017, 2026))
+
+# FIXED 2026-09-02 (audit finding, confirmed still open despite a same-day
+# commit claiming "PANEL_END truncation" fixed -- that commit only widened
+# Script 22's own PANEL_END; this constant was untouched). range(2017,2026)
+# = years 2017-2025 only (Python range excludes the upper bound), so any
+# 2026 week's (state, year) join against this output got ZERO row match at
+# all -- not even a forward-filled one. Widened to a generous sanity-guard
+# ceiling, matching the convention already used in Scripts 09/20/22/23.
+PANEL_YEARS = list(range(2017, 2031))
 LAST_MEASURED_YEAR = 2020   # CEIC road series ends FY2019-20 (reported as 2020-03-31)
 
 print('=' * 65)
