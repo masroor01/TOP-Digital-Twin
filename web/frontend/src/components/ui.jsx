@@ -125,8 +125,20 @@ export function InfoButton({ title, children }) {
   const reposition = React.useCallback(() => {
     if (!btnRef.current) return;
     const r = btnRef.current.getBoundingClientRect();
-    const left = Math.min(Math.max(8, r.right - PANEL_WIDTH), window.innerWidth - PANEL_WIDTH - 8);
-    setPos({ top: r.bottom + 6, left });
+    const MARGIN = 8;
+    const left = Math.min(Math.max(MARGIN, r.right - PANEL_WIDTH), window.innerWidth - PANEL_WIDTH - MARGIN);
+    const spaceBelow = window.innerHeight - r.bottom - MARGIN - 6;
+    const spaceAbove = r.top - MARGIN - 6;
+    // Prefer opening below the button (natural reading direction); flip
+    // above only when below is cramped AND above genuinely has more room --
+    // either way the panel gets a real maxHeight + its own scrollbar so
+    // long content (e.g. every crop/state/market tier explained at once)
+    // is never silently cut off with no way to reach the rest.
+    if (spaceBelow >= 160 || spaceBelow >= spaceAbove) {
+      setPos({ left, top: r.bottom + 6, maxHeight: Math.max(120, Math.min(spaceBelow, 420)) });
+    } else {
+      setPos({ left, bottom: window.innerHeight - r.top + 6, maxHeight: Math.max(120, Math.min(spaceAbove, 420)) });
+    }
   }, []);
 
   React.useEffect(() => {
@@ -172,9 +184,16 @@ export function InfoButton({ title, children }) {
               exit={{ opacity: 0, y: -4, scale: 0.97 }}
               transition={{ duration: 0.15 }}
               onClick={(e) => e.stopPropagation()}
-              style={{ position: 'fixed', top: pos.top, left: pos.left, width: PANEL_WIDTH }}
+              style={{
+                position: 'fixed',
+                ...(pos.top != null ? { top: pos.top } : { bottom: pos.bottom }),
+                left: pos.left,
+                width: PANEL_WIDTH,
+                maxHeight: pos.maxHeight,
+              }}
               className="z-[100] max-w-[85vw] p-3 rounded-xl border border-[var(--border-color-strong)]
-                         bg-[var(--card-bg)] shadow-[0_4px_16px_-4px_rgba(28,38,32,0.28)] text-left"
+                         bg-[var(--card-bg)] shadow-[0_4px_16px_-4px_rgba(28,38,32,0.28)] text-left
+                         overflow-y-auto overscroll-contain"
             >
               {title && <p className="text-[0.72rem] font-bold uppercase tracking-wide text-[var(--brand)] mb-1.5">{title}</p>}
               <div className="text-[0.78rem] leading-snug text-[var(--text-secondary)] space-y-1.5">{children}</div>
