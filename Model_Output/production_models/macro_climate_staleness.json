@@ -1,8 +1,8 @@
 {
   "tomato": {
     "bank_credit_agri_cr": {
-      "as_of": "2026-05-25",
-      "weeks_stale": 13
+      "as_of": "2026-07-27",
+      "weeks_stale": 4
     },
     "export_veg_usd_mn": {
       "as_of": "2026-05-25",
@@ -21,14 +21,6 @@
       "weeks_stale": 21
     },
     "agri_wages_rs_day": {
-      "as_of": "2026-03-30",
-      "weeks_stale": 21
-    },
-    "repo_rate_pct": {
-      "as_of": "2026-06-29",
-      "weeks_stale": 8
-    },
-    "reverse_repo_pct": {
       "as_of": "2026-06-29",
       "weeks_stale": 8
     },
@@ -56,15 +48,7 @@
       "as_of": "2026-04-27",
       "weeks_stale": 17
     },
-    "diesel_4city_rs_litre": {
-      "as_of": "2026-06-29",
-      "weeks_stale": 8
-    },
     "lpg_nonsub_4city_rs_cyl": {
-      "as_of": "2026-06-29",
-      "weeks_stale": 8
-    },
-    "diesel_delhi_per_L": {
       "as_of": "2026-06-29",
       "weeks_stale": 8
     },
@@ -175,8 +159,8 @@
   },
   "onion": {
     "bank_credit_agri_cr": {
-      "as_of": "2026-05-25",
-      "weeks_stale": 13
+      "as_of": "2026-07-27",
+      "weeks_stale": 4
     },
     "export_veg_usd_mn": {
       "as_of": "2026-05-25",
@@ -195,14 +179,6 @@
       "weeks_stale": 21
     },
     "agri_wages_rs_day": {
-      "as_of": "2026-03-30",
-      "weeks_stale": 21
-    },
-    "repo_rate_pct": {
-      "as_of": "2026-06-29",
-      "weeks_stale": 8
-    },
-    "reverse_repo_pct": {
       "as_of": "2026-06-29",
       "weeks_stale": 8
     },
@@ -230,15 +206,7 @@
       "as_of": "2026-04-27",
       "weeks_stale": 17
     },
-    "diesel_4city_rs_litre": {
-      "as_of": "2026-06-29",
-      "weeks_stale": 8
-    },
     "lpg_nonsub_4city_rs_cyl": {
-      "as_of": "2026-06-29",
-      "weeks_stale": 8
-    },
-    "diesel_delhi_per_L": {
       "as_of": "2026-06-29",
       "weeks_stale": 8
     },
@@ -349,8 +317,8 @@
   },
   "potato": {
     "bank_credit_agri_cr": {
-      "as_of": "2026-05-25",
-      "weeks_stale": 13
+      "as_of": "2026-07-27",
+      "weeks_stale": 4
     },
     "export_veg_usd_mn": {
       "as_of": "2026-05-25",
@@ -369,14 +337,6 @@
       "weeks_stale": 21
     },
     "agri_wages_rs_day": {
-      "as_of": "2026-03-30",
-      "weeks_stale": 21
-    },
-    "repo_rate_pct": {
-      "as_of": "2026-06-29",
-      "weeks_stale": 8
-    },
-    "reverse_repo_pct": {
       "as_of": "2026-06-29",
       "weeks_stale": 8
     },
@@ -404,15 +364,7 @@
       "as_of": "2026-04-27",
       "weeks_stale": 17
     },
-    "diesel_4city_rs_litre": {
-      "as_of": "2026-06-29",
-      "weeks_stale": 8
-    },
     "lpg_nonsub_4city_rs_cyl": {
-      "as_of": "2026-06-29",
-      "weeks_stale": 8
-    },
-    "diesel_delhi_per_L": {
       "as_of": "2026-06-29",
       "weeks_stale": 8
     },

@@ -61,7 +61,7 @@
   },
   "repo_rate_pct": {
     "min": 4.0,
-    "median": 5.9,
+    "median": 5.75,
     "max": 6.5
   },
   "usdinr_monthly_avg": {
@@ -71,12 +71,12 @@
   },
   "wage_agri_men": {
     "min": 184.1,
-    "median": 358.2,
+    "median": 361.4,
     "max": 887.2
   },
   "wage_agri_women": {
     "min": 158.8,
-    "median": 291.5,
+    "median": 294.8,
     "max": 777.8
   }
 }
