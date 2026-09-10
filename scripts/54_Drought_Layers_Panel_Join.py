@@ -9,11 +9,14 @@ checked-merge convention as Script 22 (row count must be preserved by every
 left join; a non-unique join key on the right side would otherwise silently
 fan out rows).
 
-THIS SCRIPT DOES NOT TOUCH data/master_weekly_panel_all_layers.csv OR
-SCRIPT 22. That file feeds the production ablation study and model retrain
-(Scripts 15/23) -- wiring these two layers into it as a new M7 layer is a
-separate, deliberate step for later, not a side effect of validating the
-join here. This script's own output is a new, standalone file.
+THIS SCRIPT ITSELF DOES NOT TOUCH data/master_weekly_panel_all_layers.csv OR
+SCRIPT 22 -- its own output is the standalone top_weekly_panel_with_drought.csv
+below, for validating the join in isolation. M7 WAS SUBSEQUENTLY WIRED INTO
+SCRIPT 22 AND SCRIPT 15 in a later commit (2026-09-10) using the two small
+per-layer files this script produces (trigger1_panel_weekly.csv,
+cdi_panel_weekly.csv) as their source -- see those scripts for the current
+production join. This paragraph describes what THIS script does and does
+not do; it is not a statement about the pipeline's current end-to-end state.
 
 LAYERS AND THEIR JOIN LOGIC:
 
@@ -207,6 +210,6 @@ for label, sub in [('Trigger-1 (Kharif 2022+)', kharif_2022plus), ('IDM CDI (202
         pct = 100 * cov / total if total else float('nan')
         print(f'    {crop:8s}: {pct:5.1f}%')
 
-print('\nScript 54 complete. Not wired into master_weekly_panel_all_layers.csv --')
-print('that\'s a deliberate separate step (would touch the production ablation/model')
-print('pipeline) and needs its own go-ahead.')
+print('\nScript 54 complete. (M7 was wired into Script 22/15 in a later commit,')
+print('using this script\'s two per-layer output files -- see those scripts for')
+print('the current production join; this run only validates the join in isolation.)')

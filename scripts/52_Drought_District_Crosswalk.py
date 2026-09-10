@@ -288,7 +288,7 @@ full_panel = pd.read_csv(PANEL_FILE,
                                    'arrivals_tonnes_week', 'imputed'])
 full_panel['week_start'] = pd.to_datetime(full_panel['week_start'])
 cutoff = full_panel['week_start'].max() - pd.Timedelta(days=365)
-recent = full_panel[(full_panel['week_start'] >= cutoff) & (~full_panel['imputed'])]
+recent = full_panel[(full_panel['week_start'] >= cutoff) & (full_panel['imputed'] == 0)]
 
 usable = set(zip(cw.loc[cw['match_type'].isin(['exact', 'alias', 'fuzzy']), 'state'],
                   cw.loc[cw['match_type'].isin(['exact', 'alias', 'fuzzy']), 'panel_district']))

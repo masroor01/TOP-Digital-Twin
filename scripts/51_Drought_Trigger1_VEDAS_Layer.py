@@ -204,16 +204,31 @@ def cache_path(state_code, date_obj):
     return os.path.join(CACHE_DIR, f'{state_code}_{date_obj.strftime("%Y%m%d")}.json')
 
 
+# Statuses safe to cache permanently: a real answer ('ok'), or a stable,
+# expected non-answer ('empty_response' -- confirmed in Script 51's own
+# validation to mean "not a valid fortnight date", which is a fact about
+# the calendar, not about that request). Everything else (network errors,
+# unexpected HTTP codes, malformed JSON) is presumed transient and is
+# retried on the next run rather than being written to the cache -- caught
+# in review: the original version cached every status indiscriminately, so
+# a single one-off network blip during a ~270-fetch run would have been
+# permanently misremembered as "no data" on every future re-run.
+CACHEABLE_STATUSES = {'ok', 'empty_response'}
+
+
 def fetch_cached(state_code, date_obj, session):
-    """Fetch through a per-(state,date) JSON cache so re-runs don't re-hit the API."""
+    """Fetch through a per-(state,date) JSON cache so re-runs don't re-hit the API.
+    Only caches stable outcomes (see CACHEABLE_STATUSES) -- a transient
+    failure is retried on the next run instead of being stuck forever."""
     path = cache_path(state_code, date_obj)
     if os.path.exists(path):
         with open(path, 'r', encoding='utf-8') as f:
             cached = json.load(f)
         return cached['payload'], cached['status']
     payload, status = fetch_trigger1(state_code, date_obj, session)
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump({'payload': payload, 'status': status}, f, ensure_ascii=False)
+    if status in CACHEABLE_STATUSES:
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump({'payload': payload, 'status': status}, f, ensure_ascii=False)
     time.sleep(REQUEST_DELAY_S)
     return payload, status
 

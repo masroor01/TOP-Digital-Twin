@@ -233,7 +233,7 @@ def run_probe():
                                                     'arrivals_tonnes_week', 'imputed'])
     full_panel['week_start'] = pd.to_datetime(full_panel['week_start'])
     cutoff = full_panel['week_start'].max() - pd.Timedelta(days=365)
-    recent = full_panel[(full_panel['week_start'] >= cutoff) & (~full_panel['imputed'])].copy()
+    recent = full_panel[(full_panel['week_start'] >= cutoff) & (full_panel['imputed'] == 0)].copy()
     recent['has_centroid'] = list(zip(recent['state'], recent['district']))
     recent['has_centroid'] = recent['has_centroid'].isin(covered)
     print('  Volume-weighted coverage despite the geocode gap above (last ~12mo, non-imputed):')
