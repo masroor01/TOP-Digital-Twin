@@ -5,12 +5,17 @@ Script 22 — Master Panel Join (All Layers M0-M7)
 Joins every compiled data layer onto the base weekly market panel into a
 single consolidated file. NOTE: this consolidated file is NOT what Script
 15 (the ablation study) actually trains on -- Script 15 loads and joins
-every layer itself, independently, from the same underlying per-layer
-files. This file exists for the eventual full-capacity TFT run and for
-anyone exploring the full joined panel directly; keep both scripts' join
-logic in sync by hand when a layer changes (deliberately not refactored
-into a shared import, to keep each script's provenance self-contained and
-auditable on its own).
+every layer itself, since it layers extra work on top of several joins
+(rolling climate/satellite features, forward-fill, M7 missingness flags)
+that this script deliberately doesn't do. This file exists for the
+eventual full-capacity TFT run and for anyone exploring the full joined
+panel directly.
+
+Both scripts share their actual join mechanics -- file paths, join keys,
+uniqueness assertions, row-count checks -- via `scripts/panel_layers.py`,
+so the two can no longer drift apart on those (see that module's
+docstring for why this was extracted and what's still deliberately
+per-script).
 
 Layers joined, in order, each verified to preserve row count (a left join
 whose right side isn't unique on the join key silently fans out rows —
@@ -44,43 +49,19 @@ Run: python scripts/22_Master_Panel_Join.py
 import os
 import pandas as pd
 import numpy as np
+import panel_layers as pl
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-PANEL_FILE   = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
-CMIE_FILE    = os.path.join(BASE, 'data', 'cmie_macro', 'cmie_macro_2017_2025.csv')
-RBI_FILE     = os.path.join(BASE, 'data', 'rbi_dbie', 'rbi_dbie_macro_2017_2025.csv')
-PPAC_FILE    = os.path.join(BASE, 'data', 'ppac_macro', 'ppac_diesel_lpg_2017_2025.csv')
-SAT_FILE     = os.path.join(BASE, 'data', 'satellite_climate', 'crop_weekly_features.csv')
-WAGE_FILE    = os.path.join(BASE, 'data', 'labour_wages', 'wage_agri_state_monthly.csv')
-COLD_FILE    = os.path.join(BASE, 'data', 'infrastructure', 'cold_storage_by_state.csv')
-ROAD_FILE    = os.path.join(BASE, 'data', 'infrastructure', 'road_density_state_annual.csv')
-POLICY_FILE  = os.path.join(BASE, 'data', 'policy_trade', 'policy_weekly_features.csv')
-TRIGGER1_FILE = os.path.join(BASE, 'data', 'drought_vedas', 'trigger1_panel_weekly.csv')
-IDM_FILE      = os.path.join(BASE, 'data', 'drought_idm', 'cdi_panel_weekly.csv')
-
-OUT_DIR  = os.path.join(BASE, 'data')
-OUT_FILE = os.path.join(OUT_DIR, 'master_weekly_panel_all_layers.csv')
+PANEL_FILE = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
+OUT_DIR    = os.path.join(BASE, 'data')
+OUT_FILE   = os.path.join(OUT_DIR, 'master_weekly_panel_all_layers.csv')
 
 PANEL_START = '2017-01-01'
 PANEL_END   = '2030-12-31'  # generous future ceiling, not a real cutoff — matches
                              # Script 23's pattern so new data isn't silently truncated
 
-
-def checked_merge(left, right, on, how, label):
-    """Left-join that asserts row count is preserved, catching silent
-    fan-out from a non-unique join key on the right side."""
-    n_before = len(left)
-    merged = left.merge(right, on=on, how=how)
-    n_after = len(merged)
-    status = 'OK' if n_after == n_before else 'ROW COUNT CHANGED'
-    print(f'  [{label}] join on {on}: {n_before:,} -> {n_after:,} rows  [{status}]')
-    if n_after != n_before:
-        raise ValueError(
-            f'{label}: row count changed from {n_before:,} to {n_after:,} after '
-            f'joining on {on} — the right-hand table is not unique on that key. '
-            f'Fix the source file or the join key before proceeding.')
-    return merged
+checked_merge = pl.checked_merge  # re-exported for the diagnostics block below
 
 
 print('=' * 65)
@@ -98,78 +79,47 @@ print(f'  Base panel: {len(df):,} rows')
 # M2 — Macro (CMIE + RBI + PPAC), join key (year, month)
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[2] Joining macro (M2): CMIE + RBI + PPAC on (year, month) ...')
-macro_dfs = []
-for fpath in [CMIE_FILE, RBI_FILE, PPAC_FILE]:
-    if os.path.exists(fpath):
-        macro_dfs.append(pd.read_csv(fpath))
-macro = macro_dfs[0]
-for m in macro_dfs[1:]:
-    macro = macro.merge(m, on=['year', 'month'], how='outer', suffixes=('', '_dup'))
-    dup_cols = [c for c in macro.columns if c.endswith('_dup')]
-    if dup_cols:
-        print(f'  WARNING: dropping overlapping macro columns from a later source: {dup_cols}')
-    macro = macro[[c for c in macro.columns if not c.endswith('_dup')]]
-macro = macro.drop(columns=[c for c in ['date', 'date_x', 'date_y'] if c in macro.columns])
-assert macro[['year', 'month']].duplicated().sum() == 0, 'macro table has duplicate (year,month) rows'
-df = checked_merge(df, macro, on=['year', 'month'], how='left', label='M2 macro')
+df, macro_cols = pl.join_macro(df)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # M3/M4 — Climate + Satellite, join key (crop, week_start)
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[3] Joining climate/satellite (M3/M4) on (crop, week_start) ...')
-sat = pd.read_csv(SAT_FILE, parse_dates=['week_start'])
-assert sat[['crop', 'week_start']].duplicated().sum() == 0, 'satellite table has duplicate (crop,week_start) rows'
+sat = pl.load_satellite_climate()
 df = checked_merge(df, sat, on=['crop', 'week_start'], how='left', label='M3/M4 climate/satellite')
 
 # ─────────────────────────────────────────────────────────────────────────────
 # M5a — Rural wages, join key (state, year, month)
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[4] Joining rural wages (M5a) on (state, year, month) ...')
-wages = pd.read_csv(WAGE_FILE)[['state', 'year', 'month', 'wage_agri_men', 'wage_agri_women']]
-assert wages[['state', 'year', 'month']].duplicated().sum() == 0, 'wage table has duplicate keys'
-df = checked_merge(df, wages, on=['state', 'year', 'month'], how='left', label='M5a wages')
+df, _ = pl.join_wages(df)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # M5b — Cold storage, join key (state) — static
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[5] Joining cold storage (M5b) on (state) [static] ...')
-cold = pd.read_csv(COLD_FILE)[['state', 'n_facilities', 'capacity_mt']]
-cold = cold.rename(columns={'n_facilities': 'cold_storage_n_facilities',
-                             'capacity_mt': 'cold_storage_capacity_mt'})
-assert cold['state'].duplicated().sum() == 0, 'cold storage table has duplicate state rows'
-df = checked_merge(df, cold, on=['state'], how='left', label='M5b cold storage')
+df, _ = pl.join_cold_storage(df)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # M5c — Road density, join key (state, year)
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[6] Joining road density (M5c) on (state, year) ...')
-road = pd.read_csv(ROAD_FILE)[['state', 'year', 'road_density_per_100_sqkm']]
-assert road[['state', 'year']].duplicated().sum() == 0, 'road density table has duplicate (state,year) rows'
-df = checked_merge(df, road, on=['state', 'year'], how='left', label='M5c road density')
+df, _ = pl.join_road_density(df)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # M6 — Policy/trade events, join key (crop, week_start)
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[7] Joining policy/trade (M6) on (crop, week_start) ...')
-policy = pd.read_csv(POLICY_FILE, parse_dates=['week_start'])
-assert policy[['crop', 'week_start']].duplicated().sum() == 0, 'policy table has duplicate (crop,week_start) rows'
-df = checked_merge(df, policy, on=['crop', 'week_start'], how='left', label='M6 policy')
+df, _ = pl.join_policy(df)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # M7 — Drought (VEDAS Trigger-1 + IDM CDI), join key (state, district, week_start)
+# add_missing_flags=False: this file is for open-ended exploration, so keep
+# the raw trigger1_yn/drought_category columns instead of Script 15's
+# model-oriented missingness flags.
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[7b] Joining drought (M7): VEDAS Trigger-1 + IDM CDI on (state, district, week_start) ...')
-trigger1 = pd.read_csv(TRIGGER1_FILE, parse_dates=['week_start'])[
-    ['state', 'district', 'week_start', 'trigger1_yn', 'trigger1']]
-assert trigger1[['state', 'district', 'week_start']].duplicated().sum() == 0, \
-    'trigger1 table has duplicate (state,district,week_start) rows'
-df = checked_merge(df, trigger1, on=['state', 'district', 'week_start'], how='left', label='M7a Trigger-1')
-
-idm = pd.read_csv(IDM_FILE, parse_dates=['week_start'])[
-    ['state', 'district', 'week_start', 'cdi', 'drought_category']]
-assert idm[['state', 'district', 'week_start']].duplicated().sum() == 0, \
-    'IDM CDI table has duplicate (state,district,week_start) rows'
-df = checked_merge(df, idm, on=['state', 'district', 'week_start'], how='left', label='M7b IDM CDI')
+df, _ = pl.join_drought(df, add_missing_flags=False)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -177,7 +127,7 @@ df = checked_merge(df, idm, on=['state', 'district', 'week_start'], how='left', 
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[8] Missing-value check per joined layer ...')
 LAYER_COLS = {
-    'M2 macro':      [c for c in macro.columns if c not in ('year', 'month')],
+    'M2 macro':      macro_cols,
     'M3/M4 climate/sat': [c for c in sat.columns if c not in ('crop', 'week_start')],
     'M5a wages':     ['wage_agri_men', 'wage_agri_women'],
     'M5b cold storage': ['cold_storage_n_facilities', 'cold_storage_capacity_mt'],

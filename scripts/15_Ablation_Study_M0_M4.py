@@ -48,6 +48,7 @@ import io, os, sys, time, warnings
 import pandas as pd
 import numpy as np
 import lightgbm as lgb
+import panel_layers as pl
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -61,16 +62,19 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 # ─────────────────────────────────────────────────────────────────────────────
 BASE     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AGM_FILE = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
-CMIE_FILE= os.path.join(BASE, 'data', 'cmie_macro',      'cmie_macro_2017_2025.csv')
-RBI_FILE = os.path.join(BASE, 'data', 'rbi_dbie',        'rbi_dbie_macro_2017_2025.csv')
-PPAC_FILE= os.path.join(BASE, 'data', 'ppac_macro',      'ppac_diesel_lpg_2017_2025.csv')
-SAT_FILE = os.path.join(BASE, 'data', 'satellite_climate', 'crop_weekly_features.csv')
-WAGE_FILE  = os.path.join(BASE, 'data', 'labour_wages',   'wage_agri_state_monthly.csv')
-COLD_FILE  = os.path.join(BASE, 'data', 'infrastructure', 'cold_storage_by_state.csv')
-ROAD_FILE  = os.path.join(BASE, 'data', 'infrastructure', 'road_density_state_annual.csv')
-POLICY_FILE= os.path.join(BASE, 'data', 'policy_trade',   'policy_weekly_features.csv')
-TRIGGER1_LAYER_FILE = os.path.join(BASE, 'data', 'drought_vedas', 'trigger1_panel_weekly.csv')
-IDM_LAYER_FILE      = os.path.join(BASE, 'data', 'drought_idm',   'cdi_panel_weekly.csv')
+# Layer file paths now live in one place (scripts/panel_layers.py), shared
+# with Script 22 -- aliased locally so the rest of this script (ffill
+# blocks, existence checks) doesn't need touching.
+CMIE_FILE = pl.CMIE_FILE
+RBI_FILE  = pl.RBI_FILE
+PPAC_FILE = pl.PPAC_FILE
+SAT_FILE  = pl.SAT_FILE
+WAGE_FILE   = pl.WAGE_FILE
+COLD_FILE   = pl.COLD_FILE
+ROAD_FILE   = pl.ROAD_FILE
+POLICY_FILE = pl.POLICY_FILE
+TRIGGER1_LAYER_FILE = pl.TRIGGER1_FILE
+IDM_LAYER_FILE      = pl.IDM_FILE
 OUT_DIR  = os.path.join(BASE, 'Model_Output')
 os.makedirs(OUT_DIR, exist_ok=True)
 
@@ -220,11 +224,11 @@ plt.rcParams.update({
 # 2. LOAD PANEL + MACRO
 # ─────────────────────────────────────────────────────────────────────────────
 print('='*65)
-print('SCRIPT 15: ABLATION STUDY  M0 → M6')
+print('SCRIPT 15: ABLATION STUDY  M0 → M7')
 print('='*65)
 print(f'  Fast mode : {FAST_MODE}')
 print(f'  Horizons  : {HORIZONS_RUN}')
-print(f'  Total fits: {7 * len(FOLDS) * len(HORIZONS_RUN) * len(CROPS)}\n')
+print(f'  Total fits: {8 * len(FOLDS) * len(HORIZONS_RUN) * len(CROPS)}\n')
 
 print('[1] Loading panel ...')
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
@@ -235,23 +239,8 @@ df['month'] = df['week_start'].dt.month
 print(f'   Panel: {len(df):,} rows')
 
 # Macro join
-macro_dfs = []
-for fpath in [CMIE_FILE, RBI_FILE, PPAC_FILE]:
-    if os.path.exists(fpath):
-        m = pd.read_csv(fpath)
-        macro_dfs.append(m)
-
-MACRO_COLS = []
-if macro_dfs:
-    macro = macro_dfs[0]
-    for m in macro_dfs[1:]:
-        macro = macro.merge(m, on=['year', 'month'], how='outer',
-                            suffixes=('', '_dup'))
-        macro = macro[[c for c in macro.columns if not c.endswith('_dup')]]
-    drop_cols = [c for c in ['date', 'date_x', 'date_y'] if c in macro.columns]
-    df = df.merge(macro.drop(columns=drop_cols, errors='ignore'),
-                  on=['year', 'month'], how='left')
-    MACRO_COLS = [c for c in macro.columns if c not in ('date', 'year', 'month')]
+df, MACRO_COLS = pl.join_macro(df, verbose=False)
+if MACRO_COLS:
     print(f'   Macro joined: {len(MACRO_COLS)} series → {MACRO_COLS}')
 
 
@@ -260,16 +249,12 @@ if macro_dfs:
 # ─────────────────────────────────────────────────────────────────────────────
 print('\n[2] Loading satellite/climate features (Script 14 output) ...')
 
-sat = pd.read_csv(SAT_FILE, parse_dates=['week_start'])
+sat = pl.load_satellite_climate()
 sat = sat.sort_values(['crop', 'week_start']).reset_index(drop=True)
 
-# Raw climate/satellite columns from Script 14
-ERA5_COLS   = ['era5_tmax', 'era5_tmin', 'era5_tmean', 'era5_dtr',
-               'era5_heat_35', 'era5_heat_38']
-CHIRPS_COLS = ['chirps_rain_mm', 'chirps_rain_max', 'chirps_excess']
-S2_COLS     = ['s2_ndvi', 's2_evi', 's2_valid_frac', 's2_ndvi_anom']
-MODIS_COLS  = ['modis_ndvi', 'modis_evi', 'modis_lst_mean', 'modis_lst_max',
-               'modis_lst_frac35']
+# Raw climate/satellite column groups -- shared with Script 22 via panel_layers
+ERA5_COLS, CHIRPS_COLS, S2_COLS, MODIS_COLS = (
+    pl.ERA5_COLS, pl.CHIRPS_COLS, pl.S2_COLS, pl.MODIS_COLS)
 
 # Rolling aggregates (computed at crop × time level, shift(1) to avoid leakage)
 roll_specs = [
@@ -302,7 +287,8 @@ SAT_FEATS     += [c for c in roll_cols if any(s in c for s in ['s2_', 'modis_'])
 
 # Join to panel
 join_cols = ['week_start', 'crop'] + CLIMATE_FEATS + SAT_FEATS
-df = df.merge(sat[join_cols], on=['crop', 'week_start'], how='left')
+df = pl.checked_merge(df, sat[join_cols], on=['crop', 'week_start'], how='left',
+                       label='M3/M4 climate/satellite', verbose=False)
 print(f'   Climate features  : {len(CLIMATE_FEATS)} → {CLIMATE_FEATS}')
 print(f'   Satellite features: {len(SAT_FEATS)} → {SAT_FEATS}')
 print(f'   Panel after join  : {len(df):,} rows  |  {df.shape[1]} columns')
@@ -316,92 +302,38 @@ print(f'   S2 NDVI coverage  : {df["s2_ndvi"].notna().mean():.1%}')
 print('\n[2b] Loading infrastructure (M5) + policy/trade (M6) layers ...')
 
 
-def assert_unique(frame, keys, label):
-    n_dup = frame[keys].duplicated().sum()
-    if n_dup:
-        raise ValueError(f'{label}: {n_dup} duplicate rows on {keys} — '
-                          f'join would silently fan out the panel.')
-
-
-INFRA_FEATS  = []
-POLICY_FEATS = []
-
-if os.path.exists(WAGE_FILE):
-    wages = pd.read_csv(WAGE_FILE)[['state', 'year', 'month', 'wage_agri_men', 'wage_agri_women']]
-    assert_unique(wages, ['state', 'year', 'month'], 'wages')
-    n_before = len(df)
-    df = df.merge(wages, on=['state', 'year', 'month'], how='left')
-    assert len(df) == n_before, 'wages join changed row count'
-    INFRA_FEATS += ['wage_agri_men', 'wage_agri_women']
+df, wage_feats = pl.join_wages(df, verbose=False)
+if wage_feats:
     print(f'   Wages joined      : {df["wage_agri_men"].notna().mean():.1%} coverage')
 
-if os.path.exists(COLD_FILE):
-    cold = pd.read_csv(COLD_FILE)[['state', 'n_facilities', 'capacity_mt']]
-    cold = cold.rename(columns={'n_facilities': 'cold_storage_n_facilities',
-                                 'capacity_mt': 'cold_storage_capacity_mt'})
-    assert_unique(cold, ['state'], 'cold storage')
-    n_before = len(df)
-    df = df.merge(cold, on=['state'], how='left')
-    assert len(df) == n_before, 'cold storage join changed row count'
-    INFRA_FEATS += ['cold_storage_n_facilities', 'cold_storage_capacity_mt']
+df, cold_feats = pl.join_cold_storage(df, verbose=False)
+if cold_feats:
     print(f'   Cold storage joined: {df["cold_storage_n_facilities"].notna().mean():.1%} coverage')
 
-if os.path.exists(ROAD_FILE):
-    road = pd.read_csv(ROAD_FILE)[['state', 'year', 'road_density_per_100_sqkm']]
-    assert_unique(road, ['state', 'year'], 'road density')
-    n_before = len(df)
-    df = df.merge(road, on=['state', 'year'], how='left')
-    assert len(df) == n_before, 'road density join changed row count'
-    INFRA_FEATS += ['road_density_per_100_sqkm']
+df, road_feats = pl.join_road_density(df, verbose=False)
+if road_feats:
     print(f'   Road density joined: {df["road_density_per_100_sqkm"].notna().mean():.1%} coverage')
 
-if os.path.exists(POLICY_FILE):
-    policy = pd.read_csv(POLICY_FILE, parse_dates=['week_start'])
-    policy_cols = ['export_banned', 'mep_usd_per_tonne', 'export_duty_pct',
-                   'market_intervention_flag', 'operation_greens_active']
-    policy = policy[['crop', 'week_start'] + policy_cols]
-    assert_unique(policy, ['crop', 'week_start'], 'policy')
-    n_before = len(df)
-    df = df.merge(policy, on=['crop', 'week_start'], how='left')
-    assert len(df) == n_before, 'policy join changed row count'
-    POLICY_FEATS += policy_cols
+INFRA_FEATS = wage_feats + cold_feats + road_feats
+
+df, POLICY_FEATS = pl.join_policy(df, verbose=False)
+if POLICY_FEATS:
     print(f'   Policy joined     : {df["export_banned"].notna().mean():.1%} coverage')
 
-DROUGHT_FEATS = []
-
-if os.path.exists(TRIGGER1_LAYER_FILE):
-    t1 = pd.read_csv(TRIGGER1_LAYER_FILE, parse_dates=['week_start'])[
-        ['state', 'district', 'week_start', 'trigger1']]
-    assert_unique(t1, ['state', 'district', 'week_start'], 'trigger1')
-    n_before = len(df)
-    df = df.merge(t1, on=['state', 'district', 'week_start'], how='left')
-    assert len(df) == n_before, 'trigger1 join changed row count'
-    # NOT forward-filled -- unlike M5's wage/road tail gaps, Trigger-1's
-    # gaps are core coverage (whole off-season stretches, whole pre-2022
-    # years), so ffill would fabricate a "no drought" reading for periods
-    # the source never covered. An explicit missingness flag instead, so
-    # the downstream fillna(0) reads as "no reading available", not
-    # "confirmed not triggered", once the model sees the flag.
-    df['trigger1_missing'] = df['trigger1'].isna().astype(int)
-    DROUGHT_FEATS += ['trigger1', 'trigger1_missing']
+# NOT forward-filled -- unlike M5's wage/road tail gaps, drought's gaps are
+# core coverage (whole off-season stretches, whole pre-2021/2022 years), so
+# ffill would fabricate a "no drought"/"normal CDI" reading for periods the
+# source never covered. join_drought(add_missing_flags=True) adds an
+# explicit missingness flag per feature instead, so the downstream
+# fillna(0) reads as "no reading available", not "confirmed normal", once
+# the model sees the flag. See Scripts 51-54 for the full rationale.
+df, DROUGHT_FEATS = pl.join_drought(df, add_missing_flags=True, verbose=False)
+if 'trigger1' in DROUGHT_FEATS:
     print(f'   Trigger-1 joined  : {df["trigger1"].notna().mean():.1%} coverage '
           f'(Kharif 2022+, crosswalked districts only -- structurally sparse by design)')
-
-if os.path.exists(IDM_LAYER_FILE):
-    idm = pd.read_csv(IDM_LAYER_FILE, parse_dates=['week_start'])[
-        ['state', 'district', 'week_start', 'cdi']]
-    assert_unique(idm, ['state', 'district', 'week_start'], 'IDM CDI')
-    n_before = len(df)
-    df = df.merge(idm, on=['state', 'district', 'week_start'], how='left')
-    assert len(df) == n_before, 'IDM CDI join changed row count'
-    # Same reasoning as Trigger-1 above: no ffill, missingness flag instead
-    # -- 2017-2021-07-13 rows (before IDM's own start) would otherwise get
-    # a fabricated "near-zero / normal" CDI reading via fillna(0).
-    df['cdi_missing'] = df['cdi'].isna().astype(int)
-    DROUGHT_FEATS += ['cdi', 'cdi_missing']
+if 'cdi' in DROUGHT_FEATS:
     print(f'   IDM CDI joined    : {df["cdi"].notna().mean():.1%} coverage '
           f'(2021-07-14 onward only -- structurally sparse by design)')
-
 print(f'   Drought features (M7)       : {len(DROUGHT_FEATS)} → {DROUGHT_FEATS}')
 
 # Forward-fill infrastructure columns that stop before the panel's own end
@@ -601,12 +533,17 @@ if MARKET_LEVEL_DIAGNOSTIC:
     a, b = DIAGNOSTIC_PAIR
     MODEL_FEATURE_SETS = {a: MODEL_FEATURE_SETS[a], b: MODEL_FEATURE_SETS[b]}
 
+# The richest variant actually present in THIS run -- 'M7' for a normal
+# full pass, but MARKET_LEVEL_DIAGNOSTIC can trim MODEL_FEATURE_SETS down
+# to just DIAGNOSTIC_PAIR (e.g. M0/M6), in which case 'M7' may not exist.
+# Found via a crash: hardcoding 'M7' here broke the M0/M6 diagnostic path.
+richest_variant = max(MODEL_FEATURE_SETS, key=lambda v: len(MODEL_FEATURE_SETS[v]))
 for crop in CROPS:
     df_crop = feat[crop]
-    all_possible = MODEL_FEATURE_SETS['M7']
+    all_possible = MODEL_FEATURE_SETS[richest_variant]
     available = [c for c in all_possible if c in df_crop.columns]
     print(f'   {crop:8s}: {len(df_crop):>8,} rows  | '
-          f'M7 features available: {len(available)}/{len(all_possible)}')
+          f'{richest_variant} features available: {len(available)}/{len(all_possible)}')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -632,7 +569,7 @@ def compute_metrics(y_true_log, y_pred_log):
 # ─────────────────────────────────────────────────────────────────────────────
 # 6. ABLATION TRAINING LOOP
 # ─────────────────────────────────────────────────────────────────────────────
-print('\n[4] Running ablation: M0 → M6 ...')
+print('\n[4] Running ablation: M0 → M7 ...')
 print(f'    {len(MODEL_FEATURE_SETS)} variants × {len(FOLDS)} folds × '
       f'{len(HORIZONS_RUN)} horizons × {len(CROPS)} crops = '
       f'{len(MODEL_FEATURE_SETS)*len(FOLDS)*len(HORIZONS_RUN)*len(CROPS)} model fits\n')
