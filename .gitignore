@@ -123,3 +123,15 @@ Model_Output/experiments/two_phase/table_twophase_combined_predictions.csv
 scripts/weekly_refresh/staging/
 logs/weekly_refresh/
 *.csv.backup_*
+
+# Drought layers (Scripts 51-54): raw per-request API/grid caches, one file
+# per (state, fortnight) or per week — regenerate via Scripts 51/53, not
+# meaningful to track individually (same pattern as data/satellite_climate/raw/).
+data/drought_vedas/raw_cache/
+data/drought_idm/raw_cache/
+
+# Demonstration join of both drought layers onto the full market panel (61 MB)
+# Regenerate with: python scripts/54_Drought_Layers_Panel_Join.py
+# The small per-layer files (trigger1_panel_weekly.csv, cdi_panel_weekly.csv)
+# that actually feed Script 22/15 are still tracked -- only this demo file is excluded.
+data/agmarknet_weekly/top_weekly_panel_with_drought.csv

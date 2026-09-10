@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Script 22 — Master Panel Join (All Layers M0-M6)
+Script 22 — Master Panel Join (All Layers M0-M7)
 ====================================================
 Joins every compiled data layer onto the base weekly market panel into a
-single consolidated file — the input for extending the ablation study
-(Script 15) from M0-M4 to M0-M6, and for the eventual full-capacity TFT run.
+single consolidated file. NOTE: this consolidated file is NOT what Script
+15 (the ablation study) actually trains on -- Script 15 loads and joins
+every layer itself, independently, from the same underlying per-layer
+files. This file exists for the eventual full-capacity TFT run and for
+anyone exploring the full joined panel directly; keep both scripts' join
+logic in sync by hand when a layer changes (deliberately not refactored
+into a shared import, to keep each script's provenance self-contained and
+auditable on its own).
 
 Layers joined, in order, each verified to preserve row count (a left join
 whose right side isn't unique on the join key silently fans out rows —
@@ -18,6 +24,16 @@ corrupted panel):
   M5b       cold_storage_by_state.csv              join key: (state)          [static]
   M5c       road_density_state_annual.csv          join key: (state, year)
   M6        policy_weekly_features.csv             join key: (crop, week_start)
+  M7a       trigger1_panel_weekly.csv (VEDAS)      join key: (state, district, week_start)
+  M7b       cdi_panel_weekly.csv (IDM)             join key: (state, district, week_start)
+
+M7 columns are structurally sparse by design (Trigger-1: Kharif-season
+weeks, 2022+, crosswalked districts only; IDM CDI: 2021-07-14 onward) --
+see Script 51/52/53/54 for why. This script does not forward-fill or
+impute them; it joins them as-is, NaN where a layer has no reading for
+that district/week. Whoever consumes this file needs to decide how to
+handle that sparsity for their own purpose -- Script 15 handles it via an
+explicit missingness-flag column per drought feature, not a blind fillna.
 
 Output:
   data/master_weekly_panel_all_layers.csv
@@ -40,6 +56,8 @@ WAGE_FILE    = os.path.join(BASE, 'data', 'labour_wages', 'wage_agri_state_month
 COLD_FILE    = os.path.join(BASE, 'data', 'infrastructure', 'cold_storage_by_state.csv')
 ROAD_FILE    = os.path.join(BASE, 'data', 'infrastructure', 'road_density_state_annual.csv')
 POLICY_FILE  = os.path.join(BASE, 'data', 'policy_trade', 'policy_weekly_features.csv')
+TRIGGER1_FILE = os.path.join(BASE, 'data', 'drought_vedas', 'trigger1_panel_weekly.csv')
+IDM_FILE      = os.path.join(BASE, 'data', 'drought_idm', 'cdi_panel_weekly.csv')
 
 OUT_DIR  = os.path.join(BASE, 'data')
 OUT_FILE = os.path.join(OUT_DIR, 'master_weekly_panel_all_layers.csv')
@@ -66,7 +84,7 @@ def checked_merge(left, right, on, how, label):
 
 
 print('=' * 65)
-print('SCRIPT 22: MASTER PANEL JOIN (ALL LAYERS M0-M6)')
+print('SCRIPT 22: MASTER PANEL JOIN (ALL LAYERS M0-M7)')
 print('=' * 65)
 
 print('\n[1] Loading base panel ...')
@@ -137,6 +155,22 @@ policy = pd.read_csv(POLICY_FILE, parse_dates=['week_start'])
 assert policy[['crop', 'week_start']].duplicated().sum() == 0, 'policy table has duplicate (crop,week_start) rows'
 df = checked_merge(df, policy, on=['crop', 'week_start'], how='left', label='M6 policy')
 
+# ─────────────────────────────────────────────────────────────────────────────
+# M7 — Drought (VEDAS Trigger-1 + IDM CDI), join key (state, district, week_start)
+# ─────────────────────────────────────────────────────────────────────────────
+print('\n[7b] Joining drought (M7): VEDAS Trigger-1 + IDM CDI on (state, district, week_start) ...')
+trigger1 = pd.read_csv(TRIGGER1_FILE, parse_dates=['week_start'])[
+    ['state', 'district', 'week_start', 'trigger1_yn', 'trigger1']]
+assert trigger1[['state', 'district', 'week_start']].duplicated().sum() == 0, \
+    'trigger1 table has duplicate (state,district,week_start) rows'
+df = checked_merge(df, trigger1, on=['state', 'district', 'week_start'], how='left', label='M7a Trigger-1')
+
+idm = pd.read_csv(IDM_FILE, parse_dates=['week_start'])[
+    ['state', 'district', 'week_start', 'cdi', 'drought_category']]
+assert idm[['state', 'district', 'week_start']].duplicated().sum() == 0, \
+    'IDM CDI table has duplicate (state,district,week_start) rows'
+df = checked_merge(df, idm, on=['state', 'district', 'week_start'], how='left', label='M7b IDM CDI')
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 8. MISSING-VALUE DIAGNOSTICS
@@ -149,6 +183,7 @@ LAYER_COLS = {
     'M5b cold storage': ['cold_storage_n_facilities', 'cold_storage_capacity_mt'],
     'M5c road density': ['road_density_per_100_sqkm'],
     'M6 policy':     ['export_banned', 'mep_usd_per_tonne', 'export_duty_pct'],
+    'M7 drought':    ['trigger1', 'cdi'],
 }
 for label, cols in LAYER_COLS.items():
     present = [c for c in cols if c in df.columns]
@@ -168,5 +203,4 @@ print(f'  Final shape: {df.shape[0]:,} rows x {df.shape[1]} columns')
 
 print('\n' + '=' * 65)
 print('Script 22 complete.')
-print('\nNext: extend Script 15 (ablation study) to build M5 (+ wages/cold')
-print('storage/roads) and M6 (+ export policy) variants from this file.')
+print('\nM7 (drought) columns are structurally sparse (see docstring) -- not a bug.')

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Script 15 — Ablation Study: M0 → M6
+Script 15 — Ablation Study: M0 → M7
 =====================================
-Trains 7 progressively richer LightGBM variants on the same rolling-origin
+Trains 8 progressively richer LightGBM variants on the same rolling-origin
 CV framework as Script 12, adding one data layer at a time:
 
   M0  Price features only (lags, rolling stats, seasonality, market encoding)
@@ -12,8 +12,21 @@ CV framework as Script 12, adding one data layer at a time:
   M4  + Satellite vegetation (Sentinel-2 NDVI/EVI + MODIS NDVI/LST + rolling)
   M5  + Infrastructure (state-wise agri wages, cold storage, road density)
   M6  + Policy/trade (export ban/MEP/duty, market interventions, Operation Greens)
+  M7  + Drought (VEDAS Trigger-1 + IDM CDI, district-level; see note below)
 
-Each variant × 4 folds × 4 horizons × 3 crops = 336 LightGBM model fits.
+M7 is structurally sparse by design (Trigger-1: Kharif weeks 2022+ only,
+crosswalked districts only; IDM CDI: 2021-07-14 onward only) -- unlike
+M5/M6's sparsity, which was a genuine "series hasn't updated recently" tail
+gap fixed with forward-fill, M7's gaps are core coverage (whole seasons,
+whole pre-2021/2022 years) where forward-filling would fabricate a signal
+("no drought" or a stale CDI reading) for a period the source never
+covered. So M7 uses an explicit per-feature missingness flag
+(trigger1_missing, cdi_missing) instead of forward-fill, and leaves the
+value column NaN -> fillna(0) at matrix-build time same as every other
+feature; the missingness flag lets the model tell "0 = confirmed normal"
+apart from "0 = no reading".
+
+Each variant × 4 folds × 4 horizons × 3 crops = 384 LightGBM model fits.
 
 Compare against B1 Naive Persistence from Script 13.
 
@@ -56,6 +69,8 @@ WAGE_FILE  = os.path.join(BASE, 'data', 'labour_wages',   'wage_agri_state_month
 COLD_FILE  = os.path.join(BASE, 'data', 'infrastructure', 'cold_storage_by_state.csv')
 ROAD_FILE  = os.path.join(BASE, 'data', 'infrastructure', 'road_density_state_annual.csv')
 POLICY_FILE= os.path.join(BASE, 'data', 'policy_trade',   'policy_weekly_features.csv')
+TRIGGER1_LAYER_FILE = os.path.join(BASE, 'data', 'drought_vedas', 'trigger1_panel_weekly.csv')
+IDM_LAYER_FILE      = os.path.join(BASE, 'data', 'drought_idm',   'cdi_panel_weekly.csv')
 OUT_DIR  = os.path.join(BASE, 'Model_Output')
 os.makedirs(OUT_DIR, exist_ok=True)
 
@@ -179,6 +194,7 @@ CROP_COLORS = {'tomato': '#E63946', 'onion': '#F4A261', 'potato': '#457B9D'}
 VARIANT_COLORS = {
     'M0': '#adb5bd', 'M1': '#74c0fc', 'M2': '#51cf66',
     'M3': '#ff922b', 'M4': '#cc5de8', 'M5': '#20c997', 'M6': '#e64980',
+    'M7': '#795548',
 }
 VARIANT_LABELS = {
     'M0': 'M0 Price only',
@@ -188,6 +204,7 @@ VARIANT_LABELS = {
     'M4': 'M4 + Satellite',
     'M5': 'M5 + Infrastructure',
     'M6': 'M6 + Policy/Trade',
+    'M7': 'M7 + Drought',
 }
 
 LAG_WEEKS = [1, 2, 3, 4, 8, 13, 26, 52]
@@ -349,6 +366,43 @@ if os.path.exists(POLICY_FILE):
     assert len(df) == n_before, 'policy join changed row count'
     POLICY_FEATS += policy_cols
     print(f'   Policy joined     : {df["export_banned"].notna().mean():.1%} coverage')
+
+DROUGHT_FEATS = []
+
+if os.path.exists(TRIGGER1_LAYER_FILE):
+    t1 = pd.read_csv(TRIGGER1_LAYER_FILE, parse_dates=['week_start'])[
+        ['state', 'district', 'week_start', 'trigger1']]
+    assert_unique(t1, ['state', 'district', 'week_start'], 'trigger1')
+    n_before = len(df)
+    df = df.merge(t1, on=['state', 'district', 'week_start'], how='left')
+    assert len(df) == n_before, 'trigger1 join changed row count'
+    # NOT forward-filled -- unlike M5's wage/road tail gaps, Trigger-1's
+    # gaps are core coverage (whole off-season stretches, whole pre-2022
+    # years), so ffill would fabricate a "no drought" reading for periods
+    # the source never covered. An explicit missingness flag instead, so
+    # the downstream fillna(0) reads as "no reading available", not
+    # "confirmed not triggered", once the model sees the flag.
+    df['trigger1_missing'] = df['trigger1'].isna().astype(int)
+    DROUGHT_FEATS += ['trigger1', 'trigger1_missing']
+    print(f'   Trigger-1 joined  : {df["trigger1"].notna().mean():.1%} coverage '
+          f'(Kharif 2022+, crosswalked districts only -- structurally sparse by design)')
+
+if os.path.exists(IDM_LAYER_FILE):
+    idm = pd.read_csv(IDM_LAYER_FILE, parse_dates=['week_start'])[
+        ['state', 'district', 'week_start', 'cdi']]
+    assert_unique(idm, ['state', 'district', 'week_start'], 'IDM CDI')
+    n_before = len(df)
+    df = df.merge(idm, on=['state', 'district', 'week_start'], how='left')
+    assert len(df) == n_before, 'IDM CDI join changed row count'
+    # Same reasoning as Trigger-1 above: no ffill, missingness flag instead
+    # -- 2017-2021-07-13 rows (before IDM's own start) would otherwise get
+    # a fabricated "near-zero / normal" CDI reading via fillna(0).
+    df['cdi_missing'] = df['cdi'].isna().astype(int)
+    DROUGHT_FEATS += ['cdi', 'cdi_missing']
+    print(f'   IDM CDI joined    : {df["cdi"].notna().mean():.1%} coverage '
+          f'(2021-07-14 onward only -- structurally sparse by design)')
+
+print(f'   Drought features (M7)       : {len(DROUGHT_FEATS)} → {DROUGHT_FEATS}')
 
 # Forward-fill infrastructure columns that stop before the panel's own end
 # date: wage_agri_men/women (wages data ends 2025-12) and
@@ -541,6 +595,7 @@ MODEL_FEATURE_SETS = {
     'M4': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS,
     'M5': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + INFRA_FEATS,
     'M6': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + INFRA_FEATS + POLICY_FEATS,
+    'M7': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + INFRA_FEATS + POLICY_FEATS + DROUGHT_FEATS,
 }
 if MARKET_LEVEL_DIAGNOSTIC:
     a, b = DIAGNOSTIC_PAIR
@@ -548,10 +603,10 @@ if MARKET_LEVEL_DIAGNOSTIC:
 
 for crop in CROPS:
     df_crop = feat[crop]
-    all_possible = MODEL_FEATURE_SETS['M6']
+    all_possible = MODEL_FEATURE_SETS['M7']
     available = [c for c in all_possible if c in df_crop.columns]
     print(f'   {crop:8s}: {len(df_crop):>8,} rows  | '
-          f'M6 features available: {len(available)}/{len(all_possible)}')
+          f'M7 features available: {len(available)}/{len(all_possible)}')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
