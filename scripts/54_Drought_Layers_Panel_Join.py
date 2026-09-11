@@ -25,6 +25,11 @@ LAYERS AND THEIR JOIN LOGIC:
     month), Kharif-season only (mid-Jun to mid-Oct), 2022-2026.
     - Crosswalked to panel (state, district) via Script 52's output;
       'needs_review'/'unmatched' districts are dropped, not guessed.
+    - Where VEDAS carries more than one internal polygon under the same
+      district name (found 2026-09-11: West Bengal's "PURBA MEDINIPUR"
+      resolves to two geoentity IDs every fortnight, disagreeing on 7/42
+      dates), resolved via inclusive-OR -- Yes if any sub-polygon
+      triggered -- not an arbitrary drop_duplicates pick.
     - Each fortnight date mapped to the Monday of its ISO week (same
       to_week_start() convention Script 14 uses for satellite composites).
     - Forward-filled up to 1 week within each (state, district) series --
@@ -125,8 +130,31 @@ t1['week_start'] = to_week_start(t1['date'])
 t1 = t1.rename(columns={'panel_district': 'district'})
 t1['trigger1_yn'] = t1['trigger1']
 t1['trigger1'] = (t1['trigger1_yn'] == 'Yes').astype(int)
-t1 = t1[['state', 'district', 'week_start', 'trigger1_yn', 'trigger1']].drop_duplicates(
-    subset=['state', 'district', 'week_start'])
+
+# VEDAS itself sometimes carries TWO internal district polygons under the
+# identical name (found via review, 2026-09-11): e.g. West Bengal's
+# "PURBA MEDINIPUR" resolves to two different geoentity IDs every
+# fortnight, and they disagree on 7/42 dates in the 2022 season. A plain
+# drop_duplicates(keep='first') would silently pick whichever sub-polygon
+# happened to appear first in VEDAS's JSON key order -- not a real
+# decision. Resolved instead via an explicit, documented rule: treat the
+# panel district as triggered ("Yes") if ANY of its VEDAS sub-polygons
+# triggered that fortnight -- the same inclusive logic official drought
+# assessments use (a district qualifies if any part of it meets the
+# threshold), not an arbitrary pick.
+dup_keys = t1[['state', 'district', 'week_start']].duplicated(keep=False)
+n_dup_rows = dup_keys.sum()
+if n_dup_rows:
+    dup_groups = t1[dup_keys].groupby(['state', 'district', 'week_start'])['trigger1'].nunique()
+    n_conflicting = (dup_groups > 1).sum()
+    print(f'  NOTE: {n_dup_rows} raw rows share a (state,district,week_start) key with at least '
+          f'one other row (VEDAS carries >1 polygon under the same district name) -- '
+          f'{n_conflicting} of those groups actually disagree on Yes/No. '
+          f'Resolved via inclusive-OR (Yes if any sub-polygon triggered).')
+
+t1 = (t1.groupby(['state', 'district', 'week_start'], as_index=False)['trigger1'].max())
+t1['trigger1_yn'] = t1['trigger1'].map({1: 'Yes', 0: 'No'})
+t1 = t1[['state', 'district', 'week_start', 'trigger1_yn', 'trigger1']]
 
 # Full weekly grid per (state, district) so ffill has somewhere to fill INTO,
 # spanning only the district's own observed date range (not the whole panel
