@@ -245,11 +245,14 @@ multi-episode event study)** — both had been missed in the original nine-
 script pass. Consistent with every other instance of this bug in the
 project, re-running 38/39 with the fix produced results **bit-for-bit
 identical** to the pre-fix versions — a confirmed, not assumed, null
-effect on those two analyses specifically. **Scripts 34/35/36 (the
-rejected two-phase architecture) still group by market name and have not
-been re-verified** — low priority since that architecture is already
-rejected regardless of this bug's effect, but genuinely open; see the
-Exploratory table below.
+effect on those two analyses specifically. **Scripts 35/36 (the rejected
+two-phase architecture) were ALSO fixed in this pass** (commit `cacdea5`,
+same day as 38/39) — both group on `market_id` throughout, confirmed by
+reading the current code; this was missed in an earlier write-up of this
+section, corrected 2026-09-13. Script 34 (the panel-join stage) never had
+the bug to begin with — it does no per-market feature engineering. Low
+priority regardless, since the architecture is already rejected on its
+own merits, but no longer an open collision-fix item.
 
 **2026-08-04 decision: the 23-year two-phase residual architecture is
 REJECTED, not "deferred pending a decision."** Script 33's real-but-modest
@@ -417,7 +420,7 @@ Status legend: 🟢 current · 🟡 stale, known, re-run pending · ⚫ deprecat
 ## Known gaps not yet reflected anywhere above
 - Full-capacity TFT run (Script 17) — deferred, see README §9. Also still carries the market-name collision bug (groups by `market`, not `market_id`) — a second, independent reason not to trust its numbers even setting the reduced-scope issue aside.
 - Scripts 12, 13, 15b, 15c, 17, 26 — deferred re-runs, still genuinely open. (18b is **no longer** on this list — re-run 2026-08-15, see its table row above.) These predate not just the 2026-08-01 grid fix but every fix since (policy/PANEL_END, WPI vintage, macro long-history, `s2_ndvi_anom` leakage, the 2026-08-14 market_id collision fix, and the panel's growth from 834/809/82 to 840/814/82 markets).
-- Scripts 34/35/36 (rejected two-phase architecture) — never verified against the market_id collision fix. Low priority given the architecture's already-rejected status, but genuinely open; see their table rows above.
+- ~~Scripts 34/35/36 (rejected two-phase architecture) — never verified against the market_id collision fix~~ — **corrected 2026-09-13**: 35/36 were actually fixed back on 2026-08-20 (commit `cacdea5`, same pass as Scripts 38/39), confirmed by reading the current code (`groupby('market_id')` throughout); 34 never had the bug (no per-market feature engineering). An earlier write-up of this section was stale and said otherwise — see the corrected note above. No longer an open item.
 - Daily-resolution forecasting: tried training genuinely new daily models (LightGBM M6) on 2026-07-29 — abandoned, daily naive persistence won even more decisively than weekly naive, and the daily coverage filter collapsed market counts 3-6x. Script 26 (2026-07-30) instead disaggregates the existing weekly model's forecasts into a smooth daily curve with an honest uncertainty band — not a validated daily forecast, a visualization aid. Wired into the dashboard as a "Daily price view" expander below the ticker.
 - Arrivals-outcome SDID (Scripts 38b/39b, new 2026-08-21): both robustness checks now done — see the 2026-08-21 note and their table rows above. No longer an open item, listed here only so this section's history stays complete.
 - Manuscript: previous manuscript-drafting pass cleared from `paper_drafts/` on 2026-08-21 to start a fresh, section-by-section pass — see README §9 and current chat/session history for status, since this working folder does not persist between passes.

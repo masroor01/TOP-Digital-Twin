@@ -537,11 +537,10 @@ heterogeneity finding on an independent axis (see MANIFEST.md).
   panel's further growth to 842/813/82 markets (see
   `Model_Output/MANIFEST.md` for the up-to-date per-file staleness
   flags). **18b is no longer on this list** — re-run 2026-08-15.
-- Scripts 34/35/36 (the rejected two-phase architecture) still group
-  markets by name, not `market_id`, and have never been re-verified
-  against the 2026-08-14 collision fix. Low priority since the
-  architecture is already a documented rejected result regardless, but
-  genuinely open.
+- ~~Scripts 34/35/36 (the rejected two-phase architecture) still group
+  markets by name~~ — **corrected 2026-09-13**: 35/36 were fixed on
+  2026-08-20 (commit `cacdea5`), confirmed by reading the current code;
+  34 never had the bug. No longer open — see `Model_Output/MANIFEST.md`.
 - ~~Scripts 40/41's placebo-in-time significance test scored its candidate
   pool mostly in-sample~~ — **DONE 2026-09-02**: replaced with genuine
   K=8-fold time-block out-of-fold scoring, plus a second fix removing a
