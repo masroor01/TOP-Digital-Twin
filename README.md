@@ -527,9 +527,10 @@ close the magnitude is; cross-validates the ablation study's crop/horizon
 heterogeneity finding on an independent axis (see MANIFEST.md).
 
 **Not yet done / genuinely open**:
-- Full-capacity TFT run (deliberately deferred). Also still carries the
-  market-name/`market_id` collision bug (see below) — a second,
-  independent reason not to trust its current numbers.
+- Full-capacity TFT run (deliberately deferred). ~~Also still carries the
+  market-name/`market_id` collision bug~~ — fixed 2026-09-13, see
+  `Model_Output/MANIFEST.md`. Deferral is now the only reason not to
+  trust its current (reduced-scope) numbers.
 - Re-running Scripts 12, 13, 15b, 15c, 17, 26 on the current panel — these
   predate not just the 2026-08-01 grid fix but also the policy/
   macro-vintage/leakage fixes that landed after it, and (for all but 15b/
