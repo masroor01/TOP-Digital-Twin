@@ -510,9 +510,20 @@ feature_columns, feature_ranges, uncertainty, reference, history, staleness, dai
 
 
 def predict(crop, h, feature_row):
-    """feature_row: dict of {column: value}. Returns predicted price (Rs/quintal)."""
+    """feature_row: dict of {column: value}. Returns predicted price (Rs/quintal).
+
+    FIXED 2026-09-13 (train/serve skew, flagged in the 2026-09-02 audit):
+    `feature_row.get(c, 0)` only substitutes 0 for a column MISSING from
+    the dict -- if the key exists but its value is a real NaN (confirmed
+    live in reference_rows.csv, e.g. price_lag_52/wage_agri_men for
+    thinner-history markets), the raw NaN passed straight through to the
+    model instead of the 0 Script 23's training-time `fillna(0)` used.
+    The explicit `.fillna(0)` below catches both cases the same way
+    training did, closing the gap between what the model was trained to
+    see for "no value" and what it was actually being served.
+    """
     cols = feature_columns[f'{crop}_{h}w']
-    X = pd.DataFrame([{c: feature_row.get(c, 0) for c in cols}])
+    X = pd.DataFrame([{c: feature_row.get(c, 0) for c in cols}]).fillna(0)
     log_pred = models[(crop, h)].predict(X)[0]
     return float(np.expm1(log_pred))
 
