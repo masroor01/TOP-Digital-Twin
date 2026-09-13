@@ -199,7 +199,7 @@ print(f'  Max epochs     : {TRAINER_PARAMS["max_epochs"]}\n')
 print('[1] Loading panel ...')
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
 df = df[(df['week_start'] >= '2017-01-01') & (df['week_start'] <= '2026-12-31')]
-df = df.sort_values(['crop', 'market', 'week_start']).reset_index(drop=True)
+df = df.sort_values(['crop', 'market_id', 'week_start']).reset_index(drop=True)
 df['year']  = df['week_start'].dt.year
 df['month'] = df['week_start'].dt.month
 print(f'   Panel: {len(df):,} rows')
@@ -242,8 +242,15 @@ print(f'   Satellite features: {len(SAT_ALL_COLS)}')
 week_map = {w: i for i, w in enumerate(sorted(df['week_start'].unique()))}
 df['time_idx'] = df['week_start'].map(week_map)
 
-# Unique series ID = crop_market
-df['series_id'] = df['crop'] + '__' + df['market']
+# Unique series ID = crop_market. FIXED 2026-09-13 (project-wide
+# market-name-vs-market_id collision bug, missed here in the original
+# 11-script fix pass): a handful of market NAMES repeat across different
+# states within the same crop (e.g. "Fatehabad APMC" in both Haryana and
+# Uttar Pradesh) -- building series_id from the name gave two physically
+# different markets the IDENTICAL id, interleaving their price series
+# into one TFT time series for their entire history. market_id is the
+# real per-market identifier and is unique by construction.
+df['series_id'] = df['crop'] + '__' + df['market_id'].astype(str)
 
 # Forward-fill price within each series (non-trading weeks have NaN;
 # TFT rejects NaN targets — ffill replicates last known price, same as Script 15)
@@ -334,9 +341,9 @@ for crop in CROPS:
     # FAST_MODE: subsample representative markets by coverage
     if FAST_MODE:
         n = MARKETS_PER_CROP_FAST[crop]
-        coverage = df_crop.groupby('market')['modal_price_weighted'].count()
+        coverage = df_crop.groupby('market_id')['modal_price_weighted'].count()
         top_mkts = coverage.nlargest(n).index.tolist()
-        df_crop  = df_crop[df_crop['market'].isin(top_mkts)].copy()
+        df_crop  = df_crop[df_crop['market_id'].isin(top_mkts)].copy()
         print(f'  [{crop}] FAST_MODE: {n} markets')
 
     n_series = df_crop['series_id'].nunique()
