@@ -28,9 +28,20 @@ async function loadModel(key) {
 }
 
 function toNumeric(v) {
-  if (v === null || v === undefined || v === '') return NaN;
+  // FIXED 2026-09-13 (train/serve skew, same class of bug as Script 24's
+  // dashboard predict()): every training row had fillna(0) applied before
+  // LightGBM ever fit, so the model was never trained to see a real NaN
+  // for "no value" -- it was trained to see 0. reference_rows.csv
+  // genuinely carries NaN in feature columns (price/arrival lags, rolling
+  // stats, wage_agri_men/women) for markets with insufficient history --
+  // confirmed live, not theoretical: every one of 1,737 rows in
+  // web/data/production_models/reference_rows.csv has at least one NaN
+  // feature. Returning NaN here fed that straight into the m2cgen tree
+  // code's native NaN-routing, which was never exercised at training
+  // time and has no relationship to what the model actually learned.
+  if (v === null || v === undefined || v === '') return 0;
   const n = Number(v);
-  return Number.isFinite(n) ? n : NaN;
+  return Number.isFinite(n) ? n : 0;
 }
 
 function buildInput(cols, features) {

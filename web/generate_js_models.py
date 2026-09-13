@@ -2,22 +2,36 @@
 Exports the 12 production LightGBM models to plain JavaScript (m2cgen) --
 a direct code transliteration of each tree's if/else logic, not a semantic
 re-encoding like ONNX's TreeEnsemble op. Verified empirically to reproduce
-LightGBM's predictions EXACTLY (incl. missing-value/NaN routing), unlike
-onnxmltools' ONNX conversion which showed real (non-precision) drift up to
-~0.011 log-price-points on 5 of 12 models -- see MANIFEST-style note in
-web/backend/src/models/README.md for the full account.
+LightGBM's predictions EXACTLY, unlike onnxmltools' ONNX conversion which
+showed real (non-precision) drift up to ~0.011 log-price-points on 5 of 12
+models -- see MANIFEST-style note in web/backend/src/models/README.md for
+the full account.
 
 Also dumps a cross-language validation fixture (sample feature vectors +
 Python ground-truth predictions) for the Node-side parity test to check
-against, since the real risk left is JS-vs-Python NaN/float comparison
-semantics, not the tree logic itself (already verified identical in-Python).
+against.
+
+FIXED 2026-09-13 (train/serve skew, same bug as Script 24's dashboard
+predict()): the fixture used to compute its Python "ground truth" by
+calling model.predict(X) on X still carrying real NaN (reference_rows.csv
+genuinely has NaN in several feature columns for thinner-history markets)
+-- so the old fixture only verified that the JS's native NaN-routing
+matched Python's OWN native NaN-routing, never that either matched what
+the model was actually TRAINED to see. Script 23 applies fillna(0) before
+every training fit, so the model never saw a real NaN during training at
+all; whatever NaN-default-split-direction m2cgen transliterates was never
+meaningfully learned. Now applies the same fillna(0) here before both
+computing py_pred and storing the fixture's input vector, so the fixture
+(and the production JS backend, fixed the same way in
+backend/src/models/index.js's toNumeric()) actually reflect the trained
+convention.
 
 Run: python generate_js_models.py
+Then: node backend/src/models/__fixtures__/verify.mjs
 """
 import os
 import json
 import joblib
-import numpy as np
 import pandas as pd
 import m2cgen as m2c
 
@@ -76,9 +90,17 @@ for crop in CROPS:
             X = pd.DataFrame([feat])
             for c in X.columns:
                 X[c] = pd.to_numeric(X[c], errors='coerce')
+            # FIXED 2026-09-13: ground truth used to be computed from X
+            # WITH real NaN still present, so this fixture only ever
+            # verified the JS's native NaN-routing against Python's own
+            # native NaN-routing -- neither matches what the model was
+            # actually TRAINED on, since Script 23 applies fillna(0)
+            # before every training fit. fillna(0) here makes the fixture
+            # (and therefore verify.mjs) test the input the model was
+            # actually trained to see, matching Script 23/24's convention.
+            X = X.fillna(0)
             py_pred = float(model.predict(X)[0])
             xvals = X.iloc[0].tolist()
-            xvals = [None if (isinstance(v, float) and np.isnan(v)) else v for v in xvals]
             fixture.append({'input': xvals, 'expected': py_pred})
 
         fixture_path = os.path.join(FIXTURE_DIR, f'{key}.json')
