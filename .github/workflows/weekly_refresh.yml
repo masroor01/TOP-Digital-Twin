@@ -1,0 +1,97 @@
+name: Weekly Data Refresh (CI)
+
+# Cloud counterpart to scripts/weekly_refresh/run_weekly_refresh.ps1 (local
+# Windows Task Scheduler). Independent of it -- see
+# scripts/weekly_refresh/run_weekly_refresh_ci.py's docstring for the exact
+# differences. Opens a PR instead of pushing to master directly, so nothing
+# public changes (Hostinger only redeploys on a push to master) until a
+# human reviews and merges -- see the 2026-09-16 decision recorded in
+# scripts/weekly_refresh/README.md.
+
+on:
+  schedule:
+    # 21:30 UTC Monday = 03:00 IST Tuesday, matching the local job's timing
+    - cron: '30 21 * * 1'
+  workflow_dispatch: {}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -r scripts/weekly_refresh/vendor/requirements.txt
+
+      - name: Install web/backend dependencies (needed by generate_js_models.py / verify.mjs)
+        run: npm install --prefix web/backend
+
+      - name: Install rclone
+        run: curl https://rclone.org/install.sh | sudo bash
+
+      - name: Configure rclone from secret
+        run: |
+          mkdir -p ~/.config/rclone
+          printf '%s' "${{ secrets.RCLONE_CONFIG }}" > ~/.config/rclone/rclone.conf
+          chmod 600 ~/.config/rclone/rclone.conf
+
+      - name: Pull raw trusted files from Drive
+        run: |
+          mkdir -p downloads
+          rclone copy gdrive:TOP_Digital_Twin_Raw_Data/ downloads/ --progress
+
+      - name: Run weekly refresh
+        id: refresh
+        run: python scripts/weekly_refresh/run_weekly_refresh_ci.py
+        env:
+          TOP_DOWNLOADS_DIR: ${{ github.workspace }}/downloads
+
+      - name: Push updated raw files back to Drive
+        if: success()
+        run: rclone copy downloads/ gdrive:TOP_Digital_Twin_Raw_Data/ --include "*_all_india_apmcs_*.csv" --progress
+
+      - name: Upload run log as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-refresh-log-${{ github.run_id }}
+          path: logs/weekly_refresh/*.log
+          retention-days: 30
+
+      - name: Open Pull Request with the refresh
+        if: success()
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: weekly-refresh/${{ github.run_id }}
+          title: "Automated weekly data refresh (CI run ${{ github.run_id }})"
+          body: |
+            Automated weekly refresh via GitHub Actions.
+
+            Review the diff (retrained models, refreshed reference data,
+            regenerated JS models) before merging -- merging this PR is what
+            actually updates the live dashboard, since Hostinger only
+            redeploys on a push to `master`. The `run_weekly_refresh_ci.py`
+            step already gated this on a clean `verify.mjs` pass, so the JS
+            models are confirmed to reproduce the Python predictions
+            bit-for-bit -- but a human still reviews before it goes public,
+            same boundary the local weekly refresh keeps.
+
+            Run log attached as a workflow artifact
+            (`weekly-refresh-log-${{ github.run_id }}`).
+          commit-message: "Automated weekly data refresh (CI, run ${{ github.run_id }})"
+          delete-branch: true
