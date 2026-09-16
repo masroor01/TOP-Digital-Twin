@@ -124,6 +124,13 @@ scripts/weekly_refresh/staging/
 logs/weekly_refresh/
 *.csv.backup_*
 
+# CI weekly refresh (.github/workflows/weekly_refresh.yml): scratch dir where
+# rclone pulls the raw trusted CSVs at the start of each run, at the repo
+# root (TOP_DOWNLOADS_DIR=$GITHUB_WORKSPACE/downloads). Got accidentally
+# swept into PR #1 by create-pull-request's own `git add -A` fallback before
+# this rule existed -- caught 2026-09-16, PR closed, never merged.
+downloads/
+
 # Drought layers (Scripts 51-54): raw per-request API/grid caches, one file
 # per (state, fortnight) or per week — regenerate via Scripts 51/53, not
 # meaningful to track individually (same pattern as data/satellite_climate/raw/).
