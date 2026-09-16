@@ -39,6 +39,13 @@ streamlit==1.60.0        # Interactive simulation dashboard
 plotly==6.9.0            # Dashboard scenario-comparison chart
 anthropic==0.119.0       # AI policy recommendation (Script 24) — needs ANTHROPIC_API_KEY
 
+# ── Web dashboard build step (web/generate_js_models.py) ────
+# Was installed ad hoc locally, never recorded here -- surfaced 2026-09-16
+# when the CI weekly-refresh workflow hit a clean environment with nothing
+# pre-installed and failed with ModuleNotFoundError. Anyone else setting
+# this project up from a fresh clone would hit the same gap.
+m2cgen==0.10.0            # LightGBM -> plain JS transliteration for the live dashboard
+
 # ── Stdlib (no install needed — listed for documentation) ───
 # pathlib, json, math, os, sys, re, io, time, warnings
 # zipfile, urllib.parse, urllib.request
