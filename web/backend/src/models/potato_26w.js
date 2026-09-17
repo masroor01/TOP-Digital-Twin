@@ -63,7 +63,7 @@ export function predict_potato_26w(input) {
                             if (input[10] > 7.039119656469882) {
                                 var0 = 7.019396914840433;
                             } else {
-                                if (input[11] > 0.0022093559309906414) {
+                                if (input[11] > 0.002170924936441154) {
                                     var0 = 7.007567760097461;
                                 } else {
                                     var0 = 7.02618739149865;
@@ -199,7 +199,7 @@ export function predict_potato_26w(input) {
                     } else {
                         if (input[47] > 980.9500000000002) {
                             if (input[50] > 29.30629564002827) {
-                                if (input[9] > 7.139524562005833) {
+                                if (input[9] > 7.139524562005832) {
                                     var0 = 7.051351574676899;
                                 } else {
                                     var0 = 7.042134132909647;
@@ -383,7 +383,7 @@ export function predict_potato_26w(input) {
                     }
                 } else {
                     if (input[68] > 0.40439118610296904) {
-                        if (input[8] > 7.31667035022064) {
+                        if (input[8] > 7.316670350220639) {
                             var0 = 7.02476332109728;
                         } else {
                             if (input[1] > 7.112930370137597) {
@@ -393,7 +393,7 @@ export function predict_potato_26w(input) {
                             }
                         }
                     } else {
-                        if (input[11] > 0.04968904837000481) {
+                        if (input[11] > 0.04968441681961132) {
                             var0 = 7.0283146583631115;
                         } else {
                             var0 = 7.011837566145708;
@@ -449,7 +449,7 @@ export function predict_potato_26w(input) {
                     var0 = 7.0186514678212495;
                 } else {
                     if (input[17] > 0.000000000000000000000000000000000010000000180025095) {
-                        if (input[0] > 6.419184613759583) {
+                        if (input[0] > 6.419184613759582) {
                             if (input[76] > 227.95000000000002) {
                                 if (input[4] > 6.367104613151482) {
                                     if (input[0] > 6.519555266894358) {
@@ -473,7 +473,7 @@ export function predict_potato_26w(input) {
             } else {
                 if (input[38] > 6.125000000000001) {
                     if (input[76] > 220.85000000000005) {
-                        if (input[10] > 6.818081311703567) {
+                        if (input[10] > 6.818081311703568) {
                             var0 = 7.036834391900184;
                         } else {
                             if (input[10] > 5.971905948830579) {
