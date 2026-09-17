@@ -115,7 +115,12 @@ foreach ($crop in $crops) {
     $trustedFile = Join-Path $Downloads "${cropLower}_all_india_apmcs_2000_2026.csv"
     $scrapeFile = Join-Path $Staging "${cropLower}_weekly_scrape.csv"
 
-    $scrapeArgs = @($ScraperScript, "--commodity", $crop, "--start-year", $year, "--end-year", $year, "--out", $scrapeFile, "--log-level", "WARNING")
+    # Tuned up 2026-09-17 from the scraper's own defaults (--sleep 0.25,
+    # --retries 4) -- both real Tuesday-scheduled runs that got this far
+    # (2026-09-01, 2026-09-08) hit sustained 429s from AGMARKNET during the
+    # all-India tomato/onion sweep at the default pace. Same tuning already
+    # applied to the CI path's run_weekly_refresh_ci.py.
+    $scrapeArgs = @($ScraperScript, "--commodity", $crop, "--start-year", $year, "--end-year", $year, "--out", $scrapeFile, "--log-level", "WARNING", "--sleep", "1.5", "--retries", "6")
     $scopeLabel = "all states"
     if ($StateFilter.ContainsKey($crop)) {
         $scrapeArgs += @("--states", $StateFilter[$crop])
