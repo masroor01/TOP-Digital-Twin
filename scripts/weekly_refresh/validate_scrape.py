@@ -229,10 +229,29 @@ def main():
         # care how MANY rows per day, and the coverage-continuity check (8)
         # only catches a full day going completely empty, not every day being
         # thinly populated.
+        #
+        # FIXED 2026-09-17 (confirmed live production bug): this compared the
+        # new scrape against the trusted file's recent history UNRESTRICTED
+        # by state. Fine for tomato/onion (all-India, unrestricted scrapes),
+        # but potato's scrape is restricted to --states West Bengal,Uttarakhand
+        # (see run_weekly_refresh.ps1/run_weekly_refresh_ci.py) while the
+        # trusted file's recent history is genuinely all-India (28 states) --
+        # so potato's new scrape (~67 rows/day, WB+UK only) was compared
+        # against an all-India baseline (~672 rows/day) and failed EVERY
+        # single run, both CI (PR #2, #3) and presumably every local run
+        # too, since this check landed 2026-09-02. Confirmed by restricting
+        # the trusted file's own recent 90 days to WB+UK only: 68 rows/day,
+        # matching the "failing" new scrape almost exactly (67 vs 68). Fixed
+        # by restricting the "old" comparison set to the states actually
+        # present in the new scrape before computing its density -- a no-op
+        # for tomato/onion (new already covers the full old state set), and
+        # correct for any crop with a --states restriction, not just potato
+        # (doesn't hardcode potato's specific states into this script).
         new_dates_covered = new['arrival_date'].dt.normalize().nunique()
         new_density = len(new) / max(new_dates_covered, 1)
         recent_cutoff = old['arrival_date'].max() - pd.Timedelta(days=90)
-        recent_old = old[old['arrival_date'] >= recent_cutoff]
+        new_states = set(new['state'].dropna().unique())
+        recent_old = old[(old['arrival_date'] >= recent_cutoff) & (old['state'].isin(new_states))]
         old_dates_covered = recent_old['arrival_date'].dt.normalize().nunique()
         old_density = len(recent_old) / max(old_dates_covered, 1)
         if old_density > 0 and new_density < 0.5 * old_density:
