@@ -227,8 +227,40 @@ missing/extra market_id.
 
 Most raw sources require **manual download** (no public API) — that's still
 true for macro/climate/satellite/policy below. The market layer is the
-exception as of 2026-08-29: it's now **fully automated**, see the next
-subsection.
+exception: it's **fully automated**, two independent paths now (local
+Windows Task Scheduler since 2026-08-29, plus a GitHub Actions + Google
+Drive cloud path since 2026-09-16 — see `.github/workflows/weekly_refresh.yml`
+and `scripts/weekly_refresh/README.md`), see the next subsection.
+
+### Layer status (last verified 2026-09-17)
+
+Checked directly against file timestamps and the actual production code
+(`panel_layers.py`) on the date above — re-verify before citing this table
+if it's been a while, freshness moves independently per layer.
+
+| Layer | Source | Latest data point | Cadence | Status |
+|---|---|---|---|---|
+| L1 Market (price/arrivals) | Agmarknet API | 2026-09-14 (week) | Automated weekly | Current |
+| L2/L3 Satellite/Climate (Sentinel-2, MODIS, ERA5, CHIRPS) | Google Earth Engine, manual topup | 2026-07-27 (week) | Manual, periodic | ~7 weeks behind market data |
+| L4 Macro — CMIE (credit, exports, wages, IIP) | CMIE Economic Outlook | 2026-07-01 | Manual, monthly | ~2.5 months behind |
+| L4 Macro — RBI (repo rate, USD/INR, WPI) | RBI DBIE / CMIE | Through Aug 2026 (WPI columns blank for the latest month) | Manual, monthly | Recently refreshed, WPI trails |
+| L4 Macro — PPAC (diesel/LPG) | PPAC / CMIE | 2026-08-31 | Manual, monthly | Current |
+| L5 Infrastructure — Labour wages | CMIE (state-wise) | 2026-03 (most recent state) | Manual, periodic | ~6 months behind — source itself is only quarterly |
+| L5 Infrastructure — Cold storage | Rajya Sabha parliamentary answer | Static/slow-changing by design | ~Annual | As current as this source ever gets |
+| L5 Infrastructure — Road density | CEIC/MORTH annual | Forward-filled to 2030 (flagged in the data) | Annual | Working as designed |
+| L6 Policy/trade | Hand-verified event log (PIB/DGFT cross-checked) | 2026-07-30 | After major policy changes | Current for what's happened |
+| L7 Drought (VEDAS + IDM) — built, **not wired into production** | VEDAS/SAC, India Drought Monitor | 2026-08-31 | Not scheduled | Data is current; excluded from `23_Train_Production_Models.py` on statistical grounds — see `Model_Output/MANIFEST.md`'s 2026-09-16 fold-level entry |
+
+**Validated as real/automatable, not yet acquired or built**: NOAA ONI,
+fertilizer MRP (`fert.gov.in`), CPI item-level potato/onion/tomato (MOSPI),
+NSS HCES consumption microdata, IMD gridded Tmax for heat-stress
+(`imdlib`), groundwater status (IN-GRES, low-frequency ~3yr cadence).
+
+**Investigated and rejected** (no viable automatable source found): IMD
+Long-Range Forecast, pesticide/seed prices, cold-storage *tariffs*
+(capacity above is a separate, available thing), irrigation/pump
+electricity cost, Labour Bureau *district-level* wages (state-level only
+exists), Dept. of Consumer Affairs retail prices (CAPTCHA-gated).
 
 ### Agmarknet (price + arrivals) — automated weekly, or manual as a fallback
 **Automated (current, recommended):** `scripts/weekly_refresh/` scrapes
