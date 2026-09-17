@@ -28,6 +28,7 @@ statsmodels==0.14.6     # ARIMA benchmarks (Script 13)
 # ── Excel / file I/O ────────────────────────────────────────
 openpyxl==3.1.5         # Read .xlsx files (CMIE, RBI, PPAC — Script 10)
 xlrd==2.0.2             # Read legacy .xls files (older Agmarknet exports)
+pdfplumber==0.11.10      # Extract MRP tables from fert.gov.in bulletin PDFs — Script 57
 
 # ── HTTP / API ──────────────────────────────────────────────
 requests==2.34.1        # HTTP utility (Nominatim geocoding fallback)
