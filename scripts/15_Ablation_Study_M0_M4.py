@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Script 15 — Ablation Study: M0 → M7
+Script 15 — Ablation Study: M0 → M7, plus M8
 =====================================
-Trains 8 progressively richer LightGBM variants on the same rolling-origin
+Trains 9 progressively richer LightGBM variants on the same rolling-origin
 CV framework as Script 12, adding one data layer at a time:
 
   M0  Price features only (lags, rolling stats, seasonality, market encoding)
@@ -13,6 +13,7 @@ CV framework as Script 12, adding one data layer at a time:
   M5  + Infrastructure (state-wise agri wages, cold storage, road density)
   M6  + Policy/trade (export ban/MEP/duty, market interventions, Operation Greens)
   M7  + Drought (VEDAS Trigger-1 + IDM CDI, district-level; see note below)
+  M8  + Fertilizer MRP (Urea/DAP/MOP national monthly, see note below)
 
 M7 is structurally sparse by design (Trigger-1: Kharif weeks 2022+ only,
 crosswalked districts only; IDM CDI: 2021-07-14 onward only) -- unlike
@@ -26,7 +27,32 @@ value column NaN -> fillna(0) at matrix-build time same as every other
 feature; the missingness flag lets the model tell "0 = confirmed normal"
 apart from "0 = no reading".
 
-Each variant × 4 folds × 4 horizons × 3 crops = 384 LightGBM model fits.
+M8 is built on M6, NOT on M7 -- a deliberate break from strict cumulative
+ordering. M7 (drought) was investigated and excluded from production
+(2026-09-14, see Model_Output/MANIFEST.md): its own verdict is closed, and
+stacking a new untested layer on top of an already-rejected one would
+conflate two unrelated questions ("does fert help" would be entangled with
+"does drought help", when we already know the answer to the second one is
+no on the evidence so far). M8 branches from M6 instead, so its own
+ablation result is clean and independent of M7's.
+
+M8 is fertilizer MRP ONLY, not fertilizer + CPI-AL/RL, despite both being
+acquired and wired into the master panel together (Scripts 57-59). CPI-AL/RL
+(Base 2019=100) only exists from Jun-2025 onward -- checked directly against
+this script's own fold boundaries: every fold's TRAINING window ends at or
+before 2025-06-30 except fold 5, which reaches exactly one month into CPI-AL/
+RL's real coverage. Every fold would train on essentially zero real CPI-AL/RL
+signal, the same problem M7's fold 1 had, except affecting all 5 folds
+instead of 1 -- a foreseeable null result, not a genuine test. Deferred
+until CPI-AL/RL has 2-3 years of history, same standard M7 was held to before
+its own verdict was trusted (decided 2026-09-25, user confirmed).
+Fertilizer MRP has real training coverage in every fold (41-89 months,
+Jan-2018 onward) and uses the same missingness-flag treatment as M7's
+drought features (fert_urea_mrp_missing/etc.) rather than forward-fill,
+since a ~1-year pre-2018 gap at the very front of the panel is core
+coverage too, not a recent-data lag.
+
+Each variant × 5 folds × 4 horizons × 3 crops = up to 540 LightGBM model fits.
 
 Compare against B1 Naive Persistence from Script 13.
 
@@ -41,7 +67,10 @@ Outputs (Model_Output/)
   fig_ablation_heatmap.png          full heatmap of all metric × variant combinations
 
 Run: python scripts/15_Ablation_Study_M0_M4.py
-Estimated runtime: 60-120 min (early-stop at 50 rounds)
+Estimated runtime: stale early estimate (60-120 min) predates Fold 5, M7,
+and now M8 -- the M7 addition's actual run took 2512.9 min wall-clock
+(background, spanning session gaps -- true compute time likely much lower
+but not isolated). Run in the background; don't assume a short runtime.
 """
 
 import io, os, sys, time, warnings
@@ -198,7 +227,7 @@ CROP_COLORS = {'tomato': '#E63946', 'onion': '#F4A261', 'potato': '#457B9D'}
 VARIANT_COLORS = {
     'M0': '#adb5bd', 'M1': '#74c0fc', 'M2': '#51cf66',
     'M3': '#ff922b', 'M4': '#cc5de8', 'M5': '#20c997', 'M6': '#e64980',
-    'M7': '#795548',
+    'M7': '#795548', 'M8': '#fcc419',
 }
 VARIANT_LABELS = {
     'M0': 'M0 Price only',
@@ -209,6 +238,7 @@ VARIANT_LABELS = {
     'M5': 'M5 + Infrastructure',
     'M6': 'M6 + Policy/Trade',
     'M7': 'M7 + Drought',
+    'M8': 'M8 (M6) + Fertilizer',   # branches from M6, not M7 -- see docstring
 }
 
 LAG_WEEKS = [1, 2, 3, 4, 8, 13, 26, 52]
@@ -224,11 +254,11 @@ plt.rcParams.update({
 # 2. LOAD PANEL + MACRO
 # ─────────────────────────────────────────────────────────────────────────────
 print('='*65)
-print('SCRIPT 15: ABLATION STUDY  M0 → M7')
+print('SCRIPT 15: ABLATION STUDY  M0 → M7, plus M8')
 print('='*65)
 print(f'  Fast mode : {FAST_MODE}')
 print(f'  Horizons  : {HORIZONS_RUN}')
-print(f'  Total fits: {8 * len(FOLDS) * len(HORIZONS_RUN) * len(CROPS)}\n')
+print(f'  Total fits: {9 * len(FOLDS) * len(HORIZONS_RUN) * len(CROPS)}\n')
 
 print('[1] Loading panel ...')
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
@@ -335,6 +365,16 @@ if 'cdi' in DROUGHT_FEATS:
     print(f'   IDM CDI joined    : {df["cdi"].notna().mean():.1%} coverage '
           f'(2021-07-14 onward only -- structurally sparse by design)')
 print(f'   Drought features (M7)       : {len(DROUGHT_FEATS)} → {DROUGHT_FEATS}')
+
+# M8 -- fertilizer MRP only (CPI-AL/RL deferred, see docstring for why).
+# Same missingness-flag treatment as M7's drought: the ~1-year pre-2018 gap
+# at the front of the panel is core coverage, not a recent-data lag safe to
+# forward-fill.
+df, FERT_FEATS = pl.join_fertilizer(df, add_missing_flags=True, verbose=False)
+if 'fert_urea_mrp' in FERT_FEATS:
+    print(f'   Fertilizer MRP joined (M8)  : {df["fert_urea_mrp"].notna().mean():.1%} coverage '
+          f'(Jan-2018 onward only -- pre-2018 panel rows structurally missing)')
+print(f'   Fertilizer features (M8)    : {len(FERT_FEATS)} → {FERT_FEATS}')
 
 # Forward-fill infrastructure columns that stop before the panel's own end
 # date: wage_agri_men/women (wages data ends 2025-12) and
@@ -528,6 +568,10 @@ MODEL_FEATURE_SETS = {
     'M5': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + INFRA_FEATS,
     'M6': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + INFRA_FEATS + POLICY_FEATS,
     'M7': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + INFRA_FEATS + POLICY_FEATS + DROUGHT_FEATS,
+    # Branches from M6, NOT M7 -- see docstring for why (M7's verdict is
+    # closed/excluded; stacking on it would entangle two independent
+    # questions). CPI-AL/RL deliberately excluded too (see docstring).
+    'M8': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + INFRA_FEATS + POLICY_FEATS + FERT_FEATS,
 }
 if MARKET_LEVEL_DIAGNOSTIC:
     a, b = DIAGNOSTIC_PAIR

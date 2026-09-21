@@ -219,28 +219,61 @@ def join_drought(df, add_missing_flags=True, verbose=True):
     return df, feats
 
 
-def join_fertilizer(df, verbose=True):
+def join_fertilizer(df, add_missing_flags=False, verbose=True):
     """M8a. Join key: (year, month) -- national, no state dimension, same
     shape as M2 macro. Source: Script 59's pivot of Script 57's raw MRP
     acquisition, narrowed to Urea/DAP/MOP (see Script 59 docstring for why
-    those three). Returns (df, feature_cols)."""
+    those three).
+
+    add_missing_flags=True (Script 15 ablation's need): the source starts
+    Jan-2018 -- panel rows from 2017 have no fertilizer reading at all, a
+    real ~1-year core gap at the front of the panel, not a recent-data lag
+    like macro/wages' tail gaps. Adds fert_urea_mrp_missing/etc. and
+    returns the flags alongside the values, same convention as
+    join_drought(add_missing_flags=True), so a downstream fillna(0) can be
+    told apart from a real zero reading (fertilizer MRP is never
+    genuinely 0).
+
+    add_missing_flags=False (Script 22's need): plain value columns only,
+    for open-ended exploration. Returns (df, feature_cols)."""
     if not os.path.exists(FERT_FILE):
         return df, []
+    cols = ['fert_urea_mrp', 'fert_dap_mrp', 'fert_mop_mrp']
     fert = pd.read_csv(FERT_FILE)
     df = checked_merge(df, fert, on=['year', 'month'], how='left',
                         label='M8a fertilizer MRP', verbose=verbose)
-    return df, ['fert_urea_mrp', 'fert_dap_mrp', 'fert_mop_mrp']
+    if add_missing_flags:
+        feats = []
+        for c in cols:
+            df[f'{c}_missing'] = df[c].isna().astype(int)
+            feats += [c, f'{c}_missing']
+        return df, feats
+    return df, cols
 
 
-def join_cpi_alrl(df, verbose=True):
+def join_cpi_alrl(df, add_missing_flags=False, verbose=True):
     """M8b. Join key: (state, year, month) -- same shape as M5a wages.
     Source: Script 59's pivot + panel-state crosswalk of Script 58's raw
     CPI-AL/RL acquisition. NaN for panel states the source genuinely has no
-    row for (Chandigarh -- see Script 59), not a join failure. Returns
-    (df, feature_cols)."""
+    row for (Chandigarh -- see Script 59), not a join failure.
+
+    add_missing_flags=True (Script 15 ablation's need): unlike M5's wages,
+    this series only exists Jun-2025 onward (the Base-2019 rebase) with a
+    documented gap (May-2026) inside even that short window -- this is
+    core coverage, not a tail lag safe to forward-fill or zero-fill (same
+    reasoning as join_drought). Adds cpi_al_missing/cpi_rl_missing.
+
+    add_missing_flags=False (Script 22's need): plain value columns only.
+    Returns (df, feature_cols)."""
     if not os.path.exists(CPI_ALRL_FILE):
         return df, []
     cpi = pd.read_csv(CPI_ALRL_FILE)[['state', 'year', 'month', 'cpi_al', 'cpi_rl']]
     df = checked_merge(df, cpi, on=['state', 'year', 'month'], how='left',
                         label='M8b CPI-AL/RL', verbose=verbose)
+    if add_missing_flags:
+        feats = []
+        for c in ['cpi_al', 'cpi_rl']:
+            df[f'{c}_missing'] = df[c].isna().astype(int)
+            feats += [c, f'{c}_missing']
+        return df, feats
     return df, ['cpi_al', 'cpi_rl']

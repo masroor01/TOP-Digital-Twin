@@ -1,0 +1,13 @@
+crop,horizon_weeks,n_markets_tested,pct_significant,n_sig_M8_better,n_sig_M6_better,fisher_combined_p
+tomato,1,803,35.2,256,27,0.0
+tomato,4,803,9.3,11,64,0.0
+tomato,13,786,6.5,2,49,0.0
+tomato,26,779,11.6,87,3,0.0
+onion,1,772,12.0,38,55,0.0
+onion,4,771,14.8,5,109,0.0
+onion,13,757,5.4,27,14,0.438841
+onion,26,755,4.4,23,10,0.708196
+potato,1,82,7.3,4,2,0.183218
+potato,4,82,2.4,2,0,0.036555
+potato,13,82,0.0,0,0,1.0
+potato,26,82,0.0,0,0,0.712573
