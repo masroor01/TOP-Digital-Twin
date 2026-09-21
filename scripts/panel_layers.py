@@ -58,6 +58,7 @@ TRIGGER1_FILE = os.path.join(BASE, 'data', 'drought_vedas', 'trigger1_panel_week
 IDM_FILE      = os.path.join(BASE, 'data', 'drought_idm', 'cdi_panel_weekly.csv')
 FERT_FILE     = os.path.join(BASE, 'data', 'fertilizer_mrp', 'fert_mrp_panel_monthly.csv')
 CPI_ALRL_FILE = os.path.join(BASE, 'data', 'cpi_al_rl', 'cpi_alrl_panel_state_monthly.csv')
+ONI_FILE = os.path.join(BASE, 'data', 'noaa_oni', 'oni_panel_monthly.csv')
 
 POLICY_COLS = ['export_banned', 'mep_usd_per_tonne', 'export_duty_pct',
                'market_intervention_flag', 'operation_greens_active']
@@ -277,3 +278,25 @@ def join_cpi_alrl(df, add_missing_flags=False, verbose=True):
             feats += [c, f'{c}_missing']
         return df, feats
     return df, ['cpi_al', 'cpi_rl']
+
+
+def join_oni(df, verbose=True):
+    """M9 candidate. Join key: (year, month) -- national, no state
+    dimension, same shape as M2 macro. Source: Script 62's pivot of
+    Script 56's raw ONI acquisition, reshaped from overlapping 3-month
+    seasons into a plain (year, month) series plus lags. Includes
+    oni_lag_3m/oni_lag_4m alongside the contemporaneous oni_anom -- the
+    original review docs this layer's inclusion was based on specifically
+    named the lagged versions as the ones worth testing (ENSO's effect on
+    supply shows up months after the anomaly, not the same month). No
+    missingness-flag treatment needed: ONI has continuous monthly coverage
+    back to 1950, decades before the panel starts, so there's no core
+    coverage gap the way drought/CPI-AL/RL have -- ordinary NaN (only at
+    the very start of the panel, if ever) is fine to fillna(0) like any
+    other complete series. Returns (df, feature_cols)."""
+    if not os.path.exists(ONI_FILE):
+        return df, []
+    oni = pd.read_csv(ONI_FILE)
+    df = checked_merge(df, oni, on=['year', 'month'], how='left',
+                        label='M9 ONI', verbose=verbose)
+    return df, ['oni_anom', 'oni_lag_3m', 'oni_lag_4m']
