@@ -137,6 +137,261 @@ FEATURE_INFO = {
         mechanism='A weaker rupee makes exports more attractive, pulling supply '
                    'toward export markets and away from domestic ones, which '
                    'tends to push domestic prices {dir}.'),
+    'operation_greens_active': dict(
+        label='Operation Greens Active',
+        help='Marks whether the Centre\'s Operation Greens (TOP — Tomato, Onion, '
+             'Potato) price-stabilisation scheme, including its transport/storage '
+             'subsidy, was active that week for this crop.',
+        mechanism='Operation Greens subsidises storage and interstate transport '
+                   'to smooth out price swings, so an active scheme tends to '
+                   'push prices {dir} toward normal levels rather than in one '
+                   'fixed direction.'),
+
+    # ── Climate (M3) ──────────────────────────────────────────────────────
+    'era5_tmin': dict(
+        label='Min Temperature (°C)',
+        help='Weekly minimum temperature in the growing region (ERA5). Cold '
+             'snaps can damage tender crops (tomato especially) and delay growth.',
+        mechanism='Lower minimum temperature is associated with cold-stress risk '
+                   'to the crop, which tends to push prices {dir} via reduced '
+                   'expected supply.'),
+    'era5_tmean': dict(
+        label='Mean Temperature (°C)',
+        help='Weekly average temperature in the growing region (ERA5) — the '
+             'general thermal backdrop for the growing season, distinct from '
+             'the daily extremes (max/min).',
+        mechanism='Average temperature away from the crop\'s optimal range '
+                   'tends to push prices {dir} via reduced expected supply.'),
+    'era5_dtr': dict(
+        label='Diurnal Temp. Range (°C)',
+        help='The gap between daily max and min temperature (ERA5). A wide '
+             'swing can stress crops even when the average temperature looks fine.',
+        mechanism='A wider day-night temperature swing is associated with '
+                   'additional crop stress, which tends to push prices {dir}.'),
+    'era5_heat_35': dict(
+        label='Days ≥35°C (weekly count)',
+        help='Number of days in the week the growing region hit 35°C or hotter '
+             '(ERA5) — a standard heat-stress threshold for vegetable crops.',
+        mechanism='More extreme-heat days signal crop stress and reduced '
+                   'expected supply, which tends to push prices {dir}.'),
+    'era5_heat_38': dict(
+        label='Days ≥38°C (weekly count)',
+        help='Number of days in the week the growing region hit 38°C or hotter '
+             '(ERA5) — a more severe heat-stress threshold than the 35°C count.',
+        mechanism='Severe-heat days are a stronger stress signal than the 35°C '
+                   'count, tending to push prices {dir} via reduced supply.'),
+    'chirps_rain_max': dict(
+        label='Peak Daily Rainfall (mm)',
+        help='The single wettest day\'s rainfall within the week (CHIRPS) — '
+             'captures a flooding/waterlogging risk that a weekly total can hide.',
+        mechanism='A very wet single day raises flood/waterlogging risk even if '
+                   'the week\'s total rain looks moderate, which tends to push '
+                   'prices {dir}.'),
+    'chirps_excess': dict(
+        label='Excess Rainfall Index',
+        help='A derived measure (CHIRPS) of how far weekly rainfall exceeds a '
+             'normal/expected level for the region and season.',
+        mechanism='Rainfall well above the seasonal norm signals flood/logistics '
+                   'disruption risk, which tends to push prices {dir}.'),
+
+    # ── Satellite (M4) ────────────────────────────────────────────────────
+    's2_valid_frac': dict(
+        label='Sentinel-2 Cloud-Free Fraction',
+        help='Fraction of the growing region with a usable (cloud-free) '
+             'Sentinel-2 image that week (0-1). Low values mean the NDVI/EVI '
+             'readings that week are based on thin coverage — a data-quality '
+             'signal, not an agronomic one.',
+        mechanism='This is a coverage/data-quality signal rather than a supply '
+                   'driver; the model may still have learned indirect '
+                   'associations with it, shown as {dir} here.'),
+    's2_ndvi_anom': dict(
+        label='NDVI Anomaly',
+        help='How far this week\'s Sentinel-2 vegetation index is from the '
+             'region\'s normal level for this time of year — isolates an '
+             'unusual season from a normal one better than raw NDVI alone.',
+        mechanism='A negative anomaly (worse than normal for the season) '
+                   'signals below-normal expected supply, which tends to push '
+                   'prices {dir}.'),
+    'modis_ndvi': dict(
+        label='MODIS Vegetation Index',
+        help='Crop health/density from MODIS satellite imagery — a second, '
+             'coarser-resolution vegetation signal alongside Sentinel-2\'s NDVI, '
+             'with more frequent (near-daily) revisits.',
+        mechanism='Higher MODIS NDVI (healthier growing conditions) generally '
+                   'signals more supply ahead, which tends to push prices {dir}.'),
+    'modis_evi': dict(
+        label='MODIS Enhanced Veg. Index',
+        help='A vegetation index (MODIS) that corrects for canopy background '
+             'and atmospheric effects better than plain NDVI, especially in '
+             'denser vegetation.',
+        mechanism='Higher EVI (healthier, denser vegetation) generally signals '
+                   'more supply ahead, which tends to push prices {dir}.'),
+    'modis_lst_mean': dict(
+        label='MODIS Land Surface Temp. (mean)',
+        help='Average land surface temperature from MODIS thermal imagery — '
+             'a satellite-based temperature signal distinct from ERA5\'s '
+             'ground-station-based reanalysis.',
+        mechanism='Higher land surface temperature is associated with crop '
+                   'heat stress, tending to push prices {dir} via reduced '
+                   'expected supply.'),
+    'modis_lst_max': dict(
+        label='MODIS Land Surface Temp. (max)',
+        help='Peak land surface temperature from MODIS that week — captures '
+             'the hottest surface reading, not just the average.',
+        mechanism='A higher peak surface temperature signals acute heat-stress '
+                   'risk, tending to push prices {dir}.'),
+    'modis_lst_frac35': dict(
+        label='MODIS Land ≥35°C Fraction',
+        help='Fraction of the growing region (0-1) whose MODIS-measured land '
+             'surface hit 35°C or hotter that week.',
+        mechanism='A larger heat-affected area signals broader crop stress, '
+                   'tending to push prices {dir}.'),
+
+    # ── Macro (M2) ────────────────────────────────────────────────────────
+    'agri_wages_rs_day': dict(
+        label='National Agri. Daily Wage (Rs)',
+        help='CMIE\'s all-India average agricultural daily wage — a national '
+             'labour-cost benchmark distinct from the state-specific wage '
+             'figures below.',
+        mechanism='Higher farm labour costs raise the cost of producing and '
+                   'harvesting the crop, which tends to push prices {dir}.'),
+    'bank_credit_agri_cr': dict(
+        label='Bank Credit to Agriculture (Rs Cr)',
+        help='Outstanding scheduled-bank credit to the agriculture sector '
+             '(CMIE, Rs crore) — a proxy for how much financing is available '
+             'for farm inputs, storage, and trade.',
+        mechanism='More credit available can support both planting/storage '
+                   'decisions in ways that push prices either direction — read '
+                   'the {dir} shown here as what the model learned for this '
+                   'specific change, not a fixed rule.'),
+    'crude_oil_usd_bbl': dict(
+        label='Crude Oil (USD/barrel)',
+        help='International crude oil price — the upstream driver behind '
+             'diesel and LPG prices, which affect transport and cold-chain costs.',
+        mechanism='Higher crude oil prices raise transport and cold-storage '
+                   'energy costs, tending to push prices {dir}.'),
+    'diesel_delhi_per_L': dict(
+        label='Diesel Price — Delhi (Rs/L)',
+        help='Diesel price in Delhi specifically (PPAC), alongside the '
+             '4-city average — captures local pump-price variation.',
+        mechanism='Higher diesel prices raise transport costs to market, '
+                   'tending to push prices {dir}.'),
+    'export_veg_usd_mn': dict(
+        label='Vegetable Exports (USD mn)',
+        help='India\'s total monthly vegetable export value (USD million) — '
+             'a demand-pull signal: more exports mean less supply staying '
+             'in the domestic market.',
+        mechanism='Higher export volumes pull supply away from domestic '
+                   'markets, tending to push domestic prices {dir}.'),
+    'import_veg_usd_mn': dict(
+        label='Vegetable Imports (USD mn)',
+        help='India\'s total monthly vegetable import value (USD million) — '
+             'imported supply competing with domestic produce.',
+        mechanism='Higher imports add to domestic supply, tending to push '
+                   'prices {dir}.'),
+    'iip_food_proc': dict(
+        label='Food Processing IIP',
+        help='Index of Industrial Production for food processing (CMIE) — '
+             'a proxy for processing-sector demand (e.g. tomato going into '
+             'paste/ketchup) pulling on the same raw supply as fresh markets.',
+        mechanism='Higher processing-sector activity competes with fresh '
+                   'markets for the same raw crop, tending to push prices {dir}.'),
+    'lpg_nonsub_4city_rs_cyl': dict(
+        label='LPG Price, 4-City Avg (Rs/cyl)',
+        help='Non-subsidised LPG cylinder price averaged across 4 major '
+             'cities (PPAC) — a cold-chain and local-market energy cost proxy.',
+        mechanism='Higher LPG prices raise cold-chain and local operating '
+                   'costs, tending to push prices {dir}.'),
+    'lpg_nonsub_delhi_per14kg': dict(
+        label='LPG Price — Delhi (Rs/14kg)',
+        help='Non-subsidised LPG price in Delhi specifically (PPAC), '
+             'alongside the 4-city average.',
+        mechanism='Higher LPG prices raise cold-chain and local operating '
+                   'costs, tending to push prices {dir}.'),
+    'reverse_repo_pct': dict(
+        label='RBI Reverse Repo Rate (%)',
+        help='The rate at which RBI absorbs liquidity from banks — moves '
+             'alongside the repo rate as part of the same monetary-policy '
+             'stance affecting credit costs.',
+        mechanism='Same broad channel as the repo rate — a higher reverse '
+                   'repo rate is part of a tighter monetary stance, tending '
+                   'to push prices {dir} via the cost of holding inventory.'),
+    'wpi_fruits_vegetables': dict(
+        label='WPI: Fruits & Vegetables',
+        help='Wholesale Price Index for the fruits-and-vegetables group '
+             '(RBI/CMIE) — a broad wholesale-inflation signal for the whole '
+             'category this crop sits in.',
+        mechanism='This is itself a price index for the crop\'s broader '
+                   'category, so it tends to move together with this crop\'s '
+                   'own price ({dir} shown here is the isolated model effect).'),
+    'wpi_vegetables_total': dict(
+        label='WPI: Vegetables (Total)',
+        help='Wholesale Price Index for vegetables overall (RBI/CMIE) — '
+             'narrower than the fruits-and-vegetables group above.',
+        mechanism='Another close relative of this crop\'s own price series; '
+                   '{dir} shown here is the isolated model effect net of the '
+                   'other WPI/price features.'),
+    'wpi_potato': dict(
+        label='WPI: Potato',
+        help='Wholesale Price Index specifically for potato (RBI/CMIE) — '
+             'relevant as a cross-crop signal even when simulating tomato or '
+             'onion (substitution/basket effects).',
+        mechanism='Potato\'s own wholesale index can pick up shared seasonal '
+                   'or macro effects across the vegetable basket; {dir} shown '
+                   'here is the isolated model effect.'),
+    'wpi_onion': dict(
+        label='WPI: Onion',
+        help='Wholesale Price Index specifically for onion (RBI/CMIE) — '
+             'relevant as a cross-crop signal even when simulating tomato or '
+             'potato.',
+        mechanism='Onion\'s own wholesale index can pick up shared seasonal '
+                   'or macro effects across the vegetable basket; {dir} shown '
+                   'here is the isolated model effect.'),
+    'wpi_tomato': dict(
+        label='WPI: Tomato',
+        help='Wholesale Price Index specifically for tomato (RBI/CMIE) — '
+             'relevant as a cross-crop signal even when simulating onion or '
+             'potato.',
+        mechanism='Tomato\'s own wholesale index can pick up shared seasonal '
+                   'or macro effects across the vegetable basket; {dir} shown '
+                   'here is the isolated model effect.'),
+
+    # ── Infrastructure (M5) ───────────────────────────────────────────────
+    'wage_agri_men': dict(
+        label='Agri. Wage — Men (Rs/day)',
+        help='State-level average daily wage for male agricultural labour '
+             '(Labour Bureau/CMIE) — a direct farm-labour cost input.',
+        mechanism='Higher labour costs raise the cost of producing and '
+                   'harvesting the crop, which tends to push prices {dir}.'),
+    'wage_agri_women': dict(
+        label='Agri. Wage — Women (Rs/day)',
+        help='State-level average daily wage for female agricultural labour '
+             '(Labour Bureau/CMIE) — a direct farm-labour cost input.',
+        mechanism='Higher labour costs raise the cost of producing and '
+                   'harvesting the crop, which tends to push prices {dir}.'),
+    'cold_storage_n_facilities': dict(
+        label='Cold Storage Facilities (count)',
+        help='Number of registered cold-storage facilities in this state — '
+             'more facilities mean more capacity to hold produce off the '
+             'market and smooth out price swings.',
+        mechanism='More cold-storage facilities give traders more ability to '
+                   'hold stock rather than dump it immediately, which tends '
+                   'to push prices {dir} by reducing forced-sale pressure.'),
+    'cold_storage_capacity_mt': dict(
+        label='Cold Storage Capacity (MT)',
+        help='Total registered cold-storage capacity (metric tonnes) in this '
+             'state — this is a "what if this state had more/less storage '
+             'capacity" policy-investment lever, not a week-to-week variable.',
+        mechanism='More storage capacity lets traders buffer supply across '
+                   'time instead of selling immediately, which tends to push '
+                   'prices {dir} by smoothing out short-term gluts.'),
+    'road_density_per_100_sqkm': dict(
+        label='Road Density (km per 100 km²)',
+        help='State road network density (CEIC/MORTH) — a proxy for how '
+             'easily produce moves from farm to market. Like cold storage, '
+             'this is a slow-moving infrastructure lever, not a weekly variable.',
+        mechanism='Denser road networks lower the effective cost and delay of '
+                   'getting produce to market, which tends to push prices {dir}.'),
 }
 
 st.set_page_config(
@@ -552,7 +807,9 @@ with st.sidebar:
         _counts = reference.groupby('crop')['market_id'].nunique()
         st.markdown(
             '**Feeds:** Agmarknet (prices/arrivals), CMIE/RBI/PPAC (macro), '
-            'Sentinel-2/MODIS/ERA5/CHIRPS (remote sensing), 2017-2026.\n\n'
+            'Sentinel-2/MODIS/ERA5/CHIRPS (remote sensing), Labour Bureau/CMIE '
+            '(state wages) + CEIC/MORTH (cold storage, roads), PIB/DGFT '
+            '(export policy events), 2017-2026.\n\n'
             f'- 🍅 Tomato: **{_counts.get("tomato", 0)} APMCs**\n'
             f'- 🧅 Onion: **{_counts.get("onion", 0)} APMCs**\n'
             f'- 🥔 Potato: **{_counts.get("potato", 0)} APMCs**'
@@ -651,12 +908,29 @@ with st.sidebar:
     scenario['market_intervention_flag'] = int(market_intervention)
     _policy_staleness_caption('market_intervention_flag')
 
+    _ogi = FEATURE_INFO['operation_greens_active']
+    op_greens = st.checkbox(_ogi['label'], value=bool(_num('operation_greens_active')), help=_ogi['help'])
+    scenario['operation_greens_active'] = int(op_greens)
+    _policy_staleness_caption('operation_greens_active')
+
     st.markdown("<hr>", unsafe_allow_html=True)
     st.markdown("<p style='font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#64748B; margin-bottom:6px;'>Climate & Satellite</p>", unsafe_allow_html=True)
     for col in ['era5_tmax', 'chirps_rain_mm', 's2_ndvi']:
         val = safe_slider(col)
         if val is not None:
             scenario[col] = val
+    # Every other raw M3/M4 climate/satellite column the model actually
+    # trains on (2026-09-25 dashboard audit) -- collapsed by default so the
+    # sidebar's default view is unchanged, but genuinely reachable rather
+    # than invisible. 's2_evi' deliberately excluded -- see Script 23's
+    # SIMULATABLE comment (its source data is corrupted for ~50% of rows).
+    with st.expander('More climate & satellite variables'):
+        for col in ['era5_tmin', 'era5_tmean', 'era5_dtr', 'era5_heat_35', 'era5_heat_38',
+                    'chirps_rain_max', 'chirps_excess', 's2_valid_frac', 's2_ndvi_anom',
+                    'modis_ndvi', 'modis_evi', 'modis_lst_mean', 'modis_lst_max', 'modis_lst_frac35']:
+            val = safe_slider(col)
+            if val is not None:
+                scenario[col] = val
 
     st.markdown("<hr>", unsafe_allow_html=True)
     st.markdown("<p style='font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#64748B; margin-bottom:6px;'>Macro & Logistics</p>", unsafe_allow_html=True)
@@ -664,6 +938,44 @@ with st.sidebar:
         val = safe_slider(col, extend_pct=0.20)
         if val is not None:
             scenario[col] = val
+    # Every other raw M2 macro column (CMIE/RBI/PPAC) the model actually
+    # trains on -- same collapsed-by-default treatment as climate/satellite.
+    # No extend_pct here (unlike the 3 primary sliders above): found
+    # 2026-09-25 that a 20% extension on a column whose observed minimum
+    # sits near zero (WPI series, bank credit) pushes the slider's lower
+    # bound negative, which is nonsensical for an index/count -- the 3
+    # primary sliders' own observed minimums are comfortably above zero, so
+    # this never showed up there.
+    with st.expander('More macro & trade variables'):
+        for col in ['agri_wages_rs_day', 'bank_credit_agri_cr', 'crude_oil_usd_bbl',
+                    'diesel_delhi_per_L', 'export_veg_usd_mn', 'import_veg_usd_mn',
+                    'iip_food_proc', 'lpg_nonsub_4city_rs_cyl', 'lpg_nonsub_delhi_per14kg',
+                    'reverse_repo_pct', 'wpi_fruits_vegetables', 'wpi_vegetables_total',
+                    'wpi_potato', 'wpi_onion', 'wpi_tomato']:
+            val = safe_slider(col)
+            if val is not None:
+                scenario[col] = val
+
+    st.markdown("<hr>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#64748B; margin-bottom:6px;'>Infrastructure & Labor (M5)</p>", unsafe_allow_html=True)
+    # M5 had NO presence anywhere in the dashboard before 2026-09-25 despite
+    # being real model inputs -- wage_agri_men/women vary weekly by state;
+    # cold storage/road density are slow-moving state facts (see their
+    # FEATURE_INFO 'help' text), so moving their sliders is a genuine "what
+    # if this state invested in more capacity" policy question, not a
+    # week-to-week what-if -- collapsed by default for that reason too.
+    for col in ['wage_agri_men', 'wage_agri_women']:
+        val = safe_slider(col)
+        if val is not None:
+            scenario[col] = val
+    with st.expander('Cold storage & road density (state infrastructure)'):
+        # No extend_pct -- cold_storage_n_facilities' observed minimum is
+        # already near zero, so a 20% extension pushes the slider negative
+        # (same issue as the macro WPI columns above).
+        for col in ['cold_storage_n_facilities', 'cold_storage_capacity_mt', 'road_density_per_100_sqkm']:
+            val = safe_slider(col)
+            if val is not None:
+                scenario[col] = val
 
     st.markdown("<div style='height:8px;'></div>", unsafe_allow_html=True)
     if st.button('🔄 Reset to Baseline Vector', use_container_width=True):
@@ -741,7 +1053,7 @@ for h in HORIZONS:
         'date': fdate,
         'price': fprice,
         'rmse': herr.get('rmse'),
-        'mape': herr.get('mape'),
+        'wape': herr.get('wape'),
         'season': season,
         'spark': spark
     }
@@ -752,7 +1064,7 @@ delta = scenario_pred - baseline_pred
 delta_pct = 100 * delta / baseline_pred if baseline_pred else 0
 
 err = uncertainty.get(f'{crop}_{horizon}w', {})
-rmse, mape = err.get('rmse'), err.get('mape')
+rmse, wape = err.get('rmse'), err.get('wape')
 
 def _differs(a, b):
     if pd.isna(a) and pd.isna(b):
@@ -784,7 +1096,7 @@ with tab_sim:
     t_cols = st.columns(len(HORIZONS))
     for tcol, h in zip(t_cols, HORIZONS):
         res = ticker_results[h]
-        herr_note = f" ±₹{res['rmse']:,.0f} ({res['mape']:.0f}% MAPE)" if res['rmse'] is not None else ""
+        herr_note = f" ±₹{res['rmse']:,.0f} ({res['wape']:.0f}% WAPE)" if res['rmse'] is not None else ""
         with tcol:
             st.metric(
                 f"Horizon {h}W · {res['date'].strftime('%d %b')}",
@@ -838,8 +1150,8 @@ with tab_sim:
     else:
         c3.metric("Last Real Trade", "N/A", border=True)
 
-    if mape is not None:
-        c4.metric("Model Accuracy", f"~{max(0.0, 100 - mape):.0f}%", border=True, help=f"100% - MAPE ({mape:.0f}%) from backtesting.")
+    if wape is not None:
+        c4.metric("Model Accuracy", f"~{max(0.0, 100 - wape):.0f}%", border=True, help=f"100% - WAPE ({wape:.0f}%) from backtesting.")
     else:
         c4.metric("Model Accuracy", "N/A", border=True)
 
@@ -1186,7 +1498,7 @@ with tab_ai:
                     f'Scenario prediction: Rs {scenario_pred:,.0f}/quintal '
                     f'({delta_pct:+.1f}%, {delta:+,.0f} Rs/quintal)\n'
                     f"Model's typical error at this horizon: "
-                    f"{f'±Rs {rmse:,.0f} ({mape:.0f}% MAPE)' if rmse is not None else 'not available'}\n\n"
+                    f"{f'±Rs {rmse:,.0f} ({wape:.0f}% WAPE)' if rmse is not None else 'not available'}\n\n"
                     f'Changes made in this scenario, with the isolated effect of each:\n{changes_text}\n\n'
                     'Write ONE paragraph (120-160 words) of plain-language policy commentary for an '
                     'agricultural-market analyst. Cover: (1) what this price move would mean for '

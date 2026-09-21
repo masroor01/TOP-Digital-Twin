@@ -396,6 +396,33 @@ for crop in CROPS:
 
     latest = latest.drop(columns=stale_cols).merge(weekly, on='week_start', how='left')
 
+    # M5 wages (wage_agri_men/women) need the SAME forward-fill treatment as
+    # the block above, but couldn't just be added to stale_cols: they're a
+    # (state, year, month) join, not (crop, week_start) like every column
+    # above, so a single per-week value isn't correct across different
+    # states. Found 2026-09-25 (dashboard audit): wage_agri_men/women were
+    # NaN for 100% of reference rows -- not a join bug (the historical
+    # panel has real values), but this reference-row step never
+    # forward-filled them at all, so every market's baseline silently had
+    # no wage data and the dashboard's wage sliders could never render for
+    # ANY market. Fixed with a per-state ffill, mirroring the crop-level
+    # one above but grouped by state instead.
+    wage_cols = [c for c in ['wage_agri_men', 'wage_agri_women'] if c in df_crop.columns]
+    if wage_cols:
+        wage_weekly = (df_crop[['state', 'week_start'] + wage_cols]
+                       .drop_duplicates(subset=['state', 'week_start'])
+                       .sort_values(['state', 'week_start']))
+        last_real_wage = {c: (wage_weekly.loc[wage_weekly[c].notna(), 'week_start'].max())
+                           for c in wage_cols}
+        wage_weekly[wage_cols] = wage_weekly.groupby('state')[wage_cols].ffill()
+        for c in wage_cols:
+            d = last_real_wage[c]
+            if pd.notna(d) and d < grid_end_date:
+                staleness[crop][c] = {'as_of': str(d.date()),
+                                       'weeks_stale': int((grid_end_date - d).days // 7)}
+        latest = latest.drop(columns=wage_cols).merge(
+            wage_weekly, on=['state', 'week_start'], how='left')
+
     # The panel imputes weeks with no real trading (see 'imputed' column) —
     # found in review that 58.6% of markets' LATEST row is imputed, which
     # would silently mislabel an estimated value as "last observed price"
@@ -515,16 +542,37 @@ print(f'  Saved: {hist_path}  ({len(hist_df):,} rows, up to {HISTORY_WEEKS} week
 # are identical across all markets within any single week, so their
 # cross-sectional range in ref_df is degenerate (min==max), which crashes
 # st.slider(). The full time series has real historical variation.
-SIMULATABLE = (['export_banned', 'mep_usd_per_tonne', 'export_duty_pct',
-                 'market_intervention_flag', 'operation_greens_active'] +
-                # Explicit list, not a CLIMATE_FEATS[:N] slice -- found 2026-07-27
-                # that slicing silently dropped every CHIRPS column (CLIMATE_FEATS
-                # is ERA5_COLS + CHIRPS_COLS, so [:6] only ever grabbed the 6 ERA5
-                # columns), meaning the rainfall slider had no range and could
-                # never render, since Script 15/24.
-                ['era5_tmax', 'chirps_rain_mm'] + SAT_FEATS[:4] +
-                ['diesel_4city_rs_litre', 'repo_rate_pct', 'usdinr_monthly_avg',
-                 'wage_agri_men', 'wage_agri_women'])
+#
+# 2026-09-25: expanded from a hand-picked subset (3 macro, 3 climate/sat)
+# to EVERY raw M2-M6 layer column the model actually trains on -- found via
+# a dashboard audit that most of MACRO_COLS (5 WPI series, bank credit,
+# crude oil, LPG, etc.), most climate/satellite columns, all of M5
+# infrastructure, and operation_greens_active had zero presence in the
+# dashboard despite being real model inputs. Deliberately still excludes
+# the *_roll4/_roll8 rolling-derived versions in CLIMATE_FEATS/SAT_FEATS --
+# those are feature engineering on top of the raw column already listed
+# here, not a separate data layer, same boundary price_roll_mean_* /
+# arr_roll_mean_* have always been outside SIMULATABLE.
+SIMULATABLE = (
+    MACRO_COLS +
+    ERA5_COLS + CHIRPS_COLS +
+    # 's2_evi' deliberately excluded here, unlike every other S2/MODIS
+    # column: found 2026-09-25 that ~50% of its values in
+    # crop_weekly_features.csv are wildly implausible (|value| > 10, up to
+    # ~1.2 billion -- EVI should be roughly [-1, 1]), almost certainly a
+    # divide-by-near-zero blowup in Script 14's EVI formula, not a real
+    # signal. It's still trained on as-is (M6_FEATS/SAT_FEATS untouched --
+    # that's a Script 14 data-quality bug needing its own fix, out of scope
+    # here), but a slider spanning -7.5e8 to +1.2e9 would be actively
+    # misleading, so it's withheld from the dashboard's simulatable set
+    # until Script 14's EVI computation is fixed.
+    [c for c in S2_COLS if c != 's2_evi'] + MODIS_COLS +
+    ['wage_agri_men', 'wage_agri_women',
+     'cold_storage_n_facilities', 'cold_storage_capacity_mt',
+     'road_density_per_100_sqkm'] +
+    ['export_banned', 'mep_usd_per_tonne', 'export_duty_pct',
+     'market_intervention_flag', 'operation_greens_active']
+)
 ranges = {}
 for col in SIMULATABLE:
     if col in df.columns:
