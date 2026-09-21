@@ -4,23 +4,25 @@ import { rateLimit } from 'express-rate-limit';
 import { predictBatch, inferenceHealth } from './inference.js';
 import { pchip } from './pchip.js';
 import {
-  CROPS, HORIZONS, FEATURE_INFO, POLICY_FIELDS, CLIMATE_FIELDS, MACRO_FIELDS,
+  CROPS, HORIZONS, FEATURE_INFO, POLICY_FIELDS, CLIMATE_FIELDS, MACRO_FIELDS, INFRA_FIELDS,
   SEASON_LABEL, SEASON_COLOR, seasonFor,
 } from './config.js';
 
 const WEEK_MS = 7 * 24 * 3600 * 1000;
 const DAY_MS = 24 * 3600 * 1000;
 
-// The real, exposed scenario controls in the sidebar top out at ~11 fields
-// (4 policy + 3 climate + 3 macro, at most). Anything past a generous
-// multiple of that in a single request's `overrides` object isn't a real
-// user interaction -- it's either a bug or an attempt to force the server
-// into computing thousands of isolated-effect predictions in one synchronous
-// request (confirmed exploitable: 500 garbage keys measured at ~1.1s live;
-// linear scaling means a 2MB body full of short keys could block the
-// single-threaded Node process for minutes). Reject rather than silently
-// truncate, so a real bug upstream doesn't get masked.
-const MAX_OVERRIDE_KEYS = 40;
+// The real, exposed scenario controls in the sidebar top out at ~45 fields
+// (5 policy + 17 climate/satellite + 18 macro + 5 infrastructure, at most --
+// raised from ~11 on 2026-09-21 when every M6 layer column got its own
+// control, mirroring the Streamlit dashboard's same expansion, commit
+// 0b759e5). Anything past a generous multiple of that in a single request's
+// `overrides` object isn't a real user interaction -- it's either a bug or
+// an attempt to force the server into computing thousands of isolated-effect
+// predictions in one synchronous request (confirmed exploitable: 500 garbage
+// keys measured at ~1.1s live; linear scaling means a 2MB body full of short
+// keys could block the single-threaded Node process for minutes). Reject
+// rather than silently truncate, so a real bug upstream doesn't get masked.
+const MAX_OVERRIDE_KEYS = 60;
 function tooManyOverrides(overrides) {
   return overrides && typeof overrides === 'object' && Object.keys(overrides).length > MAX_OVERRIDE_KEYS;
 }
@@ -51,6 +53,7 @@ export function buildRouter(store) {
       policyFields: POLICY_FIELDS,
       climateFields: CLIMATE_FIELDS,
       macroFields: MACRO_FIELDS,
+      infraFields: INFRA_FIELDS,
       seasonLabel: SEASON_LABEL,
       seasonColor: SEASON_COLOR,
       marketCounts: countByCrop(store.reference),

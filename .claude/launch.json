@@ -12,6 +12,12 @@
       "runtimeExecutable": "cmd",
       "runtimeArgs": ["/c", "cd /d \"C:\\Users\\masro\\Documents\\TOP_Digital_Twin\\web\\frontend\" && npm run dev"],
       "port": 5173
+    },
+    {
+      "name": "top-dashboard-react-prod",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d \"C:\\Users\\masro\\Documents\\TOP_Digital_Twin\\web\" && npm start"],
+      "port": 4000
     }
   ]
 }

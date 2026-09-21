@@ -71,12 +71,46 @@ function CheckField({ label, help, checked, onChange, staleness, crop, field }) 
   );
 }
 
+function ExpandableSliders({ summary, fields, featureInfo, featureRanges, baseRow, val, setOverride, staleness, crop, extendPct = 0 }) {
+  const items = fields
+    .map((field) => {
+      const r = featureRanges[field];
+      if (!r || baseRow?.[field] == null || !featureInfo[field]) return null;
+      const span = r.max - r.min;
+      const lo = extendPct ? r.min - span * extendPct : r.min;
+      const hi = extendPct ? r.max + span * extendPct : r.max;
+      return (
+        <SliderField key={field} label={featureInfo[field].label} help={featureInfo[field].help}
+          min={lo} max={hi} step={(hi - lo) / 100 || 1}
+          value={val(field)} onChange={(v) => setOverride(field, v)}
+          staleness={staleness} crop={crop} field={field} obsMin={r.min} obsMax={r.max} />
+      );
+    })
+    .filter(Boolean);
+  if (items.length === 0) return null;
+  return (
+    <details className="mb-3 text-xs">
+      <summary className="cursor-pointer text-[var(--text-secondary)] font-medium">{summary}</summary>
+      <div className="mt-2.5">{items}</div>
+    </details>
+  );
+}
+
 export default function Sidebar({
   meta, crop, setCrop, states, stateSel, setStateSel, markets, market, setMarket,
   horizon, setHorizon, baseRow, overrides, setOverrides, targetDate, marketCounts, onClose,
 }) {
   if (!meta) return null;
-  const { featureInfo, featureRanges, staleness, policyFields, climateFields, macroFields } = meta;
+  const { featureInfo, featureRanges, staleness, policyFields, climateFields, macroFields, infraFields = [] } = meta;
+  // First 3 of climateFields/macroFields are the primary, always-visible
+  // sliders (config.js keeps them first in the array on purpose); the rest
+  // render collapsed in an <details> so the default sidebar view is
+  // unchanged from before every M2/M3/M4 column got its own control
+  // (2026-09-21, mirrors the Streamlit dashboard's same expansion).
+  const climatePrimary = climateFields.slice(0, 3), climateRest = climateFields.slice(3);
+  const macroPrimary = macroFields.slice(0, 3), macroRest = macroFields.slice(3);
+  const infraSliders = infraFields.filter((f) => f.startsWith('wage_'));
+  const infraExpandable = infraFields.filter((f) => !f.startsWith('wage_'));
 
   const setOverride = (field, value) => setOverrides((prev) => ({ ...prev, [field]: value }));
 
@@ -112,7 +146,7 @@ export default function Sidebar({
       <details className="mb-3 text-xs">
         <summary className="cursor-pointer text-[var(--text-secondary)] font-medium">📦 Data & Market Specs</summary>
         <div className="mt-2 text-[var(--text-secondary)] leading-relaxed">
-          <p className="mb-1">Feeds: Agmarknet (prices/arrivals), CMIE/RBI/PPAC (macro), Sentinel-2/MODIS/ERA5/CHIRPS (remote sensing), 2017-2026.</p>
+          <p className="mb-1">Feeds: Agmarknet (prices/arrivals), CMIE/RBI/PPAC (macro), Sentinel-2/MODIS/ERA5/CHIRPS (remote sensing), Labour Bureau/CMIE (state wages) + CEIC/MORTH (cold storage, roads), PIB/DGFT (export policy events), 2017-2026.</p>
           <ul className="list-none space-y-0.5">
             {Object.entries(marketCounts || {}).map(([c, n]) => (
               <li key={c}>{CROP_ICON[c] || ''} {c[0].toUpperCase() + c.slice(1)}: <b>{n} APMCs</b></li>
@@ -170,10 +204,15 @@ export default function Sidebar({
       <CheckField label={featureInfo.market_intervention_flag.label} help={featureInfo.market_intervention_flag.help}
         checked={!!val('market_intervention_flag')} onChange={(v) => setOverride('market_intervention_flag', v ? 1 : 0)}
         staleness={staleness} crop={crop} field="market_intervention_flag" />
+      {policyFields.includes('operation_greens_active') && (
+        <CheckField label={featureInfo.operation_greens_active.label} help={featureInfo.operation_greens_active.help}
+          checked={!!val('operation_greens_active')} onChange={(v) => setOverride('operation_greens_active', v ? 1 : 0)}
+          staleness={staleness} crop={crop} field="operation_greens_active" />
+      )}
 
       <hr className="border-[var(--border-color)] my-3" />
       <SectionLabel>Climate & Satellite</SectionLabel>
-      {climateFields.map((field) => {
+      {climatePrimary.map((field) => {
         const r = featureRanges[field];
         if (!r || baseRow?.[field] == null) return null;
         return (
@@ -183,10 +222,13 @@ export default function Sidebar({
             staleness={staleness} crop={crop} field={field} obsMin={r.min} obsMax={r.max} />
         );
       })}
+      <ExpandableSliders summary="More climate & satellite variables" fields={climateRest}
+        featureInfo={featureInfo} featureRanges={featureRanges} baseRow={baseRow}
+        val={val} setOverride={setOverride} staleness={staleness} crop={crop} />
 
       <hr className="border-[var(--border-color)] my-3" />
       <SectionLabel>Macro & Logistics</SectionLabel>
-      {macroFields.map((field) => {
+      {macroPrimary.map((field) => {
         const r = featureRanges[field];
         if (!r || baseRow?.[field] == null) return null;
         const span = r.max - r.min;
@@ -198,6 +240,35 @@ export default function Sidebar({
             staleness={staleness} crop={crop} field={field} obsMin={r.min} obsMax={r.max} />
         );
       })}
+      {/* No extendPct for the rest -- found 2026-09-21 that a 20% extension
+          on a column whose observed minimum sits near zero (WPI series,
+          bank credit) pushes the slider's lower bound negative, which is
+          nonsensical for an index/count. The 3 primary sliders above have
+          observed minimums comfortably above zero, so this never showed up
+          there (same fix as the Streamlit dashboard, commit 0b759e5). */}
+      <ExpandableSliders summary="More macro & trade variables" fields={macroRest}
+        featureInfo={featureInfo} featureRanges={featureRanges} baseRow={baseRow}
+        val={val} setOverride={setOverride} staleness={staleness} crop={crop} />
+
+      {infraFields.length > 0 && (
+        <>
+          <hr className="border-[var(--border-color)] my-3" />
+          <SectionLabel>Infrastructure & Labor (M5)</SectionLabel>
+          {infraSliders.map((field) => {
+            const r = featureRanges[field];
+            if (!r || baseRow?.[field] == null) return null;
+            return (
+              <SliderField key={field} label={featureInfo[field].label} help={featureInfo[field].help}
+                min={r.min} max={r.max} step={(r.max - r.min) / 100 || 1}
+                value={val(field)} onChange={(v) => setOverride(field, v)}
+                staleness={staleness} crop={crop} field={field} obsMin={r.min} obsMax={r.max} />
+            );
+          })}
+          <ExpandableSliders summary="Cold storage & road density (state infrastructure)" fields={infraExpandable}
+            featureInfo={featureInfo} featureRanges={featureRanges} baseRow={baseRow}
+            val={val} setOverride={setOverride} staleness={staleness} crop={crop} />
+        </>
+      )}
 
       <button onClick={() => setOverrides({})}
         className="w-full mt-2 text-sm font-semibold rounded-lg border border-[var(--border-color-strong)] bg-[var(--card-bg)] text-[var(--text-primary)] py-2 hover:bg-[var(--brand)] hover:text-white hover:border-[var(--brand)] transition">
