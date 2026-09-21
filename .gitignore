@@ -137,6 +137,12 @@ downloads/
 data/drought_vedas/raw_cache/
 data/drought_idm/raw_cache/
 
+# Fertilizer MRP (Script 57) and CPI-AL/RL (Script 58): cached source PDFs,
+# one per bulletin/press-release, so a re-run doesn't re-download — same
+# pattern as the drought raw_cache/ above, not meaningful to track individually.
+data/fertilizer_mrp/raw_cache/
+data/cpi_al_rl/raw_cache/
+
 # Demonstration join of both drought layers onto the full market panel (61 MB)
 # Regenerate with: python scripts/54_Drought_Layers_Panel_Join.py
 # The small per-layer files (trigger1_panel_weekly.csv, cdi_panel_weekly.csv)

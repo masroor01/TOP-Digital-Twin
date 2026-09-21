@@ -1,0 +1,981 @@
+state,series,year,month,index_value
+All India,AL,2025,6,134.08
+All India,RL,2025,6,134.37
+Andaman and Nicobar Islands,AL,2025,6,138.01
+Andaman and Nicobar Islands,RL,2025,6,138.17
+Andhra Pradesh,AL,2025,6,137.77
+Andhra Pradesh,RL,2025,6,137.89
+Arunachal Pradesh,AL,2025,6,133.98
+Arunachal Pradesh,RL,2025,6,134.52
+Assam,AL,2025,6,136.86
+Assam,RL,2025,6,137.12
+Bihar,AL,2025,6,130.33
+Bihar,RL,2025,6,129.96
+Chhattisgarh,AL,2025,6,127.98
+Chhattisgarh,RL,2025,6,128.36
+"Daman and Diu, Dadra Nagar and Haveli",AL,2025,6,134.64
+"Daman and Diu, Dadra Nagar and Haveli",RL,2025,6,133.21
+Delhi,AL,2025,6,0.0
+Delhi,RL,2025,6,134.0
+Goa,AL,2025,6,126.07
+Goa,RL,2025,6,126.52
+Gujarat,AL,2025,6,136.45
+Gujarat,RL,2025,6,136.22
+Haryana,AL,2025,6,140.78
+Haryana,RL,2025,6,139.55
+Himachal Pradesh,AL,2025,6,134.02
+Himachal Pradesh,RL,2025,6,135.66
+Jammu and Kashmir,AL,2025,6,143.68
+Jammu and Kashmir,RL,2025,6,143.91
+Jharkhand,AL,2025,6,129.93
+Jharkhand,RL,2025,6,130.41
+Karnataka,AL,2025,6,138.72
+Karnataka,RL,2025,6,139.38
+Kerala,AL,2025,6,137.01
+Kerala,RL,2025,6,137.24
+Lakshadweep,AL,2025,6,135.3
+Lakshadweep,RL,2025,6,133.96
+Madhya Pradesh,AL,2025,6,130.98
+Madhya Pradesh,RL,2025,6,131.69
+Maharashtra,AL,2025,6,130.94
+Maharashtra,RL,2025,6,131.26
+Manipur,AL,2025,6,142.46
+Manipur,RL,2025,6,140.13
+Meghalaya,AL,2025,6,136.63
+Meghalaya,RL,2025,6,136.69
+Mizoram,AL,2025,6,145.66
+Mizoram,RL,2025,6,143.08
+Nagaland,AL,2025,6,134.48
+Nagaland,RL,2025,6,136.1
+Odisha,AL,2025,6,128.83
+Odisha,RL,2025,6,129.08
+Puducherry,AL,2025,6,135.08
+Puducherry,RL,2025,6,135.1
+Punjab,AL,2025,6,135.73
+Punjab,RL,2025,6,135.24
+Rajasthan,AL,2025,6,135.06
+Rajasthan,RL,2025,6,134.63
+Sikkim,AL,2025,6,129.33
+Sikkim,RL,2025,6,129.19
+Tamil Nadu,AL,2025,6,133.27
+Tamil Nadu,RL,2025,6,132.63
+Telangana,AL,2025,6,137.7
+Telangana,RL,2025,6,137.71
+Tripura,AL,2025,6,127.26
+Tripura,RL,2025,6,127.93
+Uttar Pradesh,AL,2025,6,135.88
+Uttar Pradesh,RL,2025,6,135.93
+Uttarakhand,AL,2025,6,128.49
+Uttarakhand,RL,2025,6,128.34
+West Bengal,AL,2025,6,133.17
+West Bengal,RL,2025,6,132.55
+All India,AL,2025,7,135.31
+All India,RL,2025,7,135.66
+Andaman and Nicobar Islands,AL,2025,7,139.04
+Andaman and Nicobar Islands,RL,2025,7,139.54
+Andhra Pradesh,AL,2025,7,141.33
+Andhra Pradesh,RL,2025,7,141.5
+Arunachal Pradesh,AL,2025,7,134.61
+Arunachal Pradesh,RL,2025,7,135.23
+Assam,AL,2025,7,137.51
+Assam,RL,2025,7,137.72
+Bihar,AL,2025,7,131.57
+Bihar,RL,2025,7,131.19
+Chhattisgarh,AL,2025,7,130.83
+Chhattisgarh,RL,2025,7,131.21
+"Daman and Diu, Dadra Nagar and Haveli",AL,2025,7,137.37
+"Daman and Diu, Dadra Nagar and Haveli",RL,2025,7,136.15
+Delhi,AL,2025,7,0.0
+Delhi,RL,2025,7,134.69
+Goa,AL,2025,7,126.82
+Goa,RL,2025,7,126.66
+Gujarat,AL,2025,7,138.31
+Gujarat,RL,2025,7,137.96
+Haryana,AL,2025,7,143.19
+Haryana,RL,2025,7,142.0
+Himachal Pradesh,AL,2025,7,134.89
+Himachal Pradesh,RL,2025,7,137.09
+Jammu and Kashmir,AL,2025,7,144.93
+Jammu and Kashmir,RL,2025,7,145.32
+Jharkhand,AL,2025,7,132.35
+Jharkhand,RL,2025,7,132.72
+Karnataka,AL,2025,7,138.88
+Karnataka,RL,2025,7,139.54
+Kerala,AL,2025,7,139.22
+Kerala,RL,2025,7,139.35
+Lakshadweep,AL,2025,7,136.49
+Lakshadweep,RL,2025,7,135.03
+Madhya Pradesh,AL,2025,7,132.82
+Madhya Pradesh,RL,2025,7,133.37
+Maharashtra,AL,2025,7,132.04
+Maharashtra,RL,2025,7,132.37
+Manipur,AL,2025,7,144.68
+Manipur,RL,2025,7,142.63
+Meghalaya,AL,2025,7,136.55
+Meghalaya,RL,2025,7,136.85
+Mizoram,AL,2025,7,146.5
+Mizoram,RL,2025,7,143.8
+Nagaland,AL,2025,7,135.06
+Nagaland,RL,2025,7,136.59
+Odisha,AL,2025,7,131.34
+Odisha,RL,2025,7,131.51
+Puducherry,AL,2025,7,136.13
+Puducherry,RL,2025,7,136.07
+Punjab,AL,2025,7,137.08
+Punjab,RL,2025,7,136.54
+Rajasthan,AL,2025,7,137.15
+Rajasthan,RL,2025,7,136.54
+Sikkim,AL,2025,7,130.35
+Sikkim,RL,2025,7,130.15
+Tamil Nadu,AL,2025,7,131.68
+Tamil Nadu,RL,2025,7,131.12
+Telangana,AL,2025,7,138.72
+Telangana,RL,2025,7,138.76
+Tripura,AL,2025,7,126.95
+Tripura,RL,2025,7,127.63
+Uttar Pradesh,AL,2025,7,137.67
+Uttar Pradesh,RL,2025,7,137.63
+Uttarakhand,AL,2025,7,130.94
+Uttarakhand,RL,2025,7,130.13
+West Bengal,AL,2025,7,133.73
+West Bengal,RL,2025,7,133.01
+All India,AL,2025,8,136.34
+All India,RL,2025,8,136.6
+Andaman and Nicobar Islands,AL,2025,8,137.42
+Andaman and Nicobar Islands,RL,2025,8,137.16
+Andhra Pradesh,AL,2025,8,141.96
+Andhra Pradesh,RL,2025,8,142.12
+Arunachal Pradesh,AL,2025,8,135.08
+Arunachal Pradesh,RL,2025,8,135.65
+Assam,AL,2025,8,138.57
+Assam,RL,2025,8,138.73
+Bihar,AL,2025,8,133.51
+Bihar,RL,2025,8,133.2
+Chhattisgarh,AL,2025,8,133.35
+Chhattisgarh,RL,2025,8,133.63
+"Daman and Diu, Dadra Nagar and Haveli",AL,2025,8,137.68
+"Daman and Diu, Dadra Nagar and Haveli",RL,2025,8,136.89
+Delhi,AL,2025,8,0.0
+Delhi,RL,2025,8,135.63
+Goa,AL,2025,8,127.92
+Goa,RL,2025,8,127.6
+Gujarat,AL,2025,8,137.3
+Gujarat,RL,2025,8,137.02
+Haryana,AL,2025,8,143.31
+Haryana,RL,2025,8,142.14
+Himachal Pradesh,AL,2025,8,136.26
+Himachal Pradesh,RL,2025,8,138.57
+Jammu and Kashmir,AL,2025,8,146.62
+Jammu and Kashmir,RL,2025,8,146.96
+Jharkhand,AL,2025,8,133.15
+Jharkhand,RL,2025,8,133.47
+Karnataka,AL,2025,8,139.71
+Karnataka,RL,2025,8,140.34
+Kerala,AL,2025,8,138.04
+Kerala,RL,2025,8,138.14
+Lakshadweep,AL,2025,8,137.78
+Lakshadweep,RL,2025,8,136.27
+Madhya Pradesh,AL,2025,8,133.55
+Madhya Pradesh,RL,2025,8,134.04
+Maharashtra,AL,2025,8,132.3
+Maharashtra,RL,2025,8,132.6
+Manipur,AL,2025,8,144.23
+Manipur,RL,2025,8,142.24
+Meghalaya,AL,2025,8,136.8
+Meghalaya,RL,2025,8,137.08
+Mizoram,AL,2025,8,146.99
+Mizoram,RL,2025,8,144.15
+Nagaland,AL,2025,8,135.24
+Nagaland,RL,2025,8,137.23
+Odisha,AL,2025,8,132.12
+Odisha,RL,2025,8,132.28
+Puducherry,AL,2025,8,136.49
+Puducherry,RL,2025,8,136.22
+Punjab,AL,2025,8,138.12
+Punjab,RL,2025,8,137.55
+Rajasthan,AL,2025,8,138.16
+Rajasthan,RL,2025,8,137.38
+Sikkim,AL,2025,8,131.13
+Sikkim,RL,2025,8,130.96
+Tamil Nadu,AL,2025,8,133.33
+Tamil Nadu,RL,2025,8,133.27
+Telangana,AL,2025,8,139.05
+Telangana,RL,2025,8,139.07
+Tripura,AL,2025,8,124.83
+Tripura,RL,2025,8,128.41
+Uttar Pradesh,AL,2025,8,138.29
+Uttar Pradesh,RL,2025,8,138.21
+Uttarakhand,AL,2025,8,132.38
+Uttarakhand,RL,2025,8,131.8
+West Bengal,AL,2025,8,136.8
+West Bengal,RL,2025,8,136.1
+All India,AL,2025,9,136.23
+All India,RL,2025,9,136.42
+Andaman and Nicobar Islands,AL,2025,9,137.5
+Andaman and Nicobar Islands,RL,2025,9,137.14
+Andhra Pradesh,AL,2025,9,142.01
+Andhra Pradesh,RL,2025,9,142.15
+Arunachal Pradesh,AL,2025,9,134.21
+Arunachal Pradesh,RL,2025,9,134.7
+Assam,AL,2025,9,139.34
+Assam,RL,2025,9,139.52
+Bihar,AL,2025,9,133.19
+Bihar,RL,2025,9,132.87
+Chhattisgarh,AL,2025,9,133.05
+Chhattisgarh,RL,2025,9,133.28
+"Daman and Diu, Dadra Nagar and Haveli",AL,2025,9,137.58
+"Daman and Diu, Dadra Nagar and Haveli",RL,2025,9,136.74
+Delhi,AL,2025,9,0.0
+Delhi,RL,2025,9,134.54
+Goa,AL,2025,9,124.9
+Goa,RL,2025,9,124.79
+Gujarat,AL,2025,9,137.91
+Gujarat,RL,2025,9,137.57
+Haryana,AL,2025,9,142.83
+Haryana,RL,2025,9,141.74
+Himachal Pradesh,AL,2025,9,136.35
+Himachal Pradesh,RL,2025,9,138.79
+Jammu and Kashmir,AL,2025,9,147.68
+Jammu and Kashmir,RL,2025,9,148.01
+Jharkhand,AL,2025,9,132.64
+Jharkhand,RL,2025,9,132.82
+Karnataka,AL,2025,9,139.62
+Karnataka,RL,2025,9,140.26
+Kerala,AL,2025,9,137.38
+Kerala,RL,2025,9,137.53
+Lakshadweep,AL,2025,9,138.01
+Lakshadweep,RL,2025,9,136.35
+Madhya Pradesh,AL,2025,9,132.96
+Madhya Pradesh,RL,2025,9,133.49
+Maharashtra,AL,2025,9,132.07
+Maharashtra,RL,2025,9,132.3
+Manipur,AL,2025,9,143.67
+Manipur,RL,2025,9,141.81
+Meghalaya,AL,2025,9,137.62
+Meghalaya,RL,2025,9,137.66
+Mizoram,AL,2025,9,148.29
+Mizoram,RL,2025,9,145.32
+Nagaland,AL,2025,9,135.55
+Nagaland,RL,2025,9,138.01
+Odisha,AL,2025,9,132.53
+Odisha,RL,2025,9,132.66
+Puducherry,AL,2025,9,135.89
+Puducherry,RL,2025,9,135.8
+Punjab,AL,2025,9,138.7
+Punjab,RL,2025,9,137.95
+Rajasthan,AL,2025,9,137.6
+Rajasthan,RL,2025,9,137.03
+Sikkim,AL,2025,9,131.63
+Sikkim,RL,2025,9,131.59
+Tamil Nadu,AL,2025,9,133.35
+Tamil Nadu,RL,2025,9,133.28
+Telangana,AL,2025,9,139.23
+Telangana,RL,2025,9,139.26
+Tripura,AL,2025,9,127.96
+Tripura,RL,2025,9,128.75
+Uttar Pradesh,AL,2025,9,137.42
+Uttar Pradesh,RL,2025,9,137.36
+Uttarakhand,AL,2025,9,131.2
+Uttarakhand,RL,2025,9,131.32
+West Bengal,AL,2025,9,136.82
+West Bengal,RL,2025,9,136.16
+All India,AL,2025,10,136.4
+All India,RL,2025,10,136.5
+Andaman and Nicobar Islands,AL,2025,10,138.28
+Andaman and Nicobar Islands,RL,2025,10,138.23
+Andhra Pradesh,AL,2025,10,142.0
+Andhra Pradesh,RL,2025,10,142.14
+Arunachal Pradesh,AL,2025,10,133.68
+Arunachal Pradesh,RL,2025,10,134.22
+Assam,AL,2025,10,140.99
+Assam,RL,2025,10,141.14
+Bihar,AL,2025,10,133.87
+Bihar,RL,2025,10,133.5
+Chhattisgarh,AL,2025,10,133.69
+Chhattisgarh,RL,2025,10,133.92
+"Daman and Diu, Dadra Nagar and Haveli",AL,2025,10,138.39
+"Daman and Diu, Dadra Nagar and Haveli",RL,2025,10,136.87
+Delhi,AL,2025,10,0.0
+Delhi,RL,2025,10,133.94
+Goa,AL,2025,10,123.9
+Goa,RL,2025,10,123.48
+Gujarat,AL,2025,10,137.46
+Gujarat,RL,2025,10,137.13
+Haryana,AL,2025,10,142.79
+Haryana,RL,2025,10,141.71
+Himachal Pradesh,AL,2025,10,136.38
+Himachal Pradesh,RL,2025,10,139.18
+Jammu and Kashmir,AL,2025,10,146.66
+Jammu and Kashmir,RL,2025,10,147.14
+Jharkhand,AL,2025,10,132.65
+Jharkhand,RL,2025,10,132.7
+Karnataka,AL,2025,10,139.68
+Karnataka,RL,2025,10,140.32
+Kerala,AL,2025,10,136.25
+Kerala,RL,2025,10,136.41
+Lakshadweep,AL,2025,10,137.65
+Lakshadweep,RL,2025,10,136.03
+Madhya Pradesh,AL,2025,10,133.02
+Madhya Pradesh,RL,2025,10,133.73
+Maharashtra,AL,2025,10,132.55
+Maharashtra,RL,2025,10,132.78
+Manipur,AL,2025,10,143.47
+Manipur,RL,2025,10,141.8
+Meghalaya,AL,2025,10,138.58
+Meghalaya,RL,2025,10,138.58
+Mizoram,AL,2025,10,148.42
+Mizoram,RL,2025,10,145.64
+Nagaland,AL,2025,10,136.23
+Nagaland,RL,2025,10,138.67
+Odisha,AL,2025,10,132.85
+Odisha,RL,2025,10,132.96
+Puducherry,AL,2025,10,135.3
+Puducherry,RL,2025,10,135.16
+Punjab,AL,2025,10,139.18
+Punjab,RL,2025,10,138.34
+Rajasthan,AL,2025,10,137.52
+Rajasthan,RL,2025,10,136.89
+Sikkim,AL,2025,10,131.43
+Sikkim,RL,2025,10,131.36
+Tamil Nadu,AL,2025,10,133.67
+Tamil Nadu,RL,2025,10,133.56
+Telangana,AL,2025,10,140.21
+Telangana,RL,2025,10,140.19
+Tripura,AL,2025,10,130.16
+Tripura,RL,2025,10,130.79
+Uttar Pradesh,AL,2025,10,137.46
+Uttar Pradesh,RL,2025,10,137.37
+Uttarakhand,AL,2025,10,131.98
+Uttarakhand,RL,2025,10,132.23
+West Bengal,AL,2025,10,136.3
+West Bengal,RL,2025,10,135.62
+All India,AL,2025,11,137.4
+All India,RL,2025,11,137.3
+Andaman and Nicobar Islands,AL,2025,11,137.4
+Andaman and Nicobar Islands,RL,2025,11,137.3
+Andhra Pradesh,AL,2025,11,138.91
+Andhra Pradesh,RL,2025,11,138.79
+Arunachal Pradesh,AL,2025,11,143.43
+Arunachal Pradesh,RL,2025,11,143.58
+Assam,AL,2025,11,134.12
+Assam,RL,2025,11,134.61
+Bihar,AL,2025,11,141.08
+Bihar,RL,2025,11,141.3
+Chhattisgarh,AL,2025,11,137.04
+Chhattisgarh,RL,2025,11,136.64
+"Daman and Diu, Dadra Nagar and Haveli",AL,2025,11,141.2
+"Daman and Diu, Dadra Nagar and Haveli",RL,2025,11,140.04
+Delhi,AL,2025,11,0.0
+Delhi,RL,2025,11,132.91
+Goa,AL,2025,11,123.89
+Goa,RL,2025,11,123.5
+Gujarat,AL,2025,11,138.84
+Gujarat,RL,2025,11,138.47
+Haryana,AL,2025,11,142.73
+Haryana,RL,2025,11,141.51
+Himachal Pradesh,AL,2025,11,135.77
+Himachal Pradesh,RL,2025,11,138.44
+Jammu and Kashmir,AL,2025,11,146.25
+Jammu and Kashmir,RL,2025,11,146.65
+Jharkhand,AL,2025,11,132.62
+Jharkhand,RL,2025,11,132.81
+Karnataka,AL,2025,11,140.33
+Karnataka,RL,2025,11,140.96
+Kerala,AL,2025,11,136.56
+Kerala,RL,2025,11,136.73
+Lakshadweep,AL,2025,11,135.85
+Lakshadweep,RL,2025,11,134.4
+Madhya Pradesh,AL,2025,11,134.2
+Madhya Pradesh,RL,2025,11,134.51
+Maharashtra,AL,2025,11,133.05
+Maharashtra,RL,2025,11,133.28
+Manipur,AL,2025,11,143.15
+Manipur,RL,2025,11,141.41
+Meghalaya,AL,2025,11,139.81
+Meghalaya,RL,2025,11,139.83
+Mizoram,AL,2025,11,149.19
+Mizoram,RL,2025,11,146.86
+Nagaland,AL,2025,11,136.56
+Nagaland,RL,2025,11,139.23
+Odisha,AL,2025,11,134.01
+Odisha,RL,2025,11,133.99
+Puducherry,AL,2025,11,136.5
+Puducherry,RL,2025,11,136.53
+Punjab,AL,2025,11,136.95
+Punjab,RL,2025,11,136.33
+Rajasthan,AL,2025,11,137.74
+Rajasthan,RL,2025,11,137.46
+Sikkim,AL,2025,11,133.25
+Sikkim,RL,2025,11,133.17
+Tamil Nadu,AL,2025,11,135.23
+Tamil Nadu,RL,2025,11,135.0
+Telangana,AL,2025,11,141.75
+Telangana,RL,2025,11,141.71
+Tripura,AL,2025,11,131.49
+Tripura,RL,2025,11,132.38
+Uttar Pradesh,AL,2025,11,138.35
+Uttar Pradesh,RL,2025,11,138.29
+Uttarakhand,AL,2025,11,130.62
+Uttarakhand,RL,2025,11,130.98
+West Bengal,AL,2025,11,136.01
+West Bengal,RL,2025,11,135.34
+All India,AL,2025,12,137.12
+All India,RL,2025,12,137.03
+Andaman and Nicobar Islands,AL,2025,12,138.31
+Andaman and Nicobar Islands,RL,2025,12,137.94
+Andhra Pradesh,AL,2025,12,144.12
+Andhra Pradesh,RL,2025,12,144.27
+Arunachal Pradesh,AL,2025,12,134.25
+Arunachal Pradesh,RL,2025,12,134.79
+Assam,AL,2025,12,140.16
+Assam,RL,2025,12,140.45
+Bihar,AL,2025,12,135.16
+Bihar,RL,2025,12,134.7
+Chhattisgarh,AL,2025,12,133.98
+Chhattisgarh,RL,2025,12,134.23
+"Daman and Diu, Dadra Nagar and Haveli",AL,2025,12,141.7
+"Daman and Diu, Dadra Nagar and Haveli",RL,2025,12,140.62
+Delhi,AL,2025,12,0.0
+Delhi,RL,2025,12,131.6
+Goa,AL,2025,12,124.28
+Goa,RL,2025,12,124.1
+Gujarat,AL,2025,12,137.9
+Gujarat,RL,2025,12,137.59
+Haryana,AL,2025,12,141.94
+Haryana,RL,2025,12,140.85
+Himachal Pradesh,AL,2025,12,135.57
+Himachal Pradesh,RL,2025,12,138.03
+Jammu and Kashmir,AL,2025,12,146.48
+Jammu and Kashmir,RL,2025,12,146.73
+Jharkhand,AL,2025,12,131.32
+Jharkhand,RL,2025,12,132.26
+Karnataka,AL,2025,12,140.29
+Karnataka,RL,2025,12,140.91
+Kerala,AL,2025,12,136.8
+Kerala,RL,2025,12,136.99
+Lakshadweep,AL,2025,12,135.74
+Lakshadweep,RL,2025,12,134.34
+Madhya Pradesh,AL,2025,12,134.08
+Madhya Pradesh,RL,2025,12,134.53
+Maharashtra,AL,2025,12,133.22
+Maharashtra,RL,2025,12,133.47
+Manipur,AL,2025,12,142.93
+Manipur,RL,2025,12,141.11
+Meghalaya,AL,2025,12,139.93
+Meghalaya,RL,2025,12,139.89
+Mizoram,AL,2025,12,149.31
+Mizoram,RL,2025,12,147.0
+Nagaland,AL,2025,12,137.0
+Nagaland,RL,2025,12,139.75
+Odisha,AL,2025,12,133.22
+Odisha,RL,2025,12,133.26
+Puducherry,AL,2025,12,137.06
+Puducherry,RL,2025,12,137.18
+Punjab,AL,2025,12,136.6
+Punjab,RL,2025,12,136.06
+Rajasthan,AL,2025,12,137.36
+Rajasthan,RL,2025,12,137.05
+Sikkim,AL,2025,12,135.4
+Sikkim,RL,2025,12,135.17
+Tamil Nadu,AL,2025,12,136.41
+Tamil Nadu,RL,2025,12,136.06
+Telangana,AL,2025,12,142.93
+Telangana,RL,2025,12,142.91
+Tripura,AL,2025,12,129.9
+Tripura,RL,2025,12,130.8
+Uttar Pradesh,AL,2025,12,137.47
+Uttar Pradesh,RL,2025,12,137.48
+Uttarakhand,AL,2025,12,131.87
+Uttarakhand,RL,2025,12,131.97
+West Bengal,AL,2025,12,134.74
+West Bengal,RL,2025,12,134.09
+All India,AL,2026,1,137.07
+All India,RL,2026,1,136.9
+Andaman and Nicobar Islands,AL,2026,1,138.98
+Andaman and Nicobar Islands,RL,2026,1,138.78
+Andhra Pradesh,AL,2026,1,144.86
+Andhra Pradesh,RL,2026,1,145.04
+Arunachal Pradesh,AL,2026,1,134.06
+Arunachal Pradesh,RL,2026,1,134.64
+Assam,AL,2026,1,139.08
+Assam,RL,2026,1,139.42
+Bihar,AL,2026,1,135.97
+Bihar,RL,2026,1,135.61
+Chhattisgarh,AL,2026,1,132.01
+Chhattisgarh,RL,2026,1,132.32
+"Daman and Diu, Dadra Nagar and Haveli",AL,2026,1,140.85
+"Daman and Diu, Dadra Nagar and Haveli",RL,2026,1,139.82
+Delhi,AL,2026,1,0.0
+Delhi,RL,2026,1,131.08
+Goa,AL,2026,1,124.88
+Goa,RL,2026,1,124.47
+Gujarat,AL,2026,1,138.47
+Gujarat,RL,2026,1,138.13
+Haryana,AL,2026,1,140.88
+Haryana,RL,2026,1,139.96
+Himachal Pradesh,AL,2026,1,135.58
+Himachal Pradesh,RL,2026,1,137.62
+Jammu and Kashmir,AL,2026,1,146.61
+Jammu and Kashmir,RL,2026,1,146.74
+Jharkhand,AL,2026,1,131.22
+Jharkhand,RL,2026,1,131.5
+Karnataka,AL,2026,1,141.29
+Karnataka,RL,2026,1,141.81
+Kerala,AL,2026,1,136.71
+Kerala,RL,2026,1,137.01
+Lakshadweep,AL,2026,1,135.27
+Lakshadweep,RL,2026,1,133.93
+Madhya Pradesh,AL,2026,1,133.19
+Madhya Pradesh,RL,2026,1,133.78
+Maharashtra,AL,2026,1,132.75
+Maharashtra,RL,2026,1,133.02
+Manipur,AL,2026,1,142.08
+Manipur,RL,2026,1,139.92
+Meghalaya,AL,2026,1,139.91
+Meghalaya,RL,2026,1,139.85
+Mizoram,AL,2026,1,148.6
+Mizoram,RL,2026,1,146.74
+Nagaland,AL,2026,1,137.56
+Nagaland,RL,2026,1,140.4
+Odisha,AL,2026,1,131.86
+Odisha,RL,2026,1,131.94
+Puducherry,AL,2026,1,138.24
+Puducherry,RL,2026,1,138.62
+Punjab,AL,2026,1,136.01
+Punjab,RL,2026,1,135.55
+Rajasthan,AL,2026,1,137.51
+Rajasthan,RL,2026,1,137.19
+Sikkim,AL,2026,1,136.18
+Sikkim,RL,2026,1,135.84
+Tamil Nadu,AL,2026,1,137.48
+Tamil Nadu,RL,2026,1,137.09
+Telangana,AL,2026,1,143.2
+Telangana,RL,2026,1,143.09
+Tripura,AL,2026,1,128.26
+Tripura,RL,2026,1,129.1
+Uttar Pradesh,AL,2026,1,136.15
+Uttar Pradesh,RL,2026,1,136.26
+Uttarakhand,AL,2026,1,131.03
+Uttarakhand,RL,2026,1,131.07
+West Bengal,AL,2026,1,133.86
+West Bengal,RL,2026,1,133.31
+All India,AL,2026,2,136.57
+All India,RL,2026,2,136.51
+Andaman and Nicobar Islands,AL,2026,2,138.16
+Andaman and Nicobar Islands,RL,2026,2,137.76
+Andhra Pradesh,AL,2026,2,144.01
+Andhra Pradesh,RL,2026,2,144.14
+Arunachal Pradesh,AL,2026,2,134.13
+Arunachal Pradesh,RL,2026,2,134.54
+Assam,AL,2026,2,138.53
+Assam,RL,2026,2,138.96
+Bihar,AL,2026,2,134.44
+Bihar,RL,2026,2,134.03
+Chhattisgarh,AL,2026,2,130.07
+Chhattisgarh,RL,2026,2,130.42
+"Daman and Diu, Dadra Nagar and Haveli",AL,2026,2,141.2
+"Daman and Diu, Dadra Nagar and Haveli",RL,2026,2,140.16
+Delhi,AL,2026,2,0.0
+Delhi,RL,2026,2,131.84
+Goa,AL,2026,2,125.92
+Goa,RL,2026,2,125.21
+Gujarat,AL,2026,2,136.13
+Gujarat,RL,2026,2,135.97
+Haryana,AL,2026,2,140.57
+Haryana,RL,2026,2,139.7
+Himachal Pradesh,AL,2026,2,135.74
+Himachal Pradesh,RL,2026,2,137.67
+Jammu and Kashmir,AL,2026,2,145.26
+Jammu and Kashmir,RL,2026,2,145.65
+Jharkhand,AL,2026,2,130.18
+Jharkhand,RL,2026,2,131.27
+Karnataka,AL,2026,2,141.81
+Karnataka,RL,2026,2,142.31
+Kerala,AL,2026,2,135.92
+Kerala,RL,2026,2,136.2
+Lakshadweep,AL,2026,2,135.49
+Lakshadweep,RL,2026,2,134.12
+Madhya Pradesh,AL,2026,2,133.09
+Madhya Pradesh,RL,2026,2,133.68
+Maharashtra,AL,2026,2,133.78
+Maharashtra,RL,2026,2,134.01
+Manipur,AL,2026,2,142.65
+Manipur,RL,2026,2,140.52
+Meghalaya,AL,2026,2,141.01
+Meghalaya,RL,2026,2,140.87
+Mizoram,AL,2026,2,148.92
+Mizoram,RL,2026,2,147.2
+Nagaland,AL,2026,2,138.33
+Nagaland,RL,2026,2,140.78
+Odisha,AL,2026,2,130.52
+Odisha,RL,2026,2,130.64
+Puducherry,AL,2026,2,137.93
+Puducherry,RL,2026,2,138.19
+Punjab,AL,2026,2,136.3
+Punjab,RL,2026,2,135.86
+Rajasthan,AL,2026,2,138.27
+Rajasthan,RL,2026,2,137.68
+Sikkim,AL,2026,2,135.68
+Sikkim,RL,2026,2,135.57
+Tamil Nadu,AL,2026,2,136.44
+Tamil Nadu,RL,2026,2,136.16
+Telangana,AL,2026,2,142.69
+Telangana,RL,2026,2,142.56
+Tripura,AL,2026,2,135.51
+Tripura,RL,2026,2,134.8
+Uttar Pradesh,AL,2026,2,136.04
+Uttar Pradesh,RL,2026,2,136.12
+Uttarakhand,AL,2026,2,130.42
+Uttarakhand,RL,2026,2,130.41
+West Bengal,AL,2026,2,133.57
+West Bengal,RL,2026,2,133.03
+All India,AL,2026,3,136.99
+All India,RL,2026,3,136.95
+Andaman and Nicobar Islands,AL,2026,3,137.69
+Andaman and Nicobar Islands,RL,2026,3,137.26
+Andhra Pradesh,AL,2026,3,144.93
+Andhra Pradesh,RL,2026,3,145.21
+Arunachal Pradesh,AL,2026,3,134.2
+Arunachal Pradesh,RL,2026,3,134.46
+Assam,AL,2026,3,138.05
+Assam,RL,2026,3,138.54
+Bihar,AL,2026,3,134.35
+Bihar,RL,2026,3,133.95
+Chhattisgarh,AL,2026,3,130.12
+Chhattisgarh,RL,2026,3,130.47
+"Daman and Diu, Dadra Nagar and Haveli",AL,2026,3,142.07
+"Daman and Diu, Dadra Nagar and Haveli",RL,2026,3,140.62
+Delhi,AL,2026,3,0.0
+Delhi,RL,2026,3,132.43
+Goa,AL,2026,3,126.48
+Goa,RL,2026,3,125.86
+Gujarat,AL,2026,3,136.62
+Gujarat,RL,2026,3,136.53
+Haryana,AL,2026,3,141.71
+Haryana,RL,2026,3,140.78
+Himachal Pradesh,AL,2026,3,136.47
+Himachal Pradesh,RL,2026,3,138.34
+Jammu and Kashmir,AL,2026,3,145.57
+Jammu and Kashmir,RL,2026,3,146.05
+Jharkhand,AL,2026,3,129.91
+Jharkhand,RL,2026,3,130.75
+Karnataka,AL,2026,3,142.53
+Karnataka,RL,2026,3,143.03
+Kerala,AL,2026,3,135.59
+Kerala,RL,2026,3,135.87
+Lakshadweep,AL,2026,3,135.99
+Lakshadweep,RL,2026,3,134.29
+Madhya Pradesh,AL,2026,3,133.51
+Madhya Pradesh,RL,2026,3,134.06
+Maharashtra,AL,2026,3,134.78
+Maharashtra,RL,2026,3,135.02
+Manipur,AL,2026,3,142.99
+Manipur,RL,2026,3,140.85
+Meghalaya,AL,2026,3,141.03
+Meghalaya,RL,2026,3,140.94
+Mizoram,AL,2026,3,149.13
+Mizoram,RL,2026,3,147.38
+Nagaland,AL,2026,3,139.07
+Nagaland,RL,2026,3,141.12
+Odisha,AL,2026,3,130.48
+Odisha,RL,2026,3,130.58
+Puducherry,AL,2026,3,138.67
+Puducherry,RL,2026,3,139.02
+Punjab,AL,2026,3,136.49
+Punjab,RL,2026,3,136.1
+Rajasthan,AL,2026,3,138.27
+Rajasthan,RL,2026,3,137.8
+Sikkim,AL,2026,3,135.52
+Sikkim,RL,2026,3,135.68
+Tamil Nadu,AL,2026,3,136.25
+Tamil Nadu,RL,2026,3,136.02
+Telangana,AL,2026,3,143.4
+Telangana,RL,2026,3,143.25
+Tripura,AL,2026,3,136.33
+Tripura,RL,2026,3,135.72
+Uttar Pradesh,AL,2026,3,137.32
+Uttar Pradesh,RL,2026,3,137.41
+Uttarakhand,AL,2026,3,130.61
+Uttarakhand,RL,2026,3,130.46
+West Bengal,AL,2026,3,133.67
+West Bengal,RL,2026,3,133.22
+All India,AL,2026,4,137.3
+All India,RL,2026,4,137.22
+Andaman and Nicobar Islands,AL,2026,4,137.9
+Andaman and Nicobar Islands,RL,2026,4,137.98
+Andhra Pradesh,AL,2026,4,145.42
+Andhra Pradesh,RL,2026,4,145.56
+Arunachal Pradesh,AL,2026,4,133.86
+Arunachal Pradesh,RL,2026,4,133.95
+Assam,AL,2026,4,138.47
+Assam,RL,2026,4,138.9
+Bihar,AL,2026,4,134.06
+Bihar,RL,2026,4,133.65
+Chhattisgarh,AL,2026,4,129.43
+Chhattisgarh,RL,2026,4,129.84
+"Daman and Diu, Dadra Nagar and Haveli",AL,2026,4,142.0
+"Daman and Diu, Dadra Nagar and Haveli",RL,2026,4,140.2
+Delhi,AL,2026,4,0.0
+Delhi,RL,2026,4,133.19
+Goa,AL,2026,4,127.46
+Goa,RL,2026,4,127.69
+Gujarat,AL,2026,4,137.24
+Gujarat,RL,2026,4,137.11
+Haryana,AL,2026,4,141.98
+Haryana,RL,2026,4,140.91
+Himachal Pradesh,AL,2026,4,137.31
+Himachal Pradesh,RL,2026,4,139.09
+Jammu and Kashmir,AL,2026,4,145.76
+Jammu and Kashmir,RL,2026,4,146.19
+Jharkhand,AL,2026,4,129.79
+Jharkhand,RL,2026,4,130.54
+Karnataka,AL,2026,4,143.52
+Karnataka,RL,2026,4,144.0
+Kerala,AL,2026,4,136.19
+Kerala,RL,2026,4,136.49
+Lakshadweep,AL,2026,4,136.2
+Lakshadweep,RL,2026,4,134.42
+Madhya Pradesh,AL,2026,4,133.8
+Madhya Pradesh,RL,2026,4,134.35
+Maharashtra,AL,2026,4,135.65
+Maharashtra,RL,2026,4,135.87
+Manipur,AL,2026,4,143.65
+Manipur,RL,2026,4,141.62
+Meghalaya,AL,2026,4,141.11
+Meghalaya,RL,2026,4,141.24
+Mizoram,AL,2026,4,149.56
+Mizoram,RL,2026,4,147.86
+Nagaland,AL,2026,4,139.41
+Nagaland,RL,2026,4,141.36
+Odisha,AL,2026,4,130.01
+Odisha,RL,2026,4,130.27
+Puducherry,AL,2026,4,138.63
+Puducherry,RL,2026,4,138.85
+Punjab,AL,2026,4,136.48
+Punjab,RL,2026,4,136.16
+Rajasthan,AL,2026,4,137.76
+Rajasthan,RL,2026,4,137.76
+Sikkim,AL,2026,4,136.03
+Sikkim,RL,2026,4,136.3
+Tamil Nadu,AL,2026,4,136.57
+Tamil Nadu,RL,2026,4,136.37
+Telangana,AL,2026,4,144.42
+Telangana,RL,2026,4,144.3
+Tripura,AL,2026,4,137.66
+Tripura,RL,2026,4,137.17
+Uttar Pradesh,AL,2026,4,137.07
+Uttar Pradesh,RL,2026,4,137.17
+Uttarakhand,AL,2026,4,131.26
+Uttarakhand,RL,2026,4,130.95
+West Bengal,AL,2026,4,133.74
+West Bengal,RL,2026,4,133.32
+All India,AL,2026,6,140.06
+All India,RL,2026,6,139.92
+Andaman and Nicobar Islands,AL,2026,6,140.77
+Andaman and Nicobar Islands,RL,2026,6,140.62
+Andhra Pradesh,AL,2026,6,149.4
+Andhra Pradesh,RL,2026,6,149.54
+Arunachal Pradesh,AL,2026,6,134.37
+Arunachal Pradesh,RL,2026,6,134.91
+Assam,AL,2026,6,140.7
+Assam,RL,2026,6,140.92
+Bihar,AL,2026,6,134.69
+Bihar,RL,2026,6,134.24
+Chhattisgarh,AL,2026,6,133.62
+Chhattisgarh,RL,2026,6,133.97
+"Daman and Diu, Dadra Nagar and Haveli",AL,2026,6,143.7
+"Daman and Diu, Dadra Nagar and Haveli",RL,2026,6,142.39
+Delhi,AL,2026,6,0.0
+Delhi,RL,2026,6,135.61
+Goa,AL,2026,6,130.48
+Goa,RL,2026,6,129.75
+Gujarat,AL,2026,6,140.18
+Gujarat,RL,2026,6,139.91
+Haryana,AL,2026,6,144.36
+Haryana,RL,2026,6,142.98
+Himachal Pradesh,AL,2026,6,138.87
+Himachal Pradesh,RL,2026,6,140.63
+Jammu and Kashmir,AL,2026,6,147.68
+Jammu and Kashmir,RL,2026,6,148.24
+Jharkhand,AL,2026,6,133.5
+Jharkhand,RL,2026,6,133.63
+Karnataka,AL,2026,6,145.93
+Karnataka,RL,2026,6,146.43
+Kerala,AL,2026,6,139.81
+Kerala,RL,2026,6,140.31
+Lakshadweep,AL,2026,6,138.09
+Lakshadweep,RL,2026,6,135.76
+Madhya Pradesh,AL,2026,6,137.03
+Madhya Pradesh,RL,2026,6,137.61
+Maharashtra,AL,2026,6,139.12
+Maharashtra,RL,2026,6,139.42
+Manipur,AL,2026,6,147.02
+Manipur,RL,2026,6,144.67
+Meghalaya,AL,2026,6,143.26
+Meghalaya,RL,2026,6,143.11
+Mizoram,AL,2026,6,150.75
+Mizoram,RL,2026,6,148.77
+Nagaland,AL,2026,6,140.45
+Nagaland,RL,2026,6,142.12
+Odisha,AL,2026,6,132.82
+Odisha,RL,2026,6,133.18
+Puducherry,AL,2026,6,141.4
+Puducherry,RL,2026,6,141.73
+Punjab,AL,2026,6,138.75
+Punjab,RL,2026,6,138.46
+Rajasthan,AL,2026,6,140.09
+Rajasthan,RL,2026,6,140.25
+Sikkim,AL,2026,6,139.16
+Sikkim,RL,2026,6,138.75
+Tamil Nadu,AL,2026,6,140.04
+Tamil Nadu,RL,2026,6,139.7
+Telangana,AL,2026,6,147.54
+Telangana,RL,2026,6,147.45
+Tripura,AL,2026,6,136.53
+Tripura,RL,2026,6,136.07
+Uttar Pradesh,AL,2026,6,139.46
+Uttar Pradesh,RL,2026,6,139.44
+Uttarakhand,AL,2026,6,133.54
+Uttarakhand,RL,2026,6,132.64
+West Bengal,AL,2026,6,135.82
+West Bengal,RL,2026,6,135.38
+All India,AL,2026,7,141.65
+All India,RL,2026,7,141.46
+Andaman and Nicobar Islands,AL,2026,7,141.76
+Andaman and Nicobar Islands,RL,2026,7,141.82
+Andhra Pradesh,AL,2026,7,150.94
+Andhra Pradesh,RL,2026,7,151.1
+Arunachal Pradesh,AL,2026,7,135.17
+Arunachal Pradesh,RL,2026,7,135.94
+Assam,AL,2026,7,141.73
+Assam,RL,2026,7,142.01
+Bihar,AL,2026,7,137.6
+Bihar,RL,2026,7,137.16
+Chhattisgarh,AL,2026,7,135.88
+Chhattisgarh,RL,2026,7,136.22
+"Daman and Diu, Dadra Nagar and Haveli",AL,2026,7,145.23
+"Daman and Diu, Dadra Nagar and Haveli",RL,2026,7,143.8
+Delhi,AL,2026,7,0.0
+Delhi,RL,2026,7,135.88
+Goa,AL,2026,7,131.56
+Goa,RL,2026,7,130.43
+Gujarat,AL,2026,7,142.13
+Gujarat,RL,2026,7,141.77
+Haryana,AL,2026,7,146.07
+Haryana,RL,2026,7,144.51
+Himachal Pradesh,AL,2026,7,140.72
+Himachal Pradesh,RL,2026,7,142.71
+Jammu and Kashmir,AL,2026,7,149.73
+Jammu and Kashmir,RL,2026,7,150.27
+Jharkhand,AL,2026,7,135.32
+Jharkhand,RL,2026,7,135.5
+Karnataka,AL,2026,7,146.08
+Karnataka,RL,2026,7,146.63
+Kerala,AL,2026,7,140.12
+Kerala,RL,2026,7,140.66
+Lakshadweep,AL,2026,7,138.83
+Lakshadweep,RL,2026,7,136.42
+Madhya Pradesh,AL,2026,7,138.58
+Madhya Pradesh,RL,2026,7,139.12
+Maharashtra,AL,2026,7,140.14
+Maharashtra,RL,2026,7,140.42
+Manipur,AL,2026,7,147.25
+Manipur,RL,2026,7,145.62
+Meghalaya,AL,2026,7,143.57
+Meghalaya,RL,2026,7,143.48
+Mizoram,AL,2026,7,151.49
+Mizoram,RL,2026,7,149.5
+Nagaland,AL,2026,7,141.63
+Nagaland,RL,2026,7,143.3
+Odisha,AL,2026,7,134.67
+Odisha,RL,2026,7,134.96
+Puducherry,AL,2026,7,142.6
+Puducherry,RL,2026,7,143.2
+Punjab,AL,2026,7,140.74
+Punjab,RL,2026,7,140.34
+Rajasthan,AL,2026,7,142.02
+Rajasthan,RL,2026,7,141.71
+Sikkim,AL,2026,7,140.29
+Sikkim,RL,2026,7,139.74
+Tamil Nadu,AL,2026,7,140.67
+Tamil Nadu,RL,2026,7,140.31
+Telangana,AL,2026,7,148.81
+Telangana,RL,2026,7,148.69
+Tripura,AL,2026,7,137.72
+Tripura,RL,2026,7,137.13
+Uttar Pradesh,AL,2026,7,141.79
+Uttar Pradesh,RL,2026,7,141.71
+Uttarakhand,AL,2026,7,136.25
+Uttarakhand,RL,2026,7,135.56
+West Bengal,AL,2026,7,138.04
+West Bengal,RL,2026,7,137.58
+All India,AL,2026,8,143.4
+All India,RL,2026,8,143.2
+Andaman and Nicobar Islands,AL,2026,8,142.35
+Andaman and Nicobar Islands,RL,2026,8,142.06
+Andhra Pradesh,AL,2026,8,152.98
+Andhra Pradesh,RL,2026,8,153.04
+Arunachal Pradesh,AL,2026,8,135.7
+Arunachal Pradesh,RL,2026,8,136.48
+Assam,AL,2026,8,143.74
+Assam,RL,2026,8,144.03
+Bihar,AL,2026,8,140.13
+Bihar,RL,2026,8,139.7
+Chhattisgarh,AL,2026,8,138.43
+Chhattisgarh,RL,2026,8,138.79
+"Daman and Diu, Dadra Nagar and Haveli",AL,2026,8,146.96
+"Daman and Diu, Dadra Nagar and Haveli",RL,2026,8,145.36
+Delhi,AL,2026,8,0.0
+Delhi,RL,2026,8,137.74
+Goa,AL,2026,8,131.75
+Goa,RL,2026,8,130.44
+Gujarat,AL,2026,8,144.43
+Gujarat,RL,2026,8,144.0
+Haryana,AL,2026,8,149.01
+Haryana,RL,2026,8,147.0
+Himachal Pradesh,AL,2026,8,141.97
+Himachal Pradesh,RL,2026,8,144.18
+Jammu and Kashmir,AL,2026,8,150.73
+Jammu and Kashmir,RL,2026,8,151.45
+Jharkhand,AL,2026,8,137.57
+Jharkhand,RL,2026,8,137.03
+Karnataka,AL,2026,8,146.93
+Karnataka,RL,2026,8,147.51
+Kerala,AL,2026,8,142.12
+Kerala,RL,2026,8,142.62
+Lakshadweep,AL,2026,8,140.17
+Lakshadweep,RL,2026,8,137.48
+Madhya Pradesh,AL,2026,8,140.66
+Madhya Pradesh,RL,2026,8,141.18
+Maharashtra,AL,2026,8,141.57
+Maharashtra,RL,2026,8,141.81
+Manipur,AL,2026,8,147.88
+Manipur,RL,2026,8,146.43
+Meghalaya,AL,2026,8,144.22
+Meghalaya,RL,2026,8,144.26
+Mizoram,AL,2026,8,152.18
+Mizoram,RL,2026,8,150.09
+Nagaland,AL,2026,8,142.43
+Nagaland,RL,2026,8,143.93
+Odisha,AL,2026,8,137.33
+Odisha,RL,2026,8,137.59
+Puducherry,AL,2026,8,143.61
+Puducherry,RL,2026,8,143.85
+Punjab,AL,2026,8,142.73
+Punjab,RL,2026,8,142.15
+Rajasthan,AL,2026,8,143.87
+Rajasthan,RL,2026,8,143.39
+Sikkim,AL,2026,8,141.1
+Sikkim,RL,2026,8,140.58
+Tamil Nadu,AL,2026,8,142.04
+Tamil Nadu,RL,2026,8,141.76
+Telangana,AL,2026,8,148.85
+Telangana,RL,2026,8,148.7
+Tripura,AL,2026,8,138.47
+Tripura,RL,2026,8,137.56
+Uttar Pradesh,AL,2026,8,144.09
+Uttar Pradesh,RL,2026,8,143.91
+Uttarakhand,AL,2026,8,137.96
+Uttarakhand,RL,2026,8,137.42
+West Bengal,AL,2026,8,139.35
+West Bengal,RL,2026,8,138.78

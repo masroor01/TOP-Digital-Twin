@@ -232,7 +232,7 @@ Windows Task Scheduler since 2026-08-29, plus a GitHub Actions + Google
 Drive cloud path since 2026-09-16 — see `.github/workflows/weekly_refresh.yml`
 and `scripts/weekly_refresh/README.md`), see the next subsection.
 
-### Layer status (last verified 2026-09-17)
+### Layer status (last verified 2026-09-21)
 
 Checked directly against file timestamps and the actual production code
 (`panel_layers.py`) on the date above — re-verify before citing this table
@@ -250,11 +250,14 @@ if it's been a while, freshness moves independently per layer.
 | L5 Infrastructure — Road density | CEIC/MORTH annual | Forward-filled to 2030 (flagged in the data) | Annual | Working as designed |
 | L6 Policy/trade | Hand-verified event log (PIB/DGFT cross-checked) | 2026-07-30 | After major policy changes | Current for what's happened |
 | L7 Drought (VEDAS + IDM) — built, **not wired into production** | VEDAS/SAC, India Drought Monitor | 2026-08-31 | Not scheduled | Data is current; excluded from `23_Train_Production_Models.py` on statistical grounds — see `Model_Output/MANIFEST.md`'s 2026-09-16 fold-level entry |
+| L8 Climate — NOAA ONI (ENSO) — acquired, **not wired into production** | NOAA CPC (`oni.ascii.txt`) | JJA 2026 (season) | Manual re-run, `56_NOAA_ONI_Layer.py --mode full` | National-level series only, not yet joined onto the weekly panel |
+| L8 Input cost — Fertilizer MRP — acquired, **not wired into production** | fert.gov.in monthly bulletins | 2026-07 | Manual re-run, `57_Fertilizer_MRP_Layer.py --mode full` | National-level series only, not yet joined onto the weekly panel |
+| L8 Input cost/wage — CPI-AL/RL (state-wise) — acquired, **not wired into production** | Labour Bureau press releases, Base 2019=100 | 2026-08 (May 2026 has no release — documented gap, not faked) | Manual re-run, `58_CPI_AL_RL_Layer.py --mode full` | State-level General Index (wage/food-cost proxy), not item-level; not yet joined onto the weekly panel |
 
-**Validated as real/automatable, not yet acquired or built**: NOAA ONI,
-fertilizer MRP (`fert.gov.in`), CPI item-level potato/onion/tomato (MOSPI),
-NSS HCES consumption microdata, IMD gridded Tmax for heat-stress
-(`imdlib`), groundwater status (IN-GRES, low-frequency ~3yr cadence).
+**Validated as real/automatable, not yet acquired or built**: CPI item-level
+potato/onion/tomato (MOSPI — confirmed live API bug, see prior session), NSS
+HCES consumption microdata, IMD gridded Tmax for heat-stress (`imdlib`),
+groundwater status (IN-GRES, low-frequency ~3yr cadence).
 
 **Investigated and rejected** (no viable automatable source found): IMD
 Long-Range Forecast, pesticide/seed prices, cold-storage *tariffs*
@@ -319,6 +322,23 @@ pull outside the schedule:
   topup process — the same pattern applies for future years.
 - Export results to Google Drive, download, then run
   `14_Satellite_Climate_Features.py` to process into `crop_weekly_features.csv`.
+
+### NOAA ONI, Fertilizer MRP, CPI-AL/RL — acquired, not yet wired into panel
+Three national/state-level layers are acquired but only sit as standalone
+CSVs under `data/` — none are joined onto `master_weekly_panel_all_layers.csv`
+yet (that join would be a future script, analogous to how Script 54 joins
+the drought layers):
+- **NOAA ONI**: `python scripts/56_NOAA_ONI_Layer.py --mode full` → re-fetches
+  `oni.ascii.txt` fresh each time (no local state to go stale).
+- **Fertilizer MRP**: `python scripts/57_Fertilizer_MRP_Layer.py --mode full`
+  → discovers new bulletins from fert.gov.in's two listing pages automatically.
+- **CPI-AL/RL (state-wise, Base 2019=100)**: `python scripts/58_CPI_AL_RL_Layer.py --mode full`
+  → tries the Labour Bureau site's current "latest release" each run, but the
+  historical backfill list (`BACKFILL_RELEASES` in the script) is hardcoded
+  from a one-time Wayback Machine search (the site has no archive/listing
+  page for this series). If this script goes unrun for several months, a new
+  gap can open up that needs the same Wayback-search process repeated — see
+  the script's own docstring for the method. Known existing gap: May 2026.
 
 ### Labour Bureau wages — periodic refresh (Layer 5)
 - Source: state-wise "Wage Rates in Rural India" series — the file used was
