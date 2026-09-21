@@ -5,6 +5,13 @@ Script 22 (master panel join) -- both build the same M0-M7 layer stack
 from the same source files, and until this module existed each
 implemented the reading/uniqueness-checking/joining independently.
 
+M8 (fertilizer MRP, CPI-AL/RL -- added 2026-09-25) is wired into Script 22
+only, not Script 15's ablation stack: M7 went through a dedicated fold-level
+statistical test (see Model_Output/MANIFEST.md) before a call was made on
+whether to include or exclude it from production training; M8 hasn't had
+that same scrutiny yet, so it's available in the joined panel file for
+exploration but isn't silently added to what Script 23 trains on.
+
 Extracted 2026-09-11 after a VS Code review flagged this project's
 established risk with exactly this class of duplication: two independent
 implementations of "the same operation" drifting apart (see the Script
@@ -49,6 +56,8 @@ ROAD_FILE     = os.path.join(BASE, 'data', 'infrastructure', 'road_density_state
 POLICY_FILE   = os.path.join(BASE, 'data', 'policy_trade', 'policy_weekly_features.csv')
 TRIGGER1_FILE = os.path.join(BASE, 'data', 'drought_vedas', 'trigger1_panel_weekly.csv')
 IDM_FILE      = os.path.join(BASE, 'data', 'drought_idm', 'cdi_panel_weekly.csv')
+FERT_FILE     = os.path.join(BASE, 'data', 'fertilizer_mrp', 'fert_mrp_panel_monthly.csv')
+CPI_ALRL_FILE = os.path.join(BASE, 'data', 'cpi_al_rl', 'cpi_alrl_panel_state_monthly.csv')
 
 POLICY_COLS = ['export_banned', 'mep_usd_per_tonne', 'export_duty_pct',
                'market_intervention_flag', 'operation_greens_active']
@@ -208,3 +217,30 @@ def join_drought(df, add_missing_flags=True, verbose=True):
             feats += ['cdi']
 
     return df, feats
+
+
+def join_fertilizer(df, verbose=True):
+    """M8a. Join key: (year, month) -- national, no state dimension, same
+    shape as M2 macro. Source: Script 59's pivot of Script 57's raw MRP
+    acquisition, narrowed to Urea/DAP/MOP (see Script 59 docstring for why
+    those three). Returns (df, feature_cols)."""
+    if not os.path.exists(FERT_FILE):
+        return df, []
+    fert = pd.read_csv(FERT_FILE)
+    df = checked_merge(df, fert, on=['year', 'month'], how='left',
+                        label='M8a fertilizer MRP', verbose=verbose)
+    return df, ['fert_urea_mrp', 'fert_dap_mrp', 'fert_mop_mrp']
+
+
+def join_cpi_alrl(df, verbose=True):
+    """M8b. Join key: (state, year, month) -- same shape as M5a wages.
+    Source: Script 59's pivot + panel-state crosswalk of Script 58's raw
+    CPI-AL/RL acquisition. NaN for panel states the source genuinely has no
+    row for (Chandigarh -- see Script 59), not a join failure. Returns
+    (df, feature_cols)."""
+    if not os.path.exists(CPI_ALRL_FILE):
+        return df, []
+    cpi = pd.read_csv(CPI_ALRL_FILE)[['state', 'year', 'month', 'cpi_al', 'cpi_rl']]
+    df = checked_merge(df, cpi, on=['state', 'year', 'month'], how='left',
+                        label='M8b CPI-AL/RL', verbose=verbose)
+    return df, ['cpi_al', 'cpi_rl']

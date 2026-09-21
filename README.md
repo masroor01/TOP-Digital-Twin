@@ -251,8 +251,8 @@ if it's been a while, freshness moves independently per layer.
 | L6 Policy/trade | Hand-verified event log (PIB/DGFT cross-checked) | 2026-07-30 | After major policy changes | Current for what's happened |
 | L7 Drought (VEDAS + IDM) — built, **not wired into production** | VEDAS/SAC, India Drought Monitor | 2026-08-31 | Not scheduled | Data is current; excluded from `23_Train_Production_Models.py` on statistical grounds — see `Model_Output/MANIFEST.md`'s 2026-09-16 fold-level entry |
 | L8 Climate — NOAA ONI (ENSO) — acquired, **not wired into production** | NOAA CPC (`oni.ascii.txt`) | JJA 2026 (season) | Manual re-run, `56_NOAA_ONI_Layer.py --mode full` | National-level series only, not yet joined onto the weekly panel |
-| L8 Input cost — Fertilizer MRP — acquired, **not wired into production** | fert.gov.in monthly bulletins | 2026-07 | Manual re-run, `57_Fertilizer_MRP_Layer.py --mode full` | National-level series only, not yet joined onto the weekly panel |
-| L8 Input cost/wage — CPI-AL/RL (state-wise) — acquired, **not wired into production** | Labour Bureau press releases, Base 2019=100 | 2026-08 (May 2026 has no release — documented gap, not faked) | Manual re-run, `58_CPI_AL_RL_Layer.py --mode full` | State-level General Index (wage/food-cost proxy), not item-level; not yet joined onto the weekly panel |
+| M8a Input cost — Fertilizer MRP — **wired into master panel** | fert.gov.in monthly bulletins | 2026-07 | Manual re-run, `57_...` → `59_Fertilizer_CPI_Panel_Prep.py` → `22_Master_Panel_Join.py` | Urea/DAP/MOP joined on (year, month); in `master_weekly_panel_all_layers.csv`, not yet in Script 15/23's trained feature set (see `panel_layers.py`) |
+| M8b Input cost/wage — CPI-AL/RL (state-wise) — **wired into master panel** | Labour Bureau press releases, Base 2019=100 | 2026-08 (May 2026 has no release — documented gap, not faked) | Manual re-run, `58_...` → `59_Fertilizer_CPI_Panel_Prep.py` → `22_Master_Panel_Join.py` | Joined on (state, year, month); NaN before Jun-2025 and for Chandigarh (genuinely absent from source); same not-yet-trained-on caveat as M8a |
 
 **Validated as real/automatable, not yet acquired or built**: CPI item-level
 potato/onion/tomato (MOSPI — confirmed live API bug, see prior session), NSS
@@ -323,13 +323,22 @@ pull outside the schedule:
 - Export results to Google Drive, download, then run
   `14_Satellite_Climate_Features.py` to process into `crop_weekly_features.csv`.
 
-### NOAA ONI, Fertilizer MRP, CPI-AL/RL — acquired, not yet wired into panel
-Three national/state-level layers are acquired but only sit as standalone
-CSVs under `data/` — none are joined onto `master_weekly_panel_all_layers.csv`
-yet (that join would be a future script, analogous to how Script 54 joins
-the drought layers):
+### NOAA ONI — acquired, not yet wired into panel
 - **NOAA ONI**: `python scripts/56_NOAA_ONI_Layer.py --mode full` → re-fetches
-  `oni.ascii.txt` fresh each time (no local state to go stale).
+  `oni.ascii.txt` fresh each time (no local state to go stale). Still sits
+  as a standalone CSV under `data/noaa_oni/` — no join script yet (would be
+  analogous to Script 59 below, or Script 54's drought-layer pattern).
+
+### Fertilizer MRP + CPI-AL/RL — wired into the master panel (M8)
+Both are now in `master_weekly_panel_all_layers.csv` as of Script 22
+(`fert_urea_mrp`/`fert_dap_mrp`/`fert_mop_mrp`, `cpi_al`/`cpi_rl`) — see
+`panel_layers.py`'s `join_fertilizer()`/`join_cpi_alrl()` for the join
+logic. They are NOT yet in Script 15's ablation stack or Script 23's
+trained feature set — M7 (drought) only got there after a dedicated
+fold-level statistical test, and M8 hasn't had that scrutiny yet.
+
+Refresh chain: re-run the acquisition script, then Script 59 (rebuilds the
+wide, panel-joinable files), then Script 22 (rebuilds the master panel):
 - **Fertilizer MRP**: `python scripts/57_Fertilizer_MRP_Layer.py --mode full`
   → discovers new bulletins from fert.gov.in's two listing pages automatically.
 - **CPI-AL/RL (state-wise, Base 2019=100)**: `python scripts/58_CPI_AL_RL_Layer.py --mode full`
@@ -339,6 +348,7 @@ the drought layers):
   page for this series). If this script goes unrun for several months, a new
   gap can open up that needs the same Wayback-search process repeated — see
   the script's own docstring for the method. Known existing gap: May 2026.
+- Then: `python scripts/59_Fertilizer_CPI_Panel_Prep.py && python scripts/22_Master_Panel_Join.py`
 
 ### Labour Bureau wages — periodic refresh (Layer 5)
 - Source: state-wise "Wage Rates in Rural India" series — the file used was

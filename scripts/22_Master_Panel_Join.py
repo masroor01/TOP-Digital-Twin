@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Script 22 — Master Panel Join (All Layers M0-M7)
+Script 22 — Master Panel Join (All Layers M0-M8)
 ====================================================
 Joins every compiled data layer onto the base weekly market panel into a
 single consolidated file. NOTE: this consolidated file is NOT what Script
@@ -31,6 +31,8 @@ corrupted panel):
   M6        policy_weekly_features.csv             join key: (crop, week_start)
   M7a       trigger1_panel_weekly.csv (VEDAS)      join key: (state, district, week_start)
   M7b       cdi_panel_weekly.csv (IDM)             join key: (state, district, week_start)
+  M8a       fert_mrp_panel_monthly.csv             join key: (year, month)
+  M8b       cpi_alrl_panel_state_monthly.csv       join key: (state, year, month)
 
 M7 columns are structurally sparse by design (Trigger-1: Kharif-season
 weeks, 2022+, crosswalked districts only; IDM CDI: 2021-07-14 onward) --
@@ -39,6 +41,15 @@ impute them; it joins them as-is, NaN where a layer has no reading for
 that district/week. Whoever consumes this file needs to decide how to
 handle that sparsity for their own purpose -- Script 15 handles it via an
 explicit missingness-flag column per drought feature, not a blind fillna.
+
+M8 (added 2026-09-25, see Script 59 and panel_layers.py) is in this file
+only -- not yet in Script 15's ablation stack or Script 23's trained
+features, see panel_layers.py's module docstring for why. Sparsity here is
+narrow and structural, not seasonal: M8a (fertilizer MRP) is essentially
+complete (national monthly series, Jan-2018 onward); M8b (CPI-AL/RL) is
+NaN before June-2025 (the base-year revision this series started from) and
+for Chandigarh specifically (genuinely absent from Labour Bureau's 34
+states/UTs, not a crosswalk miss -- see Script 59).
 
 Output:
   data/master_weekly_panel_all_layers.csv
@@ -65,7 +76,7 @@ checked_merge = pl.checked_merge  # re-exported for the diagnostics block below
 
 
 print('=' * 65)
-print('SCRIPT 22: MASTER PANEL JOIN (ALL LAYERS M0-M7)')
+print('SCRIPT 22: MASTER PANEL JOIN (ALL LAYERS M0-M8)')
 print('=' * 65)
 
 print('\n[1] Loading base panel ...')
@@ -121,6 +132,18 @@ df, _ = pl.join_policy(df)
 print('\n[7b] Joining drought (M7): VEDAS Trigger-1 + IDM CDI on (state, district, week_start) ...')
 df, _ = pl.join_drought(df, add_missing_flags=False)
 
+# ─────────────────────────────────────────────────────────────────────────────
+# M8a — Fertilizer MRP, join key (year, month)
+# ─────────────────────────────────────────────────────────────────────────────
+print('\n[7c] Joining fertilizer MRP (M8a) on (year, month) ...')
+df, _ = pl.join_fertilizer(df)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# M8b — CPI-AL/RL, join key (state, year, month)
+# ─────────────────────────────────────────────────────────────────────────────
+print('\n[7d] Joining CPI-AL/RL (M8b) on (state, year, month) ...')
+df, _ = pl.join_cpi_alrl(df)
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 8. MISSING-VALUE DIAGNOSTICS
@@ -134,6 +157,8 @@ LAYER_COLS = {
     'M5c road density': ['road_density_per_100_sqkm'],
     'M6 policy':     ['export_banned', 'mep_usd_per_tonne', 'export_duty_pct'],
     'M7 drought':    ['trigger1', 'cdi'],
+    'M8a fertilizer': ['fert_urea_mrp', 'fert_dap_mrp', 'fert_mop_mrp'],
+    'M8b CPI-AL/RL': ['cpi_al', 'cpi_rl'],
 }
 for label, cols in LAYER_COLS.items():
     present = [c for c in cols if c in df.columns]
