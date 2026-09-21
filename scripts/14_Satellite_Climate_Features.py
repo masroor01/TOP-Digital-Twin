@@ -332,6 +332,26 @@ for _s2_dir in _s2_dirs:
         df = df.rename(columns={'NDVI': 's2_ndvi', 'EVI': 's2_evi',
                                  'valid_px_frac': 's2_valid_frac'})
 
+        # s2_evi sanity guard: the raw GEE composites (pre-fix, see
+        # scripts/gee/gee_03_S2_NDVI_*.js) computed EVI per-pixel with no
+        # denominator floor, so pixels with a near-zero denominator blew
+        # up to values as extreme as +/-1e9 and dragged the zone-mean
+        # composite along with them -- not a bounded outlier, a corrupted
+        # composite. EVI is physically bounded to roughly [-1, 1]; treat
+        # any composite outside a generous version of that bound as an
+        # invalid observation (NaN) rather than a real value, the same
+        # way a fully-cloudy composite is already treated as missing --
+        # reindex_and_ffill's existing forward-fill (limit=4wk) then
+        # covers the gap. This does not recover the true value for
+        # composites with lighter (non-extreme) contamination from the
+        # same bug; the durable fix is the GEE-side denominator mask/clamp
+        # now in gee_03_S2_NDVI_*.js, applied on the next re-export.
+        n_before = df['s2_evi'].notna().sum()
+        df.loc[df['s2_evi'].abs() > 1.5, 's2_evi'] = pd.NA
+        n_dropped = n_before - df['s2_evi'].notna().sum()
+        if n_dropped:
+            print(f'    {fpath.name}: dropped {n_dropped} implausible s2_evi composite(s) (|EVI| > 1.5)')
+
         # If two composites fall in the same week, keep highest quality
         df = df.sort_values('s2_valid_frac', ascending=False)
         df = df.drop_duplicates(subset=['zone_id', 'week_start'], keep='first')

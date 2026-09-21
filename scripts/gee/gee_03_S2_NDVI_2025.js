@@ -78,9 +78,18 @@ function addIndices(img) {
   var b2  = img.select('B2');   // Blue
 
   var ndvi = b8.subtract(b4).divide(b8.add(b4)).rename('NDVI');
-  var evi  = b8.subtract(b4)
-    .divide(b8.add(b4.multiply(6)).subtract(b2.multiply(7.5)).add(1))
+
+  // EVI denominator can approach zero on dark/masked pixels, blowing the
+  // formula up to extreme values that dominate the zone-mean composite
+  // (this caused s2_evi values up to ~1e9 downstream). Mask any pixel
+  // whose denominator is too small to divide by safely, then clamp to
+  // the physically valid EVI range as a second guard.
+  var eviDenom = b8.add(b4.multiply(6)).subtract(b2.multiply(7.5)).add(1);
+  var evi = b8.subtract(b4)
+    .divide(eviDenom)
     .multiply(2.5)
+    .updateMask(eviDenom.abs().gte(0.01))
+    .clamp(-1, 1)
     .rename('EVI');
 
   return img.addBands([ndvi, evi]);

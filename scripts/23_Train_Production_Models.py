@@ -400,7 +400,7 @@ for crop in CROPS:
     # the block above, but couldn't just be added to stale_cols: they're a
     # (state, year, month) join, not (crop, week_start) like every column
     # above, so a single per-week value isn't correct across different
-    # states. Found 2026-09-25 (dashboard audit): wage_agri_men/women were
+    # states. Found 2026-09-21 (dashboard audit): wage_agri_men/women were
     # NaN for 100% of reference rows -- not a join bug (the historical
     # panel has real values), but this reference-row step never
     # forward-filled them at all, so every market's baseline silently had
@@ -543,7 +543,7 @@ print(f'  Saved: {hist_path}  ({len(hist_df):,} rows, up to {HISTORY_WEEKS} week
 # cross-sectional range in ref_df is degenerate (min==max), which crashes
 # st.slider(). The full time series has real historical variation.
 #
-# 2026-09-25: expanded from a hand-picked subset (3 macro, 3 climate/sat)
+# 2026-09-21: expanded from a hand-picked subset (3 macro, 3 climate/sat)
 # to EVERY raw M2-M6 layer column the model actually trains on -- found via
 # a dashboard audit that most of MACRO_COLS (5 WPI series, bank credit,
 # crude oil, LPG, etc.), most climate/satellite columns, all of M5
@@ -556,17 +556,21 @@ print(f'  Saved: {hist_path}  ({len(hist_df):,} rows, up to {HISTORY_WEEKS} week
 SIMULATABLE = (
     MACRO_COLS +
     ERA5_COLS + CHIRPS_COLS +
-    # 's2_evi' deliberately excluded here, unlike every other S2/MODIS
-    # column: found 2026-09-25 that ~50% of its values in
-    # crop_weekly_features.csv are wildly implausible (|value| > 10, up to
-    # ~1.2 billion -- EVI should be roughly [-1, 1]), almost certainly a
-    # divide-by-near-zero blowup in Script 14's EVI formula, not a real
-    # signal. It's still trained on as-is (M6_FEATS/SAT_FEATS untouched --
-    # that's a Script 14 data-quality bug needing its own fix, out of scope
-    # here), but a slider spanning -7.5e8 to +1.2e9 would be actively
-    # misleading, so it's withheld from the dashboard's simulatable set
-    # until Script 14's EVI computation is fixed.
-    [c for c in S2_COLS if c != 's2_evi'] + MODIS_COLS +
+    # 's2_evi' re-included 2026-09-21: was excluded 2026-09-21(sic, see
+    # git history) after ~50% of its values in crop_weekly_features.csv
+    # were found wildly implausible (up to ~1.2 billion; EVI should be
+    # roughly [-1, 1]) -- root cause was a divide-by-near-zero blowup in
+    # the raw per-pixel EVI formula in scripts/gee/gee_03_S2_NDVI_*.js
+    # (Script 14 only ingests the already-computed GEE composite, it
+    # doesn't compute EVI itself). Fixed at both layers: the GEE JS now
+    # masks near-zero-denominator pixels and clamps EVI to [-1,1] before
+    # averaging (takes effect on the next GEE re-export); Script 14 now
+    # also invalidates (NaN, forward-filled like a cloudy composite) any
+    # already-corrupted composite outside |EVI|>1.5 at ingestion, so the
+    # current crop_weekly_features.csv is already clean (verified range
+    # roughly [-1.4, 1.5], no billion-scale outliers) without needing a
+    # fresh GEE export first.
+    S2_COLS + MODIS_COLS +
     ['wage_agri_men', 'wage_agri_women',
      'cold_storage_n_facilities', 'cold_storage_capacity_mt',
      'road_density_per_100_sqkm'] +

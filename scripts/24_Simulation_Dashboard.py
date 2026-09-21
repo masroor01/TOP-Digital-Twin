@@ -195,6 +195,14 @@ FEATURE_INFO = {
                    'disruption risk, which tends to push prices {dir}.'),
 
     # ── Satellite (M4) ────────────────────────────────────────────────────
+    's2_evi': dict(
+        label='Sentinel-2 Enhanced Veg. Index',
+        help='A vegetation index (Sentinel-2) that corrects for canopy '
+             'background and atmospheric effects better than plain NDVI, '
+             'especially in denser vegetation — roughly -1 to 1.',
+        mechanism='Higher EVI (healthier, denser vegetation) generally '
+                   'signals more supply ahead, which tends to push prices '
+                   '{dir}.'),
     's2_valid_frac': dict(
         label='Sentinel-2 Cloud-Free Fraction',
         help='Fraction of the growing region with a usable (cloud-free) '
@@ -920,13 +928,14 @@ with st.sidebar:
         if val is not None:
             scenario[col] = val
     # Every other raw M3/M4 climate/satellite column the model actually
-    # trains on (2026-09-25 dashboard audit) -- collapsed by default so the
+    # trains on (2026-09-21 dashboard audit) -- collapsed by default so the
     # sidebar's default view is unchanged, but genuinely reachable rather
-    # than invisible. 's2_evi' deliberately excluded -- see Script 23's
-    # SIMULATABLE comment (its source data is corrupted for ~50% of rows).
+    # than invisible. 's2_evi' re-included 2026-09-21 after its corrupted
+    # source data was fixed at the root (see Script 23's SIMULATABLE
+    # comment) and crop_weekly_features.csv regenerated.
     with st.expander('More climate & satellite variables'):
         for col in ['era5_tmin', 'era5_tmean', 'era5_dtr', 'era5_heat_35', 'era5_heat_38',
-                    'chirps_rain_max', 'chirps_excess', 's2_valid_frac', 's2_ndvi_anom',
+                    'chirps_rain_max', 'chirps_excess', 's2_evi', 's2_valid_frac', 's2_ndvi_anom',
                     'modis_ndvi', 'modis_evi', 'modis_lst_mean', 'modis_lst_max', 'modis_lst_frac35']:
             val = safe_slider(col)
             if val is not None:
@@ -941,7 +950,7 @@ with st.sidebar:
     # Every other raw M2 macro column (CMIE/RBI/PPAC) the model actually
     # trains on -- same collapsed-by-default treatment as climate/satellite.
     # No extend_pct here (unlike the 3 primary sliders above): found
-    # 2026-09-25 that a 20% extension on a column whose observed minimum
+    # 2026-09-21 that a 20% extension on a column whose observed minimum
     # sits near zero (WPI series, bank credit) pushes the slider's lower
     # bound negative, which is nonsensical for an index/count -- the 3
     # primary sliders' own observed minimums are comfortably above zero, so
@@ -958,7 +967,7 @@ with st.sidebar:
 
     st.markdown("<hr>", unsafe_allow_html=True)
     st.markdown("<p style='font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#64748B; margin-bottom:6px;'>Infrastructure & Labor (M5)</p>", unsafe_allow_html=True)
-    # M5 had NO presence anywhere in the dashboard before 2026-09-25 despite
+    # M5 had NO presence anywhere in the dashboard before 2026-09-21 despite
     # being real model inputs -- wage_agri_men/women vary weekly by state;
     # cold storage/road density are slow-moving state facts (see their
     # FEATURE_INFO 'help' text), so moving their sliders is a genuine "what
