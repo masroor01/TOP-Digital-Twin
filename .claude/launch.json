@@ -6,6 +6,12 @@
       "runtimeExecutable": "cmd",
       "runtimeArgs": ["/c", "cd /d \"C:\\Users\\masro\\Documents\\TOP_Digital_Twin\" && python -m streamlit run scripts/24_Simulation_Dashboard.py --server.headless true"],
       "port": 8501
+    },
+    {
+      "name": "top-dashboard-react",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d \"C:\\Users\\masro\\Documents\\TOP_Digital_Twin\\web\\frontend\" && npm run dev"],
+      "port": 5173
     }
   ]
 }
