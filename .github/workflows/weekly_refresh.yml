@@ -61,11 +61,18 @@ jobs:
           mkdir -p downloads
           rclone copy gdrive:TOP_Digital_Twin_Raw_Data/ downloads/ --progress
 
+      - name: Write GEE service account key from secret
+        env:
+          GEE_SERVICE_ACCOUNT_KEY_CONTENT: ${{ secrets.GEE_SERVICE_ACCOUNT_KEY }}
+        run: |
+          printf '%s' "$GEE_SERVICE_ACCOUNT_KEY_CONTENT" > gee-service-account-key.json
+
       - name: Run weekly refresh
         id: refresh
         run: python scripts/weekly_refresh/run_weekly_refresh_ci.py
         env:
           TOP_DOWNLOADS_DIR: ${{ github.workspace }}/downloads
+          GEE_SERVICE_ACCOUNT_KEY: ${{ github.workspace }}/gee-service-account-key.json
 
       - name: Push updated raw files back to Drive
         if: success()

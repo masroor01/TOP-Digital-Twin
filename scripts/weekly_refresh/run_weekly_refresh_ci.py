@@ -168,6 +168,34 @@ for f in sync_files:
     dst = REPO_ROOT / "data" / "agmarknet_weekly" / f
     dst.write_bytes(src.read_bytes())
 
+log("--- GEE satellite/climate topup (ERA5, CHIRPS, S2 NDVI, MODIS NDVI+LST) ---")
+gee_scripts = [
+    "scripts/gee_auto/01_era5_topup.py",
+    "scripts/gee_auto/02_chirps_topup.py",
+    "scripts/gee_auto/03_s2_ndvi_topup.py",
+    "scripts/gee_auto/04_modis_ndvi_topup.py",
+    "scripts/gee_auto/05_modis_lst_topup.py",
+]
+gee_ok = True
+for gs in gee_scripts:
+    code = run_logged([PYTHON, gs])
+    if code != 0:
+        log(f"{gs}: FAILED (exit {code}) -- skipping Script 14 rebuild this run, "
+            f"existing data/satellite_climate/ files left untouched")
+        gee_ok = False
+        break
+
+if gee_ok:
+    log("--- Script 14: rebuilding satellite/climate features ---")
+    code = run_logged([PYTHON, "scripts/14_Satellite_Climate_Features.py"])
+    if code != 0:
+        log(f"Script 14 FAILED (exit {code}) -- existing data/satellite_climate/ "
+            f"files left untouched, continuing to Script 23 with whatever "
+            f"climate/satellite features were already committed")
+else:
+    log("GEE topup incomplete this run -- Script 14 not re-run, "
+        "continuing with existing committed satellite/climate features")
+
 log("--- Script 23: retraining production models ---")
 code = run_logged([PYTHON, "scripts/23_Train_Production_Models.py"])
 if code != 0:
@@ -212,6 +240,9 @@ files_to_add = [
     "data/agmarknet_weekly/tomato_weekly_panel.csv",
     "data/agmarknet_weekly/onion_weekly_panel.csv",
     "data/agmarknet_weekly/potato_weekly_panel.csv",
+    "data/satellite_climate/zone_weekly_features.csv",
+    "data/satellite_climate/crop_weekly_features.csv",
+    "data/satellite_climate/market_zone_features.csv",
     "Model_Output/production_models/feature_ranges.json",
     "Model_Output/production_models/macro_climate_staleness.json",
     "Model_Output/production_models/model_uncertainty.json",

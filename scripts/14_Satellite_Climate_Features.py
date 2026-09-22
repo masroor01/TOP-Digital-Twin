@@ -80,11 +80,24 @@ ZIP_MODIS      = DOWNLOADS / 'MODIS-20260708T112651Z-3-001.zip'
 # bug, and not something this change can fix without a fresh GEE pull for
 # the new zone locations.
 START = pd.Timestamp('2000-01-01')
-END   = pd.Timestamp('2026-07-27')
+# Was hardcoded to '2026-07-27' -- same class of silent-truncation bug this
+# project has hit repeatedly (see feedback_working_style.md: "never assume
+# one global date/config constant applies"). Now derived from today's date
+# so the weekly GEE automation (scripts/gee_auto/) doesn't get silently
+# capped back to whatever date this line last happened to say. Safe to
+# extend past actual source coverage: the Step 6 merge is a left-join onto
+# the full week skeleton, so weeks beyond any one source's real cutoff just
+# come through as NaN for that source's columns (see the TOPUP_2025/2026
+# comment below), not a crash or truncated file.
+END = pd.Timestamp.today().normalize()
 
 # Full ISO-week index, one buffer week before START through END (same
-# one-week-before-Monday convention the original 2017-01-01 START used)
-_all_weeks = pd.date_range('1999-12-27', '2026-07-27', freq='W-MON')
+# one-week-before-Monday convention the original 2017-01-01 START used).
+# End bound was ALSO independently hardcoded to '2026-07-27' here -- a
+# second copy of the same date, easy to miss when only fixing the END
+# constant above. Extended a generous 2 years past today's END so this
+# doesn't need touching again as weeks roll forward.
+_all_weeks = pd.date_range('1999-12-27', END + pd.DateOffset(years=2), freq='W-MON')
 WEEK_INDEX = _all_weeks[(_all_weeks >= START) & (_all_weeks <= END)]
 
 CROPS = ['tomato', 'onion', 'potato']

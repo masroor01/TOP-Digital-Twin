@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Script 15 — Ablation Study: M0 → M7, plus M8
+Script 15 — Ablation Study: M0 -> M7, plus M8, M9
 =====================================
-Trains 9 progressively richer LightGBM variants on the same rolling-origin
+Trains 10 progressively richer LightGBM variants on the same rolling-origin
 CV framework as Script 12, adding one data layer at a time:
 
   M0  Price features only (lags, rolling stats, seasonality, market encoding)
@@ -14,6 +14,7 @@ CV framework as Script 12, adding one data layer at a time:
   M6  + Policy/trade (export ban/MEP/duty, market interventions, Operation Greens)
   M7  + Drought (VEDAS Trigger-1 + IDM CDI, district-level; see note below)
   M8  + Fertilizer MRP (Urea/DAP/MOP national monthly, see note below)
+  M9  + NOAA ONI (ENSO index + 3/4-month lags, national monthly, see note below)
 
 M7 is structurally sparse by design (Trigger-1: Kharif weeks 2022+ only,
 crosswalked districts only; IDM CDI: 2021-07-14 onward only) -- unlike
@@ -52,7 +53,18 @@ drought features (fert_urea_mrp_missing/etc.) rather than forward-fill,
 since a ~1-year pre-2018 gap at the very front of the panel is core
 coverage too, not a recent-data lag.
 
-Each variant × 5 folds × 4 horizons × 3 crops = up to 540 LightGBM model fits.
+M9 (NOAA ONI, Scripts 56/62) also branches from M6 -- a sibling of M8, not
+stacked on it, same reasoning: each new candidate tested in isolation so
+its own effect is cleanly attributable. Unlike M7/M8, a usage+redundancy
+diagnostic was run BEFORE this ablation (Script 63, 2026-09-21) and came
+back genuinely encouraging: real split usage (top quarter of features) and
+no meaningful correlation with any existing macro/WPI/trend feature --
+this ablation run is testing a candidate the diagnostic actively supports,
+not one flagged for caution the way M8 was. No missingness-flag treatment
+needed -- ONI has continuous monthly coverage back to 1950, decades before
+the panel starts, so there's no core coverage gap to flag.
+
+Each variant × 5 folds × 4 horizons × 3 crops = up to 600 LightGBM model fits.
 
 Compare against B1 Naive Persistence from Script 13.
 
@@ -227,7 +239,7 @@ CROP_COLORS = {'tomato': '#E63946', 'onion': '#F4A261', 'potato': '#457B9D'}
 VARIANT_COLORS = {
     'M0': '#adb5bd', 'M1': '#74c0fc', 'M2': '#51cf66',
     'M3': '#ff922b', 'M4': '#cc5de8', 'M5': '#20c997', 'M6': '#e64980',
-    'M7': '#795548', 'M8': '#fcc419',
+    'M7': '#795548', 'M8': '#fcc419', 'M9': '#22b8cf',
 }
 VARIANT_LABELS = {
     'M0': 'M0 Price only',
@@ -239,6 +251,7 @@ VARIANT_LABELS = {
     'M6': 'M6 + Policy/Trade',
     'M7': 'M7 + Drought',
     'M8': 'M8 (M6) + Fertilizer',   # branches from M6, not M7 -- see docstring
+    'M9': 'M9 (M6) + NOAA ONI',     # branches from M6 too, sibling of M8, not stacked on it
 }
 
 LAG_WEEKS = [1, 2, 3, 4, 8, 13, 26, 52]
@@ -254,11 +267,11 @@ plt.rcParams.update({
 # 2. LOAD PANEL + MACRO
 # ─────────────────────────────────────────────────────────────────────────────
 print('='*65)
-print('SCRIPT 15: ABLATION STUDY  M0 → M7, plus M8')
+print('SCRIPT 15: ABLATION STUDY  M0 -> M7, plus M8, M9')
 print('='*65)
 print(f'  Fast mode : {FAST_MODE}')
 print(f'  Horizons  : {HORIZONS_RUN}')
-print(f'  Total fits: {9 * len(FOLDS) * len(HORIZONS_RUN) * len(CROPS)}\n')
+print(f'  Total fits: {10 * len(FOLDS) * len(HORIZONS_RUN) * len(CROPS)}\n')
 
 print('[1] Loading panel ...')
 df = pd.read_csv(AGM_FILE, parse_dates=['week_start'])
@@ -376,6 +389,17 @@ if 'fert_urea_mrp' in FERT_FEATS:
           f'(Jan-2018 onward only -- pre-2018 panel rows structurally missing)')
 print(f'   Fertilizer features (M8)    : {len(FERT_FEATS)} → {FERT_FEATS}')
 
+# M9 -- NOAA ONI, branches from M6 independently (sibling of M8, not stacked
+# on it), same reasoning as M8 not stacking on the excluded M7. No
+# missingness-flag treatment needed: ONI has continuous monthly coverage
+# back to 1950, decades before the panel starts, so there's no core
+# coverage gap the way drought/CPI-AL/RL have.
+df, ONI_FEATS = pl.join_oni(df, verbose=False)
+if 'oni_anom' in ONI_FEATS:
+    print(f'   NOAA ONI joined (M9)        : {df["oni_anom"].notna().mean():.1%} coverage '
+          f'(continuous since 1950, no core gap)')
+print(f'   ONI features (M9)           : {len(ONI_FEATS)} → {ONI_FEATS}')
+
 # Forward-fill infrastructure columns that stop before the panel's own end
 # date: wage_agri_men/women (wages data ends 2025-12) and
 # road_density_per_100_sqkm (ends 2025). Found 2026-08-13 adding Fold 5
@@ -437,6 +461,16 @@ if _ffill_sat_cols:
     n_after = df[_ffill_sat_cols].isna().sum().sum()
     print(f'   Climate/satellite forward-fill: {n_before - n_after:,} cell(s) filled '
           f'(beyond each source\'s real coverage, e.g. 2026+)')
+
+_ffill_oni_cols = [c for c in ONI_FEATS if c in df.columns]
+if _ffill_oni_cols:
+    n_before = df[_ffill_oni_cols].isna().sum().sum()
+    df = df.sort_values('week_start')
+    df[_ffill_oni_cols] = df[_ffill_oni_cols].ffill()
+    df = df.sort_values(['crop', 'market', 'week_start']).reset_index(drop=True)
+    n_after = df[_ffill_oni_cols].isna().sum().sum()
+    print(f'   ONI forward-fill: {n_before - n_after:,} cell(s) filled '
+          f'(tail past Script 62\'s last published month)')
 
 print(f'   Infrastructure features (M5): {len(INFRA_FEATS)} → {INFRA_FEATS}')
 print(f'   Policy features (M6)        : {len(POLICY_FEATS)} → {POLICY_FEATS}')
@@ -572,6 +606,10 @@ MODEL_FEATURE_SETS = {
     # closed/excluded; stacking on it would entangle two independent
     # questions). CPI-AL/RL deliberately excluded too (see docstring).
     'M8': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + INFRA_FEATS + POLICY_FEATS + FERT_FEATS,
+    # Also branches from M6, sibling of M8 (not stacked on it or on M7) --
+    # each new candidate tested in isolation against the shared M6
+    # baseline so its own effect is cleanly attributable.
+    'M9': PRICE_FEATS + ARR_FEATS + MACRO_COLS + CLIMATE_FEATS + SAT_FEATS + INFRA_FEATS + POLICY_FEATS + ONI_FEATS,
 }
 if MARKET_LEVEL_DIAGNOSTIC:
     a, b = DIAGNOSTIC_PAIR
