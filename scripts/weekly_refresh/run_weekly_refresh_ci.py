@@ -242,7 +242,13 @@ files_to_add = [
     "data/agmarknet_weekly/potato_weekly_panel.csv",
     "data/satellite_climate/zone_weekly_features.csv",
     "data/satellite_climate/crop_weekly_features.csv",
-    "data/satellite_climate/market_zone_features.csv",
+    # market_zone_features.csv deliberately excluded -- it's .gitignore'd
+    # (414MB, a market-level expansion of zone_weekly_features.csv, far too
+    # large to commit). Including it here broke the first real automated
+    # run: `git add` on a gitignored, not-yet-generated-this-run path fails
+    # with a pathspec error, which aborted the whole commit after 2.5
+    # hours of otherwise-successful work (scrape, GEE pull, retrain, all
+    # passed). Found and fixed 2026-09-22.
     "Model_Output/production_models/feature_ranges.json",
     "Model_Output/production_models/macro_climate_staleness.json",
     "Model_Output/production_models/model_uncertainty.json",
