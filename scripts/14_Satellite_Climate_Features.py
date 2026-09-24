@@ -146,6 +146,23 @@ def to_week_start(series: pd.Series) -> pd.Series:
 def extract_zip(zip_path: Path, subdir: str) -> int:
     dest = RAW_DIR / subdir
     dest.mkdir(parents=True, exist_ok=True)
+    # The zip itself is a local-only, one-time historical bulk pull (2000-2024)
+    # that's never been in Drive/CI. As of 2026-09-24, `dest`'s own contents
+    # (the already-extracted CSVs) ARE synced to Drive and pulled by the CI
+    # workflow before this script runs -- so if the zip is missing but dest
+    # already has real files (from that sync, or a prior local extraction),
+    # that's the expected CI path, not an error. Only fail if BOTH the zip
+    # AND any already-extracted files are missing (nothing to work from at all).
+    if not zip_path.exists():
+        existing = list(dest.glob('*.csv'))
+        if existing:
+            print(f'    (zip not found: {zip_path.name} -- using {len(existing)} already-extracted file(s) in {dest})')
+            return len(existing)
+        raise FileNotFoundError(
+            f'{zip_path} not found, and {dest} has no already-extracted CSVs either -- '
+            f'nothing to build historical satellite/climate features from. If running in '
+            f'CI, check the Drive-sync step pulled data/satellite_climate/raw/ successfully.'
+        )
     n = 0
     with zipfile.ZipFile(zip_path) as zf:
         for entry in zf.namelist():

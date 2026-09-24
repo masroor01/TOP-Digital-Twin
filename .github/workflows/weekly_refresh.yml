@@ -61,18 +61,42 @@ jobs:
           mkdir -p downloads
           rclone copy gdrive:TOP_Digital_Twin_Raw_Data/ downloads/ --progress
 
+      - name: Pull historical satellite/climate data from Drive
+        # Script 14 needs these one-time, local-only historical bulk pulls
+        # (2000-2024 ERA5/CHIRPS/S2/MODIS, ~33MB, plus the potato zone
+        # relocation history, ~6MB) to build satellite/climate features.
+        # Never committed to git (data/satellite_climate/raw/ is
+        # .gitignore'd, kept small/lean) -- synced via Drive instead, same
+        # pattern as the raw market-data pull above. Added 2026-09-24 after
+        # the first real automated run found Script 14 crashing in CI with
+        # nothing to fall back on (see MANIFEST.md).
+        run: |
+          mkdir -p data/satellite_climate/raw downloads/GEE_PotatoZoneReplacement downloads/GEE_PotatoZoneReplacement_Historical
+          rclone copy gdrive:TOP_Digital_Twin_Satellite_Historical/raw/ data/satellite_climate/raw/ --progress
+          rclone copy gdrive:TOP_Digital_Twin_Satellite_Historical/GEE_PotatoZoneReplacement/ downloads/GEE_PotatoZoneReplacement/ --progress
+          rclone copy gdrive:TOP_Digital_Twin_Satellite_Historical/GEE_PotatoZoneReplacement_Historical/ downloads/GEE_PotatoZoneReplacement_Historical/ --progress
+
       - name: Write GEE service account key from secret
+        # Written to RUNNER_TEMP, deliberately OUTSIDE the git working
+        # directory ($GITHUB_WORKSPACE) -- writing it inside the repo
+        # (even .gitignore'd) let peter-evans/create-pull-request's own
+        # "sweep up uncommitted changes" fallback silently include it in
+        # a PUBLIC PR's diff (real incident, 2026-09-22: the key was
+        # exposed, auto-disabled by Google's own secret scanning within
+        # minutes, revoked and rotated). A file outside the repo tree can
+        # never be swept into a git commit by any tool, regardless of
+        # .gitignore state -- the only actually reliable fix.
         env:
           GEE_SERVICE_ACCOUNT_KEY_CONTENT: ${{ secrets.GEE_SERVICE_ACCOUNT_KEY }}
         run: |
-          printf '%s' "$GEE_SERVICE_ACCOUNT_KEY_CONTENT" > gee-service-account-key.json
+          printf '%s' "$GEE_SERVICE_ACCOUNT_KEY_CONTENT" > "$RUNNER_TEMP/gee-service-account-key.json"
 
       - name: Run weekly refresh
         id: refresh
         run: python scripts/weekly_refresh/run_weekly_refresh_ci.py
         env:
           TOP_DOWNLOADS_DIR: ${{ github.workspace }}/downloads
-          GEE_SERVICE_ACCOUNT_KEY: ${{ github.workspace }}/gee-service-account-key.json
+          GEE_SERVICE_ACCOUNT_KEY: ${{ runner.temp }}/gee-service-account-key.json
 
       - name: Push updated raw files back to Drive
         if: success()
