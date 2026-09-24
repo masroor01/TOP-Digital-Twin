@@ -52,6 +52,9 @@ warnings.filterwarnings('ignore')
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 pl.seed_everything(42, workers=True)
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+print("Using device:", device)
 # ─────────────────────────────────────────────────────────────────────────────
 # 1. PATHS & CONFIG
 # ─────────────────────────────────────────────────────────────────────────────
@@ -155,13 +158,18 @@ TFT_PARAMS = dict(
     log_interval          = -1,
     reduce_on_plateau_patience = 3,
 )
+import torch as _torch  # local alias; avoids shadowing any later `torch` import
+ACCELERATOR = 'gpu' if _torch.cuda.is_available() else 'cpu'  # auto-detect;
+# was hardcoded 'cpu' until 2026-09-24 GPU test run confirmed this machine's
+# NVIDIA RTX 2000 Ada + CUDA-enabled torch build work end-to-end.
+
 TRAINER_PARAMS = dict(
     max_epochs        = SMOKE_EPOCHS if SMOKE_TEST else MAX_EPOCHS_CAP,
     gradient_clip_val = 0.1,
     enable_progress_bar = True,
     enable_model_summary = False,
     devices           = 1,
-    accelerator       = 'cpu',
+    accelerator       = ACCELERATOR,
     logger            = False,
     enable_checkpointing = False,
 )

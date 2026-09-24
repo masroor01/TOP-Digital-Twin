@@ -327,6 +327,17 @@ for _chirps_dir in chirps_dirs:
 
 chirps = pd.concat(chirps_frames, ignore_index=True)
 chirps['crop'] = chirps['crop'].str.lower()
+# Dedup ACROSS all sources (not just within one file's own groupby) -- same
+# cross-file boundary issue as MODIS/S2 above: confirmed present here too
+# (2026-09-24) for the 3 relocated potato zones, where the potato-zone-
+# replacement file's full 2017-2026 history overlaps the 2025/2026 topup
+# folders at their boundary week. CHIRPS isn't passed through
+# reindex_and_ffill so this doesn't crash, but it silently fans out the
+# Step 6 left-join (duplicate right-side rows -> duplicate panel rows) for
+# those zone/weeks. Keep the composite built from more pentads.
+chirps = (chirps
+          .sort_values('chirps_n_pentad', ascending=False)
+          .drop_duplicates(subset=['zone_id', 'week_start'], keep='first'))
 
 print(f'  Zones processed : {chirps["zone_id"].nunique()}')
 print(f'  Date range      : {chirps["week_start"].min().date()} → {chirps["week_start"].max().date()}')
@@ -390,6 +401,17 @@ for _s2_dir in _s2_dirs:
 
 s2_raw = pd.concat(s2_frames, ignore_index=True)
 s2_raw['crop'] = s2_raw['crop'].str.lower()
+# Dedup ACROSS all sources (not just within one file) -- same cross-file
+# boundary issue as MODIS above (see its loop comment): a historical zip
+# file and a topup/relocation file can each contain a composite date that
+# maps to the same ISO week at their boundary, so per-file dedup alone
+# still leaves two rows for that (zone_id, week_start) after concatenation
+# -- confirmed the cause of the 2026-09-24 CI crash ("cannot reindex on an
+# axis with duplicate labels"). Keep the composite with the higher valid
+# pixel fraction per (zone, week), same criterion as the per-file dedup.
+s2_raw = (s2_raw
+          .sort_values('s2_valid_frac', ascending=False)
+          .drop_duplicates(subset=['zone_id', 'week_start'], keep='first'))
 
 # Expand to full weekly grid with forward fill
 s2 = reindex_and_ffill(
