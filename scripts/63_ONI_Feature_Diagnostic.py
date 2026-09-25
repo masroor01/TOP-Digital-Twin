@@ -37,6 +37,7 @@ import io, os, sys, warnings
 import numpy as np
 import pandas as pd
 import lightgbm as lgb
+from gpu_utils import lgbm_gpu_params
 import shap
 import panel_layers as pl
 warnings.filterwarnings('ignore')
@@ -62,6 +63,7 @@ LGBM_PARAMS = dict(
     bagging_freq=5, reg_alpha=0.1, reg_lambda=0.1, n_jobs=-1,
     random_state=SEED, verbose=-1,
 )
+LGBM_PARAMS.update(lgbm_gpu_params())
 
 print('=' * 65)
 print('SCRIPT 63: M9 (NOAA ONI) FEATURE DIAGNOSTIC -- USAGE + REDUNDANCY')

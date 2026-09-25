@@ -36,6 +36,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
+from gpu_utils import torch_device
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -75,7 +76,7 @@ MAX_TRAIN_SEQ = 2000 if args.pilot else 8_000
 MAX_EPOCHS = 2 if args.pilot else 15
 PATIENCE = 2 if args.pilot else 3
 BATCH_SIZE = 256
-DEVICE = torch.device('cpu')
+DEVICE = torch_device()
 
 torch.manual_seed(SEED)
 np.random.seed(SEED)

@@ -30,6 +30,7 @@ import numpy as np
 import lightgbm as lgb
 import xgboost as xgb
 import catboost as cb
+from gpu_utils import lgbm_gpu_params, xgb_gpu_params, catboost_gpu_params
 from sklearn.ensemble import RandomForestRegressor
 import matplotlib
 matplotlib.use('Agg')
@@ -309,7 +310,8 @@ def fit_predict(model_name, X_tr, y_tr, X_va, y_va, X_te):
         m = lgb.LGBMRegressor(
             objective='regression', metric='rmse', n_estimators=1000, learning_rate=0.05,
             num_leaves=127, min_child_samples=20, feature_fraction=0.8, bagging_fraction=0.8,
-            bagging_freq=5, reg_alpha=0.1, reg_lambda=0.1, n_jobs=-1, random_state=SEED, verbose=-1)
+            bagging_freq=5, reg_alpha=0.1, reg_lambda=0.1, n_jobs=-1, random_state=SEED, verbose=-1,
+            **lgbm_gpu_params())
         m.fit(X_tr, y_tr, eval_set=[(X_va, y_va)],
               callbacks=[lgb.early_stopping(50, verbose=False), lgb.log_evaluation(-1)])
         trees = m.best_iteration_ or 1000
@@ -317,13 +319,15 @@ def fit_predict(model_name, X_tr, y_tr, X_va, y_va, X_te):
         m = xgb.XGBRegressor(
             n_estimators=1000, learning_rate=0.05, max_depth=8, subsample=0.8,
             colsample_bytree=0.8, reg_alpha=0.1, reg_lambda=0.1, n_jobs=-1,
-            random_state=SEED, early_stopping_rounds=50, eval_metric='rmse', verbosity=0)
+            random_state=SEED, early_stopping_rounds=50, eval_metric='rmse', verbosity=0,
+            **xgb_gpu_params())
         m.fit(X_tr, y_tr, eval_set=[(X_va, y_va)], verbose=False)
         trees = m.best_iteration or 1000
     elif model_name == 'CatBoost':
         m = cb.CatBoostRegressor(
             iterations=1000, learning_rate=0.05, depth=8, l2_leaf_reg=3.0,
-            random_state=SEED, early_stopping_rounds=50, verbose=False, thread_count=-1)
+            random_state=SEED, early_stopping_rounds=50, verbose=False, thread_count=-1,
+            **catboost_gpu_params())
         m.fit(X_tr, y_tr, eval_set=(X_va, y_va), use_best_model=True)
         trees = m.get_best_iteration() or 1000
     elif model_name == 'RandomForest':

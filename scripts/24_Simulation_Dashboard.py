@@ -1091,7 +1091,7 @@ tab_sim, tab_attrib, tab_bench, tab_multi, tab_ai, tab_audit = st.tabs([
     "🔍 Feature Attribution",
     "🏆 Market Benchmarks",
     "📊 Cross-Market Analytics",
-    "🤖 AI Policy Intelligence",
+    "🤖 MIC Assistant",
     "🛠️ Technical Audit"
 ])
 
@@ -1458,10 +1458,28 @@ with tab_multi:
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# TAB 5: AI POLICY INTELLIGENCE (Claude Haiku)
+# TAB 5: MIC ASSISTANT (SKUAST-K · Claude)
 # ═════════════════════════════════════════════════════════════════════════════
 with tab_ai:
-    st.markdown("<p style='font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#64748B; margin-top:8px; margin-bottom:10px;'>Executive Policy Synthesis</p>", unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div style="background: linear-gradient(90deg, #0F5132 0%, #065F46 100%); padding: 14px 18px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; color: white; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(15, 81, 50, 0.15);">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="position: relative; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.18); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem;">
+                    🤖
+                    <span style="position: absolute; bottom: 2px; right: 2px; width: 8px; height: 8px; background: #10B981; border: 1.5px solid #0F5132; border-radius: 50%;"></span>
+                </div>
+                <div>
+                    <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #FFFFFF; letter-spacing: -0.01em;">MIC Assistant</h3>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 0.75rem; background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 6px; font-weight: 600; letter-spacing: 0.04em;">HADP-04</span>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     def _api_key():
         try:
             return st.secrets.get('ANTHROPIC_API_KEY')
@@ -1469,9 +1487,9 @@ with tab_ai:
             return None
 
     if not diff_cols:
-        st.info('💡 Modify sidebar scenario inputs to generate an AI policy memo.')
+        st.info('💡 Modify sidebar scenario inputs to consult MIC Assistant for policy commentary.')
     elif not _api_key():
-        st.info('ℹ️ AI policy commentary requires an `ANTHROPIC_API_KEY` configured in Streamlit Secrets.')
+        st.info('ℹ️ MIC Assistant requires an `ANTHROPIC_API_KEY` configured in Streamlit Secrets.')
     else:
         scenario_key = hashlib.md5(
             f"{crop}|{market_id}|{horizon}|{sorted((c, scenario.get(c)) for c in diff_cols)}".encode()
@@ -1480,7 +1498,7 @@ with tab_ai:
 
         AI_BRIEF_COOLDOWN_SECONDS = 30
 
-        if st.button('✨ Generate Policy Briefing', key='ai_brief_btn'):
+        if st.button('✨ Ask MIC Assistant', key='ai_brief_btn'):
             _last_brief_time = st.session_state.get('last_ai_brief_time')
             _now = time.time()
             if _last_brief_time is not None and (_now - _last_brief_time) < AI_BRIEF_COOLDOWN_SECONDS:
@@ -1497,10 +1515,11 @@ with tab_ai:
                     for c, eff in sorted(isolated_effects, key=lambda x: -abs(x[1]))
                 )
                 prompt = (
-                    'You are a policy-analysis assistant embedded in an agricultural price '
-                    'forecasting dashboard for Indian APMC markets (Tomato/Onion/Potato, HADP-04, '
-                    'SKUAST-K). A user ran a what-if scenario. Ground your answer STRICTLY in the '
-                    'numbers given below — do not invent statistics, events, or data you were not given.\n\n'
+                    'You are MIC Assistant, an AI policy-analysis assistant developed by SKUAST-K '
+                    'embedded in the TOP Digital Twin agricultural price forecasting dashboard '
+                    '(Tomato/Onion/Potato, HADP-04). A user ran a what-if scenario. Ground your '
+                    'answer STRICTLY in the numbers given below — do not invent statistics, events, '
+                    'or data you were not given.\n\n'
                     f'Crop: {crop.capitalize()}\nMarket: {market}, {base_row.get("state", "")}\n'
                     f'Forecast horizon: {horizon} weeks ahead\n'
                     f'Baseline prediction: Rs {baseline_pred:,.0f}/quintal\n'

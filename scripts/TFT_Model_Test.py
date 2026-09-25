@@ -33,6 +33,18 @@ Crops:  tomato, onion, potato (one model per crop per fold)
 Run: python scripts/17_TFT_Model.py
 Estimated runtime: 3–5 hours on CPU (14 threads). Use FAST_MODE=True
 for a quick test (~30 min) with reduced markets and shorter training.
+
+GPU execution (added 2026-09-24)
+  - Training / validation / prediction: PyTorch Lightning on CUDA, bf16 mixed
+    precision (falls back to fp32 if bf16 is unsupported), TF32 matmuls,
+    pinned-memory dataloaders.
+  - Feature engineering: log transforms, seasonal sin/cos encodings, segmented
+    forward/back-fill of prices and NaN imputation are executed as CUDA tensor
+    ops (float64, numerically identical to the pandas versions). Panel merges
+    use RAPIDS cuDF when installed (Linux/WSL2) and pandas otherwise.
+  - Test-set target matching is vectorised (single merge per horizon) instead
+    of a per-row boolean scan of the panel.
+  - Everything degrades gracefully to CPU when CUDA is unavailable.
 """
 
 import io, os, sys, time, traceback, warnings
@@ -48,12 +60,39 @@ from lightning.pytorch.callbacks import EarlyStopping
 from pytorch_forecasting import TemporalFusionTransformer, TimeSeriesDataSet
 from pytorch_forecasting.metrics import QuantileLoss
 from sklearn.metrics import mean_squared_error, mean_absolute_error
-from gpu_utils import torch_device
 warnings.filterwarnings('ignore')
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 pl.seed_everything(42, workers=True)
 
-device = torch_device()
+# ── GPU configuration ────────────────────────────────────────────────────────
+USE_GPU = torch.cuda.is_available()
+device  = torch.device("cuda" if USE_GPU else "cpu")
+if USE_GPU:
+    torch.backends.cuda.matmul.allow_tf32 = True   # Ampere/Ada tensor cores
+    torch.backends.cudnn.allow_tf32       = True
+    torch.set_float32_matmul_precision('high')
+    print("Using device:", device, "|", torch.cuda.get_device_name(0))
+else:
+    print("Using device:", device, "(CUDA not available -- running on CPU)")
+
+# Optional RAPIDS cuDF for panel merges (Linux / WSL2 only; not available on
+# native Windows). Absence is harmless: pandas is used instead.
+try:
+    import cudf
+    USE_CUDF = USE_GPU
+except Exception:
+    cudf = None
+    USE_CUDF = False
+print("cuDF merges   :", USE_CUDF)
+
+# Mixed precision for the TFT. bf16 keeps fp32 dynamic range (no loss scaling,
+# safe for the attention mask fill and QuantileLoss). Set to '32-true' to
+# reproduce the earlier full-fp32 numerics exactly.
+if USE_GPU and torch.cuda.is_bf16_supported():
+    PRECISION = 'bf16-mixed'
+else:
+    PRECISION = '32-true'
+print("Precision     :", PRECISION)
 # ─────────────────────────────────────────────────────────────────────────────
 # 1. PATHS & CONFIG
 # ─────────────────────────────────────────────────────────────────────────────
@@ -77,7 +116,7 @@ SEED = 42
 # SMOKE_TEST: 1 crop, 1 fold, ~15 markets, 3 epochs, tiny network, short
 # encoder — purely to measure real sec/batch throughput on this machine
 # before committing to any larger run. Overrides FAST_MODE when True.
-SMOKE_TEST = False
+SMOKE_TEST = True  # TEMP: 2026-09-24 GPU smoke test -- revert to False after
 
 # TIMING_TEST: full FAST_MODE architecture but restricted to 1 crop x 1
 # fold — measures real epoch time at production settings.
@@ -157,7 +196,7 @@ TFT_PARAMS = dict(
     log_interval          = -1,
     reduce_on_plateau_patience = 3,
 )
-ACCELERATOR = 'gpu' if device.type == 'cuda' else 'cpu'
+ACCELERATOR = 'gpu' if USE_GPU else 'cpu'  # auto-detect
 
 TRAINER_PARAMS = dict(
     max_epochs        = SMOKE_EPOCHS if SMOKE_TEST else MAX_EPOCHS_CAP,
@@ -166,11 +205,16 @@ TRAINER_PARAMS = dict(
     enable_model_summary = False,
     devices           = 1,
     accelerator       = ACCELERATOR,
+    precision         = PRECISION,
     logger            = False,
     enable_checkpointing = False,
 )
 BATCH_SIZE  = 128 if SMOKE_TEST else 64
-NUM_WORKERS = 0      # Windows: DataLoader must use 0 workers
+# Windows: DataLoader must use 0 workers (spawn + no __main__ guard).
+# On Linux/WSL2 use worker processes so CPU-side window assembly of the
+# TimeSeriesDataSet keeps the GPU fed.
+NUM_WORKERS = 0 if os.name == 'nt' else 4
+DL_KWARGS   = dict(pin_memory=USE_GPU, persistent_workers=NUM_WORKERS > 0)
 
 QUANTILES = [0.02, 0.1, 0.25, 0.5, 0.75, 0.9, 0.98]
 MEDIAN_IDX = 3  # index of 0.5 quantile in QUANTILES
@@ -183,8 +227,59 @@ plt.rcParams.update({
 })
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 2. LOAD & PREPARE PANEL
+# 2. LOAD & PREPARE PANEL  (feature engineering on GPU)
 # ─────────────────────────────────────────────────────────────────────────────
+def fe_merge(left, right, **kw):
+    """DataFrame merge on GPU (cuDF) when available, otherwise pandas.
+    Row order is not guaranteed by cuDF; the panel is re-sorted on
+    (series_id, time_idx) before any order-dependent step."""
+    if USE_CUDF:
+        try:
+            return cudf.from_pandas(left).merge(
+                cudf.from_pandas(right), **kw).to_pandas()
+        except Exception as e:
+            print(f'   [cuDF merge failed ({type(e).__name__}: {e}); using pandas]')
+    return left.merge(right, **kw)
+
+
+def to_dev(arr):
+    """numpy -> float64 tensor on the compute device."""
+    return torch.as_tensor(np.asarray(arr, dtype=np.float64), device=device)
+
+
+def gpu_segment_fill(x, gid):
+    """Per-group forward-fill then back-fill of NaNs (== groupby.ffill().bfill()).
+    x   : 1-D float tensor, rows sorted so each group is one contiguous run
+    gid : 1-D long tensor of group codes (same order)
+    Leading NaNs are back-filled from the first valid value of the same
+    group; a group that is entirely NaN stays NaN."""
+    n   = x.numel()
+    pos = torch.arange(n, device=x.device)
+    valid = ~torch.isnan(x)
+
+    is_start = torch.ones(n, dtype=torch.bool, device=x.device)
+    is_end   = torch.ones(n, dtype=torch.bool, device=x.device)
+    if n > 1:
+        change = gid[1:] != gid[:-1]
+        is_start[1:] = change
+        is_end[:-1]  = change
+    grp_start = torch.cummax(torch.where(is_start, pos, torch.zeros_like(pos)), 0).values
+    grp_end   = torch.cummin(
+        torch.where(is_end, pos, torch.full_like(pos, n)).flip(0), 0).values.flip(0)
+
+    # forward fill: nearest valid index at or before, if inside the same group
+    last_valid = torch.cummax(torch.where(valid, pos, torch.full_like(pos, -1)), 0).values
+    out = torch.where(last_valid >= grp_start,
+                      x[last_valid.clamp(min=0)],
+                      torch.full_like(x, float('nan')))
+    # back fill leading NaNs: nearest valid index at or after, same group
+    next_valid = torch.cummin(
+        torch.where(valid, pos, torch.full_like(pos, n)).flip(0), 0).values.flip(0)
+    use_b = torch.isnan(out) & (next_valid <= grp_end)
+    out = torch.where(use_b, x[next_valid.clamp(max=n - 1)], out)
+    return out
+
+
 print('=' * 65)
 print('SCRIPT 17: TEMPORAL FUSION TRANSFORMER (TFT)')
 print('=' * 65)
@@ -222,7 +317,7 @@ if macro_dfs:
                             suffixes=('', '_dup'))
         macro = macro[[c for c in macro.columns if not c.endswith('_dup')]]
     drop_cols = [c for c in ['date', 'date_x', 'date_y'] if c in macro.columns]
-    df = df.merge(macro.drop(columns=drop_cols, errors='ignore'),
+    df = fe_merge(df, macro.drop(columns=drop_cols, errors='ignore'),
                   on=['year', 'month'], how='left')
     MACRO_COLS = [c for c in macro.columns if c not in ('date', 'year', 'month')]
     print(f'   Macro: {len(MACRO_COLS)} series joined')
@@ -238,7 +333,7 @@ MODIS_COLS = ['modis_ndvi', 'modis_evi', 'modis_lst_mean', 'modis_lst_max',
               'modis_lst_frac35']
 SAT_ALL_COLS = [c for c in ERA5_COLS + CHIRPS_COLS + S2_COLS + MODIS_COLS
                 if c in sat.columns]
-df = df.merge(sat[['crop', 'week_start'] + SAT_ALL_COLS],
+df = fe_merge(df, sat[['crop', 'week_start'] + SAT_ALL_COLS],
               on=['crop', 'week_start'], how='left')
 print(f'   Satellite features: {len(SAT_ALL_COLS)}')
 
@@ -256,21 +351,36 @@ df['time_idx'] = df['week_start'].map(week_map)
 # real per-market identifier and is unique by construction.
 df['series_id'] = df['crop'] + '__' + df['market_id'].astype(str)
 
+# Order-dependent steps below need a strict (series, time) ordering; cuDF
+# merges do not preserve row order, so sort here.
+df = df.sort_values(['series_id', 'time_idx']).reset_index(drop=True)
+series_codes = torch.as_tensor(pd.factorize(df['series_id'])[0],
+                               dtype=torch.long, device=device)
+
 # Forward-fill price within each series (non-trading weeks have NaN;
-# TFT rejects NaN targets — ffill replicates last known price, same as Script 15)
-df['modal_price_filled'] = (df.groupby('series_id')['modal_price_weighted']
-                              .transform(lambda x: x.ffill().bfill()))
-df['arrivals_filled'] = (df.groupby('series_id')['arrivals_tonnes_week']
-                           .transform(lambda x: x.fillna(0)))
-df['log_price']    = np.log(df['modal_price_filled'].clip(lower=1))
-df['log_arrivals'] = np.log(df['arrivals_filled'].clip(lower=1))
+# TFT rejects NaN targets — ffill replicates last known price, same as Script 15).
+# GPU: segmented ffill/bfill + log transforms as CUDA tensor ops.
+price_t = gpu_segment_fill(to_dev(df['modal_price_weighted'].to_numpy(dtype=np.float64,
+                                                                     na_value=np.nan)),
+                           series_codes)
+arr_t   = to_dev(df['arrivals_tonnes_week'].to_numpy(dtype=np.float64,
+                                                    na_value=np.nan))
+arr_t   = torch.where(torch.isnan(arr_t), torch.zeros_like(arr_t), arr_t)
+df['modal_price_filled'] = price_t.cpu().numpy()
+df['arrivals_filled']    = arr_t.cpu().numpy()
+df['log_price']    = torch.log(price_t.clamp(min=1.0)).cpu().numpy()
+df['log_arrivals'] = torch.log(arr_t.clamp(min=1.0)).cpu().numpy()
 
 # Seasonality features (known in future — safe for decoder)
+# ISO week extraction is a datetime op (CPU); the trigonometry runs on GPU.
 df['week_of_year'] = df['week_start'].dt.isocalendar().week.astype(float)
-df['week_sin'] = np.sin(2 * np.pi * df['week_of_year'] / 52)
-df['week_cos'] = np.cos(2 * np.pi * df['week_of_year'] / 52)
-df['month_sin'] = np.sin(2 * np.pi * df['month'] / 12)
-df['month_cos'] = np.cos(2 * np.pi * df['month'] / 12)
+woy_t   = to_dev(df['week_of_year'].to_numpy(dtype=np.float64, na_value=np.nan))
+month_t = to_dev(df['month'].to_numpy(dtype=np.float64, na_value=np.nan))
+two_pi  = 2.0 * np.pi
+df['week_sin']  = torch.sin(two_pi * woy_t   / 52).cpu().numpy()
+df['week_cos']  = torch.cos(two_pi * woy_t   / 52).cpu().numpy()
+df['month_sin'] = torch.sin(two_pi * month_t / 12).cpu().numpy()
+df['month_cos'] = torch.cos(two_pi * month_t / 12).cpu().numpy()
 
 FUTURE_KNOWN = ['week_sin', 'week_cos', 'month_sin', 'month_cos']
 
@@ -279,9 +389,12 @@ PAST_FEATURES = [c for c in MACRO_COLS + SAT_ALL_COLS if c in df.columns]
 PAST_FEATURES += ['log_arrivals']
 
 # Fill remaining NaN with 0 (already imputed in panel; satellite has ~5% missing)
-for col in PAST_FEATURES + FUTURE_KNOWN:
-    if col in df.columns:
-        df[col] = df[col].fillna(0.0).astype(float)
+# One block transfer to GPU, masked fill, one transfer back.
+fill_cols = [c for c in dict.fromkeys(PAST_FEATURES + FUTURE_KNOWN) if c in df.columns]
+if fill_cols:
+    block = to_dev(df[fill_cols].to_numpy(dtype=np.float64, na_value=np.nan))
+    block = torch.where(torch.isnan(block), torch.zeros_like(block), block)
+    df[fill_cols] = block.cpu().numpy()
 
 df = df.sort_values(['series_id', 'time_idx']).reset_index(drop=True)
 print(f'   Panel ready: {len(df):,} rows  |  {df["series_id"].nunique()} series')
@@ -331,7 +444,12 @@ def build_dataset(data, train_cutoff_idx, val_size, predict=False):
 # ─────────────────────────────────────────────────────────────────────────────
 print(f'\n[3] Running TFT: {len(FOLDS)} folds × {len(HORIZONS)} horizons × {len(CROPS)} crops ...')
 print(f'    Using pytorch-forecasting {__import__("pytorch_forecasting").__version__}')
-print(f'    Torch {torch.__version__}  |  CPU threads: {torch.get_num_threads()}\n')
+print(f'    Torch {torch.__version__}  |  CPU threads: {torch.get_num_threads()}')
+if USE_GPU:
+    _p = torch.cuda.get_device_properties(0)
+    print(f'    GPU {_p.name}  |  {_p.total_memory/1024**3:.1f} GB  |  precision {PRECISION}\n')
+else:
+    print('    GPU: none (CPU run)\n')
 
 all_results = []
 # Store last fold's predictions for onion (for interval plot)
@@ -413,9 +531,11 @@ for crop in CROPS:
             continue
 
         train_dl = training.to_dataloader(
-            train=True, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, shuffle=True)
+            train=True, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS,
+            shuffle=True, **DL_KWARGS)
         val_dl = validation.to_dataloader(
-            train=False, batch_size=BATCH_SIZE * 4, num_workers=NUM_WORKERS)
+            train=False, batch_size=BATCH_SIZE * 4, num_workers=NUM_WORKERS,
+            **DL_KWARGS)
 
         # Build TFT model
         tft = TemporalFusionTransformer.from_dataset(
@@ -447,40 +567,47 @@ for crop in CROPS:
             test_dataset = TimeSeriesDataSet.from_dataset(
                 training, data_test_ctx, predict=True, stop_randomization=True)
             test_dl = test_dataset.to_dataloader(
-                train=False, batch_size=BATCH_SIZE * 4, num_workers=NUM_WORKERS)
-            pred_result = tft.predict(test_dl, mode='raw', return_index=True)
+                train=False, batch_size=BATCH_SIZE * 4, num_workers=NUM_WORKERS,
+                **DL_KWARGS)
+            # Inference on GPU (fp32 -- single pass, precision over speed)
+            pred_result = tft.predict(
+                test_dl, mode='raw', return_index=True,
+                trainer_kwargs=dict(accelerator=ACCELERATOR, devices=1))
             raw_preds = pred_result.output   # dict with 'prediction' key
             index     = pred_result.index    # DataFrame with series_id, time_idx
             # raw_preds['prediction'] shape: (n_series_cutpoints, max_pred_len, n_quantiles)
-            median_preds = raw_preds['prediction'][:, :, MEDIAN_IDX]  # (N, 26)
+            pred_np = raw_preds['prediction'].detach().float().cpu().numpy()  # (N, 26, Q)
         except Exception as e:
             print(f'  {crop} fold{fnum}: prediction failed — {e}')
             traceback.print_exc()
             continue
 
-        # Evaluate at each horizon h
+        # Evaluate at each horizon h.
+        # Vectorised target matching: one merge per horizon replaces the
+        # previous per-row boolean scan of the whole crop panel.
+        lookup = (df_crop[['series_id', 'time_idx', 'week_start', 'log_price']]
+                  .drop_duplicates(['series_id', 'time_idx'])
+                  .rename(columns={'time_idx': 'target_idx'}))
+        base_idx = pd.DataFrame({
+            'series_id': index['series_id'].astype(str).to_numpy(),
+            'row':       np.arange(len(index)),
+            'cutoff':    index['time_idx'].to_numpy(),
+        })
+
         for h in HORIZONS:
             h_idx = h - 1  # 0-indexed step
 
-            # Match predictions to actuals
-            y_pred_list, y_true_list = [], []
-            for i, (sid, cutoff_idx) in enumerate(zip(index['series_id'],
-                                                        index['time_idx'])):
-                target_idx = cutoff_idx + h
-                actual_rows = df_crop[
-                    (df_crop['series_id'] == sid) &
-                    (df_crop['time_idx']  == target_idx)
-                ]
-                if actual_rows.empty:
-                    continue
-                actual_week = actual_rows['week_start'].iloc[0]
-                if not (test_start_ts <= actual_week <= test_end_ts):
-                    continue
-                y_true_list.append(actual_rows['log_price'].iloc[0])
-                y_pred_list.append(float(median_preds[i, h_idx]))
+            q = base_idx.assign(target_idx=base_idx['cutoff'] + h)
+            m = q.merge(lookup, on=['series_id', 'target_idx'], how='inner')
+            m = m[(m['week_start'] >= test_start_ts) &
+                  (m['week_start'] <= test_end_ts)].sort_values('row')
 
-            if len(y_true_list) < 5:
+            if len(m) < 5:
                 continue
+
+            rows        = m['row'].to_numpy()
+            y_true_list = m['log_price'].to_numpy().tolist()
+            y_pred_list = pred_np[rows, h_idx, MEDIAN_IDX].tolist()
 
             rmse, mae, mape, r2 = metrics(y_true_list, y_pred_list)
             elapsed = time.time() - t_fold
@@ -503,21 +630,25 @@ for crop in CROPS:
                 'fit_sec':       round(elapsed, 1),
             })
 
-            # Store onion fold 4 predictions for interval plot
+            # Store onion fold 4 predictions for interval plot.
+            # Bounds are taken from the SAME matched rows as y_true / y_pred
+            # (quantile idx 1 = 10th pct, idx 5 = 90th pct).
             if crop == 'onion' and fnum == 4 and h == 13:
                 onion_interval_store = {
                     'y_true': y_true_list,
                     'y_pred': y_pred_list,
-                    'y_lo':   [float(raw_preds['prediction'][i, h_idx, 1])
-                               for i in range(len(index['series_id']))
-                               if len(y_true_list) > 0][:len(y_true_list)],
-                    'y_hi':   [float(raw_preds['prediction'][i, h_idx, 5])
-                               for i in range(len(index['series_id']))
-                               if len(y_true_list) > 0][:len(y_true_list)],
+                    'y_lo':   pred_np[rows, h_idx, 1].tolist(),
+                    'y_hi':   pred_np[rows, h_idx, 5].tolist(),
                 }
 
         fold_time = time.time() - t_fold
         print(f'  {crop} fold{fnum} done in {fold_time/60:.1f} min')
+
+        # Release dataloaders/trainer and cached CUDA blocks between folds
+        # (`tft` and `raw_preds` are kept for the variable-importance figure).
+        del train_dl, val_dl, trainer, test_dl
+        if USE_GPU:
+            torch.cuda.empty_cache()
 
     print(f'  {crop} complete')
 
@@ -668,7 +799,10 @@ try:
     encoder_vars = interpretation.get('encoder_variables', None)
     if encoder_vars is not None:
         vi = encoder_vars.cpu().numpy()
-        feat_names = (PAST_FEATURES + ['log_price'])[:len(vi)]
+        # Encoder variable order is [known reals] + [unknown reals]; take the
+        # names from the model itself so labels cannot be misaligned.
+        feat_names = list(getattr(tft, 'encoder_variables',
+                                  FUTURE_KNOWN + PAST_FEATURES + ['log_price']))[:len(vi)]
         top_n = 15
         sorted_idx = np.argsort(vi)[-top_n:][::-1]
         top_feats  = [feat_names[i] for i in sorted_idx]

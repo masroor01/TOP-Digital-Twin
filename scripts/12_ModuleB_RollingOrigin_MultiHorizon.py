@@ -36,6 +36,7 @@ import io, os, sys, time, warnings
 import pandas as pd
 import numpy as np
 import lightgbm as lgb
+from gpu_utils import lgbm_gpu_params
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from sklearn.metrics import (mean_squared_error, mean_absolute_error,
@@ -87,6 +88,7 @@ LGBM_PARAMS = dict(
     random_state     = SEED,
     verbose          = -1,
 )
+LGBM_PARAMS.update(lgbm_gpu_params())
 
 LGBM_CLF_PARAMS = dict(
     objective        = 'binary',
@@ -102,6 +104,7 @@ LGBM_CLF_PARAMS = dict(
     random_state     = SEED,
     verbose          = -1,
 )
+LGBM_CLF_PARAMS.update(lgbm_gpu_params())
 
 plt.rcParams.update({
     'font.family': 'DejaVu Sans', 'font.size': 10,

@@ -46,6 +46,7 @@ import io, os, sys
 import numpy as np
 import pandas as pd
 import lightgbm as lgb
+from gpu_utils import lgbm_gpu_params
 from sklearn.metrics import roc_auc_score, average_precision_score
 import matplotlib
 matplotlib.use('Agg')
@@ -178,7 +179,8 @@ def fit_lgbm(X_train, y_train):
     spw = (len(y_train) - n_pos) / max(n_pos, 1)
     model = lgb.LGBMClassifier(n_estimators=200, max_depth=4, num_leaves=15,
                                 learning_rate=0.05, scale_pos_weight=spw,
-                                min_child_samples=5, verbose=-1)
+                                min_child_samples=5, verbose=-1,
+                                **lgbm_gpu_params())
     model.fit(X_train, y_train)
     return model
 

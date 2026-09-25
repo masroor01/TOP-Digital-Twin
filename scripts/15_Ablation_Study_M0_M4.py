@@ -89,6 +89,7 @@ import io, os, sys, time, warnings
 import pandas as pd
 import numpy as np
 import lightgbm as lgb
+from gpu_utils import lgbm_gpu_params
 import panel_layers as pl
 import matplotlib
 matplotlib.use('Agg')
@@ -178,6 +179,7 @@ LGBM_PARAMS = dict(
     random_state     = SEED,
     verbose          = -1,
 )
+LGBM_PARAMS.update(lgbm_gpu_params())
 
 # Monotonic constraints on the three unambiguous export-control levers.
 # Diagnosed 2026-07-31: Script 29 (Granger causality) found price Granger-

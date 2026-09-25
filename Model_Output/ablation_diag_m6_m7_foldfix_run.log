@@ -1,0 +1,179 @@
+=================================================================
+SCRIPT 15: ABLATION STUDY  M0 -> M7, plus M8, M9
+=================================================================
+  Fast mode : False
+  Horizons  : [1, 4, 13, 26]
+  Total fits: 600
+
+[1] Loading panel ...
+   Panel: 522,082 rows
+  WARNING: dropping overlapping macro columns from a later source: ['date_dup']
+   Macro joined: 18 series → ['bank_credit_agri_cr', 'export_veg_usd_mn', 'import_veg_usd_mn', 'crude_oil_usd_bbl', 'iip_food_proc', 'agri_wages_rs_day', 'repo_rate_pct', 'reverse_repo_pct', 'usdinr_monthly_avg', 'wpi_fruits_vegetables', 'wpi_vegetables_total', 'wpi_potato', 'wpi_onion', 'wpi_tomato', 'diesel_4city_rs_litre', 'lpg_nonsub_4city_rs_cyl', 'diesel_delhi_per_L', 'lpg_nonsub_delhi_per14kg']
+
+[2] Loading satellite/climate features (Script 14 output) ...
+   Climate features  : 13 → ['era5_tmax', 'era5_tmin', 'era5_tmean', 'era5_dtr', 'era5_heat_35', 'era5_heat_38', 'chirps_rain_mm', 'chirps_rain_max', 'chirps_excess', 'era5_heat_35_roll4', 'era5_heat_35_roll8', 'chirps_rain_mm_roll4', 'chirps_rain_mm_roll8']
+   Satellite features: 12 → ['s2_ndvi', 's2_evi', 's2_valid_frac', 's2_ndvi_anom', 'modis_ndvi', 'modis_evi', 'modis_lst_mean', 'modis_lst_max', 'modis_lst_frac35', 's2_ndvi_roll4', 's2_ndvi_anom_roll4', 'modis_lst_mean_roll4']
+   Panel after join  : 522,082 rows  |  59 columns
+   ERA5 coverage     : 98.0%
+   S2 NDVI coverage  : 96.1%
+
+[2b] Loading infrastructure (M5) + policy/trade (M6) layers ...
+   Wages joined      : 91.7% coverage
+   Cold storage joined: 100.0% coverage
+   Road density joined: 100.0% coverage
+   Policy joined     : 100.0% coverage
+   Trigger-1 joined  : 18.9% coverage (Kharif 2022+, crosswalked districts only -- structurally sparse by design)
+   IDM CDI joined    : 56.2% coverage (2021-07-14 onward only -- structurally sparse by design)
+   Drought features (M7)       : 4 → ['trigger1', 'trigger1_missing', 'cdi', 'cdi_missing']
+   Fertilizer MRP joined (M8)  : 84.4% coverage (Jan-2018 onward only -- pre-2018 panel rows structurally missing)
+   Fertilizer features (M8)    : 6 → ['fert_urea_mrp', 'fert_urea_mrp_missing', 'fert_dap_mrp', 'fert_dap_mrp_missing', 'fert_mop_mrp', 'fert_mop_mrp_missing']
+   NOAA ONI joined (M9)        : 98.7% coverage (continuous since 1950, no core gap)
+   ONI features (M9)           : 3 → ['oni_anom', 'oni_lag_3m', 'oni_lag_4m']
+   Infrastructure forward-fill: 106,926 cell(s) filled (beyond each source's real coverage, e.g. 2026+)
+   Macro forward-fill: 328,235 cell(s) filled (beyond each source's real coverage, e.g. 2026+)
+   Climate/satellite forward-fill: 332,338 cell(s) filled (beyond each source's real coverage, e.g. 2026+)
+   ONI forward-fill: 19,887 cell(s) filled (tail past Script 62's last published month)
+   Infrastructure features (M5): 5 → ['wage_agri_men', 'wage_agri_women', 'cold_storage_n_facilities', 'cold_storage_capacity_mt', 'road_density_per_100_sqkm']
+   Policy features (M6)        : 5 → ['export_banned', 'mep_usd_per_tonne', 'export_duty_pct', 'market_intervention_flag', 'operation_greens_active']
+
+[3] Engineering features ...
+   tomato  :  303,953 rows  | M7 features available: 89/92
+   onion   :  176,813 rows  | M7 features available: 89/92
+   potato  :   41,316 rows  | M7 features available: 89/92
+
+[4] Running ablation: M0 → M7 ...
+    2 variants × 5 folds × 4 horizons × 3 crops = 120 model fits
+
+
+  ── M6: M6 + Policy/Trade (up to 88 features) ──
+   M6 tomato  fold1 h= 1w | RMSE=  765.0  MAPE= 27.0%  R²= 0.654  trees= 172  [15.8s]
+   M6 tomato  fold1 h= 4w | RMSE= 1168.5  MAPE= 46.4%  R²= 0.197  trees= 183  [16.9s]
+   M6 tomato  fold1 h=13w | RMSE= 1409.9  MAPE= 57.4%  R²=-0.132  trees= 147  [14.2s] ← NEGATIVE R²
+   M6 tomato  fold1 h=26w | RMSE= 1107.8  MAPE= 61.0%  R²= 0.185  trees= 201  [17.5s]
+   M6 tomato  fold2 h= 1w | RMSE= 1582.6  MAPE= 31.7%  R²= 0.524  trees=  43  [8.4s]
+   M6 tomato  fold2 h= 4w | RMSE= 2064.2  MAPE= 46.2%  R²= 0.177  trees=  41  [9.4s]
+   M6 tomato  fold2 h=13w | RMSE= 2237.4  MAPE= 48.1%  R²= 0.010  trees=  24  [7.1s]
+   M6 tomato  fold2 h=26w | RMSE= 2182.0  MAPE= 37.8%  R²= 0.015  trees= 487  [33.5s]
+   M6 tomato  fold3 h= 1w | RMSE= 1046.5  MAPE= 31.9%  R²= 0.505  trees=  47  [12.0s]
+   M6 tomato  fold3 h= 4w | RMSE= 1401.7  MAPE= 39.4%  R²= 0.125  trees=  12  [8.8s]
+   M6 tomato  fold3 h=13w | RMSE= 1454.2  MAPE= 39.6%  R²= 0.122  trees=  26  [9.7s]
+   M6 tomato  fold3 h=26w | RMSE= 1316.2  MAPE= 49.9%  R²= 0.213  trees=  30  [9.9s]
+   M6 tomato  fold4 h= 1w | RMSE=  709.1  MAPE= 20.9%  R²= 0.721  trees=  65  [14.5s]
+   M6 tomato  fold4 h= 4w | RMSE=  939.8  MAPE= 33.9%  R²= 0.512  trees=  79  [15.8s]
+   M6 tomato  fold4 h=13w | RMSE= 1030.6  MAPE= 34.9%  R²= 0.379  trees= 145  [20.6s]
+   M6 tomato  fold4 h=26w | RMSE= 1281.6  MAPE= 39.7%  R²= 0.068  trees=  16  [9.1s]
+   M6 tomato  fold5 h= 1w | RMSE=  611.8  MAPE= 22.0%  R²= 0.704  trees= 139  [22.8s]
+   M6 tomato  fold5 h= 4w | RMSE=  826.9  MAPE= 34.5%  R²= 0.453  trees=  84  [16.7s]
+   M6 tomato  fold5 h=13w | RMSE= 1128.9  MAPE= 46.7%  R²= 0.038  trees= 295  [36.1s]
+   M6 tomato  fold5 h=26w | RMSE= 1316.1  MAPE= 68.8%  R²=-1.075  trees=  83  [16.8s] ← NEGATIVE R²
+   M6 onion   fold1 h= 1w | RMSE=  426.3  MAPE= 20.0%  R²= 0.823  trees=  55  [9.1s]
+   M6 onion   fold1 h= 4w | RMSE=  499.1  MAPE= 26.8%  R²= 0.751  trees= 113  [13.0s]
+   M6 onion   fold1 h=13w | RMSE=  707.0  MAPE= 42.1%  R²= 0.471  trees= 365  [29.7s]
+   M6 onion   fold1 h=26w | RMSE=  696.3  MAPE= 35.2%  R²= 0.541  trees= 255  [22.5s]
+   M6 onion   fold2 h= 1w | RMSE=  616.8  MAPE= 16.4%  R²= 0.808  trees= 279  [24.7s]
+   M6 onion   fold2 h= 4w | RMSE=  862.4  MAPE= 24.2%  R²= 0.622  trees= 234  [21.5s]
+   M6 onion   fold2 h=13w | RMSE= 1022.6  MAPE= 28.2%  R²= 0.441  trees= 252  [22.8s]
+   M6 onion   fold2 h=26w | RMSE= 1253.0  MAPE= 33.8%  R²= 0.039  trees= 118  [13.9s]
+   M6 onion   fold3 h= 1w | RMSE=  590.5  MAPE= 16.8%  R²= 0.838  trees=  82  [11.9s]
+   M6 onion   fold3 h= 4w | RMSE=  838.0  MAPE= 23.6%  R²= 0.676  trees=  78  [11.6s]
+   M6 onion   fold3 h=13w | RMSE= 1268.1  MAPE= 29.8%  R²= 0.223  trees= 163  [18.1s]
+   M6 onion   fold3 h=26w | RMSE= 1498.2  MAPE= 34.1%  R²= 0.035  trees=  20  [7.0s]
+   M6 onion   fold4 h= 1w | RMSE=  404.6  MAPE= 14.3%  R²= 0.855  trees=  68  [11.4s]
+   M6 onion   fold4 h= 4w | RMSE=  521.5  MAPE= 23.0%  R²= 0.734  trees=  69  [11.4s]
+   M6 onion   fold4 h=13w | RMSE=  673.0  MAPE= 35.5%  R²= 0.462  trees=  53  [10.3s]
+   M6 onion   fold4 h=26w | RMSE=  800.9  MAPE= 48.7%  R²= 0.200  trees=  20  [7.4s]
+   M6 onion   fold5 h= 1w | RMSE=  477.8  MAPE= 13.6%  R²= 0.786  trees=  62  [11.6s]
+   M6 onion   fold5 h= 4w | RMSE=  653.3  MAPE= 20.6%  R²= 0.608  trees=  90  [14.1s]
+   M6 onion   fold5 h=13w | RMSE=  914.0  MAPE= 26.8%  R²= 0.325  trees=  61  [11.5s]
+   M6 onion   fold5 h=26w | RMSE= 1365.0  MAPE= 35.0%  R²=-0.367  trees=  57  [11.2s] ← NEGATIVE R²
+   M6 potato  fold1 h= 1w | RMSE=  249.3  MAPE= 12.6%  R²= 0.787  trees= 473  [32.8s]
+   M6 potato  fold1 h= 4w | RMSE=  435.3  MAPE= 23.4%  R²= 0.370  trees= 126  [11.7s]
+   M6 potato  fold1 h=13w | RMSE=  581.7  MAPE= 37.6%  R²= 0.089  trees=  40  [6.2s]
+   M6 potato  fold1 h=26w | RMSE=  783.0  MAPE= 68.6%  R²=-0.846  trees= 228  [18.2s] ← NEGATIVE R²
+   M6 potato  fold2 h= 1w | RMSE=  148.9  MAPE= 10.0%  R²= 0.846  trees=  48  [6.9s]
+   M6 potato  fold2 h= 4w | RMSE=  216.9  MAPE= 15.7%  R²= 0.661  trees=  25  [5.6s]
+   M6 potato  fold2 h=13w | RMSE=  369.5  MAPE= 22.1%  R²=-0.287  trees=   2  [3.9s] ← NEGATIVE R²
+   M6 potato  fold2 h=26w | RMSE=  559.8  MAPE= 25.4%  R²=-0.387  trees= 434  [31.3s] ← NEGATIVE R²
+   M6 potato  fold3 h= 1w | RMSE=  271.6  MAPE= 10.4%  R²= 0.824  trees=  59  [8.0s]
+   M6 potato  fold3 h= 4w | RMSE=  418.3  MAPE= 17.4%  R²= 0.565  trees=  49  [7.4s]
+   M6 potato  fold3 h=13w | RMSE=  905.8  MAPE= 35.4%  R²=-0.888  trees=  59  [8.0s] ← NEGATIVE R²
+   M6 potato  fold3 h=26w | RMSE=  795.6  MAPE= 31.3%  R²=-0.338  trees= 112  [11.8s] ← NEGATIVE R²
+   M6 potato  fold4 h= 1w | RMSE=  160.6  MAPE= 10.4%  R²= 0.696  trees= 116  [12.0s]
+   M6 potato  fold4 h= 4w | RMSE=  258.5  MAPE= 18.6%  R²= 0.168  trees=  59  [8.2s]
+   M6 potato  fold4 h=13w | RMSE=  802.2  MAPE= 70.2%  R²=-5.347  trees= 133  [13.1s] ← NEGATIVE R²
+   M6 potato  fold4 h=26w | RMSE=  449.1  MAPE= 48.9%  R²=-0.759  trees=   5  [4.5s] ← NEGATIVE R²
+   M6 potato  fold5 h= 1w | RMSE=  150.6  MAPE= 17.9%  R²= 0.611  trees=  93  [10.4s]
+   M6 potato  fold5 h= 4w | RMSE=  254.5  MAPE= 31.8%  R²=-0.305  trees= 124  [13.0s] ← NEGATIVE R²
+   M6 potato  fold5 h=13w | RMSE=  433.0  MAPE= 58.4%  R²=-3.949  trees= 190  [14.8s] ← NEGATIVE R²
+   M6 potato  fold5 h=26w | RMSE=  455.3  MAPE= 58.8%  R²=-2.917  trees=   1  [4.4s] ← NEGATIVE R²
+  M6 done in 14.1 min
+
+  ── M7: M7 + Drought (up to 92 features) ──
+   M7 tomato  fold1 h= 1w | RMSE=  749.4  MAPE= 25.9%  R²= 0.668  trees=  80  [13.1s]
+   M7 tomato  fold1 h= 4w | RMSE= 1169.0  MAPE= 45.4%  R²= 0.197  trees= 246  [25.0s]
+   M7 tomato  fold1 h=13w | RMSE= 1234.8  MAPE= 46.5%  R²= 0.132  trees=  25  [8.2s]
+   M7 tomato  fold1 h=26w | RMSE= 1037.6  MAPE= 57.7%  R²= 0.285  trees=  33  [8.7s]
+   M7 tomato  fold2 h= 1w | RMSE= 1544.2  MAPE= 31.1%  R²= 0.547  trees=  51  [9.6s]
+   M7 tomato  fold2 h= 4w | RMSE= 2021.8  MAPE= 45.9%  R²= 0.210  trees=  58  [2.9s]
+   M7 tomato  fold2 h=13w | RMSE= 2324.9  MAPE= 49.3%  R²=-0.069  trees=  12  [1.9s] ← NEGATIVE R²
+   M7 tomato  fold2 h=26w | RMSE= 2181.1  MAPE= 37.9%  R²= 0.016  trees=1000  [37.9s]
+   M7 tomato  fold3 h= 1w | RMSE= 1025.8  MAPE= 31.2%  R²= 0.525  trees=  47  [2.8s]
+   M7 tomato  fold3 h= 4w | RMSE= 1530.4  MAPE= 38.6%  R²=-0.043  trees=   8  [1.9s] ← NEGATIVE R²
+   M7 tomato  fold3 h=13w | RMSE= 1413.5  MAPE= 37.3%  R²= 0.170  trees=  31  [2.3s]
+   M7 tomato  fold3 h=26w | RMSE= 1214.0  MAPE= 47.3%  R²= 0.330  trees=  47  [2.3s]
+   M7 tomato  fold4 h= 1w | RMSE=  713.0  MAPE= 20.7%  R²= 0.717  trees=  59  [2.9s]
+   M7 tomato  fold4 h= 4w | RMSE=  923.9  MAPE= 33.6%  R²= 0.528  trees= 126  [3.9s]
+   M7 tomato  fold4 h=13w | RMSE= 1022.2  MAPE= 35.3%  R²= 0.389  trees= 153  [4.2s]
+   M7 tomato  fold4 h=26w | RMSE= 1249.7  MAPE= 40.3%  R²= 0.114  trees=  18  [2.1s]
+   M7 tomato  fold5 h= 1w | RMSE=  607.9  MAPE= 22.2%  R²= 0.708  trees=  96  [4.2s]
+   M7 tomato  fold5 h= 4w | RMSE=  838.2  MAPE= 34.5%  R²= 0.438  trees=  83  [3.5s]
+   M7 tomato  fold5 h=13w | RMSE= 1100.2  MAPE= 46.9%  R²= 0.086  trees= 220  [5.4s]
+   M7 tomato  fold5 h=26w | RMSE= 1451.7  MAPE= 73.1%  R²=-1.525  trees= 109  [4.9s] ← NEGATIVE R²
+   M7 onion   fold1 h= 1w | RMSE=  417.7  MAPE= 19.8%  R²= 0.830  trees=  57  [1.8s]
+   M7 onion   fold1 h= 4w | RMSE=  496.9  MAPE= 26.3%  R²= 0.753  trees= 106  [1.7s]
+   M7 onion   fold1 h=13w | RMSE=  674.3  MAPE= 40.6%  R²= 0.519  trees= 236  [2.9s]
+   M7 onion   fold1 h=26w | RMSE=  722.7  MAPE= 36.9%  R²= 0.505  trees= 194  [2.4s]
+   M7 onion   fold2 h= 1w | RMSE=  628.9  MAPE= 16.6%  R²= 0.801  trees= 280  [3.4s]
+   M7 onion   fold2 h= 4w | RMSE=  869.9  MAPE= 24.2%  R²= 0.616  trees= 524  [5.2s]
+   M7 onion   fold2 h=13w | RMSE= 1035.1  MAPE= 28.5%  R²= 0.427  trees= 380  [3.9s]
+   M7 onion   fold2 h=26w | RMSE= 1259.7  MAPE= 33.6%  R²= 0.029  trees= 691  [6.4s]
+   M7 onion   fold3 h= 1w | RMSE=  592.3  MAPE= 16.9%  R²= 0.837  trees=  89  [2.0s]
+   M7 onion   fold3 h= 4w | RMSE=  838.5  MAPE= 23.7%  R²= 0.676  trees=  84  [2.0s]
+   M7 onion   fold3 h=13w | RMSE= 1304.1  MAPE= 30.6%  R²= 0.178  trees=  72  [1.8s]
+   M7 onion   fold3 h=26w | RMSE= 1490.5  MAPE= 34.2%  R²= 0.045  trees=  22  [1.2s]
+   M7 onion   fold4 h= 1w | RMSE=  394.4  MAPE= 14.1%  R²= 0.862  trees=  59  [1.8s]
+   M7 onion   fold4 h= 4w | RMSE=  522.5  MAPE= 23.6%  R²= 0.733  trees=  67  [2.0s]
+   M7 onion   fold4 h=13w | RMSE=  704.0  MAPE= 35.8%  R²= 0.411  trees=  59  [1.8s]
+   M7 onion   fold4 h=26w | RMSE=  816.1  MAPE= 50.5%  R²= 0.169  trees=  18  [1.3s]
+   M7 onion   fold5 h= 1w | RMSE=  462.9  MAPE= 13.0%  R²= 0.799  trees=  77  [2.3s]
+   M7 onion   fold5 h= 4w | RMSE=  658.8  MAPE= 20.1%  R²= 0.601  trees=  72  [2.3s]
+   M7 onion   fold5 h=13w | RMSE=  904.6  MAPE= 26.2%  R²= 0.339  trees= 100  [2.6s]
+   M7 onion   fold5 h=26w | RMSE= 1318.9  MAPE= 33.7%  R²=-0.277  trees=  48  [1.9s] ← NEGATIVE R²
+   M7 potato  fold1 h= 1w | RMSE=  240.1  MAPE= 12.1%  R²= 0.802  trees= 166  [1.5s]
+   M7 potato  fold1 h= 4w | RMSE=  440.9  MAPE= 23.6%  R²= 0.354  trees=  80  [1.0s]
+   M7 potato  fold1 h=13w | RMSE=  746.1  MAPE= 36.7%  R²=-0.498  trees=   3  [0.5s] ← NEGATIVE R²
+   M7 potato  fold1 h=26w | RMSE=  716.0  MAPE= 62.4%  R²=-0.543  trees= 160  [1.5s] ← NEGATIVE R²
+   M7 potato  fold2 h= 1w | RMSE=  153.7  MAPE= 10.2%  R²= 0.836  trees=  44  [0.8s]
+   M7 potato  fold2 h= 4w | RMSE=  216.3  MAPE= 15.6%  R²= 0.663  trees=  25  [0.7s]
+   M7 potato  fold2 h=13w | RMSE=  326.8  MAPE= 19.4%  R²=-0.006  trees=   5  [0.6s] ← NEGATIVE R²
+   M7 potato  fold2 h=26w | RMSE=  575.5  MAPE= 26.0%  R²=-0.466  trees= 329  [2.6s] ← NEGATIVE R²
+   M7 potato  fold3 h= 1w | RMSE=  280.7  MAPE= 10.7%  R²= 0.812  trees=  56  [1.0s]
+   M7 potato  fold3 h= 4w | RMSE=  377.6  MAPE= 16.3%  R²= 0.646  trees=  57  [1.0s]
+   M7 potato  fold3 h=13w | RMSE= 1002.9  MAPE= 40.7%  R²=-1.315  trees= 124  [1.5s] ← NEGATIVE R²
+   M7 potato  fold3 h=26w | RMSE=  797.4  MAPE= 32.2%  R²=-0.344  trees= 181  [1.9s] ← NEGATIVE R²
+   M7 potato  fold4 h= 1w | RMSE=  164.4  MAPE= 10.9%  R²= 0.681  trees=  95  [1.4s]
+   M7 potato  fold4 h= 4w | RMSE=  252.6  MAPE= 18.3%  R²= 0.205  trees=  69  [1.1s]
+   M7 potato  fold4 h=13w | RMSE=  748.2  MAPE= 64.1%  R²=-4.520  trees= 237  [2.3s] ← NEGATIVE R²
+   M7 potato  fold4 h=26w | RMSE=  453.4  MAPE= 49.4%  R²=-0.793  trees=   5  [0.6s] ← NEGATIVE R²
+   M7 potato  fold5 h= 1w | RMSE=  161.2  MAPE= 19.3%  R²= 0.555  trees=  75  [1.2s]
+   M7 potato  fold5 h= 4w | RMSE=  267.2  MAPE= 33.5%  R²=-0.438  trees= 185  [2.0s] ← NEGATIVE R²
+   M7 potato  fold5 h=13w | RMSE=  435.4  MAPE= 59.0%  R²=-4.005  trees= 194  [2.0s] ← NEGATIVE R²
+   M7 potato  fold5 h=26w | RMSE=  427.5  MAPE= 54.9%  R²=-2.454  trees=   1  [0.6s] ← NEGATIVE R²
+  M7 done in 3.7 min
+
+  Total ablation time: 17.8 min
+  Saved: C:\Users\masro\Documents\TOP_Digital_Twin\Model_Output\dm_market_level_raw_results.csv
+  Saved: C:\Users\masro\Documents\TOP_Digital_Twin\Model_Output\dm_market_level_predictions.csv  (2,079,906 rows)
+
+MARKET_LEVEL_DIAGNOSTIC run complete — skipping summary table/figures
+(those assume the full M0-M4 + B1_Naive production run).

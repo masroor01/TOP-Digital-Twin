@@ -47,6 +47,7 @@ import io, os, sys, time, warnings
 import numpy as np
 import pandas as pd
 import lightgbm as lgb
+from gpu_utils import lgbm_gpu_params
 from scipy import stats
 warnings.filterwarnings('ignore')
 if sys.stdout.encoding != 'utf-8':
@@ -97,6 +98,7 @@ LGBM_PARAMS = dict(
     bagging_freq=5, reg_alpha=0.1, reg_lambda=0.1, n_jobs=-1,
     random_state=SEED, verbose=-1,
 )
+LGBM_PARAMS.update(lgbm_gpu_params())
 POLICY_MONOTONE = {'export_banned': -1, 'export_duty_pct': -1, 'mep_usd_per_tonne': -1}
 
 

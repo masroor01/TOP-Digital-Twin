@@ -21,7 +21,7 @@ const TABS = [
   { key: 'multimarket', label: '🗺️ Multi-Market' },
   { key: 'validation', label: '📐 Validation' },
   { key: 'features', label: '🧬 Feature Importance' },
-  { key: 'ai', label: '✨ AI Briefing' },
+  { key: 'ai', label: '🤖 MIC Assistant' },
   { key: 'audit', label: '🔍 Audit' },
 ];
 

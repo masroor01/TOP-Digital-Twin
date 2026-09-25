@@ -80,6 +80,7 @@ import io, os, sys, time
 import numpy as np
 import pandas as pd
 import lightgbm as lgb
+from gpu_utils import lgbm_gpu_params
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import warnings
 warnings.filterwarnings('ignore')
@@ -114,6 +115,7 @@ LGBM_PARAMS = dict(
     bagging_fraction=0.8, bagging_freq=5, reg_alpha=0.1, reg_lambda=0.1,
     n_jobs=-1, random_state=SEED, verbose=-1,
 )
+LGBM_PARAMS.update(lgbm_gpu_params())
 
 LAG_WEEKS = [1, 2, 3, 4, 8, 13, 26, 52]
 ROLL_WINS = [4, 8, 13]

@@ -46,6 +46,7 @@ import io, os, sys, json, warnings
 import pandas as pd
 import numpy as np
 import lightgbm as lgb
+from gpu_utils import lgbm_gpu_params
 import joblib
 warnings.filterwarnings('ignore')
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
@@ -76,6 +77,7 @@ LGBM_PARAMS = dict(
     bagging_freq=5, reg_alpha=0.1, reg_lambda=0.1, n_jobs=-1,
     random_state=SEED, verbose=-1,
 )
+LGBM_PARAMS.update(lgbm_gpu_params())
 
 # See scripts/15_Ablation_Study_M0_M4.py for the full rationale: Script 30's
 # stress test found the unconstrained model predicts the WRONG SIGN for
