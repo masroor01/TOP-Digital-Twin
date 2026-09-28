@@ -73,7 +73,7 @@ export function predict_potato_26w(input) {
                             var0 = 7.009794507021974;
                         }
                     } else {
-                        if (input[64] > 0.728415128972518) {
+                        if (input[64] > 0.7522183934262526) {
                             if (input[6] > 7.215065779733799) {
                                 var0 = 7.0290233063648095;
                             } else {
