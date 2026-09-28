@@ -385,7 +385,14 @@ for model_name in MODELS:
                 required = ['target', 'price_lag_1']
                 df_h = df_h.dropna(subset=[c for c in required if c in df_h.columns])
 
-                train = df_h[df_h['week_start'] <= t_end]
+                # Train filtered on TARGET date (week_start + h weeks), not
+                # just origin week -- filtering only on week_start <= t_end
+                # let training rows near t_end carry targets landing past
+                # t_end, inside the validation window, leaking val-window
+                # information into the fit that eval_set (X_va/y_va) is then
+                # scored against for early stopping. Identical fix/rationale
+                # as Script 12.
+                train = df_h[df_h['week_start'] + pd.Timedelta(weeks=h) <= t_end]
                 val = df_h[(df_h['week_start'] > v_start) & (df_h['week_start'] <= v_end)]
                 test = df_h[(df_h['week_start'] >= te_start) & (df_h['week_start'] <= te_end)]
 

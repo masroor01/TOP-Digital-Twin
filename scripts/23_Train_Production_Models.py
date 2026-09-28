@@ -312,7 +312,15 @@ for crop in CROPS:
         max_date = df_h['week_start'].max()
         val_cutoff = max_date - pd.Timedelta(weeks=VAL_WEEKS)
 
-        train = df_h[df_h['week_start'] <= val_cutoff]
+        # Train filtered on TARGET date (week_start + h weeks), not just
+        # origin week -- filtering only on week_start <= val_cutoff let
+        # training rows near val_cutoff carry targets landing past
+        # val_cutoff, inside the validation window, leaking val-window
+        # information into the fit that eval_set (X_va/y_va) is then scored
+        # against for early stopping (which picks best_iter, the tree count
+        # used below for the final full-data refit). Identical fix/rationale
+        # as Script 12.
+        train = df_h[df_h['week_start'] + pd.Timedelta(weeks=h) <= val_cutoff]
         val   = df_h[df_h['week_start'] > val_cutoff]
 
         X_tr, y_tr = train[fcols].fillna(0), train['target']

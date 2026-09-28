@@ -336,6 +336,57 @@ for fname in ['feature_ranges.json', 'model_uncertainty.json', 'price_history.cs
         check('WARN', f'C {fname}', 'Missing -- some dashboard sections may not render.')
 
 # ---------------------------------------------------------------------------
+# GROUP D -- Live forecast-validation staleness (Scripts 43/45)
+# ---------------------------------------------------------------------------
+# Scripts 43 (onion) and 45 (tomato) used to hardcode a TARGET_WEEK constant
+# that someone had to remember to bump by hand every week -- both drifted
+# ~8-9 weeks stale before anyone noticed, and neither has ever appeared in
+# MANIFEST.md, i.e. they were run once and abandoned. TARGET_WEEK is now
+# computed dynamically inside those scripts as reference_rows.csv's own
+# week_start + 1 week, so it can never itself go stale -- but that also
+# means nothing was checking whether these live validations are actually
+# being RE-RUN on a recurring cadence. This group closes that gap: it
+# recomputes each script's effective target week the same way they do and
+# flags it if that target has drifted well into the past without a re-run.
+print('\n[D] Live forecast-validation staleness (Scripts 43 onion / 45 tomato)')
+
+LIVE_VALIDATION_CROPS = {
+    'onion': '43_Live_Onion_Forecast_Validation.py',
+    'tomato': '45_Live_Tomato_Forecast_Validation.py',
+}
+STALE_WARN_WEEKS = 2
+STALE_FAIL_WEEKS = 3
+
+if not os.path.exists(ref_path):
+    check('WARN', 'D1', 'reference_rows.csv missing -- cannot check live-validation staleness (see B0).')
+else:
+    ref_all = pd.read_csv(ref_path, usecols=['crop', 'week_start'])
+    today = pd.Timestamp.now().normalize()
+    for crop, script_name in LIVE_VALIDATION_CROPS.items():
+        sub = ref_all[ref_all['crop'] == crop]
+        if len(sub) == 0:
+            check('WARN', f'D1 {crop}',
+                  f'No reference rows for {crop} -- cannot compute {script_name}\'s effective target week.')
+            continue
+        ref_week = pd.to_datetime(sub['week_start']).max()
+        target_week = ref_week + pd.Timedelta(weeks=1)
+        weeks_stale = (today - target_week).days / 7
+        if weeks_stale >= STALE_FAIL_WEEKS:
+            check('FAIL', f'D1 {crop}',
+                  f'{script_name}\'s effective target week ({target_week.date()}, derived from '
+                  f'reference_rows.csv week_start {ref_week.date()}) is {weeks_stale:.1f} weeks behind '
+                  f'today ({today.date()}) -- this live validation is badly overdue for a re-run against '
+                  f'a fresh Agmarknet pull (see NEW_RAW_FILE in {script_name}).')
+        elif weeks_stale >= STALE_WARN_WEEKS:
+            check('WARN', f'D1 {crop}',
+                  f'{script_name}\'s effective target week ({target_week.date()}) is {weeks_stale:.1f} '
+                  f'weeks behind today ({today.date()}) -- consider re-running against a fresh pull soon.')
+        else:
+            check('PASS', f'D1 {crop}',
+                  f'{script_name}\'s effective target week ({target_week.date()}) is current '
+                  f'({weeks_stale:.1f} weeks behind today).')
+
+# ---------------------------------------------------------------------------
 # SUMMARY
 # ---------------------------------------------------------------------------
 n_pass = sum(1 for s, _, _ in results if s == 'PASS')

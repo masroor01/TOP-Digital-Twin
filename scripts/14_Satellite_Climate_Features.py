@@ -130,6 +130,33 @@ TOPUP_POTATO_ZONES = DOWNLOADS / 'GEE_PotatoZoneReplacement'
 # skipped gracefully with a printed message if not yet run/downloaded.
 TOPUP_POTATO_ZONES_HIST = DOWNLOADS / 'GEE_PotatoZoneReplacement_Historical'
 
+# Potato zone relocation (2026-07-28, see scripts/16_Zone_Assignment.py):
+# P1/P2/P3 moved from Agra/Farrukhabad/Jalandhar to Darjeeling/Diamond
+# Harbour/Dehradun. The OLD 2000-2024 zip/CSV extracts for those 3 zone_ids
+# are still sitting in data/satellite_climate/raw/{era5,era5_topup,chirps,
+# s2,modis}/ (e.g. P1_Agra_ERA5_2000_2024.csv, zone_id literally "P1_Agra")
+# -- orphaned data for coordinates no market is assigned to any more. Left
+# unfiltered, these zone_ids survive into zone_weekly_features.csv (Step 6's
+# skeleton is built from whatever zone_ids appear in the loaded data, not
+# from a canonical list) and then silently blend into potato's crop-level
+# climate average for EVERY week 2000-2024 (Step 7's groupby(['crop',
+# 'week_start']) averages across all zones of a crop) -- which also feeds
+# every potato figure in Step 10 and is the file scripts/23_Train_
+# Production_Models.py actually reads for potato's satellite/climate join
+# (SAT_FILE = crop_weekly_features.csv, not market_zone_features.csv).
+# Excluded once here, at ingestion, so every downstream step (6/7/8/10) is
+# clean rather than re-filtering in each one.
+ORPHANED_POTATO_ZONES = {'P1_Agra', 'P2_Farrukhabad', 'P3_Jalandhar'}
+
+
+def drop_orphaned_zones(df: pd.DataFrame) -> pd.DataFrame:
+    """Exclude rows from the old pre-relocation P1-P3 potato zone identities
+    (see ORPHANED_POTATO_ZONES above). No-op if zone_id isn't a column."""
+    if 'zone_id' not in df.columns:
+        return df
+    return df[~df['zone_id'].isin(ORPHANED_POTATO_ZONES)]
+
+
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 RAW_DIR.mkdir(parents=True, exist_ok=True)
 FIG_DIR.mkdir(parents=True, exist_ok=True)
@@ -246,6 +273,7 @@ for era5_subdir in ['era5', 'era5_topup']:
     for fpath in sorted((RAW_DIR / era5_subdir).glob('*.csv')):
         df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
         df = df[(df['date'] >= START) & (df['date'] <= END)].copy()
+        df = drop_orphaned_zones(df)
         if df.empty:
             continue
         era5_frames.append(df)
@@ -256,6 +284,7 @@ for topup_dir_path, topup_label in [(TOPUP_2025 / 'era5', '2025'), (TOPUP_2026 /
         for fpath in sorted(topup_dir_path.glob('*.csv')):
             df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
             df = df[(df['date'] >= START) & (df['date'] <= END)].copy()
+            df = drop_orphaned_zones(df)
             if not df.empty:
                 era5_frames.append(df)
         print(f'  {topup_label} ERA5 topup: {len(list(topup_dir_path.glob("*.csv")))} files loaded')
@@ -310,6 +339,7 @@ for _chirps_dir in chirps_dirs:
     for fpath in sorted(_chirps_dir.glob('*.csv')):
         df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
         df = df[(df['date'] >= START) & (df['date'] <= END)].copy()
+        df = drop_orphaned_zones(df)
         if df.empty:
             continue
         df['week_start'] = to_week_start(df['date'])
@@ -367,6 +397,7 @@ for _s2_dir in _s2_dirs:
     for fpath in sorted(_s2_dir.glob('*.csv')):
         df = pd.read_csv(fpath, parse_dates=['date_start'], low_memory=False)
         df = df[(df['date_start'] >= START) & (df['date_start'] <= END)].copy()
+        df = drop_orphaned_zones(df)
         if df.empty:
             continue
         df['week_start'] = to_week_start(df['date_start'])
@@ -477,6 +508,7 @@ for _modis_dir in _modis_dirs:
     for fpath in sorted(_modis_dir.glob('*.csv')):
         df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
         df = df[(df['date'] >= START) & (df['date'] <= END)].copy()
+        df = drop_orphaned_zones(df)
         if df.empty:
             continue
         df['week_start'] = to_week_start(df['date'])

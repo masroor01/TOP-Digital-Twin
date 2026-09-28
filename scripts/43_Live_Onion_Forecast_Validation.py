@@ -2,17 +2,20 @@
 Script 43 -- Live Forecast Validation: Onion, 1-Week Horizon
 =============================================================================
 Checks the EXISTING, already-trained onion_1w production model's forecast
-(generated from the reference row dated 2026-07-20, the panel's cutoff at
-training time) against REAL, newly-arrived observed prices for the target
-week (2026-07-27) -- obtained from a fresh Agmarknet pull that was NOT used
-to train the model.
+(generated from whatever reference row is currently in reference_rows.csv,
+the panel's cutoff at training time) against REAL, newly-arrived observed
+prices for the target week (reference week_start + 7 days) -- obtained from
+a fresh Agmarknet pull that was NOT used to train the model.
 
 Deliberately does NOT retrain on the new data before this check -- doing so
 would let the model see the future it's being asked to predict, invalidating
 the test. Retraining (if wanted) should happen only AFTER this validation.
 
-Only the 1-week horizon is checkable right now: the new pull's real coverage
-ends 2026-08-12, so the 4-week target (2026-08-17) hasn't happened yet.
+TARGET_WEEK is computed dynamically from reference_rows.csv's own week_start
+(see [1] below) rather than hardcoded, so this script can be re-run at any
+time -- after any future Script 23 retrain -- without manually editing a date
+constant first. The only manual step left is placing a fresh raw pull at
+NEW_RAW_FILE that actually covers the (now dynamic) target week; see [2].
 """
 import os
 import sys
@@ -33,7 +36,6 @@ NEW_RAW_FILE = os.path.join(DOWNLOADS, 'onion_all_india_apmcs_2026_new.csv')
 PANEL_FILE = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
 
 PRICE_CLIP = (50, 12000)          # same as Script 09's PRICE_CLIP['onion']
-TARGET_WEEK = pd.Timestamp('2026-07-27')   # reference week_start (2026-07-20) + 7 days
 
 print('=================================================================')
 print('SCRIPT 43: LIVE ONION FORECAST VALIDATION (1-WEEK HORIZON)')
@@ -51,12 +53,10 @@ ref = pd.read_csv(os.path.join(MODEL_DIR, 'reference_rows.csv'))
 ref = ref[ref['crop'] == 'onion'].copy()
 print(f'  Reference rows: {len(ref)} onion markets, week_start = {ref["week_start"].iloc[0]}')
 
-expected_target = pd.Timestamp(ref['week_start'].iloc[0]) + pd.Timedelta(weeks=1)
-assert TARGET_WEEK == expected_target, (
-    f'TARGET_WEEK ({TARGET_WEEK.date()}) does not match reference_rows.csv\'s actual '
-    f'week_start + 1 week ({expected_target.date()}) -- reference_rows.csv may have been '
-    f'regenerated with a different cutoff; update TARGET_WEEK'
-)
+# TARGET_WEEK is derived from reference_rows.csv itself, not hardcoded -- it
+# always tracks whatever cutoff Script 23 last trained on, so this script
+# stays "live" across every future retrain without manual editing.
+TARGET_WEEK = pd.Timestamp(ref['week_start'].iloc[0]) + pd.Timedelta(weeks=1)
 
 model = joblib.load(os.path.join(MODEL_DIR, 'onion_1w.joblib'))
 X = pd.DataFrame([{c: row.get(c, 0) for c in cols_1w} for _, row in ref.iterrows()])
@@ -70,6 +70,15 @@ print(f'  Forecast generated for target week: {TARGET_WEEK.date()}')
 #     -- replicating Script 09's exact cleaning + weekly-aggregation logic
 # ---------------------------------------------------------------------------
 print('\n[2] Computing real actual weekly price from the fresh onion pull ...')
+if not os.path.exists(NEW_RAW_FILE):
+    print(f'\n  ERROR: no fresh raw pull found at {NEW_RAW_FILE}')
+    print(f'  This script validates the onion_1w model against REAL observed prices for the')
+    print(f'  target week {TARGET_WEEK.date()} (reference_rows.csv cutoff + 1 week). That requires')
+    print(f'  a manually-placed fresh Agmarknet scrape -- same raw column format as Script 09\'s')
+    print(f'  onion input -- covering at least through {TARGET_WEEK.date()}, saved at the path above')
+    print(f'  (or set TOP_DOWNLOADS_DIR to point at wherever it lives).')
+    print(f'\n  Pull a fresh export and re-run. Nothing else in this script is stale.')
+    sys.exit(1)
 raw = pd.read_csv(NEW_RAW_FILE, usecols=[
     'arrival_date', 'market_id', 'market', 'state', 'modal_price_rs_per_quintal', 'arrivals_tonnes'
 ])
@@ -86,6 +95,19 @@ print(f'  Cleaned rows: {len(raw):,} (removed {before - len(raw):,})')
 raw['week_start'] = (raw['arrival_date'] - pd.to_timedelta(raw['arrival_date'].dt.dayofweek, unit='D')).dt.normalize()
 wk = raw[raw['week_start'] == TARGET_WEEK]
 print(f'  Rows in target week {TARGET_WEEK.date()}: {len(wk)}')
+
+if len(wk) == 0:
+    max_raw_week = raw['week_start'].max() if len(raw) else None
+    print(f'\n  ERROR: {NEW_RAW_FILE} has zero rows for the target week {TARGET_WEEK.date()}.')
+    if pd.notna(max_raw_week):
+        print(f'  Its latest coverage after cleaning is {max_raw_week.date()}, which is')
+        print(f'  {(TARGET_WEEK - max_raw_week).days} day(s) short of the target week -- the file is')
+        print(f'  stale relative to reference_rows.csv\'s current cutoff '
+              f'({ref["week_start"].iloc[0]}).')
+    else:
+        print(f'  The file is empty after cleaning (see removed-row count above) -- re-check the export.')
+    print(f'  Pull a fresher Agmarknet scrape covering through at least {TARGET_WEEK.date()} and re-run.')
+    sys.exit(1)
 
 def wavg(g):
     w = g['arrivals_tonnes']
@@ -147,7 +169,7 @@ out_path = os.path.join(OUT_DIR, 'table_live_onion_1w_validation.csv')
 merged.to_csv(out_path, index=False)
 
 print('\n' + '=' * 65)
-print('RESULTS -- Onion, 1-week-ahead, target week 2026-07-27')
+print(f'RESULTS -- Onion, 1-week-ahead, target week {TARGET_WEEK.date()}')
 print('=' * 65)
 print(f'  Markets checked:              {len(merged)}')
 print(f'  Model  MAPE (all markets):    {merged["model_ape"].mean():6.2f}%   (median {merged["model_ape"].median():6.2f}%)')
