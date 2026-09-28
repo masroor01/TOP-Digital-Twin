@@ -73,104 +73,44 @@
       "weeks_stale": 12
     },
     "era5_tmax": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "era5_tmin": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "era5_tmean": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "era5_dtr": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "era5_heat_35": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "era5_heat_38": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "chirps_rain_mm": {
-      "as_of": "2026-06-22",
-      "weeks_stale": 13
+      "as_of": "2026-08-24",
+      "weeks_stale": 4
     },
     "chirps_rain_max": {
-      "as_of": "2026-06-22",
-      "weeks_stale": 13
+      "as_of": "2026-08-24",
+      "weeks_stale": 4
     },
     "chirps_excess": {
-      "as_of": "2026-06-22",
-      "weeks_stale": 13
-    },
-    "era5_heat_35_roll4": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "era5_heat_35_roll8": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
+      "as_of": "2026-08-24",
+      "weeks_stale": 4
     },
     "chirps_rain_mm_roll4": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
-    },
-    "chirps_rain_mm_roll8": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "s2_ndvi": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "s2_evi": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "s2_valid_frac": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "s2_ndvi_anom": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "modis_ndvi": {
-      "as_of": "2026-07-20",
-      "weeks_stale": 9
-    },
-    "modis_evi": {
-      "as_of": "2026-07-20",
-      "weeks_stale": 9
-    },
-    "modis_lst_mean": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "modis_lst_max": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "modis_lst_frac35": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "s2_ndvi_roll4": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "s2_ndvi_anom_roll4": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "modis_lst_mean_roll4": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "wage_agri_men": {
       "as_of": "2026-03-30",
@@ -255,104 +195,44 @@
       "weeks_stale": 12
     },
     "era5_tmax": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "era5_tmin": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "era5_tmean": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "era5_dtr": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "era5_heat_35": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "era5_heat_38": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "chirps_rain_mm": {
-      "as_of": "2026-06-22",
-      "weeks_stale": 13
+      "as_of": "2026-08-24",
+      "weeks_stale": 4
     },
     "chirps_rain_max": {
-      "as_of": "2026-06-22",
-      "weeks_stale": 13
+      "as_of": "2026-08-24",
+      "weeks_stale": 4
     },
     "chirps_excess": {
-      "as_of": "2026-06-22",
-      "weeks_stale": 13
-    },
-    "era5_heat_35_roll4": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "era5_heat_35_roll8": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
+      "as_of": "2026-08-24",
+      "weeks_stale": 4
     },
     "chirps_rain_mm_roll4": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 10
-    },
-    "chirps_rain_mm_roll8": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "s2_ndvi": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "s2_evi": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "s2_valid_frac": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "s2_ndvi_anom": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "modis_ndvi": {
-      "as_of": "2026-07-20",
-      "weeks_stale": 9
-    },
-    "modis_evi": {
-      "as_of": "2026-07-20",
-      "weeks_stale": 9
-    },
-    "modis_lst_mean": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "modis_lst_max": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "modis_lst_frac35": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "s2_ndvi_roll4": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "s2_ndvi_anom_roll4": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
-    },
-    "modis_lst_mean_roll4": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 8
+      "as_of": "2026-09-14",
+      "weeks_stale": 1
     },
     "wage_agri_men": {
       "as_of": "2026-03-30",
@@ -419,106 +299,6 @@
     "lpg_nonsub_delhi_per14kg": {
       "as_of": "2026-06-29",
       "weeks_stale": 8
-    },
-    "era5_tmax": {
-      "as_of": "2026-07-20",
-      "weeks_stale": 5
-    },
-    "era5_tmin": {
-      "as_of": "2026-07-20",
-      "weeks_stale": 5
-    },
-    "era5_tmean": {
-      "as_of": "2026-07-20",
-      "weeks_stale": 5
-    },
-    "era5_dtr": {
-      "as_of": "2026-07-20",
-      "weeks_stale": 5
-    },
-    "era5_heat_35": {
-      "as_of": "2026-07-20",
-      "weeks_stale": 5
-    },
-    "era5_heat_38": {
-      "as_of": "2026-07-20",
-      "weeks_stale": 5
-    },
-    "chirps_rain_mm": {
-      "as_of": "2026-06-22",
-      "weeks_stale": 9
-    },
-    "chirps_rain_max": {
-      "as_of": "2026-06-22",
-      "weeks_stale": 9
-    },
-    "chirps_excess": {
-      "as_of": "2026-06-22",
-      "weeks_stale": 9
-    },
-    "era5_heat_35_roll4": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
-    },
-    "era5_heat_35_roll8": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
-    },
-    "chirps_rain_mm_roll4": {
-      "as_of": "2026-07-13",
-      "weeks_stale": 6
-    },
-    "chirps_rain_mm_roll8": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
-    },
-    "s2_ndvi": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
-    },
-    "s2_evi": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
-    },
-    "s2_valid_frac": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
-    },
-    "s2_ndvi_anom": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
-    },
-    "modis_ndvi": {
-      "as_of": "2026-07-20",
-      "weeks_stale": 5
-    },
-    "modis_evi": {
-      "as_of": "2026-07-20",
-      "weeks_stale": 5
-    },
-    "modis_lst_mean": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
-    },
-    "modis_lst_max": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
-    },
-    "modis_lst_frac35": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
-    },
-    "s2_ndvi_roll4": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
-    },
-    "s2_ndvi_anom_roll4": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
-    },
-    "modis_lst_mean_roll4": {
-      "as_of": "2026-07-27",
-      "weeks_stale": 4
     },
     "wage_agri_men": {
       "as_of": "2026-03-30",
