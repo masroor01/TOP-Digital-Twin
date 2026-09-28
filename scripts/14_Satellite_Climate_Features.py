@@ -170,6 +170,47 @@ def to_week_start(series: pd.Series) -> pd.Series:
     return (dt - pd.to_timedelta(dt.dt.dayofweek, unit='D')).dt.normalize()
 
 
+def pentad_length_days(dates: pd.Series) -> pd.Series:
+    """Actual calendar length (in days) of a CHIRPS pentad given its start
+    date. CHIRPS PENTAD images are calendar-month-anchored 5-day windows
+    (days 1-5, 6-10, 11-15, 16-20, 21-25) EXCEPT the last pentad of the
+    month (26-end-of-month), which is only 3-6 days depending on the
+    month's length (28/29-day Feb -> 3/4 days, 30-day months -> 5 days,
+    31-day months -> 6 days). Confirmed against scripts/gee_auto/
+    02_chirps_topup.py: the CHIRPS 'precipitation' band already accumulates
+    over the TRUE period length regardless of day-of-month, and this
+    project's rain_mean_mm = precip / 5 unconditionally (GEE script always
+    divides by 5, see fetch_zone()'s `daily_mm = precip.divide(5)`) -- so
+    rain_mean_mm * 5 still recovers the TRUE pentad total even for a
+    non-5-day last pentad (the /5 and *5 cancel exactly). What actually
+    needs the true calendar length is the day-range used below for
+    ISO-week overlap apportionment, not the total-mm recovery.
+    """
+    d = pd.to_datetime(dates)
+    days_in_month = (d + pd.offsets.MonthEnd(0)).dt.day
+    length = np.where(d.dt.day == 26, days_in_month - 25, 5)
+    return pd.Series(length, index=d.index).astype(int)
+
+
+def apportion_pentad_to_weeks(start_date: pd.Timestamp, length_days: int):
+    """Split a pentad's calendar date range [start_date, start_date +
+    length_days - 1] across the ISO (Monday-start) weeks it overlaps.
+    Returns a list of (week_start, weight) pairs where weight is the
+    fraction of the pentad's days that fall in that week (weights sum to
+    1.0). A pentad fully inside one ISO week returns a single (week, 1.0)
+    pair; a pentad straddling a week boundary returns 2 (occasionally 3)
+    pairs. Assumes rainfall is uniformly distributed across the pentad's
+    days, which is the best assumption available since only the pentad
+    aggregate (not per-day rainfall) is in the raw CHIRPS pull.
+    """
+    end_date = start_date + pd.Timedelta(days=int(length_days) - 1)
+    days = pd.date_range(start_date, end_date, freq='D')
+    wk = to_week_start(pd.Series(days))
+    counts = wk.value_counts()
+    n = len(days)
+    return [(w, c / n) for w, c in counts.items()]
+
+
 def extract_zip(zip_path: Path, subdir: str) -> int:
     dest = RAW_DIR / subdir
     dest.mkdir(parents=True, exist_ok=True)
@@ -342,17 +383,84 @@ for _chirps_dir in chirps_dirs:
         df = drop_orphaned_zones(df)
         if df.empty:
             continue
-        df['week_start'] = to_week_start(df['date'])
-        # rain_mean_mm = spatial-mean daily rainfall (mm/day).
-        # Multiply by 5 to get pentad total mm, then sum across pentads in the week.
+
+        # ── Pentad -> ISO-week apportionment fix (2026-09-28) ──────────────
+        # PRE-EXISTING KNOWN BUG (flagged but deliberately left unfixed by
+        # scripts/gee_auto/02_chirps_topup.py's own docstring: "Deliberately
+        # NOT touched here: the known chirps_rain_mm CHIRPS-pentad-vs-ISO-
+        # week misalignment bug ... lives in Script 14/09's downstream
+        # weekly-panel join"). CHIRPS pentads are calendar-month-anchored
+        # 5-day (or, for the month's last pentad, 3-6 day) windows -- they do
+        # NOT align to Monday-start ISO weeks. The old code did
+        # `to_week_start()` on each pentad's START date only, then dumped
+        # the WHOLE pentad's rainfall into that one week -- so a pentad
+        # straddling a week boundary had 100% of its rain counted in
+        # whichever week it started in, and 0% in the other week it
+        # actually overlapped. Systematic, at every month-boundary-adjacent
+        # week, for the whole 2000-2026 history.
+        #
+        # Fix: apportion each pentad's total rainfall across the ISO week(s)
+        # it overlaps, weighted by day-overlap (see apportion_pentad_to_weeks
+        # / pentad_length_days above), instead of assigning it wholesale to
+        # one week. Uses the pentad's TRUE calendar length (3-6 days for the
+        # last pentad of a month, 5 otherwise) for the day-range, not a
+        # hardcoded 5 -- see pentad_length_days()'s docstring for why the
+        # *5 used for the total-mm recovery below is still correct even
+        # though the day-range isn't always 5 days.
+        df['pentad_length_days'] = pentad_length_days(df['date'])
+        # rain_mean_mm = spatial-mean daily rainfall (mm/day, = precip/5 as
+        # computed by the GEE script regardless of true pentad length).
+        # *5 recovers the true pentad total mm (see pentad_length_days doc).
         df['pentad_total_mm'] = df['rain_mean_mm'] * 5
 
+        overlaps = df.apply(
+            lambda r: apportion_pentad_to_weeks(r['date'], r['pentad_length_days']),
+            axis=1,
+        )
+        df = df.assign(_overlap=overlaps).explode('_overlap', ignore_index=False)
+        df[['week_start', 'week_weight']] = pd.DataFrame(
+            df['_overlap'].tolist(), index=df.index
+        )
+        df = df.drop(columns='_overlap')
+
+        # chirps_rain_mm: apportion the pentad TOTAL across overlapped weeks
+        # in proportion to day-overlap, then sum per (zone, crop, week).
+        df['rain_mm_wk_contrib'] = df['pentad_total_mm'] * df['week_weight']
+
+        # chirps_excess (fraction of pentads with excess rain): frac_excess_
+        # rain is a per-pentad spatial fraction (share of pixels over the
+        # excess-rain threshold for that WHOLE pentad), not something that
+        # can be split by day. We attribute it to each overlapped week
+        # weighted by day-overlap and take a weighted mean per week (a
+        # pentad that puts 6 of its 7 days in one week contributes 6/7 of
+        # its weight -- and hence more influence -- to that week's average,
+        # rather than being counted identically in both overlapped weeks).
+        df['_excess_w'] = df['frac_excess_rain'] * df['week_weight']
+
+        # chirps_n_pentad: was a raw count of pentad rows contributing to a
+        # week. With apportionment a pentad can now contribute fractionally
+        # to 2+ weeks, so this becomes an "effective pentad-count"
+        # (sum of day-overlap weights) rather than an integer row count --
+        # same interpretation (roughly how many pentads' worth of data
+        # back this week's total), just weighted instead of binary.
+        #
+        # chirps_rain_max (max daily rainfall mm/day within the pentad): we
+        # only have the pentad's max, not which specific day achieved it,
+        # so we cannot pin it to one particular overlapped week. Rather than
+        # scale it (it isn't a sum, scaling would be physically meaningless
+        # for a "max"), we conservatively attribute the full max value to
+        # EVERY week the pentad overlaps and keep the max-aggregation as
+        # before -- this can only ever push a week's max up to a true
+        # upper bound, never manufacture rain that didn't happen.
         agg = df.groupby(['zone_id', 'crop', 'week_start']).agg(
-            chirps_rain_mm  = ('pentad_total_mm',  'sum'),   # total mm in week
-            chirps_rain_max = ('rain_max_mm',       'max'),   # max daily rainfall (mm/day)
-            chirps_excess   = ('frac_excess_rain',  'mean'),  # fraction of pentads with excess rain
-            chirps_n_pentad = ('date',              'count'),
+            chirps_rain_mm   = ('rain_mm_wk_contrib', 'sum'),
+            chirps_rain_max  = ('rain_max_mm',         'max'),
+            _excess_w_sum    = ('_excess_w',           'sum'),
+            _weight_sum      = ('week_weight',         'sum'),
         ).reset_index()
+        agg['chirps_excess']   = agg['_excess_w_sum'] / agg['_weight_sum']
+        agg['chirps_n_pentad'] = agg['_weight_sum']
+        agg = agg.drop(columns=['_excess_w_sum', '_weight_sum'])
         chirps_frames.append(agg)
 
 chirps = pd.concat(chirps_frames, ignore_index=True)

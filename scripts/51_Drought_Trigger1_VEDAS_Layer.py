@@ -215,18 +215,68 @@ def cache_path(state_code, date_obj):
 # permanently misremembered as "no data" on every future re-run.
 CACHEABLE_STATUSES = {'ok', 'empty_response'}
 
+# BUG (caught in a later audit, fixed here): 'empty_response' was being
+# treated as permanently cacheable for EVERY date, on the rationale above --
+# "not a valid fortnight date" is a fact about the calendar that can never
+# change. That rationale only holds for a date VEDAS has actually had a
+# chance to publish. kharif_fortnight_dates()/run_full's date grid is NOT
+# clipped to "today" -- given the default --end-year (2026, i.e. "this
+# season"), it includes fortnight dates that are still in the future, or
+# only just passed, relative to whenever the script happens to be run. For
+# those dates the API returns the exact same bare `{}` for two different
+# reasons that are NOT distinguishable from the response alone (same 200
+# status, same empty dict, no distinguishing field -- confirmed by reading
+# fetch_trigger1()/parse_trigger1_payload() above: there is no structural
+# signal here to key off of, unlike e.g. a distinct HTTP status or payload
+# shape):
+#   (a) genuinely not a valid fortnight date on the calendar (permanent), or
+#   (b) a valid fortnight date whose data VEDAS hasn't published yet
+#       (temporary -- will turn into real 'ok' data later).
+# Caching (b) under CACHEABLE_STATUSES permanently poisons the cache: a
+# later re-run (e.g. the project's weekly-refresh automation) would keep
+# reading the stale empty cache entry forever and never pick up the real
+# data once VEDAS publishes it.
+#
+# Fix (fallback approach (b) from the review, since no structural
+# discriminator exists in the response to implement approach (a)): only
+# treat 'empty_response' as permanently cacheable for dates comfortably in
+# the past -- more than EMPTY_RESPONSE_SAFE_LAG_DAYS before "today" at fetch
+# time. That buffer is a generous publication-lag allowance (VEDAS has been
+# observed to publish within days of a fortnight date, so 60 days is ample
+# slack), not a guess at the true lag. A fortnight date inside that recent
+# window gets an 'empty_response' that is NOT written to the cache at all,
+# so the next run retries it for real instead of trusting a possibly-stale
+# empty result forever. This was confirmed to be a real, not theoretical,
+# problem: the on-disk cache already contains 'empty_response' entries for
+# every state at 2026-09-16 (a fortnight only ~12 days old as of this fix)
+# and at the genuinely-future 2026-10-01 / 2026-10-16 dates -- see the audit
+# report for this fix.
+EMPTY_RESPONSE_SAFE_LAG_DAYS = 60
+
+
+def _empty_response_is_permanent(date_obj, today=None):
+    """True only once a fortnight date is far enough in the past that an
+    empty payload can be trusted to mean 'not a valid calendar date' rather
+    than 'valid date, not published yet'."""
+    today = today or dt.date.today()
+    return (today - date_obj).days > EMPTY_RESPONSE_SAFE_LAG_DAYS
+
 
 def fetch_cached(state_code, date_obj, session):
     """Fetch through a per-(state,date) JSON cache so re-runs don't re-hit the API.
-    Only caches stable outcomes (see CACHEABLE_STATUSES) -- a transient
-    failure is retried on the next run instead of being stuck forever."""
+    Only caches stable outcomes -- a transient failure, or an 'empty_response'
+    for a recent/future fortnight date, is retried on the next run instead of
+    being stuck forever (see EMPTY_RESPONSE_SAFE_LAG_DAYS above)."""
     path = cache_path(state_code, date_obj)
     if os.path.exists(path):
         with open(path, 'r', encoding='utf-8') as f:
             cached = json.load(f)
         return cached['payload'], cached['status']
     payload, status = fetch_trigger1(state_code, date_obj, session)
-    if status in CACHEABLE_STATUSES:
+    cacheable = status in CACHEABLE_STATUSES
+    if status == 'empty_response' and not _empty_response_is_permanent(date_obj):
+        cacheable = False
+    if cacheable:
         with open(path, 'w', encoding='utf-8') as f:
             json.dump({'payload': payload, 'status': status}, f, ensure_ascii=False)
     time.sleep(REQUEST_DELAY_S)
