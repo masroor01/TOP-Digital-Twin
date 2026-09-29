@@ -97,20 +97,20 @@
       "weeks_stale": 1
     },
     "chirps_rain_mm": {
-      "as_of": "2026-08-24",
-      "weeks_stale": 5
+      "as_of": "2026-08-31",
+      "weeks_stale": 4
     },
     "chirps_rain_max": {
-      "as_of": "2026-08-24",
-      "weeks_stale": 5
+      "as_of": "2026-08-31",
+      "weeks_stale": 4
     },
     "chirps_excess": {
-      "as_of": "2026-08-24",
-      "weeks_stale": 5
+      "as_of": "2026-08-31",
+      "weeks_stale": 4
     },
     "chirps_rain_mm_roll4": {
-      "as_of": "2026-09-14",
-      "weeks_stale": 2
+      "as_of": "2026-09-21",
+      "weeks_stale": 1
     },
     "modis_ndvi": {
       "as_of": "2026-09-21",
@@ -227,20 +227,20 @@
       "weeks_stale": 1
     },
     "chirps_rain_mm": {
-      "as_of": "2026-08-24",
-      "weeks_stale": 5
+      "as_of": "2026-08-31",
+      "weeks_stale": 4
     },
     "chirps_rain_max": {
-      "as_of": "2026-08-24",
-      "weeks_stale": 5
+      "as_of": "2026-08-31",
+      "weeks_stale": 4
     },
     "chirps_excess": {
-      "as_of": "2026-08-24",
-      "weeks_stale": 5
+      "as_of": "2026-08-31",
+      "weeks_stale": 4
     },
     "chirps_rain_mm_roll4": {
-      "as_of": "2026-09-14",
-      "weeks_stale": 2
+      "as_of": "2026-09-21",
+      "weeks_stale": 1
     },
     "modis_ndvi": {
       "as_of": "2026-09-21",
