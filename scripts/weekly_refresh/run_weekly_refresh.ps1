@@ -44,9 +44,20 @@ $LogStream = [System.IO.StreamWriter]::new(
 $LogStream.AutoFlush = $true
 
 function Log {
+    # Write-Host, NOT Write-Output -- same reasoning as RunLogged's own
+    # per-line echo below (see its comment). Log() is called FROM INSIDE
+    # RunLogged (the "RUN: ..." line before the command executes), so if
+    # Log used Write-Output, that line would land in RunLogged's own return
+    # stream ahead of `return $LASTEXITCODE`, turning $code into a 2+
+    # element array again -- the exact 2026-08-29 bug, just via a second
+    # path the original fix didn't cover. Confirmed live 2026-09-30: a
+    # genuinely successful (exit 0) 20-minute tomato scrape was reported as
+    # "SCRAPE FAILED (exit [10:13:12] RUN: ... 0)" and skipped, because
+    # $code was actually the array [the "RUN: ..." log line, 0] and
+    # `-ne 0` against that array is elementwise-true on the string element.
     param([string]$msg)
     $line = "[{0}] {1}" -f (Get-Date -Format "HH:mm:ss"), $msg
-    Write-Output $line
+    Write-Host $line
     $LogStream.WriteLine($line)
 }
 
