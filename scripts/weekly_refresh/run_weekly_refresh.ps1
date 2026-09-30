@@ -22,7 +22,14 @@
 # =============================================================================
 
 $RepoRoot = "C:\Users\masro\Documents\TOP_Digital_Twin"
-$ScraperScript = "C:\Users\masro\Documents\Codex\2026-05-14\assuming-you-re-an-expert-provide\agmarknet_onion_prices.py"
+# Was hardcoded to C:\Users\masro\Documents\Codex\2026-05-14\assuming-you-re-an-expert-provide\
+# agmarknet_onion_prices.py -- an external, untracked folder outside the repo
+# (byte-identical to the repo's own vendored copy as of 2026-09-30, but only
+# by luck; nothing kept the two in sync, and that folder doesn't exist on any
+# other machine). Repointed to the repo's own vendor/ copy, the one the CI
+# path (run_weekly_refresh_ci.py) already uses, so both paths run the exact
+# same tracked, portable script.
+$ScraperScript = Join-Path $RepoRoot "scripts\weekly_refresh\vendor\agmarknet_onion_prices.py"
 $Downloads = "C:\Users\masro\Downloads"
 $Staging = Join-Path $RepoRoot "scripts\weekly_refresh\staging"
 $LogDir = Join-Path $RepoRoot "logs\weekly_refresh"
