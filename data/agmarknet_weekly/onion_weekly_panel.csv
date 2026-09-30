@@ -89,8 +89,8 @@ onion,Telangana,TL,Hyderabad,Mahboob Manison APMC,2.0,2026-08-24,2026,35,2906.64
 onion,Telangana,TL,Hyderabad,Mahboob Manison APMC,2.0,2026-08-31,2026,36,3552.919565387321,5117.2,6.0,0,observed
 onion,Telangana,TL,Hyderabad,Mahboob Manison APMC,2.0,2026-09-07,2026,37,3857.6498198369045,4218.400000000001,5.0,0,observed
 onion,Telangana,TL,Hyderabad,Mahboob Manison APMC,2.0,2026-09-14,2026,38,3826.798931549865,4904.299999999999,6.0,0,observed
-onion,Telangana,TL,Hyderabad,Mahboob Manison APMC,2.0,2026-09-21,2026,39,3552.1113572521526,4378.7,5.0,0,observed
-onion,Telangana,TL,Hyderabad,Mahboob Manison APMC,2.0,2026-09-28,2026,40,3820.012117081298,2640.9,2.0,0,observed
+onion,Telangana,TL,Hyderabad,Mahboob Manison APMC,2.0,2026-09-21,2026,39,3552.1113572521517,4378.700000000001,5.0,0,observed
+onion,Telangana,TL,Hyderabad,Mahboob Manison APMC,2.0,2026-09-28,2026,40,3720.1063259262705,4288.700000000001,3.0,0,observed
 onion,Telangana,TL,Sangareddy,Sadasivpet APMC,11.0,2024-12-30,2025,1,2775.626506024096,16.6,3.0,0,observed
 onion,Telangana,TL,Sangareddy,Sadasivpet APMC,11.0,2025-01-06,2025,2,2110.0216110019646,50.900000000000006,4.0,0,observed
 onion,Telangana,TL,Sangareddy,Sadasivpet APMC,11.0,2025-01-13,2025,3,2183.1433143349045,,,1,linear
@@ -1707,9 +1707,9 @@ onion,Gujarat,GJ,Bhavnagar,Mahuva(Station Road) APMC,55.0,2026-08-17,2026,34,176
 onion,Gujarat,GJ,Bhavnagar,Mahuva(Station Road) APMC,55.0,2026-08-24,2026,35,2181.8746038034865,504.8,3.0,0,observed
 onion,Gujarat,GJ,Bhavnagar,Mahuva(Station Road) APMC,55.0,2026-08-31,2026,36,2430.809483416744,589.45,3.0,0,observed
 onion,Gujarat,GJ,Bhavnagar,Mahuva(Station Road) APMC,55.0,2026-09-07,2026,37,2534.0873138085226,675.38,4.0,0,observed
-onion,Gujarat,GJ,Bhavnagar,Mahuva(Station Road) APMC,55.0,2026-09-14,2026,38,2500.1528263403266,343.2,3.0,0,observed
+onion,Gujarat,GJ,Bhavnagar,Mahuva(Station Road) APMC,55.0,2026-09-14,2026,38,2500.152826340326,343.2,3.0,0,observed
 onion,Gujarat,GJ,Bhavnagar,Mahuva(Station Road) APMC,55.0,2026-09-21,2026,39,2265.4421797897444,466.1000000000001,4.0,0,observed
-onion,Gujarat,GJ,Bhavnagar,Mahuva(Station Road) APMC,55.0,2026-09-28,2026,40,2104.874354274288,300.04999999999995,2.0,0,observed
+onion,Gujarat,GJ,Bhavnagar,Mahuva(Station Road) APMC,55.0,2026-09-28,2026,40,2104.8743542742877,300.05,2.0,0,observed
 onion,Gujarat,GJ,Rajkot,Gondal APMC,61.0,2017-01-02,2017,1,373.07888457399525,2137.2999999999997,6.0,0,observed
 onion,Gujarat,GJ,Rajkot,Gondal APMC,61.0,2017-01-09,2017,2,360.82059652767475,2695.6,5.0,0,observed
 onion,Gujarat,GJ,Rajkot,Gondal APMC,61.0,2017-01-16,2017,3,405.0,410.4,1.0,0,observed
@@ -2727,7 +2727,7 @@ onion,Gujarat,GJ,Morbi,Morbi APMC,62.0,2026-08-31,2026,36,3152.3722203079515,,,1
 onion,Gujarat,GJ,Morbi,Morbi APMC,62.0,2026-09-07,2026,37,3385.6793145654833,81.7,4.0,0,observed
 onion,Gujarat,GJ,Morbi,Morbi APMC,62.0,2026-09-14,2026,38,3568.3665008291873,120.60000000000001,6.0,0,observed
 onion,Gujarat,GJ,Morbi,Morbi APMC,62.0,2026-09-21,2026,39,3750.0,103.5,5.0,0,observed
-onion,Gujarat,GJ,Morbi,Morbi APMC,62.0,2026-09-28,2026,40,3625.5924170616113,42.2,2.0,0,observed
+onion,Gujarat,GJ,Morbi,Morbi APMC,62.0,2026-09-28,2026,40,3583.0721003134795,63.800000000000004,3.0,0,observed
 onion,Gujarat,GJ,Surat,Surat APMC,64.0,2017-02-20,2017,8,600.6172839506173,405.0,2.0,0,observed
 onion,Gujarat,GJ,Surat,Surat APMC,64.0,2017-02-27,2017,9,650.0,1220.0,6.0,0,observed
 onion,Gujarat,GJ,Surat,Surat APMC,64.0,2017-03-06,2017,10,638.0537974683544,1580.0,7.0,0,observed
@@ -7745,7 +7745,7 @@ onion,Haryana,HR,Kurukshetra,Thanesar APMC,87.0,2026-08-31,2026,36,4591.58751696
 onion,Haryana,HR,Kurukshetra,Thanesar APMC,87.0,2026-09-07,2026,37,4884.536082474227,106.69999999999999,5.0,0,observed
 onion,Haryana,HR,Kurukshetra,Thanesar APMC,87.0,2026-09-14,2026,38,4549.003322259136,120.4,6.0,0,observed
 onion,Haryana,HR,Kurukshetra,Thanesar APMC,87.0,2026-09-21,2026,39,4531.760435571688,110.2,6.0,0,observed
-onion,Haryana,HR,Kurukshetra,Thanesar APMC,87.0,2026-09-28,2026,40,4600.0,19.0,1.0,0,observed
+onion,Haryana,HR,Kurukshetra,Thanesar APMC,87.0,2026-09-28,2026,40,4600.0,36.5,2.0,0,observed
 onion,Haryana,HR,Kurukshetra,Shahabad APMC,89.0,2017-01-02,2017,1,865.8536585365854,24.599999999999998,6.0,0,observed
 onion,Haryana,HR,Kurukshetra,Shahabad APMC,89.0,2017-01-09,2017,2,800.0,36.1,6.0,0,observed
 onion,Haryana,HR,Kurukshetra,Shahabad APMC,89.0,2017-01-16,2017,3,800.0,23.5,5.0,0,observed
@@ -8254,7 +8254,7 @@ onion,Haryana,HR,Kurukshetra,Shahabad APMC,89.0,2026-08-31,2026,36,4022.31104651
 onion,Haryana,HR,Kurukshetra,Shahabad APMC,89.0,2026-09-07,2026,37,4231.520467836258,34.199999999999996,5.0,0,observed
 onion,Haryana,HR,Kurukshetra,Shahabad APMC,89.0,2026-09-14,2026,38,4159.710144927536,34.5,6.0,0,observed
 onion,Haryana,HR,Kurukshetra,Shahabad APMC,89.0,2026-09-21,2026,39,4124.45205479452,36.5,6.0,0,observed
-onion,Haryana,HR,Kurukshetra,Shahabad APMC,89.0,2026-09-28,2026,40,4193.939393939395,9.899999999999999,2.0,0,observed
+onion,Haryana,HR,Kurukshetra,Shahabad APMC,89.0,2026-09-28,2026,40,4277.8443113772455,16.7,3.0,0,observed
 onion,Haryana,HR,Sirsa,kalanwali APMC,92.0,2017-01-02,2017,1,897.2972972972973,3.7,2.0,0,observed
 onion,Haryana,HR,Sirsa,kalanwali APMC,92.0,2017-01-09,2017,2,914.4144144144144,,,1,linear
 onion,Haryana,HR,Sirsa,kalanwali APMC,92.0,2017-01-16,2017,3,931.5315315315315,,,1,linear
@@ -10261,7 +10261,7 @@ onion,Karnataka,KK,Bangalore,Bangalore APMC,99.0,2026-08-10,2026,33,2390.0309460
 onion,Karnataka,KK,Bangalore,Bangalore APMC,99.0,2026-08-17,2026,34,3187.312456773469,14603.300000000001,6.0,0,observed
 onion,Karnataka,KK,Bangalore,Bangalore APMC,99.0,2026-08-24,2026,35,3937.930299712705,13609.699999999999,5.0,0,observed
 onion,Karnataka,KK,Bangalore,Bangalore APMC,99.0,2026-08-31,2026,36,4054.7224972570843,14947.600000000002,6.0,0,observed
-onion,Karnataka,KK,Bangalore,Bangalore APMC,99.0,2026-09-07,2026,37,4249.998610647993,14395.200000000003,5.0,0,observed
+onion,Karnataka,KK,Bangalore,Bangalore APMC,99.0,2026-09-07,2026,37,4249.998610647994,14395.2,5.0,0,observed
 onion,Karnataka,KK,Bangalore,Bangalore APMC,99.0,2026-09-14,2026,38,4273.204013508691,20460.900000000005,5.0,0,observed
 onion,Karnataka,KK,Bangalore,Bangalore APMC,99.0,2026-09-21,2026,39,4020.3792645862763,23361.0,6.0,0,observed
 onion,Karnataka,KK,Bangalore,Bangalore APMC,99.0,2026-09-28,2026,40,3824.9781114695897,8337.7,2.0,0,observed
@@ -13827,7 +13827,7 @@ onion,Kerala,KL,Ernakulam,Aluva APMC,126.0,2026-08-31,2026,36,5597.142857142857,
 onion,Kerala,KL,Ernakulam,Aluva APMC,126.0,2026-09-07,2026,37,5775.0,240.0,5.0,0,observed
 onion,Kerala,KL,Ernakulam,Aluva APMC,126.0,2026-09-14,2026,38,6061.290322580645,155.0,5.0,0,observed
 onion,Kerala,KL,Ernakulam,Aluva APMC,126.0,2026-09-21,2026,39,6244.827586206897,145.0,5.0,0,observed
-onion,Kerala,KL,Ernakulam,Aluva APMC,126.0,2026-09-28,2026,40,6050.0,60.0,2.0,0,observed
+onion,Kerala,KL,Ernakulam,Aluva APMC,126.0,2026-09-28,2026,40,6033.333333333333,90.0,3.0,0,observed
 onion,Kerala,KL,Kannur,Thalasserry APMC,128.0,2024-07-01,2024,27,4072.7272727272725,1.1,4.0,0,observed
 onion,Kerala,KL,Kannur,Thalasserry APMC,128.0,2024-07-08,2024,28,3800.0,1.8,6.0,0,observed
 onion,Kerala,KL,Kannur,Thalasserry APMC,128.0,2024-07-15,2024,29,3382.3529411764707,1.7,6.0,0,observed
@@ -21580,7 +21580,7 @@ onion,Maharashtra,MH,Nashik,Lasalgaon APMC,161.0,2026-08-31,2026,36,4385.4896489
 onion,Maharashtra,MH,Nashik,Lasalgaon APMC,161.0,2026-09-07,2026,37,4473.317983820784,2892.6,4.0,0,observed
 onion,Maharashtra,MH,Nashik,Lasalgaon APMC,161.0,2026-09-14,2026,38,4376.61053236583,2783.8,4.0,0,observed
 onion,Maharashtra,MH,Nashik,Lasalgaon APMC,161.0,2026-09-21,2026,39,4113.700359785486,2946.2000000000003,5.0,0,observed
-onion,Maharashtra,MH,Nashik,Lasalgaon APMC,161.0,2026-09-28,2026,40,4164.054990104609,1414.8,2.0,0,observed
+onion,Maharashtra,MH,Nashik,Lasalgaon APMC,161.0,2026-09-28,2026,40,4148.325601237136,1875.3,3.0,0,observed
 onion,Maharashtra,MH,Nashik,Pimpalgaon APMC,162.0,2017-01-02,2017,1,693.3125416574095,18004.0,6.0,0,observed
 onion,Maharashtra,MH,Nashik,Pimpalgaon APMC,162.0,2017-01-09,2017,2,578.0366488821138,15744.0,6.0,0,observed
 onion,Maharashtra,MH,Nashik,Pimpalgaon APMC,162.0,2017-01-16,2017,3,567.6953667953668,10360.0,4.0,0,observed
@@ -22089,7 +22089,7 @@ onion,Maharashtra,MH,Nashik,Pimpalgaon APMC,162.0,2026-08-31,2026,36,4525.698221
 onion,Maharashtra,MH,Nashik,Pimpalgaon APMC,162.0,2026-09-07,2026,37,4665.612793640314,7270.800000000001,5.0,0,observed
 onion,Maharashtra,MH,Nashik,Pimpalgaon APMC,162.0,2026-09-14,2026,38,4464.539372525927,6113.4,4.0,0,observed
 onion,Maharashtra,MH,Nashik,Pimpalgaon APMC,162.0,2026-09-21,2026,39,4301.305916073557,6210.2,5.0,0,observed
-onion,Maharashtra,MH,Nashik,Pimpalgaon APMC,162.0,2026-09-28,2026,40,4200.0,2572.2,2.0,0,observed
+onion,Maharashtra,MH,Nashik,Pimpalgaon APMC,162.0,2026-09-28,2026,40,4200.0,2523.0,2.0,0,observed
 onion,Maharashtra,MH,Pune,Pune APMC,164.0,2017-01-02,2017,1,680.5278310940499,10420.0,6.0,0,observed
 onion,Maharashtra,MH,Pune,Pune APMC,164.0,2017-01-09,2017,2,628.2572906867357,8504.0,6.0,0,observed
 onion,Maharashtra,MH,Pune,Pune APMC,164.0,2017-01-16,2017,3,600.0,5590.0,4.0,0,observed
@@ -22598,7 +22598,7 @@ onion,Maharashtra,MH,Pune,Pune APMC,164.0,2026-08-31,2026,36,2871.8114728561413,
 onion,Maharashtra,MH,Pune,Pune APMC,164.0,2026-09-07,2026,37,2982.736483873463,5171.599999999999,6.0,0,observed
 onion,Maharashtra,MH,Pune,Pune APMC,164.0,2026-09-14,2026,38,2967.9994442900806,3599.0,4.0,0,observed
 onion,Maharashtra,MH,Pune,Pune APMC,164.0,2026-09-21,2026,39,2866.7348879517076,2418.6,3.0,0,observed
-onion,Maharashtra,MH,Pune,Pune APMC,164.0,2026-09-28,2026,40,2850.0,894.1,1.0,0,observed
+onion,Maharashtra,MH,Pune,Pune APMC,164.0,2026-09-28,2026,40,2825.525294050474,1751.4,2.0,0,observed
 onion,Maharashtra,MH,Pune,APMC Khed,165.0,2026-06-29,2026,27,1598.6486486486488,14.799999999999999,6.0,0,observed
 onion,Maharashtra,MH,Pune,APMC Khed,165.0,2026-07-06,2026,28,1689.1304347826087,13.799999999999999,5.0,0,observed
 onion,Maharashtra,MH,Pune,APMC Khed,165.0,2026-07-13,2026,29,1838.6363636363637,13.2,5.0,0,observed
@@ -22612,7 +22612,7 @@ onion,Maharashtra,MH,Pune,APMC Khed,165.0,2026-08-31,2026,36,3019.84126984127,12
 onion,Maharashtra,MH,Pune,APMC Khed,165.0,2026-09-07,2026,37,3490.0,9.0,6.0,0,observed
 onion,Maharashtra,MH,Pune,APMC Khed,165.0,2026-09-14,2026,38,3500.0,8.0,5.0,0,observed
 onion,Maharashtra,MH,Pune,APMC Khed,165.0,2026-09-21,2026,39,3500.0,12.9,5.0,0,observed
-onion,Maharashtra,MH,Pune,APMC Khed,165.0,2026-09-28,2026,40,3500.0,2.6,1.0,0,observed
+onion,Maharashtra,MH,Pune,APMC Khed,165.0,2026-09-28,2026,40,3499.9999999999995,4.4,2.0,0,observed
 onion,Maharashtra,MH,Solapur,Solapur APMC,168.0,2017-01-02,2017,1,542.1385099685205,23825.0,6.0,0,observed
 onion,Maharashtra,MH,Solapur,Solapur APMC,168.0,2017-01-09,2017,2,500.0,15017.0,3.0,0,observed
 onion,Maharashtra,MH,Solapur,Solapur APMC,168.0,2017-01-16,2017,3,461.54157394294964,9886.0,4.0,0,observed
@@ -23926,7 +23926,7 @@ onion,Madhya Pradesh,MP,Bhopal,Bhopal APMC,172.0,2026-08-31,2026,36,3638.1966546
 onion,Madhya Pradesh,MP,Bhopal,Bhopal APMC,172.0,2026-09-07,2026,37,3381.6323382037,1263.2860000000003,6.0,0,observed
 onion,Madhya Pradesh,MP,Bhopal,Bhopal APMC,172.0,2026-09-14,2026,38,3146.0653924014878,1104.5320000000002,6.0,0,observed
 onion,Madhya Pradesh,MP,Bhopal,Bhopal APMC,172.0,2026-09-21,2026,39,2978.6355795910035,891.646,5.0,0,observed
-onion,Madhya Pradesh,MP,Bhopal,Bhopal APMC,172.0,2026-09-28,2026,40,3474.3932105932436,361.74,3.0,0,observed
+onion,Madhya Pradesh,MP,Bhopal,Bhopal APMC,172.0,2026-09-28,2026,40,3538.763512938373,375.936,3.0,0,observed
 onion,Madhya Pradesh,MP,Bhopal,Bhopal(F&V) APMC,173.0,2017-01-02,2017,1,399.99999999999994,239.60000000000002,4.0,0,observed
 onion,Madhya Pradesh,MP,Bhopal,Bhopal(F&V) APMC,173.0,2017-01-09,2017,2,505.467746439542,716.2,7.0,0,observed
 onion,Madhya Pradesh,MP,Bhopal,Bhopal(F&V) APMC,173.0,2017-01-16,2017,3,376.00678733031674,707.2,7.0,0,observed
@@ -25451,8 +25451,8 @@ onion,Madhya Pradesh,MP,Neemuch,Neemuch APMC,182.0,2026-08-17,2026,34,3597.36331
 onion,Madhya Pradesh,MP,Neemuch,Neemuch APMC,182.0,2026-08-24,2026,35,3621.0253486768843,75.428,3.0,0,observed
 onion,Madhya Pradesh,MP,Neemuch,Neemuch APMC,182.0,2026-08-31,2026,36,4367.644130972153,128.241,5.0,0,observed
 onion,Madhya Pradesh,MP,Neemuch,Neemuch APMC,182.0,2026-09-07,2026,37,4060.2210852280646,179.22500000000002,5.0,0,observed
-onion,Madhya Pradesh,MP,Neemuch,Neemuch APMC,182.0,2026-09-14,2026,38,4178.424962819416,177.51199999999997,4.0,0,observed
-onion,Madhya Pradesh,MP,Neemuch,Neemuch APMC,182.0,2026-09-21,2026,39,3677.922053915969,222.34599999999998,4.0,0,observed
+onion,Madhya Pradesh,MP,Neemuch,Neemuch APMC,182.0,2026-09-14,2026,38,4178.424962819416,177.512,4.0,0,observed
+onion,Madhya Pradesh,MP,Neemuch,Neemuch APMC,182.0,2026-09-21,2026,39,3677.9220539159687,222.346,4.0,0,observed
 onion,Madhya Pradesh,MP,Neemuch,Neemuch APMC,182.0,2026-09-28,2026,40,3236.9094717832963,55.375,2.0,0,observed
 onion,Chattisgarh,CG,Rajnandgaon,Rajnandgaon APMC,184.0,2017-01-02,2017,1,811.4285714285714,175.0,3.0,0,observed
 onion,Chattisgarh,CG,Rajnandgaon,Rajnandgaon APMC,184.0,2017-01-09,2017,2,1037.7272727272727,220.0,4.0,0,observed
@@ -26108,7 +26108,7 @@ onion,Madhya Pradesh,MP,Ujjain,Ujjain APMC,186.0,2026-08-31,2026,36,3090.9755453
 onion,Madhya Pradesh,MP,Ujjain,Ujjain APMC,186.0,2026-09-07,2026,37,3221.478027834766,3156.125,4.0,0,observed
 onion,Madhya Pradesh,MP,Ujjain,Ujjain APMC,186.0,2026-09-14,2026,38,3067.9349158112045,3442.9760000000006,6.0,0,observed
 onion,Madhya Pradesh,MP,Ujjain,Ujjain APMC,186.0,2026-09-21,2026,39,3213.574592360082,1583.996,4.0,0,observed
-onion,Madhya Pradesh,MP,Ujjain,Ujjain APMC,186.0,2026-09-28,2026,40,2837.2199479541937,1111.713,2.0,0,observed
+onion,Madhya Pradesh,MP,Ujjain,Ujjain APMC,186.0,2026-09-28,2026,40,2837.2199479541932,1111.713,2.0,0,observed
 onion,Odisha,OR,Bargarh,Bargarh APMC,199.0,2017-01-02,2017,1,1493.862188766647,17.270000000000003,7.0,0,observed
 onion,Odisha,OR,Bargarh,Bargarh APMC,199.0,2017-01-09,2017,2,1431.0653536257835,33.51,7.0,0,observed
 onion,Odisha,OR,Bargarh,Bargarh APMC,199.0,2017-01-16,2017,3,1348.9568845618912,28.760000000000005,7.0,0,observed
@@ -27819,7 +27819,7 @@ onion,Punjab,PB,Fazilka,Fazilka APMC,218.0,2026-08-31,2026,36,4682.183566848729,
 onion,Punjab,PB,Fazilka,Fazilka APMC,218.0,2026-09-07,2026,37,4735.611135923775,40.30200000000001,6.0,0,observed
 onion,Punjab,PB,Fazilka,Fazilka APMC,218.0,2026-09-14,2026,38,4500.0,49.732,6.0,0,observed
 onion,Punjab,PB,Fazilka,Fazilka APMC,218.0,2026-09-21,2026,39,4500.0,39.779,5.0,0,observed
-onion,Punjab,PB,Fazilka,Fazilka APMC,218.0,2026-09-28,2026,40,4500.0,21.015,2.0,0,observed
+onion,Punjab,PB,Fazilka,Fazilka APMC,218.0,2026-09-28,2026,40,4500.0,29.86,3.0,0,observed
 onion,Punjab,PB,Fazilka,Jalalabad APMC,219.0,2024-12-30,2025,1,2269.2913385826773,6.35,3.0,0,observed
 onion,Punjab,PB,Fazilka,Jalalabad APMC,219.0,2025-01-06,2025,2,2849.777777777778,11.25,6.0,0,observed
 onion,Punjab,PB,Fazilka,Jalalabad APMC,219.0,2025-01-13,2025,3,2575.600000000001,12.499999999999996,6.0,0,observed
@@ -28093,7 +28093,7 @@ onion,Punjab,PB,Ludhiana,Khanna APMC,226.0,2026-08-31,2026,36,3123.8938053097345
 onion,Punjab,PB,Ludhiana,Khanna APMC,226.0,2026-09-07,2026,37,3000.0,245.4,6.0,0,observed
 onion,Punjab,PB,Ludhiana,Khanna APMC,226.0,2026-09-14,2026,38,3000.0,212.2,7.0,0,observed
 onion,Punjab,PB,Ludhiana,Khanna APMC,226.0,2026-09-21,2026,39,3000.0,151.3,4.0,0,observed
-onion,Punjab,PB,Ludhiana,Khanna APMC,226.0,2026-09-28,2026,40,3200.0,79.0,1.0,0,observed
+onion,Punjab,PB,Ludhiana,Khanna APMC,226.0,2026-09-28,2026,40,3172.6775956284155,91.5,2.0,0,observed
 onion,Punjab,PB,Moga,Baghapurana APMC,228.0,2025-01-06,2025,2,2500.0,4.6,6.0,0,observed
 onion,Punjab,PB,Moga,Baghapurana APMC,228.0,2025-01-13,2025,3,2500.0,4.24,5.0,0,observed
 onion,Punjab,PB,Moga,Baghapurana APMC,228.0,2025-01-20,2025,4,2500.0,4.26,6.0,0,observed
@@ -28368,7 +28368,7 @@ onion,Punjab,PB,Muktsar,Malout APMC,231.0,2026-08-31,2026,36,4088.0726900435116,
 onion,Punjab,PB,Muktsar,Malout APMC,231.0,2026-09-07,2026,37,3278.79456450885,39.886,5.0,0,observed
 onion,Punjab,PB,Muktsar,Malout APMC,231.0,2026-09-14,2026,38,3904.855214456782,55.116,5.0,0,observed
 onion,Punjab,PB,Muktsar,Malout APMC,231.0,2026-09-21,2026,39,3238.1663268577895,10.604,4.0,0,observed
-onion,Punjab,PB,Muktsar,Malout APMC,231.0,2026-09-28,2026,40,3000.0,4.827,2.0,0,observed
+onion,Punjab,PB,Muktsar,Malout APMC,231.0,2026-09-28,2026,40,2863.3147674243564,6.643,3.0,0,observed
 onion,Punjab,PB,Patiala,Patiala APMC,232.0,2024-12-30,2025,1,2500.0,37.0,1.0,0,observed
 onion,Punjab,PB,Patiala,Patiala APMC,232.0,2025-01-06,2025,2,2500.0,226.0,6.0,0,observed
 onion,Punjab,PB,Patiala,Patiala APMC,232.0,2025-01-13,2025,3,2500.0,149.0,4.0,0,observed
@@ -29426,7 +29426,7 @@ onion,Rajasthan,RJ,Hanumangarh,Sangriya APMC,259.0,2026-08-31,2026,36,3093.75,3.
 onion,Rajasthan,RJ,Hanumangarh,Sangriya APMC,259.0,2026-09-07,2026,37,3176.0,2.5,5.0,0,observed
 onion,Rajasthan,RJ,Hanumangarh,Sangriya APMC,259.0,2026-09-14,2026,38,3268.181818181818,2.2,4.0,0,observed
 onion,Rajasthan,RJ,Hanumangarh,Sangriya APMC,259.0,2026-09-21,2026,39,4151.515151515151,3.3000000000000003,6.0,0,observed
-onion,Rajasthan,RJ,Hanumangarh,Sangriya APMC,259.0,2026-09-28,2026,40,3466.6666666666665,0.9,2.0,0,observed
+onion,Rajasthan,RJ,Hanumangarh,Sangriya APMC,259.0,2026-09-28,2026,40,3514.2857142857147,1.4,3.0,0,observed
 onion,Rajasthan,RJ,Jaipur,Jaipur (F&V) APMC,261.0,2024-12-30,2025,1,2188.842231553689,833.5,2.0,0,observed
 onion,Rajasthan,RJ,Jaipur,Jaipur (F&V) APMC,261.0,2025-01-06,2025,2,2052.3399475851743,801.3,3.0,0,observed
 onion,Rajasthan,RJ,Jaipur,Jaipur (F&V) APMC,261.0,2025-01-13,2025,3,2034.3856655290103,1992.3999999999999,4.0,0,observed
@@ -29518,7 +29518,7 @@ onion,Rajasthan,RJ,Jaipur,Jaipur (F&V) APMC,261.0,2026-08-31,2026,36,3523.873104
 onion,Rajasthan,RJ,Jaipur,Jaipur (F&V) APMC,261.0,2026-09-07,2026,37,3557.406744255446,1675.5,3.0,0,observed
 onion,Rajasthan,RJ,Jaipur,Jaipur (F&V) APMC,261.0,2026-09-14,2026,38,3771.1440747418455,2440.4,5.0,0,observed
 onion,Rajasthan,RJ,Jaipur,Jaipur (F&V) APMC,261.0,2026-09-21,2026,39,3622.46828053242,2569.4,4.0,0,observed
-onion,Rajasthan,RJ,Jaipur,Jaipur (F&V) APMC,261.0,2026-09-28,2026,40,3481.966787752984,770.8,2.0,0,observed
+onion,Rajasthan,RJ,Jaipur,Jaipur (F&V) APMC,261.0,2026-09-28,2026,40,3458.772093023256,1075.0,3.0,0,observed
 onion,Rajasthan,RJ,Jhunjhunu,Nawalgarh APMC,265.0,2025-01-20,2025,4,1467.5675675675677,3.6999999999999997,3.0,0,observed
 onion,Rajasthan,RJ,Jhunjhunu,Nawalgarh APMC,265.0,2025-01-27,2025,5,1179.1666666666667,2.4,5.0,0,observed
 onion,Rajasthan,RJ,Jhunjhunu,Nawalgarh APMC,265.0,2025-02-03,2025,6,1200.0,2.7,6.0,0,observed
@@ -31906,7 +31906,7 @@ onion,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-08-31,2026,36,550.0
 onion,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-09-07,2026,37,1000.0,6.0,1.0,0,observed
 onion,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-09-14,2026,38,766.6666666666666,15.0,3.0,0,observed
 onion,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-09-21,2026,39,900.0,11.0,2.0,0,observed
-onion,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-09-28,2026,40,900.0,,,1,trailing_ffill
+onion,Uttarakhand,UC,Udhamsinghnagar,Kicchha APMC,325.0,2026-09-28,2026,40,900.0,6.0,1.0,0,observed
 onion,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2024-12-30,2025,1,2200.0,65.0,4.0,0,observed
 onion,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2025-01-06,2025,2,2343.75,112.0,6.0,0,observed
 onion,Uttarakhand,UC,Udhamsinghnagar,Rudrapur APMC,326.0,2025-01-13,2025,3,2298.1308411214955,107.0,6.0,0,observed
@@ -33010,7 +33010,7 @@ onion,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-08-31,2026,36,4170.235934664
 onion,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-09-07,2026,37,4041.5584415584417,77.0,7.0,0,observed
 onion,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-09-14,2026,38,4447.857142857143,70.0,6.0,0,observed
 onion,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-09-21,2026,39,4470.414201183432,84.5,7.0,0,observed
-onion,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-09-28,2026,40,4400.0,15.0,1.0,0,observed
+onion,West Bengal,WB,Nadia,Karimpur APMC,341.0,2026-09-28,2026,40,4245.1612903225805,31.0,2.0,0,observed
 onion,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2024-12-30,2025,1,3021.212121212121,9.9,3.0,0,observed
 onion,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2025-01-06,2025,2,2898.828125,25.6,7.0,0,observed
 onion,West Bengal,WB,Nadia,Bethuadahari APMC,342.0,2025-01-13,2025,3,2651.5625,32.0,7.0,0,observed
@@ -36410,7 +36410,7 @@ onion,Haryana,HR,Panipat,Panipat APMC,452.0,2026-08-31,2026,36,2656.920077972709
 onion,Haryana,HR,Panipat,Panipat APMC,452.0,2026-09-07,2026,37,2781.7283950617284,121.5,5.0,0,observed
 onion,Haryana,HR,Panipat,Panipat APMC,452.0,2026-09-14,2026,38,3029.047619047619,210.00000000000003,6.0,0,observed
 onion,Haryana,HR,Panipat,Panipat APMC,452.0,2026-09-21,2026,39,2619.718309859155,177.5,4.0,0,observed
-onion,Haryana,HR,Panipat,Panipat APMC,452.0,2026-09-28,2026,40,3000.0,33.0,1.0,0,observed
+onion,Haryana,HR,Panipat,Panipat APMC,452.0,2026-09-28,2026,40,3000.0000000000005,65.1,2.0,0,observed
 onion,Haryana,HR,Sonipat,Sonepat APMC,454.0,2017-01-02,2017,1,1000.0,24.8,2.0,0,observed
 onion,Haryana,HR,Sonipat,Sonepat APMC,454.0,2017-01-09,2017,2,1069.7350069735007,71.7,5.0,0,observed
 onion,Haryana,HR,Sonipat,Sonepat APMC,454.0,2017-01-16,2017,3,1000.0000000000001,38.699999999999996,6.0,0,observed
@@ -37164,7 +37164,7 @@ onion,Haryana,HR,Rohtak,Rohtak APMC,455.0,2026-08-31,2026,36,1636.3636363636363,
 onion,Haryana,HR,Rohtak,Rohtak APMC,455.0,2026-09-07,2026,37,1500.0,139.4,4.0,0,observed
 onion,Haryana,HR,Rohtak,Rohtak APMC,455.0,2026-09-14,2026,38,2476.190476190476,63.0,4.0,0,observed
 onion,Haryana,HR,Rohtak,Rohtak APMC,455.0,2026-09-21,2026,39,2794.871794871795,78.0,5.0,0,observed
-onion,Haryana,HR,Rohtak,Rohtak APMC,455.0,2026-09-28,2026,40,3000.0,20.0,1.0,0,observed
+onion,Haryana,HR,Rohtak,Rohtak APMC,455.0,2026-09-28,2026,40,3769.3194925028833,86.7,2.0,0,observed
 onion,Haryana,HR,Jhajar,Jhajjar APMC,456.0,2017-01-02,2017,1,1053.4351145038167,13.1,5.0,0,observed
 onion,Haryana,HR,Jhajar,Jhajjar APMC,456.0,2017-01-09,2017,2,1026.7175572519084,,,1,linear
 onion,Haryana,HR,Jhajar,Jhajjar APMC,456.0,2017-01-16,2017,3,1000.0,4.0,4.0,0,observed
@@ -41216,7 +41216,7 @@ onion,Himachal Pradesh,HP,Hamirpur,PMY Hamirpur,466.0,2026-08-31,2026,36,4729.41
 onion,Himachal Pradesh,HP,Hamirpur,PMY Hamirpur,466.0,2026-09-07,2026,37,5100.0,12.5,6.0,0,observed
 onion,Himachal Pradesh,HP,Hamirpur,PMY Hamirpur,466.0,2026-09-14,2026,38,5018.421052631578,11.400000000000002,6.0,0,observed
 onion,Himachal Pradesh,HP,Hamirpur,PMY Hamirpur,466.0,2026-09-21,2026,39,4983.561643835616,14.6,6.0,0,observed
-onion,Himachal Pradesh,HP,Hamirpur,PMY Hamirpur,466.0,2026-09-28,2026,40,4700.0,3.7,1.0,0,observed
+onion,Himachal Pradesh,HP,Hamirpur,PMY Hamirpur,466.0,2026-09-28,2026,40,4700.0,5.5,2.0,0,observed
 onion,Himachal Pradesh,HP,Shimla,PMY Dhalli Shimla,467.0,2019-05-27,2019,22,1650.0,17.5,2.0,0,observed
 onion,Himachal Pradesh,HP,Shimla,PMY Dhalli Shimla,467.0,2019-06-03,2019,23,1650.0,30.0,4.0,0,observed
 onion,Himachal Pradesh,HP,Shimla,PMY Dhalli Shimla,467.0,2019-06-10,2019,24,1747.3684210526317,38.0,5.0,0,observed
@@ -43108,7 +43108,7 @@ onion,Jammu and Kashmir,JK,Jammu,Narwal Jammu (F&V) APMC,472.0,2026-08-31,2026,3
 onion,Jammu and Kashmir,JK,Jammu,Narwal Jammu (F&V) APMC,472.0,2026-09-07,2026,37,5250.0,950.0,6.0,0,observed
 onion,Jammu and Kashmir,JK,Jammu,Narwal Jammu (F&V) APMC,472.0,2026-09-14,2026,38,5250.0,570.0,4.0,0,observed
 onion,Jammu and Kashmir,JK,Jammu,Narwal Jammu (F&V) APMC,472.0,2026-09-21,2026,39,5250.0,850.0,5.0,0,observed
-onion,Jammu and Kashmir,JK,Jammu,Narwal Jammu (F&V) APMC,472.0,2026-09-28,2026,40,5250.0,350.0,2.0,0,observed
+onion,Jammu and Kashmir,JK,Jammu,Narwal Jammu (F&V) APMC,472.0,2026-09-28,2026,40,5250.0,550.0,3.0,0,observed
 onion,Karnataka,KK,Bangalore,Doddaballa Pur APMC,489.0,2018-06-04,2018,23,1375.0,24.0,4.0,0,observed
 onion,Karnataka,KK,Bangalore,Doddaballa Pur APMC,489.0,2018-06-11,2018,24,1360.7142857142858,28.0,5.0,0,observed
 onion,Karnataka,KK,Bangalore,Doddaballa Pur APMC,489.0,2018-06-18,2018,25,1300.0,35.0,6.0,0,observed
@@ -46712,7 +46712,7 @@ onion,Maharashtra,MH,Nashik,Manmad APMC,551.0,2026-08-31,2026,36,4376.2233222429
 onion,Maharashtra,MH,Nashik,Manmad APMC,551.0,2026-09-07,2026,37,4158.469337289812,808.8000000000001,4.0,0,observed
 onion,Maharashtra,MH,Nashik,Manmad APMC,551.0,2026-09-14,2026,38,4196.0612294288485,826.4,4.0,0,observed
 onion,Maharashtra,MH,Nashik,Manmad APMC,551.0,2026-09-21,2026,39,3917.210643596801,762.9000000000001,5.0,0,observed
-onion,Maharashtra,MH,Nashik,Manmad APMC,551.0,2026-09-28,2026,40,4100.0,156.2,1.0,0,observed
+onion,Maharashtra,MH,Nashik,Manmad APMC,551.0,2026-09-28,2026,40,4100.0,515.9,3.0,0,observed
 onion,Maharashtra,MH,Pune,Manchar APMC,553.0,2017-01-02,2017,1,663.7931034482758,638.0,3.0,0,observed
 onion,Maharashtra,MH,Pune,Manchar APMC,553.0,2017-01-09,2017,2,634.0925266903914,562.0,2.0,0,observed
 onion,Maharashtra,MH,Pune,Manchar APMC,553.0,2017-01-16,2017,3,650.0,22.0,1.0,0,observed
@@ -50551,7 +50551,7 @@ onion,Punjab,PB,Gurdaspur,Gurdaspur APMC,600.0,2026-08-31,2026,36,3633.957219251
 onion,Punjab,PB,Gurdaspur,Gurdaspur APMC,600.0,2026-09-07,2026,37,3826.897689768977,60.599999999999994,4.0,0,observed
 onion,Punjab,PB,Gurdaspur,Gurdaspur APMC,600.0,2026-09-14,2026,38,4000.0,12.8,1.0,0,observed
 onion,Punjab,PB,Gurdaspur,Gurdaspur APMC,600.0,2026-09-21,2026,39,3960.05291005291,75.6,5.0,0,observed
-onion,Punjab,PB,Gurdaspur,Gurdaspur APMC,600.0,2026-09-28,2026,40,3950.4702194357365,31.900000000000002,2.0,0,observed
+onion,Punjab,PB,Gurdaspur,Gurdaspur APMC,600.0,2026-09-28,2026,40,4035.1966873706006,48.3,3.0,0,observed
 onion,Punjab,PB,Bhatinda,Bathinda APMC,603.0,2024-12-30,2025,1,2337.9310344827586,43.5,3.0,0,observed
 onion,Punjab,PB,Bhatinda,Bathinda APMC,603.0,2025-01-06,2025,2,3321.626617375231,54.1,4.0,0,observed
 onion,Punjab,PB,Bhatinda,Bathinda APMC,603.0,2025-01-13,2025,3,2000.0,89.2,6.0,0,observed
@@ -53918,7 +53918,7 @@ onion,Tripura,TR,Sepahijala,Melaghar APMC,679.0,2026-08-31,2026,36,5254.16666666
 onion,Tripura,TR,Sepahijala,Melaghar APMC,679.0,2026-09-07,2026,37,5650.0,5.4,7.0,0,observed
 onion,Tripura,TR,Sepahijala,Melaghar APMC,679.0,2026-09-14,2026,38,5284.313725490196,5.1000000000000005,7.0,0,observed
 onion,Tripura,TR,Sepahijala,Melaghar APMC,679.0,2026-09-21,2026,39,5286.274509803922,5.1,6.0,0,observed
-onion,Tripura,TR,Sepahijala,Melaghar APMC,679.0,2026-09-28,2026,40,5100.0,0.6,1.0,0,observed
+onion,Tripura,TR,Sepahijala,Melaghar APMC,679.0,2026-09-28,2026,40,5281.818181818181,1.1,2.0,0,observed
 onion,Tamil Nadu,TN,Nagercoil (Kannyiakumari),Vadaseri APMC,681.0,2024-12-30,2025,1,5500.0,2.34,5.0,0,observed
 onion,Tamil Nadu,TN,Nagercoil (Kannyiakumari),Vadaseri APMC,681.0,2025-01-06,2025,2,5500.0,3.17,7.0,0,observed
 onion,Tamil Nadu,TN,Nagercoil (Kannyiakumari),Vadaseri APMC,681.0,2025-01-13,2025,3,5355.7993730407525,3.19,7.0,0,observed
@@ -54611,7 +54611,7 @@ onion,Karnataka,KK,Chikmagalur,Chikkamagalore APMC,709.0,2026-08-31,2026,36,4569
 onion,Karnataka,KK,Chikmagalur,Chikkamagalore APMC,709.0,2026-09-07,2026,37,4609.923664122137,13.100000000000001,7.0,0,observed
 onion,Karnataka,KK,Chikmagalur,Chikkamagalore APMC,709.0,2026-09-14,2026,38,4628.0821917808225,14.599999999999998,6.0,0,observed
 onion,Karnataka,KK,Chikmagalur,Chikkamagalore APMC,709.0,2026-09-21,2026,39,4647.126436781609,8.7,4.0,0,observed
-onion,Karnataka,KK,Chikmagalur,Chikkamagalore APMC,709.0,2026-09-28,2026,40,5000.0,3.7,1.0,0,observed
+onion,Karnataka,KK,Chikmagalur,Chikkamagalore APMC,709.0,2026-09-28,2026,40,4952.1126760563375,7.1000000000000005,2.0,0,observed
 onion,Karnataka,KK,Kalburgi,Kalburgi APMC,728.0,2021-08-02,2021,31,1847.3684210526317,190.0,2.0,0,observed
 onion,Karnataka,KK,Kalburgi,Kalburgi APMC,728.0,2021-08-09,2021,32,1734.6153846153845,130.0,2.0,0,observed
 onion,Karnataka,KK,Kalburgi,Kalburgi APMC,728.0,2021-08-16,2021,33,2000.0,60.0,1.0,0,observed
@@ -56500,7 +56500,7 @@ onion,Punjab,PB,Mohali,Lalru APMC,793.0,2026-08-31,2026,36,4330.188679245283,15.
 onion,Punjab,PB,Mohali,Lalru APMC,793.0,2026-09-07,2026,37,4319.089743589743,15.600000000000001,5.0,0,observed
 onion,Punjab,PB,Mohali,Lalru APMC,793.0,2026-09-14,2026,38,4370.198675496689,15.099999999999998,6.0,0,observed
 onion,Punjab,PB,Mohali,Lalru APMC,793.0,2026-09-21,2026,39,4388.326203208555,18.700000000000003,7.0,0,observed
-onion,Punjab,PB,Mohali,Lalru APMC,793.0,2026-09-28,2026,40,4727.777777777777,4.5,2.0,0,observed
+onion,Punjab,PB,Mohali,Lalru APMC,793.0,2026-09-28,2026,40,4636.666666666667,7.5,3.0,0,observed
 onion,Uttar Pradesh,UP,Fatehpur,Fatehpur APMC,795.0,2024-12-30,2025,1,2141.818181818182,33.0,4.0,0,observed
 onion,Uttar Pradesh,UP,Fatehpur,Fatehpur APMC,795.0,2025-01-06,2025,2,2118.5542168674697,83.0,6.0,0,observed
 onion,Uttar Pradesh,UP,Fatehpur,Fatehpur APMC,795.0,2025-01-13,2025,3,1991.3829787234042,94.0,6.0,0,observed
@@ -56868,7 +56868,7 @@ onion,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-08-31,2026,36,46
 onion,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-09-07,2026,37,4800.0,5.0,7.0,0,observed
 onion,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-09-14,2026,38,4841.836734693878,4.9,7.0,0,observed
 onion,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-09-21,2026,39,4857.731958762886,4.8500000000000005,7.0,0,observed
-onion,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-09-28,2026,40,4899.999999999999,1.4500000000000002,2.0,0,observed
+onion,West Bengal,WB,Bankura,Bishnupur(Bankura) APMC,801.0,2026-09-28,2026,40,4865.90909090909,2.2,3.0,0,observed
 onion,Goa,GO,North Goa,Mapusa APMC,802.0,2017-01-02,2017,1,829.5676998368679,73.56,7.0,0,observed
 onion,Goa,GO,North Goa,Mapusa APMC,802.0,2017-01-09,2017,2,773.9608448259235,103.69,7.0,0,observed
 onion,Goa,GO,North Goa,Mapusa APMC,802.0,2017-01-16,2017,3,672.500481602774,103.82000000000001,7.0,0,observed
@@ -57377,7 +57377,7 @@ onion,Goa,GO,North Goa,Mapusa APMC,802.0,2026-08-31,2026,36,2653.0585541380437,4
 onion,Goa,GO,North Goa,Mapusa APMC,802.0,2026-09-07,2026,37,2682.1680485088477,40.405,7.0,0,observed
 onion,Goa,GO,North Goa,Mapusa APMC,802.0,2026-09-14,2026,38,2505.305079651337,33.27,7.0,0,observed
 onion,Goa,GO,North Goa,Mapusa APMC,802.0,2026-09-21,2026,39,2679.877454695044,46.187,7.0,0,observed
-onion,Goa,GO,North Goa,Mapusa APMC,802.0,2026-09-28,2026,40,2756.226815050344,9.435,2.0,0,observed
+onion,Goa,GO,North Goa,Mapusa APMC,802.0,2026-09-28,2026,40,2712.340799297321,11.385,3.0,0,observed
 onion,Maharashtra,MH,Ahilyanagar,Sangamner APMC,813.0,2017-01-02,2017,1,655.9081459482393,4714.0,3.0,0,observed
 onion,Maharashtra,MH,Ahilyanagar,Sangamner APMC,813.0,2017-01-09,2017,2,599.2221744735712,2327.0,2.0,0,observed
 onion,Maharashtra,MH,Ahilyanagar,Sangamner APMC,813.0,2017-01-16,2017,3,577.9798296727924,2231.0,2.0,0,observed
@@ -58162,7 +58162,7 @@ onion,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-08-31,2026,36,4500.0,19
 onion,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-09-07,2026,37,5006.306306306306,22.2,7.0,0,observed
 onion,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-09-14,2026,38,4746.041055718476,68.19999999999999,7.0,0,observed
 onion,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-09-21,2026,39,4875.087719298245,28.500000000000004,7.0,0,observed
-onion,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-09-28,2026,40,4799.999999999999,9.100000000000001,2.0,0,observed
+onion,West Bengal,WB,Hooghly,Champadanga APMC,821.0,2026-09-28,2026,40,4799.999999999999,13.900000000000002,3.0,0,observed
 onion,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2024-12-30,2025,1,3342.0473773265653,295.5,5.0,0,observed
 onion,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2025-01-06,2025,2,2905.2123786407765,412.0,7.0,0,observed
 onion,West Bengal,WB,Murshidabad,Jangipur APMC,822.0,2025-01-13,2025,3,2782.1557971014495,414.0,7.0,0,observed
@@ -59456,7 +59456,7 @@ onion,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-08-31,2026,36,3446.060606
 onion,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-09-07,2026,37,3484.976025572723,187.7,6.0,0,observed
 onion,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-09-14,2026,38,3364.7175421209113,201.80000000000004,6.0,0,observed
 onion,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-09-21,2026,39,3508.430085815245,198.1,6.0,0,observed
-onion,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-09-28,2026,40,3500.0,82.0,2.0,0,observed
+onion,Uttarakhand,UC,Nanital,Haldwani APMC,1070.0,2026-09-28,2026,40,3500.0,120.5,3.0,0,observed
 onion,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2024-12-30,2025,1,1832.2784810126582,158.0,5.0,0,observed
 onion,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2025-01-06,2025,2,2036.9565217391305,184.0,6.0,0,observed
 onion,Uttarakhand,UC,Haridwar,Haridwar Union APMC,1071.0,2025-01-13,2025,3,2237.706511175899,102.9,3.0,0,observed
@@ -59824,7 +59824,7 @@ onion,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-08-31,2026,36,19
 onion,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-09-07,2026,37,2259.259259259259,5.4,5.0,0,observed
 onion,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-09-14,2026,38,3146.875,3.2,5.0,0,observed
 onion,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-09-21,2026,39,2508.3333333333335,3.5999999999999996,4.0,0,observed
-onion,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-09-28,2026,40,2700.0,0.6,1.0,0,observed
+onion,Uttarakhand,UC,Garhwal (Pauri),Kotadwara APMC,1074.0,2026-09-28,2026,40,2650.0,0.8,2.0,0,observed
 onion,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2024-12-30,2025,1,1966.666666666667,0.8999999999999999,2.0,0,observed
 onion,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2025-01-06,2025,2,1646.875,3.2,4.0,0,observed
 onion,Uttarakhand,UC,Haridwar,Manglaur APMC,1077.0,2025-01-13,2025,3,1608.6956521739132,2.3,6.0,0,observed
@@ -61982,10 +61982,10 @@ onion,Madhya Pradesh,MP,Shajapur,Shujalpur APMC,1086.0,2026-08-10,2026,33,2466.4
 onion,Madhya Pradesh,MP,Shajapur,Shujalpur APMC,1086.0,2026-08-17,2026,34,3166.3906891590236,2966.9930000000004,5.0,0,observed
 onion,Madhya Pradesh,MP,Shajapur,Shujalpur APMC,1086.0,2026-08-24,2026,35,3508.341943998913,1133.478,3.0,0,observed
 onion,Madhya Pradesh,MP,Shajapur,Shujalpur APMC,1086.0,2026-08-31,2026,36,4025.389068172399,1607.0140000000001,5.0,0,observed
-onion,Madhya Pradesh,MP,Shajapur,Shujalpur APMC,1086.0,2026-09-07,2026,37,3702.2664623826563,1746.588,3.0,0,observed
-onion,Madhya Pradesh,MP,Shajapur,Shujalpur APMC,1086.0,2026-09-14,2026,38,2850.5819842553524,1433.7569999999996,5.0,0,observed
+onion,Madhya Pradesh,MP,Shajapur,Shujalpur APMC,1086.0,2026-09-07,2026,37,3702.2664623826563,1746.5880000000002,3.0,0,observed
+onion,Madhya Pradesh,MP,Shajapur,Shujalpur APMC,1086.0,2026-09-14,2026,38,2850.5819842553515,1433.757,5.0,0,observed
 onion,Madhya Pradesh,MP,Shajapur,Shujalpur APMC,1086.0,2026-09-21,2026,39,2829.2533605430103,788.9350000000002,2.0,0,observed
-onion,Madhya Pradesh,MP,Shajapur,Shujalpur APMC,1086.0,2026-09-28,2026,40,3543.7915345468446,292.97900000000004,2.0,0,observed
+onion,Madhya Pradesh,MP,Shajapur,Shujalpur APMC,1086.0,2026-09-28,2026,40,3550.3475174183586,295.37800000000004,3.0,0,observed
 onion,Haryana,HR,Ambala,Ambala Cantt. APMC,1108.0,2017-01-02,2017,1,,,,1,
 onion,Haryana,HR,Ambala,Ambala Cantt. APMC,1108.0,2017-01-09,2017,2,750.0,40.0,2.0,0,observed
 onion,Haryana,HR,Ambala,Ambala Cantt. APMC,1108.0,2017-01-16,2017,3,800.0,20.0,1.0,0,observed
@@ -63512,7 +63512,7 @@ onion,Haryana,HR,Gurgaon,Sohna APMC,1111.0,2026-08-31,2026,36,3422.6190476190473
 onion,Haryana,HR,Gurgaon,Sohna APMC,1111.0,2026-09-07,2026,37,4346.4,12.5,5.0,0,observed
 onion,Haryana,HR,Gurgaon,Sohna APMC,1111.0,2026-09-14,2026,38,4405.172413793103,11.6,6.0,0,observed
 onion,Haryana,HR,Gurgaon,Sohna APMC,1111.0,2026-09-21,2026,39,4275.0,10.0,4.0,0,observed
-onion,Haryana,HR,Gurgaon,Sohna APMC,1111.0,2026-09-28,2026,40,4200.0,6.699999999999999,2.0,0,observed
+onion,Haryana,HR,Gurgaon,Sohna APMC,1111.0,2026-09-28,2026,40,4165.432098765432,8.1,3.0,0,observed
 onion,Haryana,HR,Mahendragarh-Narnaul,Mohindergarh APMC,1113.0,2017-01-02,2017,1,678.90625,12.8,7.0,0,observed
 onion,Haryana,HR,Mahendragarh-Narnaul,Mohindergarh APMC,1113.0,2017-01-09,2017,2,747.6923076923077,19.5,6.0,0,observed
 onion,Haryana,HR,Mahendragarh-Narnaul,Mohindergarh APMC,1113.0,2017-01-16,2017,3,756.3829787234042,18.8,7.0,0,observed
@@ -64570,7 +64570,7 @@ onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2025-09-01,2025,36,1642.2077922077
 onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2025-09-08,2025,37,1618.6893203883496,41.199999999999996,5.0,0,observed
 onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2025-09-15,2025,38,1616.0194174757282,,,1,linear
 onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2025-09-22,2025,39,1613.3495145631068,,,1,linear
-onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2025-09-29,2025,40,4000.0,,,1,seasonal_median
+onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2025-09-29,2025,40,3999.9999999999995,,,1,seasonal_median
 onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2025-10-06,2025,41,1600.0,,,1,seasonal_median
 onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2025-10-13,2025,42,1600.0,,,1,seasonal_median
 onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2025-10-20,2025,43,1600.0,,,1,seasonal_median
@@ -64622,7 +64622,7 @@ onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2026-08-31,2026,36,3981.4285714285
 onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2026-09-07,2026,37,4088.3720930232557,38.7,6.0,0,observed
 onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2026-09-14,2026,38,3999.9999999999995,39.7,4.0,0,observed
 onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2026-09-21,2026,39,4094.3396226415102,37.099999999999994,5.0,0,observed
-onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2026-09-28,2026,40,4000.0,14.5,2.0,0,observed
+onion,Punjab,PB,Fatehgarh,Sirhind APMC,1128.0,2026-09-28,2026,40,3999.9999999999995,22.700000000000003,3.0,0,observed
 onion,Punjab,PB,Mansa,Mansa APMC,1130.0,2025-01-06,2025,2,2487.0967741935483,31.0,7.0,0,observed
 onion,Punjab,PB,Mansa,Mansa APMC,1130.0,2025-01-13,2025,3,2550.0,16.0,2.0,0,observed
 onion,Punjab,PB,Mansa,Mansa APMC,1130.0,2025-01-20,2025,4,2513.3333333333335,,,1,linear
@@ -73371,7 +73371,7 @@ onion,Maharashtra,MH,Satara,Vai APMC,1315.0,2026-08-31,2026,36,3125.0,3.0,2.0,0,
 onion,Maharashtra,MH,Satara,Vai APMC,1315.0,2026-09-07,2026,37,3000.0,2.8,2.0,0,observed
 onion,Maharashtra,MH,Satara,Vai APMC,1315.0,2026-09-14,2026,38,3250.0,3.4,2.0,0,observed
 onion,Maharashtra,MH,Satara,Vai APMC,1315.0,2026-09-21,2026,39,3500.0,1.5,1.0,0,observed
-onion,Maharashtra,MH,Satara,Vai APMC,1315.0,2026-09-28,2026,40,4000.0,1.7,1.0,0,observed
+onion,Maharashtra,MH,Satara,Vai APMC,1315.0,2026-09-28,2026,40,3100.0,3.5,2.0,0,observed
 onion,Maharashtra,MH,Solapur,Mangal Wedha APMC,1318.0,2017-01-02,2017,1,566.6666666666666,6.0,5.0,0,observed
 onion,Maharashtra,MH,Solapur,Mangal Wedha APMC,1318.0,2017-01-09,2017,2,455.55555555555554,9.0,6.0,0,observed
 onion,Maharashtra,MH,Solapur,Mangal Wedha APMC,1318.0,2017-01-16,2017,3,440.0,5.0,3.0,0,observed
@@ -75715,7 +75715,7 @@ onion,Punjab,PB,Gurdaspur,Quadian APMC,1429.0,2026-08-31,2026,36,3400.0,12.0,7.0
 onion,Punjab,PB,Gurdaspur,Quadian APMC,1429.0,2026-09-07,2026,37,3386.0576923076924,10.4,7.0,0,observed
 onion,Punjab,PB,Gurdaspur,Quadian APMC,1429.0,2026-09-14,2026,38,3341.176470588235,8.5,5.0,0,observed
 onion,Punjab,PB,Gurdaspur,Quadian APMC,1429.0,2026-09-21,2026,39,3386.9565217391305,11.5,7.0,0,observed
-onion,Punjab,PB,Gurdaspur,Quadian APMC,1429.0,2026-09-28,2026,40,3388.8888888888887,4.5,2.0,0,observed
+onion,Punjab,PB,Gurdaspur,Quadian APMC,1429.0,2026-09-28,2026,40,3423.076923076923,6.5,3.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Garh Shankar APMC,1433.0,2024-12-30,2025,1,1999.9999999999998,12.600000000000001,2.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Garh Shankar APMC,1433.0,2025-01-06,2025,2,2149.032258064516,31.0,4.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Garh Shankar APMC,1433.0,2025-01-13,2025,3,2148.9473684210525,38.0,6.0,0,observed
@@ -75807,7 +75807,7 @@ onion,Punjab,PB,Hoshiarpur,Garh Shankar APMC,1433.0,2026-08-31,2026,36,3644.1935
 onion,Punjab,PB,Hoshiarpur,Garh Shankar APMC,1433.0,2026-09-07,2026,37,3918.032786885246,36.6,5.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Garh Shankar APMC,1433.0,2026-09-14,2026,38,3777.562326869806,36.1,6.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Garh Shankar APMC,1433.0,2026-09-21,2026,39,3766.666666666667,26.7,6.0,0,observed
-onion,Punjab,PB,Hoshiarpur,Garh Shankar APMC,1433.0,2026-09-28,2026,40,3799.9999999999995,10.3,2.0,0,observed
+onion,Punjab,PB,Hoshiarpur,Garh Shankar APMC,1433.0,2026-09-28,2026,40,3799.9999999999995,16.200000000000003,3.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Tanda Urmur APMC,1434.0,2024-12-30,2025,1,3335.714285714286,7.0,3.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Tanda Urmur APMC,1434.0,2025-01-06,2025,2,3354.3689320388353,10.299999999999999,4.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Tanda Urmur APMC,1434.0,2025-01-13,2025,3,3332.0,5.0,2.0,0,observed
@@ -75895,7 +75895,7 @@ onion,Punjab,PB,Hoshiarpur,Tanda Urmur APMC,1434.0,2026-08-03,2026,32,3027.80269
 onion,Punjab,PB,Hoshiarpur,Tanda Urmur APMC,1434.0,2026-08-10,2026,33,2979.9065420560746,21.400000000000002,7.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Tanda Urmur APMC,1434.0,2026-08-17,2026,34,3051.3888888888887,14.4,5.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Tanda Urmur APMC,1434.0,2026-08-24,2026,35,4503.649635036496,13.700000000000001,5.0,0,observed
-onion,Punjab,PB,Hoshiarpur,Tanda Urmur APMC,1434.0,2026-08-31,2026,36,4826.20320855615,18.7,6.0,0,observed
+onion,Punjab,PB,Hoshiarpur,Tanda Urmur APMC,1434.0,2026-08-31,2026,36,4826.203208556149,18.700000000000003,6.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Tanda Urmur APMC,1434.0,2026-09-07,2026,37,5109.574468085108,18.799999999999997,7.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Tanda Urmur APMC,1434.0,2026-09-14,2026,38,5246.153846153847,16.9,6.0,0,observed
 onion,Punjab,PB,Hoshiarpur,Tanda Urmur APMC,1434.0,2026-09-21,2026,39,5289.8089171974525,15.7,6.0,0,observed
@@ -76046,7 +76046,7 @@ onion,Punjab,PB,Ludhiana,Doraha APMC,1441.0,2026-08-31,2026,36,3806.371299157092
 onion,Punjab,PB,Ludhiana,Doraha APMC,1441.0,2026-09-07,2026,37,4024.621014113957,9.565000000000001,6.0,0,observed
 onion,Punjab,PB,Ludhiana,Doraha APMC,1441.0,2026-09-14,2026,38,4076.7123287671234,9.636,6.0,0,observed
 onion,Punjab,PB,Ludhiana,Doraha APMC,1441.0,2026-09-21,2026,39,4118.977405325129,9.427000000000001,6.0,0,observed
-onion,Punjab,PB,Ludhiana,Doraha APMC,1441.0,2026-09-28,2026,40,4000.0,3.003,2.0,0,observed
+onion,Punjab,PB,Ludhiana,Doraha APMC,1441.0,2026-09-28,2026,40,4000.0,3.016,2.0,0,observed
 onion,Punjab,PB,Ludhiana,Ludhiana APMC,1443.0,2024-12-30,2025,1,1967.4747474747476,495.0,4.0,0,observed
 onion,Punjab,PB,Ludhiana,Ludhiana APMC,1443.0,2025-01-06,2025,2,1968.7396351575455,1206.0,6.0,0,observed
 onion,Punjab,PB,Ludhiana,Ludhiana APMC,1443.0,2025-01-13,2025,3,1800.0,1079.0,6.0,0,observed
@@ -76410,7 +76410,7 @@ onion,Punjab,PB,Patiala,Rajpura APMC,1456.0,2026-08-03,2026,32,2688.940809968847
 onion,Punjab,PB,Patiala,Rajpura APMC,1456.0,2026-08-10,2026,33,2527.9141104294476,32.6,5.0,0,observed
 onion,Punjab,PB,Patiala,Rajpura APMC,1456.0,2026-08-17,2026,34,2507.8073089700997,30.099999999999998,6.0,0,observed
 onion,Punjab,PB,Patiala,Rajpura APMC,1456.0,2026-08-24,2026,35,2521.2034383954156,34.9,5.0,0,observed
-onion,Punjab,PB,Patiala,Rajpura APMC,1456.0,2026-08-31,2026,36,3069.2844677137873,57.3,6.0,0,observed
+onion,Punjab,PB,Patiala,Rajpura APMC,1456.0,2026-08-31,2026,36,3069.284467713787,57.300000000000004,6.0,0,observed
 onion,Punjab,PB,Patiala,Rajpura APMC,1456.0,2026-09-07,2026,37,3571.102661596958,52.6,6.0,0,observed
 onion,Punjab,PB,Patiala,Rajpura APMC,1456.0,2026-09-14,2026,38,3643.409090909091,44.0,5.0,0,observed
 onion,Punjab,PB,Patiala,Rajpura APMC,1456.0,2026-09-21,2026,39,3787.7068557919624,42.3,6.0,0,observed
@@ -76780,7 +76780,7 @@ onion,Punjab,PB,Fatehgarh,Bassi Pathana APMC,1464.0,2026-08-31,2026,36,4762.5,6.
 onion,Punjab,PB,Fatehgarh,Bassi Pathana APMC,1464.0,2026-09-07,2026,37,4741.666666666667,6.0,5.0,0,observed
 onion,Punjab,PB,Fatehgarh,Bassi Pathana APMC,1464.0,2026-09-14,2026,38,4356.25,8.0,6.0,0,observed
 onion,Punjab,PB,Fatehgarh,Bassi Pathana APMC,1464.0,2026-09-21,2026,39,4825.396825396825,6.3,6.0,0,observed
-onion,Punjab,PB,Fatehgarh,Bassi Pathana APMC,1464.0,2026-09-28,2026,40,5100.0,2.0,2.0,0,observed
+onion,Punjab,PB,Fatehgarh,Bassi Pathana APMC,1464.0,2026-09-28,2026,40,5142.857142857143,3.5,3.0,0,observed
 onion,Punjab,PB,Fatehgarh,Khamano APMC,1466.0,2025-01-06,2025,2,3800.0,0.5,5.0,0,observed
 onion,Punjab,PB,Fatehgarh,Khamano APMC,1466.0,2025-01-13,2025,3,4000.0000000000005,0.44999999999999996,4.0,0,observed
 onion,Punjab,PB,Fatehgarh,Khamano APMC,1466.0,2025-01-20,2025,4,3100.0,1.0,6.0,0,observed
@@ -77715,7 +77715,7 @@ onion,Odisha,OR,Boudh,Boudh APMC,1507.0,2026-08-31,2026,36,5261.9047619047615,10
 onion,Odisha,OR,Boudh,Boudh APMC,1507.0,2026-09-07,2026,37,5875.0,8.0,5.0,0,observed
 onion,Odisha,OR,Boudh,Boudh APMC,1507.0,2026-09-14,2026,38,6500.0,8.0,4.0,0,observed
 onion,Odisha,OR,Boudh,Boudh APMC,1507.0,2026-09-21,2026,39,6115.384615384615,6.5,6.0,0,observed
-onion,Odisha,OR,Boudh,Boudh APMC,1507.0,2026-09-28,2026,40,5714.285714285715,3.5,2.0,0,observed
+onion,Odisha,OR,Boudh,Boudh APMC,1507.0,2026-09-28,2026,40,5777.777777777777,4.5,3.0,0,observed
 onion,Odisha,OR,Sundergarh,Sargipali APMC,1510.0,2017-01-02,2017,1,1281.1965811965813,11.7,5.0,0,observed
 onion,Odisha,OR,Sundergarh,Sargipali APMC,1510.0,2017-01-09,2017,2,1200.0,5.6,2.0,0,observed
 onion,Odisha,OR,Sundergarh,Sargipali APMC,1510.0,2017-01-16,2017,3,1200.0,14.3,6.0,0,observed
@@ -81197,7 +81197,7 @@ onion,Odisha,OR,Sonepur,Birmaharajpur APMC,1525.0,2026-08-31,2026,36,4707.317073
 onion,Odisha,OR,Sonepur,Birmaharajpur APMC,1525.0,2026-09-07,2026,37,5502.222222222223,9.0,6.0,0,observed
 onion,Odisha,OR,Sonepur,Birmaharajpur APMC,1525.0,2026-09-14,2026,38,5600.0,4.4,3.0,0,observed
 onion,Odisha,OR,Sonepur,Birmaharajpur APMC,1525.0,2026-09-21,2026,39,5698.11320754717,10.6,7.0,0,observed
-onion,Odisha,OR,Sonepur,Birmaharajpur APMC,1525.0,2026-09-28,2026,40,5800.0,3.0,2.0,0,observed
+onion,Odisha,OR,Sonepur,Birmaharajpur APMC,1525.0,2026-09-28,2026,40,5800.0,4.8,3.0,0,observed
 onion,Odisha,OR,Ganjam,Hinjilicut APMC,1527.0,2017-01-02,2017,1,1513.5802469135804,97.19999999999999,6.0,0,observed
 onion,Odisha,OR,Ganjam,Hinjilicut APMC,1527.0,2017-01-09,2017,2,1500.0,36.9,2.0,0,observed
 onion,Odisha,OR,Ganjam,Hinjilicut APMC,1527.0,2017-01-16,2017,3,1457.5384615384614,32.5,2.0,0,observed
@@ -82059,7 +82059,7 @@ onion,Gujarat,GJ,Porbandar,Porbandar APMC,1537.0,2026-08-31,2026,36,3000.0,29.59
 onion,Gujarat,GJ,Porbandar,Porbandar APMC,1537.0,2026-09-07,2026,37,4414.285714285715,28.0,5.0,0,observed
 onion,Gujarat,GJ,Porbandar,Porbandar APMC,1537.0,2026-09-14,2026,38,4248.148148148148,27.0,5.0,0,observed
 onion,Gujarat,GJ,Porbandar,Porbandar APMC,1537.0,2026-09-21,2026,39,4057.7319587628867,48.5,6.0,0,observed
-onion,Gujarat,GJ,Porbandar,Porbandar APMC,1537.0,2026-09-28,2026,40,4000.0,15.2,2.0,0,observed
+onion,Gujarat,GJ,Porbandar,Porbandar APMC,1537.0,2026-09-28,2026,40,3909.663865546219,23.799999999999997,3.0,0,observed
 onion,Punjab,PB,Bhatinda,Bhagta Bhai Ka APMC,1569.0,2024-12-30,2025,1,3425.0,1.6,4.0,0,observed
 onion,Punjab,PB,Bhatinda,Bhagta Bhai Ka APMC,1569.0,2025-01-06,2025,2,3400.0,3.0,7.0,0,observed
 onion,Punjab,PB,Bhatinda,Bhagta Bhai Ka APMC,1569.0,2025-01-13,2025,3,2881.081081081081,3.7,7.0,0,observed
@@ -83487,7 +83487,7 @@ onion,Rajasthan,RJ,Ajmer,Ajmer(F&V) APMC,1610.0,2026-08-31,2026,36,3542.22222222
 onion,Rajasthan,RJ,Ajmer,Ajmer(F&V) APMC,1610.0,2026-09-07,2026,37,4509.566395663956,369.0,4.0,0,observed
 onion,Rajasthan,RJ,Ajmer,Ajmer(F&V) APMC,1610.0,2026-09-14,2026,38,4410.148514851485,323.20000000000005,5.0,0,observed
 onion,Rajasthan,RJ,Ajmer,Ajmer(F&V) APMC,1610.0,2026-09-21,2026,39,4351.5746124031,412.8,5.0,0,observed
-onion,Rajasthan,RJ,Ajmer,Ajmer(F&V) APMC,1610.0,2026-09-28,2026,40,4500.0,99.5,1.0,0,observed
+onion,Rajasthan,RJ,Ajmer,Ajmer(F&V) APMC,1610.0,2026-09-28,2026,40,4383.648591845313,237.9,2.0,0,observed
 onion,Rajasthan,RJ,Bikaner,Bikaner (F&V) APMC,1611.0,2024-12-30,2025,1,1528.5171102661598,263.0,4.0,0,observed
 onion,Rajasthan,RJ,Bikaner,Bikaner (F&V) APMC,1611.0,2025-01-06,2025,2,1724.4444444444443,441.0,6.0,0,observed
 onion,Rajasthan,RJ,Bikaner,Bikaner (F&V) APMC,1611.0,2025-01-13,2025,3,1570.625566636446,220.60000000000002,5.0,0,observed
@@ -83671,7 +83671,7 @@ onion,Rajasthan,RJ,Ganganagar,Sriganganagar (F&V) APMC,1614.0,2026-08-31,2026,36
 onion,Rajasthan,RJ,Ganganagar,Sriganganagar (F&V) APMC,1614.0,2026-09-07,2026,37,4633.333333333333,174.0,5.0,0,observed
 onion,Rajasthan,RJ,Ganganagar,Sriganganagar (F&V) APMC,1614.0,2026-09-14,2026,38,4885.057471264367,130.5,5.0,0,observed
 onion,Rajasthan,RJ,Ganganagar,Sriganganagar (F&V) APMC,1614.0,2026-09-21,2026,39,4651.652892561983,242.0,6.0,0,observed
-onion,Rajasthan,RJ,Ganganagar,Sriganganagar (F&V) APMC,1614.0,2026-09-28,2026,40,4500.0,77.0,2.0,0,observed
+onion,Rajasthan,RJ,Ganganagar,Sriganganagar (F&V) APMC,1614.0,2026-09-28,2026,40,4568.376068376068,117.0,3.0,0,observed
 onion,Maharashtra,MH,Nashik,Satana APMC,1633.0,2017-01-02,2017,1,498.97058823529414,102.0,5.0,0,observed
 onion,Maharashtra,MH,Nashik,Satana APMC,1633.0,2017-01-09,2017,2,503.7900818488204,2077.0,5.0,0,observed
 onion,Maharashtra,MH,Nashik,Satana APMC,1633.0,2017-01-16,2017,3,555.5833125156133,4003.0,4.0,0,observed
@@ -85707,7 +85707,7 @@ onion,Maharashtra,MH,Nashik,Sinner APMC,1644.0,2026-08-31,2026,36,4251.159865846
 onion,Maharashtra,MH,Nashik,Sinner APMC,1644.0,2026-09-07,2026,37,4280.034975225882,343.1,4.0,0,observed
 onion,Maharashtra,MH,Nashik,Sinner APMC,1644.0,2026-09-14,2026,38,4218.374613003096,323.0,3.0,0,observed
 onion,Maharashtra,MH,Nashik,Sinner APMC,1644.0,2026-09-21,2026,39,3894.8481561822123,276.6,4.0,0,observed
-onion,Maharashtra,MH,Nashik,Sinner APMC,1644.0,2026-09-28,2026,40,3871.5504451038573,134.8,2.0,0,observed
+onion,Maharashtra,MH,Nashik,Sinner APMC,1644.0,2026-09-28,2026,40,3870.015637216575,127.9,2.0,0,observed
 onion,Maharashtra,MH,Ahilyanagar,APMC Newasa,1649.0,2026-05-11,2026,20,700.0,826.0,1.0,0,observed
 onion,Maharashtra,MH,Ahilyanagar,APMC Newasa,1649.0,2026-05-18,2026,21,800.0000000000001,560.3,2.0,0,observed
 onion,Maharashtra,MH,Ahilyanagar,APMC Newasa,1649.0,2026-05-25,2026,22,999.9638074556643,552.5999999999999,2.0,0,observed
@@ -91008,7 +91008,7 @@ onion,Haryana,HR,Ambala,Naraingarh APMC,1808.0,2026-08-31,2026,36,3684.683115626
 onion,Haryana,HR,Ambala,Naraingarh APMC,1808.0,2026-09-07,2026,37,3221.2598425196848,12.700000000000001,5.0,0,observed
 onion,Haryana,HR,Ambala,Naraingarh APMC,1808.0,2026-09-14,2026,38,3446.6321243523316,19.3,6.0,0,observed
 onion,Haryana,HR,Ambala,Naraingarh APMC,1808.0,2026-09-21,2026,39,3807.7461196531367,27.446,6.0,0,observed
-onion,Haryana,HR,Ambala,Naraingarh APMC,1808.0,2026-09-28,2026,40,3666.628095348299,8.642000000000001,2.0,0,observed
+onion,Haryana,HR,Ambala,Naraingarh APMC,1808.0,2026-09-28,2026,40,3630.411157399022,11.042000000000002,3.0,0,observed
 onion,Haryana,HR,Ambala,Shahzadpur APMC,1809.0,2017-01-02,2017,1,949.6848739495797,4.760000000000001,6.0,0,observed
 onion,Haryana,HR,Ambala,Shahzadpur APMC,1809.0,2017-01-09,2017,2,983.5294117647059,4.25,5.0,0,observed
 onion,Haryana,HR,Ambala,Shahzadpur APMC,1809.0,2017-01-16,2017,3,972.9166666666666,3.6,6.0,0,observed
@@ -97071,7 +97071,7 @@ onion,Haryana,HR,Kaithal,Dhand APMC,1839.0,2026-08-31,2026,36,3545.4545454545446
 onion,Haryana,HR,Kaithal,Dhand APMC,1839.0,2026-09-07,2026,37,4203.225806451614,3.1,7.0,0,observed
 onion,Haryana,HR,Kaithal,Dhand APMC,1839.0,2026-09-14,2026,38,4630.434782608695,2.3000000000000003,7.0,0,observed
 onion,Haryana,HR,Kaithal,Dhand APMC,1839.0,2026-09-21,2026,39,5100.0,2.0,6.0,0,observed
-onion,Haryana,HR,Kaithal,Dhand APMC,1839.0,2026-09-28,2026,40,4788.888888888889,0.9,2.0,0,observed
+onion,Haryana,HR,Kaithal,Dhand APMC,1839.0,2026-09-28,2026,40,4792.307692307692,1.3,3.0,0,observed
 onion,Haryana,HR,Kaithal,Siwan APMC,1842.0,2017-01-02,2017,1,900.0,14.0,2.0,0,observed
 onion,Haryana,HR,Kaithal,Siwan APMC,1842.0,2017-01-09,2017,2,841.6666666666666,12.0,2.0,0,observed
 onion,Haryana,HR,Kaithal,Siwan APMC,1842.0,2017-01-16,2017,3,841.4215686274509,,,1,linear
@@ -111099,7 +111099,7 @@ onion,Kerala,KL,Kottayam,Pala APMC,2022.0,2026-08-31,2026,36,6400.0,48.0,6.0,0,o
 onion,Kerala,KL,Kottayam,Pala APMC,2022.0,2026-09-07,2026,37,6666.666666666667,30.0,5.0,0,observed
 onion,Kerala,KL,Kottayam,Pala APMC,2022.0,2026-09-14,2026,38,7155.813953488372,43.0,6.0,0,observed
 onion,Kerala,KL,Kottayam,Pala APMC,2022.0,2026-09-21,2026,39,7350.0,32.0,4.0,0,observed
-onion,Kerala,KL,Kottayam,Pala APMC,2022.0,2026-09-28,2026,40,7575.0,8.0,1.0,0,observed
+onion,Kerala,KL,Kottayam,Pala APMC,2022.0,2026-09-28,2026,40,7575.0,24.0,3.0,0,observed
 onion,Kerala,KL,Thirssur,Chalakudy APMC,2024.0,2017-01-02,2017,1,2200.0,5.0,1.0,0,observed
 onion,Kerala,KL,Thirssur,Chalakudy APMC,2024.0,2017-01-09,2017,2,1300.0,1.0,1.0,0,observed
 onion,Kerala,KL,Thirssur,Chalakudy APMC,2024.0,2017-01-16,2017,3,1300.0,3.5,2.0,0,observed
@@ -114803,10 +114803,10 @@ onion,Madhya Pradesh,MP,Dhar,Badnawar APMC,2076.0,2026-08-03,2026,32,1101.764343
 onion,Madhya Pradesh,MP,Dhar,Badnawar APMC,2076.0,2026-08-10,2026,33,1181.657772684365,4617.729000000001,4.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Badnawar APMC,2076.0,2026-08-17,2026,34,1377.9107883908891,7938.765000000001,5.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Badnawar APMC,2076.0,2026-08-24,2026,35,1207.049068584208,4657.909,4.0,0,observed
-onion,Madhya Pradesh,MP,Dhar,Badnawar APMC,2076.0,2026-08-31,2026,36,1185.3976680010317,3710.379,5.0,0,observed
+onion,Madhya Pradesh,MP,Dhar,Badnawar APMC,2076.0,2026-08-31,2026,36,1185.3976680010317,3710.3790000000004,5.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Badnawar APMC,2076.0,2026-09-07,2026,37,1041.5811075453546,7355.148,5.0,0,observed
-onion,Madhya Pradesh,MP,Dhar,Badnawar APMC,2076.0,2026-09-14,2026,38,1294.475632398796,8577.578,6.0,0,observed
-onion,Madhya Pradesh,MP,Dhar,Badnawar APMC,2076.0,2026-09-21,2026,39,1327.0924277020354,3585.094,4.0,0,observed
+onion,Madhya Pradesh,MP,Dhar,Badnawar APMC,2076.0,2026-09-14,2026,38,1294.4756323987958,8577.578000000001,6.0,0,observed
+onion,Madhya Pradesh,MP,Dhar,Badnawar APMC,2076.0,2026-09-21,2026,39,1327.0924277020351,3585.0940000000005,4.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Badnawar APMC,2076.0,2026-09-28,2026,40,1090.0384484096398,1555.591,2.0,0,observed
 onion,Madhya Pradesh,MP,Rajgarh,Narsinghgarh APMC,2086.0,2017-01-02,2017,1,113.58695652173914,9.2,4.0,0,observed
 onion,Madhya Pradesh,MP,Rajgarh,Narsinghgarh APMC,2086.0,2017-01-09,2017,2,313.9682539682539,6.300000000000001,2.0,0,observed
@@ -115968,7 +115968,7 @@ onion,Madhya Pradesh,MP,Shajapur,Shajapur APMC,2097.0,2026-08-10,2026,33,2334.02
 onion,Madhya Pradesh,MP,Shajapur,Shajapur APMC,2097.0,2026-08-17,2026,34,2956.8127698267003,10594.93,6.0,0,observed
 onion,Madhya Pradesh,MP,Shajapur,Shajapur APMC,2097.0,2026-08-24,2026,35,3071.419950892193,5073.735,3.0,0,observed
 onion,Madhya Pradesh,MP,Shajapur,Shajapur APMC,2097.0,2026-08-31,2026,36,3156.703792412151,6208.716000000001,5.0,0,observed
-onion,Madhya Pradesh,MP,Shajapur,Shajapur APMC,2097.0,2026-09-07,2026,37,3244.785186535986,8477.828,5.0,0,observed
+onion,Madhya Pradesh,MP,Shajapur,Shajapur APMC,2097.0,2026-09-07,2026,37,3244.7851865359858,8477.828,5.0,0,observed
 onion,Madhya Pradesh,MP,Shajapur,Shajapur APMC,2097.0,2026-09-14,2026,38,3098.0855369607334,8419.07,5.0,0,observed
 onion,Madhya Pradesh,MP,Shajapur,Shajapur APMC,2097.0,2026-09-21,2026,39,2970.6039763615895,6318.276,5.0,0,observed
 onion,Madhya Pradesh,MP,Shajapur,Shajapur APMC,2097.0,2026-09-28,2026,40,3243.6169254636475,1431.6370000000002,1.0,0,observed
@@ -117498,7 +117498,7 @@ onion,Maharashtra,MH,Nashik,Lasalgaon(Niphad) APMC,2139.0,2026-08-31,2026,36,440
 onion,Maharashtra,MH,Nashik,Lasalgaon(Niphad) APMC,2139.0,2026-09-07,2026,37,4430.670277589709,2215.5,5.0,0,observed
 onion,Maharashtra,MH,Nashik,Lasalgaon(Niphad) APMC,2139.0,2026-09-14,2026,38,4300.945537065053,1983.0,4.0,0,observed
 onion,Maharashtra,MH,Nashik,Lasalgaon(Niphad) APMC,2139.0,2026-09-21,2026,39,4039.0079365079364,1890.0,5.0,0,observed
-onion,Maharashtra,MH,Nashik,Lasalgaon(Niphad) APMC,2139.0,2026-09-28,2026,40,4125.996376811594,828.0,2.0,0,observed
+onion,Maharashtra,MH,Nashik,Lasalgaon(Niphad) APMC,2139.0,2026-09-28,2026,40,4141.974431818182,1056.0,3.0,0,observed
 onion,Maharashtra,MH,Nashik,Dindori(Vani) APMC,2141.0,2017-01-02,2017,1,698.7317436661699,3355.0,5.0,0,observed
 onion,Maharashtra,MH,Nashik,Dindori(Vani) APMC,2141.0,2017-01-09,2017,2,600.5555913631969,3103.0,4.0,0,observed
 onion,Maharashtra,MH,Nashik,Dindori(Vani) APMC,2141.0,2017-01-16,2017,3,586.6616314199396,1324.0,2.0,0,observed
@@ -126130,7 +126130,7 @@ onion,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-08-31,2026,36,4385.377
 onion,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-09-07,2026,37,4570.170454545455,704.0,7.0,0,observed
 onion,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-09-14,2026,38,4628.571428571428,700.0,7.0,0,observed
 onion,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-09-21,2026,39,4864.630681818182,704.0,7.0,0,observed
-onion,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-09-28,2026,40,4687.313432835821,201.0,2.0,0,observed
+onion,West Bengal,WB,Hooghly,Sheoraphuly APMC,2270.0,2026-09-28,2026,40,4574.503311258278,302.0,3.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Rajgarh APMC,2318.0,2017-01-02,2017,1,489.171974522293,157.0,6.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Rajgarh APMC,2318.0,2017-01-09,2017,2,491.8181818181818,110.0,6.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Rajgarh APMC,2318.0,2017-01-16,2017,3,452.63157894736844,152.0,7.0,0,observed
@@ -126781,11 +126781,11 @@ onion,Madhya Pradesh,MP,Mandsaur,Shamgarh APMC,2325.0,2026-08-03,2026,32,1658.39
 onion,Madhya Pradesh,MP,Mandsaur,Shamgarh APMC,2325.0,2026-08-10,2026,33,1747.1617544673936,17.236,3.0,0,observed
 onion,Madhya Pradesh,MP,Mandsaur,Shamgarh APMC,2325.0,2026-08-17,2026,34,3220.481233588027,50.649,4.0,0,observed
 onion,Madhya Pradesh,MP,Mandsaur,Shamgarh APMC,2325.0,2026-08-24,2026,35,3143.8614288797758,9.265999999999998,3.0,0,observed
-onion,Madhya Pradesh,MP,Mandsaur,Shamgarh APMC,2325.0,2026-08-31,2026,36,3142.7317131591544,54.27400000000001,4.0,0,observed
+onion,Madhya Pradesh,MP,Mandsaur,Shamgarh APMC,2325.0,2026-08-31,2026,36,3142.731713159156,54.274,4.0,0,observed
 onion,Madhya Pradesh,MP,Mandsaur,Shamgarh APMC,2325.0,2026-09-07,2026,37,3467.9346312812704,64.358,5.0,0,observed
 onion,Madhya Pradesh,MP,Mandsaur,Shamgarh APMC,2325.0,2026-09-14,2026,38,3819.575952540107,35.904,3.0,0,observed
-onion,Madhya Pradesh,MP,Mandsaur,Shamgarh APMC,2325.0,2026-09-21,2026,39,3656.273599844876,30.942999999999998,4.0,0,observed
-onion,Madhya Pradesh,MP,Mandsaur,Shamgarh APMC,2325.0,2026-09-28,2026,40,3477.181506849315,19.272,2.0,0,observed
+onion,Madhya Pradesh,MP,Mandsaur,Shamgarh APMC,2325.0,2026-09-21,2026,39,3656.2735998448766,30.942999999999998,4.0,0,observed
+onion,Madhya Pradesh,MP,Mandsaur,Shamgarh APMC,2325.0,2026-09-28,2026,40,3477.1815068493147,19.272000000000002,2.0,0,observed
 onion,Tamil Nadu,TN,Vellore,Thirupathur APMC,2422.0,2024-12-30,2025,1,4500.000000000001,3.6499999999999995,5.0,0,observed
 onion,Tamil Nadu,TN,Vellore,Thirupathur APMC,2422.0,2025-01-06,2025,2,4500.0,3.99,7.0,0,observed
 onion,Tamil Nadu,TN,Vellore,Thirupathur APMC,2422.0,2025-01-13,2025,3,4500.0,4.17,7.0,0,observed
@@ -128067,7 +128067,7 @@ onion,Punjab,PB,Jalandhar,Jalandhar City(Jalandhar) APMC,2487.0,2026-08-31,2026,
 onion,Punjab,PB,Jalandhar,Jalandhar City(Jalandhar) APMC,2487.0,2026-09-07,2026,37,3305.965163445478,419.1,5.0,0,observed
 onion,Punjab,PB,Jalandhar,Jalandhar City(Jalandhar) APMC,2487.0,2026-09-14,2026,38,3165.2882583760947,331.29999999999995,5.0,0,observed
 onion,Punjab,PB,Jalandhar,Jalandhar City(Jalandhar) APMC,2487.0,2026-09-21,2026,39,3418.975369458128,507.5,4.0,0,observed
-onion,Punjab,PB,Jalandhar,Jalandhar City(Jalandhar) APMC,2487.0,2026-09-28,2026,40,3500.0,50.6,1.0,0,observed
+onion,Punjab,PB,Jalandhar,Jalandhar City(Jalandhar) APMC,2487.0,2026-09-28,2026,40,3305.343511450382,144.1,2.0,0,observed
 onion,Punjab,PB,Nawanshahr,Nawan Shahar(Subzi Mandi) APMC,2490.0,2024-12-30,2025,1,2600.0,5.98,2.0,0,observed
 onion,Punjab,PB,Nawanshahr,Nawan Shahar(Subzi Mandi) APMC,2490.0,2025-01-06,2025,2,2634.6638655462184,14.280000000000001,5.0,0,observed
 onion,Punjab,PB,Nawanshahr,Nawan Shahar(Subzi Mandi) APMC,2490.0,2025-01-13,2025,3,2530.778790389395,12.07,4.0,0,observed
@@ -131754,8 +131754,8 @@ onion,Gujarat,GJ,Ahmedabad,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,2543.0
 onion,Gujarat,GJ,Ahmedabad,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,2543.0,2026-08-17,2026,34,3708.40152313052,2468.5999999999995,5.0,0,observed
 onion,Gujarat,GJ,Ahmedabad,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,2543.0,2026-08-24,2026,35,4520.799982693722,2311.3,3.0,0,observed
 onion,Gujarat,GJ,Ahmedabad,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,2543.0,2026-08-31,2026,36,4621.888119513657,3668.2000000000003,5.0,0,observed
-onion,Gujarat,GJ,Ahmedabad,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,2543.0,2026-09-07,2026,37,4762.105656409121,3613.6,6.0,0,observed
-onion,Gujarat,GJ,Ahmedabad,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,2543.0,2026-09-14,2026,38,4732.682272027992,3315.1000000000004,5.0,0,observed
+onion,Gujarat,GJ,Ahmedabad,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,2543.0,2026-09-07,2026,37,4762.1056564091205,3613.6000000000004,6.0,0,observed
+onion,Gujarat,GJ,Ahmedabad,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,2543.0,2026-09-14,2026,38,4732.6822720279915,3315.100000000001,5.0,0,observed
 onion,Gujarat,GJ,Ahmedabad,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,2543.0,2026-09-21,2026,39,4639.610420764764,2084.3000000000006,4.0,0,observed
 onion,Gujarat,GJ,Ahmedabad,Ahmedabad(Chimanbhai Patal Market Vasana) APMC,2543.0,2026-09-28,2026,40,4611.688122772565,1374.9,2.0,0,observed
 onion,Gujarat,GJ,Rajkot,Rajkot(Veg.Sub Yard) APMC,2545.0,2017-01-02,2017,1,510.0,1300.0,6.0,0,observed
@@ -132266,7 +132266,7 @@ onion,Gujarat,GJ,Rajkot,Rajkot(Veg.Sub Yard) APMC,2545.0,2026-08-31,2026,36,3396
 onion,Gujarat,GJ,Rajkot,Rajkot(Veg.Sub Yard) APMC,2545.0,2026-09-07,2026,37,3366.3995215311,794.2,5.0,0,observed
 onion,Gujarat,GJ,Rajkot,Rajkot(Veg.Sub Yard) APMC,2545.0,2026-09-14,2026,38,3165.3465215082315,753.2,6.0,0,observed
 onion,Gujarat,GJ,Rajkot,Rajkot(Veg.Sub Yard) APMC,2545.0,2026-09-21,2026,39,2989.585915793973,935.8,6.0,0,observed
-onion,Gujarat,GJ,Rajkot,Rajkot(Veg.Sub Yard) APMC,2545.0,2026-09-28,2026,40,3025.0,321.4,2.0,0,observed
+onion,Gujarat,GJ,Rajkot,Rajkot(Veg.Sub Yard) APMC,2545.0,2026-09-28,2026,40,3033.8181019332164,455.2,3.0,0,observed
 onion,Gujarat,GJ,Dahod,Dahod(Veg. Market) APMC,2549.0,2017-01-02,2017,1,852.5448376151236,103.15,7.0,0,observed
 onion,Gujarat,GJ,Dahod,Dahod(Veg. Market) APMC,2549.0,2017-01-09,2017,2,1028.328611898017,52.95,5.0,0,observed
 onion,Gujarat,GJ,Dahod,Dahod(Veg. Market) APMC,2549.0,2017-01-16,2017,3,781.4102564102565,78.0,7.0,0,observed
@@ -132775,7 +132775,7 @@ onion,Gujarat,GJ,Dahod,Dahod(Veg. Market) APMC,2549.0,2026-08-31,2026,36,4386.79
 onion,Gujarat,GJ,Dahod,Dahod(Veg. Market) APMC,2549.0,2026-09-07,2026,37,4540.441176470587,13.600000000000001,7.0,0,observed
 onion,Gujarat,GJ,Dahod,Dahod(Veg. Market) APMC,2549.0,2026-09-14,2026,38,4216.666666666667,12.0,7.0,0,observed
 onion,Gujarat,GJ,Dahod,Dahod(Veg. Market) APMC,2549.0,2026-09-21,2026,39,4237.068965517242,11.6,7.0,0,observed
-onion,Gujarat,GJ,Dahod,Dahod(Veg. Market) APMC,2549.0,2026-09-28,2026,40,4368.75,3.2,2.0,0,observed
+onion,Gujarat,GJ,Dahod,Dahod(Veg. Market) APMC,2549.0,2026-09-28,2026,40,4410.63829787234,4.7,3.0,0,observed
 onion,Gujarat,GJ,Vadodara(Baroda),Vadodara(Sayajipura) APMC,2551.0,2017-01-02,2017,1,826.9237563595251,1415.2,7.0,0,observed
 onion,Gujarat,GJ,Vadodara(Baroda),Vadodara(Sayajipura) APMC,2551.0,2017-01-09,2017,2,759.230588787239,852.6,5.0,0,observed
 onion,Gujarat,GJ,Vadodara(Baroda),Vadodara(Sayajipura) APMC,2551.0,2017-01-16,2017,3,750.0,884.0,5.0,0,observed
@@ -133803,7 +133803,7 @@ onion,Gujarat,GJ,Anand,"Anand(Veg,Yard,Anand) APMC",2571.0,2026-08-31,2026,36,35
 onion,Gujarat,GJ,Anand,"Anand(Veg,Yard,Anand) APMC",2571.0,2026-09-07,2026,37,4140.116561437591,205.9,6.0,0,observed
 onion,Gujarat,GJ,Anand,"Anand(Veg,Yard,Anand) APMC",2571.0,2026-09-14,2026,38,4242.077464788733,198.79999999999998,6.0,0,observed
 onion,Gujarat,GJ,Anand,"Anand(Veg,Yard,Anand) APMC",2571.0,2026-09-21,2026,39,4106.576492537313,107.2,3.0,0,observed
-onion,Gujarat,GJ,Anand,"Anand(Veg,Yard,Anand) APMC",2571.0,2026-09-28,2026,40,4000.0,44.6,2.0,0,observed
+onion,Gujarat,GJ,Anand,"Anand(Veg,Yard,Anand) APMC",2571.0,2026-09-28,2026,40,4000.0,126.20000000000002,3.0,0,observed
 onion,Kerala,KL,Kollam,Kottarakkara APMC,2668.0,2017-01-02,2017,1,3901.26582278481,0.79,3.0,0,observed
 onion,Kerala,KL,Kollam,Kottarakkara APMC,2668.0,2017-01-09,2017,2,4177.570093457944,1.07,4.0,0,observed
 onion,Kerala,KL,Kollam,Kottarakkara APMC,2668.0,2017-01-16,2017,3,4216.233766233766,1.54,6.0,0,observed
@@ -139396,7 +139396,7 @@ onion,Kerala,KL,Malappuram,Parappanangadi APMC,2685.0,2026-08-03,2026,32,3422.93
 onion,Kerala,KL,Malappuram,Parappanangadi APMC,2685.0,2026-08-10,2026,33,3650.8078994614007,55.699999999999996,5.0,0,observed
 onion,Kerala,KL,Malappuram,Parappanangadi APMC,2685.0,2026-08-17,2026,34,4950.973451327433,56.5,5.0,0,observed
 onion,Kerala,KL,Malappuram,Parappanangadi APMC,2685.0,2026-08-24,2026,35,5265.4266958424505,45.7,4.0,0,observed
-onion,Kerala,KL,Malappuram,Parappanangadi APMC,2685.0,2026-08-31,2026,36,5546.296296296297,70.19999999999999,6.0,0,observed
+onion,Kerala,KL,Malappuram,Parappanangadi APMC,2685.0,2026-08-31,2026,36,5546.296296296296,70.2,6.0,0,observed
 onion,Kerala,KL,Malappuram,Parappanangadi APMC,2685.0,2026-09-07,2026,37,6113.5,60.0,5.0,0,observed
 onion,Kerala,KL,Malappuram,Parappanangadi APMC,2685.0,2026-09-14,2026,38,6123.913043478261,69.0,6.0,0,observed
 onion,Kerala,KL,Malappuram,Parappanangadi APMC,2685.0,2026-09-21,2026,39,5884.981684981685,54.6,5.0,0,observed
@@ -143655,7 +143655,7 @@ onion,Maharashtra,MH,Mumbai,Mumbai-Onion & Potato Market APMC,2703.0,2026-08-31,
 onion,Maharashtra,MH,Mumbai,Mumbai-Onion & Potato Market APMC,2703.0,2026-09-07,2026,37,4044.4563210572346,6174.599999999999,6.0,0,observed
 onion,Maharashtra,MH,Mumbai,Mumbai-Onion & Potato Market APMC,2703.0,2026-09-14,2026,38,3914.1796642113964,5199.700000000001,5.0,0,observed
 onion,Maharashtra,MH,Mumbai,Mumbai-Onion & Potato Market APMC,2703.0,2026-09-21,2026,39,3795.9110674708936,4990.3,5.0,0,observed
-onion,Maharashtra,MH,Mumbai,Mumbai-Onion & Potato Market APMC,2703.0,2026-09-28,2026,40,3888.8198262809783,2509.8,2.0,0,observed
+onion,Maharashtra,MH,Mumbai,Mumbai-Onion & Potato Market APMC,2703.0,2026-09-28,2026,40,3877.705738497412,3516.6000000000004,3.0,0,observed
 onion,Maharashtra,MH,Amarawati,Amrawati(Frui & Veg. Market) APMC,2704.0,2017-01-02,2017,1,1006.2841530054645,183.0,6.0,0,observed
 onion,Maharashtra,MH,Amarawati,Amrawati(Frui & Veg. Market) APMC,2704.0,2017-01-09,2017,2,799.5412844036697,109.0,4.0,0,observed
 onion,Maharashtra,MH,Amarawati,Amrawati(Frui & Veg. Market) APMC,2704.0,2017-01-16,2017,3,874.6376811594203,69.0,3.0,0,observed
@@ -149493,7 +149493,7 @@ onion,Madhya Pradesh,MP,Harda,Harda(F&V) APMC,3045.0,2026-08-31,2026,36,2768.292
 onion,Madhya Pradesh,MP,Harda,Harda(F&V) APMC,3045.0,2026-09-07,2026,37,3000.0,4.7,4.0,0,observed
 onion,Madhya Pradesh,MP,Harda,Harda(F&V) APMC,3045.0,2026-09-14,2026,38,3302.631578947369,7.6,7.0,0,observed
 onion,Madhya Pradesh,MP,Harda,Harda(F&V) APMC,3045.0,2026-09-21,2026,39,3452.8301886792447,5.300000000000001,5.0,0,observed
-onion,Madhya Pradesh,MP,Harda,Harda(F&V) APMC,3045.0,2026-09-28,2026,40,3500.0,1.1,1.0,0,observed
+onion,Madhya Pradesh,MP,Harda,Harda(F&V) APMC,3045.0,2026-09-28,2026,40,3500.0,2.2,2.0,0,observed
 onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2023-12-18,2023,51,1160.4718134756629,5133.6599989999995,3.0,0,observed
 onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2023-12-25,2023,52,1048.159387503619,5388.44,6.0,0,observed
 onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2024-01-01,2024,1,767.0958494645001,6356.319998000001,6.0,0,observed
@@ -149635,11 +149635,11 @@ onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2026-08-03,2026,32,2207.214731
 onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2026-08-10,2026,33,2409.7512784798023,14517.437000000002,5.0,0,observed
 onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2026-08-17,2026,34,3166.0901988696087,24379.341000000004,6.0,0,observed
 onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2026-08-24,2026,35,3664.663457162279,16452.696,4.0,0,observed
-onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2026-08-31,2026,36,3840.5749320108853,14251.546,5.0,0,observed
+onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2026-08-31,2026,36,3840.574932010885,14251.546000000002,5.0,0,observed
 onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2026-09-07,2026,37,3595.4543806625215,28080.022000000004,6.0,0,observed
 onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2026-09-14,2026,38,3538.962864651997,20803.602,6.0,0,observed
 onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2026-09-21,2026,39,3484.8610509039045,22935.608,5.0,0,observed
-onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2026-09-28,2026,40,3495.1529964975775,6769.887000000001,2.0,0,observed
+onion,Madhya Pradesh,MP,Indore,Indore APMC,3046.0,2026-09-28,2026,40,3495.33187898656,6786.552000000001,3.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Badnawar(F&V) APMC,3048.0,2017-01-02,2017,1,220.75903614457832,8.3,2.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Badnawar(F&V) APMC,3048.0,2017-01-09,2017,2,247.1726907630522,,,1,linear
 onion,Madhya Pradesh,MP,Dhar,Badnawar(F&V) APMC,3048.0,2017-01-16,2017,3,273.5863453815261,,,1,linear
@@ -151166,7 +151166,7 @@ onion,Madhya Pradesh,MP,Gwalior,Lashkar(F&V) APMC,3059.0,2026-08-31,2026,36,2850
 onion,Madhya Pradesh,MP,Gwalior,Lashkar(F&V) APMC,3059.0,2026-09-07,2026,37,2800.0,104.0,4.0,0,observed
 onion,Madhya Pradesh,MP,Gwalior,Lashkar(F&V) APMC,3059.0,2026-09-14,2026,38,2960.56338028169,106.5,4.0,0,observed
 onion,Madhya Pradesh,MP,Gwalior,Lashkar(F&V) APMC,3059.0,2026-09-21,2026,39,2891.4728682170544,64.5,4.0,0,observed
-onion,Madhya Pradesh,MP,Gwalior,Lashkar(F&V) APMC,3059.0,2026-09-28,2026,40,2000.0,19.0,1.0,0,observed
+onion,Madhya Pradesh,MP,Gwalior,Lashkar(F&V) APMC,3059.0,2026-09-28,2026,40,2000.0,78.0,2.0,0,observed
 onion,Madhya Pradesh,MP,Sagar,Sagar(F&V) APMC,3067.0,2017-01-02,2017,1,700.0000000000001,23.299999999999997,7.0,0,observed
 onion,Madhya Pradesh,MP,Sagar,Sagar(F&V) APMC,3067.0,2017-01-09,2017,2,690.3089887640449,71.2,6.0,0,observed
 onion,Madhya Pradesh,MP,Sagar,Sagar(F&V) APMC,3067.0,2017-01-16,2017,3,624.8969497114592,121.3,6.0,0,observed
@@ -151675,7 +151675,7 @@ onion,Madhya Pradesh,MP,Sagar,Sagar(F&V) APMC,3067.0,2026-08-31,2026,36,1800.0,0
 onion,Madhya Pradesh,MP,Sagar,Sagar(F&V) APMC,3067.0,2026-09-07,2026,37,1951.9837232960326,98.3,6.0,0,observed
 onion,Madhya Pradesh,MP,Sagar,Sagar(F&V) APMC,3067.0,2026-09-14,2026,38,1786.3930885529157,138.9,7.0,0,observed
 onion,Madhya Pradesh,MP,Sagar,Sagar(F&V) APMC,3067.0,2026-09-21,2026,39,2113.409090909091,176.0,6.0,0,observed
-onion,Madhya Pradesh,MP,Sagar,Sagar(F&V) APMC,3067.0,2026-09-28,2026,40,1800.0,14.2,1.0,0,observed
+onion,Madhya Pradesh,MP,Sagar,Sagar(F&V) APMC,3067.0,2026-09-28,2026,40,1800.0,48.7,2.0,0,observed
 onion,Madhya Pradesh,MP,Jabalpur,Jabalpur(F&V) APMC,3071.0,2017-01-02,2017,1,387.82442748091603,196.5,6.0,0,observed
 onion,Madhya Pradesh,MP,Jabalpur,Jabalpur(F&V) APMC,3071.0,2017-01-09,2017,2,404.7418738049713,261.5,6.0,0,observed
 onion,Madhya Pradesh,MP,Jabalpur,Jabalpur(F&V) APMC,3071.0,2017-01-16,2017,3,411.5753424657534,146.0,6.0,0,observed
@@ -158971,7 +158971,7 @@ onion,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-08-31,2026,36,4455.6497175
 onion,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-09-07,2026,37,4922.4137931034475,34.800000000000004,7.0,0,observed
 onion,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-09-14,2026,38,4795.013850415513,36.099999999999994,7.0,0,observed
 onion,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-09-21,2026,39,4881.142857142857,35.0,7.0,0,observed
-onion,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-09-28,2026,40,4800.0,11.8,2.0,0,observed
+onion,West Bengal,WB,Hooghly,Kalipur APMC,3347.0,2026-09-28,2026,40,4799.999999999999,18.200000000000003,3.0,0,observed
 onion,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2024-12-30,2025,1,3139.9159663865544,23.8,5.0,0,observed
 onion,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2025-01-06,2025,2,3492.5233644859813,32.1,7.0,0,observed
 onion,West Bengal,WB,Nadia,Ranaghat APMC,3349.0,2025-01-13,2025,3,3124.0469208211143,34.1,7.0,0,observed
@@ -159724,7 +159724,7 @@ onion,Kerala,KL,Ernakulam,North Paravur APMC,3394.0,2026-08-31,2026,36,7680.0,5.
 onion,Kerala,KL,Ernakulam,North Paravur APMC,3394.0,2026-09-07,2026,37,7550.0,10.0,5.0,0,observed
 onion,Kerala,KL,Ernakulam,North Paravur APMC,3394.0,2026-09-14,2026,38,7816.666666666667,12.0,6.0,0,observed
 onion,Kerala,KL,Ernakulam,North Paravur APMC,3394.0,2026-09-21,2026,39,7690.0,10.0,5.0,0,observed
-onion,Kerala,KL,Ernakulam,North Paravur APMC,3394.0,2026-09-28,2026,40,7750.0,4.0,2.0,0,observed
+onion,Kerala,KL,Ernakulam,North Paravur APMC,3394.0,2026-09-28,2026,40,7750.0,6.0,3.0,0,observed
 onion,Punjab,PB,Hoshiarpur,GarhShankar (Kotfatuhi) APMC,3440.0,2024-12-30,2025,1,1800.0,0.5,1.0,0,observed
 onion,Punjab,PB,Hoshiarpur,GarhShankar (Kotfatuhi) APMC,3440.0,2025-01-06,2025,2,2200.0,0.9,2.0,0,observed
 onion,Punjab,PB,Hoshiarpur,GarhShankar (Kotfatuhi) APMC,3440.0,2025-01-13,2025,3,2227.5862068965516,2.9,6.0,0,observed
@@ -160659,7 +160659,7 @@ onion,Maharashtra,MH,Nashik,Lasalgaon(Vinchur) APMC,3448.0,2026-08-31,2026,36,43
 onion,Maharashtra,MH,Nashik,Lasalgaon(Vinchur) APMC,3448.0,2026-09-07,2026,37,4410.802233098807,2615.2,5.0,0,observed
 onion,Maharashtra,MH,Nashik,Lasalgaon(Vinchur) APMC,3448.0,2026-09-14,2026,38,4321.78727386151,2564.8,5.0,0,observed
 onion,Maharashtra,MH,Nashik,Lasalgaon(Vinchur) APMC,3448.0,2026-09-21,2026,39,3981.7896217567986,1599.5000000000002,5.0,0,observed
-onion,Maharashtra,MH,Nashik,Lasalgaon(Vinchur) APMC,3448.0,2026-09-28,2026,40,4152.767800549334,946.6,2.0,0,observed
+onion,Maharashtra,MH,Nashik,Lasalgaon(Vinchur) APMC,3448.0,2026-09-28,2026,40,4117.894994293169,1226.6,3.0,0,observed
 onion,Maharashtra,MH,Pune,Pune(Manjri) APMC,3449.0,2020-05-11,2020,20,900.0,10.0,3.0,0,observed
 onion,Maharashtra,MH,Pune,Pune(Manjri) APMC,3449.0,2020-05-18,2020,21,844.4444444444445,18.0,6.0,0,observed
 onion,Maharashtra,MH,Pune,Pune(Manjri) APMC,3449.0,2020-05-25,2020,22,1000.0,15.0,5.0,0,observed
@@ -162157,7 +162157,7 @@ onion,Maharashtra,MH,Nashik,Nampur APMC,3462.0,2026-08-31,2026,36,4123.415042073
 onion,Maharashtra,MH,Nashik,Nampur APMC,3462.0,2026-09-07,2026,37,4289.987429076206,2943.3,5.0,0,observed
 onion,Maharashtra,MH,Nashik,Nampur APMC,3462.0,2026-09-14,2026,38,4191.179754372906,1074.8000000000002,3.0,0,observed
 onion,Maharashtra,MH,Nashik,Nampur APMC,3462.0,2026-09-21,2026,39,3559.0846939596236,1243.3,4.0,0,observed
-onion,Maharashtra,MH,Nashik,Nampur APMC,3462.0,2026-09-28,2026,40,3600.0,701.1,2.0,0,observed
+onion,Maharashtra,MH,Nashik,Nampur APMC,3462.0,2026-09-28,2026,40,3599.9999999999995,517.7,2.0,0,observed
 onion,Jammu and Kashmir,JK,Anantnag,Batengoo Anantnag (F&V),3500.0,2025-11-17,2025,47,1600.0,6.0,2.0,0,observed
 onion,Jammu and Kashmir,JK,Anantnag,Batengoo Anantnag (F&V),3500.0,2025-11-24,2025,48,1700.0,3.0,1.0,0,observed
 onion,Jammu and Kashmir,JK,Anantnag,Batengoo Anantnag (F&V),3500.0,2025-12-01,2025,49,1540.0,30.0,3.0,0,observed
@@ -162250,7 +162250,7 @@ onion,Himachal Pradesh,HP,Mandi,PMY Kangni Mandi,3517.0,2026-08-31,2026,36,4132.
 onion,Himachal Pradesh,HP,Mandi,PMY Kangni Mandi,3517.0,2026-09-07,2026,37,4325.509049773756,7.072,5.0,0,observed
 onion,Himachal Pradesh,HP,Mandi,PMY Kangni Mandi,3517.0,2026-09-14,2026,38,4423.824451410658,31.900000000000002,6.0,0,observed
 onion,Himachal Pradesh,HP,Mandi,PMY Kangni Mandi,3517.0,2026-09-21,2026,39,4462.075215224287,22.07,4.0,0,observed
-onion,Himachal Pradesh,HP,Mandi,PMY Kangni Mandi,3517.0,2026-09-28,2026,40,4500.0,5.6,1.0,0,observed
+onion,Himachal Pradesh,HP,Mandi,PMY Kangni Mandi,3517.0,2026-09-28,2026,40,4408.695652173913,16.1,3.0,0,observed
 onion,Rajasthan,RJ,Hanumangarh,Dablirathan APMC,3626.0,2025-04-07,2025,15,1999.9999999999998,1.1,2.0,0,observed
 onion,Rajasthan,RJ,Hanumangarh,Dablirathan APMC,3626.0,2025-04-14,2025,16,1434.4827586206898,0.58,6.0,0,observed
 onion,Rajasthan,RJ,Hanumangarh,Dablirathan APMC,3626.0,2025-04-21,2025,17,1337.5,0.4,4.0,0,observed
@@ -163182,7 +163182,7 @@ onion,Maharashtra,MH,Solapur,"Laxmi-Sopan Agriculture Produce Marketing Co Ltd, 
 onion,Maharashtra,MH,Solapur,"Laxmi-Sopan Agriculture Produce Marketing Co Ltd, Barshi, Dist Solapur",3996.0,2026-09-07,2026,37,3820.618556701031,9.7,6.0,0,observed
 onion,Maharashtra,MH,Solapur,"Laxmi-Sopan Agriculture Produce Marketing Co Ltd, Barshi, Dist Solapur",3996.0,2026-09-14,2026,38,4068.3520599250937,53.4,3.0,0,observed
 onion,Maharashtra,MH,Solapur,"Laxmi-Sopan Agriculture Produce Marketing Co Ltd, Barshi, Dist Solapur",3996.0,2026-09-21,2026,39,3841.1462160176343,136.1,5.0,0,observed
-onion,Maharashtra,MH,Solapur,"Laxmi-Sopan Agriculture Produce Marketing Co Ltd, Barshi, Dist Solapur",3996.0,2026-09-28,2026,40,3800.0,26.4,1.0,0,observed
+onion,Maharashtra,MH,Solapur,"Laxmi-Sopan Agriculture Produce Marketing Co Ltd, Barshi, Dist Solapur",3996.0,2026-09-28,2026,40,3709.6774193548385,34.1,2.0,0,observed
 onion,Maharashtra,MH,Ahilyanagar,"Prasanna Krushi Market, Tal Parnet, Dist Ahilyanagar",4003.0,2026-06-29,2026,27,1485.0,17.93,1.0,0,observed
 onion,Maharashtra,MH,Ahilyanagar,"Prasanna Krushi Market, Tal Parnet, Dist Ahilyanagar",4003.0,2026-07-06,2026,28,1540.0832028191076,51.08,2.0,0,observed
 onion,Maharashtra,MH,Ahilyanagar,"Prasanna Krushi Market, Tal Parnet, Dist Ahilyanagar",4003.0,2026-07-13,2026,29,1594.4162905211329,48.739999999999995,3.0,0,observed
@@ -178566,7 +178566,7 @@ onion,Madhya Pradesh,MP,Dhar,Kukshi(F&V) APMC,4491.0,2026-08-31,2026,36,2149.642
 onion,Madhya Pradesh,MP,Dhar,Kukshi(F&V) APMC,4491.0,2026-09-07,2026,37,2179.487179487179,3.9000000000000004,5.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Kukshi(F&V) APMC,4491.0,2026-09-14,2026,38,2694.5945945945946,3.7,6.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Kukshi(F&V) APMC,4491.0,2026-09-21,2026,39,2583.6734693877547,4.9,5.0,0,observed
-onion,Madhya Pradesh,MP,Dhar,Kukshi(F&V) APMC,4491.0,2026-09-28,2026,40,2850.0,1.4000000000000001,2.0,0,observed
+onion,Madhya Pradesh,MP,Dhar,Kukshi(F&V) APMC,4491.0,2026-09-28,2026,40,2634.782608695652,2.3000000000000003,3.0,0,observed
 onion,Madhya Pradesh,MP,Sagar,Malthone(F&V) APMC,4501.0,2026-08-17,2026,34,2100.0,0.3,1.0,0,observed
 onion,Madhya Pradesh,MP,Sagar,Malthone(F&V) APMC,4501.0,2026-08-24,2026,35,2000.0,2.0,2.0,0,observed
 onion,Madhya Pradesh,MP,Sagar,Malthone(F&V) APMC,4501.0,2026-08-31,2026,36,2100.0,0.2,1.0,0,observed
@@ -178679,7 +178679,7 @@ onion,Madhya Pradesh,MP,Dhar,Manawar(F&V) APMC,4503.0,2026-08-31,2026,36,2863.12
 onion,Madhya Pradesh,MP,Dhar,Manawar(F&V) APMC,4503.0,2026-09-07,2026,37,3229.2769230769236,6.5,7.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Manawar(F&V) APMC,4503.0,2026-09-14,2026,38,3058.7164179104475,6.7,7.0,0,observed
 onion,Madhya Pradesh,MP,Dhar,Manawar(F&V) APMC,4503.0,2026-09-21,2026,39,3126.9500000000003,6.0,6.0,0,observed
-onion,Madhya Pradesh,MP,Dhar,Manawar(F&V) APMC,4503.0,2026-09-28,2026,40,3299.789473684211,1.9,2.0,0,observed
+onion,Madhya Pradesh,MP,Dhar,Manawar(F&V) APMC,4503.0,2026-09-28,2026,40,3346.142857142858,2.8,3.0,0,observed
 onion,Madhya Pradesh,MP,Neemuch,Neemuch(F&V) APMC,4515.0,2026-08-03,2026,32,2400.0,20.0,1.0,0,observed
 onion,Madhya Pradesh,MP,Neemuch,Neemuch(F&V) APMC,4515.0,2026-08-10,2026,33,2800.0,,,1,linear
 onion,Madhya Pradesh,MP,Neemuch,Neemuch(F&V) APMC,4515.0,2026-08-17,2026,34,3200.0,0.1,1.0,0,observed
@@ -179164,7 +179164,7 @@ onion,Madhya Pradesh,MP,Ratlam,Sailana(F&V) APMC,4533.0,2026-08-31,2026,36,4956.
 onion,Madhya Pradesh,MP,Ratlam,Sailana(F&V) APMC,4533.0,2026-09-07,2026,37,5664.427083333333,576.0,5.0,0,observed
 onion,Madhya Pradesh,MP,Ratlam,Sailana(F&V) APMC,4533.0,2026-09-14,2026,38,4050.5076142131984,325.04999999999995,4.0,0,observed
 onion,Madhya Pradesh,MP,Ratlam,Sailana(F&V) APMC,4533.0,2026-09-21,2026,39,3054.384393063584,346.0,3.0,0,observed
-onion,Madhya Pradesh,MP,Ratlam,Sailana(F&V) APMC,4533.0,2026-09-28,2026,40,2750.0,124.05,1.0,0,observed
+onion,Madhya Pradesh,MP,Ratlam,Sailana(F&V) APMC,4533.0,2026-09-28,2026,40,2786.2702286154636,194.65,2.0,0,observed
 onion,Madhya Pradesh,MP,Khandwa,Sanawad(F&V) APMC,4534.0,2024-09-23,2024,39,4555.555555555556,0.8999999999999999,3.0,0,observed
 onion,Madhya Pradesh,MP,Khandwa,Sanawad(F&V) APMC,4534.0,2024-09-30,2024,40,4138.88888888889,1.7999999999999998,7.0,0,observed
 onion,Madhya Pradesh,MP,Khandwa,Sanawad(F&V) APMC,4534.0,2024-10-07,2024,41,3750.0000000000005,2.1999999999999997,7.0,0,observed
@@ -179328,7 +179328,7 @@ onion,Madhya Pradesh,MP,Indore,Sanwer(F&V) APMC,4535.0,2026-08-31,2026,36,2951.2
 onion,Madhya Pradesh,MP,Indore,Sanwer(F&V) APMC,4535.0,2026-09-07,2026,37,3337.606837606837,1.1700000000000002,6.0,0,observed
 onion,Madhya Pradesh,MP,Indore,Sanwer(F&V) APMC,4535.0,2026-09-14,2026,38,2980.6201550387595,1.29,6.0,0,observed
 onion,Madhya Pradesh,MP,Indore,Sanwer(F&V) APMC,4535.0,2026-09-21,2026,39,3067.9611650485444,1.0299999999999998,6.0,0,observed
-onion,Madhya Pradesh,MP,Indore,Sanwer(F&V) APMC,4535.0,2026-09-28,2026,40,3000.0000000000005,0.32999999999999996,2.0,0,observed
+onion,Madhya Pradesh,MP,Indore,Sanwer(F&V) APMC,4535.0,2026-09-28,2026,40,3000.0000000000005,0.57,3.0,0,observed
 onion,Madhya Pradesh,MP,Badwani,Sendhwa(F&V) APMC,4539.0,2024-09-23,2024,39,2500.0,4.0,2.0,0,observed
 onion,Madhya Pradesh,MP,Badwani,Sendhwa(F&V) APMC,4539.0,2024-09-30,2024,40,2500.0,4.0,1.0,0,observed
 onion,Madhya Pradesh,MP,Badwani,Sendhwa(F&V) APMC,4539.0,2024-10-07,2024,41,2500.0,4.0,1.0,0,observed
