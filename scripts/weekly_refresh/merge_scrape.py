@@ -142,7 +142,22 @@ def main():
     # larger than what it replaces (same or better coverage, moving forward
     # in time); a truncated/stalled scrape that still has an old-enough min
     # date to trigger a big cutoff would show up here as a large loss.
+    #
+    # FIXED 2026-09-30 (same bug class as validate_scrape.py's 2026-09-17
+    # density fix, just never mirrored here): this compared new_rows against
+    # ALL trusted rows from cutoff onward, unrestricted by state. Fine for
+    # tomato/onion (all-India scrapes), but potato's scrape is restricted to
+    # --states West Bengal,Uttarakhand while the trusted file's own recent
+    # rows are genuinely all-India -- so potato's new scrape (~18k rows,
+    # WB+UK only) was compared against the full all-India replaced-row count
+    # (~149k) and aborted every single run, even though the merge was
+    # completely healthy for the two states it actually covers. Restricting
+    # `replaced` to the states present in new_rows before comparing -- a
+    # no-op for tomato/onion (new already covers the full old state set),
+    # correct for any --states-restricted crop, not just potato.
+    new_states = set(new_rows['state'].dropna().unique())
     replaced = old[old_dates >= cutoff]
+    replaced = replaced[replaced['state'].isin(new_states)]
     if len(replaced) > 500 and len(new_rows) < 0.5 * len(replaced):
         print(f'  [ABORT] New scrape has {len(new_rows):,} rows but would replace '
               f'{len(replaced):,} existing trusted rows from {cutoff.date()} onward '
