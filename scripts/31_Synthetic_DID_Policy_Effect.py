@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 """
+NOTE 2026-10-07 (Track B): the price effect estimated here is NOT identified. Script 66 (placebo-in-time) shows the onion block is
+indistinguishable from its own noise for the 2020 and 2023 episodes, and Scripts 67/68 show the Part B hub-vs-non-hub contrast has strong
+pre-event trends (parallel-trend failure). Treat all ATTs below as descriptive, not causal. See Model_Output/MANIFEST.md (2026-10-07).
+
 Script 31 — Synthetic Difference-in-Differences: Onion Export-Restriction
 Policy Effect
 =============================================================================

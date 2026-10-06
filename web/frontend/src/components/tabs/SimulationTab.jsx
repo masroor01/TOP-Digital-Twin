@@ -131,6 +131,9 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
         ))}
       </div>
 
+      <p className="text-xs text-[var(--text-secondary)] mb-2">
+        Scenario results are model sensitivities, not causal estimates of what a policy or shock would actually do.
+      </p>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
         <Metric label={`Baseline`} value={fmtRs(kpis.baseline, { perQ: true })} help="Unmodified baseline model projection." />
         <Metric label={`Scenario`} value={fmtRs(kpis.scenario, { perQ: true })}

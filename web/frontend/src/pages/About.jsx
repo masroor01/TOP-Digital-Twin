@@ -50,8 +50,8 @@ export default function About() {
           </FadeIn>
           <FadeIn delay={0.1}>
             <p className="text-[var(--text-secondary)] leading-relaxed mt-4">
-              Onion prices respond strongly to policy — export bans and duties have historically moved them in ways
-              the model can pick up on. Tomato is highly perishable, so short-horizon forecasts are mostly about
+              Onion prices have often moved around export bans and duties, and the model uses these policy events as
+              inputs; the dashboard does not claim the policies caused those moves. Tomato is highly perishable, so short-horizon forecasts are mostly about
               recent momentum, while longer horizons need slower-moving fundamentals. Potato's extensive cold-storage
               network already smooths out most of what the extra data layers could add, so simpler models hold their
               own there for longer. The dashboard's what-if simulator is built to make these differences visible,

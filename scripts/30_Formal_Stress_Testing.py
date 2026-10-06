@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 """
+NOTE 2026-10-07 (Track B): scenario magnitudes from this battery are model sensitivities, not causal estimates; no design tested so far
+(Scripts 31/38/39/66/67/68) identifies the causal price effect of onion export policy.
+
 Script 30 — Formal Stress-Testing Module
 ===========================================
 The dashboard (Script 24) already lets a user manually drag sliders to
