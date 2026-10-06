@@ -2,391 +2,547 @@
   "tomato": {
     "bank_credit_agri_cr": {
       "as_of": "2026-07-27",
-      "weeks_stale": 9
+      "weeks_stale": 10
     },
     "export_veg_usd_mn": {
       "as_of": "2026-05-25",
-      "weeks_stale": 18
+      "weeks_stale": 19
     },
     "import_veg_usd_mn": {
       "as_of": "2026-05-25",
-      "weeks_stale": 18
+      "weeks_stale": 19
     },
     "crude_oil_usd_bbl": {
       "as_of": "2026-03-30",
-      "weeks_stale": 26
+      "weeks_stale": 27
     },
     "iip_food_proc": {
       "as_of": "2026-03-30",
-      "weeks_stale": 26
+      "weeks_stale": 27
     },
     "agri_wages_rs_day": {
       "as_of": "2026-06-29",
-      "weeks_stale": 13
+      "weeks_stale": 14
     },
     "repo_rate_pct": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "reverse_repo_pct": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "usdinr_monthly_avg": {
       "as_of": "2026-06-29",
-      "weeks_stale": 13
+      "weeks_stale": 14
     },
     "wpi_fruits_vegetables": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "wpi_vegetables_total": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "wpi_potato": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "wpi_onion": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "wpi_tomato": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "diesel_4city_rs_litre": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "lpg_nonsub_4city_rs_cyl": {
       "as_of": "2026-06-29",
-      "weeks_stale": 13
+      "weeks_stale": 14
     },
     "diesel_delhi_per_L": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "lpg_nonsub_delhi_per14kg": {
       "as_of": "2026-06-29",
-      "weeks_stale": 13
+      "weeks_stale": 14
     },
     "era5_tmax": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_tmin": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_tmean": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_dtr": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_heat_35": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_heat_38": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "chirps_rain_mm": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "chirps_rain_max": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "chirps_excess": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
+    },
+    "era5_heat_35_roll4": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "era5_heat_35_roll8": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
     },
     "chirps_rain_mm_roll4": {
       "as_of": "2026-09-21",
+      "weeks_stale": 2
+    },
+    "chirps_rain_mm_roll8": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_ndvi": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_evi": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_valid_frac": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_ndvi_anom": {
+      "as_of": "2026-09-28",
       "weeks_stale": 1
     },
     "modis_ndvi": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "modis_evi": {
       "as_of": "2026-09-21",
+      "weeks_stale": 2
+    },
+    "modis_lst_mean": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "modis_lst_max": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "modis_lst_frac35": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_ndvi_roll4": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_ndvi_anom_roll4": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "modis_lst_mean_roll4": {
+      "as_of": "2026-09-28",
       "weeks_stale": 1
     },
     "wage_agri_men": {
       "as_of": "2026-03-30",
-      "weeks_stale": 26
+      "weeks_stale": 27
     },
     "wage_agri_women": {
       "as_of": "2026-03-30",
-      "weeks_stale": 26
+      "weeks_stale": 27
     }
   },
   "onion": {
     "bank_credit_agri_cr": {
       "as_of": "2026-07-27",
-      "weeks_stale": 9
+      "weeks_stale": 10
     },
     "export_veg_usd_mn": {
       "as_of": "2026-05-25",
-      "weeks_stale": 18
+      "weeks_stale": 19
     },
     "import_veg_usd_mn": {
       "as_of": "2026-05-25",
-      "weeks_stale": 18
+      "weeks_stale": 19
     },
     "crude_oil_usd_bbl": {
       "as_of": "2026-03-30",
-      "weeks_stale": 26
+      "weeks_stale": 27
     },
     "iip_food_proc": {
       "as_of": "2026-03-30",
-      "weeks_stale": 26
+      "weeks_stale": 27
     },
     "agri_wages_rs_day": {
       "as_of": "2026-06-29",
-      "weeks_stale": 13
+      "weeks_stale": 14
     },
     "repo_rate_pct": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "reverse_repo_pct": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "usdinr_monthly_avg": {
       "as_of": "2026-06-29",
-      "weeks_stale": 13
+      "weeks_stale": 14
     },
     "wpi_fruits_vegetables": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "wpi_vegetables_total": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "wpi_potato": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "wpi_onion": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "wpi_tomato": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "diesel_4city_rs_litre": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "lpg_nonsub_4city_rs_cyl": {
       "as_of": "2026-06-29",
-      "weeks_stale": 13
+      "weeks_stale": 14
     },
     "diesel_delhi_per_L": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "lpg_nonsub_delhi_per14kg": {
       "as_of": "2026-06-29",
-      "weeks_stale": 13
+      "weeks_stale": 14
     },
     "era5_tmax": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_tmin": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_tmean": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_dtr": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_heat_35": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_heat_38": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "chirps_rain_mm": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "chirps_rain_max": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "chirps_excess": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
+    },
+    "era5_heat_35_roll4": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "era5_heat_35_roll8": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
     },
     "chirps_rain_mm_roll4": {
       "as_of": "2026-09-21",
+      "weeks_stale": 2
+    },
+    "chirps_rain_mm_roll8": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_ndvi": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_evi": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_valid_frac": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_ndvi_anom": {
+      "as_of": "2026-09-28",
       "weeks_stale": 1
     },
     "modis_ndvi": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "modis_evi": {
       "as_of": "2026-09-21",
+      "weeks_stale": 2
+    },
+    "modis_lst_mean": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "modis_lst_max": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "modis_lst_frac35": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_ndvi_roll4": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_ndvi_anom_roll4": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "modis_lst_mean_roll4": {
+      "as_of": "2026-09-28",
       "weeks_stale": 1
     },
     "wage_agri_men": {
       "as_of": "2026-03-30",
-      "weeks_stale": 26
+      "weeks_stale": 27
     },
     "wage_agri_women": {
       "as_of": "2026-03-30",
-      "weeks_stale": 26
+      "weeks_stale": 27
     }
   },
   "potato": {
     "bank_credit_agri_cr": {
       "as_of": "2026-07-27",
-      "weeks_stale": 9
+      "weeks_stale": 10
     },
     "export_veg_usd_mn": {
       "as_of": "2026-05-25",
-      "weeks_stale": 18
+      "weeks_stale": 19
     },
     "import_veg_usd_mn": {
       "as_of": "2026-05-25",
-      "weeks_stale": 18
+      "weeks_stale": 19
     },
     "crude_oil_usd_bbl": {
       "as_of": "2026-03-30",
-      "weeks_stale": 26
+      "weeks_stale": 27
     },
     "iip_food_proc": {
       "as_of": "2026-03-30",
-      "weeks_stale": 26
+      "weeks_stale": 27
     },
     "agri_wages_rs_day": {
       "as_of": "2026-06-29",
-      "weeks_stale": 13
+      "weeks_stale": 14
     },
     "repo_rate_pct": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "reverse_repo_pct": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "usdinr_monthly_avg": {
       "as_of": "2026-06-29",
-      "weeks_stale": 13
+      "weeks_stale": 14
     },
     "wpi_fruits_vegetables": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "wpi_vegetables_total": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "wpi_potato": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "wpi_onion": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "wpi_tomato": {
       "as_of": "2026-04-27",
-      "weeks_stale": 22
+      "weeks_stale": 23
     },
     "diesel_4city_rs_litre": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "lpg_nonsub_4city_rs_cyl": {
       "as_of": "2026-06-29",
-      "weeks_stale": 13
+      "weeks_stale": 14
     },
     "diesel_delhi_per_L": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "lpg_nonsub_delhi_per14kg": {
       "as_of": "2026-06-29",
-      "weeks_stale": 13
+      "weeks_stale": 14
     },
     "era5_tmax": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_tmin": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_tmean": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_dtr": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_heat_35": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "era5_heat_38": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "chirps_rain_mm": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "chirps_rain_max": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
     },
     "chirps_excess": {
       "as_of": "2026-08-31",
-      "weeks_stale": 4
+      "weeks_stale": 5
+    },
+    "era5_heat_35_roll4": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "era5_heat_35_roll8": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
     },
     "chirps_rain_mm_roll4": {
       "as_of": "2026-09-21",
+      "weeks_stale": 2
+    },
+    "chirps_rain_mm_roll8": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_ndvi": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_evi": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_valid_frac": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_ndvi_anom": {
+      "as_of": "2026-09-28",
       "weeks_stale": 1
     },
     "modis_ndvi": {
       "as_of": "2026-09-21",
-      "weeks_stale": 1
+      "weeks_stale": 2
     },
     "modis_evi": {
       "as_of": "2026-09-21",
+      "weeks_stale": 2
+    },
+    "modis_lst_mean": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "modis_lst_max": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "modis_lst_frac35": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_ndvi_roll4": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "s2_ndvi_anom_roll4": {
+      "as_of": "2026-09-28",
+      "weeks_stale": 1
+    },
+    "modis_lst_mean_roll4": {
+      "as_of": "2026-09-28",
       "weeks_stale": 1
     },
     "wage_agri_men": {
       "as_of": "2026-03-30",
-      "weeks_stale": 26
+      "weeks_stale": 27
     },
     "wage_agri_women": {
       "as_of": "2026-03-30",
-      "weeks_stale": 26
+      "weeks_stale": 27
     }
   }
 }
