@@ -1,0 +1,15 @@
+event,outcome,window,pooled_regime,expected_sign,n_hub,n_donors,att_pct,signed_att,sign_as_expected,inspace_sd,p_inspace,intime_sd,p_intime,meets_standard
+R1_2019_ban,price,att_0_12,True,-1,8,57,20.97,-20.97,False,6.02,0.005,5.19,0.0116,False
+R1_2019_ban,price,att_0_26,True,-1,8,57,11.36,-11.36,False,3.85,0.01,4.55,0.0116,False
+R2_2020_lift,price,att_0_12,True,1,6,45,-12.65,-12.65,False,4.68,0.0149,5.19,0.0116,False
+R2_2020_lift,price,att_0_26,True,1,6,45,1.05,1.05,True,3.39,0.7761,4.55,0.7791,False
+R3_2023_duty,price,att_0_12,True,-1,6,140,4.04,-4.04,False,3.94,0.2935,5.19,0.4535,False
+R3_2023_duty,price,att_0_26,True,-1,6,140,6.06,-6.06,False,4.53,0.1493,4.55,0.2674,False
+R4_2024_lift,price,att_0_12,True,1,7,157,4.02,4.02,True,2.77,0.1692,5.19,0.4651,False
+R4_2024_lift,price,att_0_26,True,1,7,157,4.34,4.34,True,3.31,0.199,4.55,0.4302,False
+R5_2025_dutyoff,price,att_0_12,True,1,8,158,5.11,5.11,True,4.43,0.2537,5.19,0.314,False
+R5_2025_dutyoff,price,att_0_26,True,1,8,158,1.48,1.48,True,3.89,0.6468,4.55,0.7442,False
+S_2023_ban,price,att_0_12,False,-1,6,146,14.79,-14.79,False,6.63,0.0498,5.19,0.0116,False
+S_2023_ban,price,att_0_26,False,-1,6,146,13.09,-13.09,False,4.31,0.01,4.55,0.0116,False
+S_2024_MEPoff,price,att_0_12,False,1,7,156,6.85,6.85,True,4.13,0.1045,5.19,0.1977,False
+S_2024_MEPoff,price,att_0_26,False,1,7,156,1.52,1.52,True,3.39,0.6119,4.55,0.7442,False

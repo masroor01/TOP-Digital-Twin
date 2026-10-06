@@ -1,0 +1,13 @@
+outcome,window,set,n_regimes,signed_pooled_att,n_meeting_standard
+price,att_0_12,all,5,-5.71,0
+price,att_0_12,leave_out_R1_2019_ban,4,-1.89,0
+price,att_0_12,leave_out_R2_2020_lift,4,-3.97,0
+price,att_0_12,leave_out_R3_2023_duty,4,-6.12,0
+price,att_0_12,leave_out_R4_2024_lift,4,-8.14,0
+price,att_0_12,leave_out_R5_2025_dutyoff,4,-8.41,0
+price,att_0_26,all,5,-2.11,0
+price,att_0_26,leave_out_R1_2019_ban,4,0.2,0
+price,att_0_26,leave_out_R2_2020_lift,4,-2.9,0
+price,att_0_26,leave_out_R3_2023_duty,4,-1.12,0
+price,att_0_26,leave_out_R4_2024_lift,4,-3.72,0
+price,att_0_26,leave_out_R5_2025_dutyoff,4,-3.01,0

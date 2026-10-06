@@ -1,0 +1,13 @@
+event,outcome,window,pooled_regime,expected_sign,n_hub,n_donors,att_pct,signed_att,sign_as_expected,inspace_sd,p_inspace,intime_sd,p_intime,meets_standard
+R1_2019_ban,arrivals,att_0_12,True,-1,8,44,-52.09,52.09,True,15.36,0.01,29.9,0.1395,False
+R1_2019_ban,arrivals,att_0_26,True,-1,8,44,19.39,-19.39,False,11.82,0.0995,23.45,0.4186,False
+R2_2020_lift,arrivals,att_0_12,True,1,6,38,36.68,36.68,True,25.43,0.1741,29.9,0.2558,False
+R2_2020_lift,arrivals,att_0_26,True,1,6,38,147.5,147.5,True,19.4,0.005,23.45,0.0116,True
+R4_2024_lift,arrivals,att_0_12,True,1,7,149,13.15,13.15,True,12.09,0.2886,29.9,0.5,False
+R4_2024_lift,arrivals,att_0_26,True,1,7,149,2.75,2.75,True,11.32,0.7711,23.45,0.8953,False
+R5_2025_dutyoff,arrivals,att_0_12,True,1,8,152,12.05,12.05,True,11.98,0.2736,29.9,0.5116,False
+R5_2025_dutyoff,arrivals,att_0_26,True,1,8,152,18.83,18.83,True,11.82,0.0995,23.45,0.4302,False
+S_2023_ban,arrivals,att_0_12,False,-1,6,141,20.5,-20.5,False,14.76,0.1542,29.9,0.3953,False
+S_2023_ban,arrivals,att_0_26,False,-1,6,141,-8.16,8.16,True,12.53,0.4627,23.45,0.7093,False
+S_2024_MEPoff,arrivals,att_0_12,False,1,7,151,-45.56,-45.56,False,12.05,0.005,29.9,0.1628,False
+S_2024_MEPoff,arrivals,att_0_26,False,1,7,151,1.64,1.64,True,12.69,0.9055,23.45,0.9302,False

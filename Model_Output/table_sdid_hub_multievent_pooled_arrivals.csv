@@ -1,0 +1,11 @@
+outcome,window,set,n_regimes,signed_pooled_att,n_meeting_standard
+arrivals,att_0_12,all,4,28.49,0
+arrivals,att_0_12,leave_out_R1_2019_ban,3,20.63,0
+arrivals,att_0_12,leave_out_R2_2020_lift,3,25.76,0
+arrivals,att_0_12,leave_out_R4_2024_lift,3,33.61,0
+arrivals,att_0_12,leave_out_R5_2025_dutyoff,3,33.97,0
+arrivals,att_0_26,all,4,37.42,1
+arrivals,att_0_26,leave_out_R1_2019_ban,3,56.36,1
+arrivals,att_0_26,leave_out_R2_2020_lift,3,0.73,0
+arrivals,att_0_26,leave_out_R4_2024_lift,3,48.98,1
+arrivals,att_0_26,leave_out_R5_2025_dutyoff,3,43.62,1
