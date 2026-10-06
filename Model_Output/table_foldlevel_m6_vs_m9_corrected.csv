@@ -1,0 +1,13 @@
+crop,horizon_weeks,M9_wins,n_folds,binom_p
+onion,1,2,5,0.8125
+onion,4,3,5,0.5
+onion,13,3,5,0.5
+onion,26,3,5,0.5
+potato,1,4,5,0.1875
+potato,4,0,5,1.0
+potato,13,1,5,0.9688
+potato,26,1,5,0.9688
+tomato,1,3,5,0.5
+tomato,4,2,5,0.8125
+tomato,13,3,5,0.5
+tomato,26,4,5,0.1875

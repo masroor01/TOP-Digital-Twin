@@ -1,37 +1,37 @@
 crop,market_id,market,horizon_weeks,mape_shared,mape_market_restricted,DM_stat,p_value,mean_d,n,better_model,significant_5pct
-tomato,9.0,Shadnagar APMC,1,43.66,31.72,1.8236,0.0695,130268.098303,240,market-restricted,False
-tomato,9.0,Shadnagar APMC,4,68.64,48.22,0.5541,0.5801,81358.927623,237,market-restricted,False
-tomato,9.0,Shadnagar APMC,13,62.23,42.86,-0.8975,0.3704,-102052.861853,228,shared,False
-tomato,9.0,Shadnagar APMC,26,77.15,41.94,0.7927,0.4288,112523.456995,215,market-restricted,False
-tomato,112.0,Kolar APMC,1,34.48,26.08,-1.3699,0.172,-176673.22378,240,shared,False
-tomato,112.0,Kolar APMC,4,56.57,35.61,-0.6387,0.5237,-170574.342177,237,shared,False
-tomato,112.0,Kolar APMC,13,57.1,36.31,-0.7675,0.4436,-144295.19785,228,shared,False
-tomato,112.0,Kolar APMC,26,70.05,37.35,0.9111,0.3633,139242.558368,215,market-restricted,False
-tomato,2481.0,Kota (F&V) APMC,1,29.26,29.99,-2.5694,0.0108,-224764.731379,229,shared,True
-tomato,2481.0,Kota (F&V) APMC,4,42.15,41.01,-1.298,0.1956,-249744.450635,223,shared,False
-tomato,2481.0,Kota (F&V) APMC,13,45.8,42.17,-0.5332,0.5944,-70347.048874,210,shared,False
-tomato,2481.0,Kota (F&V) APMC,26,49.36,44.41,-1.3974,0.1639,-324046.629078,195,shared,False
-onion,54.0,Bharuch APMC,1,10.63,12.46,-0.6602,0.511,-5830.336462,83,shared,False
-onion,54.0,Bharuch APMC,4,17.69,29.31,-1.8557,0.0672,-86651.296324,80,shared,False
-onion,54.0,Bharuch APMC,13,31.09,55.31,-2.0193,0.0473,-354827.907232,71,shared,True
-onion,54.0,Bharuch APMC,26,61.97,47.64,,,203444.813505,58,market-restricted,False
-onion,162.0,Pimpalgaon APMC,1,20.17,21.13,-0.3958,0.6926,-12845.083484,240,shared,False
-onion,162.0,Pimpalgaon APMC,4,27.01,35.42,-2.7407,0.0066,-278351.052049,237,shared,True
-onion,162.0,Pimpalgaon APMC,13,35.9,39.2,-1.3854,0.1673,-142111.424488,228,shared,False
-onion,162.0,Pimpalgaon APMC,26,39.1,33.62,-0.0345,0.9725,-13865.620811,215,shared,False
-onion,550.0,Chandvad APMC,1,22.19,24.48,-1.7486,0.0816,-50036.318355,240,shared,False
-onion,550.0,Chandvad APMC,4,30.62,42.68,-2.9553,0.0034,-376660.001235,237,shared,True
-onion,550.0,Chandvad APMC,13,43.56,47.86,-2.3372,0.0203,-132182.104387,228,shared,True
-onion,550.0,Chandvad APMC,26,46.35,40.43,-0.1178,0.9064,-43247.06271,215,shared,False
-potato,303.0,Dehradoon APMC,1,15.84,18.27,-3.4169,0.0007,-14359.997338,237,shared,True
-potato,303.0,Dehradoon APMC,4,19.59,21.29,-2.1057,0.0363,-30966.288558,234,shared,True
-potato,303.0,Dehradoon APMC,13,32.94,27.44,-0.2865,0.7748,-14689.2836,225,shared,False
-potato,303.0,Dehradoon APMC,26,34.1,25.09,0.2004,0.8414,14428.25436,212,market-restricted,False
-potato,319.0,Kashipur APMC,1,15.51,15.27,-0.3061,0.7599,-1816.172627,185,shared,False
-potato,319.0,Kashipur APMC,4,22.07,18.56,0.7065,0.4808,9121.666633,182,market-restricted,False
-potato,319.0,Kashipur APMC,13,35.45,23.9,0.7358,0.4628,33180.826602,173,market-restricted,False
-potato,319.0,Kashipur APMC,26,37.43,20.88,0.6917,0.4901,60277.33846,160,market-restricted,False
-potato,3350.0,Chakdah APMC,1,10.76,13.14,-4.1421,0.0,-36934.196621,237,shared,True
-potato,3350.0,Chakdah APMC,4,17.35,20.66,-2.2812,0.0234,-106118.79623,234,shared,True
-potato,3350.0,Chakdah APMC,13,44.24,36.68,1.3427,0.1807,197794.091254,225,market-restricted,False
-potato,3350.0,Chakdah APMC,26,30.21,43.77,-0.9502,0.3431,-159791.44212,212,shared,False
+tomato,9.0,Shadnagar APMC,1,40.38,31.97,1.5202,0.1297,73653.272419,247,market-restricted,False
+tomato,9.0,Shadnagar APMC,4,59.78,49.13,-0.0043,0.9966,-385.942998,244,shared,False
+tomato,9.0,Shadnagar APMC,13,60.21,42.2,-0.9856,0.3253,-78170.681612,235,shared,False
+tomato,9.0,Shadnagar APMC,26,76.21,40.64,0.3265,0.7443,41408.457286,222,market-restricted,False
+tomato,112.0,Kolar APMC,1,31.7,26.68,-1.7344,0.0841,-217989.97507,247,shared,False
+tomato,112.0,Kolar APMC,4,50.2,38.95,-0.9119,0.3627,-233395.547427,244,shared,False
+tomato,112.0,Kolar APMC,13,56.45,40.45,-1.1609,0.2468,-229611.515084,235,shared,False
+tomato,112.0,Kolar APMC,26,69.81,37.36,-0.1718,0.8637,-35175.058995,222,shared,False
+tomato,2481.0,Kota (F&V) APMC,1,27.64,31.85,-3.4036,0.0008,-276540.273677,236,shared,True
+tomato,2481.0,Kota (F&V) APMC,4,37.31,43.33,-1.4815,0.1398,-268493.287163,230,shared,False
+tomato,2481.0,Kota (F&V) APMC,13,43.27,43.16,-1.761,0.0797,-336906.096165,217,shared,False
+tomato,2481.0,Kota (F&V) APMC,26,47.32,53.18,-4.1353,0.0001,-757690.290069,204,shared,True
+onion,54.0,Bharuch APMC,1,8.82,12.65,-2.5239,0.0134,-17918.713054,90,shared,True
+onion,54.0,Bharuch APMC,4,13.53,23.58,-2.568,0.012,-57720.773218,87,shared,True
+onion,54.0,Bharuch APMC,13,13.69,30.6,-2.0475,0.044,-136120.205067,78,shared,True
+onion,54.0,Bharuch APMC,26,17.53,50.85,-3.5542,0.0007,-427661.666954,65,shared,True
+onion,162.0,Pimpalgaon APMC,1,18.92,20.82,-2.6936,0.0076,-147972.583229,247,shared,True
+onion,162.0,Pimpalgaon APMC,4,27.12,31.81,-2.3548,0.0193,-391555.704254,244,shared,True
+onion,162.0,Pimpalgaon APMC,13,34.54,34.13,-1.1636,0.2458,-173607.188771,235,shared,False
+onion,162.0,Pimpalgaon APMC,26,39.0,29.56,0.651,0.5157,156289.131859,222,market-restricted,False
+onion,550.0,Chandvad APMC,1,20.15,24.65,-3.5623,0.0004,-190626.305056,247,shared,True
+onion,550.0,Chandvad APMC,4,31.99,40.9,-2.8507,0.0047,-471272.625231,244,shared,True
+onion,550.0,Chandvad APMC,13,43.01,37.87,-0.8007,0.4241,-238127.083528,235,shared,False
+onion,550.0,Chandvad APMC,26,46.56,32.21,0.5749,0.566,164380.124346,222,market-restricted,False
+potato,303.0,Dehradoon APMC,1,15.74,19.64,-4.2056,0.0,-18760.887607,247,shared,True
+potato,303.0,Dehradoon APMC,4,18.84,19.16,-1.1969,0.2325,-16792.903215,244,shared,False
+potato,303.0,Dehradoon APMC,13,31.13,28.88,-0.8212,0.4124,-32092.817354,235,shared,False
+potato,303.0,Dehradoon APMC,26,31.37,25.69,-0.226,0.8214,-11406.864935,222,shared,False
+potato,319.0,Kashipur APMC,1,15.71,14.64,-0.4654,0.6422,-2955.557917,195,shared,False
+potato,319.0,Kashipur APMC,4,21.75,18.27,0.7753,0.4391,11460.541888,192,market-restricted,False
+potato,319.0,Kashipur APMC,13,33.46,25.09,0.4352,0.6639,15395.087582,183,market-restricted,False
+potato,319.0,Kashipur APMC,26,31.85,23.41,0.1505,0.8806,9529.374679,170,market-restricted,False
+potato,3350.0,Chakdah APMC,1,11.05,14.53,-5.3247,0.0,-59022.328083,247,shared,True
+potato,3350.0,Chakdah APMC,4,18.78,21.11,-2.543,0.0116,-104795.243667,244,shared,True
+potato,3350.0,Chakdah APMC,13,37.35,38.4,0.4733,0.6365,70319.0804,235,market-restricted,False
+potato,3350.0,Chakdah APMC,26,35.42,35.14,1.1529,0.2502,102961.321683,222,market-restricted,False
