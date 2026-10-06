@@ -286,8 +286,9 @@ for crop in CROPS:
                 df_h['target'] = df_h['log_price'].shift(-h)
                 df_h = df_h.dropna(subset=[c for c in ['target', 'price_lag_1'] if c in df_h.columns])
 
-                train = df_h[df_h['week_start'] <= t_end]
-                val = df_h[(df_h['week_start'] > v_start) & (df_h['week_start'] <= v_end)]
+                # target-date-aware window (corrected protocol, 2026-10-03): a row's target h weeks ahead must not fall past t_end
+                train = df_h[df_h['week_start'] + pd.Timedelta(weeks=h) <= t_end]
+                val = df_h[(df_h['week_start'] >= v_start) & (df_h['week_start'] <= v_end)]
                 test = df_h[(df_h['week_start'] >= te_start) & (df_h['week_start'] <= te_end)]
 
                 if len(train) < 50 or len(val) < 5 or len(test) < 5:

@@ -96,3 +96,24 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Users\masro\Documents\TO
   machine. A cloud-scheduled job would have no access to any of it.
 - **No auto-push** — keeps GitHub (and the live Streamlit redeploy it
   triggers) under manual review before anything public changes.
+
+## Local (.ps1) vs CI (.py): known divergences
+
+Two independent orchestrators now exist and they are **not kept in sync automatically**.
+The cloud path (`.github/workflows/weekly_refresh.yml` -> `run_weekly_refresh_ci.py`) is the
+one the live dashboard depends on; the local Task Scheduler path (`run_weekly_refresh.ps1`)
+is the older fallback. Differences to know about before trusting either one:
+
+| Aspect | Local `.ps1` | CI `.py` (GitHub Actions) |
+|---|---|---|
+| Satellite/climate top-up (GEE scripts 01-05) and Script 14 | **Not run.** ERA5/CHIRPS/S2/MODIS features stay as of the last manual or CI update, so the dashboard's climate/satellite feeds go stale | Run every cycle (S2 NDVI top-up is the ~1.6 h bottleneck of a ~2.5 h run); Script 14 is skipped, with a log line, if any GEE step is incomplete |
+| Raw trusted CSVs | Fixed local Downloads folder | `TOP_DOWNLOADS_DIR`, populated by the workflow (`rclone copy`) before the script runs |
+| Scraper pacing | `--sleep`/`--retries` tuned up 2026-09-17 | `--sleep 1.5 --retries 6` from the start |
+| After the run | Commits to local history; never pushes | Commits on the runner; the workflow opens a **pull request** (Hostinger only redeploys on a push to master, so nothing public changes until a human merges) |
+| Safety gates (strict merge asserts, parity `verify.mjs`, sanity suite Script 44) | Present | Present (same intent) |
+
+Consequences: a local-only run refreshes prices and models but **not** the satellite/climate
+layers, so retrained models then use stale climate/satellite rows (carried forward and flagged
+as stale). Prefer the CI path for production refreshes. If the local path is ever relied on
+again, add the GEE steps (or run `scripts/gee_auto/*` and Script 14 manually first). Any change
+to one orchestrator must be mirrored by hand in the other.
