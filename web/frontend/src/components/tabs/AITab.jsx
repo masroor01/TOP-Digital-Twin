@@ -58,6 +58,9 @@ export default function AITab({ sim, crop, market, horizon }) {
       {brief && (
         <Card className="p-5 max-w-3xl">
           <p className="text-sm leading-relaxed text-[var(--text-primary)]">{brief}</p>
+          <p className="text-xs mt-3 pt-3 border-t border-[var(--border-color-strong)] text-[var(--text-secondary)]">
+            AI-generated commentary on a what-if from a single model. It is not a validated forecast: model skill is strongest at 13–26 weeks for tomato and onion, and weak for potato and at 1 week.
+          </p>
         </Card>
       )}
     </div>
