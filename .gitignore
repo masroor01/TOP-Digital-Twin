@@ -154,3 +154,4 @@ data/agmarknet_weekly/top_weekly_panel_with_drought.csv
 # see .github/workflows/weekly_refresh.yml); this is defense-in-depth
 # after a real exposure incident (2026-09-22, see MANIFEST.md).
 gee-service-account-key*.json
+Model_Output/_stability_runs/

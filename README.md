@@ -546,7 +546,7 @@ their age relative to the current pipeline).
 - **Skill vs persistence (M6, 1 / 4 / 13 / 26 wk):** tomato −62 / +5 / +37 / +38 %; onion −80 / −17 / +6 / +20 %; potato −140 / −40 / −42 / −2 %. Crossover: tomato 4 wk, onion 13 wk, potato none within 26 wk.
 - **Classical benchmarks (13 / 26 wk):** model beats the best of persistence, seasonal naive, 4-wk moving average and ARIMA in 5 of 6 cells (potato 13 wk is the exception; onion 13 wk margin is small).
 - **Crises (13 wk):** tomato 2023 23 % vs 158 %, onion 2023-24 21 % vs 51 %, potato spike 2024 49 % vs 27 % (worse), potato crash 2025 36 % vs 57 %; 8 of 16 cells won, all four missed at 1 wk.
-- **Layers:** no M6-vs-M0 cell certified (best 4 of 5 folds); one candidate cell reaches 5 of 5 (M9/ENSO, onion 13 wk, p = 0.031) but is NOT claimed (36 cells tested; 6 of 8 on the 8-fold extension; it was 3 of 5 before the validation fix). Cell-level fold counts move by up to 2-3 folds under a change that only touches early stopping, so only the broad pattern is robust.
+- **Layers:** no M6-vs-M0 cell certified (best 4 of 5 folds; 0 of 60 seed-runs reach 5 of 5; results stable across seeds, Script 69). The validation-window fix changed two cells for real (onion 26 wk, potato 13 wk: a leak removed). Candidate layers (M9/ENSO) are seed-sensitive: a 5-of-5 appears in a different cell with each seed (6 of 60 runs; seed-averaged only tomato 26 wk, p = 0.031, one of 36 comparisons): NOT claimed.
 - **Causal policy effects:** the price effect of onion export policy is not identified by either design tried (Scripts 66-68); scenario outputs are model sensitivities. See `Model_Output/MANIFEST.md` (2026-10-07 sections).
 
 
