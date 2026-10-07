@@ -1,25 +1,25 @@
 crop,state,horizon_weeks,mape_shared,mape_state_restricted,DM_stat,p_value,mean_d,n,better_model,significant_5pct
-tomato,Uttar Pradesh,1,22.54,21.56,-15.0288,0.0,-83150.137594,36693,shared,True
-tomato,Uttar Pradesh,4,35.83,33.79,-22.2928,0.0,-183411.5092,35967,shared,True
-tomato,Uttar Pradesh,13,39.78,44.08,-27.1274,0.0,-363674.99966,34100,shared,True
-tomato,Uttar Pradesh,26,43.49,44.38,-11.9218,0.0,-239092.587456,31935,shared,True
-tomato,Keralam,1,22.26,24.65,-7.1993,0.0,-67679.771506,15110,shared,True
-tomato,Keralam,4,30.93,33.86,-12.6069,0.0,-301111.169812,14882,shared,True
-tomato,Keralam,13,32.17,31.63,8.671,0.0,752274.585138,14240,state-restricted,True
-tomato,Keralam,26,36.05,37.26,5.4648,0.0,1101215.77701,13412,state-restricted,True
-onion,Maharashtra,1,19.21,19.41,-1.4392,0.1501,-4033.799423,16798,shared,False
-onion,Maharashtra,4,29.74,30.81,-11.0706,0.0,-144632.429085,16516,shared,True
-onion,Maharashtra,13,40.2,37.89,-8.752,0.0,-301953.556741,15745,shared,True
-onion,Maharashtra,26,44.91,34.71,-1.5447,0.1225,-46056.957017,14814,shared,False
-onion,Kerala,1,12.64,13.83,-4.6947,0.0,-16375.157761,14063,shared,True
-onion,Kerala,4,17.91,20.05,-0.5781,0.5632,-6925.431662,13868,shared,False
-onion,Kerala,13,23.46,28.95,-1.7964,0.0724,-62786.813579,13294,shared,False
-onion,Kerala,26,29.46,26.92,10.0961,0.0,563651.339984,12491,state-restricted,True
-potato,West Bengal,1,11.33,12.07,-34.8657,0.0,-17865.74854,16413,shared,True
-potato,West Bengal,4,19.69,19.56,-14.7199,0.0,-29295.610033,16179,shared,True
-potato,West Bengal,13,39.74,41.02,7.1754,0.0,25981.217761,15517,state-restricted,True
-potato,West Bengal,26,38.52,36.13,3.6578,0.0003,21737.558583,14670,state-restricted,True
-potato,Uttarakhand,1,14.94,14.7,-6.1533,0.0,-5505.634354,3625,shared,True
-potato,Uttarakhand,4,20.9,19.75,-5.0045,0.0,-28200.19068,3568,shared,True
-potato,Uttarakhand,13,35.99,26.8,1.9193,0.055,15110.586465,3403,state-restricted,False
-potato,Uttarakhand,26,36.32,29.46,-2.6126,0.009,-35741.94893,3204,shared,True
+tomato,Uttar Pradesh,1,22.87,21.65,-16.0497,0.0,-87258.636703,36816,shared,True
+tomato,Uttar Pradesh,4,35.55,32.77,-14.1164,0.0,-98229.833203,36087,shared,True
+tomato,Uttar Pradesh,13,38.0,41.26,-27.5688,0.0,-267135.302514,34219,shared,True
+tomato,Uttar Pradesh,26,38.61,36.4,-1.6269,0.1038,-9528.767843,32061,shared,False
+tomato,Keralam,1,22.83,24.67,-14.1683,0.0,-101122.504605,15174,shared,True
+tomato,Keralam,4,31.14,36.03,-13.9459,0.0,-502439.99168,14946,shared,True
+tomato,Keralam,13,30.49,30.81,4.6597,0.0,220074.046156,14303,state-restricted,True
+tomato,Keralam,26,35.76,40.12,-2.8214,0.0048,-185958.005875,13475,shared,True
+onion,Maharashtra,1,19.64,19.12,5.0908,0.0,11845.540986,16874,state-restricted,True
+onion,Maharashtra,4,29.95,30.17,-9.4209,0.0,-128311.34189,16592,shared,True
+onion,Maharashtra,13,40.27,38.47,-9.6067,0.0,-299009.401272,15820,shared,True
+onion,Maharashtra,26,45.37,35.92,-1.3188,0.1873,-35068.945934,14885,shared,False
+onion,Kerala,1,12.48,13.8,-8.3879,0.0,-30131.037926,14114,shared,True
+onion,Kerala,4,17.37,19.9,-4.2155,0.0,-46161.953452,13919,shared,True
+onion,Kerala,13,26.69,29.34,7.3467,0.0,568673.034755,13345,state-restricted,True
+onion,Kerala,26,29.02,27.31,9.5372,0.0,640514.465524,12541,state-restricted,True
+potato,West Bengal,1,12.15,12.26,-19.9268,0.0,-10415.139573,16480,shared,True
+potato,West Bengal,4,19.5,19.62,-15.238,0.0,-30257.89215,16246,shared,True
+potato,West Bengal,13,39.94,40.36,3.3037,0.001,13869.544145,15584,state-restricted,True
+potato,West Bengal,26,46.68,51.13,-11.5141,0.0,-53129.797695,14735,shared,True
+potato,Uttarakhand,1,15.18,14.59,-4.7223,0.0,-3423.700241,3858,shared,True
+potato,Uttarakhand,4,21.01,19.44,-4.4502,0.0,-19184.990503,3795,shared,True
+potato,Uttarakhand,13,40.35,27.68,4.6476,0.0,47328.606536,3612,state-restricted,True
+potato,Uttarakhand,26,37.98,32.36,-1.5749,0.1154,-21752.963044,3391,shared,False
