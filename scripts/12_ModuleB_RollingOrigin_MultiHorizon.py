@@ -327,7 +327,11 @@ for crop in CROPS:
             # for early stopping. val's lower bound uses >= v_start (was
             # > v_start, silently dropping the validation window's first week).
             train = df_h[df_h['week_start'] + pd.Timedelta(weeks=h) <= t_end]
-            val   = df_h[(df_h['week_start'] >= v_start) & (df_h['week_start'] <= v_end)]
+            # val is also selected by TARGET date (2026-10-06): filtering val on origin week let
+            # its targets run up to h weeks past v_end into the test window (all of them at h=26),
+            # so early stopping picked best_iter on test-period prices. Target in [v_start, v_end]
+            # keeps train < val < test by target date and gives every horizon a full val window.
+            val   = df_h[(df_h['week_start'] + pd.Timedelta(weeks=h)).between(v_start, v_end)]
             test  = df_h[(df_h['week_start'] >= te_start) & (df_h['week_start'] <= te_end)]
 
             if len(train) < 100 or len(test) < 10:
@@ -403,9 +407,10 @@ for crop in CROPS:
         # Train filtered on TARGET date (week_start + 1 week), not just
         # origin week -- see identical fix/rationale in section 4 above.
         # val's lower bound uses >= v_start (was > v_start, silently
-        # dropping the validation window's first week).
+        # dropping the validation window's first week). val is also
+        # selected by target date (2026-10-06), as in section 4 above.
         train = df_h[df_h['week_start'] + pd.Timedelta(weeks=1) <= t_end]
-        val   = df_h[(df_h['week_start'] >= v_start) & (df_h['week_start'] <= v_end)]
+        val   = df_h[(df_h['week_start'] + pd.Timedelta(weeks=1)).between(v_start, v_end)]
         test  = df_h[(df_h['week_start'] >= te_start) & (df_h['week_start'] <= te_end)]
 
         # Threshold on TRAIN prices

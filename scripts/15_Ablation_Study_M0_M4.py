@@ -700,7 +700,11 @@ for variant, feat_list_all in MODEL_FEATURE_SETS.items():
                 # > v_start, silently dropping the validation window's first
                 # week -- an off-by-one Script 12 also fixed in its own file).
                 train = df_h[df_h['week_start'] + pd.Timedelta(weeks=h) <= t_end]
-                val   = df_h[(df_h['week_start'] >= v_start) & (df_h['week_start'] <= v_end)]
+                # val is also selected by TARGET date (2026-10-06): filtering val on origin week let
+                # its targets run up to h weeks past v_end into the test window (all of them at h=26),
+                # so early stopping picked best_iter on test-period prices. Target in [v_start, v_end]
+                # keeps train < val < test by target date and gives every horizon a full val window.
+                val   = df_h[(df_h['week_start'] + pd.Timedelta(weeks=h)).between(v_start, v_end)]
                 test  = df_h[(df_h['week_start'] >= te_start) & (df_h['week_start'] <= te_end)]
 
                 if len(train) < 100 or len(test) < 10:
