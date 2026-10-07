@@ -87,7 +87,7 @@ from the project root (`cd TOP_Digital_Twin`, then `python scripts/NN_Name.py`).
 |---|---|---|
 | `12_ModuleB_RollingOrigin_MultiHorizon.py` | Core rolling-origin CV framework | Script 09 |
 | `13_Benchmark_Models.py` | Naive persistence / ARIMA benchmarks (`table_benchmarks.csv`). **Fixed 2026-09-02**: added the previously-missing national-level B4_ARIMA h=4/13/26 variants (only h=1 per-market existed before). Re-run surfaced one genuine, diagnosed outlier — tomato fold 3 (2024 test year) shows MAPE>1000%/R²<-450 at h=4 because training data ends mid-spike (the real Jul-2023 tomato escalation) and ARIMA(1,1,1) extrapolates that momentum without mean-reversion; this single fold dominates the crop-level mean, so prefer the median across folds (130% MAPE) over the mean (393%) when citing a single tomato ARIMA figure. Not a bug — see MANIFEST.md for the full diagnosis. | Script 09 |
-| `15_Ablation_Study_M0_M4.py` | **The main modeling script.** Trains LightGBM variants M0→M6 (price-only up to the full pipeline), 4-fold rolling-origin CV × 4 horizons × 3 crops = 336 fits. Has a `MARKET_LEVEL_DIAGNOSTIC` flag (see §7) for retraining just 2 variants on the full market panel for higher-power statistical tests. **~10-15 min for the full run.** | Scripts 09, 10, 14, 19, 20, 21 (rebuilds the join itself) |
+| `15_Ablation_Study_M0_M4.py` | **The main modeling script.** Trains LightGBM variants M0→M6 (price-only up to the full pipeline) plus the M7/M8/M9 candidate layers, 5-fold rolling-origin CV × 4 horizons × 3 crops (train, validation AND test rows selected by forecast-target date since 2026-10-06). Has a `MARKET_LEVEL_DIAGNOSTIC` flag (see §7) for retraining just 2 variants on the full market panel for higher-power statistical tests. **~10-15 min for the full run.** | Scripts 09, 10, 14, 19, 20, 21 (rebuilds the join itself) |
 | `15b_Tree_Model_Comparison.py` | Compares LightGBM against RandomForest, XGBoost, CatBoost on the same CV framework — validates LightGBM as the production choice. RandomForest is clearly worst; the other three are competitive with no consistent winner. **~2 hours** (RandomForest dominates the runtime). | Same as Script 15 |
 | `15c_LSTM_Transformer_Comparison.py` | Compares LightGBM against an LSTM and a small Transformer on the same CV framework. Both deep-learning models underperform every tree model, mostly negative R². **~20-25 min.** | Same as Script 15 |
 
@@ -540,6 +540,15 @@ their age relative to the current pipeline).
 ---
 
 ## 9. Project Status (as of 2026-08-29 — see git log for anything after this date)
+
+### Latest evaluation snapshot (full re-run 2026-10-07, commit `92ef20a`; validation window now chosen by target date)
+
+- **Skill vs persistence (M6, 1 / 4 / 13 / 26 wk):** tomato −62 / +5 / +37 / +38 %; onion −80 / −17 / +6 / +20 %; potato −140 / −40 / −42 / −2 %. Crossover: tomato 4 wk, onion 13 wk, potato none within 26 wk.
+- **Classical benchmarks (13 / 26 wk):** model beats the best of persistence, seasonal naive, 4-wk moving average and ARIMA in 5 of 6 cells (potato 13 wk is the exception; onion 13 wk margin is small).
+- **Crises (13 wk):** tomato 2023 23 % vs 158 %, onion 2023-24 21 % vs 51 %, potato spike 2024 49 % vs 27 % (worse), potato crash 2025 36 % vs 57 %; 8 of 16 cells won, all four missed at 1 wk.
+- **Layers:** no M6-vs-M0 cell certified (best 4 of 5 folds); one candidate cell reaches 5 of 5 (M9/ENSO, onion 13 wk, p = 0.031) but is NOT claimed (36 cells tested; 6 of 8 on the 8-fold extension; it was 3 of 5 before the validation fix). Cell-level fold counts move by up to 2-3 folds under a change that only touches early stopping, so only the broad pattern is robust.
+- **Causal policy effects:** the price effect of onion export policy is not identified by either design tried (Scripts 66-68); scenario outputs are model sensitivities. See `Model_Output/MANIFEST.md` (2026-10-07 sections).
+
 
 **Done**: all data layers M0-M6, ablation study (extended from 4 to 5
 rolling-origin folds on 2026-08-13, 420 LightGBM fits), model-family
