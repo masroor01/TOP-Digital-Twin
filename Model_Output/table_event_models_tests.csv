@@ -1,0 +1,37 @@
+crop,side,horizon_weeks,comparison,V_a,V_b,diff,ci90_lo,ci90_hi,ci_above_zero,lay_beats_m0e_folds,n_folds
+onion,crash,13,LAY minus M0E,-0.0054,-0.0205,0.0152,0.0039,0.0276,True,5,5
+onion,crash,13,LAY minus best naive (seasonal),-0.0054,-0.1132,0.1079,0.0816,0.1571,True,5,5
+onion,crash,13,LAY minus M6reg,-0.0054,-0.0392,0.0338,0.0197,0.0558,True,5,5
+onion,crash,13,M0E minus M6reg,-0.0205,-0.0392,0.0187,0.0033,0.0418,True,5,5
+onion,crash,13,EXPLORATORY probability rule: LAY_prob minus M0E_prob,0.5194,0.4217,0.0977,-0.045,0.2978,False,3,5
+onion,crash,13,EXPLORATORY probability rule: LAY_prob minus M6reg (capacity),0.5194,-0.0392,0.5586,0.3495,0.9621,True,3,5
+onion,spike,13,LAY minus M0E,-0.779,-0.7659,-0.0131,-0.0525,0.0165,False,3,5
+onion,spike,13,LAY minus best naive (seasonal),-0.779,-0.8459,0.0669,0.0101,0.124,True,3,5
+onion,spike,13,LAY minus M6reg,-0.779,-0.7484,-0.0306,-0.0783,0.0059,False,3,5
+onion,spike,13,M0E minus M6reg,-0.7659,-0.7484,-0.0175,-0.0395,0.0035,False,3,5
+onion,spike,13,EXPLORATORY probability rule: LAY_prob minus M0E_prob,0.0351,-0.5357,0.5708,-0.1808,1.7498,False,2,5
+onion,spike,13,EXPLORATORY probability rule: LAY_prob minus M6reg (capacity),0.0351,-0.7484,0.7835,0.1573,1.7871,True,2,5
+potato,crash,13,LAY minus M0E,0.0506,0.0217,0.0289,0.0029,0.0695,True,5,5
+potato,crash,13,LAY minus best naive (seasonal),0.0506,-0.0167,0.0673,0.0444,0.1216,True,5,5
+potato,crash,13,LAY minus M6reg,0.0506,0.0383,0.0122,-0.0065,0.0351,False,5,5
+potato,crash,13,M0E minus M6reg,0.0217,0.0383,-0.0166,-0.0495,0.0046,False,5,5
+potato,crash,13,EXPLORATORY probability rule: LAY_prob minus M0E_prob,0.3038,0.4455,-0.1417,-0.3993,-0.0197,False,2,5
+potato,crash,13,EXPLORATORY probability rule: LAY_prob minus M6reg (capacity),0.3038,0.0383,0.2654,-0.1052,0.7524,False,2,5
+potato,spike,13,LAY minus M0E,0.0877,0.0928,-0.0052,-0.0238,0.0118,False,2,5
+potato,spike,13,LAY minus best naive (seasonal),0.0877,0.0209,0.0667,0.0355,0.118,True,2,5
+potato,spike,13,LAY minus M6reg,0.0877,0.0859,0.0017,-0.027,0.0307,False,2,5
+potato,spike,13,M0E minus M6reg,0.0928,0.0859,0.0069,-0.0263,0.0392,False,2,5
+potato,spike,13,EXPLORATORY probability rule: LAY_prob minus M0E_prob,0.481,0.4507,0.0303,-0.0677,0.1333,False,2,5
+potato,spike,13,EXPLORATORY probability rule: LAY_prob minus M6reg (capacity),0.481,0.0859,0.395,0.1103,0.8537,True,2,5
+tomato,crash,13,LAY minus M0E,-0.4151,-0.4002,-0.0148,-0.0251,-0.006,False,0,5
+tomato,crash,13,LAY minus best naive (seasonal),-0.4151,-0.6143,0.1992,0.1522,0.2535,True,0,5
+tomato,crash,13,LAY minus M6reg,-0.4151,-0.4378,0.0227,0.0119,0.0342,True,0,5
+tomato,crash,13,M0E minus M6reg,-0.4002,-0.4378,0.0376,0.0241,0.0525,True,0,5
+tomato,crash,13,EXPLORATORY probability rule: LAY_prob minus M0E_prob,0.0601,0.2101,-0.1499,-0.2702,-0.0641,False,1,5
+tomato,crash,13,EXPLORATORY probability rule: LAY_prob minus M6reg (capacity),0.0601,-0.4378,0.498,0.0811,1.0198,True,1,5
+tomato,spike,13,LAY minus M0E,-0.5491,-0.5271,-0.0221,-0.0369,-0.0089,False,0,5
+tomato,spike,13,LAY minus best naive (seasonal),-0.5491,-0.7719,0.2228,0.1768,0.2697,True,0,5
+tomato,spike,13,LAY minus M6reg,-0.5491,-0.5487,-0.0004,-0.0183,0.0164,False,0,5
+tomato,spike,13,M0E minus M6reg,-0.5271,-0.5487,0.0216,0.0063,0.0353,True,0,5
+tomato,spike,13,EXPLORATORY probability rule: LAY_prob minus M0E_prob,0.2179,0.3232,-0.1053,-0.2357,0.014,False,2,5
+tomato,spike,13,EXPLORATORY probability rule: LAY_prob minus M6reg (capacity),0.2179,-0.5487,0.7666,0.307,1.4452,True,2,5

@@ -1,0 +1,7 @@
+crop,side,V_LAY,V_M0E,diff_vs_M0E,ci_lo,ci_hi,folds_LAY_beats_M0E,beats_best_naive,layers_help
+onion,crash,-0.0054,-0.0205,0.0152,0.0039,0.0276,5,True,True
+onion,spike,-0.779,-0.7659,-0.0131,-0.0525,0.0165,3,True,False
+potato,crash,0.0506,0.0217,0.0289,0.0029,0.0695,5,True,True
+potato,spike,0.0877,0.0928,-0.0052,-0.0238,0.0118,2,True,False
+tomato,crash,-0.4151,-0.4002,-0.0148,-0.0251,-0.006,0,True,False
+tomato,spike,-0.5491,-0.5271,-0.0221,-0.0369,-0.0089,0,True,False
