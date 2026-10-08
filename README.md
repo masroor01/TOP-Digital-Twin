@@ -394,8 +394,7 @@ wide, panel-joinable files), then Script 22 (rebuilds the master panel):
 
 **Live:** https://topdigitaltwin.micskuast.in (Home, About, Dashboard pages).
 The production dashboard is the React/Node app in `web/`. The earlier Streamlit
-app (`scripts/24_Simulation_Dashboard.py`) is kept as a legacy local tool and is
-no longer what the public site runs.
+app has been cancelled and is not used.
 
 **Architecture** (full detail in `web/README.md`)
 - `web/frontend/` React (Vite) single-page app: Home, About, Dashboard
@@ -442,13 +441,9 @@ as an environment variable on the host (see `web/backend/.env.example`); never
 commit a key. Without it the dashboard works and that tab shows an info message.
 Set a spending limit at console.anthropic.com, since the site is public.
 
-**Legacy Streamlit app (local only):**
-```bash
-python -m streamlit run scripts/24_Simulation_Dashboard.py
-```
-Needs Script 23 output (`Model_Output/production_models/`) and Script 26's
-`table_dow_pattern.csv`. Use `python -m streamlit` on Windows. Its Streamlit
-Community Cloud deployment is no longer the public site.
+**Streamlit app:** cancelled and no longer used. The public site at
+https://topdigitaltwin.micskuast.in is the only dashboard. `scripts/24_Simulation_Dashboard.py`
+is retained in the repo for history only.
 
 ---
 
