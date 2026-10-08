@@ -220,7 +220,7 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
           {!dailyLoading && daily && daily.points.length > 0 && (
             <>
               <div className="marquee-wrap overflow-hidden whitespace-nowrap border border-[var(--border-color)] rounded-lg py-2 mb-3 bg-[var(--bg-app-alt)]">
-                <div className="marquee-track text-xs text-[var(--text-primary)]" style={{ animationDuration: `${Math.max(80, daily.points.length * 1.4)}s` }}>
+                <div className="marquee-track text-xs text-[var(--text-primary)]" style={{ animationDuration: `${Math.max(300, daily.points.length * 5)}s` }}>
                   {daily.points.map((p) => (
                     <span key={p.date} className="bg-[var(--card-bg)] px-2 py-0.5 rounded-md border border-[var(--border-color)] mr-4">
                       {fmtDate(p.date)}: <b>{fmtRs(p.price, { perQ: true })}</b> · <b>{fmtRsKg(p.price)}</b>
@@ -229,10 +229,12 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
                 </div>
               </div>
               <PlotChart height={360} layout={{
-                title: { text: 'Smooth Daily Trajectory & Volatility' },
-                xaxis: { title: { text: 'Date' } },
-                yaxis: { title: { text: 'Price (Rs/quintal)' } },
-                yaxis2: { title: { text: 'Price (Rs/kg)' }, overlaying: 'y', side: 'right', showgrid: false },
+                title: { text: 'Smooth Daily Price Trajectory and Volatility Band', font: { size: 14 } },
+                margin: { l: 70, r: 75, t: 70, b: 55 },
+                xaxis: { title: { text: 'Date', standoff: 10 }, showgrid: true, gridcolor: '#EEF0EA', zeroline: false, tickfont: { size: 10, color: '#5B6B60' } },
+                yaxis: { title: { text: 'Price (Rs/quintal)', standoff: 8 }, showgrid: true, gridcolor: '#EEF0EA', zeroline: false, tickformat: ',.0f', tickfont: { size: 10, color: '#5B6B60' } },
+                yaxis2: { title: { text: 'Price (Rs/kg)', standoff: 8 }, overlaying: 'y', side: 'right', showgrid: false, zeroline: false, tickformat: '.1f', tickfont: { size: 10, color: '#5B6B60' } },
+                legend: { orientation: 'h', yanchor: 'bottom', y: 1.01, xanchor: 'center', x: 0.5, font: { size: 11, color: '#5B6B60' } },
                 hovermode: 'x unified',
               }} data={[
                 {
