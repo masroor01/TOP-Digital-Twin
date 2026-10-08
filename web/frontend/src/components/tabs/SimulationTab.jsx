@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, SectionLabel, Metric, Badge, Spinner, CropBadge, Alert, InfoButton } from '../ui';
 import PlotChart from '../PlotChart';
 import { fmtRs, fmtRsKg, fmtPct, fmtDate, HORIZONS, CROP_ICON, CROP_COLOR } from '../../lib/theme';
@@ -14,22 +14,28 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
   const [daily, setDaily] = useState(null);
   const [dailyLoading, setDailyLoading] = useState(false);
 
+  // The daily curve belongs to one crop, market and scenario, so it is re-fetched whenever any of them changes
+  // while the section is open (otherwise it would keep showing the market it was first opened for).
+  const overridesKey = JSON.stringify(overrides || {});
+  useEffect(() => {
+    if (!dailyOpen) return undefined;
+    let stale = false;
+    setDailyLoading(true);
+    api.dailyCurve({ crop, marketId, overrides })
+      .then((d) => { if (!stale) setDaily(d); })
+      .catch(() => { if (!stale) setDaily(null); })
+      .finally(() => { if (!stale) setDailyLoading(false); });
+    return () => { stale = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dailyOpen, crop, marketId, overridesKey]);
+
   if (!sim) return <Spinner label="Running simulation…" />;
 
   const { ticker, kpis, chart, dataQuality } = sim;
   const cropColor = CROP_COLOR[crop];
   const dq = dataQuality || {};
 
-  async function toggleDaily() {
-    if (!dailyOpen && !daily) {
-      setDailyLoading(true);
-      try {
-        const d = await api.dailyCurve({ crop, marketId, overrides });
-        setDaily(d);
-      } finally {
-        setDailyLoading(false);
-      }
-    }
+  function toggleDaily() {
     setDailyOpen((v) => !v);
   }
 
