@@ -132,6 +132,9 @@ export default function Dashboard() {
             ))}
           </div>
 
+          <p className="text-xs text-[var(--text-secondary)] mb-3">
+            Best used for 1–6 month planning; at one week no crop beats a no-change guess. Evaluation re-run 7 Oct 2026 (see About).
+          </p>
           {simError && <Alert tone="error">Simulation error: {simError}</Alert>}
           {!meta || !market ? (
             <Spinner label="Loading dashboard…" />

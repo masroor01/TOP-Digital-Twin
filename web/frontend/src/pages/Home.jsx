@@ -12,7 +12,7 @@ const FEATURES = [
     icon: '⚙️',
     gradient: 'linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%)',
     title: 'What-If Scenario Simulator',
-    body: 'Move a policy, climate, or macro lever — an export ban, a diesel price spike, a rainfall shock — and see the model\'s multi-horizon price response update live.',
+    body: 'Move a policy, climate, or macro lever — an export ban, a diesel price spike, a rainfall shock — and see the model\'s multi-horizon price response update live. Results are model sensitivities, not causal estimates.',
   },
   {
     icon: '🎯',
@@ -32,6 +32,13 @@ const FEATURES = [
     title: 'AI Policy Briefing',
     body: 'A grounded, plain-language commentary on the current scenario — generated strictly from the computed baseline, delta, and isolated effects, never free-form.',
   },
+];
+
+const EVIDENCE = [
+  { big: '13–26 wk', label: 'Where it helps', body: 'Tomato error is about 37–38 % below a no-change guess at 3 and 6 months; onion 6 % and 20 %.' },
+  { big: '5 of 6', label: 'Beats classical methods', body: 'Long-horizon cells where the model beats the best of four classical benchmarks (tomato and onion; potato at 26 weeks).' },
+  { big: 'Not 1 week', label: 'Where it does not', body: 'At one week ahead no crop beats a no-change guess. This is a planning tool for 1–6 months, not a next-week trading signal.' },
+  { big: '2022–2026', label: 'Tested on unseen years', body: 'Five rolling test years, repeated across random seeds. Layer benefits are indicated, not certified; potato is weak.' },
 ];
 
 const LAYERS = [
@@ -126,6 +133,33 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Evidence at a glance */}
+      <section className="max-w-6xl mx-auto px-5 pb-16">
+        <FadeIn>
+          <h2 className="font-display text-2xl sm:text-3xl font-bold text-[var(--text-primary)] text-center mb-2">The evidence, honestly</h2>
+          <p className="text-[var(--text-secondary)] text-center max-w-2xl mx-auto mb-8">
+            Every figure comes from out-of-sample tests re-run on 7 October 2026. We report where the model works and where it does not.
+          </p>
+        </FadeIn>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {EVIDENCE.map((e, i) => (
+            <FadeIn key={e.label} delay={0.05 * i}>
+              <Card className="p-5 h-full">
+                <p className="font-display text-2xl font-bold text-[var(--brand-text)]">{e.big}</p>
+                <p className="font-display font-semibold text-[var(--text-primary)] mt-1">{e.label}</p>
+                <p className="text-sm text-[var(--text-secondary)] mt-1.5 leading-relaxed">{e.body}</p>
+              </Card>
+            </FadeIn>
+          ))}
+        </div>
+        <FadeIn delay={0.1}>
+          <p className="text-xs text-[var(--text-secondary)] text-center mt-5 max-w-3xl mx-auto leading-relaxed">
+            Forward test in progress: an onion early-warning comparison (price-only vs layered models) was frozen on 8 October 2026 and
+            is scored on weeks whose outcomes are not yet known; the single pre-specified analysis is due from April 2027.
+          </p>
+        </FadeIn>
       </section>
 
       {/* Features */}
