@@ -245,7 +245,7 @@ if it's been a while, freshness moves independently per layer.
 | Layer | Source | Latest data point | Cadence | Status |
 |---|---|---|---|---|
 | L1 Market (price/arrivals) | Agmarknet API | 2026-09-14 (week) | Automated weekly | Current |
-| L2/L3 Satellite/Climate (Sentinel-2, MODIS, ERA5, CHIRPS) | Google Earth Engine, manual topup | 2026-07-27 (week) | Manual, periodic | ~7 weeks behind market data |
+| L2/L3 Satellite/Climate (Sentinel-2, MODIS, ERA5, CHIRPS) | Google Earth Engine (`scripts/gee_auto/`) | Fetched by the weekly GitHub Actions run; last verified 2026-07-27 | Automatic in CI only (not in the local Task Scheduler job); the Drive pull failed on 2026-10-06 (expired rclone token) | Needs rclone token re-auth; output arrives as a PR to merge |
 | L4 Macro — CMIE (credit, exports, wages, IIP) | CMIE Economic Outlook | 2026-07-01 | Manual, monthly | ~2.5 months behind |
 | L4 Macro — RBI (repo rate, USD/INR, WPI) | RBI DBIE / CMIE | Through Aug 2026 (WPI columns blank for the latest month) | Manual, monthly | Recently refreshed, WPI trails |
 | L4 Macro — PPAC (diesel/LPG) | PPAC / CMIE | 2026-08-31 | Manual, monthly | Current |
@@ -392,70 +392,63 @@ wide, panel-joinable files), then Script 22 (rebuilds the master panel):
 
 ## 6. The Dashboard
 
-**Run locally:**
+**Live:** https://topdigitaltwin.micskuast.in (Home, About, Dashboard pages).
+The production dashboard is the React/Node app in `web/`. The earlier Streamlit
+app (`scripts/24_Simulation_Dashboard.py`) is kept as a legacy local tool and is
+no longer what the public site runs.
+
+**Architecture** (full detail in `web/README.md`)
+- `web/frontend/` React (Vite) single-page app: Home, About, Dashboard
+  (Simulation, Feature Importance, AI Briefing tabs and others).
+- `web/backend/` Express API plus static file server, one Node process, no Python
+  at runtime. The 12 production LightGBM models run in-process as plain
+  JavaScript exported with m2cgen (parity-checked against Python).
+- `web/data/` bundled copy of every table the app reads (reference rows, price
+  history, accuracy and SHAP tables, staleness flags). Nothing outside `web/` is
+  needed at deploy time.
+
+**Run locally**
+```bash
+cd web
+npm run build    # builds the frontend, installs backend dependencies
+npm start        # app and API on http://localhost:4000
+```
+For hot reload: `npm run dev` in `web/frontend/` (Vite, proxies `/api` to :4000)
+and `npm run dev` in `web/backend/`.
+
+**After retraining or refreshing data**
+1. Retrain with `scripts/23_Train_Production_Models.py`, then copy the model
+   reference files and `table_dow_pattern.csv` into `web/data/` (commands in
+   `web/README.md`, "Updating the bundled data").
+2. If the models changed, run `python web/generate_js_models.py` and
+   `node web/backend/src/models/__fixtures__/verify.mjs`; do not deploy unless
+   every model shows OK.
+
+**Deploying:** hosted on Hostinger as a single Node.js app (root directory
+`web`, build `npm run build`, start `npm start`). Every push to `master`
+redeploys automatically. Nothing reaches the live site until it is merged or
+pushed to `master`.
+
+**Weekly refresh path:** the GitHub Actions workflow
+`.github/workflows/weekly_refresh.yml` runs Monday night, pulls Earth Engine
+exports and Agmarknet data, rebuilds the panel and models, and opens a pull
+request. A person reviews and merges it; the merge triggers the redeploy. The
+workflow also scores the onion forward test. See Section 5 for which layers are
+automatic and which are manual.
+
+**AI Briefing (optional):** the AI tab calls the Claude API (Haiku) for a
+one-paragraph policy commentary on the current scenario. Set `ANTHROPIC_API_KEY`
+as an environment variable on the host (see `web/backend/.env.example`); never
+commit a key. Without it the dashboard works and that tab shows an info message.
+Set a spending limit at console.anthropic.com, since the site is public.
+
+**Legacy Streamlit app (local only):**
 ```bash
 python -m streamlit run scripts/24_Simulation_Dashboard.py
 ```
-(Use `python -m streamlit`, not bare `streamlit` — on Windows the `streamlit`
-executable often isn't on PATH after `pip install`, `python -m` sidesteps that.)
-
-**Requires** Script 23 to have been run at least once (needs
-`Model_Output/production_models/*.joblib` and the metadata JSON/CSV files
-alongside them). The daily price view additionally requires Script 26's
-output (`table_dow_pattern.csv`).
-
-**Theme**: `.streamlit/config.toml` sets the project's palette (green
-accent, crop-specific colors for tomato/onion/potato) — no setup needed,
-Streamlit picks it up automatically.
-
-**Price forecast ticker**: shows the model's prediction at each of its 4
-trained horizons, tagged with which season (per the crop's own calendar —
-kharif/peak-arrival/lean for tomato, rabi-arrival/kharif/lean for onion,
-harvest/storage/lean for potato) that forecast date falls in. The "Show
-daily price forecast" toggle (below the ticker) expands into a smoothed
-daily curve with a seasonal-shading chart and an honest uncertainty band —
-see Script 26 above for what it is and isn't.
-
-**AI policy recommendation (optional)**: the dashboard has a button that
-generates a one-paragraph AI policy commentary on whatever scenario you've
-built, using the Claude API. It's optional — without a key, the dashboard
-still works fully, just with that one section showing an info message
-instead of the button.
-- Get a key at [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys)
-  and **set a spending limit there** — the app is public, so any visitor
-  who clicks the button triggers one API call (using the cheap Haiku model).
-- **Local dev**: copy `.streamlit/secrets.toml.example` to
-  `.streamlit/secrets.toml` and paste in your key. That file is gitignored —
-  never commit a real key.
-- **Streamlit Cloud**: App settings → Secrets → paste
-  `ANTHROPIC_API_KEY = "sk-ant-..."` in the same TOML format. No redeploy
-  needed — secrets take effect on the next app restart/rerun.
-
-**Redeploying to the public URL** (Streamlit Community Cloud):
-- The app is already deployed at the live link you've been sharing. Since
-  it's connected to GitHub, **any push to `master` triggers an automatic
-  rebuild** — you don't need to manually redeploy for code/data changes,
-  just `git push` and wait a few minutes.
-- If you ever need to redeploy from scratch: go to
-  [share.streamlit.io](https://share.streamlit.io), sign in with GitHub,
-  "Create app" → repo `masroor01/TOP-Digital-Twin`, branch `master`, main
-  file `scripts/24_Simulation_Dashboard.py`.
-- **If deploy says "repository does not exist"**: the repo is private and
-  Streamlit's GitHub App wasn't granted access. Fix at
-  [github.com/settings/installations](https://github.com/settings/installations) →
-  find "Streamlit" → Configure → grant access to this repo.
-- **If the deployed app shows "you do not have access"**: this is NOT
-  necessarily the GitHub repo's visibility — confirmed 2026-08-10 that
-  making the repo public did not by itself fix this message. Streamlit
-  Community Cloud has its OWN separate app-level sharing control
-  (share.streamlit.io → the app → Settings → Sharing → "Only specific
-  people" vs. public/anyone-with-link) that does not automatically follow
-  the GitHub repo's visibility. Check that setting directly; if it's
-  deliberately set to "Only specific people" (current state as of
-  2026-08-10, a deliberate choice, not a bug), add viewers individually
-  there rather than via GitHub repo access — GitHub collaborator access
-  does not grant Streamlit app viewer access, they're independent
-  permission systems.
+Needs Script 23 output (`Model_Output/production_models/`) and Script 26's
+`table_dow_pattern.csv`. Use `python -m streamlit` on Windows. Its Streamlit
+Community Cloud deployment is no longer the public site.
 
 ---
 
