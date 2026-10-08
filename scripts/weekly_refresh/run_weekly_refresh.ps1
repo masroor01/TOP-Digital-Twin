@@ -257,8 +257,17 @@ if ($code -ne 0) {
     Log "Script 44: clean."
 }
 
+Log "--- Onion forward test: log this week's frozen-model forecasts (informational, never aborts the refresh) ---"
+$code = RunLogged $Python @("scripts;_Forward_Test_Onion.py", "score")
+if ($code -ne 0) {
+    Log "WARNING: forward-test scoring failed (exit $code) -- the forecast log was NOT extended this week; see the log above. The refresh itself is unaffected."
+} else {
+    Log "Forward test: forecast log up to date."
+}
+
 Log "--- Local git commit (no push) ---"
 $filesToAdd = @(
+    "Model_Outputorward_test_onionorecast_log.csv",
     "data\agmarknet_weekly\tomato_weekly_panel.csv",
     "data\agmarknet_weekly\onion_weekly_panel.csv",
     "data\agmarknet_weekly\potato_weekly_panel.csv",

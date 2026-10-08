@@ -156,3 +156,4 @@ data/agmarknet_weekly/top_weekly_panel_with_drought.csv
 gee-service-account-key*.json
 Model_Output/_stability_runs/
 Model_Output/_event_runs/
+Model_Output/forward_test_onion/frozen_models/
