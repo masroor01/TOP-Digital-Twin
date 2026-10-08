@@ -223,12 +223,18 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
                 <div className="marquee-track text-xs text-[var(--text-primary)]" style={{ animationDuration: `${Math.max(80, daily.points.length * 1.4)}s` }}>
                   {daily.points.map((p) => (
                     <span key={p.date} className="bg-[var(--card-bg)] px-2 py-0.5 rounded-md border border-[var(--border-color)] mr-4">
-                      {fmtDate(p.date)}: <b>{fmtRs(p.price)}</b>
+                      {fmtDate(p.date)}: <b>{fmtRs(p.price, { perQ: true })}</b> · <b>{fmtRsKg(p.price)}</b>
                     </span>
                   ))}
                 </div>
               </div>
-              <PlotChart height={360} layout={{ title: { text: 'Smooth Daily Trajectory & Volatility' } }} data={[
+              <PlotChart height={360} layout={{
+                title: { text: 'Smooth Daily Trajectory & Volatility' },
+                xaxis: { title: { text: 'Date' } },
+                yaxis: { title: { text: 'Price (Rs/quintal)' } },
+                yaxis2: { title: { text: 'Price (Rs/kg)' }, overlaying: 'y', side: 'right', showgrid: false },
+                hovermode: 'x unified',
+              }} data={[
                 {
                   x: [...daily.points.map((p) => p.date), ...daily.points.map((p) => p.date).reverse()],
                   y: [...daily.points.map((p) => p.price + p.band), ...daily.points.map((p) => p.price - p.band).reverse()],
@@ -237,6 +243,13 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
                 {
                   x: daily.points.map((p) => p.date), y: daily.points.map((p) => p.price),
                   type: 'scatter', mode: 'lines', line: { color: '#2D6A4F', width: 2 }, name: 'PCHIP Daily Trend',
+                  hovertemplate: '%{y:,.0f} Rs/quintal (%{customdata:.2f} Rs/kg)<extra></extra>', customdata: daily.points.map((p) => p.price / 100),
+                },
+                {
+                  // invisible trace that gives the right-hand Rs/kg axis the same range as the band
+                  x: [...daily.points.map((p) => p.date), ...daily.points.map((p) => p.date).reverse()],
+                  y: [...daily.points.map((p) => (p.price + p.band) / 100), ...daily.points.map((p) => (p.price - p.band) / 100).reverse()],
+                  yaxis: 'y2', type: 'scatter', mode: 'lines', line: { width: 0 }, hoverinfo: 'skip', showlegend: false,
                 },
               ]} />
             </>
