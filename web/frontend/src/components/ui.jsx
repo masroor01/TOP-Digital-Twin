@@ -84,7 +84,7 @@ export function Sparkline({ points, color = '#0F172A', width = 88, height = 26 }
   );
 }
 
-export function Metric({ label, value, delta, deltaTone, help, spark, sparkColor, border = true, accent, icon }) {
+export function Metric({ label, value, sub, delta, deltaTone, help, spark, sparkColor, border = true, accent, icon }) {
   return (
     <Card className={`p-4 relative group ${border ? '' : 'shadow-none border-0'}`} accent={accent} title={help}>
       <div className="flex items-center justify-between mb-1.5">
@@ -99,13 +99,14 @@ export function Metric({ label, value, delta, deltaTone, help, spark, sparkColor
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="font-display text-[1.6rem] font-bold text-[var(--text-primary)] tracking-tight"
+            className="font-display text-[1.6rem] font-bold text-[var(--text-primary)] tracking-tight whitespace-nowrap"
           >
             {value}
           </motion.p>
         </AnimatePresence>
         {spark && <Sparkline points={spark} color={sparkColor || 'var(--brand)'} />}
       </div>
+      {sub && <p className="text-sm font-semibold text-[var(--text-secondary)] mt-0.5">{sub}</p>}
       {delta && (
         <p className={`font-mono text-[0.82rem] font-semibold mt-1 ${deltaTone === 'up' ? 'text-red-600' : deltaTone === 'down' ? 'text-emerald-600' : 'text-[var(--text-secondary)]'}`}>
           {delta}

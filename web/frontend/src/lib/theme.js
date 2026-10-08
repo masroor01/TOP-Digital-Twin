@@ -7,6 +7,12 @@ export function fmtRs(v, opts = {}) {
   return `₹ ${Math.round(v).toLocaleString('en-IN')}${opts.perQ ? ' / q' : ''}`;
 }
 
+// Price per kg from a price per quintal (1 quintal = 100 kg).
+export function fmtRsKg(v) {
+  if (v == null || Number.isNaN(v)) return '—';
+  return `₹ ${(v / 100).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / kg`;
+}
+
 export function fmtDate(iso, opts = {}) {
   if (!iso) return '—';
   const d = new Date(iso);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, SectionLabel, Metric, Badge, Spinner, CropBadge, Alert, InfoButton } from '../ui';
 import PlotChart from '../PlotChart';
-import { fmtRs, fmtPct, fmtDate, HORIZONS, CROP_ICON, CROP_COLOR } from '../../lib/theme';
+import { fmtRs, fmtRsKg, fmtPct, fmtDate, HORIZONS, CROP_ICON, CROP_COLOR } from '../../lib/theme';
 import { api } from '../../lib/api';
 
 const SEASON_LABEL = {
@@ -118,7 +118,7 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
         {ticker.map((t) => (
           <div key={t.horizon}>
-            <Metric label={`Horizon ${t.horizon}W · ${fmtDate(t.date)}`} value={fmtRs(t.price)}
+            <Metric label={`Horizon ${t.horizon}W · ${fmtDate(t.date)}`} value={fmtRs(t.price, { perQ: true })} sub={fmtRsKg(t.price)}
               spark={t.spark} sparkColor={cropColor} accent={cropColor}
               icon={<CropBadge crop={crop} icon={CROP_ICON[crop]} color={cropColor} size="sm" />}
               help={t.rmse ? `±₹${Math.round(t.rmse).toLocaleString()} (${t.wape.toFixed(0)}% WAPE)` : ''} />
@@ -135,12 +135,13 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
         Scenario results are model sensitivities, not causal estimates of what a policy or shock would actually do.
       </p>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-        <Metric label={`Baseline`} value={fmtRs(kpis.baseline, { perQ: true })} help="Unmodified baseline model projection." />
-        <Metric label={`Scenario`} value={fmtRs(kpis.scenario, { perQ: true })}
+        <Metric label={`Baseline`} value={fmtRs(kpis.baseline, { perQ: true })} sub={fmtRsKg(kpis.baseline)} help="Unmodified baseline model projection." />
+        <Metric label={`Scenario`} value={fmtRs(kpis.scenario, { perQ: true })} sub={fmtRsKg(kpis.scenario)}
           delta={`${fmtRs(kpis.delta)} (${fmtPct(kpis.deltaPct)})`} deltaTone={deltaTone}
           help="Model projection with active scenario modifier inputs." />
         <Metric label="Live Mandi Price"
           value={kpis.lastObservedPrice != null ? fmtRs(kpis.lastObservedPrice, { perQ: true }) : 'N/A'}
+          sub={kpis.lastObservedPrice != null ? fmtRsKg(kpis.lastObservedPrice) : undefined}
           help="Most recent non-imputed trade price reported from the mandi." />
         <Metric label="Model Accuracy" value={kpis.wape != null ? `~${Math.max(0, 100 - kpis.wape).toFixed(0)}%` : 'N/A'}
           delta={
