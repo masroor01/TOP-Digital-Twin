@@ -24,8 +24,10 @@ export default function ValidationTab() {
         Every other metric in this dashboard (RMSE, WAPE, Model Accuracy) measures how close the predicted price
         <em> level</em> was. This measures something different: for every per-market forecast, did the model correctly
         call whether the price would go <b>up</b> or <b>down</b> from where it stood when the forecast was made —
-        regardless of by how much? Tested against a 50% coin-flip null with a binomial test (all cells below are
-        statistically significant given large per-market sample sizes).
+        regardless of by how much? Tested against a 50% coin-flip null with a binomial test. At one week the call
+        is no better than a coin flip (about 50%); from four weeks onward it is better than chance, and it is
+        strongest at 13 to 26 weeks for tomato and onion. Corrected 10 Oct 2026: an earlier version measured the
+        change from the wrong starting week and overstated these figures.
       </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
