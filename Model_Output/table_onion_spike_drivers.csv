@@ -1,0 +1,10 @@
+driver,episodes_testable,episodes_hit,hit_rate,false_alarm_rate,lift,p_perm,p_bonferroni,candidate
+1 arrivals shortfall (4-wk mean),8,3,0.38,0.03,11.25,0.001,0.009,False
+2 arrivals 4-wk change,8,3,0.38,0.52,0.73,0.8832,1.0,False
+3 stock proxy: 26-wk arrivals shortfall,8,3,0.38,0.02,21.75,0.0,0.0,False
+4 rainfall excess (4-wk sum),8,3,0.38,0.55,0.68,0.9092,1.0,False
+5 rainfall deficit (4-wk sum),8,5,0.62,0.51,1.22,0.3838,1.0,False
+6 heat-day anomaly (4-wk mean),8,1,0.12,0.17,0.73,0.791,1.0,False
+7 vegetation anomaly (4-wk mean),6,2,0.33,0.2,1.64,0.349,1.0,False
+8 diesel 13-wk change,9,3,0.33,0.16,2.15,0.1492,1.0,False
+9 price low vs season (comparator),8,1,0.12,0.14,0.87,0.7142,1.0,False
