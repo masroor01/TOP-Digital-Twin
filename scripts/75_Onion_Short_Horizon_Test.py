@@ -48,10 +48,10 @@ def fit_predict(g, Xtr, ytr, Xva, yva, Xte, fcols):
     return m.predict(Xva), m.predict(Xte)
 
 
-def run(h, g):
+def run(h, g, crop='onion'):
     os.makedirs(RUNS, exist_ok=True)
     feat = g['feat']; FS = g['MODEL_FEATURE_SETS']; FOLDS = g['FOLDS']
-    df = feat['onion'].sort_values(['market_id', 'week_start']).copy()
+    df = feat[crop].sort_values(['market_id', 'week_start']).copy()
     fcols = [c for c in FS['M6'] if c in df.columns]
     df['target'] = df.groupby('market_id')['log_price'].shift(-h)
     df = df.dropna(subset=['target', 'price_lag_1'])
@@ -81,7 +81,7 @@ def run(h, g):
         o['y_A'] = np.expm1(a_te); o['y_B'] = np.expm1(b_te); o['y_C'] = np.expm1(c_te)
         rows.append(o)
         print('[75] h=%d fold%d  n_test=%d  alpha_C=%.2f  [%.0fs]' % (h, fi['fold'], len(te), a_best, time.time() - t0), flush=True)
-    pd.concat(rows, ignore_index=True).to_parquet(os.path.join(RUNS, 'onion_sh_h%d.parquet' % h), index=False)
+    pd.concat(rows, ignore_index=True).to_parquet(os.path.join(RUNS, crop + '_sh_h%d.parquet' % h), index=False)
 
 
 def wape(d, col):
@@ -97,9 +97,9 @@ def direction(d, col):
     return 100 * (a[m] == p[m]).mean()
 
 
-def summarise():
+def summarise(crop='onion'):
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-    d = pd.concat([pd.read_parquet(f) for f in sorted(glob.glob(os.path.join(RUNS, 'onion_sh_h*.parquet')))], ignore_index=True)
+    d = pd.concat([pd.read_parquet(f) for f in sorted(glob.glob(os.path.join(RUNS, crop + '_sh_h*.parquet')))], ignore_index=True)
     # rows whose origin-week price is missing have no persistence/change forecast; drop them for ALL variants (same sample)
     n0 = len(d); d = d.dropna(subset=['y_last', 'y_B', 'y_C']); print('[75] dropped %d of %d rows with no origin-week price' % (n0 - len(d), n0))
     d['week_start'] = pd.to_datetime(d['week_start']); d['regime'] = np.where(d['nat_ret4'] >= 0.15, 'rising', 'calm')
@@ -144,9 +144,9 @@ def summarise():
                               diff_pp=round(wape(gh, 'y_A') - wape(gh, 'y_' + v), 2), ci90_lo=round(lo, 2), ci90_hi=round(hi, 2),
                               folds_beating_A=wins, n_folds=gh['fold'].nunique(), calm_WAPE_rel_change_pct=round(calm_rel, 1), passes_standard=ok))
     S, F, T = pd.DataFrame(summ), pd.DataFrame(folds), pd.DataFrame(tests)
-    S.to_csv(os.path.join(OUT, 'table_onion_short_horizon_summary.csv'), index=False)
-    F.to_csv(os.path.join(OUT, 'table_onion_short_horizon_folds.csv'), index=False)
-    T.to_csv(os.path.join(OUT, 'table_onion_short_horizon_tests.csv'), index=False)
+    S.to_csv(os.path.join(OUT, 'table_' + crop + '_short_horizon_summary.csv'), index=False)
+    F.to_csv(os.path.join(OUT, 'table_' + crop + '_short_horizon_folds.csv'), index=False)
+    T.to_csv(os.path.join(OUT, 'table_' + crop + '_short_horizon_tests.csv'), index=False)
     pd.set_option('display.width', 250); pd.set_option('display.max_columns', 40)
     print(S[S.stratum.isin(['all', 'regime_at_origin'])].to_string(index=False))
     print(T.to_string(index=False))
@@ -155,9 +155,12 @@ def summarise():
 
 if __name__ == '__main__':
     args = [int(a) for a in sys.argv[1:] if a.isdigit()]
+    crops = [a for a in sys.argv[1:] if a in ('tomato', 'onion', 'potato')] or ['onion']
     if '--summarise' in sys.argv:
-        summarise()
+        for c in crops:
+            summarise(c)
     else:
         G = load_g()          # Script 15 is exec'd once per process (it rewraps stdout)
-        for h in (args or HORIZONS):
-            run(h, G)
+        for c in crops:
+            for h in (args or HORIZONS):
+                run(h, G, c)
