@@ -507,3 +507,11 @@ Scripts 48/49: pooling still better in most State/market comparisons (see tables
 
 ### 2026-10-08 — Live site updated (Home, About, Dashboard) and web data synced to the 2026-10-07 re-run
 Re-ran Script 47 (`table_market_level_accuracy.csv`) on the new-window predictions; synced `web/data/` tables (directional accuracy, SHAP, market-level accuracy). Home: new "The evidence, honestly" section and forward-test status; About: "What the evidence shows" and "What we do not claim"; Dashboard: one-line usage note; simulator wording "model sensitivities, not causal estimates". Backend endpoints re-checked locally (meta, directional-accuracy, shap, history, simulate all 200). Deploy is git-triggered (push to master).
+
+## 2026-10-10 -- Short-horizon forecast test (change target vs level target): result recorded, model NOT adopted
+Scripts 74-77 (live track record of archived dashboard forecasts, change-target test on all three crops, onion spike-onset event study, accuracy summary figure) and the Script 46 baseline fix (week_start is the origin week; the earlier directional accuracy was overstated).
+- Change-target (predict the change from the last price) cut 1-week error by 37-57 % in all three crops (still not better than "no change") and passed the pre-set standard at 3 horizons for onion (1, 4, 26 wk) and potato (1, 4, 13 wk), but not for tomato, where it was much worse at 13 and 26 wk (skill vs persistence 37 -> 14 % and 45 -> 36 %). Tables: `table_{onion,tomato,potato}_short_horizon_*.csv`.
+- **Decision (Dr. Masroor, 2026-10-10): the change-target and persistence-blend variants are discarded for all three crops; production stays on the level target. No production file was changed by this work.**
+- Onion spike onset: no leading indicator among the available drivers (Script 77, `table_onion_spike_*.csv`); spikes are flagged only once they begin.
+- Live record (Script 74): tomato on target or better than the backtest, onion missed the Aug-Sep 2026 spike (national price +60 %), potato little movement; 13/26 wk not yet matured.
+- Corrected directional accuracy (M6, 1/4/13/26 wk): tomato 50/63/77/84, onion 50/55/68/72, potato 49/58/59/59 (was 58/75/84/73, 53/72/72/66, 56/69/63/61). Old figures remain in web/data and some documents until they are updated.
