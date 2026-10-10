@@ -17,8 +17,9 @@ comparison anyway.
 For each (variant, crop, horizon, market, fold, target week) row we have the
 target actual price (y_true) and the model's predicted price (y_pred), but
 NOT the price at the moment the forecast was made (the "origin"). That has
-to be looked up separately: origin_date = target_week - horizon weeks, price
-from the raw weekly panel (data/agmarknet_weekly/top_weekly_panel.csv), keyed
+to be looked up separately: in these prediction files week_start IS the origin week (y_true is the price
+at week_start + horizon weeks -- verified against the panel 2026-10-10), so origin_date = week_start and the
+price comes from the raw weekly panel (data/agmarknet_weekly/top_weekly_panel.csv), keyed
 on (crop, market_id, week_start) same as every other script in this project.
 
   actual_change    = y_true - origin_price
@@ -92,7 +93,10 @@ preds['market_id'] = preds['market_id'].astype(int)
 #     made, i.e. horizon weeks before the target week) for every prediction row
 # ---------------------------------------------------------------------------
 print('\n[2] Computing origin dates and looking up origin prices ...')
-preds['origin_date'] = preds['week_start'] - pd.to_timedelta(preds['horizon_weeks'] * 7, unit='D')
+# FIXED 2026-10-10: week_start is the ORIGIN week (Script 15 writes test['week_start'], and y_true is the price at
+# week_start + horizon). The earlier version subtracted the horizon again, so the baseline was the price h weeks
+# BEFORE the forecast was made and directional accuracy was overstated.
+preds['origin_date'] = preds['week_start']
 
 panel_idx = panel.set_index(['crop', 'market_id', 'week_start'])['modal_price_weighted']
 key = pd.MultiIndex.from_frame(preds[['crop', 'market_id', 'origin_date']].rename(columns={'origin_date': 'week_start'}))
