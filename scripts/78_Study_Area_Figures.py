@@ -6,7 +6,7 @@ Fig 2  weekly number of markets with an observed price, by crop
 Fig 3  national median weekly price by crop, 2017-2026
 Fig 4  markets per state, by crop
 Fig 5  age of the latest data point of each layer, relative to the market panel
-State outlines: Survey-of-India-based shapefile (path in TOP_INDIA_STATES_SHP, default in Downloads); the map is skipped if absent.
+Country outline: Survey of India based boundary (Datameet) (path in TOP_INDIA_STATES_SHP, default in Downloads); the map is skipped if absent.
 Outputs: Model_Output/fig_ms_study_area_{1..5}.png
 """
 import os, re, io, sys
@@ -19,7 +19,7 @@ import matplotlib.dates as mdates
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, 'Model_Output')
-SHP = os.environ.get('TOP_INDIA_STATES_SHP', r'C:\Users\masro\Downloads\India Shapefile With Kashmir\India Shape\india_st')
+OUTLINE = os.environ.get('TOP_INDIA_OUTLINE', r'C:\Users\masro\Downloads\maps-master\Country\india-soi.geojson')   # Datameet, Survey of India based country outline (CC-BY-SA 2.5 / ODbL)
 CROPS = ['tomato', 'onion', 'potato']
 COL = {'tomato': '#DC2626', 'onion': '#7C3AED', 'potato': '#B45309'}
 INK, MUTED, GRID = '#1F2933', '#52606D', '#E1E0D9'
@@ -137,20 +137,25 @@ def north(ax, x=96.0, y=11.0):
 
 def fig1(p):
     try:
-        import shapefile
-        r = shapefile.Reader(SHP)
+        import json
+        gj = json.load(io.open(OUTLINE, encoding='utf-8'))
     except Exception as e:
         print('[78] map skipped:', e); return
+    rings = []
+    for ft in gj['features']:
+        g = ft['geometry']
+        polys = g['coordinates'] if g['type'] == 'MultiPolygon' else [g['coordinates']]
+        for poly in polys:
+            for ring in poly:
+                rings.append(np.array(ring))
     za = locations(p)
     za = za[za['lat'].notna()]
     pts = za.groupby(['crop', 'lat', 'lon']).size().reset_index(name='n')
     Z = zones()
     fig, axs = plt.subplots(1, 3, figsize=(12.5, 5.2))
     for ax, crop in zip(axs, CROPS):
-        for shp in r.shapes():
-            parts = list(shp.parts) + [len(shp.points)]
-            for a, b in zip(parts[:-1], parts[1:]):
-                xy = np.array(shp.points[a:b]); ax.plot(xy[:, 0], xy[:, 1], color='#B8C0C8', lw=0.5, zorder=1)
+        for xy in rings:
+            ax.plot(xy[:, 0], xy[:, 1], color='#8A96A3', lw=0.7, zorder=1)
         d = pts[pts.crop == crop]
         ax.scatter(d.lon, d.lat, s=8 + 9 * np.sqrt(d.n), color=COL[crop], alpha=0.55, linewidths=0, zorder=3, label='Markets (size = number per district)')
         zz = Z[Z.crop == crop]
