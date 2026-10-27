@@ -46,7 +46,12 @@ INFILES = {
     'potato': str(DOWNLOADS / 'potato_all_india_apmcs_2000_2026.csv'),
 }
 
-OUTDIR = str(DOWNLOADS / 'Agmarknet_Weekly')
+OUTDIR = os.environ.get('TOP_PANEL_OUTDIR', str(DOWNLOADS / 'Agmarknet_Weekly'))   # override for experiments only
+# Experiment switches (defaults reproduce the production panel exactly):
+#   TOP_POTATO_MIN_YEARS  years of data a potato market needs (default 8 of 9; the V2 coverage test uses 0 = same own-span rule as tomato/onion)
+#   TOP_CROPS             comma list of crops to build (default all three)
+POTATO_MIN_YEARS = int(os.environ.get('TOP_POTATO_MIN_YEARS', '8'))
+CROPS_TO_BUILD = os.environ.get('TOP_CROPS', 'tomato,onion,potato').split(',')
 os.makedirs(OUTDIR, exist_ok=True)
 
 START_DATE = '2017-01-01'
@@ -251,11 +256,11 @@ def process_crop(crop: str) -> pd.DataFrame:
     # 7. Potato: balanced panel (markets with data in >=8 of the years in [START_DATE, END_DATE])
     if crop == 'potato':
         years_per_market = df.groupby('market_id')['iso_year'].nunique()
-        balanced_markets = years_per_market[years_per_market >= 8].index
+        balanced_markets = years_per_market[years_per_market >= POTATO_MIN_YEARS].index
         before = df['market_id'].nunique()
         df = df[df['market_id'].isin(balanced_markets)]
         print(f'  Potato balanced panel: {df["market_id"].nunique()} / {before} markets '
-              f'(kept those present in >=8 of 9 years)')
+              f'(kept those present in >={POTATO_MIN_YEARS} of 9 years)')
         print(f'  Rows after balancing: {len(df):,}')
 
     # 8. Weekly aggregation: arrivals-weighted mean modal price per market per week
@@ -369,7 +374,7 @@ def coverage_report(df: pd.DataFrame, crop: str):
 if __name__ == '__main__':
     all_dfs = []
 
-    for crop in ['tomato', 'onion', 'potato']:
+    for crop in CROPS_TO_BUILD:
         df_crop = process_crop(crop)
         all_dfs.append(df_crop)
         coverage_report(df_crop, crop)

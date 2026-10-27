@@ -522,3 +522,6 @@ Finding: Script 15 / 23 feature sets contain price lags from 1 week before the f
 - Layers (M6P vs M0P): 0 of 12 cells certified; at 1 week the layers are significantly worse than price-only in all three crops.
 - Effect on earlier statements: skill and accuracy at 1 and 4 weeks (backtest, live record, directional accuracy, the PI briefing, decks, proposal, dashboard accuracy figures) were computed without the origin-week price and are superseded for those horizons; 13 to 26 week results and the crisis backtests are essentially unchanged. Production models NOT yet retrained; decision pending.
 Tables: `table_origin_price_probe.csv`, `table_origin_price_fix_{summary,folds,tests}.csv`.
+
+## 2026-10-28 -- V2 data fix tests (Script 82; Script 09 gained experiment switches, defaults unchanged)
+Protocol docs/V2_DATA_FIXES_PROTOCOL.md (local). Baseline = M0P/M6P of Script 81 (origin-week price included). T1 potato coverage (relax the 8-of-9-years rule; adds Uttar Pradesh, 166 markets to 2025-12): does not help the original markets (0 of 4 cells), significantly worse at 4 wk; representativeness gain only. T2 spatial weather (zone series per market): 0 of 12 cells; layers still 0 of 12 certified. T3 observed-only features and rows: small two-way differences, layer conclusion unchanged. No fix passed; production unchanged. Table `table_v2_fix_tests.csv`.

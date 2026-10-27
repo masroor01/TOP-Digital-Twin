@@ -1,0 +1,77 @@
+test,crop,horizon_weeks,comparison,skill_base,skill_new,wape_gain_pp,ci90_lo,ci90_hi,folds_new_better,n_folds,passes
+T1 potato coverage (original 83 markets),potato,1,M0P vs M0X1,-30.2,-30.8,-0.03,-0.22,0.16,2.0,5,False
+T1 potato coverage (original 83 markets),potato,1,M6P vs M6X1,-48.6,-54.9,-0.32,-0.56,-0.09,2.0,5,False
+"T1 potato coverage (new markets only, descriptive)",potato,1,M0X1 skill on 31492 new-market rows,,-31.4,,,,,5,
+"T1 potato coverage (new markets only, descriptive)",potato,1,M6X1 skill on 31492 new-market rows,,-48.7,,,,,5,
+T1 potato coverage (original 83 markets),potato,4,M0P vs M0X1,-22.3,-38.1,-2.05,-3.77,-0.18,2.0,5,False
+T1 potato coverage (original 83 markets),potato,4,M6P vs M6X1,-19.1,-33.7,-1.89,-3.23,-0.61,1.0,5,False
+"T1 potato coverage (new markets only, descriptive)",potato,4,M0X1 skill on 30970 new-market rows,,-27.8,,,,,5,
+"T1 potato coverage (new markets only, descriptive)",potato,4,M6X1 skill on 30970 new-market rows,,-13.6,,,,,5,
+T1 potato coverage (original 83 markets),potato,13,M0P vs M0X1,0.8,0.1,-0.2,-2.35,2.33,2.0,5,False
+T1 potato coverage (original 83 markets),potato,13,M6P vs M6X1,-30.7,-28.4,0.66,-0.37,1.68,2.0,5,False
+"T1 potato coverage (new markets only, descriptive)",potato,13,M0X1 skill on 29425 new-market rows,,1.6,,,,,5,
+"T1 potato coverage (new markets only, descriptive)",potato,13,M6X1 skill on 29425 new-market rows,,-29.6,,,,,5,
+T1 potato coverage (original 83 markets),potato,26,M0P vs M0X1,27.0,25.4,-0.69,-2.24,0.96,1.0,5,False
+T1 potato coverage (original 83 markets),potato,26,M6P vs M6X1,0.2,7.0,2.96,-2.21,9.23,3.0,5,False
+"T1 potato coverage (new markets only, descriptive)",potato,26,M0X1 skill on 27228 new-market rows,,34.4,,,,,5,
+"T1 potato coverage (new markets only, descriptive)",potato,26,M6X1 skill on 27228 new-market rows,,18.5,,,,,5,
+T2 spatial weather,onion,1,M6S vs M6P,-32.5,-28.6,0.31,-0.09,0.68,3.0,5,False
+T2 spatial weather,onion,1,layers: M6S vs M0P,-19.6,-28.6,-0.72,-1.76,0.46,2.0,5,False
+T2 spatial weather,onion,4,M6S vs M6P,-7.1,-9.4,-0.41,-1.25,0.6,3.0,5,False
+T2 spatial weather,onion,4,layers: M6S vs M0P,-24.0,-9.4,2.62,-0.32,5.81,3.0,5,False
+T2 spatial weather,onion,13,M6S vs M6P,14.7,11.9,-0.96,-1.99,0.08,1.0,5,False
+T2 spatial weather,onion,13,layers: M6S vs M0P,-7.8,11.9,6.89,-0.84,15.84,1.0,5,False
+T2 spatial weather,onion,26,M6S vs M6P,19.3,17.6,-0.69,-2.52,1.68,2.0,5,False
+T2 spatial weather,onion,26,layers: M6S vs M0P,-6.4,17.6,9.81,2.63,17.86,4.0,5,False
+T2 spatial weather,potato,1,M6S vs M6P,-48.6,-54.3,-0.29,-0.54,-0.03,2.0,5,False
+T2 spatial weather,potato,1,layers: M6S vs M0P,-30.2,-54.3,-1.22,-1.72,-0.73,1.0,5,False
+T2 spatial weather,potato,4,M6S vs M6P,-19.1,-30.1,-1.43,-2.82,-0.01,1.0,5,False
+T2 spatial weather,potato,4,layers: M6S vs M0P,-22.3,-30.1,-1.02,-2.61,0.45,2.0,5,False
+T2 spatial weather,potato,13,M6S vs M6P,-30.7,-32.0,-0.37,-1.73,0.81,3.0,5,False
+T2 spatial weather,potato,13,layers: M6S vs M0P,0.8,-32.0,-9.24,-14.54,-3.54,2.0,5,False
+T2 spatial weather,potato,26,M6S vs M6P,0.2,-0.6,-0.37,-1.56,0.81,2.0,5,False
+T2 spatial weather,potato,26,layers: M6S vs M0P,27.0,-0.6,-12.05,-18.03,-5.93,1.0,5,False
+T2 spatial weather,tomato,1,M6S vs M6P,-14.7,-12.4,0.35,-0.07,0.81,4.0,5,False
+T2 spatial weather,tomato,1,layers: M6S vs M0P,-6.7,-12.4,-0.86,-1.43,-0.36,0.0,5,False
+T2 spatial weather,tomato,4,M6S vs M6P,11.2,11.6,0.15,-0.69,1.07,3.0,5,False
+T2 spatial weather,tomato,4,layers: M6S vs M0P,11.6,11.6,-0.0,-1.17,1.27,2.0,5,False
+T2 spatial weather,tomato,13,M6S vs M6P,36.5,36.9,0.22,-0.92,1.42,3.0,5,False
+T2 spatial weather,tomato,13,layers: M6S vs M0P,32.1,36.9,2.73,-0.7,7.34,3.0,5,False
+T2 spatial weather,tomato,26,M6S vs M6P,44.6,46.0,0.9,-1.97,4.0,3.0,5,False
+T2 spatial weather,tomato,26,layers: M6S vs M0P,42.6,46.0,2.28,-0.42,4.56,3.0,5,False
+T3 observed-only,onion,1,M0P vs M0O (same rows),-19.6,-19.3,0.02,-0.14,0.19,3.0,5,False
+T3 observed-only,onion,1,M6P vs M6O (same rows),-32.5,-32.8,-0.03,-0.43,0.29,4.0,5,False
+T3 observed-only,onion,1,layers: M6O vs M0O,-19.3,-32.8,-1.05,-1.76,-0.25,1.0,5,False
+T3 observed-only,onion,4,M0P vs M0O (same rows),-25.8,-22.1,0.64,0.01,1.23,5.0,5,True
+T3 observed-only,onion,4,M6P vs M6O (same rows),-8.1,-9.4,-0.23,-0.95,0.49,4.0,5,False
+T3 observed-only,onion,4,layers: M6O vs M0O,-22.1,-9.4,2.23,-1.15,6.01,3.0,5,False
+T3 observed-only,onion,13,M0P vs M0O (same rows),-8.5,-9.2,-0.24,-1.08,0.6,1.0,5,False
+T3 observed-only,onion,13,M6P vs M6O (same rows),14.9,16.4,0.52,-0.38,1.27,3.0,5,False
+T3 observed-only,onion,13,layers: M6O vs M0O,-9.2,16.4,8.88,0.23,17.9,2.0,5,False
+T3 observed-only,onion,26,M0P vs M0O (same rows),-7.0,-8.9,-0.76,-3.01,1.1,2.0,5,False
+T3 observed-only,onion,26,M6P vs M6O (same rows),19.1,16.9,-0.9,-2.13,-0.07,1.0,5,False
+T3 observed-only,onion,26,layers: M6O vs M0O,-8.9,16.9,10.46,1.25,20.95,2.0,5,False
+T3 observed-only,potato,1,M0P vs M0O (same rows),-30.8,-39.0,-0.41,-0.75,-0.1,1.0,5,False
+T3 observed-only,potato,1,M6P vs M6O (same rows),-49.5,-43.2,0.32,-0.18,0.76,2.0,5,False
+T3 observed-only,potato,1,layers: M6O vs M0O,-39.0,-43.2,-0.21,-0.7,0.23,2.0,5,False
+T3 observed-only,potato,4,M0P vs M0O (same rows),-22.6,-19.3,0.42,-0.03,0.97,2.0,5,False
+T3 observed-only,potato,4,M6P vs M6O (same rows),-20.0,-23.0,-0.39,-0.99,0.17,2.0,5,False
+T3 observed-only,potato,4,layers: M6O vs M0O,-19.3,-23.0,-0.47,-2.64,1.73,4.0,5,False
+T3 observed-only,potato,13,M0P vs M0O (same rows),0.6,-2.7,-0.92,-2.66,0.34,1.0,5,False
+T3 observed-only,potato,13,M6P vs M6O (same rows),-31.4,-34.7,-0.93,-2.91,0.68,1.0,5,False
+T3 observed-only,potato,13,layers: M6O vs M0O,-2.7,-34.7,-8.99,-15.07,-2.63,2.0,5,False
+T3 observed-only,potato,26,M0P vs M0O (same rows),27.6,28.0,0.2,-0.26,0.73,3.0,5,False
+T3 observed-only,potato,26,M6P vs M6O (same rows),0.6,0.9,0.11,-1.16,1.35,3.0,5,False
+T3 observed-only,potato,26,layers: M6O vs M0O,28.0,0.9,-11.86,-18.15,-5.62,1.0,5,False
+T3 observed-only,tomato,1,M0P vs M0O (same rows),-6.6,-8.7,-0.31,-0.54,-0.11,1.0,5,False
+T3 observed-only,tomato,1,M6P vs M6O (same rows),-14.6,-16.6,-0.29,-0.67,0.09,2.0,5,False
+T3 observed-only,tomato,1,layers: M6O vs M0O,-8.7,-16.6,-1.18,-1.7,-0.62,1.0,5,False
+T3 observed-only,tomato,4,M0P vs M0O (same rows),11.2,11.5,0.1,-0.76,0.78,3.0,5,False
+T3 observed-only,tomato,4,M6P vs M6O (same rows),10.5,8.9,-0.56,-0.89,-0.26,0.0,5,False
+T3 observed-only,tomato,4,layers: M6O vs M0O,11.5,8.9,-0.9,-2.14,0.32,1.0,5,False
+T3 observed-only,tomato,13,M0P vs M0O (same rows),31.8,31.1,-0.42,-1.44,0.5,2.0,5,False
+T3 observed-only,tomato,13,M6P vs M6O (same rows),36.3,36.0,-0.18,-1.0,0.6,2.0,5,False
+T3 observed-only,tomato,13,layers: M6O vs M0O,31.1,36.0,2.78,-0.51,7.61,3.0,5,False
+T3 observed-only,tomato,26,M0P vs M0O (same rows),42.8,41.8,-0.67,-1.47,-0.03,0.0,5,False
+T3 observed-only,tomato,26,M6P vs M6O (same rows),45.2,41.1,-2.75,-5.0,-1.06,1.0,5,False
+T3 observed-only,tomato,26,layers: M6O vs M0O,41.8,41.1,-0.46,-4.94,3.58,2.0,5,False
