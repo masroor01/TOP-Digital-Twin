@@ -41,14 +41,17 @@ def zones():
     return pd.DataFrame(out)
 
 
-def fig1():
+def fig1(p):
     try:
         import shapefile
         r = shapefile.Reader(SHP)
     except Exception as e:
         print('[78] map skipped:', e); return
     za = pd.read_csv(os.path.join(BASE, 'data', 'zone_assignment.csv'))
+    za['market_id'] = za['market_id'].astype(float).astype(int)
+    panel_ids = {c: set(p[p.crop == c].market_id.dropna().astype(int)) for c in CROPS}
     za = za[za['geocode_level'].isin(['district', 'district_only']) & za['lat'].notna()]
+    za = za[[mid in panel_ids[c] for c, mid in zip(za.crop, za.market_id)]]     # current panel markets only
     pts = za.groupby(['crop', 'lat', 'lon']).size().reset_index(name='n')
     Z = zones()
     fig, axs = plt.subplots(1, 3, figsize=(12.5, 5.2))
@@ -61,7 +64,7 @@ def fig1():
         ax.scatter(d.lon, d.lat, s=8 + 9 * np.sqrt(d.n), color=COL[crop], alpha=0.55, linewidths=0, zorder=3, label='Markets (size = number per district)')
         zz = Z[Z.crop == crop]
         ax.scatter(zz.lon, zz.lat, marker='*', s=150, color='white', edgecolor=INK, linewidths=1.0, zorder=5, label='Production zone (30 km)')
-        ax.set_title('%s: %d markets mapped' % (crop.capitalize(), int(za[za.crop == crop].market_id.nunique())), fontsize=11, fontweight='bold', color=INK, loc='left')
+        ax.set_title('%s: %d of %d markets mapped' % (crop.capitalize(), int(za[za.crop == crop].market_id.nunique()), len(panel_ids[crop])), fontsize=11, fontweight='bold', color=INK, loc='left')
         ax.set_xlim(67.5, 98); ax.set_ylim(6, 37.5); ax.set_aspect(1.05); ax.axis('off')
     h, l = axs[1].get_legend_handles_labels()
     fig.legend(h, l, loc='lower center', ncol=2, frameon=False, fontsize=9)
@@ -125,5 +128,5 @@ def fig5():
 
 if __name__ == '__main__':
     p = panel()
-    fig1(); fig2(p); fig3(p); fig4(p); fig5()
+    fig1(p); fig2(p); fig3(p); fig4(p); fig5()
     print('wrote figures to', OUT)
