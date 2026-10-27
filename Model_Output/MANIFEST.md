@@ -515,3 +515,10 @@ Scripts 74-77 (live track record of archived dashboard forecasts, change-target 
 - Onion spike onset: no leading indicator among the available drivers (Script 77, `table_onion_spike_*.csv`); spikes are flagged only once they begin.
 - Live record (Script 74): tomato on target or better than the backtest, onion missed the Aug-Sep 2026 spike (national price +60 %), potato little movement; 13/26 wk not yet matured.
 - Corrected directional accuracy (M6, 1/4/13/26 wk): tomato 50/63/77/84, onion 50/55/68/72, potato 49/58/59/59 (was 58/75/84/73, 53/72/72/66, 56/69/63/61). Old figures remain in web/data and some documents until they are updated.
+
+## 2026-10-27 -- Origin-week price missing from the feature sets: probe and fix test (Scripts 80, 81)
+Finding: Script 15 / 23 feature sets contain price lags from 1 week before the forecast origin and never the origin-week price (`log_price` is excluded), so an "h-week" forecast saw prices only up to week t-1 while the persistence baseline used p(t). Probe (Script 80) and a pre-registered fix test (Script 81; protocol docs/ORIGIN_PRICE_FIX_PROTOCOL.md, local) add `log_price` to M0 (M0P) and M6 (M6P), same folds, settings and seed.
+- Adding it improved every crop at 1 and 4 weeks (error -1.8 to -7.7 points, 5 of 5 folds): 8 of 12 cells for each of M0P and M6P; long horizons mostly unchanged (potato 26 wk M6P slightly worse). No model beats "no change" at 1 week (best tomato M0P -6.7 %); tomato beats it from 4 weeks (M6P +11 %), onion from 13 weeks (M6P +15 %); potato M6P never.
+- Layers (M6P vs M0P): 0 of 12 cells certified; at 1 week the layers are significantly worse than price-only in all three crops.
+- Effect on earlier statements: skill and accuracy at 1 and 4 weeks (backtest, live record, directional accuracy, the PI briefing, decks, proposal, dashboard accuracy figures) were computed without the origin-week price and are superseded for those horizons; 13 to 26 week results and the crisis backtests are essentially unchanged. Production models NOT yet retrained; decision pending.
+Tables: `table_origin_price_probe.csv`, `table_origin_price_fix_{summary,folds,tests}.csv`.
