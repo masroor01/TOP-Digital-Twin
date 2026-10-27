@@ -206,6 +206,7 @@ def build_features(df_in):
 feat = build_features(df)
 
 PRICE_FEATS = (
+    ['log_price'] +          # origin-week price, added 2026-10-27 (same as Scripts 15/23)
     [f'price_lag_{lag}' for lag in LAG_WEEKS] +
     [f'price_roll_mean_{w}' for w in ROLL_WINS] +
     [f'price_roll_std_{w}' for w in ROLL_WINS] +

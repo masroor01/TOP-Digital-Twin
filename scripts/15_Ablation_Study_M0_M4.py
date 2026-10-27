@@ -578,7 +578,11 @@ def build_features(df_in):
 feat = build_features(df)
 
 # Define feature groups (built column names must exist in at least one crop's df)
+# ORIGIN-WEEK PRICE ADDED 2026-10-27 (Script 80/81 finding): the feature sets used to hold price lags starting at
+# t-1 and never the origin-week price p(t) itself, so an "h-week" forecast saw prices only up to t-1 while the
+# persistence baseline used p(t). 'log_price' (= log1p of the origin week's price) is now a price feature.
 PRICE_FEATS = (
+    ['log_price'] +
     [f'price_lag_{lag}' for lag in LAG_WEEKS] +
     [f'price_roll_mean_{w}' for w in ROLL_WINS] +
     [f'price_roll_std_{w}' for w in ROLL_WINS] +

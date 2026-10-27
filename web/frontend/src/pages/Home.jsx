@@ -35,7 +35,7 @@ const FEATURES = [
 ];
 
 const EVIDENCE = [
-  { big: '13–26 wk', label: 'Where it helps', body: 'Tomato error is about 37–38 % below a no-change guess at 3 and 6 months; onion 6 % and 20 %.' },
+  { big: '13–26 wk', label: 'Where it helps', body: 'Tomato error is about 38 % and 45 % below a no-change guess at 3 and 6 months; onion 14 % and 22 %.' },
   { big: '5 of 6', label: 'Beats classical methods', body: 'Long-horizon cells where the model beats the best of four classical benchmarks (tomato and onion; potato at 26 weeks).' },
   { big: 'Not 1 week', label: 'Where it does not', body: 'At one week ahead no crop beats a no-change guess. This is a planning tool for 1–6 months, not a next-week trading signal.' },
   { big: '2022–2026', label: 'Tested on unseen years', body: 'Five rolling test years, repeated across random seeds. Layer benefits are indicated, not certified; potato is weak.' },

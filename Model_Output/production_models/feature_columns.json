@@ -1,5 +1,6 @@
 {
   "tomato_1w": [
+    "log_price",
     "price_lag_1",
     "price_lag_2",
     "price_lag_3",
@@ -87,6 +88,7 @@
     "operation_greens_active"
   ],
   "tomato_4w": [
+    "log_price",
     "price_lag_1",
     "price_lag_2",
     "price_lag_3",
@@ -174,6 +176,7 @@
     "operation_greens_active"
   ],
   "tomato_13w": [
+    "log_price",
     "price_lag_1",
     "price_lag_2",
     "price_lag_3",
@@ -261,6 +264,7 @@
     "operation_greens_active"
   ],
   "tomato_26w": [
+    "log_price",
     "price_lag_1",
     "price_lag_2",
     "price_lag_3",
@@ -348,6 +352,7 @@
     "operation_greens_active"
   ],
   "onion_1w": [
+    "log_price",
     "price_lag_1",
     "price_lag_2",
     "price_lag_3",
@@ -435,6 +440,7 @@
     "operation_greens_active"
   ],
   "onion_4w": [
+    "log_price",
     "price_lag_1",
     "price_lag_2",
     "price_lag_3",
@@ -522,6 +528,7 @@
     "operation_greens_active"
   ],
   "onion_13w": [
+    "log_price",
     "price_lag_1",
     "price_lag_2",
     "price_lag_3",
@@ -609,6 +616,7 @@
     "operation_greens_active"
   ],
   "onion_26w": [
+    "log_price",
     "price_lag_1",
     "price_lag_2",
     "price_lag_3",
@@ -696,6 +704,7 @@
     "operation_greens_active"
   ],
   "potato_1w": [
+    "log_price",
     "price_lag_1",
     "price_lag_2",
     "price_lag_3",
@@ -783,6 +792,7 @@
     "operation_greens_active"
   ],
   "potato_4w": [
+    "log_price",
     "price_lag_1",
     "price_lag_2",
     "price_lag_3",
@@ -870,6 +880,7 @@
     "operation_greens_active"
   ],
   "potato_13w": [
+    "log_price",
     "price_lag_1",
     "price_lag_2",
     "price_lag_3",
@@ -957,6 +968,7 @@
     "operation_greens_active"
   ],
   "potato_26w": [
+    "log_price",
     "price_lag_1",
     "price_lag_2",
     "price_lag_3",

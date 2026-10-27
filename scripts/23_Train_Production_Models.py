@@ -271,7 +271,11 @@ def build_features(df_in):
 
 feat = build_features(df)
 
+# ORIGIN-WEEK PRICE ADDED 2026-10-27 (Script 80/81 finding): the feature sets used to hold price lags starting at
+# t-1 and never the origin-week price p(t) itself, so an "h-week" forecast saw prices only up to t-1 while the
+# persistence baseline used p(t). 'log_price' (= log1p of the origin week's price) is now a price feature.
 PRICE_FEATS = (
+    ['log_price'] +
     [f'price_lag_{lag}' for lag in LAG_WEEKS] +
     [f'price_roll_mean_{w}' for w in ROLL_WINS] +
     [f'price_roll_std_{w}' for w in ROLL_WINS] +
@@ -629,6 +633,12 @@ print(f'  Saved: {stale_path}  ({n_stale} crop x feature entries forward-filled)
 # by this issue -- it's already sum-of-squares based, not row-averaged
 # percentages -- so no reason to change its source).
 ablation_path = os.path.join(BASE, 'Model_Output', 'ablation_raw_results.csv')
+# 2026-10-27: M6 RMSE now comes from the SAME diagnostic run as the per-market predictions (Script 15 with
+# MARKET_LEVEL_DIAGNOSTIC=True, which includes the origin-week price feature). ablation_raw_results.csv (full M0-M9 run)
+# predates that feature until the full run is repeated, so it is only the fallback.
+_dm_raw = os.path.join(BASE, 'Model_Output', 'dm_market_level_raw_results.csv')
+if os.path.exists(_dm_raw):
+    ablation_path = _dm_raw
 dm_pred_path = os.path.join(BASE, 'Model_Output', 'dm_market_level_predictions.csv')
 if os.path.exists(ablation_path) and os.path.exists(dm_pred_path):
     ablation = pd.read_csv(ablation_path)
