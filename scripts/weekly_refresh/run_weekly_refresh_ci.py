@@ -51,6 +51,8 @@ from datetime import datetime
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import portal_reports   # manual portal-report ingestion (see portal_reports.py)
 SCRAPER = REPO_ROOT / "scripts" / "weekly_refresh" / "vendor" / "agmarknet_onion_prices.py"
 DOWNLOADS = Path(os.environ.get("TOP_DOWNLOADS_DIR", str(REPO_ROOT / "downloads")))
 STAGING = REPO_ROOT / "scripts" / "weekly_refresh" / "staging"
@@ -113,46 +115,61 @@ for crop in crops:
     trusted_file = DOWNLOADS / f"{crop_lower}_all_india_apmcs_2000_2026.csv"
     scrape_file = STAGING / f"{crop_lower}_weekly_scrape.csv"
 
-    scrape_args = [
-        PYTHON, str(SCRAPER),
-        "--commodity", crop,
-        "--start-year", str(year), "--end-year", str(year),
-        "--out", str(scrape_file),
-        "--log-level", "WARNING",
-        # Tuned up from the scraper's own defaults (--sleep 0.25, --retries 4)
-        # -- see module docstring above for why.
-        "--sleep", "1.5", "--retries", "6",
-    ]
-    scope_label = "all states"
-    if crop in state_filter:
-        scrape_args += ["--states", state_filter[crop]]
-        scope_label = state_filter[crop]
-
-    # INCREMENTAL WINDOW (2026-10-28): the scraper used to sweep every month of the year for every state each week
-    # (about 400 requests per crop); on 2026-10-27 that alone took 4 h 48 min because the portal was throttling, and the
-    # run was cancelled at the job time limit. Now only the months from three weeks before the trusted file's newest
-    # row to the current month are scraped. merge_scrape.py replaces everything from the new file's first date onward,
-    # so the window must start at or before the first day it should refresh: three weeks of overlap covers late
-    # portal revisions.
-    try:
-        import pandas as _pd
-        _last = _pd.read_csv(trusted_file, usecols=['arrival_date'], parse_dates=['arrival_date'])['arrival_date'].max()
-        _since = _last - _pd.Timedelta(days=21)
-        scrape_args += ['--since-month', f'{_since.year}-{_since.month:02d}', '--until-month', f'{datetime.now().year}-{datetime.now().month:02d}']
-        scrape_args[scrape_args.index('--start-year') + 1] = str(_since.year)
-        scope_label += f', months from {_since.year}-{_since.month:02d}'
-    except Exception as exc:
-        log(f'{crop}: could not set an incremental window ({exc}); scraping the whole year as before')
-    log(f"--- {crop}: scraping (year {year}, {scope_label}) ---")
-    code = run_logged(scrape_args, timeout_min=float(os.environ.get('SCRAPE_TIMEOUT_MIN', '75')))
-    if code == 3:
-        captcha_blocked = True
-        log(f"{crop}: Agmarknet now requires a captcha on its data API (TOKEN_OR_CAPTCHA_REQUIRED). Not retrying and not bypassing it; "
-            "stopping the scrape for all crops.")
-        break
-    if code != 0:
-        log(f"{crop}: SCRAPE FAILED (exit {code}) -- skipping this crop, trusted file untouched")
+    # PORTAL REPORTS FIRST (2026-10-28): Agmarknet's data API now needs a captcha, so prices are normally supplied as the portal's
+    # own "Daily Price Report" + "Daily Arrival Report" CSVs, downloaded by a person and placed on Drive under
+    # TOP_Digital_Twin_Raw_Data/portal_reports/<crop>/ (see portal_reports.py). If a pair is present it is used instead of scraping.
+    reports = portal_reports.find_reports(DOWNLOADS, crop_lower)
+    if reports:
+        log(f"--- {crop}: using portal reports {Path(reports[0]).name} + {Path(reports[1]).name} ---")
+        try:
+            portal_reports.build_scrape(crop_lower, reports[0], reports[1], str(trusted_file), str(scrape_file), log=log)
+        except SystemExit as exc:
+            log(f"{crop}: PORTAL-REPORT INGESTION FAILED ({exc}) -- skipping this crop, trusted file untouched")
+            continue
+    elif captcha_blocked:
+        log(f"{crop}: no portal reports on Drive and the scrape is blocked by the captcha -- skipping this crop")
         continue
+    else:
+        scrape_args = [
+            PYTHON, str(SCRAPER),
+            "--commodity", crop,
+            "--start-year", str(year), "--end-year", str(year),
+            "--out", str(scrape_file),
+            "--log-level", "WARNING",
+            # Tuned up from the scraper's own defaults (--sleep 0.25, --retries 4)
+            # -- see module docstring above for why.
+            "--sleep", "1.5", "--retries", "6",
+        ]
+        scope_label = "all states"
+        if crop in state_filter:
+            scrape_args += ["--states", state_filter[crop]]
+            scope_label = state_filter[crop]
+
+        # INCREMENTAL WINDOW (2026-10-28): the scraper used to sweep every month of the year for every state each week
+        # (about 400 requests per crop); on 2026-10-27 that alone took 4 h 48 min because the portal was throttling, and the
+        # run was cancelled at the job time limit. Now only the months from three weeks before the trusted file's newest
+        # row to the current month are scraped. merge_scrape.py replaces everything from the new file's first date onward,
+        # so the window must start at or before the first day it should refresh: three weeks of overlap covers late
+        # portal revisions.
+        try:
+            import pandas as _pd
+            _last = _pd.read_csv(trusted_file, usecols=['arrival_date'], parse_dates=['arrival_date'])['arrival_date'].max()
+            _since = _last - _pd.Timedelta(days=21)
+            scrape_args += ['--since-month', f'{_since.year}-{_since.month:02d}', '--until-month', f'{datetime.now().year}-{datetime.now().month:02d}']
+            scrape_args[scrape_args.index('--start-year') + 1] = str(_since.year)
+            scope_label += f', months from {_since.year}-{_since.month:02d}'
+        except Exception as exc:
+            log(f'{crop}: could not set an incremental window ({exc}); scraping the whole year as before')
+        log(f"--- {crop}: scraping (year {year}, {scope_label}) ---")
+        code = run_logged(scrape_args, timeout_min=float(os.environ.get('SCRAPE_TIMEOUT_MIN', '75')))
+        if code == 3:
+            captcha_blocked = True
+            log(f"{crop}: Agmarknet now requires a captcha on its data API (TOKEN_OR_CAPTCHA_REQUIRED). Not retrying and not bypassing it; "
+                "the other crops will use portal reports if present.")
+            continue
+        if code != 0:
+            log(f"{crop}: SCRAPE FAILED (exit {code}) -- skipping this crop, trusted file untouched")
+            continue
 
     log(f"--- {crop}: validating ---")
     code = run_logged([PYTHON, str(REPO_ROOT / "scripts" / "weekly_refresh" / "validate_scrape.py"),

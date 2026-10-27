@@ -131,6 +131,29 @@ bypassed by this scraper, so:
 - the incremental window (`--since-month`, `--until-month`; three weeks of overlap) is kept for when scraping is possible again, and a per-crop time
   budget (`SCRAPE_TIMEOUT_MIN`, default 75) stops any single crop from using the whole job.
 
+### Weekly procedure now (portal reports; implemented 2026-10-28, `portal_reports.py`)
+1. On agmarknet.gov.in -> Price & Arrivals, for EACH crop (Tomato, Onion, Potato) download the **Daily Price Report** and the **Daily Arrival Report**
+   as CSV for the period since the last refresh (the newest data in the trusted files is the week of 2026-10-05; a period of several weeks is fine, the merge
+   replaces everything from the file's first date onward). The portal asks for a captcha; a person solves it.
+2. Put the two files for each crop on Drive in `TOP_Digital_Twin_Raw_Data/portal_reports/<crop>/` (crop in lower case: tomato, onion, potato). Any file names
+   work as long as they contain "Price" or "Arrival"; the newest pair by modified time is used.
+3. The weekly workflow pulls that folder, converts each pair to the scraper's 20-column schema (`portal_reports.build_scrape`: variety rows averaged,
+   market_id by normalised state and market name, new ids for new markets), then runs the same gates as before (`validate_scrape.py`, `merge_scrape.py`)
+   and the rest of the pipeline. A crop without reports is skipped (or tried through the scraper, which stops at the captcha). Locally:
+   `python scripts/weekly_refresh/portal_reports.py --crop onion --price "..." --arrival "..." --trusted <trusted csv> --out <staging csv>`.
+Test: the onion reports of Jan-Jul 2026 reproduce the rows already in the trusted file (120,502 of 120,834 (market, date) rows overlap; prices within 1 % in 100 %,
+arrivals within 1 % in 99.7 %).
+
+**Known data issue found while building this:** in the trusted onion file the market_ids 4846 and 4848-4852 are each shared by two different markets in different
+states (for example 4846 = Varanasi(F&V) APMC, Uttar Pradesh, to Jan 2026, and Karimangalam(Uzhavar Sandhai), Tamil Nadu, from Feb 2026), a collision between ids
+assigned by Script 09b and ids from the scraper's directory. Script 09 merges each pair into one market series. A repair (unique ids for the later-seen market of
+each pair, applied in Script 09) and a panel rebuild are still to be done; `portal_reports.py` reports the collision as a warning.
+
+**data.gov.in feed (tested 2026-10-28 with the project's free API key, which is not stored in the repository):** the resource "Current Daily Price of Various
+Commodities from Various Markets (Mandi)" answers, but it holds only the CURRENT day (657 onion records, all dated 27/10/2026) and has no arrival quantity
+(fields: state, district, market, commodity, variety, grade, arrival_date, min/max/modal price). The pipeline needs arrivals (rows without arrivals are dropped and
+arrival features are built from them) and history, so it cannot replace the portal reports; at most a daily collector could keep a price-only archive.
+
 Ways forward (none implemented yet): (1) download the portal's "Daily Price Report" and "Daily Arrival Report" by hand each week (a person solves the
 captcha) and merge them into the trusted files, as was done for onion 2026 (`09b_Merge_Onion_2026_Update.py`, to be generalised to all crops);
 (2) an official open-data feed (data.gov.in "Current Daily Price of Various Commodities from Various Markets (Mandi)" needs a free API key); (3) ask
