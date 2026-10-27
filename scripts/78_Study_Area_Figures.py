@@ -41,17 +41,108 @@ def zones():
     return pd.DataFrame(out)
 
 
+GADM2 = os.environ.get('TOP_GADM2_SHP', r'C:\Users\masro\Downloads\gadm41_IND_2')
+# Agmarknet district names the geocoder could not match (misspellings, market names used as districts) -> GADM district
+FIX = {('Gujarat', 'Banaskanth'): 'Banas Kantha', ('Haryana', 'Jhajar'): 'Jhajjar', ('Himachal Pradesh', 'Sirmore'): 'Sirmaur', ('Kerala', 'Thirssur'): 'Thrissur',
+       ('Maharashtra', 'Chattrapati Sambhajinagar'): 'Aurangabad', ('Odisha', 'Balasore'): 'Baleshwar', ('Odisha', 'Mayurbhanja'): 'Mayurbhanj', ('Punjab', 'Ferozpur'): 'Firozpur',
+       ('Punjab', 'Tarntaran'): 'Tarn Taran', ('Rajasthan', 'Alwar FV'): 'Alwar', ('Rajasthan', 'Hanumangarh Town APMC'): 'Hanumangarh', ('Tamil Nadu', 'Nagercoil (Kannyiakumari)'): 'Kanniyakumari',
+       ('Tamil Nadu', 'Thiruchirappalli'): 'Tiruchirappalli', ('Tamil Nadu', 'Thiruvellore'): 'Thiruvallur', ('Telangana', 'Kukatpally Rythu Bazar APMC'): 'Hyderabad',
+       ('Uttar Pradesh', 'Bhadohi(Sant Ravi Nagar)'): 'Sant Ravi Das Nagar', ('Uttar Pradesh', 'Farukhabad'): 'Farrukhabad', ('Uttar Pradesh', 'Kannuj'): 'Kannauj',
+       ('Uttar Pradesh', 'Mau(Maunathbhanjan)'): 'Mau', ('Uttar Pradesh', 'Pillibhit'): 'Pilibhit', ('Uttar Pradesh', 'Tamkuhi road APMC'): 'Kushinagar',
+       ('Uttar Pradesh', 'Varanasi(F&V) APMC'): 'Varanasi', ('Uttarakhand', 'Dehradoon'): 'Dehradun', ('Uttarakhand', 'Nanital'): 'Nainital', ('Uttarakhand', 'Udhamsinghnagar'): 'Udham Singh Nagar',
+       ('West Bengal', 'Purba Bardhaman'): 'Barddhaman', ('West Bengal', 'Sounth 24 Parganas'): 'South 24 Parganas'}
+
+
+def gadm_centroids():
+    import shapefile
+    r = shapefile.Reader(GADM2)
+    f = [x[0] for x in r.fields][1:]
+    out = {}
+    for sh, rec in zip(r.shapes(), r.records()):
+        d = dict(zip(f, rec))
+        parts = list(sh.parts) + [len(sh.points)]
+        best = None
+        for a, b in zip(parts[:-1], parts[1:]):
+            xy = np.array(sh.points[a:b])
+            x, y = xy[:, 0], xy[:, 1]
+            cr = x[:-1] * y[1:] - x[1:] * y[:-1]
+            ar = cr.sum() / 2
+            if abs(ar) < 1e-12:
+                continue
+            cx = ((x[:-1] + x[1:]) * cr).sum() / (6 * ar)
+            cy = ((y[:-1] + y[1:]) * cr).sum() / (6 * ar)
+            if best is None or abs(ar) > best[0]:
+                best = (abs(ar), cy, cx)
+        if best:
+            out[(d['NAME_1'], d['NAME_2'])] = (best[1], best[2])
+    return out
+
+
+def hav(lat1, lon1, lat2, lon2):
+    r = 6371.0
+    a = np.radians
+    h = np.sin((a(lat2) - a(lat1)) / 2) ** 2 + np.cos(a(lat1)) * np.cos(a(lat2)) * np.sin((a(lon2) - a(lon1)) / 2) ** 2
+    return 2 * r * np.arcsin(np.sqrt(h))
+
+
+def locations(p):
+    """Coordinates for every market in the current panel (district centroid), nearest production zone and distance.
+    Uses the geocoded district centroid in data/zone_assignment.csv where it is district-level, and the GADM district centroid otherwise."""
+    pm = p.drop_duplicates(['crop', 'market_id'])[['crop', 'market_id', 'market', 'state', 'district']].copy()
+    pm['market_id'] = pm['market_id'].astype(int)
+    za = pd.read_csv(os.path.join(BASE, 'data', 'zone_assignment.csv'))
+    za['market_id'] = za['market_id'].astype(float).astype(int)
+    za = za[za['geocode_level'].isin(['district', 'district_only']) & za['lat'].notna()][['crop', 'market_id', 'lat', 'lon']]
+    m = pm.merge(za, on=['crop', 'market_id'], how='left')
+    m['source'] = np.where(m['lat'].notna(), 'geocoded district', '')
+    G = gadm_centroids()
+    st_alias = {'Keralam': 'Kerala'}
+    for i in m.index[m['lat'].isna()]:
+        s_ = st_alias.get(m.at[i, 'state'], m.at[i, 'state'])
+        d_ = str(m.at[i, 'district'])
+        key = (s_, FIX.get((s_, d_), d_))
+        if key not in G:
+            key = next((k for k in G if k[0] == s_ and k[1].lower() == d_.lower()), None)
+        if key in G:
+            m.at[i, 'lat'], m.at[i, 'lon'] = G[key]
+            m.at[i, 'source'] = 'GADM district centroid'
+    Z = zones()
+    zl, dl = [], []
+    for i, r_ in m.iterrows():
+        zz = Z[Z.crop == r_.crop]
+        if pd.isna(r_.lat):
+            zl.append(None); dl.append(np.nan); continue
+        d = hav(r_.lat, r_.lon, zz.lat.values, zz.lon.values)
+        j = int(np.argmin(d))
+        zl.append(zz.zone.values[j]); dl.append(d[j])
+    m['zone'] = zl
+    m['dist_km'] = dl
+    m.loc[m['dist_km'] > 500, 'zone'] = None
+    m.to_csv(os.path.join(OUT, 'table_market_locations.csv'), index=False)
+    return m
+
+
+def scalebar(ax, km=500, x0=68.2, y0=7.0):
+    deg = km / (111.32 * np.cos(np.radians(y0)))
+    ax.plot([x0, x0 + deg], [y0, y0], color=INK, lw=2.5, solid_capstyle='butt', zorder=6)
+    ax.plot([x0, x0], [y0 - 0.25, y0 + 0.25], color=INK, lw=1.2, zorder=6)
+    ax.plot([x0 + deg, x0 + deg], [y0 - 0.25, y0 + 0.25], color=INK, lw=1.2, zorder=6)
+    ax.text(x0 + deg / 2, y0 + 0.55, '%d km' % km, ha='center', va='bottom', fontsize=8, color=INK)
+
+
+def north(ax, x=96.0, y=11.0):
+    ax.annotate('', xy=(x, y + 3.2), xytext=(x, y), arrowprops=dict(arrowstyle='-|>', color=INK, lw=1.4), zorder=6)
+    ax.text(x, y + 3.7, 'N', ha='center', va='bottom', fontsize=9, fontweight='bold', color=INK)
+
+
 def fig1(p):
     try:
         import shapefile
         r = shapefile.Reader(SHP)
     except Exception as e:
         print('[78] map skipped:', e); return
-    za = pd.read_csv(os.path.join(BASE, 'data', 'zone_assignment.csv'))
-    za['market_id'] = za['market_id'].astype(float).astype(int)
-    panel_ids = {c: set(p[p.crop == c].market_id.dropna().astype(int)) for c in CROPS}
-    za = za[za['geocode_level'].isin(['district', 'district_only']) & za['lat'].notna()]
-    za = za[[mid in panel_ids[c] for c, mid in zip(za.crop, za.market_id)]]     # current panel markets only
+    za = locations(p)
+    za = za[za['lat'].notna()]
     pts = za.groupby(['crop', 'lat', 'lon']).size().reset_index(name='n')
     Z = zones()
     fig, axs = plt.subplots(1, 3, figsize=(12.5, 5.2))
@@ -64,8 +155,8 @@ def fig1(p):
         ax.scatter(d.lon, d.lat, s=8 + 9 * np.sqrt(d.n), color=COL[crop], alpha=0.55, linewidths=0, zorder=3, label='Markets (size = number per district)')
         zz = Z[Z.crop == crop]
         ax.scatter(zz.lon, zz.lat, marker='*', s=150, color='white', edgecolor=INK, linewidths=1.0, zorder=5, label='Production zone (30 km)')
-        ax.set_title('%s: %d of %d markets mapped' % (crop.capitalize(), int(za[za.crop == crop].market_id.nunique()), len(panel_ids[crop])), fontsize=11, fontweight='bold', color=INK, loc='left')
-        ax.set_xlim(67.5, 98); ax.set_ylim(6, 37.5); ax.set_aspect(1.05); ax.axis('off')
+        ax.set_title('%s: %d markets' % (crop.capitalize(), int(za[za.crop == crop].market_id.nunique())), fontsize=11, fontweight='bold', color=INK, loc='left')
+        ax.set_xlim(67.5, 98); ax.set_ylim(6, 37.5); ax.set_aspect(1.05); ax.axis('off'); scalebar(ax); north(ax)
     h, l = axs[1].get_legend_handles_labels()
     fig.legend(h, l, loc='lower center', ncol=2, frameon=False, fontsize=9)
     fig.tight_layout(rect=(0, 0.05, 1, 1))
