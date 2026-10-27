@@ -117,3 +117,21 @@ layers, so retrained models then use stale climate/satellite rows (carried forwa
 as stale). Prefer the CI path for production refreshes. If the local path is ever relied on
 again, add the GEE steps (or run `scripts/gee_auto/*` and Script 14 manually first). Any change
 to one orchestrator must be mirrored by hand in the other.
+
+## Captcha block (from 2026-10-27): the automated price scrape no longer works
+
+On 2026-10-27 the scheduled refresh ran 4 h 48 min on the tomato scrape and was cancelled at the job time limit. Cause: the portal's data endpoint
+(`api.agmarknet.gov.in/v1/prices-and-arrivals/date-wise/specific-commodity`) now answers **HTTP 400 `TOKEN_OR_CAPTCHA_REQUIRED`** ("Captcha key and
+captcha value are required") to every request; the scraper retried each of about 400 requests six times. A captcha cannot and must not be solved or
+bypassed by this scraper, so:
+
+- `vendor/agmarknet_onion_prices.py` now raises `CaptchaRequired` on that response and exits with code 3 within seconds;
+- `run_weekly_refresh_ci.py` stops the scrape for all crops on code 3 and fails the run with the message "AGMARKNET REQUIRES A CAPTCHA", so a blocked
+  week costs about a minute, not five hours; nothing is merged and the trusted files are untouched;
+- the incremental window (`--since-month`, `--until-month`; three weeks of overlap) is kept for when scraping is possible again, and a per-crop time
+  budget (`SCRAPE_TIMEOUT_MIN`, default 75) stops any single crop from using the whole job.
+
+Ways forward (none implemented yet): (1) download the portal's "Daily Price Report" and "Daily Arrival Report" by hand each week (a person solves the
+captcha) and merge them into the trusted files, as was done for onion 2026 (`09b_Merge_Onion_2026_Update.py`, to be generalised to all crops);
+(2) an official open-data feed (data.gov.in "Current Daily Price of Various Commodities from Various Markets (Mandi)" needs a free API key); (3) ask
+the Directorate of Marketing and Inspection for bulk access.

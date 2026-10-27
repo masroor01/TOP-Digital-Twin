@@ -72,10 +72,15 @@ def log(msg: str) -> None:
     _log_fh.flush()
 
 
-def run_logged(cmd: list[str]) -> int:
+def run_logged(cmd: list[str], timeout_min: float | None = None) -> int:
     log("RUN: " + " ".join(cmd))
-    proc = subprocess.run(cmd, cwd=REPO_ROOT, stdout=subprocess.PIPE,
-                           stderr=subprocess.STDOUT, text=True)
+    try:
+        proc = subprocess.run(cmd, cwd=REPO_ROOT, stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT, text=True,
+                              timeout=None if timeout_min is None else timeout_min * 60)
+    except subprocess.TimeoutExpired:
+        log(f"TIMEOUT after {timeout_min:.0f} min -- command stopped")
+        return 124
     for line in proc.stdout.splitlines():
         print(line, flush=True)
         _log_fh.write(line + "\n")
@@ -95,6 +100,7 @@ log("=== Weekly Refresh (CI) Started ===")
 year = datetime.now().year
 crops = ["Tomato", "Onion", "Potato"]
 merged_crops: list[str] = []
+captcha_blocked = False
 
 # Same restriction as the local .ps1: potato's production panel has only
 # ever included West Bengal + Uttarakhand (Script 09's balanced-panel /
@@ -122,8 +128,28 @@ for crop in crops:
         scrape_args += ["--states", state_filter[crop]]
         scope_label = state_filter[crop]
 
+    # INCREMENTAL WINDOW (2026-10-28): the scraper used to sweep every month of the year for every state each week
+    # (about 400 requests per crop); on 2026-10-27 that alone took 4 h 48 min because the portal was throttling, and the
+    # run was cancelled at the job time limit. Now only the months from three weeks before the trusted file's newest
+    # row to the current month are scraped. merge_scrape.py replaces everything from the new file's first date onward,
+    # so the window must start at or before the first day it should refresh: three weeks of overlap covers late
+    # portal revisions.
+    try:
+        import pandas as _pd
+        _last = _pd.read_csv(trusted_file, usecols=['arrival_date'], parse_dates=['arrival_date'])['arrival_date'].max()
+        _since = _last - _pd.Timedelta(days=21)
+        scrape_args += ['--since-month', f'{_since.year}-{_since.month:02d}', '--until-month', f'{datetime.now().year}-{datetime.now().month:02d}']
+        scrape_args[scrape_args.index('--start-year') + 1] = str(_since.year)
+        scope_label += f', months from {_since.year}-{_since.month:02d}'
+    except Exception as exc:
+        log(f'{crop}: could not set an incremental window ({exc}); scraping the whole year as before')
     log(f"--- {crop}: scraping (year {year}, {scope_label}) ---")
-    code = run_logged(scrape_args)
+    code = run_logged(scrape_args, timeout_min=float(os.environ.get('SCRAPE_TIMEOUT_MIN', '75')))
+    if code == 3:
+        captcha_blocked = True
+        log(f"{crop}: Agmarknet now requires a captcha on its data API (TOKEN_OR_CAPTCHA_REQUIRED). Not retrying and not bypassing it; "
+            "stopping the scrape for all crops.")
+        break
     if code != 0:
         log(f"{crop}: SCRAPE FAILED (exit {code}) -- skipping this crop, trusted file untouched")
         continue
@@ -146,6 +172,9 @@ for crop in crops:
     log(f"{crop}: refresh complete")
 
 if not merged_crops:
+    if captcha_blocked:
+        fail_and_exit("AGMARKNET REQUIRES A CAPTCHA -- the automated price scrape is blocked. Download the portal's Price and Arrival reports "
+                      "by hand (see scripts/weekly_refresh/README.md, 'Captcha block') or use an official data feed; nothing was merged")
     fail_and_exit("no crops merged successfully, stopping before touching the pipeline")
 log(f"Crops merged this run: {', '.join(merged_crops)}")
 

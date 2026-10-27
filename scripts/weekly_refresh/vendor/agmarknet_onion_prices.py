@@ -91,6 +91,14 @@ def to_float(value: Any) -> float | None:
         return None
 
 
+class CaptchaRequired(RuntimeError):
+    """The portal's data endpoint now answers HTTP 400 TOKEN_OR_CAPTCHA_REQUIRED (seen 2026-10-27). A captcha cannot be
+    solved by this scraper and must not be bypassed, so the run stops at once instead of retrying every request."""
+
+
+EXIT_CAPTCHA = 3
+
+
 def request_json(
     session: requests.Session,
     path: str,
@@ -106,6 +114,8 @@ def request_json(
     for attempt in range(1, retries + 1):
         try:
             response = session.get(url, params=params, timeout=timeout)
+            if response.status_code == 400 and "CAPTCHA" in response.text.upper():
+                raise CaptchaRequired(f"{url} requires a captcha (TOKEN_OR_CAPTCHA_REQUIRED)")
             if response.status_code in {429, 500, 502, 503, 504}:
                 raise requests.HTTPError(
                     f"{response.status_code} from {response.url}", response=response
@@ -336,10 +346,24 @@ def utc_now_iso() -> str:
     return datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
 
 
-def iter_year_months(start_year: int, end_year: int) -> Iterable[tuple[int, int]]:
+def iter_year_months(start_year: int, end_year: int, since: tuple[int, int] | None = None,
+                     until: tuple[int, int] | None = None) -> Iterable[tuple[int, int]]:
+    """All (year, month) jobs in the year range, optionally limited to since <= (year, month) <= until.
+    Added 2026-10-28 so the weekly refresh can scrape only the recent months instead of the whole year."""
     for year in range(start_year, end_year + 1):
         for month in range(1, 13):
+            if since is not None and (year, month) < since:
+                continue
+            if until is not None and (year, month) > until:
+                continue
             yield year, month
+
+
+def parse_ym(text: str | None) -> tuple[int, int] | None:
+    if not text:
+        return None
+    y, m = text.split("-")
+    return int(y), int(m)
 
 
 def make_parser() -> argparse.ArgumentParser:
@@ -364,6 +388,8 @@ def make_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Append to the CSV and skip state/month jobs recorded in the .progress.jsonl file.",
     )
+    parser.add_argument("--since-month", default=None, help="Only scrape months from YYYY-MM onward (incremental refresh).")
+    parser.add_argument("--until-month", default=None, help="Only scrape months up to YYYY-MM (default: no limit).")
     parser.add_argument("--sleep", type=float, default=0.25, help="Delay after each request.")
     parser.add_argument("--timeout", type=int, default=60, help="HTTP timeout seconds.")
     parser.add_argument("--retries", type=int, default=4, help="HTTP retry attempts.")
@@ -425,7 +451,8 @@ def main() -> int:
     )
 
     total_rows = 0
-    total_jobs = len(states) * 12 * (args.end_year - args.start_year + 1)
+    since_ym, until_ym = parse_ym(args.since_month), parse_ym(args.until_month)
+    total_jobs = len(states) * len(list(iter_year_months(args.start_year, args.end_year, since_ym, until_ym)))
     finished_jobs = 0
 
     with output_path.open(mode, newline="", encoding="utf-8") as csvfile:
@@ -434,7 +461,7 @@ def main() -> int:
             writer.writeheader()
 
         for state in states:
-            for year, month in iter_year_months(args.start_year, args.end_year):
+            for year, month in iter_year_months(args.start_year, args.end_year, since_ym, until_ym):
                 key = job_key(state.id, year, month)
                 if key in completed:
                     finished_jobs += 1
@@ -477,6 +504,8 @@ def main() -> int:
                         len(rows),
                         total_rows,
                     )
+                except CaptchaRequired:
+                    raise
                 except Exception as exc:
                     write_progress(
                         progress_path,
@@ -501,6 +530,9 @@ def main() -> int:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
+    except CaptchaRequired as exc:
+        print(f"STOPPED: {exc}. The Agmarknet data API now needs a captcha; automated scraping is not possible.", file=sys.stderr)
+        raise SystemExit(EXIT_CAPTCHA)
     except KeyboardInterrupt:
         print("\nInterrupted. Re-run with --resume to continue.", file=sys.stderr)
         raise SystemExit(130)
