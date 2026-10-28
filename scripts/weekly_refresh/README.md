@@ -131,6 +131,17 @@ bypassed by this scraper, so:
 - the incremental window (`--since-month`, `--until-month`; three weeks of overlap) is kept for when scraping is possible again, and a per-crop time
   budget (`SCRAPE_TIMEOUT_MIN`, default 75) stops any single crop from using the whole job.
 
+### Preferred input: the combined "Daily Price Arrival Report" (tested 2026-10-28)
+The portal can also export ONE file per commodity with price and arrival quantity on every row ("Daily Price Arrival Report-DD-MM-YYYY to DD-MM-YYYY.csv").
+`portal_reports.py` accepts it directly (put that single file in `portal_reports/<crop>/`; if a combined file and a price/arrival pair are both present the
+newest is used). Rows are variety/grade rows: prices are averaged and arrival quantities summed per (state, district, market, date).
+Tested on the tomato file Nov 2025 to 28 Oct 2026 (214,023 rows, 28 states, 1,282 markets): against the trusted tomato file for the same weeks, prices agree
+within 1 % in 100 % of the matched (market, date) rows and arrival totals within 1 % in 99.1 %; all validate_scrape.py gates pass; a dry-run merge on a copy
+advances the trusted file's newest date from 2026-10-06 to 2026-10-28. 22 markets in the file are new, 69 trusted markets are absent from it (markets that did
+not report in the window or are spelled differently). Download only the weeks since the last refresh plus about three weeks of overlap (the merge replaces
+everything from the file's first date onward, and replaced rows become one averaged row per market and day); one such file is needed per crop (the tomato
+file above has no onion or potato rows).
+
 ### Weekly procedure now (portal reports; implemented 2026-10-28, `portal_reports.py`)
 1. On agmarknet.gov.in -> Price & Arrivals, for EACH crop (Tomato, Onion, Potato) download the **Daily Price Report** and the **Daily Arrival Report**
    as CSV for the period since the last refresh (the newest data in the trusted files is the week of 2026-10-05; a period of several weeks is fine, the merge

@@ -47,11 +47,17 @@ def find_reports(downloads, crop):
     """Newest (price, arrival) pair under <downloads>/portal_reports/<crop>/, or None."""
     folder = os.path.join(str(downloads), 'portal_reports', crop.lower())
     files = [f for f in glob.glob(os.path.join(folder, '*.csv'))]
-    price = sorted([f for f in files if re.search(r'price', os.path.basename(f), re.I)], key=os.path.getmtime)
-    arr = sorted([f for f in files if re.search(r'arriv', os.path.basename(f), re.I)], key=os.path.getmtime)
+    base = lambda f: os.path.basename(f)
+    combined = sorted([f for f in files if re.search(r'price', base(f), re.I) and re.search(r'arriv', base(f), re.I)], key=os.path.getmtime)
+    price = sorted([f for f in files if re.search(r'price', base(f), re.I) and not re.search(r'arriv', base(f), re.I)], key=os.path.getmtime)
+    arr = sorted([f for f in files if re.search(r'arriv', base(f), re.I) and not re.search(r'price', base(f), re.I)], key=os.path.getmtime)
+    # newest of: a combined "Daily Price Arrival Report" (one file with price and arrival on each row), or a price + arrival pair
+    cands = []
+    if combined:
+        cands.append((os.path.getmtime(combined[-1]), (combined[-1], None)))
     if price and arr:
-        return price[-1], arr[-1]
-    return None
+        cands.append((max(os.path.getmtime(price[-1]), os.path.getmtime(arr[-1])), (price[-1], arr[-1])))
+    return max(cands, key=lambda c: c[0])[1] if cands else None
 
 
 def _read_report(path):
@@ -60,6 +66,59 @@ def _read_report(path):
     if 'Market' not in df.columns:       # no title line in this export
         df = pd.read_csv(path, low_memory=False)
     return df
+
+
+def _num(df, cols):
+    for c in cols:
+        df[c] = pd.to_numeric(df[c].astype(str).str.replace(',', ''), errors='coerce')
+
+
+def _combined_to_market_days(path, crop, crop_name, log):
+    """COMBINED report ("Daily Price Arrival Report"): one file, each row holds price and arrival quantity for a variety/grade.
+    Prices are averaged and arrival quantities summed per (state, district, market, date); tested 2026-10-28 against the trusted tomato
+    file: 99.1 % of arrival totals within 1 %, 100 % of prices within 1 %."""
+    comb = _read_report(path)
+    if 'Commodity' in comb.columns:
+        comb = comb[comb['Commodity'].astype(str).str.strip().str.lower() == crop.lower()]
+        if comb.empty:
+            raise SystemExit(f'the combined report has no {crop_name} rows')
+    if 'Arrival Unit' in comb.columns and not (comb['Arrival Unit'] == 'Metric Tonnes').all():
+        raise SystemExit('unexpected arrival unit in the combined report (expected Metric Tonnes only)')
+    comb = comb.rename(columns={'State/UT': 'state', 'District': 'district', 'Market': 'market', 'Arrival Date': 'date_raw', 'Modal Price': 'modal_price_rs_per_quintal',
+                                'Min Price': 'min_price_rs_per_quintal', 'Max Price': 'max_price_rs_per_quintal', 'Arrival Quantity': 'arrivals_tonnes'})
+    need = ['state', 'district', 'market', 'date_raw', 'modal_price_rs_per_quintal', 'min_price_rs_per_quintal', 'max_price_rs_per_quintal', 'arrivals_tonnes']
+    missing = [c for c in need if c not in comb.columns]
+    if missing:
+        raise SystemExit(f'combined report is missing columns {missing}; found {list(comb.columns)}')
+    _num(comb, need[4:])
+    out = comb.groupby(['state', 'district', 'market', 'date_raw'], as_index=False).agg(
+        modal_price_rs_per_quintal=('modal_price_rs_per_quintal', 'mean'), min_price_rs_per_quintal=('min_price_rs_per_quintal', 'mean'),
+        max_price_rs_per_quintal=('max_price_rs_per_quintal', 'mean'), arrivals_tonnes=('arrivals_tonnes', 'sum'))
+    log(f'  combined report: {len(comb):,} rows -> {len(out):,} (market, date) rows')
+    return out
+
+
+def _pair_to_market_days(price_csv, arrival_csv, log):
+    """Separate "Daily Price Report" + "Daily Arrival Report" (as used for onion 2026 in Script 09b)."""
+    price = _read_report(price_csv).rename(columns={'State/UT': 'state', 'District': 'district', 'Market': 'market', 'Price Date': 'date_raw',
+                                                    'Modal Price': 'modal_price_rs_per_quintal', 'Min Price': 'min_price_rs_per_quintal', 'Max Price': 'max_price_rs_per_quintal'})
+    need = ['state', 'district', 'market', 'date_raw', 'modal_price_rs_per_quintal', 'min_price_rs_per_quintal', 'max_price_rs_per_quintal']
+    missing = [c for c in need if c not in price.columns]
+    if missing:
+        raise SystemExit(f'price report is missing columns {missing}; found {list(price.columns)}')
+    _num(price, need[4:])
+    price_agg = price.groupby(['state', 'district', 'market', 'date_raw'], as_index=False).agg(
+        modal_price_rs_per_quintal=('modal_price_rs_per_quintal', 'mean'), min_price_rs_per_quintal=('min_price_rs_per_quintal', 'mean'),
+        max_price_rs_per_quintal=('max_price_rs_per_quintal', 'mean'))
+    log(f'  price report: {len(price):,} rows -> {len(price_agg):,} (market, date) rows after variety average')
+    arr = _read_report(arrival_csv).rename(columns={'State/UT': 'state', 'District': 'district', 'Market': 'market', 'Arrival Date': 'date_raw', 'Arrival Quantity': 'arrivals_tonnes'})
+    if 'Arrival Unit' in arr.columns and not (arr['Arrival Unit'] == 'Metric Tonnes').all():
+        raise SystemExit('unexpected arrival unit in the arrival report (expected Metric Tonnes only)')
+    _num(arr, ['arrivals_tonnes'])
+    arr = arr[['state', 'district', 'market', 'date_raw', 'arrivals_tonnes']]
+    m = price_agg.merge(arr, on=['state', 'district', 'market', 'date_raw'], how='inner')
+    log(f'  matched (market, date) rows with both price and arrivals: {len(m):,}')
+    return m
 
 
 def build_scrape(crop, price_csv, arrival_csv, trusted_csv, out_csv, log=print):
@@ -74,29 +133,21 @@ def build_scrape(crop, price_csv, arrival_csv, trusted_csv, out_csv, log=print):
     max_market_id = int(old['market_id'].max()); max_district_id = int(old['district_id'].max())
     commodity_id = int(old['commodity_id'].dropna().iloc[0])
 
-    price = _read_report(price_csv).rename(columns={'State/UT': 'state', 'District': 'district', 'Market': 'market', 'Price Date': 'date_raw',
-                                                    'Modal Price': 'modal_price_rs_per_quintal', 'Min Price': 'min_price_rs_per_quintal', 'Max Price': 'max_price_rs_per_quintal'})
-    need = ['state', 'district', 'market', 'date_raw', 'modal_price_rs_per_quintal', 'min_price_rs_per_quintal', 'max_price_rs_per_quintal']
-    missing = [c for c in need if c not in price.columns]
-    if missing:
-        raise SystemExit(f'price report is missing columns {missing}; found {list(price.columns)}')
-    for c in need[4:]:
-        price[c] = pd.to_numeric(price[c].astype(str).str.replace(',', ''), errors='coerce')
-    price_agg = price.groupby(['state', 'district', 'market', 'date_raw'], as_index=False).agg(
-        modal_price_rs_per_quintal=('modal_price_rs_per_quintal', 'mean'), min_price_rs_per_quintal=('min_price_rs_per_quintal', 'mean'),
-        max_price_rs_per_quintal=('max_price_rs_per_quintal', 'mean'))
-    log(f'  price report: {len(price):,} rows -> {len(price_agg):,} (market, date) rows after variety average')
-
-    arr = _read_report(arrival_csv).rename(columns={'State/UT': 'state', 'District': 'district', 'Market': 'market', 'Arrival Date': 'date_raw', 'Arrival Quantity': 'arrivals_tonnes'})
-    if 'Arrival Unit' in arr.columns and not (arr['Arrival Unit'] == 'Metric Tonnes').all():
-        raise SystemExit('unexpected arrival unit in the arrival report (expected Metric Tonnes only)')
-    arr['arrivals_tonnes'] = pd.to_numeric(arr['arrivals_tonnes'].astype(str).str.replace(',', ''), errors='coerce')
-    arr = arr[['state', 'district', 'market', 'date_raw', 'arrivals_tonnes']]
-    m = price_agg.merge(arr, on=['state', 'district', 'market', 'date_raw'], how='inner')
-    log(f'  matched (market, date) rows with both price and arrivals: {len(m):,}')
+    if arrival_csv is None:
+        m = _combined_to_market_days(price_csv, crop, crop_name, log)
+    else:
+        m = _pair_to_market_days(price_csv, arrival_csv, log)
 
     m['state_n'] = norm(m['state']); m['market_n'] = norm(m['market'])
     m = m.merge(lookup[['state_n', 'market_n', 'market_id', 'state_id', 'state_code', 'district_id']], on=['state_n', 'market_n'], how='left')
+    # A market recorded under two spellings with two different ids in the trusted file (for example Sheopurkalan (F&V) APMC: 3066 and 4543)
+    # must keep the id of the EXACT spelling the report uses, which is also what validate_scrape.py compares; the normalised-name lookup
+    # above would otherwise pick whichever spelling came first.
+    exact = old.drop_duplicates(['state', 'market'])[['state', 'market', 'market_id']].rename(columns={'market_id': 'market_id_exact'})
+    m = m.merge(exact, on=['state', 'market'], how='left')
+    use = m['market_id_exact'].notna()
+    m.loc[use, 'market_id'] = m.loc[use, 'market_id_exact']
+    m = m.drop(columns='market_id_exact')
     unmatched = m['market_id'].isna()
     keys = m.loc[unmatched, ['state_n', 'market_n']].drop_duplicates().reset_index(drop=True)
     keys['new_market_id'] = max_market_id + 1 + keys.index; keys['new_district_id'] = max_district_id + 1 + keys.index
@@ -142,7 +193,8 @@ def build_scrape(crop, price_csv, arrival_csv, trusted_csv, out_csv, log=print):
 if __name__ == '__main__':
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[1])
     ap.add_argument('--crop', required=True, choices=['tomato', 'onion', 'potato'])
-    ap.add_argument('--price', required=True); ap.add_argument('--arrival', required=True)
+    ap.add_argument('--price', required=True, help='the price report, or the single combined Daily Price Arrival Report')
+    ap.add_argument('--arrival', default=None, help='the arrival report; omit when --price is a combined report')
     ap.add_argument('--trusted', required=True); ap.add_argument('--out', required=True)
     a = ap.parse_args()
-    build_scrape(a.crop, a.price, a.arrival, a.trusted, a.out)
+    build_scrape(a.crop, a.price, a.arrival or None, a.trusted, a.out)
