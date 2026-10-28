@@ -34,6 +34,32 @@ function tooManyOverrides(overrides) {
 // as MAX_OVERRIDE_KEYS above.
 const MAX_MARKET_IDS = 40;
 
+// Rolling features the models train on (scripts/23_Train_Production_Models.py roll_specs): sums for heat days and rain,
+// means for NDVI/LST, each built from the PREVIOUS weeks (current week excluded). The sidebar only exposes the raw
+// weekly series, so overriding a raw value never reached these derived columns and the weather what-ifs were damped or
+// inert (2026-10-28). A weather override is therefore treated as a sustained shift: the rolling sum moves by
+// window x (new - baseline), the rolling mean by (new - baseline). An explicit override of a derived column wins.
+const ROLLING_DERIVED = {
+  era5_heat_35: [['era5_heat_35_roll4', 4, true], ['era5_heat_35_roll8', 8, true]],
+  chirps_rain_mm: [['chirps_rain_mm_roll4', 4, true], ['chirps_rain_mm_roll8', 8, true]],
+  s2_ndvi: [['s2_ndvi_roll4', 4, false]],
+  s2_ndvi_anom: [['s2_ndvi_anom_roll4', 4, false]],
+  modis_lst_mean: [['modis_lst_mean_roll4', 4, false]],
+};
+function buildScenario(baseRow, overrides) {
+  const scenario = { ...baseRow, ...overrides };
+  for (const [raw, derived] of Object.entries(ROLLING_DERIVED)) {
+    const nv = Number(overrides[raw]), bv = Number(baseRow[raw]);
+    if (overrides[raw] === undefined || !Number.isFinite(nv) || !Number.isFinite(bv) || nv === bv) continue;
+    for (const [col, win, isSum] of derived) {
+      if (overrides[col] !== undefined || !Number.isFinite(Number(baseRow[col]))) continue;
+      const shifted = Number(baseRow[col]) + (isSum ? win : 1) * (nv - bv);
+      scenario[col] = isSum ? Math.max(0, shifted) : shifted;
+    }
+  }
+  return scenario;
+}
+
 // /ai-brief calls the real Anthropic API with a server-side key -- unlike
 // every other endpoint here, each call has a real dollar cost. Rate-limited
 // much tighter than the general API limit for that reason.
@@ -169,7 +195,7 @@ export function buildRouter(store) {
       const baseRow = findBaseRow(store.reference, crop, marketId);
       if (!baseRow) return res.status(404).json({ error: 'no baseline row for this crop/market' });
 
-      const scenario = { ...baseRow, ...overrides };
+      const scenario = buildScenario(baseRow, overrides);
       const diffCols = Object.keys(overrides).filter((c) => !valuesEqual(overrides[c], baseRow[c]));
 
       const asOf = new Date(baseRow.week_start);
@@ -182,7 +208,7 @@ export function buildRouter(store) {
         items.push({ id: `scenario_${h}`, crop, horizon: h, features: scenario });
       }
       for (const col of diffCols) {
-        items.push({ id: `isolated_${col}`, crop, horizon, features: { ...baseRow, [col]: scenario[col] } });
+        items.push({ id: `isolated_${col}`, crop, horizon, features: buildScenario(baseRow, { [col]: overrides[col] }) });
       }
       const preds = await predictBatch(items);
 
@@ -318,7 +344,7 @@ export function buildRouter(store) {
       if (!baseRow) return res.status(404).json({ error: 'no baseline row' });
       if (!(crop in store.dailyNoise)) return res.json({ points: [], note: 'no daily-noise factor for this crop' });
 
-      const scenario = { ...baseRow, ...overrides };
+      const scenario = buildScenario(baseRow, overrides);
       const asOf = new Date(baseRow.week_start);
       const items = HORIZONS.map((h) => ({ id: `h${h}`, crop, horizon: h, features: scenario }));
       const preds = await predictBatch(items);

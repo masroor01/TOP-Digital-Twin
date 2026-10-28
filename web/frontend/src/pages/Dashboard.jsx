@@ -58,37 +58,51 @@ export default function Dashboard() {
   }, []);
 
   // crop change -> reload states
+  // The previous crop's state/market/baseline are cleared at once: otherwise the new crop is requested with the old
+  // crop's market id (404s on /reference and /simulate until the new market list arrives).
   useEffect(() => {
+    let cancelled = false;
     setOverrides({});
+    setStates([]); setStateSel(''); setMarkets([]); setMarket(null); setBaseRow(null); setSim(null);
     api.states(crop).then((s) => {
+      if (cancelled) return;
       setStates(s);
       setStateSel(s[0] || '');
     });
+    return () => { cancelled = true; };
   }, [crop]);
 
   // state change -> reload markets
   useEffect(() => {
     if (!stateSel) return;
-    api.markets(crop, stateSel).then((m) => {
+    let cancelled = false;
+    api.markets(crop, stateSel).then((list) => {
+      if (cancelled) return;
+      const m = list.map((x) => ({ ...x, _crop: crop }));   // remembers which crop's list the market came from
       setMarkets(m);
       setMarket(m[0] || null);
     });
+    return () => { cancelled = true; };
   }, [crop, stateSel]);
 
   // market change -> reload baseline reference row
   useEffect(() => {
-    if (!market) return;
+    if (!market || market._crop !== crop) return;
+    let cancelled = false;
     setOverrides({});
-    api.reference(crop, market.marketId).then(setBaseRow).catch(() => setBaseRow(null));
+    api.reference(crop, market.marketId).then((r) => { if (!cancelled) setBaseRow(r); }).catch(() => { if (!cancelled) setBaseRow(null); });
+    return () => { cancelled = true; };
   }, [crop, market?.marketId]);
 
   // scenario change -> re-run simulation
   useEffect(() => {
-    if (!market) return;
+    if (!market || market._crop !== crop) return;
+    let cancelled = false;
     setSimError(null);
     api.simulate({ crop, marketId: market.marketId, horizon, overrides })
-      .then(setSim)
-      .catch((e) => setSimError(e?.response?.data?.error || e.message));
+      .then((r) => { if (!cancelled) setSim(r); })
+      .catch((e) => { if (!cancelled) setSimError(e?.response?.data?.error || e.message); });
+    return () => { cancelled = true; };
   }, [crop, market?.marketId, horizon, overrides]);
 
   const marketCounts = meta?.marketCounts;
