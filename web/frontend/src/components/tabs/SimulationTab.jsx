@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, SectionLabel, Metric, Badge, Spinner, CropBadge, Alert, InfoButton } from '../ui';
 import PlotChart from '../PlotChart';
+import PolicyAnalogues from '../PolicyAnalogues';
 import { fmtRs, fmtRsKg, fmtPct, fmtDate, HORIZONS, CROP_ICON, CROP_COLOR } from '../../lib/theme';
 import { api } from '../../lib/api';
 
@@ -139,6 +140,7 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
 
       <p className="text-xs text-[var(--text-secondary)] mb-2">
         Scenario results are model sensitivities, not causal estimates of what a policy or shock would actually do.
+        {crop === 'onion' && ' The export ban, minimum export price and export duty do not move the model forecast (it has no reliable policy signal to learn from); switching one on shows historical analogues below instead.'}
       </p>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
         <Metric label={`Baseline`} value={fmtRs(kpis.baseline, { perQ: true })} sub={fmtRsKg(kpis.baseline)} help="Unmodified baseline model projection." />
@@ -200,6 +202,8 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
               ` — these can differ meaningfully from the crop-wide figure.`
             : ''} />
       </div>
+
+      <PolicyAnalogues crop={crop} overrides={overrides || {}} baseRow={sim.baseRow} />
 
       <Card className="p-3" accent={cropColor}>
         <PlotChart data={mainTraces} height={440} layout={{

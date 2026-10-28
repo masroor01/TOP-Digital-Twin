@@ -1,4 +1,6 @@
 import express from 'express';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
 import Anthropic from '@anthropic-ai/sdk';
 import { rateLimit } from 'express-rate-limit';
 import { predictBatch, inferenceHealth } from './inference.js';
@@ -182,6 +184,16 @@ export function buildRouter(store) {
       };
     });
     res.json(series);
+  });
+
+  // Descriptive price history around real export-policy actions (scripts/83_Policy_Analogues.py); not a model output.
+  const ANALOGUES_FILE = fileURLToPath(new URL('../../data/policy_analogues.json', import.meta.url));
+  router.get('/policy-analogues', (req, res) => {
+    try {
+      res.json(JSON.parse(fs.readFileSync(ANALOGUES_FILE, 'utf-8')));
+    } catch (e) {
+      res.status(404).json({ error: 'policy analogues not available' });
+    }
   });
 
   // ── Core simulation ─────────────────────────────────────────────────────

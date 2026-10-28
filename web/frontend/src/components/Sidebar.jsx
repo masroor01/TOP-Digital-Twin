@@ -185,18 +185,23 @@ export default function Sidebar({
 
       <hr className="border-[var(--border-color)] my-3" />
       <SectionLabel>Policy Scenarios</SectionLabel>
-      {policyFields.includes('export_banned') && (
+      {crop !== 'onion' && (
+        <p className="text-[0.72rem] text-[var(--text-secondary)] mb-2.5 leading-snug">
+          Export ban, minimum export price and export duty apply to onion only: there is no export restriction on {crop} in the data.
+        </p>
+      )}
+      {crop === 'onion' && policyFields.includes('export_banned') && (
         <CheckField label={featureInfo.export_banned.label} help={featureInfo.export_banned.help}
           checked={!!val('export_banned')} onChange={(v) => setOverride('export_banned', v ? 1 : 0)}
           staleness={staleness} crop={crop} field="export_banned" />
       )}
-      {featureRanges.mep_usd_per_tonne && (
+      {crop === 'onion' && featureRanges.mep_usd_per_tonne && (
         <SliderField label={featureInfo.mep_usd_per_tonne.label} help={featureInfo.mep_usd_per_tonne.help}
           min={0} max={Math.max(featureRanges.mep_usd_per_tonne.max, 900)} step={10}
           value={val('mep_usd_per_tonne')} onChange={(v) => setOverride('mep_usd_per_tonne', v)}
           staleness={staleness} crop={crop} field="mep_usd_per_tonne" />
       )}
-      {featureRanges.export_duty_pct && (
+      {crop === 'onion' && featureRanges.export_duty_pct && (
         <SliderField label={featureInfo.export_duty_pct.label} help={featureInfo.export_duty_pct.help}
           min={0} max={50} step={1} value={val('export_duty_pct')} onChange={(v) => setOverride('export_duty_pct', v)}
           staleness={staleness} crop={crop} field="export_duty_pct" />
