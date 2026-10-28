@@ -171,7 +171,8 @@ def build_scrape(crop, price_csv, arrival_csv, trusted_csv, out_csv, log=print):
     # involves an id created by THIS run is fatal.
     st_per_id = old.assign(_s=old['state'].replace({'Keralam': 'Kerala'})).groupby('market_id')['_s'].nunique()
     pre_existing = set(st_per_id[st_per_id > 1].index.astype(int))
-    bad = out.groupby('market_id')['market'].nunique()
+    # spelling variants of one market (double spaces, punctuation) share an id legitimately; compare normalised names
+    bad = out.assign(_n=norm(out['market'])).groupby('market_id')['_n'].nunique()
     bad_ids = set(bad[bad > 1].index.astype(int))
     if bad_ids - pre_existing:
         raise SystemExit(f'market_id maps to more than one market name: {sorted(bad_ids - pre_existing)[:10]}')
