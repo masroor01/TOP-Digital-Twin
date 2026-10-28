@@ -120,7 +120,7 @@ for crop in crops:
     # TOP_Digital_Twin_Raw_Data/portal_reports/<crop>/ (see portal_reports.py). If a pair is present it is used instead of scraping.
     reports = portal_reports.find_reports(DOWNLOADS, crop_lower)
     if reports:
-        log(f"--- {crop}: using portal reports {Path(reports[0]).name} + {Path(reports[1]).name} ---")
+        log(f"--- {crop}: using portal reports {' + '.join(Path(p).name for p in reports if p)} ---")
         try:
             portal_reports.build_scrape(crop_lower, reports[0], reports[1], str(trusted_file), str(scrape_file), log=log)
         except SystemExit as exc:
