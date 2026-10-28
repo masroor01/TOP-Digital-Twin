@@ -25,7 +25,7 @@ export default function ValidationTab() {
         <em> level</em> was. This measures something different: for every per-market forecast, did the model correctly
         call whether the price would go <b>up</b> or <b>down</b> from where it stood when the forecast was made —
         regardless of by how much? Tested against a 50% coin-flip null with a binomial test. At one week the call
-        is only slightly better than a coin flip (52 to 54%); from four weeks onward it is clearly better, and it is
+        is only slightly better than a coin flip (52 to 55%); from four weeks onward it is clearly better, and it is
         strongest at 13 to 26 weeks for tomato and onion. Corrected 10 Oct 2026: an earlier version measured the
         change from the wrong starting week and overstated these figures.
       </p>
