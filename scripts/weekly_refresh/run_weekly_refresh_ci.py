@@ -214,6 +214,23 @@ for f in sync_files:
     dst = REPO_ROOT / "data" / "agmarknet_weekly" / f
     dst.write_bytes(src.read_bytes())
 
+# 2025 TOP-UP (2026-10-28): gee_auto/* only fetches 2026. The 2025 export (GEE_2025/) used to exist only in a local Downloads
+# folder, so every CI run since 2026-09-24 rebuilt the satellite/climate features with NO 2025 data for tomato and onion
+# (carried forward for a whole year). It is now versioned in the repo and staged into the downloads dir here.
+import shutil
+_topup_src = REPO_ROOT / "data" / "satellite_climate" / "topup_2025"
+_topup_dst = DOWNLOADS / "GEE_2025"
+if _topup_src.exists():
+    for _sub in _topup_src.iterdir():
+        if _sub.is_dir():
+            (_topup_dst / _sub.name).mkdir(parents=True, exist_ok=True)
+            for _f in _sub.glob("*.csv"):
+                if not (_topup_dst / _sub.name / _f.name).exists():
+                    shutil.copy2(_f, _topup_dst / _sub.name / _f.name)
+    log(f"staged 2025 satellite/climate top-up from {_topup_src}")
+else:
+    log("WARNING: data/satellite_climate/topup_2025 missing -- 2025 satellite/climate data will be absent")
+
 log("--- GEE satellite/climate topup (ERA5, CHIRPS, S2 NDVI, MODIS NDVI+LST) ---")
 gee_scripts = [
     "scripts/gee_auto/01_era5_topup.py",
@@ -231,6 +248,23 @@ for gs in gee_scripts:
         gee_ok = False
         break
 
+def check_satellite_coverage() -> list[str]:
+    """Every crop must have (nearly) full ERA5/CHIRPS/MODIS coverage in every calendar year from 2019 to the year before the
+    current one, and S2 too. A collapsed year means a top-up input is missing; models would silently carry values forward."""
+    import pandas as _pd
+    f = REPO_ROOT / "data" / "satellite_climate" / "crop_weekly_features.csv"
+    d = _pd.read_csv(f, parse_dates=["week_start"])
+    d["yr"] = d["week_start"].dt.year
+    bad = []
+    last_full = datetime.now().year - 1
+    for col in ("era5_tmax", "chirps_rain_mm", "s2_ndvi", "modis_ndvi"):
+        cov = d[(d.yr >= 2019) & (d.yr <= last_full)].groupby(["crop", "yr"])[col].apply(lambda s: s.notna().mean())
+        for (crop, yr), v in cov.items():
+            if v < 0.85:
+                bad.append(f"{crop} {yr} {col}: {v:.0%}")
+    return bad
+
+
 if gee_ok:
     log("--- Script 14: rebuilding satellite/climate features ---")
     code = run_logged([PYTHON, "scripts/14_Satellite_Climate_Features.py"])
@@ -238,6 +272,10 @@ if gee_ok:
         log(f"Script 14 FAILED (exit {code}) -- existing data/satellite_climate/ "
             f"files left untouched, continuing to Script 23 with whatever "
             f"climate/satellite features were already committed")
+    else:
+        gaps = check_satellite_coverage()
+        if gaps:
+            fail_and_exit("satellite/climate coverage gap after Script 14 (a top-up input is missing): " + "; ".join(gaps[:8]))
 else:
     log("GEE topup incomplete this run -- Script 14 not re-run, "
         "continuing with existing committed satellite/climate features")
