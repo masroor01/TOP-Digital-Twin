@@ -218,18 +218,19 @@ for f in sync_files:
 # folder, so every CI run since 2026-09-24 rebuilt the satellite/climate features with NO 2025 data for tomato and onion
 # (carried forward for a whole year). It is now versioned in the repo and staged into the downloads dir here.
 import shutil
-_topup_src = REPO_ROOT / "data" / "satellite_climate" / "topup_2025"
-_topup_dst = DOWNLOADS / "GEE_2025"
-if _topup_src.exists():
-    for _sub in _topup_src.iterdir():
-        if _sub.is_dir():
-            (_topup_dst / _sub.name).mkdir(parents=True, exist_ok=True)
-            for _f in _sub.glob("*.csv"):
-                if not (_topup_dst / _sub.name / _f.name).exists():
-                    shutil.copy2(_f, _topup_dst / _sub.name / _f.name)
-    log(f"staged 2025 satellite/climate top-up from {_topup_src}")
-else:
-    log("WARNING: data/satellite_climate/topup_2025 missing -- 2025 satellite/climate data will be absent")
+for _name, _dst_name, _required in (("topup_2025", "GEE_2025", True), ("chirps_history_2000_2024", "GEE_CHIRPS_History", False)):
+    _topup_src = REPO_ROOT / "data" / "satellite_climate" / _name
+    _topup_dst = DOWNLOADS / _dst_name
+    if _topup_src.exists():
+        for _sub in _topup_src.iterdir():
+            if _sub.is_dir():
+                (_topup_dst / _sub.name).mkdir(parents=True, exist_ok=True)
+                for _f in _sub.glob("*.csv"):
+                    if not (_topup_dst / _sub.name / _f.name).exists():
+                        shutil.copy2(_f, _topup_dst / _sub.name / _f.name)
+        log(f"staged {_name} from {_topup_src}")
+    elif _required:
+        log(f"WARNING: data/satellite_climate/{_name} missing -- that satellite/climate data will be absent")
 
 log("--- GEE satellite/climate topup (ERA5, CHIRPS, S2 NDVI, MODIS NDVI+LST) ---")
 gee_scripts = [
@@ -262,6 +263,14 @@ def check_satellite_coverage() -> list[str]:
         for (crop, yr), v in cov.items():
             if v < 0.85:
                 bad.append(f"{crop} {yr} {col}: {v:.0%}")
+    # scale check: a zone-level series whose yearly rainfall total jumps far from the crop's typical year means two extractions on different
+    # scales were joined (found 2026-10-28: 2000-2024 CHIRPS history ~5x the 2025-26 top-ups for tomato and onion)
+    rain = d[(d.yr >= 2019) & (d.yr <= last_full)].groupby(["crop", "yr"])["chirps_rain_mm"].sum().unstack("yr")
+    for crop, row in rain.iterrows():
+        med = row.median()
+        for yr, v in row.items():
+            if med > 0 and not (0.4 <= v / med <= 2.5):
+                bad.append(f"{crop} {yr} chirps_rain_mm yearly total {v:.0f} vs typical {med:.0f} (scale break)")
     return bad
 
 
@@ -274,6 +283,11 @@ if gee_ok:
             f"climate/satellite features were already committed")
     else:
         gaps = check_satellite_coverage()
+        scale = [g for g in gaps if "scale break" in g]
+        gaps = [g for g in gaps if "scale break" not in g]
+        if scale:
+            # warning only until the CHIRPS history is re-extracted (scripts/gee/gee_02_CHIRPS_history_2000_2024.js); then make it fatal
+            log("WARNING: CHIRPS rainfall scale break between the history and the recent years: " + "; ".join(scale[:6]))
         if gaps:
             fail_and_exit("satellite/climate coverage gap after Script 14 (a top-up input is missing): " + "; ".join(gaps[:8]))
 else:

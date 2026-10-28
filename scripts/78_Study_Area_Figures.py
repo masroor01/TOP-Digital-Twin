@@ -16,6 +16,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from section2_common import load_panel, layer_latest
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, 'Model_Output')
@@ -28,9 +30,7 @@ plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 9, 'axes.spines.
 
 
 def panel():
-    p = pd.read_csv(os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv'), parse_dates=['week_start'])
-    p['state'] = p['state'].replace({'Keralam': 'Kerala'})   # one label for the state (renamed in 2026)
-    return p
+    return load_panel()   # the three tracked per-crop weekly panels, current to the latest weekly refresh (section2_common.py)
 
 
 def zones():
@@ -51,6 +51,13 @@ FIX = {('Gujarat', 'Banaskanth'): 'Banas Kantha', ('Haryana', 'Jhajar'): 'Jhajja
        ('Uttar Pradesh', 'Mau(Maunathbhanjan)'): 'Mau', ('Uttar Pradesh', 'Pillibhit'): 'Pilibhit', ('Uttar Pradesh', 'Tamkuhi road APMC'): 'Kushinagar',
        ('Uttar Pradesh', 'Varanasi(F&V) APMC'): 'Varanasi', ('Uttarakhand', 'Dehradoon'): 'Dehradun', ('Uttarakhand', 'Nanital'): 'Nainital', ('Uttarakhand', 'Udhamsinghnagar'): 'Udham Singh Nagar',
        ('West Bengal', 'Purba Bardhaman'): 'Barddhaman', ('West Bengal', 'Sounth 24 Parganas'): 'South 24 Parganas'}
+
+
+# Markets added by the 2026 portal reports whose district is newer than GADM 4.1 (Kallakurichi and Tirupattur were split off in 2019, so the parent
+# district's centroid is used) or is spelled differently in the source
+FIX.update({('Tamil Nadu', 'Kallakurichi'): 'Viluppuram', ('Tamil Nadu', 'Kannyiakumari'): 'Kanniyakumari', ('Tamil Nadu', 'Thirupathur'): 'Vellore',
+            ('Tamil Nadu', 'Thiruppur'): 'Tiruppur', ('Tamil Nadu', 'Tiruvarur'): 'Thiruvarur', ('Tamil Nadu', 'Villupuram'): 'Viluppuram',
+            ('Karnataka', 'Bengaluru Rural'): 'Bangalore Rural'})
 
 
 def gadm_centroids():
@@ -207,18 +214,16 @@ def fig4(p):
 
 
 def fig5():
-    ref = pd.Timestamp('2026-10-05')
-    L = [('Market prices and arrivals (Agmarknet)', '2026-10-05'), ('Weather and satellite (zone features)', '2026-09-28'),
-         ('Drought (VEDAS / IDM, panel)', '2026-08-31'), ('Fuel prices (PPAC)', '2026-08-31'), ('Oceanic Nino Index (NOAA)', '2026-08-31'),
-         ('Rural price index (CPI-AL/RL)', '2026-08-31'), ('Fertiliser prices (fert.gov.in)', '2026-07-31'), ('Policy and trade log', '2026-07-30'),
-         ('Macro (CMIE: credit, trade, wages, WPI)', '2026-07-01'), ('State agricultural wages (Labour Bureau)', '2026-03-31')]
-    d = pd.DataFrame(L, columns=['layer', 'last']); d['last'] = pd.to_datetime(d['last']); d['lag'] = (ref - d['last']).dt.days / 7
+    lat = layer_latest()
+    ref = lat['Market prices and arrivals (Agmarknet)']
+    d = pd.DataFrame({'layer': list(lat), 'last': list(lat.values())})
+    d['lag'] = (ref - d['last']).dt.days / 7
     d = d.iloc[::-1]
-    fig, ax = plt.subplots(figsize=(8.5, 4.2))
-    ax.barh(d.layer, d.lag, color='#2a78d6', height=0.65)
-    for y, v in enumerate(d.lag): ax.text(v + 0.5, y, '%.0f wk' % v, va='center', fontsize=8.5, color=INK)
-    ax.set_xlabel('Weeks between the latest data point and the market panel (week of 5 Oct 2026)'); ax.xaxis.grid(True, color=GRID); ax.set_axisbelow(True)
-    ax.set_xlim(0, d.lag.max() * 1.15); ax.tick_params(length=0)
+    fig, ax = plt.subplots(figsize=(8.5, 5.4))
+    ax.barh(d.layer, d.lag.clip(lower=0), color='#2a78d6', height=0.65)
+    for y, (v, dt) in enumerate(zip(d.lag, d['last'])): ax.text(max(v, 0) + 0.5, y, '%.0f wk  (%s)' % (max(v, 0), dt.strftime('%d %b %Y')), va='center', fontsize=8, color=INK)
+    ax.set_xlabel('Weeks between the latest data point and the market panel (week of %s)' % ref.strftime('%d %b %Y')); ax.xaxis.grid(True, color=GRID); ax.set_axisbelow(True)
+    ax.set_xlim(0, max(d.lag.max(), 1) * 1.3); ax.tick_params(length=0)
     fig.tight_layout(); fig.savefig(os.path.join(OUT, 'fig_ms_study_area_5.png'), dpi=200, facecolor='white'); plt.close(fig)
 
 

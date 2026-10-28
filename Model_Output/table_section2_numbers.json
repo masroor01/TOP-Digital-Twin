@@ -1,0 +1,200 @@
+{
+ "panel_first_week": "2017-01-02",
+ "panel_last_week": "2026-10-26",
+ "n_weeks": 513,
+ "imputed_method_values": {
+  "observed": 477584,
+  "NA": 25319,
+  "linear": 21375,
+  "seasonal_median": 7816,
+  "trailing_ffill": 414
+ },
+ "rows": 532508,
+ "distinct_markets_all": 1038,
+ "states_all": 25,
+ "per_crop": {
+  "tomato": {
+   "markets": 839,
+   "states": 23,
+   "districts": 337,
+   "market_weeks": 308689,
+   "observed_share_pct": 89.1,
+   "by_method_pct": {
+    "observed": 89.1,
+    "NA": 5.3,
+    "linear": 4.0,
+    "seasonal_median": 1.5,
+    "trailing_ffill": 0.1
+   },
+   "markets_observed_2017": 500,
+   "markets_observed_latest52": 835,
+   "median_price": 1858,
+   "iqr_price": [
+    1142,
+    2890
+   ],
+   "median_weekly_arrivals_t": 12,
+   "top_states": {
+    "Tamil Nadu": 182,
+    "Uttar Pradesh": 162,
+    "Kerala": 65,
+    "Punjab": 60,
+    "Odisha": 50
+   },
+   "first_report_steps": {
+    "2017-01-02": 397,
+    "2024-07-15": 154,
+    "2017-01-30": 12,
+    "2025-11-03": 10
+   },
+   "national_median_min": [
+    651,
+    "2018-05-07"
+   ],
+   "national_median_max": [
+    8000,
+    "2023-07-31"
+   ],
+   "national_median_cv": 0.56,
+   "national_median_last": [
+    2800,
+    "2026-10-26"
+   ]
+  },
+  "onion": {
+   "markets": 800,
+   "states": 25,
+   "districts": 322,
+   "market_weeks": 181252,
+   "observed_share_pct": 89.7,
+   "by_method_pct": {
+    "observed": 89.7,
+    "linear": 4.4,
+    "NA": 4.3,
+    "seasonal_median": 1.5,
+    "trailing_ffill": 0.1
+   },
+   "markets_observed_2017": 239,
+   "markets_observed_latest52": 796,
+   "median_price": 2000,
+   "iqr_price": [
+    1292,
+    3017
+   ],
+   "median_weekly_arrivals_t": 21,
+   "top_states": {
+    "Tamil Nadu": 174,
+    "Uttar Pradesh": 112,
+    "Maharashtra": 75,
+    "Punjab": 62,
+    "Kerala": 61
+   },
+   "first_report_steps": {
+    "2024-12-30": 387,
+    "2017-01-02": 213,
+    "2025-01-06": 19,
+    "2025-11-03": 10
+   },
+   "national_median_min": [
+    759,
+    "2017-05-08"
+   ],
+   "national_median_max": [
+    6905,
+    "2019-12-02"
+   ],
+   "national_median_cv": 0.5,
+   "national_median_last": [
+    4700,
+    "2026-10-26"
+   ]
+  },
+  "potato": {
+   "markets": 83,
+   "states": 2,
+   "districts": 28,
+   "market_weeks": 42567,
+   "observed_share_pct": 93.7,
+   "by_method_pct": {
+    "observed": 93.7,
+    "linear": 2.8,
+    "NA": 2.4,
+    "seasonal_median": 1.0,
+    "trailing_ffill": 0.0
+   },
+   "markets_observed_2017": 83,
+   "markets_observed_latest52": 83,
+   "median_price": 1100,
+   "iqr_price": [
+    748,
+    1500
+   ],
+   "median_weekly_arrivals_t": 77,
+   "top_states": {
+    "West Bengal": 67,
+    "Uttarakhand": 16
+   },
+   "first_report_steps": {
+    "2017-01-02": 80,
+    "2017-02-06": 1,
+    "2017-01-23": 1,
+    "2017-01-30": 1
+   },
+   "national_median_min": [
+    350,
+    "2017-02-20"
+   ],
+   "national_median_max": [
+    3385,
+    "2020-11-23"
+   ],
+   "national_median_cv": 0.48,
+   "national_median_last": [
+    750,
+    "2026-10-26"
+   ]
+  }
+ },
+ "all_by_method": {
+  "observed": [
+   477584,
+   89.7
+  ],
+  "NA": [
+   25319,
+   4.8
+  ],
+  "linear": [
+   21375,
+   4.0
+  ],
+  "seasonal_median": [
+   7816,
+   1.5
+  ],
+  "trailing_ffill": [
+   414,
+   0.1
+  ]
+ },
+ "zone_assignment": {
+  "tomato": {
+   "markets": 839,
+   "assigned_within_500km": 598,
+   "median_dist_km": 332,
+   "mean_dist_km": 440
+  },
+  "onion": {
+   "markets": 800,
+   "assigned_within_500km": 252,
+   "median_dist_km": 705,
+   "mean_dist_km": 749
+  },
+  "potato": {
+   "markets": 83,
+   "assigned_within_500km": 83,
+   "median_dist_km": 85,
+   "mean_dist_km": 96
+  }
+ }
+}

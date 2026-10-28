@@ -113,6 +113,10 @@ CROPS = ['tomato', 'onion', 'potato']
 # week skeleton, so a source's trailing weeks beyond its own cutoff just
 # come through as NaN for those columns, not a crash or a truncated file.
 TOPUP_2025 = DOWNLOADS / 'GEE_2025'
+# CHIRPS history re-extraction (2026-10-28, scripts/gee/gee_02_CHIRPS_history_2000_2024.js): the 2000-2024 CHIRPS files in raw/chirps for the
+# tomato, onion and Bardhaman zones are on a different scale from the 2025/2026 top-ups (Kolar ~5,150 mm a year vs 1,130). Where this folder has a
+# *_CHIRPS_2000_2024.csv for a zone, it replaces that zone's old raw/chirps history; zones without one are unchanged.
+CHIRPS_HISTORY = DOWNLOADS / 'GEE_CHIRPS_History'
 TOPUP_2026 = DOWNLOADS / 'GEE_2026'
 # Potato zone relocation (2026-07-28): P1-P3 moved from Agra/Farrukhabad/
 # Jalandhar (unreachable by any modeled market -- see Script 16) to
@@ -367,6 +371,12 @@ print('='*65)
 chirps_frames = []
 # Load CHIRPS from zip-extracted folder + optional 2025/2026 topup folders
 chirps_dirs = [RAW_DIR / 'chirps']
+_hist_dir = CHIRPS_HISTORY / 'chirps' if (CHIRPS_HISTORY / 'chirps').exists() else CHIRPS_HISTORY
+REPLACED_CHIRPS_ZONES = set()
+if _hist_dir.exists() and list(_hist_dir.glob('*_CHIRPS_2000_2024.csv')):
+    chirps_dirs.append(_hist_dir)
+    REPLACED_CHIRPS_ZONES = {f.name.split('_CHIRPS_2000_2024')[0] for f in _hist_dir.glob('*_CHIRPS_2000_2024.csv')}
+    print(f'  CHIRPS history re-extraction: {len(REPLACED_CHIRPS_ZONES)} zones replace their old raw history ({_hist_dir})')
 for _topup_chirps, topup_label in [(TOPUP_2025 / 'chirps', '2025'), (TOPUP_2026 / 'chirps', '2026'),
                                     (TOPUP_POTATO_ZONES / 'chirps', 'potato-zone-relocation'),
                                     (TOPUP_POTATO_ZONES_HIST / 'chirps', 'potato-zone-relocation-historical')]:
@@ -378,6 +388,8 @@ for _topup_chirps, topup_label in [(TOPUP_2025 / 'chirps', '2025'), (TOPUP_2026 
 
 for _chirps_dir in chirps_dirs:
     for fpath in sorted(_chirps_dir.glob('*.csv')):
+        if _chirps_dir == RAW_DIR / 'chirps' and any(fpath.name.startswith(z + '_CHIRPS_') for z in REPLACED_CHIRPS_ZONES):
+            continue   # superseded by the re-extracted history for this zone
         df = pd.read_csv(fpath, parse_dates=['date'], low_memory=False)
         df = df[(df['date'] >= START) & (df['date'] <= END)].copy()
         df = drop_orphaned_zones(df)

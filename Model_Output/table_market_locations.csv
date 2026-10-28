@@ -44,7 +44,7 @@ tomato,155,Nagpur APMC,Maharashtra,Nagpur,21.1498134,79.0820556,geocoded distric
 tomato,160,Nasik APMC,Maharashtra,Nashik,20.0112475,73.7902364,geocoded district,T3_Nashik_Tomato,1.5293321644002678
 tomato,162,Pimpalgaon Baswant APMC,Maharashtra,Nashik,20.0112475,73.7902364,geocoded district,T3_Nashik_Tomato,1.5293321644002678
 tomato,164,Pune APMC,Maharashtra,Pune,18.5213738,73.8545071,geocoded district,T3_Nashik_Tomato,164.2782174619209
-tomato,165,APMC Khed,Maharashtra,Pune,18.5213738,73.8545071,geocoded district,T3_Nashik_Tomato,164.2782174619209
+tomato,165,APMC Khed ,Maharashtra,Pune,18.5213738,73.8545071,geocoded district,T3_Nashik_Tomato,164.2782174619209
 tomato,168,SHRI.SIDDHESHWAR APMC,Maharashtra,Solapur,17.8499067,75.2763203,geocoded district,T3_Nashik_Tomato,285.43030416683666
 tomato,173,Bhopal(F&V) APMC,Madhya Pradesh,Bhopal,23.2584857,77.401989,geocoded district,,520.4158612320524
 tomato,179,Indore(F&V) APMC,Madhya Pradesh,Indore,22.7203616,75.8681996,geocoded district,T5_Navsari,364.02129529829244
@@ -78,7 +78,6 @@ tomato,247,Baran APMC,Rajasthan,Baran,24.9208165,76.6821985,geocoded district,,5
 tomato,250,Bhilwara APMC,Rajasthan,Bhilwara,25.470994,74.6961316,geocoded district,,535.2915392132774
 tomato,261,Jaipur (F&V) APMC,Rajasthan,Jaipur,26.9154576,75.8189817,geocoded district,T4_Solan,461.1833853045175
 tomato,266,Jodhpur (F&V) APMC,Rajasthan,Jodhpur,26.2967719,73.0351433,geocoded district,,594.9527045886347
-tomato,292,Ulundurpettai APMC,Tamil Nadu,Villupuram,11.9398285,79.4945645,geocoded district,T1_Kolar,199.12903527997972
 tomato,295,Bishalgarh APMC,Tripura,Sepahijala,23.6658005,91.3200275,geocoded district,,1615.907774833777
 tomato,296,Teliamura APMC,Tripura,Khowai,23.9563913,91.642107,geocoded district,,1626.3735307941288
 tomato,297,Agra APMC,Uttar Pradesh,Agra,27.1752554,78.0098161,geocoded district,T4_Solan,423.6592647301843
@@ -108,7 +107,6 @@ tomato,322,Shahjahanpur APMC,Uttar Pradesh,Shahjahanpur,27.9128583,79.7476254,ge
 tomato,324,Sitapur APMC,Uttar Pradesh,Sitapur,27.5026748,80.8335139,geocoded district,,522.6340797047
 tomato,326,Rudrapur APMC,Uttarakhand,Udhamsinghnagar,29.04298460552889,79.49917330041666,GADM district centroid,T4_Solan,309.0283702796197
 tomato,328,Barasat APMC,West Bengal,North 24 Parganas,22.6926815,88.6625795,geocoded district,,1463.593142648815
-tomato,330,Bolpur APMC,West Bengal,Birbhum,23.951730347882915,87.66158609358688,GADM district centroid,,1295.2877220115
 tomato,331,Kalna APMC,West Bengal,Purba Bardhaman,23.388517,87.9068097,geocoded district,,1354.5036228455401
 tomato,332,Katwa APMC,West Bengal,Purba Bardhaman,23.425331838402307,87.76325389389756,GADM district centroid,,1340.709077074774
 tomato,333,Coochbehar APMC,West Bengal,Coochbehar,26.340623,89.4812163,geocoded district,,1308.1561717951404
@@ -191,7 +189,6 @@ tomato,671,Medinipur(West) APMC,West Bengal,Medinipur(W),22.4256204,87.3196353,g
 tomato,672,Birbhum APMC,West Bengal,Birbhum,24.0621532,87.6982823,geocoded district,,1290.5200255945542
 tomato,675,Jalpaiguri Sadar APMC,West Bengal,Jalpaiguri,26.6262805,88.7334485,geocoded district,,1227.3152766419005
 tomato,676,Alipurduar APMC,West Bengal,Alipurduar,26.4851573,89.5246926,geocoded district,,1305.1879158273173
-tomato,681,Vadaseri APMC,Tamil Nadu,Nagercoil (Kannyiakumari),8.306046792015573,77.34649866807521,GADM district centroid,,544.2045931674919
 tomato,682,Muzzafarnagar APMC,Uttar Pradesh,Muzaffarnagar,29.4496979,77.7429333,geocoded district,T4_Solan,172.60272244815792
 tomato,683,Panisagar APMC,Tripura,North Tripura,24.0921476,92.2451214,geocoded district,,1671.16641858435
 tomato,690,Channapatna APMC,Karnataka,Bengaluru South,12.720006,77.3184199,geocoded district,T1_Kolar,99.72431601976623
@@ -219,7 +216,6 @@ tomato,892,Ibrahimputnam APMC,Telangana,Ranga Reddy,17.1333954,78.3970979,geocod
 tomato,987,Pattikonda APMC,Andhra Pradesh,Kurnool,15.8309251,78.0425373,geocoded district,T2_Madanapalle,258.3630900310438
 tomato,1022,Somala APMC,Andhra Pradesh,Annamayya,13.7883575,78.6346286,geocoded district,T2_Madanapalle,30.065171679859258
 tomato,1048,Venkateswarnagar APMC,Telangana,Nalgonda,17.0504406,79.2669235,geocoded district,T2_Madanapalle,397.72562338851145
-tomato,1061,Udumalpet APMC,Tamil Nadu,Coimbatore,11.0018115,76.9628425,geocoded district,T1_Kolar,269.5085161996936
 tomato,1070,Haldwani APMC,Uttarakhand,Nanital,29.316774237645138,79.45503287572147,GADM district centroid,T4_Solan,285.9223696652457
 tomato,1071,Haridwar Union APMC,Uttarakhand,Haridwar,29.9384473,78.1452985,geocoded district,T4_Solan,145.82896031692104
 tomato,1072,Ramnagar APMC,Uttarakhand,Nanital,29.316774237645138,79.45503287572147,GADM district centroid,T4_Solan,285.9223696652457
@@ -229,7 +225,6 @@ tomato,1077,Manglaur APMC,Uttarakhand,Haridwar,29.9384473,78.1452985,geocoded di
 tomato,1078,Gudimalkapur APMC,Telangana,Hyderabad,17.360589,78.4740613,geocoded district,T2_Madanapalle,423.6846444089033
 tomato,1079,Gohana APMC,Haryana,Sonipat,28.9953758,77.0233627,geocoded district,T4_Solan,212.47527645485474
 tomato,1081,Thodupuzha Market,Kerala,Idukki,9.8154785,76.9991599,geocoded district,T1_Kolar,389.6255280446091
-tomato,1108,Ambala Cantt. APMC,Haryana,Ambala,30.3843674,76.770421,geocoded district,T4_Solan,66.65141006848732
 tomato,1110,Ballabhgarh APMC,Haryana,Faridabad,28.4031478,77.3105561,geocoded district,T4_Solan,278.7675886697431
 tomato,1111,Sohna APMC,Haryana,Gurgaon,28.4646148,77.0299194,geocoded district,T4_Solan,271.4323059023738
 tomato,1113,Mohindergarh APMC,Haryana,Mahendragarh-Narnaul,28.0530574,76.1136303,geocoded district,T4_Solan,331.5941621672025
@@ -246,14 +241,13 @@ tomato,1142,Kosikalan APMC,Uttar Pradesh,Mathura,27.4955539,77.6855554,geocoded 
 tomato,1143,Unnao APMC,Uttar Pradesh,Unnao,26.5673264,80.6198193,geocoded district,,590.8743840856678
 tomato,1147,Padra APMC,Gujarat,Vadodara(Baroda),22.3108115,73.1657755,geocoded district,T5_Navsari,153.99455208229642
 tomato,1181,V. Kota Sub-yard of AMC Palamaneru,Andhra Pradesh,Chittor,13.2178147,79.0929361,geocoded district,T2_Madanapalle,73.80420492733076
-tomato,1185,"Excise Colony,RBZ",Telangana,Hanumakonda,18.032699,79.4283969,geocoded district,,508.1534682459879
+tomato,1185,"Excise Colony,RBZ ",Telangana,Hanumakonda,18.032699,79.4283969,geocoded district,,508.1534682459879
 tomato,1194,"Saroornagar,RBZ",Telangana,Ranga Reddy,17.1333954,78.3970979,geocoded district,T2_Madanapalle,398.5711350302465
 tomato,1195,"Vanasthalipuram,RBZ",Telangana,Ranga Reddy,17.1333954,78.3970979,geocoded district,T2_Madanapalle,398.5711350302465
 tomato,1197,"Alwal,RBZ",Telangana,Hyderabad,17.360589,78.4740613,geocoded district,T2_Madanapalle,423.6846444089033
 tomato,1199,RYTHU BAZAR FALAKNUMA,Telangana,Hyderabad,17.360589,78.4740613,geocoded district,T2_Madanapalle,423.6846444089033
 tomato,1202,Sangareddy APMC,Telangana,Medak,17.9375095,78.211745,geocoded district,T2_Madanapalle,488.8151829058399
 tomato,1204,Jharsuguda APMC,Odisha,Jharsuguda,21.8019368,83.9713964,geocoded district,,1076.2813064937804
-tomato,1214,Tindivanam APMC,Tamil Nadu,Villupuram,11.9398285,79.4945645,geocoded district,T1_Kolar,199.12903527997972
 tomato,1239,Kailaras APMC,Madhya Pradesh,Morena,26.3849794,77.8612721,geocoded district,,507.768114263649
 tomato,1273,Navsari APMC,Gujarat,Navsari,20.952407,72.9323831,geocoded district,T5_Navsari,3.0874983699500214
 tomato,1275,Kapadvanj APMC,Gujarat,Kheda,22.8532503,72.9953586,geocoded district,T5_Navsari,212.11228761151673
@@ -284,14 +278,12 @@ tomato,1434,Tanda Urmur APMC,Punjab,Hoshiarpur,31.6092942,75.8459754,geocoded di
 tomato,1438,Lohian Khas APMC,Punjab,Jalandhar,31.2922312,75.5678878,geocoded district,T4_Solan,153.64031347253973
 tomato,1441,Doraha APMC,Punjab,Ludhiana,30.9090157,75.851601,geocoded district,T4_Solan,120.6980891654108
 tomato,1446,Sahnewal APMC,Punjab,Ludhiana,30.9090157,75.851601,geocoded district,T4_Solan,120.6980891654108
-tomato,1448,Dharamkot APMC,Punjab,Moga,30.76706397842836,75.15800306592914,GADM district centroid,T4_Solan,187.6302497352314
 tomato,1452,Bariwala APMC,Punjab,Muktsar,30.4692,74.5182,geocoded district,T4_Solan,253.14343611662665
 tomato,1456,Rajpura APMC,Punjab,Patiala,30.2092778,76.3397231,geocoded district,T4_Solan,107.28904672232417
 tomato,1457,Chamkaur Sahib APMC,Punjab,Ropar (Rupnagar),30.9688367,76.526088,geocoded district,T4_Solan,56.78253488799395
 tomato,1458,Kharar APMC,Punjab,Mohali,30.6908804,76.7114879,geocoded district,T4_Solan,45.41127212889021
 tomato,1464,Bassi Pathana APMC,Punjab,Fatehgarh,31.6610527,74.9764967,geocoded district,T4_Solan,220.08697243006966
 tomato,1466,Khamano APMC,Punjab,Fatehgarh,31.6610527,74.9764967,geocoded district,T4_Solan,220.08697243006966
-tomato,1469,Vellore APMC,Tamil Nadu,Vellore,12.9021849,79.061104,geocoded district,T2_Madanapalle,94.0818657439254
 tomato,1504,Nimapara APMC,Odisha,Puri,19.8076083,85.8252538,geocoded district,,1044.8217036725023
 tomato,1505,Parlakhemundi APMC,Odisha,Gajapati,19.1966026,84.1930634,geocoded district,,873.1206674211658
 tomato,1506,Bhanjanagar APMC,Odisha,Ganjam,19.6090068,84.7080633,geocoded district,,943.7535088568022
@@ -496,12 +488,10 @@ tomato,2246,Chitwadagaon APMC,Uttar Pradesh,Ballia,25.8749595,84.1210329,geocode
 tomato,2248,Chorichora APMC,Uttar Pradesh,Gorakhpur,26.6677977,83.3642334,geocoded district,,769.5590186549699
 tomato,2249,Khalilabad APMC,Uttar Pradesh,Sant Kabir Nagar,26.755082,83.0398545,geocoded district,,738.551113152873
 tomato,2250,Gadaura APMC,Uttar Pradesh,Maharajganj,26.4710847,81.1807046,geocoded district,,632.4649328360774
-tomato,2254,Valangaiman APMC,Tamil Nadu,Thiruvarur,10.6878621,79.4979437,geocoded district,T1_Kolar,310.4321781398099
 tomato,2269,Uluberia APMC,West Bengal,Howrah,22.5736296,88.3251045,geocoded district,,1442.831696453907
 tomato,2270,Sheoraphuly APMC,West Bengal,Hooghly,22.9099402,88.0120825,geocoded district,,1397.6122109142698
 tomato,2272,Egra/contai APMC,West Bengal,Medinipur(E),22.4207025,87.3269963,geocoded district,,1356.991430333774
 tomato,2373,Gandai APMC,Chattisgarh,Rajnandgaon,21.0684425,80.7970779,geocoded district,,739.2564547726886
-tomato,2422,Thirupathur APMC,Tamil Nadu,Vellore,12.9021849,79.061104,geocoded district,T2_Madanapalle,94.0818657439254
 tomato,2444,FerozpurZirkha(Nagina) APMC,Haryana,Mewat,27.9935177,77.0419634,geocoded district,T4_Solan,323.7673124630583
 tomato,2481,Kota (F&V) APMC,Rajasthan,Kota,25.1737019,75.8574194,geocoded district,,558.6740335836928
 tomato,2487,Jalandhar City(Jalandhar) APMC,Punjab,Jalandhar,31.2922312,75.5678878,geocoded district,T4_Solan,153.64031347253973
@@ -568,8 +558,6 @@ tomato,2901,Pundibari APMC,West Bengal,Coochbehar,26.340623,89.4812163,geocoded 
 tomato,2905,Balarampur APMC,West Bengal,Puruliya,23.333333,86.416667,geocoded district,,1246.3295031110752
 tomato,2907,Chevella APMC,Telangana,Ranga Reddy,17.1333954,78.3970979,geocoded district,T2_Madanapalle,398.5711350302465
 tomato,2910,"New Grain Market , Faridabad APMC",Haryana,Faridabad,28.4031478,77.3105561,geocoded district,T4_Solan,278.7675886697431
-tomato,2940,Tiruchengode APMC,Tamil Nadu,Namakkal,11.3033889,78.118604,geocoded district,T1_Kolar,204.11583279070305
-tomato,2970,Thuraiyur APMC,Tamil Nadu,Thiruchirappalli,10.8766852587086,78.55491393817347,GADM district centroid,T1_Kolar,255.72796435409944
 tomato,3014,Kalikiri APMC,Andhra Pradesh,Annamayya,13.7883575,78.6346286,geocoded district,T2_Madanapalle,30.065171679859258
 tomato,3018,L B Nagar APMC,Telangana,Hyderabad,17.360589,78.4740613,geocoded district,T2_Madanapalle,423.6846444089033
 tomato,3044,Bagepalli APMC,Karnataka,Chikkaballapur,13.0993764,77.388729,geocoded district,T1_Kolar,80.61131922354878
@@ -602,7 +590,7 @@ tomato,3303,Damana Hat APMC,Odisha,Khurda,20.1531141,85.7076331,geocoded distric
 tomato,3306,Nilagiri APMC,Odisha,Balasore,21.5006421,86.919884,geocoded district,,1255.5126782957454
 tomato,3308,Hindol APMC,Odisha,Dhenkanal,20.8351494,85.6022305,geocoded district,,1106.2899026828986
 tomato,3327,Mahabubnagar(Rythu Bazar) APMC,Telangana,Mahbubnagar,16.7434538,77.9923191,geocoded district,T2_Madanapalle,359.2478949309526
-tomato,3328,Siddipet(Rythu Bazar),Telangana,Siddipet,18.0055851,78.896113,geocoded district,T2_Madanapalle,497.18012108404247
+tomato,3328,Siddipet(Rythu Bazar) ,Telangana,Siddipet,18.0055851,78.896113,geocoded district,T2_Madanapalle,497.18012108404247
 tomato,3332,Mehndipatnam(Rythu Bazar) APMC,Telangana,Ranga Reddy,17.1333954,78.3970979,geocoded district,T2_Madanapalle,398.5711350302465
 tomato,3339,Falakata APMC,West Bengal,Alipurduar,26.4851573,89.5246926,geocoded district,,1305.1879158273173
 tomato,3341,Karsiyang(Matigara) APMC,West Bengal,Darjeeling,27.0377554,88.263176,geocoded district,,1165.7264143668604
@@ -644,11 +632,9 @@ tomato,4070,Dharmapuri(Uzhavar Sandhai ),Tamil Nadu,Dharmapuri,12.1456131,78.113
 tomato,4071,Pennagaram(Uzhavar Sandhai ),Tamil Nadu,Dharmapuri,12.1456131,78.1132217,geocoded district,T1_Kolar,110.47837151991017
 tomato,4072,Palacode(Uzhavar Sandhai ),Tamil Nadu,Dharmapuri,12.1456131,78.1132217,geocoded district,T1_Kolar,110.47837151991017
 tomato,4073,Harur(Uzhavar Sandhai ),Tamil Nadu,Dharmapuri,12.1456131,78.1132217,geocoded district,T1_Kolar,110.47837151991017
-tomato,4074,AJattihalli(Uzhavar Sandhai ),Tamil Nadu,Dharmapuri,12.1456131,78.1132217,geocoded district,T1_Kolar,110.47837151991017
 tomato,4075,Dindigul(Uzhavar Sandhai ),Tamil Nadu,Dindigul,10.4256896,77.815664,geocoded district,T1_Kolar,303.6645525497567
 tomato,4076,Palani(Uzhavar Sandhai ),Tamil Nadu,Dindigul,10.4256896,77.815664,geocoded district,T1_Kolar,303.6645525497567
 tomato,4077,Chinnalapatti(Uzhavar Sandhai ),Tamil Nadu,Dindigul,10.4256896,77.815664,geocoded district,T1_Kolar,303.6645525497567
-tomato,4080,Vedasanthur(Uzhavar Sandhai ),Tamil Nadu,Dindigul,10.4256896,77.815664,geocoded district,T1_Kolar,303.6645525497567
 tomato,4081,Sampath Nagar(Uzhavar Sandhai ),Tamil Nadu,Erode,11.4905282,77.3505274,geocoded district,T1_Kolar,202.0057778146541
 tomato,4082,Gobichettipalayam(Uzhavar Sandhai ),Tamil Nadu,Erode,11.4905282,77.3505274,geocoded district,T1_Kolar,202.0057778146541
 tomato,4083,Sathiyamagalam(Uzhavar Sandhai ),Tamil Nadu,Erode,11.4905282,77.3505274,geocoded district,T1_Kolar,202.0057778146541
@@ -728,7 +714,7 @@ tomato,4161,Kandiyaperi(Uzhavar Sandhai ),Tamil Nadu,Thirunelveli,8.5495014,77.5
 tomato,4162,Melapalayam(Uzhavar Sandhai ),Tamil Nadu,Thirunelveli,8.5495014,77.5805178,geocoded district,,513.8684448661594
 tomato,4163,Ambasamudram(Uzhavar Sandhai ),Tamil Nadu,Thirunelveli,8.5495014,77.5805178,geocoded district,,513.8684448661594
 tomato,4164,NGO Colony(Uzhavar Sandhai ),Tamil Nadu,Thirunelveli,8.5495014,77.5805178,geocoded district,,513.8684448661594
-tomato,4165,Tiruthani(Uzhavar Sandhai ),Tamil Nadu,Thiruvellore,13.233634040337728,79.93012829360221,GADM district centroid,T2_Madanapalle,158.39398168751308
+tomato,4165,Tiruthani(Uzhavar Sandhai ),Tamil Nadu,Thiruvallur,13.233634040337728,79.93012829360221,GADM district centroid,T2_Madanapalle,158.39398168751308
 tomato,4166,Tiruvallur(Uzhavar Sandhai ),Tamil Nadu,Thiruvellore,13.233634040337728,79.93012829360221,GADM district centroid,T2_Madanapalle,158.39398168751308
 tomato,4167,Ambattur(Uzhavar Sandhai ),Tamil Nadu,Thiruvellore,13.233634040337728,79.93012829360221,GADM district centroid,T2_Madanapalle,158.39398168751308
 tomato,4168,Paruthipattu(Uzhavar Sandhai ),Tamil Nadu,Thiruvellore,13.233634040337728,79.93012829360221,GADM district centroid,T2_Madanapalle,158.39398168751308
@@ -791,11 +777,7 @@ tomato,4236,Dharapuram(Uzhavar Sandhai ),Tamil Nadu,Thirupur,10.7915267,77.53254
 tomato,4237,Kangayam(Uzhavar Sandhai ),Tamil Nadu,Thirupur,10.7915267,77.5325466,geocoded district,T1_Kolar,269.0475064845352
 tomato,4240,Balarampuram Market,Kerala,Thiruvananthapuram,8.4882267,76.947551,geocoded district,,533.0681028462249
 tomato,4247,Balugaon APMC,Assam,Darrang,26.4373481,92.0047145,geocoded district,,1533.5247190149103
-tomato,4251,Ambagan APMC,Assam,Nagaon,26.3313646,92.7524763,geocoded district,,1606.9358307839489
 tomato,4252,Haibargaon APMC,Assam,Nagaon,26.3313646,92.7524763,geocoded district,,1606.9358307839489
-tomato,4295,Barpeta Road APMC,Assam,Barpeta,26.345941,91.039708,geocoded district,,1449.0372275177842
-tomato,4390,Manjhanpur APMC,Uttar Pradesh,Kaushambi,25.5342456,81.4493567,geocoded district,,732.4780338335222
-tomato,4401,SMY Shatt,Himachal Pradesh,Kullu,31.9578974,77.1089232,geocoded district,T4_Solan,117.1347704498211
 tomato,4402,SMY Jogindernagar,Himachal Pradesh,Mandi,31.6516617,77.0092542,geocoded district,T4_Solan,83.70570510556361
 tomato,4407,SMY Takarla,Himachal Pradesh,Una,31.5834642,76.2351452,geocoded district,T4_Solan,112.79784630971393
 tomato,4415,Aron (F&V) APMC,Madhya Pradesh,Guna,24.5001772,77.2600959,geocoded district,,596.3453820872915
@@ -826,7 +808,7 @@ tomato,4677,Balasore APMC,Odisha,Balasore,21.48889618115634,86.90429878540624,GA
 tomato,4681,Ayodhya APMC,Uttar Pradesh,Ayodhya,26.7990707,82.2052321,geocoded district,,673.6173296478378
 tomato,4687,B.Kothakota H/Q Angallu,Andhra Pradesh,Annamayya,13.7883575,78.6346286,geocoded district,T2_Madanapalle,30.065171679859258
 tomato,4697,Chamoli APMC,Uttarakhand,Chamoli (Gopeshwar),30.40878,79.31855,geocoded district,T4_Solan,217.70514449441316
-tomato,4707,"Fruit&Vegetable Market,Gazipur APMC",NCT of Delhi,Delhi,28.6223066,77.2394313,geocoded district,T4_Solan,254.04463046637443
+tomato,4707,"APMC Shahdara, Fruit and Vegetable Market, Gazipur",NCT of Delhi,Delhi,28.6223066,77.2394313,geocoded district,T4_Solan,254.04463046637443
 tomato,4757,APMC PATANCHERU,Telangana,Sangareddy,17.8684342,77.8227189,geocoded district,T2_Madanapalle,485.6226771649362
 tomato,4790,Valmikipuram APMC,Andhra Pradesh,Annamayya,13.7883575,78.6346286,geocoded district,T2_Madanapalle,30.065171679859258
 tomato,4834,Doomdumia APMC,Assam,Nagaon,26.3313646,92.7524763,geocoded district,,1606.9358307839489
@@ -841,6 +823,21 @@ tomato,4854,Vedaranyam(Uzhavar Sandhai),Tamil Nadu,Nagapattinam,10.6026203,79.76
 tomato,4855,Gandhigramam(Uzhavar Sandhai),Tamil Nadu,Karur,10.8217671,78.3828654,geocoded district,T1_Kolar,259.10519444377
 tomato,4909,Guramkonda Sub-yard of AMC Valmikipuram,Andhra Pradesh,Annamayya,13.7883575,78.6346286,geocoded district,T2_Madanapalle,30.065171679859258
 tomato,4911,Uparhali Pmy APMC,Assam,Kamrup,26.1468861,91.2227397,geocoded district,,1474.7149122286396
+tomato,4916,Harbartganj Daily Market APMC,Assam,Hailakandi,24.49649775547258,92.58903386825591,GADM district centroid,,1679.450163347163
+tomato,4917,Santar Bazaar APMC,Assam,Karimganj,24.580413301793044,92.3794837835792,GADM district centroid,,1656.371065059177
+tomato,5039,Kutumba APMC,Bihar,Aurangabad,24.79362481850556,84.40448204271546,GADM district centroid,,986.9432555551103
+tomato,5041,A.Jattihalli(Uzhavar Sandhai ),Tamil Nadu,Dharmapuri,12.08637020583348,78.18379797313038,GADM district centroid,T1_Kolar,117.18196518210495
+tomato,5042,Vedasandur(Uzhavar Sandhai ),Tamil Nadu,Dindigul,10.379260158569256,77.80498330783665,GADM district centroid,T1_Kolar,308.92664155168666
+tomato,5043,Ulundurpet RM,Tamil Nadu,Kallakurichi,11.960325100340619,79.28446743185668,GADM district centroid,T1_Kolar,181.17250025573622
+tomato,5044,Vadaseri RM,Tamil Nadu,Kannyiakumari,8.306046792015573,77.34649866807521,GADM district centroid,,544.2045931674919
+tomato,5046,Thiruchengodu RM,Tamil Nadu,Namakkal,11.30529614742185,78.12248315165728,GADM district centroid,T1_Kolar,203.90118810250357
+tomato,5047,Thuraiyur RM,Tamil Nadu,Thiruchirappalli,10.8766852587086,78.55491393817347,GADM district centroid,T1_Kolar,255.72796435409944
+tomato,5048,Thirupathur RM,Tamil Nadu,Thirupathur,12.80063780403996,78.99814820457823,GADM district centroid,T2_Madanapalle,99.14716587971155
+tomato,5049,Udumalpettai RM,Tamil Nadu,Thiruppur,10.845590766521484,77.35244426625891,GADM district centroid,T1_Kolar,268.7401771763954
+tomato,5050,Valangaiman RM,Tamil Nadu,Tiruvarur,10.669941076063742,79.53437655377537,GADM district centroid,T1_Kolar,314.0915804282427
+tomato,5051,Vellore RM,Tamil Nadu,Vellore,12.80063780403996,78.99814820457823,GADM district centroid,T2_Madanapalle,99.14716587971155
+tomato,5052,Tindivanam RM,Tamil Nadu,Villupuram,11.960325100340619,79.28446743185668,GADM district centroid,T1_Kolar,181.17250025573622
+tomato,5055,Sidhauli APMC,Uttar Pradesh,Sitapur,27.523179188274906,80.84695757293883,GADM district centroid,,521.8657252421098
 onion,2,Mahboob Manison APMC,Telangana,Hyderabad,17.360589,78.4740613,geocoded district,O9_Kurnool,176.646380084694
 onion,11,Sadasivpet APMC,Telangana,Sangareddy,17.8684342,77.8227189,geocoded district,O7_Solapur,203.9278197685566
 onion,43,Chandigarh(Grain/Fruit) APMC,Chandigarh,Chandigarh,30.7334421,76.7797143,geocoded district,,1142.6047501999592
@@ -888,7 +885,7 @@ onion,160,Nasik APMC,Maharashtra,Nashik,20.0112475,73.7902364,geocoded district,
 onion,161,Lasalgaon APMC,Maharashtra,Nashik,20.0112475,73.7902364,geocoded district,O2_Pimpalgaon,24.975773839984893
 onion,162,Pimpalgaon APMC,Maharashtra,Nashik,20.0112475,73.7902364,geocoded district,O2_Pimpalgaon,24.975773839984893
 onion,164,Pune APMC,Maharashtra,Pune,18.5213738,73.8545071,geocoded district,O2_Pimpalgaon,174.51028340165945
-onion,165,APMC Khed,Maharashtra,Pune,18.5213738,73.8545071,geocoded district,O2_Pimpalgaon,174.51028340165945
+onion,165,APMC Khed ,Maharashtra,Pune,18.5213738,73.8545071,geocoded district,O2_Pimpalgaon,174.51028340165945
 onion,168,Solapur APMC,Maharashtra,Solapur,17.8499067,75.2763203,geocoded district,O7_Solapur,69.18192777620283
 onion,169,Kalyan APMC,Maharashtra,Palghar,19.757249,73.0931199,geocoded district,O2_Pimpalgaon,103.13497771153685
 onion,171,Lamlong Bazaar APMC,Manipur,Imphal East,24.8326698,94.0168859,geocoded district,,1941.2214055853162
@@ -900,7 +897,6 @@ onion,184,Rajnandgaon APMC,Chattisgarh,Rajnandgaon,21.0684425,80.7970779,geocode
 onion,186,Ujjain APMC,Madhya Pradesh,Ujjain,23.1885131,75.7716562,geocoded district,O8_Manmad,354.6475276043636
 onion,199,Bargarh APMC,Odisha,Bargarh,21.2319922,83.5652737,geocoded district,,836.8834799166884
 onion,206,Kesinga APMC,Odisha,Kalahandi,19.8265757,83.0408702,geocoded district,,691.410417450347
-onion,207,Bhawanipatna APMC,Odisha,Kalahandi,19.8265757,83.0408702,geocoded district,,691.410417450347
 onion,216,Tarantaran APMC,Punjab,Tarntaran,31.336005409861453,74.8363226109296,GADM district centroid,,1116.7743213392437
 onion,218,Fazilka APMC,Punjab,Fazilka,30.3198406,74.1217943,geocoded district,,986.7513306279894
 onion,219,Jalalabad APMC,Punjab,Fazilka,30.3198406,74.1217943,geocoded district,,986.7513306279894
@@ -924,7 +920,6 @@ onion,259,Sangriya APMC,Rajasthan,Hanumangarh,29.3659533,74.298429,geocoded dist
 onion,261,Jaipur (F&V) APMC,Rajasthan,Jaipur,26.9154576,75.8189817,geocoded district,,746.8794075551446
 onion,265,Nawalgarh APMC,Rajasthan,Jhunjhunu,28.0798944,75.5424211,geocoded district,,831.3293160160008
 onion,266,Jodhpur (F&V) APMC,Rajasthan,Jodhpur,26.2967719,73.0351433,geocoded district,,532.8759758775977
-onion,292,Ulundurpettai APMC,Tamil Nadu,Villupuram,11.9398285,79.4945645,geocoded district,O9_Kurnool,460.0713956525788
 onion,296,Teliamura APMC,Tripura,Khowai,23.9563913,91.642107,geocoded district,,1683.6363809261447
 onion,297,Agra APMC,Uttar Pradesh,Agra,27.1752554,78.0098161,geocoded district,,851.4977269746743
 onion,298,Prayagraj APMC,Uttar Pradesh,Prayagraj,25.4381302,81.8338005,geocoded district,,952.1850561457853
@@ -957,7 +952,6 @@ onion,332,Katwa APMC,West Bengal,Purba Bardhaman,23.388517,87.9068097,geocoded d
 onion,334,Pandua APMC,West Bengal,Hooghly,22.9099402,88.0120825,geocoded district,,1308.7294451787243
 onion,335,Dhupguri APMC,West Bengal,Jalpaiguri,26.6262805,88.7334485,geocoded district,,1620.1515318189643
 onion,336,Samsi APMC,West Bengal,Malda,25.0057449,88.1398483,geocoded district,,1464.948805525405
-onion,337,English Bazar APMC,West Bengal,Malda,25.0057449,88.1398483,geocoded district,,1464.948805525405
 onion,338,Tamluk (Medinipur E) APMC,West Bengal,Medinipur(E),22.4207025,87.3269963,geocoded district,,1219.9258716168483
 onion,341,Karimpur APMC,West Bengal,Nadia,23.4847374,88.5567067,geocoded district,,1391.1701889681156
 onion,342,Bethuadahari APMC,West Bengal,Nadia,23.4847374,88.5567067,geocoded district,,1391.1701889681156
@@ -1023,7 +1017,6 @@ onion,654,Rampur APMC,Uttar Pradesh,Rampur,28.7934728,79.1845806,geocoded distri
 onion,655,Badayoun APMC,Uttar Pradesh,Badaun,28.0649367,79.043832,geocoded district,,986.4338517847431
 onion,656,Chandausi APMC,Uttar Pradesh,Sambhal,28.4271928,78.5564546,geocoded district,,1000.2380368127054
 onion,657,Raibareilly APMC,Uttar Pradesh,Raebarelli,26.772397,80.9443626,geocoded district,,982.5832702881083
-onion,658,Gonda APMC,Uttar Pradesh,Gonda,27.1103723,81.9238906,geocoded district,,1077.9640049013299
 onion,660,Pratapgarh APMC,Uttar Pradesh,Pratapgarh,25.75,81.75,geocoded district,,966.2180240357186
 onion,662,Basti APMC,Uttar Pradesh,Basti,26.8387083,82.5350919,geocoded district,,1103.129188849899
 onion,663,Azamgarh APMC,Uttar Pradesh,Azamgarh,26.023639,83.0293105,geocoded district,,1087.6015858629812
@@ -1040,7 +1033,6 @@ onion,675,Jalpaiguri Sadar APMC,West Bengal,Jalpaiguri,26.6262805,88.7334485,geo
 onion,676,Alipurduar APMC,West Bengal,Alipurduar,26.4851573,89.5246926,geocoded district,,1678.3170582762023
 onion,678,Pabiacherra APMC,Tripura,Unokoti,24.18965474725179,92.04693825947786,GADM district centroid,,1732.19570416264
 onion,679,Melaghar APMC,Tripura,Sepahijala,23.6658005,91.3200275,geocoded district,,1639.1403819520756
-onion,681,Vadaseri APMC,Tamil Nadu,Nagercoil (Kannyiakumari),8.306046792015573,77.34649866807521,GADM district centroid,,821.2626048813164
 onion,683,Panisagar APMC,Tripura,North Tripura,24.0921476,92.2451214,geocoded district,,1744.3576295581872
 onion,709,Chikkamagalore APMC,Karnataka,Chikmagalur,13.318014,75.7738743,geocoded district,O6_Hubli,238.10827985012793
 onion,728,Kalburgi APMC,Karnataka,Kalburgi,17.3310003,76.8334228,geocoded district,O7_Solapur,105.90914357270033
@@ -1060,7 +1052,6 @@ onion,821,Champadanga APMC,West Bengal,Hooghly,22.9099402,88.0120825,geocoded di
 onion,822,Jangipur APMC,West Bengal,Murshidabad,24.1745993,88.2721335,geocoded district,,1414.8560335175805
 onion,823,Udupi APMC,Karnataka,Udupi,13.5269784,74.8731879,geocoded district,O6_Hubli,206.1207083681453
 onion,931,Kurnool APMC,Andhra Pradesh,Kurnool,15.8309251,78.0425373,geocoded district,O9_Kurnool,0.6423331397878955
-onion,1061,Udumalpet APMC,Tamil Nadu,Coimbatore,11.0018115,76.9628425,geocoded district,,524.3732732908792
 onion,1070,Haldwani APMC,Uttarakhand,Nanital,29.316774237645138,79.45503287572147,GADM district centroid,,1127.9099539614565
 onion,1071,Haridwar Union APMC,Uttarakhand,Haridwar,29.9384473,78.1452985,geocoded district,,1138.4632289182935
 onion,1072,Ramnagar APMC,Uttarakhand,Nanital,29.316774237645138,79.45503287572147,GADM district centroid,,1127.9099539614565
@@ -1085,7 +1076,7 @@ onion,1141,Pukharayan APMC,Uttar Pradesh,Kanpur Dehat,26.4585639,79.8548052,geoc
 onion,1142,Kosikalan APMC,Uttar Pradesh,Mathura,27.4955539,77.6855554,geocoded district,,870.630333996503
 onion,1143,Unnao APMC,Uttar Pradesh,Unnao,26.5673264,80.6198193,geocoded district,,943.8438476669224
 onion,1147,Padra APMC,Gujarat,Vadodara(Baroda),22.3108115,73.1657755,geocoded district,O3_Mahuva,197.80424661669784
-onion,1185,"Excise Colony,RBZ",Telangana,Hanumakonda,18.032699,79.4283969,geocoded district,O9_Kurnool,286.3353311514671
+onion,1185,"Excise Colony,RBZ ",Telangana,Hanumakonda,18.032699,79.4283969,geocoded district,O9_Kurnool,286.3353311514671
 onion,1193,"Kukatpally,RBZ",Telangana,Medchal Malkajgiri,17.5349835,78.5246387,geocoded district,O9_Kurnool,196.7666439907875
 onion,1194,"Saroornagar,RBZ",Telangana,Ranga Reddy,17.1333954,78.3970979,geocoded district,O9_Kurnool,150.12654912968233
 onion,1195,"Vanasthalipuram,RBZ",Telangana,Ranga Reddy,17.1333954,78.3970979,geocoded district,O9_Kurnool,150.12654912968233
@@ -1093,7 +1084,6 @@ onion,1197,"Alwal,RBZ",Telangana,Hyderabad,17.360589,78.4740613,geocoded distric
 onion,1199,RYTHU BAZAR FALAKNUMA,Telangana,Hyderabad,17.360589,78.4740613,geocoded district,O9_Kurnool,176.646380084694
 onion,1202,Sangareddy APMC,Telangana,Sangareddy,17.8684342,77.8227189,geocoded district,O7_Solapur,203.9278197685566
 onion,1204,Jharsuguda APMC,Odisha,Jharsuguda,21.8019368,83.9713964,geocoded district,,911.4999725542514
-onion,1214,Tindivanam APMC,Tamil Nadu,Villupuram,11.9398285,79.4945645,geocoded district,O9_Kurnool,460.0713956525788
 onion,1236,Agar APMC,Madhya Pradesh,Shajapur,23.4171002,76.6074794,geocoded district,O8_Manmad,417.37980317256074
 onion,1239,Kailaras APMC,Madhya Pradesh,Morena,26.3849794,77.8612721,geocoded district,,766.4630718270541
 onion,1275,Kapadvanj APMC,Gujarat,Kheda,22.8532503,72.9953586,geocoded district,O3_Mahuva,233.11705173642437
@@ -1115,7 +1105,6 @@ onion,1315,Vai APMC,Maharashtra,Satara,17.6361289,74.2982781,geocoded district,O
 onion,1318,Mangal Wedha APMC,Maharashtra,Solapur,17.8499067,75.2763203,geocoded district,O7_Solapur,69.18192777620283
 onion,1321,Lasur Station APMC,Maharashtra,Chattrapati Sambhajinagar,20.022667196629108,75.27591483919167,GADM district centroid,O8_Manmad,91.18619644204287
 onion,1322,Vaijpur APMC,Maharashtra,Chattrapati Sambhajinagar,20.022667196629108,75.27591483919167,GADM district centroid,O8_Manmad,91.18619644204287
-onion,1364,APMC Gevrai,Maharashtra,Beed,18.9918442,75.909784,geocoded district,O7_Solapur,145.2704060474239
 onion,1377,Bayana APMC,Rajasthan,Bharatpur,27.0246959,77.2920116,geocoded district,,807.4152436148872
 onion,1385,Sujangarh APMC,Rajasthan,Churu,28.2047781,74.6912996,geocoded district,,797.1963324218467
 onion,1386,Bhadara APMC,Rajasthan,Hanumangarh,29.3659533,74.298429,geocoded district,,894.8743575467747
@@ -1139,7 +1128,6 @@ onion,1458,Kharar APMC,Punjab,Mohali,30.6908804,76.7114879,geocoded district,,11
 onion,1459,Kurali APMC,Punjab,Mohali,30.6908804,76.7114879,geocoded district,,1135.09768968606
 onion,1464,Bassi Pathana APMC,Punjab,Fatehgarh,31.6610527,74.9764967,geocoded district,,1155.2645945771444
 onion,1466,Khamano APMC,Punjab,Fatehgarh,31.6610527,74.9764967,geocoded district,,1155.2645945771444
-onion,1469,Vellore APMC,Tamil Nadu,Vellore,12.9021849,79.061104,geocoded district,O9_Kurnool,343.5253319254081
 onion,1498,Jahajharpur APMC,Bihar,Madhubani,26.3503076,86.2296424,geocoded district,,1381.1928115936744
 onion,1507,Boudh APMC,Odisha,Boudh,20.6407463,83.9969704,geocoded district,,825.9462209684947
 onion,1510,Sargipali APMC,Odisha,Sundergarh,22.1172081,84.0200982,geocoded district,,940.3479986241279
@@ -1168,7 +1156,7 @@ onion,1633,Satana APMC,Maharashtra,Nashik,20.0112475,73.7902364,geocoded distric
 onion,1634,Rahuri APMC,Maharashtra,Ahilyanagar,19.092952,74.7493451,geocoded district,O8_Manmad,132.7569869521414
 onion,1637,Akluj APMC,Maharashtra,Solapur,17.8499067,75.2763203,geocoded district,O7_Solapur,69.18192777620283
 onion,1644,Sinner APMC,Maharashtra,Nashik,20.0112475,73.7902364,geocoded district,O2_Pimpalgaon,24.975773839984893
-onion,1649,APMC Newasa,Maharashtra,Ahilyanagar,19.092952,74.7493451,geocoded district,O8_Manmad,132.7569869521414
+onion,1649,APMC Newasa ,Maharashtra,Ahilyanagar,19.092952,74.7493451,geocoded district,O8_Manmad,132.7569869521414
 onion,1663,Sitarganj APMC,Uttarakhand,Udhamsinghnagar,29.04298460552889,79.49917330041666,GADM district centroid,,1103.1187453589982
 onion,1704,Dasda APMC,Tripura,North Tripura,24.0921476,92.2451214,geocoded district,,1744.3576295581872
 onion,1715,Kopaganj APMC,Uttar Pradesh,Mau(Maunathbhanjan),26.03539667130642,83.50281805610163,GADM district centroid,,1127.7109667521204
@@ -1315,7 +1303,6 @@ onion,2269,Uluberia APMC,West Bengal,Howrah,22.5736296,88.3251045,geocoded distr
 onion,2270,Sheoraphuly APMC,West Bengal,Hooghly,22.9099402,88.0120825,geocoded district,,1308.7294451787243
 onion,2318,Rajgarh APMC,Madhya Pradesh,Dhar,22.5786572,75.2258637,geocoded district,O8_Manmad,271.5136569465519
 onion,2325,Shamgarh APMC,Madhya Pradesh,Mandsaur,24.2628148,75.385692,geocoded district,O1_Lasalgaon,451.6125582173513
-onion,2422,Thirupathur APMC,Tamil Nadu,Vellore,12.9021849,79.061104,geocoded district,O9_Kurnool,343.5253319254081
 onion,2441,Ambala City(Subji Mandi) APMC,Haryana,Ambala,30.3843674,76.770421,geocoded district,,1109.6806611501202
 onion,2444,FerozpurZirkha(Nagina) APMC,Haryana,Mewat,27.9935177,77.0419634,geocoded district,,897.8932134262764
 onion,2451,Panchkul(Kalka) APMC,Haryana,Panchkula,30.6975401,76.8551066,geocoded district,,1143.1862360677271
@@ -1361,7 +1348,6 @@ onion,2701,Garh Shankar(Mahalpur) APMC,Punjab,Hoshiarpur,31.6092942,75.8459754,g
 onion,2703,Mumbai-Onion & Potato Market APMC,Maharashtra,Mumbai,19.054999,72.8692035,geocoded district,O2_Pimpalgaon,165.91462753081055
 onion,2704,Amrawati(Frui & Veg. Market) APMC,Maharashtra,Amarawati,15.9964121,76.9597966,geocoded district,O9_Kurnool,116.73190095668303
 onion,2708,Newasa(Ghodegaon) APMC,Maharashtra,Ahilyanagar,19.092952,74.7493451,geocoded district,O8_Manmad,132.7569869521414
-onion,2713,Bonai APMC,Odisha,Sundergarh,22.1172081,84.0200982,geocoded district,,940.3479986241279
 onion,2714,Bargarh(Barapalli) APMC,Odisha,Bargarh,21.2319922,83.5652737,geocoded district,,836.8834799166884
 onion,2721,Keonjhar(Dhekikote) APMC,Odisha,Keonjhar,21.5,85.5,geocoded district,,1007.5067045374908
 onion,2738,Udaipur (F&V) APMC,Rajasthan,Udaipur,24.578721,73.6862571,geocoded district,O10_Gondal,414.43703521147893
@@ -1377,8 +1363,6 @@ onion,2899,Durgapur APMC,West Bengal,Paschim Bardhaman,23.6461884,87.1587969,geo
 onion,2902,Gajol APMC,West Bengal,Malda,25.0057449,88.1398483,geocoded district,,1464.948805525405
 onion,2905,Balarampur APMC,West Bengal,Puruliya,23.333333,86.416667,geocoded district,,1210.5479770168226
 onion,2910,"New Grain Market , Faridabad APMC",Haryana,Faridabad,28.4031478,77.3105561,geocoded district,,949.8487863381984
-onion,2940,Tiruchengode APMC,Tamil Nadu,Namakkal,11.3033889,78.118604,geocoded district,,503.20162192029744
-onion,2970,Thuraiyur APMC,Tamil Nadu,Thiruchirappalli,10.8766852587086,78.55491393817347,GADM district centroid,,553.4107741354592
 onion,3039,SMY Santoshgarh,Himachal Pradesh,Una,31.5834642,76.2351452,geocoded district,,1197.9083599801124
 onion,3045,Harda(F&V) APMC,Madhya Pradesh,Harda,22.2427973,77.1179173,geocoded district,O8_Manmad,355.39020248122375
 onion,3046,Indore APMC,Madhya Pradesh,Indore,22.7203616,75.8681996,geocoded district,O8_Manmad,312.0710936893358
@@ -1401,13 +1385,14 @@ onion,3117,Asansol APMC,West Bengal,Paschim Bardhaman,23.6461884,87.1587969,geoc
 onion,3128,Junnar(Alephata) APMC,Maharashtra,Pune,18.5213738,73.8545071,geocoded district,O2_Pimpalgaon,174.51028340165945
 onion,3130,Junnar(Narayangaon) APMC,Maharashtra,Pune,18.5213738,73.8545071,geocoded district,O2_Pimpalgaon,174.51028340165945
 onion,3142,Kamthi APMC,Maharashtra,Nagpur,21.1498134,79.0820556,geocoded district,O8_Manmad,493.4217807995415
+onion,3151,Hoskote APMC,Karnataka,Bengaluru Rural,13.217761447370089,77.56624897396748,GADM district centroid,O9_Kurnool,294.6510257416337
 onion,3218,Tiphra APMC,Chattisgarh,Bilaspur,22.1638486,82.1365923,geocoded district,,819.648789966298
 onion,3297,Khariar APMC,Odisha,Nuapada,20.5412657,82.5292352,geocoded district,,706.8685929905436
 onion,3299,Chuliaposi APMC,Odisha,Mayurbhanja,21.890673373869838,86.40586503360132,GADM district centroid,,1108.4930488885607
 onion,3306,Nilagiri APMC,Odisha,Balasore,21.5006421,86.919884,geocoded district,,1127.9855964327976
 onion,3308,Hindol APMC,Odisha,Dhenkanal,20.8351494,85.6022305,geocoded district,,973.1087072296715
-onion,3328,Siddipet(Rythu Bazar),Telangana,Siddipet,18.0055851,78.896113,geocoded district,O9_Kurnool,258.7868377730411
-onion,3329,Miryalguda(Rythu Bazar),Telangana,Nalgonda,17.0504406,79.2669235,geocoded district,O9_Kurnool,188.86543052428337
+onion,3328,Siddipet(Rythu Bazar) ,Telangana,Siddipet,18.0055851,78.896113,geocoded district,O9_Kurnool,258.7868377730411
+onion,3329,Miryalguda(Rythu Bazar) ,Telangana,Nalgonda,17.0504406,79.2669235,geocoded district,O9_Kurnool,188.86543052428337
 onion,3339,Falakata APMC,West Bengal,Alipurduar,26.4851573,89.5246926,geocoded district,,1678.3170582762023
 onion,3340,Moynaguri APMC,West Bengal,Jalpaiguri,26.6262805,88.7334485,geocoded district,,1620.1515318189643
 onion,3341,Karsiyang(Matigara) APMC,West Bengal,Darjeeling,27.0377554,88.263176,geocoded district,,1596.2375331041972
@@ -1461,11 +1446,9 @@ onion,4070,Dharmapuri(Uzhavar Sandhai ),Tamil Nadu,Dharmapuri,12.1456131,78.1132
 onion,4071,Pennagaram(Uzhavar Sandhai ),Tamil Nadu,Dharmapuri,12.1456131,78.1132217,geocoded district,O9_Kurnool,409.5557604866304
 onion,4072,Palacode(Uzhavar Sandhai ),Tamil Nadu,Dharmapuri,12.1456131,78.1132217,geocoded district,O9_Kurnool,409.5557604866304
 onion,4073,Harur(Uzhavar Sandhai ),Tamil Nadu,Dharmapuri,12.1456131,78.1132217,geocoded district,O9_Kurnool,409.5557604866304
-onion,4074,AJattihalli(Uzhavar Sandhai ),Tamil Nadu,Dharmapuri,12.1456131,78.1132217,geocoded district,O9_Kurnool,409.5557604866304
 onion,4075,Dindigul(Uzhavar Sandhai ),Tamil Nadu,Dindigul,10.4256896,77.815664,geocoded district,,601.1994808104301
 onion,4076,Palani(Uzhavar Sandhai ),Tamil Nadu,Dindigul,10.4256896,77.815664,geocoded district,,601.1994808104301
 onion,4077,Chinnalapatti(Uzhavar Sandhai ),Tamil Nadu,Dindigul,10.4256896,77.815664,geocoded district,,601.1994808104301
-onion,4080,Vedasanthur(Uzhavar Sandhai ),Tamil Nadu,Dindigul,10.4256896,77.815664,geocoded district,,601.1994808104301
 onion,4081,Sampath Nagar(Uzhavar Sandhai ),Tamil Nadu,Erode,11.4905282,77.3505274,geocoded district,O9_Kurnool,487.98780832704915
 onion,4082,Gobichettipalayam(Uzhavar Sandhai ),Tamil Nadu,Erode,11.4905282,77.3505274,geocoded district,O9_Kurnool,487.98780832704915
 onion,4083,Sathiyamagalam(Uzhavar Sandhai ),Tamil Nadu,Erode,11.4905282,77.3505274,geocoded district,O9_Kurnool,487.98780832704915
@@ -1477,7 +1460,6 @@ onion,4089,Sunguvarchatram(Uzhavar Sandhai ),Tamil Nadu,Kancheepuram,12.8796052,
 onion,4090,Kundrathur(Uzhavar Sandhai ),Tamil Nadu,Kancheepuram,12.8796052,79.7042762,geocoded district,O9_Kurnool,373.8026767261726
 onion,4091,Karur(Uzhavar Sandhai ),Tamil Nadu,Karur,10.8217671,78.3828654,geocoded district,,557.9321914876558
 onion,4092,Kulithalai(Uzhavar Sandhai ),Tamil Nadu,Karur,10.8217671,78.3828654,geocoded district,,557.9321914876558
-onion,4093,Velayuthampalayam(Uzhavar Sandhai ),Tamil Nadu,Karur,10.8217671,78.3828654,geocoded district,,557.9321914876558
 onion,4096,Hosur(Uzhavar Sandhai ),Tamil Nadu,Krishnagiri,12.5152075,78.0093769,geocoded district,O9_Kurnool,368.3891349407149
 onion,4097,Krishnagiri(Uzhavar Sandhai ),Tamil Nadu,Krishnagiri,12.5152075,78.0093769,geocoded district,O9_Kurnool,368.3891349407149
 onion,4098,Kaveripattinam(Uzhavar Sandhai ),Tamil Nadu,Krishnagiri,12.5152075,78.0093769,geocoded district,O9_Kurnool,368.3891349407149
@@ -1540,7 +1522,7 @@ onion,4159,Chinnamanur(Uzhavar Sandhai ),Tamil Nadu,Theni,9.8692558,77.4222974,g
 onion,4160,Palayamkottai(Uzhavar Sandhai ),Tamil Nadu,Thirunelveli,8.5495014,77.5805178,geocoded district,,803.4946870714233
 onion,4162,Melapalayam(Uzhavar Sandhai ),Tamil Nadu,Thirunelveli,8.5495014,77.5805178,geocoded district,,803.4946870714233
 onion,4164,NGO Colony(Uzhavar Sandhai ),Tamil Nadu,Thirunelveli,8.5495014,77.5805178,geocoded district,,803.4946870714233
-onion,4165,Tiruthani(Uzhavar Sandhai ),Tamil Nadu,Thiruvellore,13.233634040337728,79.93012829360221,GADM district centroid,O9_Kurnool,353.1695313559978
+onion,4165,Tiruthani(Uzhavar Sandhai ),Tamil Nadu,Thiruvallur,13.233634040337728,79.93012829360221,GADM district centroid,O9_Kurnool,353.1695313559978
 onion,4166,Tiruvallur(Uzhavar Sandhai ),Tamil Nadu,Thiruvellore,13.233634040337728,79.93012829360221,GADM district centroid,O9_Kurnool,353.1695313559978
 onion,4167,Ambattur(Uzhavar Sandhai ),Tamil Nadu,Thiruvellore,13.233634040337728,79.93012829360221,GADM district centroid,O9_Kurnool,353.1695313559978
 onion,4168,Paruthipattu(Uzhavar Sandhai ),Tamil Nadu,Thiruvellore,13.233634040337728,79.93012829360221,GADM district centroid,O9_Kurnool,353.1695313559978
@@ -1605,8 +1587,8 @@ onion,4240,Balarampuram APMC,Kerala,Thiruvananthapuram,8.4882267,76.947551,geoco
 onion,4398,Kakching Market APMC,Manipur,Kakching,24.4974827,93.9835543,geocoded district,,1920.9865514006528
 onion,4402,SMY Jogindernagar,Himachal Pradesh,Mandi,31.6516617,77.0092542,geocoded district,,1240.760555953006
 onion,4407,SMY Takarla,Himachal Pradesh,Una,31.5834642,76.2351452,geocoded district,,1197.9083599801124
-onion,4415,Aron (F&V) APMC,Madhya Pradesh,Guna,24.5001772,77.2600959,geocoded district,,554.5886183232204
 onion,4429,Badwani(F&V) APMC,Madhya Pradesh,Badwani,18.8240919,76.7136454,geocoded district,O7_Solapur,152.63697224284584
+onion,4442,Biaora(F&V) APMC,Madhya Pradesh,Rajgarh,23.86537502369999,76.73110175515909,GADM district centroid,O8_Manmad,466.3625565232404
 onion,4445,Chhatarpur (F&V) APMC,Madhya Pradesh,Chhatarpur,24.7606089,79.6781776,geocoded district,,735.6768364062522
 onion,4449,Dabra(F&V) APMC,Madhya Pradesh,Gwalior,26.045045627579785,78.13879230972641,GADM district centroid,,747.1954934818383
 onion,4454,Gadarwada (F&V) APMC,Madhya Pradesh,Narsinghpur,22.934556,79.0867849,geocoded district,,565.8435634343996
@@ -1630,20 +1612,32 @@ onion,4540,Seoni(F&V) APMC,Madhya Pradesh,Seoni,22.2748109,79.7202522,geocoded d
 onion,4666,Rampurhat APMC,West Bengal,Birbhum,24.0621532,87.6982823,geocoded district,,1362.0922421435203
 onion,4681,Ayodhya APMC,Uttar Pradesh,Ayodhya,26.7990707,82.2052321,geocoded district,,1075.3571185138876
 onion,4697,Chamoli APMC,Uttarakhand,Chamoli (Gopeshwar),30.40878,79.31855,geocoded district,,1231.1222314964393
-onion,4707,"Fruit&Vegetable Market,Gazipur APMC",NCT of Delhi,Delhi,28.6223066,77.2394313,geocoded district,,970.1511332643131
+onion,4707,"APMC Shahdara, Fruit and Vegetable Market, Gazipur",NCT of Delhi,Delhi,28.6223066,77.2394313,geocoded district,,970.1511332643131
 onion,4757,APMC PATANCHERU,Telangana,Sangareddy,17.8684342,77.8227189,geocoded district,O7_Solapur,203.9278197685566
 onion,4798,Yerraguntla APMC,Andhra Pradesh,YSR Kadapa,14.5395752,78.6582332,geocoded district,O9_Kurnool,158.0136642046929
-onion,4846,Varanasi(F&V) APMC,Uttar Pradesh,Varanasi(F&V) APMC,25.390631071953965,82.90902975276406,GADM district centroid,,1039.1205997452842
-onion,4849,Alwar FV,Rajasthan,Alwar FV,27.59682448587522,76.59800450631704,GADM district centroid,,841.6319221208087
-onion,4850,Hanumangarh Town APMC,Rajasthan,Hanumangarh Town APMC,29.240141048092834,74.59694825878785,GADM district centroid,,894.402718000134
-onion,4851,Kukatpally Rythu Bazar APMC,Telangana,Kukatpally Rythu Bazar APMC,17.3856202413129,78.46413087185923,GADM district centroid,O9_Kurnool,179.06040922321404
-onion,4852,Tamkuhi road APMC,Uttar Pradesh,Tamkuhi road APMC,26.86466249435571,83.92526577002258,GADM district centroid,,1214.24463386046
 onion,4853,Vazhapadi(Uzhavar Sandhai),Tamil Nadu,Salem,11.6469616,78.2106958,geocoded district,O9_Kurnool,465.2982765338229
 onion,4854,Vedaranyam(Uzhavar Sandhai),Tamil Nadu,Nagapattinam,10.6026203,79.7619348,geocoded district,,610.2794952321217
 onion,4855,Gandhigramam(Uzhavar Sandhai),Tamil Nadu,Karur,10.8217671,78.3828654,geocoded district,,557.9321914876558
 onion,4906,Dhampur APMC,Uttar Pradesh,Bijnor,29.4074203,78.4821406,geocoded district,,1096.7797617294752
 onion,4911,Uparhali Pmy APMC,Assam,Kamrup,26.1468861,91.2227397,geocoded district,,1783.8127877744164
 onion,4916,Harbartganj Daily Market APMC,Assam,Hailakandi,24.6846916,92.5645836,geocoded district,,1805.1345404694948
+onion,4918,Kutumba APMC,Bihar,Aurangabad,24.79362481850556,84.40448204271546,GADM district centroid,,1141.17173039099
+onion,4919,Kollam Market,Kerala,Kollam,8.954113992582258,76.86771097660802,GADM district centroid,,737.5678881954011
+onion,4921,A.Jattihalli(Uzhavar Sandhai ),Tamil Nadu,Dharmapuri,12.08637020583348,78.18379797313038,GADM district centroid,O9_Kurnool,416.3614767489798
+onion,4922,Vedasandur(Uzhavar Sandhai ),Tamil Nadu,Dindigul,10.379260158569256,77.80498330783665,GADM district centroid,,606.4050544888532
+onion,4923,Ulundurpet RM,Tamil Nadu,Kallakurichi,11.960325100340619,79.28446743185668,GADM district centroid,O9_Kurnool,450.64489395935567
+onion,4924,Vadaseri RM,Tamil Nadu,Kannyiakumari,8.306046792015573,77.34649866807521,GADM district centroid,,821.2626048813164
+onion,4926,Thiruchengodu RM,Tamil Nadu,Namakkal,11.30529614742185,78.12248315165728,GADM district centroid,,502.9970737952407
+onion,4927,Thuraiyur RM,Tamil Nadu,Thiruchirappalli,10.8766852587086,78.55491393817347,GADM district centroid,,553.4107741354592
+onion,4928,Thirupathur RM,Tamil Nadu,Thirupathur,12.80063780403996,78.99814820457823,GADM district centroid,O9_Kurnool,352.1927689619321
+onion,4929,Udumalpettai RM,Tamil Nadu,Thiruppur,10.845590766521484,77.35244426625891,GADM district centroid,,557.424524426804
+onion,4931,Vellore RM,Tamil Nadu,Vellore,12.80063780403996,78.99814820457823,GADM district centroid,O9_Kurnool,352.1927689619321
+onion,4932,Tindivanam RM,Tamil Nadu,Villupuram,11.960325100340619,79.28446743185668,GADM district centroid,O9_Kurnool,450.64489395935567
+onion,104846,Karimangalam(Uzhavar Sandhai),Tamil Nadu,Dharmapuri,12.08637020583348,78.18379797313038,GADM district centroid,O9_Kurnool,416.3614767489798
+onion,104849,Pallikonda(Uzhavar Sandhai),Tamil Nadu,Vellore,12.80063780403996,78.99814820457823,GADM district centroid,O9_Kurnool,352.1927689619321
+onion,104850,Perampet(Uzhavar Sandhai),Tamil Nadu,Vellore,12.80063780403996,78.99814820457823,GADM district centroid,O9_Kurnool,352.1927689619321
+onion,104851,Peravurani(Uzhavar Sandhai),Tamil Nadu,Thanjavur,10.655250032829214,79.22359051451181,GADM district centroid,,589.3411420609866
+onion,104852,Ponnamaravathi(Uzhavar Sandhai),Tamil Nadu,Pudukkottai,10.342065199846346,78.86659364961653,GADM district centroid,,616.5904131024429
 potato,303,Dehradoon APMC,Uttarakhand,Dehradoon,30.468612516674792,77.95975185450236,GADM district centroid,P3_Dehradun,17.82701806603075
 potato,319,Kashipur APMC,Uttarakhand,Udhamsinghnagar,29.04298460552889,79.49917330041666,GADM district centroid,P3_Dehradun,200.26759489890281
 potato,325,Kicchha APMC,Uttarakhand,Udhamsinghnagar,29.04298460552889,79.49917330041666,GADM district centroid,P3_Dehradun,200.26759489890281
