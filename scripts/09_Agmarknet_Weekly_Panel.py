@@ -216,6 +216,34 @@ def impute_price_gaps(agg: pd.DataFrame, grid_end: pd.Timestamp) -> pd.DataFrame
 # Core processor
 # ----------------------------------------------------------------
 
+def disambiguate_market_ids(df: pd.DataFrame, crop: str) -> pd.DataFrame:
+    """Give each market its own market_id when one id is shared by markets in DIFFERENT states.
+
+    Found 2026-10-28: in the trusted onion file the ids 4846 and 4848-4852 are each shared by two different markets in two states
+    (for example 4846 = Varanasi(F&V) APMC, Uttar Pradesh, to Jan 2026, and Karimangalam(Uzhavar Sandhai), Tamil Nadu, from Feb 2026): ids
+    assigned by Script 09b collided with ids from the scraper's market directory. The panel is keyed by market_id, so each pair was merged
+    into one series. 'Kerala' and 'Keralam' are one state (renamed 2026) and are not treated as different.
+    Rule (deterministic, idempotent, stable across weekly runs): within a shared id, the state whose rows start first keeps the original
+    id; each later state gets original id + 100000 * k (k = 1, 2, ... in order of first appearance). Same-state name changes (a market
+    renamed under one id) are NOT split.
+    """
+    st = df['state'].replace({'Keralam': 'Kerala'})
+    n_states = st.groupby(df['market_id']).nunique()
+    shared = n_states[n_states > 1].index
+    if len(shared) == 0:
+        return df
+    df = df.copy()
+    df['st_norm'] = st
+    first = df[df['market_id'].isin(shared)].groupby(['market_id', 'st_norm'])['arrival_date'].min().reset_index().sort_values(['market_id', 'arrival_date', 'st_norm'])
+    first['rank_k'] = first.groupby('market_id').cumcount()
+    remap = {(r.market_id, r.st_norm): r.market_id + 100000 * r.rank_k for r in first.itertuples() if r.rank_k > 0}
+    mask = df['market_id'].isin(shared)
+    df.loc[mask, 'market_id'] = [remap.get((m_, s_), m_) for m_, s_ in zip(df.loc[mask, 'market_id'], df.loc[mask, 'st_norm'])]
+    print(f'  Market-id repair ({crop}): {len(shared)} ids shared by markets in different states -> {len(remap)} markets given a new id '
+          f'(original id + 100000 x order of first appearance); ids: {sorted(int(x) for x in shared)}')
+    return df.drop(columns='st_norm')
+
+
 def process_crop(crop: str) -> pd.DataFrame:
     print(f'\n{"="*60}')
     print(f'Processing: {crop.upper()}')
@@ -240,6 +268,9 @@ def process_crop(crop: str) -> pd.DataFrame:
     df = df.dropna(subset=['modal_price_rs_per_quintal', 'arrivals_tonnes'])
     df = df[df['arrivals_tonnes'] > 0]
     print(f'  After null/zero-arrivals drop: {len(df):,} rows  (removed {before-len(df):,})')
+
+    # 4b. Market-id repair (see disambiguate_market_ids)
+    df = disambiguate_market_ids(df, crop)
 
     # 5. Price outlier clip
     lo, hi = PRICE_CLIP[crop]

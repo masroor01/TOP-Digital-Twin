@@ -16,7 +16,7 @@
   },
   "crude_oil_usd_bbl": {
     "min": 19.9,
-    "median": 69.8,
+    "median": 70.01,
     "max": 116.01
   },
   "iip_food_proc": {
@@ -61,7 +61,7 @@
   },
   "wpi_onion": {
     "min": 102.3,
-    "median": 194.3,
+    "median": 200.5,
     "max": 729.8
   },
   "wpi_tomato": {
