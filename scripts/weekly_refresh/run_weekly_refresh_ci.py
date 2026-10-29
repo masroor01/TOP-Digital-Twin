@@ -283,13 +283,9 @@ if gee_ok:
             f"climate/satellite features were already committed")
     else:
         gaps = check_satellite_coverage()
-        scale = [g for g in gaps if "scale break" in g]
-        gaps = [g for g in gaps if "scale break" not in g]
-        if scale:
-            # warning only until the CHIRPS history is re-extracted (scripts/gee/gee_02_CHIRPS_history_2000_2024.js); then make it fatal
-            log("WARNING: CHIRPS rainfall scale break between the history and the recent years: " + "; ".join(scale[:6]))
         if gaps:
-            fail_and_exit("satellite/climate coverage gap after Script 14 (a top-up input is missing): " + "; ".join(gaps[:8]))
+            # coverage gaps and scale breaks are both fatal: the models would silently use carried-forward or mis-scaled values
+            fail_and_exit("satellite/climate data check failed after Script 14: " + "; ".join(gaps[:8]))
 else:
     log("GEE topup incomplete this run -- Script 14 not re-run, "
         "continuing with existing committed satellite/climate features")
