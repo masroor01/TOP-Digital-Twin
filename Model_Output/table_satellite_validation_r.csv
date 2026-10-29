@@ -1,6 +1,6 @@
 x,y,crop,r,n
-era5_tmax,modis_lst_mean,tomato,0.860316244722534,2558
-era5_tmax,modis_lst_mean,onion,0.8303395324000035,4096
+era5_tmax,modis_lst_mean,tomato,0.8601507617019314,2558
+era5_tmax,modis_lst_mean,onion,0.8303200122233497,4096
 era5_tmax,modis_lst_mean,potato,0.8655191235613288,2048
 s2_ndvi,modis_ndvi,tomato,0.7270008721200327,2368
 s2_ndvi,modis_ndvi,onion,0.7011000764123945,3833
