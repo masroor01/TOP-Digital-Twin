@@ -107,7 +107,7 @@ export default function About() {
       {/* What the evidence shows */}
       <section className="max-w-3xl mx-auto px-5 py-10">
         <FadeIn>
-          <SectionLabel>What the evidence shows (re-run 7 October 2026)</SectionLabel>
+          <SectionLabel>What the evidence shows (re-run 29 October 2026)</SectionLabel>
         </FadeIn>
         <div className="grid grid-cols-1 gap-3 mt-3">
           {[

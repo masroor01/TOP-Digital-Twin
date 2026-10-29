@@ -140,7 +140,7 @@ export default function Home() {
         <FadeIn>
           <h2 className="font-display text-2xl sm:text-3xl font-bold text-[var(--text-primary)] text-center mb-2">The evidence, honestly</h2>
           <p className="text-[var(--text-secondary)] text-center max-w-2xl mx-auto mb-8">
-            Every figure comes from out-of-sample tests re-run on 7 October 2026. We report where the model works and where it does not.
+            Every figure comes from out-of-sample tests re-run on 29 October 2026. We report where the model works and where it does not.
           </p>
         </FadeIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
