@@ -112,14 +112,6 @@
       "as_of": "2026-10-19",
       "weeks_stale": 1
     },
-    "modis_ndvi": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "modis_evi": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
     "wage_agri_men": {
       "as_of": "2026-03-30",
       "weeks_stale": 30
@@ -242,14 +234,6 @@
       "as_of": "2026-10-19",
       "weeks_stale": 1
     },
-    "modis_ndvi": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "modis_evi": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
     "wage_agri_men": {
       "as_of": "2026-03-30",
       "weeks_stale": 30
@@ -369,14 +353,6 @@
       "weeks_stale": 4
     },
     "chirps_rain_mm_roll4": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "modis_ndvi": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "modis_evi": {
       "as_of": "2026-10-19",
       "weeks_stale": 1
     },
