@@ -52,3 +52,22 @@ Simulated data only were used for the changes below; no real-data estimate had b
 3. **Decision rule as amended** (replaces the four conditions above): a crop passes only if (i) the first-stage HAC F is at least 10 **and** the permutation p value of the first stage is below 0.05; (ii) the permutation p value of the placebo (lead) test is at least 0.10; (iii) the Anderson-Rubin set is non-empty (this replaces the Hansen test, whose HAC version is oversized; an empty set is the over-identification failure of the Anderson-Rubin test); (iv) the Anderson-Rubin set lies entirely below zero and does not touch the lower end of the grid (-6).
 4. The HAC standard error of the 2SLS estimate, the HAC Hansen J and the HAC p values are still reported, as descriptive columns only, with the oversizing caveat. The finite-sample scaling T/(T-k) is applied to every HAC covariance.
 5. Self-test: `scripts/87_Weather_Causal_Feasibility.py selftest` (100 simulated samples at each autocorrelation level 0, 0.6 and 0.85; 2SLS biased towards OLS when the noise is very persistent, which is why the decision does not use it).
+
+## Results (run once, 2026-10-30, after the addendum was committed; Script 87; tables in this folder)
+**No crop passes; the pre-specified decision is to stop.** Weather anomalies in the production zones, lagged 1 to 26 weeks, do not predict the quantity arriving at the markets, so there is no first stage to build a causal supply effect on.
+
+| Crop | Fixed markets | Weeks | First-stage F (HAC) | First-stage permutation p | Placebo (lead) p | Reduced-form permutation p | Anderson-Rubin set for beta | Passes |
+|---|---|---|---|---|---|---|---|---|
+| Tomato | 400 | 495 | 0.4 | 0.90 | 0.69 | 0.99 | whole grid (-6 to +2) | no |
+| Onion | 191 | 488 | 0.6 | 0.78 | 0.27 | 0.17 | whole grid | no |
+| Potato | 79 | 488 | 1.1 | 0.64 | 0.73 | 0.91 | whole grid | no |
+
+- The first stage fails by a wide margin (F about 0.4 to 1.1 against the threshold of 10), and the Anderson-Rubin set is the whole grid: the data are consistent with any price response to supply, so they say nothing about it.
+- Zone by zone (descriptive): first-stage F 0.4 to 5.4 across 8 zones; the best is onion at Pimpalgaon (F 5.4, permutation p 0.05) and tomato at Kolar (F 4.5, p 0.12); neither reaches F = 10. Tomato at Nashik was skipped (singular design).
+- The HAC test gave a reduced-form p of 0.002 for onion; the permutation p is 0.17. The difference is the oversizing found in the simulations, and it shows why the HAC p values were not used for the decision.
+- The onion run with the export-policy indicators added as controls gives the same picture (F 0.6).
+- Placebo (lead) tests pass for all crops (future weather does not predict current arrivals), as they should when there is no relation.
+
+**What this does and does not show.** Within this design (six pre-specified lagged weather blocks in 17 key production zones, aggregate weekly arrivals at a fixed set of wholesale markets) the weather in these zones does not move measured arrivals. It does not show that supply does not affect price, nor that another design (district-level production and area, satellite yield proxies, region-specific supply chains) would fail. Possible reasons, none tested here: the zones cover only part of national supply; wholesale-market arrivals are a noisy measure of supply (private trade, storage, imports, reporting); and the effect of weather on yield may be non-linear. No specification was changed after seeing the result.
+
+**Consequence.** Scenarios stay labelled as sensitivities of the fitted model, not causal estimates. The negative result is reported in the paper (Sections 3.3 and 6.7) as the test of the only lever for which an identification route existed.
