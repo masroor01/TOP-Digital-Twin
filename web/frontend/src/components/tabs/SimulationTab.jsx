@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, SectionLabel, Metric, Badge, Spinner, CropBadge, Alert, InfoButton } from '../ui';
 import PlotChart from '../PlotChart';
 import PolicyAnalogues from '../PolicyAnalogues';
+import RegimeNotice from '../RegimeNotice';
 import { fmtRs, fmtRsKg, fmtPct, fmtDate, HORIZONS, CROP_ICON, CROP_COLOR } from '../../lib/theme';
 import { api } from '../../lib/api';
 
@@ -10,7 +11,7 @@ const SEASON_LABEL = {
   rabi_arrival: 'Rabi Arrival', harvest: 'Harvest Season', storage: 'Storage Period',
 };
 
-export default function SimulationTab({ sim, crop, market, marketId, overrides }) {
+export default function SimulationTab({ sim, crop, market, marketId, overrides, horizon }) {
   const [dailyOpen, setDailyOpen] = useState(false);
   const [daily, setDaily] = useState(null);
   const [dailyLoading, setDailyLoading] = useState(false);
@@ -49,7 +50,7 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
       x: [...chart.dates, ...chart.dates.slice().reverse()],
       y: [...chart.bandUpper, ...chart.bandLower.slice().reverse()],
       fill: 'toself', fillcolor: 'rgba(27,67,50,0.10)', line: { width: 0 },
-      name: '±RMSE Uncertainty Range', hoverinfo: 'skip', type: 'scatter',
+      name: chart.bandKind === 'outcome' ? 'Likely range (80 % of past outcomes in similar situations)' : '±RMSE Uncertainty Range', hoverinfo: 'skip', type: 'scatter',
     },
     {
       x: chart.dates, y: chart.baselineCurve, type: 'scatter', mode: 'lines+markers', name: 'Baseline Forecast',
@@ -138,6 +139,7 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides }
         ))}
       </div>
 
+      <RegimeNotice regime={sim.regime} horizon={horizon} />
       <p className="text-xs text-[var(--text-secondary)] mb-2">
         Scenario results are model sensitivities, not causal estimates of what a policy or shock would actually do.
         {crop === 'onion' && ' The export ban, minimum export price and export duty do not move the model forecast (it has no reliable policy signal to learn from); switching one on shows historical analogues below instead.'}

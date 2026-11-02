@@ -159,7 +159,7 @@ export default function Dashboard() {
                 transition={{ duration: 0.18 }}
               >
                 {tab === 'simulation' && (
-                  <SimulationTab sim={sim} crop={crop} market={market} marketId={market.marketId} overrides={overrides} />
+                  <SimulationTab sim={sim} crop={crop} market={market} marketId={market.marketId} overrides={overrides} horizon={horizon} />
                 )}
                 {tab === 'attribution' && <AttributionTab sim={sim} />}
                 {tab === 'benchmarks' && <BenchmarksTab crop={crop} />}

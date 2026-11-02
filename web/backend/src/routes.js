@@ -196,6 +196,30 @@ export function buildRouter(store) {
     }
   });
 
+  // Price-regime outcomes (scripts/88_Regime_Outcomes_and_Bands.py): what happened after similar past situations, and the outcome band.
+  const REGIME_FILE = fileURLToPath(new URL('../../data/regime_outcomes.json', import.meta.url));
+  let REGIME = null;
+  try { REGIME = JSON.parse(fs.readFileSync(REGIME_FILE, 'utf-8')); } catch (e) { REGIME = null; }
+
+  // level of the market's price at the origin = price / median of the previous 52 weeks (same definition as Script 88; needs at least 26 weeks)
+  function marketLevel(crop, marketId, asOf, price) {
+    const prev = store.history
+      .filter((r) => r.crop === crop && r.market_id === marketId && new Date(r.week_start) < asOf && r.modal_price_weighted != null)
+      .sort((a, b) => new Date(a.week_start) - new Date(b.week_start))
+      .slice(-52)
+      .map((r) => r.modal_price_weighted)
+      .sort((a, b) => a - b);
+    if (prev.length < 26 || !(price > 0)) return null;
+    const mid = prev.length >> 1;
+    const med = prev.length % 2 ? prev[mid] : (prev[mid - 1] + prev[mid]) / 2;
+    return { level: price / med, med52: med };
+  }
+  function regimeRecord(crop, h, level) {
+    const list = REGIME?.crops?.[crop]?.[String(h)];
+    if (!list || level == null) return null;
+    return list.find((r) => level >= r.levelLow && (r.levelHigh == null || level < r.levelHigh)) || null;
+  }
+
   // ── Core simulation ─────────────────────────────────────────────────────
   router.post('/simulate', async (req, res) => {
     try {
@@ -232,6 +256,13 @@ export function buildRouter(store) {
         .map((r) => r.modal_price_weighted)
         .filter((v) => v != null);
 
+      const originPrice = baseRow.log_price != null ? Math.expm1(baseRow.log_price) : null;
+      const lv = marketLevel(crop, baseRow.market_id, asOf, originPrice);
+      const outcomeRange = (h, price) => {
+        const rec = regimeRecord(crop, h, lv?.level);
+        if (!rec) return null;
+        return { lo: price * Math.exp(rec.residLog.q10), hi: price * Math.exp(rec.residLog.q90) };
+      };
       const ticker = HORIZONS.map((h) => {
         const fdate = new Date(asOf.getTime() + h * WEEK_MS);
         const price = preds[`base_${h}`];
@@ -244,6 +275,7 @@ export function buildRouter(store) {
           wape: err.wape ?? null,
           season: seasonFor(crop, fdate),
           spark: recentHist.length ? [...recentHist, price] : null,
+          outcomeRange: outcomeRange(h, price),
         };
       });
 
@@ -294,8 +326,18 @@ export function buildRouter(store) {
       const fcDates = [lastActualDate, ...HORIZONS.map((h) => new Date(asOf.getTime() + h * WEEK_MS))];
       const baselineCurve = [lastActualPrice, ...HORIZONS.map((h) => preds[`base_${h}`])];
       const scenarioCurve = [lastActualPrice, ...HORIZONS.map((h) => preds[`scenario_${h}`])];
-      const bandUpper = [lastActualPrice, ...HORIZONS.map((h) => preds[`base_${h}`] + (store.uncertainty[`${crop}_${h}w`]?.rmse || 0))];
-      const bandLower = [lastActualPrice, ...HORIZONS.map((h) => preds[`base_${h}`] - (store.uncertainty[`${crop}_${h}w`]?.rmse || 0))];
+      const useOutcomeBand = HORIZONS.every((h) => outcomeRange(h, preds[`base_${h}`]) != null);
+      const bandUpper = [lastActualPrice, ...HORIZONS.map((h) => useOutcomeBand ? outcomeRange(h, preds[`base_${h}`]).hi : preds[`base_${h}`] + (store.uncertainty[`${crop}_${h}w`]?.rmse || 0))];
+      const bandLower = [lastActualPrice, ...HORIZONS.map((h) => useOutcomeBand ? outcomeRange(h, preds[`base_${h}`]).lo : preds[`base_${h}`] - (store.uncertainty[`${crop}_${h}w`]?.rmse || 0))];
+      // regime notice: how unusual the price level is and what followed similar past situations, per horizon
+      const regime = lv ? {
+        level: lv.level, med52: lv.med52, price: originPrice,
+        byHorizon: Object.fromEntries(HORIZONS.map((h) => {
+          const rec = regimeRecord(crop, h, lv.level);
+          return [h, rec ? { ...rec, forecastChange: originPrice ? preds[`base_${h}`] / originPrice - 1 : null } : null];
+        })),
+        notable: lv.level >= 1.75 || lv.level < 0.8,
+      } : null;
 
       const targetDate = new Date(asOf.getTime() + horizon * WEEK_MS);
 
@@ -332,7 +374,9 @@ export function buildRouter(store) {
         sumIsolated,
         interactionGap,
         diffCols,
+        regime,
         chart: {
+          bandKind: useOutcomeBand ? 'outcome' : 'rmse',
           history: mktHistory.map((r) => ({ weekStart: r.week_start, price: r.modal_price_weighted })),
           dates: fcDates.map((d) => d.toISOString().slice(0, 10)),
           baselineCurve,
