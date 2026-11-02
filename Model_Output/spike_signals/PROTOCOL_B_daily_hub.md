@@ -29,3 +29,19 @@ The hub shows a usable early warning only if **all** hold: (i) the median lead o
 
 ## Limits stated up front
 Twelve episodes, so every statistic is imprecise; the groups are defined a priori but the hub is chosen from earlier analysis of the same history; daily records are noisy (reporting gaps, few arrivals on some days) and the two data sources differ; a retrospective alert is not a forecast issued in real time; and a pass would support a warning for onion only. A negative result with this power does not prove that no signal exists.
+
+## Results (run once, 2026-11-02, after the protocol was committed; Script 89; tables in this folder)
+**Not passed; the pre-specified decision is to stop.** Daily prices at the Nashik hub do not give a usable early warning of a national onion spike.
+
+| Criterion | Result | Required |
+|---|---|---|
+| (i) median lead of the hub over the follower group; hub first | 2.5 days; first in 3 of the 6 episodes in which both fire | at least 7 days; first in at least 6 episodes |
+| (ii) recall of hub-only alerts before onset | 4 of 12 episodes (33 %) | at least 6 of 12 |
+| (iii) precision (alerts followed by an onset within 56 days) | 0.15 (27 alerts, 4 followed by an onset) | at least 0.30 |
+| (iv) permutation p value of the recall | 0.74 | below 0.05 |
+
+- The follower group fires a signal in the window around the onset in only 6 of 12 episodes, so in half of the episodes neither the hub nor the rest shows a 15 % rise that the rule can date. Against the weekly national series, the hub's median lead is 6 days (the weekly series is dated at the end of its week, which accounts for most of it).
+- Hub-only alerts are no better than chance: shuffling the 12 onset dates gives as high a recall in 74 % of shuffles.
+- The 25 % threshold, reported for description only, gives a median lead of 3 days.
+- **Data caveat.** The two daily sources disagree on their overlap (2025-11-07 to 2025-12-31): the correlation of the daily follower median is 0.64 and the report is about 16 % higher than the file. This can create a spurious step at the switch date and affects only the last two episodes; the other ten episodes use one source and the conclusion does not depend on the last two.
+- **What this does and does not show.** At the daily resolution available, the hub does not move reliably before the rest of the country at onset. It does not show that no leading structure exists in other data, nor for other crops or other hubs. The weekly forecasting model is therefore not expected to gain a lead from hub daily prices, and protocol B2 (follower-market forecasts) is not run.

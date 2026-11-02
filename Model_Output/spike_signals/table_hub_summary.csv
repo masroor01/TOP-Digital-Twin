@@ -1,0 +1,16 @@
+,value
+episodes,12.0
+episodes_both_fire,6.0
+hub_first_n,3.0
+hub_first_>=7d_n,2.0
+median_lead_days_vs_follower,2.5
+median_lead_days_vs_delhi,1.0
+median_lead_days_vs_national_weekly,6.0
+median_lead25_days_vs_follower (descriptive),3.0
+n_alerts,27.0
+recall_episodes,4.0
+recall,0.3333333333333333
+precision,0.14814814814814814
+perm_p_recall,0.740251949610078
+source_overlap_corr,0.6389898185751794
+source_overlap_median_ratio,1.1612903225806452
