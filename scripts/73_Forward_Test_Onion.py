@@ -16,7 +16,7 @@ Modes
 
 Usage: python scripts/73_Forward_Test_Onion.py <freeze|score|status|evaluate>
 """
-import os, sys, io, json, hashlib, subprocess, importlib.util, datetime
+import os, sys, io, json, hashlib, subprocess, importlib.util, datetime, shutil
 import numpy as np
 import pandas as pd
 import joblib
@@ -30,7 +30,16 @@ MANIFEST = os.path.join(D, 'freeze_manifest.json')
 LOG = os.path.join(D, 'forecast_log.csv')
 RESULTS = os.path.join(BASE, 'Model_Output', 'table_forward_test_onion_results.csv')
 PANEL = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
-FIRST_ORIGIN = pd.Timestamp('2026-07-13')
+FIRST_ORIGIN_V1 = pd.Timestamp('2026-07-13')   # first freeze (2026-10-08), superseded by amendment 1 (2026-11-02); the live value is read from the manifest
+
+
+def first_origin():
+    """First forward origin week of the CURRENT freeze (stored in the manifest; the Monday after the data cut-off at freezing)."""
+    if os.path.exists(MANIFEST):
+        return pd.Timestamp(json.load(open(MANIFEST))['first_origin'])
+    return FIRST_ORIGIN_V1
+
+
 HORIZONS = [4, 13, 26]; SEEDS = [42, 43, 44, 45, 46]
 UP, DN = 0.30, -0.25
 ALARM_P = 0.20; CL = 0.2; REQUIRED_WEEKS = 26; BLOCK = 4; NBOOT = 5000; SEED = 20261008
@@ -64,13 +73,26 @@ def git_commit():
     except Exception: return 'unknown'
 
 
-def freeze():
+def freeze(amend_reason=None):
+    amends = None
     if os.path.exists(MANIFEST):
-        print('[73] already frozen (%s). Refusing to retrain.' % MANIFEST); return
+        if not amend_reason:
+            print('[73] already frozen (%s). Refusing to retrain. A documented amendment needs: freeze --amend "<reason>"' % MANIFEST); return
+        old = json.load(open(MANIFEST))
+        arch = os.path.join(D, 'superseded_' + old['frozen_at_utc'][:10])
+        os.makedirs(arch, exist_ok=True)
+        for src in (MANIFEST, LOG, MODELS):                       # archive, never delete
+            if os.path.exists(src):
+                shutil.move(src, os.path.join(arch, os.path.basename(src)))
+        amends = dict(reason=amend_reason, previous_frozen_at_utc=old['frozen_at_utc'], previous_data_through=old['data_through'],
+                      previous_first_origin=old['first_origin'], previous_manifest_sha256=sha(os.path.join(arch, os.path.basename(MANIFEST))),
+                      archived_in=os.path.relpath(arch, BASE))
+        print('[73] amendment: previous freeze archived in %s' % arch)
     os.makedirs(MODELS, exist_ok=True)
     m, df, sets = features()
     data_through = df['week_start'].max()
-    manifest = dict(frozen_at_utc=datetime.datetime.utcnow().isoformat() + 'Z', data_through=str(data_through.date()), first_origin=str(FIRST_ORIGIN.date()), code_commit=git_commit(),
+    first = data_through + pd.Timedelta(weeks=1)                   # the first origin week whose outcome cannot be known at freezing
+    manifest = dict(frozen_at_utc=datetime.datetime.utcnow().isoformat() + 'Z', data_through=str(data_through.date()), first_origin=str(first.date()), code_commit=git_commit(), amends=amends,
                     params=m.PARAMS, seeds=SEEDS, thresholds=dict(spike=UP, crash=DN, alarm_probability=ALARM_P, cost_loss=CL), feature_sets=sets, files={})
     for h in HORIZONS:
         d = df.copy(); d['target'] = d.groupby('market_id')['log_price'].shift(-h); d = d.dropna(subset=['target', 'price_lag_1'])
@@ -111,7 +133,7 @@ def score():
     done = set(zip(old['origin_week'], old['h']))
     new_rows = []
     for h in HORIZONS:
-        for ow in sorted(df.loc[df['week_start'] >= FIRST_ORIGIN, 'week_start'].unique()):
+        for ow in sorted(df.loc[df['week_start'] >= first_origin(), 'week_start'].unique()):
             ow = pd.Timestamp(ow)
             if ow + pd.Timedelta(weeks=h) <= data_through: continue        # outcome already observable: not a forward forecast
             if (ow, h) in done: continue
@@ -151,7 +173,7 @@ def status():
     for h in HORIZONS:
         mat = matured(h, dt)
         print('h=%2d: %d origin weeks logged, %d matured (data through %s)' % (h, lg[lg.h == h].origin_week.nunique(), mat.origin_week.nunique(), dt.date()))
-    final_origin = FIRST_ORIGIN + pd.Timedelta(weeks=REQUIRED_WEEKS - 1); ready = final_origin + pd.Timedelta(weeks=13)
+    final_origin = first_origin() + pd.Timedelta(weeks=REQUIRED_WEEKS - 1); ready = final_origin + pd.Timedelta(weeks=13)
     print('primary evaluation (h = 13) needs %d matured origin weeks: last origin %s, evaluable from %s' % (REQUIRED_WEEKS, final_origin.date(), ready.date()))
 
 
@@ -199,4 +221,7 @@ def evaluate():
 
 if __name__ == '__main__':
     mode = sys.argv[1]
-    {'freeze': freeze, 'score': score, 'status': status, 'evaluate': evaluate}[mode]()
+    if mode == 'freeze':
+        freeze(amend_reason=sys.argv[3] if len(sys.argv) > 3 and sys.argv[2] == '--amend' else None)
+    else:
+        {'score': score, 'status': status, 'evaluate': evaluate}[mode]()
