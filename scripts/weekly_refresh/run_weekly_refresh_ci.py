@@ -322,6 +322,16 @@ for line in proc.stdout.splitlines():
 if proc.returncode != 0:
     fail_and_exit(f"verify.mjs cross-language parity check FAILED (exit {proc.returncode}) -- newly generated JS models do not reproduce Python predictions, refusing to commit them; check the log above for which model(s) diverged")
 
+# ONION FORWARD TEST (version 2, 2026-11-02): log this week's frozen-model forecasts. Version 1 was scored only by the local job, which no longer
+# runs the refresh, so nothing was logged after 2026-10-05. Informational: a failure here never aborts the refresh (the log is append-only and the
+# missing origin weeks can be scored on the next run while their outcomes are still unobservable).
+log("--- Onion forward test: log this week's frozen-model forecasts (informational, never aborts the refresh) ---")
+code = run_logged([PYTHON, "scripts/73_Forward_Test_Onion.py", "score"])
+if code != 0:
+    log(f"WARNING: forward-test scoring failed (exit {code}) -- the forecast log was NOT extended this week; see the log above")
+else:
+    log("Forward test: forecast log up to date.")
+
 log("--- Script 44: final sanity check (informational) ---")
 code = run_logged([PYTHON, "scripts/44_Pipeline_Sanity_Check.py"])
 if code != 0:
@@ -366,6 +376,9 @@ files_to_add = [
     "web/backend/src/models/potato_1w.js", "web/backend/src/models/potato_4w.js",
     "web/backend/src/models/potato_13w.js", "web/backend/src/models/potato_26w.js",
 ]
+# the forward-test log exists only once the first origin week has been scored; adding a missing path would abort the commit
+if (REPO_ROOT / "Model_Output" / "forward_test_onion" / "forecast_log.csv").exists():
+    files_to_add.append("Model_Output/forward_test_onion/forecast_log.csv")
 proc = subprocess.run(["git", "add", *files_to_add], cwd=REPO_ROOT,
                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
 _log_fh.write(proc.stdout)

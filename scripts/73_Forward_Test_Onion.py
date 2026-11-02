@@ -169,6 +169,11 @@ def panel():
 
 def status():
     p = panel(); dt = p.index.get_level_values(1).max()
+    if not os.path.exists(LOG):
+        final_origin = first_origin() + pd.Timedelta(weeks=REQUIRED_WEEKS - 1)
+        print('no origin week logged yet (first forward origin %s; data through %s); last origin %s, evaluable from %s'
+              % (first_origin().date(), dt.date(), final_origin.date(), (final_origin + pd.Timedelta(weeks=13)).date()))
+        return
     lg = pd.read_csv(LOG, parse_dates=['origin_week'])
     for h in HORIZONS:
         mat = matured(h, dt)

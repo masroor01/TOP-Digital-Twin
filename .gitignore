@@ -156,4 +156,6 @@ data/agmarknet_weekly/top_weekly_panel_with_drought.csv
 gee-service-account-key*.json
 Model_Output/_stability_runs/
 Model_Output/_event_runs/
-Model_Output/forward_test_onion/frozen_models/
+# forward test v2 (amendment 1, 2026-11-02): the frozen models are tracked (with their SHA-256 manifest) so the weekly workflow can score them;
+# the superseded version-1 models stay local
+Model_Output/forward_test_onion/superseded_*/frozen_models/

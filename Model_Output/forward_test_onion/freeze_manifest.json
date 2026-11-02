@@ -1,8 +1,16 @@
 {
- "frozen_at_utc": "2026-10-08T05:00:09.866475Z",
- "data_through": "2026-10-05",
- "first_origin": "2026-07-13",
- "code_commit": "1cf0b93aa864c1d83491070459e95c0dd1542fac",
+ "frozen_at_utc": "2026-11-02T05:35:56.078448Z",
+ "data_through": "2026-10-26",
+ "first_origin": "2026-11-02",
+ "code_commit": "c068606b4c0c85156b7c6e9674f4c4c6ff9042d6",
+ "amends": {
+  "reason": "Version 2: weather/satellite features repaired (2025 gap; CHIRPS history scale); see PROTOCOL.md amendment 1",
+  "previous_frozen_at_utc": "2026-10-08T05:00:09.866475Z",
+  "previous_data_through": "2026-10-05",
+  "previous_first_origin": "2026-07-13",
+  "previous_manifest_sha256": "e963385efd62f65282ed1caf560be8cce62cefdca1c82b65b55cd8fe886d15e5",
+  "archived_in": "Model_Output\\forward_test_onion\\superseded_2026-10-08"
+ },
  "params": {
   "objective": "binary",
   "metric": "binary_logloss",
@@ -33,6 +41,7 @@
  },
  "feature_sets": {
   "M0E": [
+   "log_price",
    "price_lag_1",
    "price_lag_2",
    "price_lag_3",
@@ -70,6 +79,7 @@
    "mkt_vs_nat"
   ],
   "LAY": [
+   "log_price",
    "price_lag_1",
    "price_lag_2",
    "price_lag_3",
@@ -179,17 +189,17 @@
   ]
  },
  "files": {
-  "h4_spike_M0E.joblib": "36a82c5bea0c08dc535256201bd06dd3f3fbccc731aa791ea39cb5da44be2b29",
-  "h4_spike_LAY.joblib": "b0e6dce7d122efaf6d6c9c8885c87d409e9590e5b10e82dcba425c37ff8ddf7d",
-  "h4_crash_M0E.joblib": "7f5d1feecafde665c41dfc65a92ab73c675d8f18a3a79347b839a1b3280f9f49",
-  "h4_crash_LAY.joblib": "ca8a3949a5b37d88f26f9005d7b1f86ea010167ffb2535f055a029829f4e5fd6",
-  "h13_spike_M0E.joblib": "cce715a6d953a1db6522291354ae0d042afbc1a2b40675176dbb5f3a6066c819",
-  "h13_spike_LAY.joblib": "4e4f92f39e6ac8a97a1504bd0b0e23f11ce8fbf11225c167d1164cd3098e5ed7",
-  "h13_crash_M0E.joblib": "97f62cd7d5e990917a3ced6b7665e79fadfbc65cf5a7237f386b307cf578eb78",
-  "h13_crash_LAY.joblib": "6531b011ea63b7144d500def1148e43d08cc4786ce3771ddc49a15923708218b",
-  "h26_spike_M0E.joblib": "d221491d42a7615e5388e85c3aaf538896b646e77ee0e3c536e57943c9fb46aa",
-  "h26_spike_LAY.joblib": "7fae7f4800580474b335e33964b9744fdd751dc7b94117da4e776cf606e7f795",
-  "h26_crash_M0E.joblib": "bf36e56a28e70180f1f873638665c361af04b2f9d40a7146702c739bef2fc928",
-  "h26_crash_LAY.joblib": "9b492941f5c3217f917e2e62341238c6ea48a0501ea188e8a68f1195278bdc2b"
+  "h4_spike_M0E.joblib": "12a17d2a0b58d0ebc9feaf261a1350a7bce879f07de2dce3e8df26fc39c3171d",
+  "h4_spike_LAY.joblib": "a109fc7e1537bf73b00b4984ef7fe7302ad4161f9c4a4958e1d77d5fc3f79975",
+  "h4_crash_M0E.joblib": "4dd0aad2e30d5428106d463b62e1fc49168608537bb22064cfa4fc306bbb8c1a",
+  "h4_crash_LAY.joblib": "7dfb534d9f76da5277cf0eb0bfdc5a14429403f960415b47338d600170a8a2cd",
+  "h13_spike_M0E.joblib": "ac731dafb40811852bafe2a700cc60473d7111ae32d26ba6273e78407d1b8ece",
+  "h13_spike_LAY.joblib": "69149c8e49cc14ad80c0b26c8a702dc87589e92271d78cbf5b50801afc8b7e51",
+  "h13_crash_M0E.joblib": "cdb7be2e7f79d0513fdb5123ed6204a519791aef42f75db10d2b4b61ab52fc78",
+  "h13_crash_LAY.joblib": "ade5c560394f7770209c672931facd898fd6ac9ddd130bad0961c9b29b0e4998",
+  "h26_spike_M0E.joblib": "d4a1b8597af0523a9872e8bc8fdcdf33cc237213fa81de7422ff13ac013fdae7",
+  "h26_spike_LAY.joblib": "36a17aa90542444c98c1950141d967631e532a39e8613d2a2c1db80345fdd2ed",
+  "h26_crash_M0E.joblib": "8381c29a717f981d3fc1ae364e2a5cef91066c1ca3eefa15e6e8a65717ce1970",
+  "h26_crash_LAY.joblib": "4419b2921a23907d81e7d53fc5979fb0d4791dcb619495a832f1c8a0859829b5"
  }
 }
