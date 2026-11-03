@@ -27,6 +27,10 @@ function coerceRow(row) {
   return out;
 }
 
+// The source portal renamed Kerala to Keralam in 2026; the two labels are one state (scripts/section2_common.py does the same for the analysis).
+// Display label only: model inputs are numeric and unaffected.
+const canonicalState = (s) => (s === 'Keralam' ? 'Kerala' : s);
+
 export function loadAll() {
   if (!fs.existsSync(MODEL_DIR)) {
     throw new Error(`Production models not found at ${MODEL_DIR}. Run scripts/23_Train_Production_Models.py first.`);
@@ -38,7 +42,7 @@ export function loadAll() {
   const staleness = readJSON('macro_climate_staleness.json');
 
   const referenceRaw = readCSV(path.join(MODEL_DIR, 'reference_rows.csv'));
-  const reference = referenceRaw.map(coerceRow);
+  const reference = referenceRaw.map(coerceRow).map((r) => ({ ...r, state: canonicalState(r.state) }));
 
   const historyRaw = readCSV(path.join(MODEL_DIR, 'price_history.csv'));
   const history = historyRaw.map(coerceRow);
@@ -75,7 +79,7 @@ export function loadAll() {
     const rows = readCSV(MARKET_ACCURACY_FILE).map(coerceRow);
     for (const r of rows) {
       marketAccuracy.set(`${r.crop}_${r.market_id}_${r.horizon_weeks}`, {
-        state: r.state,
+        state: canonicalState(r.state),
         marketWapeRaw: r.market_wape_raw,
         marketN: r.market_n,
         marketWapeShrunk: r.market_wape_shrunk,
