@@ -14,7 +14,7 @@ export function predict_potato_13w(input) {
                                         if (input[6] > 7.89760641875285) {
                                             var0 = 7.039407907677198;
                                         } else {
-                                            if (input[65] > 0.44602981418526716) {
+                                            if (input[65] > 0.4391743078389108) {
                                                 var0 = 7.012206432056846;
                                             } else {
                                                 var0 = 7.006279882206123;
