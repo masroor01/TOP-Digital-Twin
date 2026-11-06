@@ -1,0 +1,5 @@
+,days_signal_on,share_days_mad_zero,episodes_both_fire,news_first_n,median_lead_days,n_alerts,recall_episodes,precision,perm_p,pass_i,pass_ii,pass_iii,pass_iv,PASS_ALL
+A_supply_price_k2,0.20217329139262225,0.0031455533314269373,5,4,6.0,26,5,0.23076923076923078,0.4097180563887223,False,False,False,False,False
+A_supply_price_k3_descriptive,0.1369745496139548,0.0031455533314269373,5,3,6.0,17,4,0.23529411764705882,0.3219356128774245,False,False,False,False,False
+B_policy_k2,0.5779239348012583,0.5587646554189305,6,5,6.0,24,5,0.25,0.20475904819036192,False,False,False,False,False
+B_policy_k3_descriptive,0.5599084929939948,0.5587646554189305,6,3,3.0,21,3,0.19047619047619047,0.6644671065786842,False,False,False,False,False
