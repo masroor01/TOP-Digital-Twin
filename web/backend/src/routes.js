@@ -300,14 +300,30 @@ export function buildRouter(store) {
       const isolatedEffects = diffCols
         .map((col) => {
           const effect = preds[`isolated_${col}`] - baselinePred;
-          const direction = effect > 0 ? 'higher' : effect < 0 ? 'lower' : 'about the same';
+          const direction = effect > 0 ? 'higher' : 'lower';
+          // A tree ensemble only responds when a value crosses one of its split points. A zero effect therefore
+          // means "the model does not separate these two values", NOT "the lever has no real-world effect".
+          // Say so, and say whether the new value is beyond what the model was trained on (2026-11-10).
+          const noResponse = Math.abs(effect) < 1e-9;
+          const rng = store.featureRanges?.[col];
+          const nv = Number(scenario[col]);
+          const outsideObserved = !!(rng && Number.isFinite(nv) && (nv < rng.min || nv > rng.max));
+          const mechanism = noResponse
+            ? 'No model response at this horizon: the forecast does not change for this move. '
+              + (outsideObserved
+                ? 'The new value lies outside the range the model was trained on, so it cannot respond. '
+                : 'The new value falls in the same decision region of the model as the baseline value. ')
+              + 'This is not evidence that the lever has no real-world effect, only that the model has not learned one here.'
+            : (FEATURE_INFO[col]?.mechanism ? FEATURE_INFO[col].mechanism.replace('{dir}', direction) : null);
           return {
             field: col,
             label: FEATURE_INFO[col]?.label || col,
             before: baseRow[col],
             after: scenario[col],
             effect,
-            mechanism: FEATURE_INFO[col]?.mechanism ? FEATURE_INFO[col].mechanism.replace('{dir}', direction) : null,
+            noResponse,
+            outsideObserved,
+            mechanism,
           };
         })
         .sort((a, b) => Math.abs(b.effect) - Math.abs(a.effect));

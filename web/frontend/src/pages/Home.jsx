@@ -12,7 +12,7 @@ const FEATURES = [
     icon: '⚙️',
     gradient: 'linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%)',
     title: 'What-If Scenario Simulator',
-    body: 'Move a policy, climate, or macro lever — an export ban, a diesel price spike, a rainfall shock — and see the model\'s multi-horizon price response update live. Results are model sensitivities, not causal estimates.',
+    body: 'Move a policy, climate, or macro lever — an export ban, a heat wave, a rainfall shock, a repo-rate change — and see the model\'s multi-horizon price response update live. Results are model sensitivities, not causal estimates.',
   },
   {
     icon: '🎯',

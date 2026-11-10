@@ -236,11 +236,11 @@ export default function Sidebar({
       {macroPrimary.map((field) => {
         const r = featureRanges[field];
         if (!r || baseRow?.[field] == null) return null;
-        const span = r.max - r.min;
-        const lo = r.min - span * 0.2, hi = r.max + span * 0.2;
+        // Sliders stop at the range the model was trained on. Beyond it a tree model is flat (it cannot
+        // extrapolate), so an extended slider only produced silent zero effects (changed 2026-11-10).
         return (
           <SliderField key={field} label={featureInfo[field].label} help={featureInfo[field].help}
-            min={lo} max={hi} step={span / 100 || 1}
+            min={r.min} max={r.max} step={(r.max - r.min) / 100 || 1}
             value={val(field)} onChange={(v) => setOverride(field, v)}
             staleness={staleness} crop={crop} field={field} obsMin={r.min} obsMax={r.max} />
         );

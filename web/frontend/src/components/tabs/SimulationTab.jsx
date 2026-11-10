@@ -144,6 +144,17 @@ export default function SimulationTab({ sim, crop, market, marketId, overrides, 
         Scenario results are model sensitivities, not causal estimates of what a policy or shock would actually do.
         {crop === 'onion' && ' The export ban, minimum export price and export duty do not move the model forecast (it has no reliable policy signal to learn from); switching one on shows historical analogues below instead.'}
       </p>
+      {(() => {
+        const flat = (sim.isolatedEffects || []).filter((e) => e.noResponse && !String(e.field).startsWith('export_') && e.field !== 'mep_usd_per_tonne');
+        if (!flat.length) return null;
+        return (
+          <p className="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-2">
+            No model response at this horizon for: {flat.map((e) => e.label).join(', ')}.{' '}
+            {flat.some((e) => e.outsideObserved) ? 'Some of these values are outside the range the model was trained on. ' : ''}
+            That means the model has not learned a reaction to this move, not that the lever has no real-world effect.
+          </p>
+        );
+      })()}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
         <Metric label={`Baseline`} value={fmtRs(kpis.baseline, { perQ: true })} sub={fmtRsKg(kpis.baseline)} help="Unmodified baseline model projection." />
         <Metric label={`Scenario`} value={fmtRs(kpis.scenario, { perQ: true })} sub={fmtRsKg(kpis.scenario)}
