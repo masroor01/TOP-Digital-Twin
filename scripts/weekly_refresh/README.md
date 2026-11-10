@@ -169,3 +169,6 @@ Ways forward (none implemented yet): (1) download the portal's "Daily Price Repo
 captcha) and merge them into the trusted files, as was done for onion 2026 (`09b_Merge_Onion_2026_Update.py`, to be generalised to all crops);
 (2) an official open-data feed (data.gov.in "Current Daily Price of Various Commodities from Various Markets (Mandi)" needs a free API key); (3) ask
 the Directorate of Marketing and Inspection for bulk access.
+
+### Partial weeks are dropped (2026-11-10)
+`portal_reports.build_scrape` keeps only complete Monday-Sunday weeks: if the newest date in a report is not a Sunday, the rows of that last, incomplete week are dropped and logged (`partial final week dropped: N rows ...`). The weekly panel sums arrivals per week, so a part week would understate arrivals and start the forecast from a thin sample (on 2026-11-06 the dashboard's arrival lag 1 was a sixth of lag 2 for this reason). The dropped rows are not lost: the next report holds them. A report that holds no complete week stops that crop with a message and leaves the trusted file untouched. Override for a one-off with `--keep-partial-week` on the command line.

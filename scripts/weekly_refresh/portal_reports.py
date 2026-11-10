@@ -121,7 +121,7 @@ def _pair_to_market_days(price_csv, arrival_csv, log):
     return m
 
 
-def build_scrape(crop, price_csv, arrival_csv, trusted_csv, out_csv, log=print):
+def build_scrape(crop, price_csv, arrival_csv, trusted_csv, out_csv, log=print, drop_partial_week=True):
     crop_name = crop.capitalize()
     old = pd.read_csv(trusted_csv, low_memory=False)
     lookup = old.drop_duplicates(['state', 'market'])[['state', 'district', 'market', 'market_id', 'state_id', 'state_code', 'district_id', 'commodity_id']].copy()
@@ -162,6 +162,19 @@ def build_scrape(crop, price_csv, arrival_csv, trusted_csv, out_csv, log=print):
     m['total_arrivals_tonnes'] = m['arrivals_tonnes']
     m['arrival_date'] = pd.to_datetime(m['date_raw'], format='%d-%m-%Y', errors='coerce')
     m = m.dropna(subset=['arrival_date', 'modal_price_rs_per_quintal', 'arrivals_tonnes'])
+    if drop_partial_week and len(m):
+        # The weekly panel sums arrivals per Monday-Sunday week, so a final week that the report covers only in part (a report downloaded on a
+        # Monday holds one day of the new week) would enter the panel with understated arrivals and a thin market sample, and the forecast would
+        # start from it (seen on the dashboard 2026-11-06: arrival lag 1 was a sixth of lag 2). Keep only complete weeks; the rows are not lost,
+        # the next report holds them.
+        last = m['arrival_date'].max()
+        if last.weekday() != 6:
+            cutoff = last - pd.Timedelta(days=last.weekday() + 1)           # the Sunday that ended the last complete week
+            n_drop = int((m['arrival_date'] > cutoff).sum())
+            m = m[m['arrival_date'] <= cutoff]
+            if m.empty:
+                raise SystemExit(f'the report holds no complete Monday-Sunday week (it ends {last.date()}); download a longer period')
+            log(f'  partial final week dropped: {n_drop:,} rows dated {(cutoff + pd.Timedelta(days=1)).date()} to {last.date()}; the panel keeps complete weeks only (last kept day {cutoff.date()})')
     m['arrival_date_raw'] = m['date_raw']; m['year'] = m['arrival_date'].dt.year; m['month'] = m['arrival_date'].dt.month
     m['arrival_date'] = m['arrival_date'].dt.strftime('%Y-%m-%d')
     m['market_id'] = m['market_id'].astype(int); m['district_id'] = m['district_id'].astype(int); m['state_id'] = m['state_id'].astype('Int64')
@@ -197,5 +210,6 @@ if __name__ == '__main__':
     ap.add_argument('--price', required=True, help='the price report, or the single combined Daily Price Arrival Report')
     ap.add_argument('--arrival', default=None, help='the arrival report; omit when --price is a combined report')
     ap.add_argument('--trusted', required=True); ap.add_argument('--out', required=True)
+    ap.add_argument('--keep-partial-week', action='store_true', help='keep a final week that the report covers only in part (default: drop it)')
     a = ap.parse_args()
-    build_scrape(a.crop, a.price, a.arrival or None, a.trusted, a.out)
+    build_scrape(a.crop, a.price, a.arrival or None, a.trusted, a.out, drop_partial_week=not a.keep_partial_week)
