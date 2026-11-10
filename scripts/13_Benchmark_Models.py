@@ -47,7 +47,9 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 # ── Paths ──────────────────────────────────────────────────────────────────────
 BASE     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AGM_FILE = os.path.join(BASE, 'data', 'agmarknet_weekly', 'top_weekly_panel.csv')
-LGB_FILE = os.path.join(BASE, 'Model_Output', 'table_rolling_origin_metrics.csv')
+# 2026-11-06: the model rows now come from the re-run ablation (Script 15, variant M6 = production model, per fold); they used to come from
+# table_rolling_origin_metrics.csv (Script 12), which pre-dates the validation-window, origin-price and data repairs.
+LGB_FILE = os.path.join(BASE, 'Model_Output', 'ablation_raw_results.csv')
 OUT_DIR  = os.path.join(BASE, 'Model_Output')
 os.makedirs(OUT_DIR, exist_ok=True)
 
@@ -355,6 +357,7 @@ print(f'\n[4] Saved: {bench_path}  ({len(bench_df)} rows)')
 print('\n[5] Building comparison table ...')
 
 lgbm_df = pd.read_csv(LGB_FILE)
+lgbm_df = lgbm_df[lgbm_df['variant'] == 'M6'].copy()
 
 # Mean across folds for each crop × horizon
 lgbm_mean = (lgbm_df
