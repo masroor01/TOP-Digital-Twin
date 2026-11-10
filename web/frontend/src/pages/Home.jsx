@@ -36,7 +36,7 @@ const FEATURES = [
 
 const EVIDENCE = [
   { big: '13–26 wk', label: 'Where it helps', body: 'Tomato error is about 37 % and 38 % below a no-change guess at 3 and 6 months; onion 8 % and 13 %.' },
-  { big: '5 of 6', label: 'Beats classical methods', body: 'Long-horizon cells where the model beats the best of four classical benchmarks (tomato and onion; potato at 26 weeks).' },
+  { big: '4 of 6', label: 'Beats classical methods', body: 'Long-horizon cells where the model beats the best of four classical benchmarks (tomato and onion at 13 and 26 weeks; not potato).' },
   { big: 'Not 1 week', label: 'Where it does not', body: 'At one week ahead no crop beats a no-change guess. This is a planning tool for 1–6 months, not a next-week trading signal.' },
   { big: '2022–2026', label: 'Tested on unseen years', body: 'Five rolling test years, repeated across random seeds. Layer benefits are indicated, not certified; potato is weak.' },
 ];
@@ -156,8 +156,8 @@ export default function Home() {
         </div>
         <FadeIn delay={0.1}>
           <p className="text-xs text-[var(--text-secondary)] text-center mt-5 max-w-3xl mx-auto leading-relaxed">
-            Forward test in progress: an onion early-warning comparison (price-only vs layered models) was frozen on 8 October 2026 and
-            is scored on weeks whose outcomes are not yet known; the single pre-specified analysis is due from April 2027.
+            Forward test in progress: an onion early-warning comparison (price-only vs layered models) was first frozen on 8 October 2026, re-frozen on 2 November 2026 after the weather data were repaired, and
+            is scored on weeks whose outcomes are not yet known; the single pre-specified analysis is due from 26 July 2027.
           </p>
         </FadeIn>
       </section>
