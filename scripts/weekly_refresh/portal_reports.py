@@ -43,12 +43,27 @@ def norm(s: pd.Series) -> pd.Series:
     return s.astype(str).str.strip().str.lower().str.replace(r'[^a-z0-9]+', ' ', regex=True).str.strip()
 
 
+def _looks_like_combined_report(path):
+    """True if the file is a combined Daily Price Arrival Report whatever it is called: the header (line 1 or 2) has the portal's price and
+    arrival columns. Added 2026-11-10: the 2026-11-09 reports were uploaded as 'Tomato update.csv' etc., which the file-name rule below skipped
+    silently, so the weekly run kept using the 28 Oct reports."""
+    try:
+        with open(path, 'r', encoding='utf-8-sig', errors='replace') as fh:
+            head = ' '.join(fh.readline() for _ in range(3)).lower()
+    except OSError:
+        return False
+    return 'modal price' in head and 'arrival quantity' in head and 'arrival date' in head
+
+
 def find_reports(downloads, crop):
-    """Newest (price, arrival) pair under <downloads>/portal_reports/<crop>/, or None."""
+    """Newest (price, arrival) pair under <downloads>/portal_reports/<crop>/, or None. A combined report is recognised by its file name
+    (contains "price" and "arrival") or, failing that, by its header columns."""
     folder = os.path.join(str(downloads), 'portal_reports', crop.lower())
     files = [f for f in glob.glob(os.path.join(folder, '*.csv'))]
     base = lambda f: os.path.basename(f)
-    combined = sorted([f for f in files if re.search(r'price', base(f), re.I) and re.search(r'arriv', base(f), re.I)], key=os.path.getmtime)
+    by_name = [f for f in files if re.search(r'price', base(f), re.I) and re.search(r'arriv', base(f), re.I)]
+    by_content = [f for f in files if f not in by_name and not re.search(r'price|arriv', base(f), re.I) and _looks_like_combined_report(f)]
+    combined = sorted(by_name + by_content, key=os.path.getmtime)
     price = sorted([f for f in files if re.search(r'price', base(f), re.I) and not re.search(r'arriv', base(f), re.I)], key=os.path.getmtime)
     arr = sorted([f for f in files if re.search(r'arriv', base(f), re.I) and not re.search(r'price', base(f), re.I)], key=os.path.getmtime)
     # newest of: a combined "Daily Price Arrival Report" (one file with price and arrival on each row), or a price + arrival pair
