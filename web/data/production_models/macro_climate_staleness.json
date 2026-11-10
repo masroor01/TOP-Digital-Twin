@@ -72,30 +72,6 @@
       "as_of": "2026-06-29",
       "weeks_stale": 17
     },
-    "era5_tmax": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_tmin": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_tmean": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_dtr": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_heat_35": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_heat_38": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
     "chirps_rain_mm": {
       "as_of": "2026-09-28",
       "weeks_stale": 4
@@ -194,30 +170,6 @@
       "as_of": "2026-06-29",
       "weeks_stale": 17
     },
-    "era5_tmax": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_tmin": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_tmean": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_dtr": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_heat_35": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_heat_38": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
     "chirps_rain_mm": {
       "as_of": "2026-09-28",
       "weeks_stale": 4
@@ -315,30 +267,6 @@
     "lpg_nonsub_delhi_per14kg": {
       "as_of": "2026-06-29",
       "weeks_stale": 17
-    },
-    "era5_tmax": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_tmin": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_tmean": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_dtr": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_heat_35": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
-    },
-    "era5_heat_38": {
-      "as_of": "2026-10-19",
-      "weeks_stale": 1
     },
     "chirps_rain_mm": {
       "as_of": "2026-09-28",

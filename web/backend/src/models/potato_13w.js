@@ -122,7 +122,7 @@ export function predict_potato_13w(input) {
                 if (input[0] > 7.45562922693201) {
                     var0 = 7.032720706910624;
                 } else {
-                    if (input[11] > 7.225357871549073) {
+                    if (input[11] > 7.225357871549072) {
                         var0 = 6.984892120446908;
                     } else {
                         if (input[7] > 7.113330292203817) {
@@ -236,7 +236,7 @@ export function predict_potato_13w(input) {
                         if (input[17] > 0.5680647467311555) {
                             var0 = 6.989380765978926;
                         } else {
-                            if (input[2] > 7.14496134149627) {
+                            if (input[2] > 7.144961341496269) {
                                 var0 = 7.020962767451258;
                             } else {
                                 var0 = 7.000887707764321;
@@ -473,7 +473,7 @@ export function predict_potato_13w(input) {
             } else {
                 if (input[77] > 203.05000000000004) {
                     if (input[64] > 0.5387426250888191) {
-                        if (input[11] > 6.445961798694058) {
+                        if (input[11] > 6.445961798694059) {
                             if (input[7] > 6.281060370762815) {
                                 var0 = 6.974600342417949;
                             } else {
