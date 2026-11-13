@@ -154,8 +154,8 @@ export default function About() {
               Forecasts come from LightGBM (gradient-boosted trees) — one model per crop and horizon, 12 in total —
               chosen after being validated against tree-ensemble alternatives (XGBoost, CatBoost, Random Forest) and
               deep-learning baselines (LSTM, Transformer) on the same data. The what-if simulator's isolated feature
-              effects and AI policy briefings are grounded strictly in what the model actually computed for a given
-              scenario — not free-form commentary. Where the data or the model is genuinely uncertain (a stale
+              effects are computed strictly from the trained model for a given
+              scenario — not from free-form commentary. Where the data or the model is genuinely uncertain (a stale
               market feed, a thin-data region, a scenario the model has little training signal for), the dashboard
               says so rather than presenting a confident number regardless.
             </p>

@@ -6,7 +6,6 @@ import SimulationTab from '../components/tabs/SimulationTab';
 import AttributionTab from '../components/tabs/AttributionTab';
 import BenchmarksTab from '../components/tabs/BenchmarksTab';
 import MultiMarketTab from '../components/tabs/MultiMarketTab';
-import AITab from '../components/tabs/AITab';
 import AuditTab from '../components/tabs/AuditTab';
 import ValidationTab from '../components/tabs/ValidationTab';
 import FeatureImportanceTab from '../components/tabs/FeatureImportanceTab';
@@ -21,7 +20,6 @@ const TABS = [
   { key: 'multimarket', label: '🗺️ Multi-Market' },
   { key: 'validation', label: '📐 Validation' },
   { key: 'features', label: '🧬 Feature Importance' },
-  { key: 'ai', label: '🤖 MIC Assistant' },
   { key: 'audit', label: '🔍 Audit' },
 ];
 
@@ -166,7 +164,6 @@ export default function Dashboard() {
                 {tab === 'multimarket' && <MultiMarketTab crop={crop} markets={markets} />}
                 {tab === 'validation' && <ValidationTab />}
                 {tab === 'features' && <FeatureImportanceTab crop={crop} horizon={horizon} />}
-                {tab === 'ai' && <AITab sim={sim} crop={crop} market={market} horizon={horizon} />}
                 {tab === 'audit' && <AuditTab sim={sim} overrides={overrides} />}
               </motion.div>
             </AnimatePresence>

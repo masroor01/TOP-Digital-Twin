@@ -26,12 +26,6 @@ const FEATURES = [
     title: 'Cross-Market Benchmarks',
     body: 'Compare price levels and arrival volumes across every tracked APMC market for a crop, and overlay historical trajectories for up to 8 markets at once.',
   },
-  {
-    icon: '✨',
-    gradient: 'linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%)',
-    title: 'AI Policy Briefing',
-    body: 'A grounded, plain-language commentary on the current scenario — generated strictly from the computed baseline, delta, and isolated effects, never free-form.',
-  },
 ];
 
 const EVIDENCE = [
@@ -170,7 +164,7 @@ export default function Home() {
             Built on 12 production LightGBM models, one per crop and forecast horizon.
           </p>
         </FadeIn>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {FEATURES.map((f, i) => (
             <FadeIn key={f.title} delay={0.05 * i}>
               <Card className="p-6 h-full group">

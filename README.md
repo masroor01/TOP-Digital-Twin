@@ -398,7 +398,7 @@ app has been cancelled and is not used.
 
 **Architecture** (full detail in `web/README.md`)
 - `web/frontend/` React (Vite) single-page app: Home, About, Dashboard
-  (Simulation, Feature Importance, AI Briefing tabs and others).
+  (Simulation, Attribution, Feature Importance tabs and others).
 - `web/backend/` Express API plus static file server, one Node process, no Python
   at runtime. The 12 production LightGBM models run in-process as plain
   JavaScript exported with m2cgen (parity-checked against Python).
@@ -435,11 +435,8 @@ request. A person reviews and merges it; the merge triggers the redeploy. The
 workflow also scores the onion forward test. See Section 5 for which layers are
 automatic and which are manual.
 
-**AI Briefing (optional):** the AI tab calls the Claude API (Haiku) for a
-one-paragraph policy commentary on the current scenario. Set `ANTHROPIC_API_KEY`
-as an environment variable on the host (see `web/backend/.env.example`); never
-commit a key. Without it the dashboard works and that tab shows an info message.
-Set a spending limit at console.anthropic.com, since the site is public.
+**No paid services:** the dashboard calls no paid API. The "MIC Assistant" / AI Policy Briefing
+(an optional Claude-API commentary tab) was removed on 2026-11-13 because it needed a paid key.
 
 **Streamlit app:** cancelled and no longer used. The public site at
 https://topdigitaltwin.micskuast.in is the only dashboard. `scripts/24_Simulation_Dashboard.py`
@@ -639,9 +636,6 @@ heterogeneity finding on an independent axis (see MANIFEST.md).
   rural wage series (not agriculture-specific), and `iip_food_proc` is
   actually the overall manufacturing IIP (not the food-processing
   sub-index). Would need a full retrain + re-validation if corrected.
-- Confirming the `ANTHROPIC_API_KEY` Streamlit Cloud secret is actually
-  live on the deployed dashboard (only ever verified locally with a
-  dummy key).
 - **Live dashboard viewer access is deliberately restricted, not broken.**
   The GitHub repo itself was switched back to public (2026-08-10,
   `gh repo edit --visibility public`, confirmed via `gh api`), but the app
