@@ -495,7 +495,7 @@ export function predict_onion_13w(input) {
                     }
                 } else {
                     if (input[0] > 6.934103753460756) {
-                        if (input[73] > 0.29735753201950227) {
+                        if (input[73] > 0.2973575320195022) {
                             var0 = 7.561488389287224;
                         } else {
                             var0 = 7.573158488508431;
@@ -1187,7 +1187,7 @@ export function predict_onion_13w(input) {
                     }
                 } else {
                     if (input[0] > 6.7840584139855356) {
-                        if (input[74] > 0.0002814845665274159) {
+                        if (input[74] > 0.0002814845665274035) {
                             var2 = 0.000541105507508323;
                         } else {
                             if (input[8] > 6.705299764929018) {
