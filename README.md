@@ -392,7 +392,7 @@ wide, panel-joinable files), then Script 22 (rebuilds the master panel):
 
 ## 6. The Dashboard
 
-**Live:** https://topdigitaltwin.micskuast.in (Home, About, Dashboard pages).
+**Live:** https://top-digital-twin.onrender.com (Home, About, Dashboard pages; free hosting, so allow about a minute for it to wake after idle).
 The production dashboard is the React/Node app in `web/`. The earlier Streamlit
 app has been cancelled and is not used.
 
@@ -442,7 +442,7 @@ automatic and which are manual.
 (an optional Claude-API commentary tab) was removed on 2026-11-13 because it needed a paid key.
 
 **Streamlit app:** cancelled and no longer used. The public site at
-https://topdigitaltwin.micskuast.in is the only dashboard. `scripts/24_Simulation_Dashboard.py`
+https://top-digital-twin.onrender.com is the only dashboard. `scripts/24_Simulation_Dashboard.py`
 is retained in the repo for history only.
 
 ---
