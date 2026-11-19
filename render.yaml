@@ -1,0 +1,20 @@
+# Render Blueprint: deploys the TOP Digital Twin dashboard (one Node process: React frontend + Express API,
+# pure-JS model inference, no Python, no API keys) on Render's free web-service plan.
+#
+# Free-plan behaviour to know about: the service sleeps after ~15 minutes without a request and takes
+# roughly a minute to wake on the next visit. Open the site a few minutes before showing it to anyone.
+# Auto-deploy is on, so merging the weekly-refresh pull request into master redeploys the site, as before.
+services:
+  - type: web
+    name: top-digital-twin
+    runtime: node
+    plan: free
+    region: singapore          # closest free region to India
+    rootDir: web
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22

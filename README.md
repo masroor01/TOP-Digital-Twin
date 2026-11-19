@@ -423,10 +423,13 @@ and `npm run dev` in `web/backend/`.
    `node web/backend/src/models/__fixtures__/verify.mjs`; do not deploy unless
    every model shows OK.
 
-**Deploying:** hosted on Hostinger as a single Node.js app (root directory
-`web`, build `npm run build`, start `npm start`). Every push to `master`
-redeploys automatically. Nothing reaches the live site until it is merged or
-pushed to `master`.
+**Deploying:** the Hostinger site (topdigitaltwin.micskuast.in) went offline in
+November 2026. `render.yaml` at the repository root deploys the same single
+Node.js app (root directory `web`, build `npm run build`, start `npm start`) on
+Render's free plan: connect the GitHub repository on render.com (New, Blueprint)
+and every push to `master` redeploys. The free plan sleeps after about 15
+minutes idle and takes about a minute to wake. Nothing reaches the live site
+until it is merged or pushed to `master`.
 
 **Weekly refresh path:** the GitHub Actions workflow
 `.github/workflows/weekly_refresh.yml` runs Monday night, pulls Earth Engine

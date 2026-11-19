@@ -56,7 +56,7 @@ Or for hot-reload during development: `npm run dev` in `frontend/` (Vite, proxie
 
 ## Deployment
 
-Deployed as a single Node.js app (build command: `npm run build`, start command: `npm start`, both run from this `web/` directory). No API keys are needed (the optional AI Briefing tab, which used a paid Anthropic key, was removed on 2026-11-13). Hostinger auto-redeploys on every push to `master` (confirmed 2026-08-31 — no manual redeploy click needed).
+Deployed as a single Node.js app (build command: `npm run build`, start command: `npm start`, both run from this `web/` directory). No API keys are needed (the optional AI Briefing tab, which used a paid Anthropic key, was removed on 2026-11-13). Hostinger auto-redeployed on every push to `master` (confirmed 2026-08-31); since the Hostinger site went offline in November 2026 the repository root's `render.yaml` deploys the same app on Render's free plan, which also redeploys on every push to `master`.
 
 ## Security notes (from the 2026-08-31 audit)
 
