@@ -2,7 +2,8 @@
 """
 Script 86 -- system architecture figure for manuscript Section 3 (not the data-layer figure of Section 2).
 Flow: weekly refresh (GitHub Actions, human-reviewed pull request) -> weekly panel -> twelve LightGBM models exported to JavaScript ->
-scenario engine and API (Express) -> web application; offline evaluation and the AI briefing as side parts.
+scenario engine and API (Express) -> web application; offline evaluation as a side part.
+2026-11-25: the optional AI briefing (language-model commentary) was removed from the application on 13 November 2026 and is no longer drawn.
 Output: Model_Output/fig_ms_system_architecture.png
 """
 import os
@@ -43,7 +44,7 @@ ax.text(50, 35.6, 'pull request  ->  a person reviews and merges  ->  merge to m
 # row 2: serving
 ax.text(1, 32.4, 'Serving (one Node.js process)', fontsize=9.4, fontweight='bold', color=INK)
 box(53, 17, 22, 13, '#F7DADA', 'Scenario engine and API', ['holds the latest feature row per market', 'overrides applied, forecast recomputed', 'attribution of each lever', 'band = validated RMSE of the model', 'accuracy at crop, state, market level'])
-box(78, 17, 21, 13, '#E3F1D2', 'Web application', ['simulation, attribution, benchmarks', 'multi-market, validation, features', 'AI briefing, audit', 'daily curve from the weekly points'])
+box(78, 17, 21, 13, '#E3F1D2', 'Web application', ['simulation, attribution, benchmarks', 'multi-market, validation, features', 'audit view', 'daily curve from the weekly points'])
 box(27, 17, 22, 13, '#EEEEEE', 'Historical analogues', ['onion export-policy actions:', 'price paths around real dated', 'actions (descriptive, not a', 'model effect)'], ls=(0, (4, 3)))
 arrow((77.8, 23.5), (75.3, 23.5), color='#7B8794'); arrow((75.0, 28.0), (78.0, 28.0))
 arrow((49.3, 23.5), (52.7, 23.5), ls=(0, (3, 3)))
@@ -54,11 +55,9 @@ ax.text(1, 13.6, 'Evaluation (offline)', fontsize=9.4, fontweight='bold', color=
 box(1, 1.5, 22, 10.5, '#E4ECF4', 'Rolling-origin backtest', ['5 folds, test years 2022-2026', 'M0 price-only to M6 six-layer', 'skill vs a no-change guess'])
 box(27, 1.5, 22, 10.5, '#E4ECF4', 'Layer tests and benchmarks', ['fold-level test of each layer', 'classical benchmarks', 'crisis episodes, direction'])
 box(53, 1.5, 22, 10.5, '#E4ECF4', 'Live record', ['forecasts the site issued,', 'scored on later prices', 'frozen onion forward test'])
-box(78, 1.5, 21, 10.5, '#FDEBD0', 'AI briefing (optional)', ['short commentary on the', 'user\'s scenario; rate-limited,', 'server-side key'], ls=(0, (4, 3)))
 arrow((12, 12.3), (57, 16.7), ls=(0, (3, 3)))
 arrow((38, 12.3), (61, 16.7), ls=(0, (3, 3)))
 arrow((64, 12.3), (64, 16.7), ls=(0, (3, 3)))
-arrow((88.5, 12.2), (88.5, 16.8), ls=(0, (3, 3)))
 ax.text(1, -0.7, 'Solid arrows: data flow. Dashed: optional or descriptive parts. Results of the evaluation are shown in the validation and benchmark tabs.', fontsize=7, color=MUTED)
 ax.set_ylim(-2, 56)
 fig.savefig(os.path.join(BASE, 'Model_Output', 'fig_ms_system_architecture.png'), dpi=200, facecolor='white')
