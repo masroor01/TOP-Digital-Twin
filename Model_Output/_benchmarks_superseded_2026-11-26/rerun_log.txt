@@ -1,0 +1,86 @@
+=================================================================
+SCRIPT 13 — BENCHMARK MODELS
+=================================================================
+
+[1] Loading weekly panel ...
+    532,508 rows | 1087 markets
+    tomato   market    0  elapsed 0.0 min
+    ARIMA closed form checked against statsmodels: 7.14750 vs 7.14750
+    ARIMA closed form checked against statsmodels: 6.56492 vs 6.56492
+    tomato   market  100  elapsed 0.3 min
+    tomato   market  200  elapsed 0.6 min
+    tomato   market  300  elapsed 1.0 min
+    tomato   market  400  elapsed 1.4 min
+    tomato   market  500  elapsed 1.8 min
+    tomato   market  600  elapsed 2.1 min
+    tomato   market  700  elapsed 2.2 min
+    tomato   market  800  elapsed 2.2 min
+    onion    market    0  elapsed 2.2 min
+    onion    market  100  elapsed 2.4 min
+    onion    market  200  elapsed 2.6 min
+    onion    market  300  elapsed 2.7 min
+    onion    market  400  elapsed 2.9 min
+    onion    market  500  elapsed 3.2 min
+    onion    market  600  elapsed 3.3 min
+    onion    market  700  elapsed 3.4 min
+    potato   market    0  elapsed 3.4 min
+    benchmarks done in 3.8 min
+
+[4] Saved: Model_Output\table_benchmarks.csv  (240 rows)
+
+[5] Building comparison table ...
+  crop  horizon_weeks  M6_MAPE best_classical  best_MAPE  M6_beats_best  M6_folds_below_best
+ onion              1    11.75       B1_Naive       9.24          False                    0
+ onion              4    24.15       B1_Naive      20.31          False                    1
+ onion             13    35.94       B4_ARIMA      39.95           True                    3
+ onion             26    39.91    B2_Seasonal      42.68           True                    3
+potato              1     7.77       B4_ARIMA       5.62          False                    0
+potato              4    18.66       B4_ARIMA      14.19          False                    1
+potato             13    41.63       B4_ARIMA      32.38          False                    2
+potato             26    48.16       B4_ARIMA      47.58          False                    3
+tomato              1    16.95       B4_ARIMA      15.16          False                    0
+tomato              4    33.55       B4_ARIMA      38.11           True                    4
+tomato             13    38.96    B2_Seasonal      56.55           True                    5
+tomato             26    45.99    B2_Seasonal      57.04           True                    4
+  M6 beats the best classical method: 5 of 12 cells; 4 of 6 at 13 and 26 weeks
+
+  h=1 week comparison (mean across folds):
+  Crop     Model              RMSE     MAPE       R²
+  ----------------------------------------------------
+  onion    B1_Naive          341.0     9.2%   0.9290
+  onion    B2_Seasonal      1115.1    35.6%   0.2276
+  onion    B3_MA4            453.9    13.6%   0.8755
+  onion    B4_ARIMA          342.2     9.4%   0.9285
+  onion    LightGBM          378.8    11.8%   0.9096
+  potato   B1_Naive          116.3     5.7%   0.9100
+  potato   B2_Seasonal       708.7    49.0%  -2.9139
+  potato   B3_MA4            171.1     9.6%   0.7979
+  potato   B4_ARIMA          113.5     5.6%   0.9145
+  potato   LightGBM          128.7     7.8%   0.8901
+  tomato   B1_Naive          620.9    15.2%   0.8311
+  tomato   B2_Seasonal      1607.1    50.6%  -0.1537
+  tomato   B3_MA4            912.4    25.6%   0.6405
+  tomato   B4_ARIMA          623.1    15.2%   0.8290
+  tomato   LightGBM          683.0    16.9%   0.8028
+
+  Skill score vs B1_Naive (h=1): (MAPE_naive - MAPE_lgbm) / MAPE_naive × 100
+  tomato  : naive MAPE=15.2%  LightGBM MAPE=16.9%  skill=-11.4%
+  onion   : naive MAPE=9.2%  LightGBM MAPE=11.8%  skill=-27.2%
+  potato  : naive MAPE=5.7%  LightGBM MAPE=7.8%  skill=-35.8%
+
+[6] Generating figures ...
+    Saved: Model_Output\fig_benchmark_comparison.png
+    Saved: Model_Output\fig_skill_score.png
+    Saved: Model_Output\fig_r2_comparison_heatmap.png
+
+=================================================================
+Script 13 complete.
+Total time: 3.8 min
+
+  table_benchmarks.csv                            15.0 KB
+  table_comparison.csv                             2.7 KB
+  fig_benchmark_comparison.png                   239.0 KB
+  fig_skill_score.png                             91.9 KB
+  fig_r2_comparison_heatmap.png                   74.4 KB
+
+Next: Script 14 — ERA5 climate feature processing (Layer 3)

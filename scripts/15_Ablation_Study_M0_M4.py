@@ -991,7 +991,7 @@ for row_i, h in enumerate([1, 4]):
                          color=CROP_COLORS[crop])
         ax.grid(axis='y', alpha=0.3)
 
-plt.suptitle('Ablation Study: R² by Data Layer Addition (LightGBM, mean across 3 folds)',
+plt.suptitle('Ablation Study: R² by Data Layer Addition (LightGBM, mean across folds)',
              fontsize=12, fontweight='bold')
 plt.tight_layout()
 p = os.path.join(OUT_DIR, 'fig_ablation_r2.png')
@@ -1073,7 +1073,7 @@ for i in range(len(pivot.index)):
         if not np.isnan(val):
             ax.text(j, i, f'{val:.0f}', ha='center', va='center',
                     fontsize=8, color='black' if val < pivot.values.max() * 0.7 else 'white')
-ax.set_title('RMSE Heatmap: Model Variant × Crop × Horizon (Rs/quintal)\n(Lower is better — mean across 3 folds)',
+ax.set_title('RMSE Heatmap: Model Variant × Crop × Horizon (Rs/quintal)\n(Lower is better — mean across folds)',
              fontsize=11, fontweight='bold')
 plt.tight_layout()
 p = os.path.join(OUT_DIR, 'fig_ablation_heatmap.png')

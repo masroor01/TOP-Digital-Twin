@@ -382,7 +382,7 @@ if ('onion', 4) in shap_cache:
     X_sample, shap_values = shap_cache[('onion', 4)]
     plt.figure(figsize=(9, 7))
     shap.summary_plot(shap_values, X_sample, max_display=15, show=False)
-    plt.title('Onion, h=4w — SHAP Summary (the study\'s strongest M6 result)', fontweight='bold')
+    plt.title('Onion, h=4w — SHAP Summary (M6)', fontweight='bold')
     plt.tight_layout()
     p = os.path.join(OUT_DIR, 'fig_shap_beeswarm_onion_4w.png')
     plt.savefig(p, dpi=200, bbox_inches='tight')
