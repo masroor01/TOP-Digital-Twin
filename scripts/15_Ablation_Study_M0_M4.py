@@ -175,11 +175,12 @@ LGBM_PARAMS = dict(
     bagging_freq     = 5,
     reg_alpha        = 0.1,
     reg_lambda       = 0.1,
-    n_jobs           = -1,
+    n_jobs           = int(os.environ.get('TWIN_LGBM_THREADS', -1)),  # set low when other jobs hold the cores
     random_state     = SEED,
     verbose          = -1,
 )
-LGBM_PARAMS.update(lgbm_gpu_params())
+if os.environ.get('TWIN_LGBM_DEVICE', '').lower() != 'cpu':  # 'cpu' avoids the OpenCL GPU path, which hung on 2026-11-26
+    LGBM_PARAMS.update(lgbm_gpu_params())
 
 # Monotonic constraints on the three unambiguous export-control levers.
 # Diagnosed 2026-07-31: Script 29 (Granger causality) found price Granger-
@@ -664,6 +665,7 @@ print(f'    {len(MODEL_FEATURE_SETS)} variants × {len(FOLDS)} folds × '
 
 all_rows = []
 all_pred_rows = []   # crop-level weekly avg predictions, for Script 18 DM tests
+market_rows = []     # every market forecast of the main pass (2026-11-26): one source for crop- and market-level results
 t0_total = time.time()
 
 for variant, feat_list_all in MODEL_FEATURE_SETS.items():
@@ -748,6 +750,9 @@ for variant, feat_list_all in MODEL_FEATURE_SETS.items():
                     'y_true': np.expm1(y_te.values),
                     'y_pred': np.expm1(y_pred),
                 })
+
+                if not MARKET_LEVEL_DIAGNOSTIC:
+                    market_rows.append(pred_df.assign(variant=variant, crop=crop, fold=fold, horizon_weeks=h))
 
                 if MARKET_LEVEL_DIAGNOSTIC:
                     # Full per-market rows — only 2 variants (DIAGNOSTIC_PAIR),
@@ -836,6 +841,7 @@ if not MARKET_LEVEL_DIAGNOSTIC:
                     y_true=('y_true', 'mean'), y_pred=('y_pred', 'mean'),
                     n_markets=('y_true', 'size'),
                 ).reset_index()
+                market_rows.append(pred_df.assign(variant='B1_Naive', crop=crop, fold=fold, horizon_weeks=h))
                 weekly['variant'] = 'B1_Naive'
                 weekly['crop'] = crop
                 weekly['fold'] = fold
@@ -882,6 +888,14 @@ predictions = predictions[['variant', 'crop', 'fold', 'horizon_weeks',
 pred_path = os.path.join(OUT_DIR, 'ablation_predictions.csv')
 predictions.to_csv(pred_path, index=False)
 print(f'  Saved: {pred_path}  ({len(predictions):,} rows)')
+
+# every market forecast of this pass; dm_market_level_predictions.csv (M0, M6) is cut from the same fits for Scripts 46, 47, 65, 88
+mkt = pd.concat(market_rows, ignore_index=True)[['variant', 'crop', 'fold', 'horizon_weeks', 'market', 'market_id', 'week_start', 'y_true', 'y_pred']]
+mkt_path = os.path.join(OUT_DIR, 'ablation_market_predictions.parquet')
+mkt.astype({'variant': 'category', 'crop': 'category', 'market': 'category'}).to_parquet(mkt_path, index=False)
+print(f'  Saved: {mkt_path}  ({len(mkt):,} rows)')
+mkt[mkt.variant.isin(['M0', 'M6'])].to_csv(os.path.join(OUT_DIR, 'dm_market_level_predictions.csv'), index=False)
+del mkt, market_rows
 
 
 # ─────────────────────────────────────────────────────────────────────────────

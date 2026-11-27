@@ -1,0 +1,9 @@
+re-run started 2026-11-26 13:56:42  TWIN_LGBM_THREADS=2  device=gpu
+commit a488339 2026-11-26 11:21:24 +0530
+lightgbm                  4.6.0
+numpy                     2.4.6
+pandas                    3.0.3
+316a5879f27b3131964b56450fbf9bdc *data/agmarknet_weekly/top_weekly_panel.csv
+-rw-r--r-- 1 masro 197610 56706820 2026-11-02 11:05 data/agmarknet_weekly/top_weekly_panel.csv
+restarted 2026-11-26 14:07:27 with OMP_NUM_THREADS=2 OMP_WAIT_POLICY=PASSIVE (first start stalled in the device check; no fits written)
+restarted 2026-11-26 14:44:55 TWIN_LGBM_DEVICE=cpu threads=8 (GPU run hung after 51 fits at 14:23; its partial log kept; nothing was saved from it)

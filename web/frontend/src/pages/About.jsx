@@ -107,15 +107,15 @@ export default function About() {
       {/* What the evidence shows */}
       <section className="max-w-3xl mx-auto px-5 py-10">
         <FadeIn>
-          <SectionLabel>What the evidence shows (re-run 29 October 2026)</SectionLabel>
+          <SectionLabel>What the evidence shows (re-run 26 November 2026)</SectionLabel>
         </FadeIn>
         <div className="grid grid-cols-1 gap-3 mt-3">
           {[
-            ['Forecast skill depends on the horizon', 'Against a no-change guess, tomato error is about 37 % and 38 % lower at 13 and 26 weeks; onion 8 % and 13 % lower. At one week no crop beats the guess, and potato does not reliably beat it within 26 weeks. Since 27 October 2026 the models also see the latest price, which cut one-week error by a third or more but not below the no-change guess.'],
+            ['Forecast skill depends on the horizon', 'Against a no-change guess, tomato error is about 34 % and 40 % lower at 13 and 26 weeks; onion 6 % and 15 % lower. At one week no crop beats the guess, and potato does not reliably beat it within 26 weeks. Since 27 October 2026 the models also see the latest price, which cut one-week error by a third or more but not below the no-change guess.'],
             ['Beats classical methods at long range', 'At 13 and 26 weeks the model has lower error than the best of persistence, seasonal naive, a 4-week moving average and ARIMA in 4 of 6 crop-horizon cells: tomato and onion at both horizons. Potato is behind at both (compared on the same five test years and market-weeks; corrected on 26 November 2026).'],
-            ['Price crises: medium-range warning, not week-ahead precision', 'In four documented episodes the model had far lower error than a no-change guess at 13 weeks in three (tomato 2023: 26 % vs 158 %; onion 2023–24: 23 % vs 51 %; potato crash 2025), and was worse in the 2024 potato spike.'],
-            ['Extra data layers: indicated, not certified', 'They lower error in many tomato and onion cells, and they carry most of the signal at long horizons, but no layer passes the strict yearly-fold test (five test years can certify only a 5-of-5 sweep). A 5-of-5 result for the El Niño layer appears in a different cell with each random seed, so it is not claimed.'],
-            ['Early-warning decisions', 'Models trained directly on the event (a +30 % spike or −25 % crash within 13 weeks) with calibrated probabilities make alarms far more robust than alarms from a price forecast. A pre-registered test found no reliable decision benefit from the data layers, so we do not claim one. Onion is being confirmed on new weeks.'],
+            ['Price crises: medium-range warning, not week-ahead precision', 'In four documented episodes the model had far lower error than a no-change guess at 13 weeks in three (tomato 2023: 25 % vs 158 %; onion 2023–24: 23 % vs 51 %; potato crash 2025: 36 % vs 57 %), and was worse in the 2024 potato spike.'],
+            ['Extra data layers: indicated, not certified', 'They lower error in many tomato and onion cells, and they carry most of the signal at long horizons, but no layer passes the strict yearly-fold test (five test years can certify only a 5-of-5 sweep). Averaged over five random seeds, the El Niño layer passes in two of twelve cells, one of them unstable; that is about what chance could give, so it is not claimed.'],
+            ['Early-warning decisions', 'For tomato and potato spikes, models trained directly on the event (a +30 % rise within 13 weeks) with calibrated probabilities make better alarms than a price forecast; for onion neither gives a useful alarm. A pre-registered test found no reliable decision benefit from the data layers, so we do not claim one. Onion is being confirmed on new weeks.'],
           ].map(([t, b], i) => (
             <FadeIn key={t} delay={0.04 * i}>
               <Card className="p-4" accent="var(--brand)">

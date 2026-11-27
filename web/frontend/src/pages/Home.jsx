@@ -29,7 +29,7 @@ const FEATURES = [
 ];
 
 const EVIDENCE = [
-  { big: '13–26 wk', label: 'Where it helps', body: 'Tomato error is about 37 % and 38 % below a no-change guess at 3 and 6 months; onion 8 % and 13 %.' },
+  { big: '13–26 wk', label: 'Where it helps', body: 'Tomato error is about 34 % and 40 % below a no-change guess at 3 and 6 months; onion 6 % and 15 %.' },
   { big: '4 of 6', label: 'Beats classical methods', body: 'Long-horizon cells where the model beats the best of four classical benchmarks (tomato and onion at 13 and 26 weeks; not potato).' },
   { big: 'Not 1 week', label: 'Where it does not', body: 'At one week ahead no crop beats a no-change guess. This is a planning tool for 1–6 months, not a next-week trading signal.' },
   { big: '2022–2026', label: 'Tested on unseen years', body: 'Five rolling test years, repeated across random seeds. Layer benefits are indicated, not certified; potato is weak.' },
@@ -134,7 +134,7 @@ export default function Home() {
         <FadeIn>
           <h2 className="font-display text-2xl sm:text-3xl font-bold text-[var(--text-primary)] text-center mb-2">The evidence, honestly</h2>
           <p className="text-[var(--text-secondary)] text-center max-w-2xl mx-auto mb-8">
-            Every figure comes from out-of-sample tests re-run on 29 October 2026. We report where the model works and where it does not.
+            Every figure comes from out-of-sample tests re-run on 26 November 2026. We report where the model works and where it does not.
           </p>
         </FadeIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

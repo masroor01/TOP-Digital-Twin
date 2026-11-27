@@ -1,0 +1,7 @@
+crop,market_id,market,state,why,eligible,skill_1,mape_1,mape_nc_1,skill_4,mape_4,mape_nc_4,skill_13,mape_13,mape_nc_13,skill_26,mape_26,mape_nc_26
+tomato,112,Kolar,Karnataka,largest arrivals,243,-14.0,20.4,17.1,10.6,47.6,49.9,32.6,59.4,87.4,29.7,70.5,95.2
+tomato,647,Buland Shahr,Uttar Pradesh,median 13-week skill,243,-13.9,12.3,10.7,14.2,30.0,34.5,35.6,35.1,65.7,55.7,33.3,97.0
+onion,55,Mahuva(Station Road),Gujarat,largest arrivals,158,-30.7,13.1,9.3,-29.7,28.5,19.9,5.1,39.7,37.4,13.8,42.4,48.5
+onion,709,Chikkamagalore,Karnataka,median 13-week skill,158,-22.9,9.2,7.5,-7.7,17.6,16.2,9.2,27.9,36.0,16.4,32.0,42.5
+potato,2537,Siliguri,West Bengal,largest arrivals,61,-59.0,6.0,3.6,-36.2,17.0,12.0,-51.9,40.4,29.1,4.5,44.8,47.9
+potato,338,Tamluk (Medinipur E),West Bengal,median 13-week skill,61,-78.3,6.4,3.7,-48.1,17.4,12.6,-33.3,35.1,32.7,2.8,46.4,51.2
